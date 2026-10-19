@@ -25,14 +25,21 @@
 .product-price-note{font-size:13px;color:#6b7280;margin:0 0 16px;line-height:1.4}
 .reward-goal-card{background:#ffffff;border:1.5px solid #e2e8f0;border-radius:14px;padding:16px 18px;margin:0 0 24px;box-shadow:0 4px 12px -2px rgba(0,0,0,0.05);transition:all .25s ease}
 .reward-goal-card.hierarchy-top{background:linear-gradient(180deg,#fffdf0 0%,#ffffff 100%);border-color:#fde047;box-shadow:0 6px 18px -3px rgba(255,209,0,0.15),0 2px 6px -1px rgba(0,0,0,0.04)}
-.reward-goal-badge{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#854d0e;margin-bottom:12px}
-.reward-badge-dot{width:8px;height:8px;border-radius:50%;background:#f59e0b;box-shadow:0 0 0 2px rgba(245,158,11,0.25);display:inline-block;animation:pulse-dot 2s infinite}
+.reward-goal-badge{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.reward-badge-left{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#854d0e}
+.reward-badge-dot{width:8px;height:8px;border-radius:50%;background:#f59e0b;box-shadow:0 0 0 2px rgba(245,158,11,0.25);display:inline-block;animation:pulse-dot 2s infinite;flex-shrink:0}
 @keyframes pulse-dot{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.3);opacity:0.7}}
-.reward-badge-pill{margin-left:auto;font-size:11px;font-weight:700;color:#111827;background:#fef08a;padding:2px 8px;border-radius:999px;border:1px solid #fde047}
+.reward-badge-action, .reward-badge-pill{display:inline-flex;align-items:center;gap:6px;background:#ffffff;color:#854d0e;border:1.5px solid #fde047;border-radius:8px;padding:5px 12px;font-size:11.5px;font-weight:700;line-height:1.2;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.05);transition:all .18s cubic-bezier(0.4,0,0.2,1);text-decoration:none;margin-left:auto}
+.reward-badge-action:hover, .reward-badge-pill:hover{background:#fef9c3;border-color:#eab308;color:#713f12;transform:translateY(-1px);box-shadow:0 3px 8px -1px rgba(234,179,8,0.25)}
+.reward-badge-action:active, .reward-badge-pill:active{transform:translateY(0) scale(0.97);box-shadow:0 1px 2px rgba(0,0,0,0.06)}
+.reward-badge-action:focus-visible{outline:2px solid #ffd100;outline-offset:2px}
+.reward-badge-action svg{flex-shrink:0;transition:transform .18s ease}
+.reward-badge-action:hover .reward-action-arrow{transform:translateX(2px)}
 .reward-goal-card.unlocked{background:linear-gradient(135deg,#f0fdf4 0%,#ecfdf5 50%,#fef9c3 100%);border-color:#10b981;box-shadow:0 6px 20px -2px rgba(16,185,129,0.22)}
-.reward-goal-card.unlocked .reward-goal-badge{color:#065f46}
+.reward-goal-card.unlocked .reward-badge-left{color:#065f46}
 .reward-goal-card.unlocked .reward-badge-dot{background:#10b981;box-shadow:0 0 0 2px rgba(16,185,129,0.3)}
-.reward-goal-card.unlocked .reward-badge-pill{background:#d1fae5;color:#065f46;border-color:#6ee7b7}
+.reward-badge-action.unlocked, .reward-goal-card.unlocked .reward-badge-action, .reward-goal-card.unlocked .reward-badge-pill{background:#ecfdf5;color:#065f46;border-color:#34d399;box-shadow:0 2px 8px -1px rgba(16,185,129,0.25)}
+.reward-badge-action.unlocked:hover, .reward-goal-card.unlocked .reward-badge-action:hover{background:#d1fae5;border-color:#10b981;color:#047857;box-shadow:0 4px 12px rgba(16,185,129,0.3)}
 .reward-goal-header{display:flex;align-items:center;gap:14px;margin-bottom:12px}
 .reward-goal-icon{font-size:26px;line-height:1;flex-shrink:0;width:44px;height:44px;display:grid;place-items:center;background:#fefce8;border:1px solid #fef08a;border-radius:12px}
 .reward-goal-card.unlocked .reward-goal-icon{background:#dcfce7;border-color:#86efac}
@@ -53,6 +60,25 @@
 .reward-percent{font-size:11.5px;font-weight:600;color:#b45309}
 .reward-goal-card.unlocked .reward-percent{color:#047857;font-weight:700}
 .reward-unlocked-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:8px;background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0;font-size:12px;font-weight:700}
+.reward-modal-dialog{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;border:0;padding:0;background:transparent;display:none;align-items:center;justify-content:center;z-index:9999}
+.reward-modal-dialog[open],.reward-modal-dialog.is-open{display:flex}
+.reward-modal-backdrop{position:fixed;inset:0;background:rgba(17,24,39,0.55);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);animation:fade-in .2s ease}
+.reward-modal-card{position:relative;z-index:10;width:min(520px, calc(100vw - 32px));background:#ffffff;border-radius:16px;padding:26px 24px 22px;box-shadow:0 20px 40px -10px rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.06);animation:modal-pop .25s cubic-bezier(0.16, 1, 0.3, 1)}
+@keyframes fade-in{from{opacity:0}to{opacity:1}}
+@keyframes modal-pop{from{opacity:0;transform:scale(0.96) translateY(8px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.reward-modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.reward-modal-badge{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:#854d0e;background:#fef9c3;border:1px solid #fde047;border-radius:6px;padding:3px 10px}
+.reward-modal-close{width:32px;height:32px;border-radius:8px;border:0;background:#f3f4f6;color:#4b5563;font-size:22px;line-height:1;display:grid;place-items:center;cursor:pointer;transition:all .15s ease}
+.reward-modal-close:hover{background:#e5e7eb;color:#111827}
+.reward-modal-title{font-size:20px;font-weight:700;color:#111827;margin:0 0 8px;line-height:1.3}
+.reward-modal-lead{font-size:13.5px;color:#4b5563;line-height:1.5;margin:0 0 18px}
+.reward-modal-perks{display:flex;flex-direction:column;gap:10px;margin-bottom:22px}
+.reward-perk{display:flex;align-items:flex-start;gap:12px;background:#f9fafb;border:1px solid #f1f5f9;border-radius:10px;padding:12px 14px}
+.reward-perk-icon{font-size:20px;line-height:1;flex-shrink:0;padding-top:2px}
+.reward-perk strong{display:block;font-size:13px;font-weight:700;color:#111827;margin-bottom:2px}
+.reward-perk p{font-size:12px;color:#6b7280;margin:0;line-height:1.4}
+.reward-modal-footer{display:flex;justify-content:flex-end}
+.reward-modal-btn{width:100%;padding:12px 20px;font-size:14px;font-weight:700;border-radius:8px;border:0;cursor:pointer;text-align:center}
 .product-option-group{margin:0 0 20px}
 .product-option-label{font-size:14px;margin:0 0 10px;font-weight:500;color:#111827}
 .product-option-values{display:flex;flex-wrap:wrap;gap:10px}

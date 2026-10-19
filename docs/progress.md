@@ -1,5 +1,16 @@
 # Avances y validación
 
+## 19/10/2026 — Mejora de botón de objetivo y modal interactivo de regalo especial
+
+- Rama secundaria: `feature/monto-estimado`.
+- Se perfeccionó el botón de objetivo en la cabecera de la meta (`snippets/product-landing.liquid`, `assets/product-detail.css`, `assets/product-detail.js`):
+  - Diseño y acabado profesional: se transformó el elemento estático en un botón de acción interactivo (`.reward-badge-action`), con icono de regalo SVG, tipografía nítida, micro-interacción con elevación suave en hover y compresión táctil en click.
+  - Apertura de modal explicativo (`<dialog class="reward-modal-dialog">`): describe con claridad las condiciones del beneficio comercial (obsequio de cortesía a partir de S/. 1,000 PEN, sin cupones, confirmado por el asesor comercial en Odoo y válido para todo el catálogo).
+  - Estado dinámico de desbloqueo: al alcanzar los S/. 1,000.00 PEN, el botón actualiza su texto a `¡Regalo Desbloqueado! · Ver detalles` con tonalidades esmeralda, borde verde y resplandor festivo.
+  - Accesibilidad completa: cierre con tecla Escape, clic en fondo translúcido con desenfoque (`backdrop-filter`) o botón de cierre, atributos ARIA (`aria-haspopup="dialog"`, `aria-expanded`).
+  - Optimización táctil de los botones de cantidad (`+`/`-`) y el botón principal de compra (`.product-cta`).
+- Validación: 18 de 18 pruebas unitarias y DOM aprobadas (`npm test`), vistas sincronizadas (`npm run sync:preview`).
+
 ## 19/10/2026 — Meta de objetivo con jerarquía superior para regalo especial desde S/. 1,000 PEN
 
 - Rama secundaria: `feature/monto-estimado`.

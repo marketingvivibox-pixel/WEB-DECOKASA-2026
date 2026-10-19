@@ -208,9 +208,15 @@ Nuestras marcas</a></div>
 
         <div class="reward-goal-card hierarchy-top" data-reward-goal="" data-threshold="100000">
           <div class="reward-goal-badge">
-            <span class="reward-badge-dot"></span>
-            <span>META DE OBJETIVO · REGALO ESPECIAL</span>
-            <span class="reward-badge-pill">Meta: S/. 1000.00 PEN</span>
+            <div class="reward-badge-left">
+              <span class="reward-badge-dot"></span>
+              <span class="reward-badge-title">META DE OBJETIVO · REGALO ESPECIAL</span>
+            </div>
+            <button type="button" class="reward-badge-action reward-badge-pill" data-reward-modal-open="" aria-haspopup="dialog" aria-expanded="false" title="Ver detalles y beneficios del regalo especial">
+              <svg class="reward-gift-mini" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="13" rx="2" /><path d="M12 8v13" /><path d="M19 12H5" /><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.5 4.5 0 0 1 12 7.5a4.5 4.5 0 0 1 4.5-4.5 2.5 2.5 0 0 1 0 5z" /></svg>
+              <span class="reward-action-text" data-reward-action-text="">Meta S/. 1000 · Ver regalo</span>
+              <svg class="reward-action-arrow" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
+            </button>
           </div>
           <div class="reward-goal-header">
             <div class="reward-goal-icon" data-reward-icon="">🎁</div>
@@ -227,6 +233,46 @@ Nuestras marcas</a></div>
             <span class="reward-percent" data-reward-percent="">0% de la meta</span>
           </div>
         </div>
+        <dialog class="reward-modal-dialog" data-reward-modal="" aria-labelledby="RewardModalTitle-preview-product-landing">
+          <div class="reward-modal-backdrop" data-reward-modal-close=""></div>
+          <div class="reward-modal-card">
+            <div class="reward-modal-header">
+              <div class="reward-modal-badge">
+                <span>🎁 Beneficio Exclusivo</span>
+                <span>Desde S/. 1000.00 PEN</span>
+              </div>
+              <button type="button" class="reward-modal-close" data-reward-modal-close="" aria-label="Cerrar modal">×</button>
+            </div>
+            <h2 id="RewardModalTitle-preview-product-landing" class="reward-modal-title">Regalo Especial por tu compra en Decokasa</h2>
+            <p class="reward-modal-lead">Por cada solicitud de compra que alcance o supere los <strong>S/. 1000.00 PEN</strong>, nuestro equipo incluye un regalo especial de cortesía en tu pedido.</p>
+            <div class="reward-modal-perks">
+              <div class="reward-perk">
+                <span class="reward-perk-icon">🎁</span>
+                <div>
+                  <strong>Obsequio premium de cortesía</strong>
+                  <p>Accesorios de instalación, complementos de acabado o detalle exclusivo seleccionado para tu categoría de producto.</p>
+                </div>
+              </div>
+              <div class="reward-perk">
+                <span class="reward-perk-icon">⚡</span>
+                <div>
+                  <strong>Activación automática sin cupones</strong>
+                  <p>El total estimado de tu ficha calcula tu progreso al instante. Al enviar tu solicitud, el asesor valida tu regalo en Odoo.</p>
+                </div>
+              </div>
+              <div class="reward-perk">
+                <span class="reward-perk-icon">🏷️</span>
+                <div>
+                  <strong>Válido para todo el catálogo</strong>
+                  <p>Aplica combinando cualquier producto: pisos SPC, pisos PVC, accesorios, tecnología o fitness.</p>
+                </div>
+              </div>
+            </div>
+            <div class="reward-modal-footer">
+              <button type="button" class="button yellow reward-modal-btn" data-reward-modal-close="">¡Entendido! Continuar cotizando</button>
+            </div>
+          </div>
+        </dialog>
         <p class="eyebrow product-vendor">Xion</p>
         <h1>Audífonos inalámbricos</h1>
         <div class="product-price-row">

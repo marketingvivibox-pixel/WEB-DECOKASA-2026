@@ -49,9 +49,17 @@
             if (currentEl) currentEl.textContent = formatted;
             if (percentEl) percentEl.textContent = `${percent}% de la meta`;
 
+            const actionTextEl = goalCard.querySelector('[data-reward-action-text]');
+            const actionBtn = goalCard.querySelector('[data-reward-modal-open]');
+
             if (totalCents >= thresholdCents) {
               goalCard.classList.add('unlocked');
               if (iconEl) iconEl.textContent = '🎉';
+              if (actionTextEl) actionTextEl.textContent = '¡Regalo Desbloqueado! · Ver detalles';
+              if (actionBtn) {
+                actionBtn.classList.add('unlocked');
+                actionBtn.setAttribute('title', '¡Meta alcanzada! Haz clic para ver detalles de tu regalo');
+              }
               if (titleEl) {
                 titleEl.innerHTML = '¡Felicidades! Has alcanzado la meta y desbloqueaste tu <strong>Regalo Especial</strong> 🎁';
               }
@@ -67,6 +75,11 @@
             } else {
               goalCard.classList.remove('unlocked');
               if (iconEl) iconEl.textContent = '🎁';
+              if (actionTextEl) actionTextEl.textContent = `Meta S/. ${(thresholdCents / 100).toFixed(0)} · Ver regalo`;
+              if (actionBtn) {
+                actionBtn.classList.remove('unlocked');
+                actionBtn.setAttribute('title', 'Ver detalles y beneficios del regalo especial');
+              }
               const diffCents = thresholdCents - totalCents;
               const remainingFormatted = `S/. ${(diffCents / 100).toFixed(2)} PEN`;
               if (titleEl) {
@@ -165,8 +178,52 @@
       page.querySelector('[data-request-details]').open = true;
       page.querySelector('[name=name]').focus();
     }
+    const modalTrigger = event.target.closest('[data-reward-modal-open]');
+    if (modalTrigger) {
+      event.preventDefault();
+      const modal = page.querySelector('[data-reward-modal]');
+      if (modal) {
+        if (typeof modal.showModal === 'function') {
+          try { modal.showModal(); } catch (e) { modal.setAttribute('open', ''); }
+        } else {
+          modal.setAttribute('open', '');
+        }
+        modal.classList.add('is-open');
+        modalTrigger.setAttribute('aria-expanded', 'true');
+      }
+    }
+    const modalClose = event.target.closest('[data-reward-modal-close]');
+    if (modalClose) {
+      event.preventDefault();
+      const modal = document.querySelector('[data-reward-modal]');
+      if (modal) {
+        if (typeof modal.close === 'function') {
+          try { modal.close(); } catch (e) { modal.removeAttribute('open'); }
+        } else {
+          modal.removeAttribute('open');
+        }
+        modal.classList.remove('is-open');
+        const trigger = document.querySelector('[data-reward-modal-open]');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+      }
+    }
     const link = event.target.closest('[data-option-link]');
     if (link && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) { event.preventDefault(); if (link.getAttribute('aria-current') !== 'true') changeOption(page, link); }
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      const modal = document.querySelector('[data-reward-modal][open], [data-reward-modal].is-open');
+      if (modal) {
+        if (typeof modal.close === 'function') {
+          try { modal.close(); } catch (e) { modal.removeAttribute('open'); }
+        } else {
+          modal.removeAttribute('open');
+        }
+        modal.classList.remove('is-open');
+        const trigger = document.querySelector('[data-reward-modal-open]');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+      }
+    }
   });
   document.addEventListener('shopify:section:load', event => init(event.target));
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => init()); else init();

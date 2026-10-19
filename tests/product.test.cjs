@@ -85,3 +85,28 @@ test('Una respuesta fallida de Shopify conserva la navegación normal a la varia
   assert.equal(app.histories.length, 0);
   assert.equal(app.document.querySelector('[data-product-page]').hasAttribute('aria-busy'), false);
 });
+test('El botón de objetivo abre el modal de detalles y actualiza estado al alcanzar la meta', async () => {
+  const nextHTML = await html(product(0));
+  const app = await runtime(()=>({ok:true, text:async()=>nextHTML}));
+  const actionBtn = app.document.querySelector('[data-reward-modal-open]');
+  const modal = app.document.querySelector('[data-reward-modal]');
+  assert.ok(actionBtn, 'El botón de objetivo debe existir');
+  assert.ok(modal, 'El modal de regalo especial debe existir');
+
+  // Abre el modal al hacer click en el botón
+  app.click('[data-reward-modal-open]');
+  assert.equal(actionBtn.getAttribute('aria-expanded'), 'true');
+  assert.ok(modal.classList.contains('is-open') || modal.hasAttribute('open'));
+
+  // Cierra el modal con el botón de cierre
+  app.click('[data-reward-modal-close]');
+  assert.equal(actionBtn.getAttribute('aria-expanded'), 'false');
+
+  // Cantidad para superar S/. 1,000 PEN (precio base 120 * 10 = 1200)
+  const quantity = app.document.querySelector('[data-product-quantity]');
+  quantity.value = '10';
+  quantity.dispatchEvent(new app.window.Event('input', { bubbles: true }));
+  assert.ok(actionBtn.classList.contains('unlocked'));
+  assert.match(app.document.querySelector('[data-reward-action-text]').textContent, /¡Regalo Desbloqueado!/);
+});
+
