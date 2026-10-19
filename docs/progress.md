@@ -1,5 +1,15 @@
 # Avances y validación
 
+## 19/10/2026 — Previsualización dinámica de monto estimado en ficha de producto
+
+- Rama secundaria: `feature/monto-estimado`.
+- Se implementó la previsualización del monto estimado en la ficha de producto (`snippets/product-landing.liquid`, `assets/product-detail.css`, `assets/product-detail.js`):
+  - Tarjeta de cálculo dinámico: refleja el subtotal calculado en tiempo real según la cantidad seleccionada y el precio unitario de la variante activa (`data-estimated-bar`).
+  - Muestra desglose claro: `${cantidad} unidades × S/. ${precio_unitario} PEN` (o cajas en revestimientos PVC/SPC).
+  - Actualización inmediata con los botones de incremento/decremento (`+`/`-`), ingreso manual o cálculo de cajas PVC.
+  - Sincronización con variantes activas y conservación en la simulación de solicitud para el asesor.
+- Validación: 17 de 17 pruebas aprobadas (`node --test`), vistas locales sincronizadas y publicadas en la rama secundaria.
+
 ## 09/10/2026 — Ficha predeterminada de producto
 
 - Implementada la ficha solicitada a partir de la captura: galería con miniaturas, marca, título, precio, variantes, cantidad, SKU, descripción y bloques informativos. Dos columnas en escritorio, una en móvil. Configuración desde el editor nativo y datos desde Productos.

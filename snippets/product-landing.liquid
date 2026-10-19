@@ -39,7 +39,7 @@
         <h1>{{ product.title | escape }}</h1>
         <div class="product-price-row">
           {% if section.settings.show_price != false and current_variant != blank %}
-            <span class="product-price" data-product-price>{{ current_variant.price | money_with_currency }}</span>
+            <span class="product-price" data-product-price data-cents="{{ current_variant.price }}">{{ current_variant.price | money_with_currency }}</span>
             {% if section.settings.show_compare_price != false and current_variant.compare_at_price > current_variant.price %}<s class="product-compare-price">{{ current_variant.compare_at_price | money_with_currency }}</s>{% endif %}
           {% else %}<span class="product-price">Precio a consultar</span>{% endif %}
         </div>
@@ -68,9 +68,16 @@
         {% endunless %}
         <p class="product-availability">{% render 'icon', name: 'headphones' %}<span><strong>Disponibilidad a confirmar</strong><small>Un asesor te ayuda con tu compra.</small></span></p>
         {% if pvc or product.metafields.decokasa.coverage_m2.value != blank or current_variant.metafields.decokasa.coverage_m2.value != blank %}{% render 'pvc-calculator' %}{% endif %}
-        <div class="product-purchase" data-purchase-controls hidden>
+        <div class="product-purchase" data-purchase-controls>
           <div class="product-quantity"><button type="button" data-quantity-step="-1" aria-label="Disminuir cantidad">−</button><label class="sr-only" for="Quantity-{{ section.id }}">Cantidad</label><input id="Quantity-{{ section.id }}" data-product-quantity type="number" min="1" max="1000000" step="1" value="1" inputmode="numeric"><button type="button" data-quantity-step="1" aria-label="Aumentar cantidad">+</button></div>
           <a class="button yellow product-cta" href="#solicitud" data-open-request {% if current_variant == blank %}aria-disabled="true"{% endif %}>{{ section.settings.cta_label | default: 'Solicitar compra' | escape }}</a>
+        </div>
+        <div class="product-estimate-card" data-estimated-bar>
+          <div class="estimate-line">
+            <span class="estimate-title">Monto estimado:</span>
+            <strong class="estimate-amount" data-estimated-amount>{{ current_variant.price | money_with_currency }}</strong>
+          </div>
+          <div class="estimate-breakdown" data-estimated-breakdown>1 unidad × {{ current_variant.price | money_with_currency }}</div>
         </div>
         {% if current_variant == blank %}<p class="error">Esta combinación no existe. Elige otra presentación.</p>{% endif %}
         {% if section.settings.show_sku != false %}<p class="product-sku">SKU: <span data-sku>{{ current_variant.sku | default: 'Pendiente' | escape }}</span></p>{% endif %}

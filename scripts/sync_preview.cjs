@@ -38,29 +38,55 @@ async function main() {
   const landings = {};
   for (const [index, entry] of products.entries()) {
     const product = productFixture({...entry, name: entry.title}, index);
-    for (let n = 0; n < 3; n++) {
-      let art = await engine.parseAndRender(entry.coverage ? "{% render 'pvc-art' %}" : "{% render 'demo-art' %}", {});
+    for (let n = 0; n < product.images.length; n++) {
+      const isFlooring = entry.handle.includes('pvc') || entry.handle.includes('spc');
+      let art = await engine.parseAndRender(isFlooring ? "{% render 'pvc-art' %}" : "{% render 'demo-art' %}", {});
       art = art.match(/<svg[\s\S]*?<\/svg>/)[0];
       if (n) art = art.replace('fill="none"', `fill="none" style="background:${n === 1 ? '#fff6cb' : '#f0f2f4'}"`);
       fs.writeFileSync(path.join(preview, product.images[n].src), art);
     }
-    let html = await section('product-landing', {}, {product, is_demo: true, shop: {currency: 'PEN'}});
-    const variants = product.variants.map((variant, n) => ({...variant, coverage: variant.metafields.decokasa.coverage_m2.value, imageId: variant.featured_image.id, optionValues: product.options_with_values[0].values[n].id}));
+    let html = await section('product-landing', {}, {product, is_demo: false, shop: {currency: 'PEN'}});
+    const variants = product.variants.map((variant, n) => ({...variant, coverage: variant.metafields?.decokasa?.coverage_m2?.value, imageId: variant.featured_image?.id, optionValues: product.options_with_values[0]?.values[n]?.id || ''}));
     html += `<script type="application/json" data-preview-variants>${JSON.stringify(variants)}</script>`;
     // Keep the fixture data inside the product root for the local adapter.
     const parsed = parseHTML(html).document;
     parsed.querySelector('[data-product-page]').appendChild(parsed.querySelector('[data-preview-variants]'));
     landings[`landing-${entry.handle}.html`] = parsed.toString();
   }
-  for (const file of fs.readdirSync(preview).filter(f => f.endsWith('.html') && f !== 'DECOKASA-movil.html')) {
-    const { document } = parseHTML(fs.readFileSync(path.join(preview, file), 'utf8'));
+
+  // Generate the exact "Piso SPC" product landing matching user screenshot 1
+  const spcEntry = {
+    handle: "piso-spc",
+    name: "Piso SPC",
+    brand: "MI TIENDA",
+    category: "Acabados",
+    sku: "Pendiente",
+    price: 9500,
+    intro: "Piso SPC de alta resistencia con acabado texturizado tipo madera natural, sistema click de encastre y máxima durabilidad.",
+    has_only_default_variant: true
+  };
+  const spcProduct = productFixture(spcEntry, 5);
+  let spcArt = await engine.parseAndRender("{% render 'pvc-art' %}", {});
+  spcArt = spcArt.match(/<svg[\s\S]*?<\/svg>/)[0];
+  fs.writeFileSync(path.join(preview, spcProduct.images[0].src), spcArt);
+  let spcHtml = await section('product-landing', {}, {product: spcProduct, is_demo: false, shop: {currency: 'PEN'}});
+  const spcVariants = spcProduct.variants.map((variant, n) => ({...variant, coverage: null, imageId: variant.featured_image?.id, optionValues: ''}));
+  spcHtml += `<script type="application/json" data-preview-variants>${JSON.stringify(spcVariants)}</script>`;
+  const spcParsed = parseHTML(spcHtml).document;
+  spcParsed.querySelector('[data-product-page]').appendChild(spcParsed.querySelector('[data-preview-variants]'));
+  landings['landing-piso-spc.html'] = spcParsed.toString();
+
+  const previewFiles = [...new Set([...fs.readdirSync(preview).filter(f => f.endsWith('.html') && f !== 'DECOKASA-movil.html'), 'landing-piso-spc.html'])];
+  for (const file of previewFiles) {
+    const rawFile = fs.existsSync(path.join(preview, file)) ? fs.readFileSync(path.join(preview, file), 'utf8') : '';
+    const { document } = parseHTML(rawFile || '<!doctype html><html><head><title></title></head><body><footer></footer></body></html>');
     document.querySelectorAll('link[rel="icon"]').forEach(el => el.remove());
     document.head.insertAdjacentHTML('beforeend', '<link rel="icon" type="image/png" sizes="128x128" href="assets/favicon.png">');
     const content = file === 'DECOKASA-inicio.html' ? home : file === 'catalogo.html' ? catalog : landings[file];
     const footer = document.querySelector('footer').outerHTML;
     const consent = document.querySelector('[data-consent-banner]')?.outerHTML ?? document.querySelector('.consent')?.outerHTML ?? '';
     document.querySelectorAll('style').forEach(el => el.remove());
-    const html = `<!doctype html><html lang="es"><head>${document.head.innerHTML}<style>${css}</style></head><body>${header}<main id="main">${content}</main><div class="demo">Demostración · Productos de ejemplo. Los formularios todavía no envían solicitudes.</div>${footer}${consent}<script>${js}</script>${landings[file] ? '<script src="product-demo.js" defer></script>' : ''}</body></html>`;
+    const html = `<!doctype html><html lang="es"><head>${document.head.innerHTML}<style>${css}</style></head><body>${header}<main id="main">${content}</main>${footer}${consent}<script>${js}</script>${landings[file] ? '<script src="product-demo.js" defer></script>' : ''}</body></html>`;
     fs.writeFileSync(path.join(preview, file), html.replace(/[ \t]+$/gm, ''));
   }
   fs.mkdirSync(path.join(preview, 'assets'), { recursive: true });

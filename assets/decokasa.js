@@ -68,7 +68,7 @@
       let draft=null;
       form.querySelector('fieldset').disabled=false;
       function calculation(){if(!calc)return;try{const coverage=select.selectedOptions[0].dataset.coverage;const n=boxes(calc.querySelector('[name=area]').value,calc.querySelector('[name=waste]').value,coverage);result.textContent=`${n} cajas · ${(n*Number(coverage)).toLocaleString('es-PE',{maximumFractionDigits:2})} m² de cobertura`;qty.value=n;page.dispatchEvent(new CustomEvent('decokasa:quantity',{bubbles:true}));result.classList.remove('error');}catch(e){result.textContent=e.message;result.classList.add('error');}}
-      function variant(){const o=select.selectedOptions[0];if(!o)return;if(price)price.textContent=new Intl.NumberFormat('es-PE',{style:'currency',currency:form.dataset.currency}).format(Number(o.dataset.price)/100);if(sku)sku.textContent=o.dataset.sku||'Pendiente';calculation();}
+      function variant(){const o=select.selectedOptions[0];if(!o)return;if(price){price.textContent=new Intl.NumberFormat('es-PE',{style:'currency',currency:form.dataset.currency}).format(Number(o.dataset.price)/100);price.dataset.cents=o.dataset.price;}if(sku)sku.textContent=o.dataset.sku||'Pendiente';calculation();page.dispatchEvent(new CustomEvent('decokasa:quantity',{bubbles:true}));}
       if(calc){calc.querySelectorAll('input').forEach(i=>i.addEventListener('input',calculation));calculation();}
       select.addEventListener('change',variant);
       form.addEventListener('submit',event=>{

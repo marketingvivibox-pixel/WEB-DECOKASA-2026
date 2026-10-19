@@ -10,15 +10,37 @@
       const quantity = page.querySelector('[data-product-quantity]');
       const formQuantity = page.querySelector('[data-request-form] [name=quantity]');
       if (!quantity || !formQuantity) return;
+      const updateEstimated = () => {
+        const priceEl = page.querySelector('[data-product-price]');
+        let cents = Number(priceEl?.dataset.cents || 0);
+        if (!cents && priceEl) {
+          const match = priceEl.textContent.match(/[\d,.]+/);
+          if (match) cents = Math.round(parseFloat(match[0].replace(/,/g, '')) * 100);
+        }
+        const qty = Math.max(1, Number(quantity.value) || 1);
+        const estimateEl = page.querySelector('[data-estimated-amount]');
+        const breakdownEl = page.querySelector('[data-estimated-breakdown]');
+        if (estimateEl && cents > 0) {
+          const totalCents = qty * cents;
+          const formatted = `S/. ${(totalCents / 100).toFixed(2)} PEN`;
+          estimateEl.textContent = formatted;
+          if (breakdownEl) {
+            const isBoxes = !!page.querySelector('[data-pvc]');
+            const unitText = isBoxes ? (qty === 1 ? 'caja' : 'cajas') : (qty === 1 ? 'unidad' : 'unidades');
+            breakdownEl.textContent = `${qty} ${unitText} × S/. ${(cents / 100).toFixed(2)} PEN`;
+          }
+        }
+      };
       const sync = () => {
         quantity.value = formQuantity.value;
         page.querySelector('[data-quantity-step="-1"]').disabled = Number(quantity.value) <= 1;
         page.querySelector('[data-quantity-step="1"]').disabled = Number(quantity.value) >= 1000000;
+        updateEstimated();
       };
       formQuantity.addEventListener('input', sync);
       formQuantity.addEventListener('invalid', event => { event.preventDefault(); quantity.focus(); quantity.reportValidity(); });
       page.addEventListener('decokasa:quantity', sync);
-      quantity.addEventListener('input', () => { formQuantity.value = quantity.value; formQuantity.dispatchEvent(new Event('input', {bubbles: true})); });
+      quantity.addEventListener('input', () => { formQuantity.value = quantity.value; formQuantity.dispatchEvent(new Event('input', {bubbles: true})); updateEstimated(); });
       page.dataset.enhanced = 'true';
       page.querySelector('[data-purchase-controls]').hidden = false;
       sync();
