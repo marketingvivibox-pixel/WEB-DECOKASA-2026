@@ -14,7 +14,7 @@
         const priceEl = page.querySelector('[data-product-price]');
         let cents = Number(priceEl?.dataset.cents || 0);
         if (!cents && priceEl) {
-          const match = priceEl.textContent.match(/[\d,.]+/);
+          const match = priceEl.textContent.match(/\d[\d,.]*/);
           if (match) cents = Math.round(parseFloat(match[0].replace(/,/g, '')) * 100);
         }
         const qty = Math.max(1, Number(quantity.value) || 1);
@@ -24,11 +24,15 @@
           const totalCents = qty * cents;
           const formatted = `S/. ${(totalCents / 100).toFixed(2)} PEN`;
           if (estimateEl) estimateEl.textContent = formatted;
+          const isBoxes = !!page.querySelector('[data-pvc]');
+          const unitText = isBoxes ? (qty === 1 ? 'caja' : 'cajas') : (qty === 1 ? 'unidad' : 'unidades');
           if (breakdownEl) {
-            const isBoxes = !!page.querySelector('[data-pvc]');
-            const unitText = isBoxes ? (qty === 1 ? 'caja' : 'cajas') : (qty === 1 ? 'unidad' : 'unidades');
             breakdownEl.textContent = `${qty} ${unitText} × S/. ${(cents / 100).toFixed(2)} PEN`;
           }
+          const formQtyEl = page.querySelector('[data-form-qty]');
+          const formTotalEl = page.querySelector('[data-form-total]');
+          if (formQtyEl) formQtyEl.textContent = `${qty} ${unitText}`;
+          if (formTotalEl) formTotalEl.textContent = formatted;
 
           // Meta de objetivo: Regalo especial desde S/. 1,000.00 PEN (100,000 centavos)
           const goalCard = page.querySelector('[data-reward-goal]');

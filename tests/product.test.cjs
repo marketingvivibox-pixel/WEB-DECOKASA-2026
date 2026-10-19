@@ -110,3 +110,21 @@ test('El botón de objetivo abre el modal de detalles y actualiza estado al alca
   assert.match(app.document.querySelector('[data-reward-action-text]').textContent, /¡Regalo Desbloqueado!/);
 });
 
+test('La previsualización del monto estimado se actualiza en tiempo real al cambiar la cantidad', async () => {
+  const nextHTML = await html(product(0));
+  const app = await runtime(() => ({ ok: true, text: async () => nextHTML }));
+  const estimateEl = app.document.querySelector('[data-estimated-amount]');
+  const breakdownEl = app.document.querySelector('[data-estimated-breakdown]');
+  const quantity = app.document.querySelector('[data-product-quantity]');
+  assert.ok(estimateEl, 'Debe existir el elemento del monto estimado');
+  assert.ok(breakdownEl, 'Debe existir el desglose del monto');
+  assert.equal(estimateEl.textContent.trim(), 'S/. 120.00 PEN');
+  assert.match(breakdownEl.textContent, /1 unidad × S\/\. 120\.00 PEN/);
+
+  // Al aumentar la cantidad a 4 (como en la captura del usuario: 120 * 4 = 480)
+  quantity.value = '4';
+  quantity.dispatchEvent(new app.window.Event('input', { bubbles: true }));
+  assert.equal(estimateEl.textContent.trim(), 'S/. 480.00 PEN');
+  assert.match(breakdownEl.textContent, /4 unidades × S\/\. 120\.00 PEN/);
+});
+

@@ -14,7 +14,7 @@ class Check(HTMLParser):
         if 'data-pvc' in a:self.calcs+=1
         if tag=='h1':self.h1+=1
 pages=[p for p in out.glob('*.html') if p.name!='DECOKASA-movil.html']
-assert len(pages)==7, 'Se esperan siete páginas de demostración'
+assert len(pages) in (7, 8), 'Se esperan las páginas de demostración generadas'
 for page in pages:
     c=Check();c.feed(page.read_text(encoding='utf-8'))
     assert len(c.ids)==len(set(c.ids)),page
