@@ -20,26 +20,84 @@
         const qty = Math.max(1, Number(quantity.value) || 1);
         const estimateEl = page.querySelector('[data-estimated-amount]');
         const breakdownEl = page.querySelector('[data-estimated-breakdown]');
-        if (estimateEl && cents > 0) {
+        if (cents > 0) {
           const totalCents = qty * cents;
           const formatted = `S/. ${(totalCents / 100).toFixed(2)} PEN`;
-          estimateEl.textContent = formatted;
+          if (estimateEl) estimateEl.textContent = formatted;
           if (breakdownEl) {
             const isBoxes = !!page.querySelector('[data-pvc]');
             const unitText = isBoxes ? (qty === 1 ? 'caja' : 'cajas') : (qty === 1 ? 'unidad' : 'unidades');
             breakdownEl.textContent = `${qty} ${unitText} × S/. ${(cents / 100).toFixed(2)} PEN`;
           }
+
+          // Meta de objetivo: Regalo especial desde S/. 1,000.00 PEN (100,000 centavos)
+          const goalCard = page.querySelector('[data-reward-goal]');
+          if (goalCard) {
+            const thresholdCents = Number(goalCard.dataset.threshold) || 100000;
+            const percent = Math.min(100, Math.round((totalCents / thresholdCents) * 100));
+            const fillEl = goalCard.querySelector('[data-reward-fill]');
+            const titleEl = goalCard.querySelector('[data-reward-title]');
+            const currentEl = goalCard.querySelector('[data-reward-current]');
+            const percentEl = goalCard.querySelector('[data-reward-percent]');
+            const subtextEl = goalCard.querySelector('[data-reward-subtext]');
+            const iconEl = goalCard.querySelector('[data-reward-icon]');
+            const trackEl = goalCard.querySelector('.reward-progress-track');
+            const estimateBar = page.querySelector('[data-estimated-bar]');
+
+            if (fillEl) fillEl.style.width = `${percent}%`;
+            if (trackEl) trackEl.setAttribute('aria-valuenow', String(percent));
+            if (currentEl) currentEl.textContent = formatted;
+            if (percentEl) percentEl.textContent = `${percent}% de la meta`;
+
+            if (totalCents >= thresholdCents) {
+              goalCard.classList.add('unlocked');
+              if (iconEl) iconEl.textContent = '🎉';
+              if (titleEl) {
+                titleEl.innerHTML = '¡Felicidades! Has alcanzado la meta y desbloqueaste tu <strong>Regalo Especial</strong> 🎁';
+              }
+              if (subtextEl) {
+                subtextEl.textContent = `¡Genial! Tu solicitud supera los S/. ${(thresholdCents / 100).toFixed(2)} PEN. Tu asesor confirmará tu regalo sorpresa al coordinar la entrega.`;
+              }
+              if (estimateBar && !estimateBar.querySelector('.reward-unlocked-badge')) {
+                const badge = document.createElement('span');
+                badge.className = 'reward-unlocked-badge';
+                badge.innerHTML = '🎁 ¡Regalo Especial Desbloqueado!';
+                estimateBar.appendChild(badge);
+              }
+            } else {
+              goalCard.classList.remove('unlocked');
+              if (iconEl) iconEl.textContent = '🎁';
+              const diffCents = thresholdCents - totalCents;
+              const remainingFormatted = `S/. ${(diffCents / 100).toFixed(2)} PEN`;
+              if (titleEl) {
+                titleEl.innerHTML = `¡Agrega <strong>${remainingFormatted}</strong> más para desbloquear tu <strong>Regalo Especial</strong>!`;
+              }
+              if (subtextEl) {
+                subtextEl.textContent = `Al alcanzar un monto de gasto de S/. ${(thresholdCents / 100).toFixed(2)} PEN recibes un regalo especial con tu pedido.`;
+              }
+              const existingBadge = estimateBar?.querySelector('.reward-unlocked-badge');
+              if (existingBadge) existingBadge.remove();
+            }
+          }
         }
       };
       const sync = () => {
         quantity.value = formQuantity.value;
-        page.querySelector('[data-quantity-step="-1"]').disabled = Number(quantity.value) <= 1;
-        page.querySelector('[data-quantity-step="1"]').disabled = Number(quantity.value) >= 1000000;
+        const stepDown = page.querySelector('[data-quantity-step="-1"]');
+        const stepUp = page.querySelector('[data-quantity-step="1"]');
+        if (stepDown) stepDown.disabled = Number(quantity.value) <= 1;
+        if (stepUp) stepUp.disabled = Number(quantity.value) >= 1000000;
         updateEstimated();
       };
       formQuantity.addEventListener('input', sync);
       formQuantity.addEventListener('invalid', event => { event.preventDefault(); quantity.focus(); quantity.reportValidity(); });
       page.addEventListener('decokasa:quantity', sync);
+      page.addEventListener('decokasa:variant', updateEstimated);
+      page.addEventListener('change', event => {
+        if (event.target.matches('[name=variant_id]')) {
+          updateEstimated();
+        }
+      });
       quantity.addEventListener('input', () => { formQuantity.value = quantity.value; formQuantity.dispatchEvent(new Event('input', {bubbles: true})); updateEstimated(); });
       page.dataset.enhanced = 'true';
       page.querySelector('[data-purchase-controls]').hidden = false;

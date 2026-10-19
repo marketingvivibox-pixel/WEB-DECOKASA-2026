@@ -22,7 +22,37 @@
 .product-price-row{display:flex;align-items:baseline;flex-wrap:wrap;gap:12px;margin:0 0 4px}
 .product-price{font-size:26px;font-weight:700;color:#111827}
 .product-compare-price{font-size:16px;color:#9ca3af;text-decoration:line-through}
-.product-price-note{font-size:13px;color:#6b7280;margin:0 0 20px;line-height:1.4}
+.product-price-note{font-size:13px;color:#6b7280;margin:0 0 16px;line-height:1.4}
+.reward-goal-card{background:#ffffff;border:1.5px solid #e2e8f0;border-radius:14px;padding:16px 18px;margin:0 0 24px;box-shadow:0 4px 12px -2px rgba(0,0,0,0.05);transition:all .25s ease}
+.reward-goal-card.hierarchy-top{background:linear-gradient(180deg,#fffdf0 0%,#ffffff 100%);border-color:#fde047;box-shadow:0 6px 18px -3px rgba(255,209,0,0.15),0 2px 6px -1px rgba(0,0,0,0.04)}
+.reward-goal-badge{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#854d0e;margin-bottom:12px}
+.reward-badge-dot{width:8px;height:8px;border-radius:50%;background:#f59e0b;box-shadow:0 0 0 2px rgba(245,158,11,0.25);display:inline-block;animation:pulse-dot 2s infinite}
+@keyframes pulse-dot{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.3);opacity:0.7}}
+.reward-badge-pill{margin-left:auto;font-size:11px;font-weight:700;color:#111827;background:#fef08a;padding:2px 8px;border-radius:999px;border:1px solid #fde047}
+.reward-goal-card.unlocked{background:linear-gradient(135deg,#f0fdf4 0%,#ecfdf5 50%,#fef9c3 100%);border-color:#10b981;box-shadow:0 6px 20px -2px rgba(16,185,129,0.22)}
+.reward-goal-card.unlocked .reward-goal-badge{color:#065f46}
+.reward-goal-card.unlocked .reward-badge-dot{background:#10b981;box-shadow:0 0 0 2px rgba(16,185,129,0.3)}
+.reward-goal-card.unlocked .reward-badge-pill{background:#d1fae5;color:#065f46;border-color:#6ee7b7}
+.reward-goal-header{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.reward-goal-icon{font-size:26px;line-height:1;flex-shrink:0;width:44px;height:44px;display:grid;place-items:center;background:#fefce8;border:1px solid #fef08a;border-radius:12px}
+.reward-goal-card.unlocked .reward-goal-icon{background:#dcfce7;border-color:#86efac}
+.reward-goal-info{flex:1;min-width:0}
+.reward-goal-title{display:block;font-size:14px;font-weight:600;color:#111827;line-height:1.4}
+.reward-goal-title strong{color:#b45309}
+.reward-goal-card.unlocked .reward-goal-title{color:#065f46;font-size:14.5px}
+.reward-goal-card.unlocked .reward-goal-title strong{color:#047857}
+.reward-goal-subtext{display:block;font-size:12px;color:#6b7280;margin-top:3px;line-height:1.35}
+.reward-goal-card.unlocked .reward-goal-subtext{color:#047857;font-weight:500}
+.reward-progress-track{width:100%;height:10px;background:#f1f5f9;border-radius:999px;overflow:hidden;position:relative;box-shadow:inset 0 1px 2px rgba(0,0,0,0.06)}
+.reward-progress-fill{height:100%;background:linear-gradient(90deg,#ffd100 0%,#f59e0b 100%);border-radius:999px;transition:width .4s cubic-bezier(0.4, 0, 0.2, 1)}
+.reward-goal-card.unlocked .reward-progress-fill{background:linear-gradient(90deg,#10b981 0%,#059669 100%);box-shadow:0 0 10px rgba(16,185,129,0.4)}
+.reward-goal-footer{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#6b7280;margin-top:8px;font-weight:500}
+.reward-current-label{color:#4b5563}
+.reward-current{font-weight:700;color:#111827}
+.reward-goal-card.unlocked .reward-current{color:#065f46}
+.reward-percent{font-size:11.5px;font-weight:600;color:#b45309}
+.reward-goal-card.unlocked .reward-percent{color:#047857;font-weight:700}
+.reward-unlocked-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:8px;background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0;font-size:12px;font-weight:700}
 .product-option-group{margin:0 0 20px}
 .product-option-label{font-size:14px;margin:0 0 10px;font-weight:500;color:#111827}
 .product-option-values{display:flex;flex-wrap:wrap;gap:10px}

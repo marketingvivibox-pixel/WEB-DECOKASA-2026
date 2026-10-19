@@ -13,8 +13,12 @@ document.querySelectorAll('[data-product-page]').forEach(page => {
     option.dataset.price = variant.price; option.dataset.sku = variant.sku; option.dataset.coverage = variant.coverage || '';
     option.selected = true; select.replaceChildren(option);
     const priceEl = page.querySelector('[data-product-price]');
-    if (priceEl) priceEl.dataset.cents = variant.price;
+    if (priceEl) {
+      priceEl.dataset.cents = variant.price;
+      priceEl.textContent = `S/. ${(variant.price / 100).toFixed(2)} PEN`;
+    }
     select.dispatchEvent(new Event('change', {bubbles: true}));
+    page.dispatchEvent(new CustomEvent('decokasa:variant', {bubbles: true}));
     page.querySelectorAll('[data-option-link]').forEach(item => { if (item === link) item.setAttribute('aria-current', 'true'); else item.removeAttribute('aria-current'); });
     page.querySelector('.product-option-label strong').textContent = variant.title;
     page.querySelector(`[data-gallery-choice="${variant.imageId}"]`)?.click();

@@ -1,5 +1,16 @@
 # Avances y validación
 
+## 19/10/2026 — Meta de objetivo con jerarquía superior para regalo especial desde S/. 1,000 PEN
+
+- Rama secundaria: `feature/monto-estimado`.
+- Se implementó la meta de objetivo con jerarquía superior en pantalla para todos los productos (`snippets/product-landing.liquid`, `assets/product-detail.css`, `assets/product-detail.js`, `preview/product-demo.js`):
+  - Ubicación preferente: posicionada en la cabecera de la columna de detalles del producto con alta jerarquía visual (`.reward-goal-card.hierarchy-top`), destacando el objetivo antes de la selección de variantes.
+  - Indicador de meta con umbral de S/. 1,000.00 PEN (`reward_threshold` configurable por sección, por defecto 1000 PEN / 100,000 centavos).
+  - Barra de progreso dinámica e interactiva con porcentaje en tiempo real, cálculo de diferencia restante (`S/. XX.XX PEN restantes`) y estado de desbloqueo con felicitación (`¡Felicidades! Has alcanzado la meta y desbloqueaste tu Regalo Especial 🎁`).
+  - Sincronización completa con el selector de cantidad (`+`/`-`), ingreso manual, calculadora de cajas PVC y cambios de variantes/presentaciones.
+  - Insignia de regalo especial reflejada de forma complementaria en la tarjeta de monto estimado bajo los controles de compra.
+- Validación: 17 de 17 pruebas unitarias y DOM aprobadas (`npm test`), vistas de demostración sincronizadas (`npm run sync:preview`) y probadas en todos los productos.
+
 ## 19/10/2026 — Previsualización dinámica de monto estimado en ficha de producto
 
 - Rama secundaria: `feature/monto-estimado`.
