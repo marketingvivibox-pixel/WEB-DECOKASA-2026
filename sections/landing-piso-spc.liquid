@@ -6,15 +6,22 @@
 {{ 'landing-piso-spc.css' | asset_url | stylesheet_tag }}
 
 <div class="spc-landing" id="piso-spc-landing">
+  {% if section.settings.show_top_announcement and section.settings.top_announcement != blank %}
   <!-- Top Announcement Bar -->
   <div class="spc-topbar">
     <span>{{ section.settings.top_announcement }}</span>
   </div>
+  {% endif %}
 
   <!-- Hero Section -->
   <section class="spc-hero">
     <div class="spc-hero-container">
       <div class="spc-hero-content">
+        <div class="spc-hero-brand-row" style="margin-bottom: 22px;">
+          <a href="DECOKASA-inicio.html" title="DECOKASA Inicio" style="display: inline-block; text-decoration: none;">
+            <img src="{{ 'decokasa-logo.webp' | asset_url }}" alt="DECOKASA" width="180" height="48" style="height: 38px; width: auto; object-fit: contain; display: block;">
+          </a>
+        </div>
         <div class="spc-badge">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           {{ section.settings.badge_text }}
@@ -649,6 +656,12 @@
 {
   "name": "Landing Piso SPC",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_top_announcement",
+      "label": "Mostrar Barra Superior de Aviso",
+      "default": true
+    },
     {
       "type": "text",
       "id": "top_announcement",

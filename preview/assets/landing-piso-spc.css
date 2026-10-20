@@ -1,4 +1,18 @@
-/* DECOKASA — Landing Page Exclusiva Piso SPC Premium (OS 2.0) */
+/* ==========================================================================
+   SUPRESIÓN DE BARRAS DE CABECERA EN LA LANDING (Modo Aislado / Campañas)
+   ========================================================================== */
+.service-bar,
+.store-header,
+.navigation-shell,
+.skip {
+  display: none !important;
+}
+
+body.landing-page-isolated,
+body:has(.spc-landing) {
+  padding-top: 0 !important;
+  --service-bar-height: 0px !important;
+}
 
 :root {
   --spc-gold-primary: #d4af37;

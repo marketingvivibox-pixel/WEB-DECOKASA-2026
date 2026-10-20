@@ -79,9 +79,12 @@ async function main() {
     const footer = document.querySelector('footer').outerHTML;
     const consent = document.querySelector('[data-consent-banner]')?.outerHTML ?? document.querySelector('.consent')?.outerHTML ?? '';
     document.querySelectorAll('style').forEach(el => el.remove());
-    const extraCss = file === 'landing-piso-spc.html' ? '<link rel="stylesheet" href="assets/landing-piso-spc.css">' : '';
-    const html = `<!doctype html><html lang="es"><head>${document.head.innerHTML}<style>${css}</style>${extraCss}</head><body>${header}<main id="main">${content}</main>${footer}${consent}<script>${js}</script>${landings[file] && file !== 'landing-piso-spc.html' ? '<script src="product-demo.js" defer></script>' : ''}</body></html>`;
-    fs.writeFileSync(path.join(preview, file), html.replace(/[ \t]+$/gm, ''));
+    const isLandingSpc = file === 'landing-piso-spc.html';
+    const pageHeader = isLandingSpc ? '' : header;
+    const extraCss = isLandingSpc ? '<link rel="stylesheet" href="assets/landing-piso-spc.css">' : '';
+    const bodyAttr = isLandingSpc ? ' class="landing-page-isolated" style="padding-top:0!important;"' : '';
+    const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">${document.head.innerHTML}<style>${css}</style>${extraCss}</head><body${bodyAttr}>${pageHeader}<main id="main">${content}</main>${footer}${consent}<script>${js}</script>${landings[file] && !isLandingSpc ? '<script src="product-demo.js" defer></script>' : ''}</body></html>`;
+    fs.writeFileSync(path.join(preview, file), html.replace(/[ \t]+$/gm, ''), 'utf8');
   }
   fs.mkdirSync(path.join(preview, 'assets'), { recursive: true });
   for (const asset of fs.readdirSync(path.join(root, 'assets')).filter(name => /^(decokasa-.*\.webp|favicon\.png|product-detail\.(css|js)|landing-piso-spc\.(css|js)|spc_.*\.jpg|customer_.*\.jpg)$/.test(name))) {
