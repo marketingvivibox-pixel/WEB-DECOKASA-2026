@@ -69,14 +69,14 @@ async function main() {
   let spcHtml = await section('landing-piso-spc', {}, {product: spcProduct, is_demo: false, shop: {currency: 'PEN'}});
   landings['landing-piso-spc.html'] = spcHtml;
 
-  const previewFiles = [...new Set([...fs.readdirSync(preview).filter(f => f.endsWith('.html') && f !== 'DECOKASA-movil.html'), 'landing-piso-spc.html'])];
+  const previewFiles = [...new Set([...fs.readdirSync(preview).filter(f => f.endsWith('.html') && !['DECOKASA-movil.html', 'render_pdf.html'].includes(f)), 'landing-piso-spc.html'])];
   for (const file of previewFiles) {
     const rawFile = fs.existsSync(path.join(preview, file)) ? fs.readFileSync(path.join(preview, file), 'utf8') : '';
     const { document } = parseHTML(rawFile || '<!doctype html><html><head><title></title></head><body><footer></footer></body></html>');
     document.querySelectorAll('link[rel="icon"]').forEach(el => el.remove());
     document.head.insertAdjacentHTML('beforeend', '<link rel="icon" type="image/png" sizes="128x128" href="assets/favicon.png">');
     const content = file === 'DECOKASA-inicio.html' ? home : file === 'catalogo.html' ? catalog : landings[file];
-    const footer = document.querySelector('footer').outerHTML;
+    const footer = document.querySelector('footer')?.outerHTML ?? '';
     const consent = document.querySelector('[data-consent-banner]')?.outerHTML ?? document.querySelector('.consent')?.outerHTML ?? '';
     document.querySelectorAll('style').forEach(el => el.remove());
     const isLandingSpc = file === 'landing-piso-spc.html';

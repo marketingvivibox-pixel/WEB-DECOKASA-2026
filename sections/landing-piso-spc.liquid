@@ -1,6 +1,6 @@
 {% comment %}
-  DECOKASA - Sección Exclusiva Landing Page Piso SPC Premium
-  Basado en la maqueta oficial de la diseñadora y ficha técnica validada.
+  DECOKASA - Landing Page Exclusiva Piso SPC Premium (OS 2.0)
+  Fidelidad visual >95% basada en arte original de diseñadora (1080x6739) y ficha técnica.
 {% endcomment %}
 
 {{ 'landing-piso-spc.css' | asset_url | stylesheet_tag }}
@@ -13,489 +13,512 @@
   </div>
   {% endif %}
 
-  <!-- Hero Section -->
-  <section class="spc-hero">
-    <div class="spc-hero-container">
-      <div class="spc-hero-content">
-        <div class="spc-hero-brand-row" style="margin-bottom: 22px;">
-          <a href="DECOKASA-inicio.html" title="DECOKASA Inicio" style="display: inline-block; text-decoration: none;">
-            <img src="{{ 'decokasa-logo.webp' | asset_url }}" alt="DECOKASA" width="180" height="48" style="height: 38px; width: auto; object-fit: contain; display: block;">
-          </a>
-        </div>
-        <div class="spc-badge">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          {{ section.settings.badge_text }}
-        </div>
-        <h1 class="spc-hero-title">
-          {{ section.settings.hero_title_prefix }} <span class="highlight">{{ section.settings.hero_title_highlight }}</span>
-        </h1>
-        <p class="spc-hero-subtitle">
-          {{ section.settings.hero_subtitle }}
-        </p>
+  <!-- =========================================================================
+       1. HERO SECTION: Luxury Stage con Monograma DK Dorado, Planchas y Dual CTA
+       ========================================================================= -->
+  <section class="spc-hero-stage">
+    <div class="spc-hero-stage-bg" style="background-image: url('{{ 'spc_hero_banner.jpg' | asset_url }}');"></div>
+    <div class="spc-hero-overlay"></div>
 
-        <!-- Feature Pills Strip -->
-        <div class="spc-hero-features-strip">
-          <div class="spc-feature-pill">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            Espesor 5.5 mm con IXPE
-          </div>
-          <div class="spc-feature-pill">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m9 12 2 2 4-4"/></svg>
-            Sistema Click Hermético
-          </div>
-          <div class="spc-feature-pill">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
-            100% Resistente al Agua
-          </div>
-          <div class="spc-feature-pill">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-            2.196 m² por Caja (10 Pzs)
-          </div>
-        </div>
-
-        <!-- Price Display Box -->
-        <div class="spc-price-box">
-          <div>
-            <div class="spc-price-label">Precio Especial por Caja</div>
-            <div class="spc-price-amount">S/ {{ section.settings.price_pen }}</div>
-          </div>
-          <div class="spc-price-unit">
-            <span>Rinde 2.196 m²</span><br>
-            <small style="color: #6b7280;">(~S/ 43.26 por m²)</small>
-          </div>
-        </div>
-
-        <!-- Action Buttons -->
-        <div class="spc-hero-actions">
-          <a href="https://wa.me/{{ section.settings.whatsapp_phone }}?text=Hola%20Decokasa,%20deseo%20asesor%C3%ADa%20sobre%20el%20Piso%20SPC%20Premium" class="spc-btn spc-btn-whatsapp" target="_blank" rel="noopener">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            Contactar Asesor
-          </a>
-          <a href="#calculadora" class="spc-btn spc-btn-gold">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M8 18h.01M12 18h.01"/></svg>
-            Calcular Cajas Necesarias
-          </a>
-        </div>
+    <div class="spc-stage-container">
+      <!-- Monograma Emblema DK Dorado Oficial (Techo de casa con monograma) -->
+      <div class="spc-emblem-wrap">
+        <a href="DECOKASA-inicio.html" title="DECOKASA - Volver a la Tienda" class="spc-emblem-link">
+          <svg class="spc-dk-emblem" viewBox="0 0 120 120" width="76" height="76" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="spcGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#fff4b8"/>
+                <stop offset="25%" stop-color="#f5d76e"/>
+                <stop offset="60%" stop-color="#d4af37"/>
+                <stop offset="90%" stop-color="#aa820a"/>
+                <stop offset="100%" stop-color="#7a5b00"/>
+              </linearGradient>
+              <filter id="goldGlow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="3" result="blur"/>
+                <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+              </filter>
+            </defs>
+            <!-- Contorno de casa estilizada -->
+            <path d="M60 14 L106 50 V106 H14 V50 Z" stroke="url(#spcGoldGrad)" stroke-width="6.5" stroke-linejoin="round" fill="rgba(18, 16, 12, 0.4)" filter="url(#goldGlow)"/>
+            <!-- Letra D con flecha curva icónica Decokasa -->
+            <path d="M36 50 H51 C58.5 50 63 54.5 63 62 C63 69.5 58.5 74 51 74 H44 V86 H36 Z M44 57 V67 H51 C54 67 56 65 56 62 C56 59 54 57 51 57 Z" fill="url(#spcGoldGrad)"/>
+            <path d="M32 60 L36 55 L40 60 Z" fill="url(#spcGoldGrad)"/>
+            <!-- Letra K -->
+            <path d="M68 50 H76 V66 L89 50 H100 L84 68 L101 86 H89 L76 71 V86 H68 Z" fill="url(#spcGoldGrad)"/>
+          </svg>
+        </a>
       </div>
 
-      <!-- Hero Visual Image -->
-      <div class="spc-hero-media">
-        <div class="spc-hero-image-wrap">
-          <img src="{{ 'spc_hero_banner.jpg' | asset_url }}" alt="Piso SPC Decokasa Premium con Sistema Click" width="1080" height="1310" loading="eager">
-        </div>
+      <!-- Título de Impacto en Relieve Dorado -->
+      <div class="spc-stage-headings">
+        <h1 class="spc-stage-title">
+          Los Pisos del <span class="spc-gold-shimmer">Futuro</span>
+        </h1>
+        <p class="spc-stage-subtitle">
+          Piso Vinílico SPC Decokasa Premium con Sistema Click y Base Acústica IXPE Incorporada
+        </p>
+      </div>
+
+      <!-- Placas y Empaque Standing (Arte 3D del Diseñador) -->
+      <div class="spc-stage-visual">
+        <img src="{{ 'spc_hero_banner.jpg' | asset_url }}" alt="Pisos SPC Decokasa con Caja de Empaque Oficial y Tablones en Roble, Gris y Teca" class="spc-stage-mockup-img" width="1080" height="1310" loading="eager">
+      </div>
+
+      <!-- Dual Call to Action Hero -->
+      <div class="spc-stage-actions">
+        <!-- Botón Asesoría WhatsApp -->
+        <a href="https://wa.me/{{ section.settings.whatsapp_phone }}?text=Hola%20Decokasa,%20deseo%20asesor%C3%ADa%20sobre%20el%20Piso%20SPC%20Premium" class="spc-hero-advisor-btn" target="_blank" rel="noopener">
+          <span class="spc-wa-circle">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </span>
+          <span class="spc-advisor-text">
+            <strong>Buscar asesoría</strong>
+            <small>Contacta un asesor en vivo</small>
+          </span>
+        </a>
+
+        <!-- Botón Catálogo Píldora Dorada Oficial -->
+        <a href="#calculadora" class="spc-pill-gold-btn">
+          <svg class="spc-pill-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <rect x="4" y="3" width="16" height="18" rx="2"/>
+            <line x1="8" y1="7" x2="16" y2="7"/>
+            <line x1="8" y1="11" x2="16" y2="11"/>
+            <line x1="8" y1="15" x2="12" y2="15"/>
+          </svg>
+          <span class="spc-pill-btn-label">Calcular Cajas & Cotizar</span>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- Benefits Section (Dark Luxury Mode) -->
-  <section class="spc-benefits" id="beneficios">
-    <div class="spc-benefits-overlay" style="background-image: url('{{ 'spc_benefits_bg.jpg' | asset_url }}');"></div>
+  <!-- =========================================================================
+       2. BENEFITS SECTION: 6 Iconos Lineales Dorados en Habitación Oscura de Lujo
+       ========================================================================= -->
+  <section class="spc-benefits-section" id="beneficios">
+    <div class="spc-benefits-backdrop" style="background-image: url('{{ 'spc_benefits_bg.jpg' | asset_url }}');"></div>
+    <div class="spc-benefits-dimmer"></div>
+
     <div class="spc-container">
       <div class="spc-section-header">
-        <div class="spc-badge">Atributos Superiores</div>
-        <h2 class="spc-section-title">¿Por qué elegir Piso SPC Decokasa?</h2>
-        <p class="spc-section-desc">Diseñado con tecnología de punta Stone Plastic Composite para ofrecer durabilidad extrema, belleza de madera auténtica y cero preocupaciones de mantenimiento.</p>
+        <div class="spc-tag-badge">Atributos Exclusivos</div>
+        <h2 class="spc-section-title light-title">¿Por qué elegir Piso SPC Decokasa?</h2>
+        <p class="spc-section-sub light-sub">Ingeniería Stone Plastic Composite diseñada para soportar el ritmo de vida moderno con acabado de madera noble.</p>
       </div>
 
-      <div class="spc-benefits-grid">
-        <!-- Benefit 1 -->
-        <div class="spc-benefit-card">
-          <div class="spc-benefit-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+      <!-- Grilla 3x2 con los 6 Iconos Lineales Dorados de la Maqueta -->
+      <div class="spc-designer-icons-grid">
+        <!-- 1. Gota de Agua (100% Impermeable) -->
+        <div class="spc-icon-feature-card">
+          <div class="spc-gold-glyph">
+            <svg viewBox="0 0 64 64" width="58" height="58" fill="none" stroke="url(#spcGoldGrad)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M32 8 C32 8 14 30 14 42 C14 52 22 60 32 60 C42 60 50 52 50 42 C50 30 32 8 32 8 Z"/>
+              <path d="M32 24 C32 24 22 36 22 43 C22 48 26 52 32 52" stroke-width="2.5" opacity="0.6"/>
+            </svg>
           </div>
           <h3>100% Resistente al Agua</h3>
-          <p>No se hincha, pudre ni deforma por derrames, humedad ambiental o trapeado constante. Ideal para salas, comedores, cocinas y comercios.</p>
+          <p>Inmune a derrames accidentales, trapeado diario y humedad. No se expande, deforma ni despega.</p>
         </div>
 
-        <!-- Benefit 2 -->
-        <div class="spc-benefit-card">
-          <div class="spc-benefit-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+        <!-- 2. Capas Diamante Multicapa -->
+        <div class="spc-icon-feature-card">
+          <div class="spc-gold-glyph">
+            <svg viewBox="0 0 64 64" width="58" height="58" fill="none" stroke="url(#spcGoldGrad)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M32 6 L56 22 L32 38 L8 22 Z"/>
+              <path d="M8 32 L32 48 L56 32" opacity="0.85"/>
+              <path d="M8 42 L32 58 L56 42" opacity="0.7"/>
+            </svg>
           </div>
-          <h3>Espuma IXPE Incorporada</h3>
-          <p>Incluye base acústica de 1.5 mm preadherida. Reduce el eco de pisadas, mejora la sensación térmica y absorbe microdesniveles del contrapiso.</p>
+          <h3>Núcleo SPC de 5.5 mm con IXPE</h3>
+          <p>Compuesto 70% caliza mineral de extrema rigidez con base acústica IXPE de 1.5 mm preadherida.</p>
         </div>
 
-        <!-- Benefit 3 -->
-        <div class="spc-benefit-card">
-          <div class="spc-benefit-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="7" r="4"/><path d="M5 22v-5l7-3 7 3v5"/></svg>
+        <!-- 3. Figura Caminando (Alto Tránsito) -->
+        <div class="spc-icon-feature-card">
+          <div class="spc-gold-glyph">
+            <svg viewBox="0 0 64 64" width="58" height="58" fill="none" stroke="url(#spcGoldGrad)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="32" cy="14" r="6"/>
+              <path d="M32 24 L24 40 L12 44"/>
+              <path d="M32 24 L40 38 L52 52"/>
+              <path d="M24 40 L34 56"/>
+              <path d="M22 28 L32 24 L42 28"/>
+            </svg>
           </div>
-          <h3>Alto Tránsito Garantizado</h3>
-          <p>Capa de desgaste de 0.3 mm con tratamiento UV cerámico. Máxima protección contra rayones de calzado, arrastre de sillas y mascotas.</p>
+          <h3>Alto Tránsito Comercial & Residencial</h3>
+          <p>Capa de desgaste de 0.3 mm con tratamiento cerámico UV que previene rayaduras y desgaste por fricción.</p>
         </div>
 
-        <!-- Benefit 4 -->
-        <div class="spc-benefit-card">
-          <div class="spc-benefit-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <!-- 4. Sistema Click Encastre Hermético -->
+        <div class="spc-icon-feature-card">
+          <div class="spc-gold-glyph">
+            <svg viewBox="0 0 64 64" width="58" height="58" fill="none" stroke="url(#spcGoldGrad)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="10" y="20" width="44" height="24" rx="3"/>
+              <path d="M10 32 H26 V38 H38 V32 H54"/>
+              <path d="M22 20 V26 M42 20 V26"/>
+            </svg>
           </div>
           <h3>Sistema Click Sin Pegamento</h3>
-          <p>Encastre perimetral hermético que encaja pieza con pieza. Instalación limpia, rápida, sin olores ni tiempos de espera para transitar.</p>
+          <p>Encastre perimetral patentado tipo macho-hembra. Instalación limpia, rápida, sin polvos ni tiempos de secado.</p>
         </div>
 
-        <!-- Benefit 5 -->
-        <div class="spc-benefit-card">
-          <div class="spc-benefit-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 15-6-6-6 6"/><path d="M4 20h16"/></svg>
+        <!-- 5. Escoba / Fácil Limpieza -->
+        <div class="spc-icon-feature-card">
+          <div class="spc-gold-glyph">
+            <svg viewBox="0 0 64 64" width="58" height="58" fill="none" stroke="url(#spcGoldGrad)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="48" y1="10" x2="28" y2="38"/>
+              <path d="M28 38 L18 54 H42 L34 38 Z"/>
+              <line x1="24" y1="46" x2="36" y2="46"/>
+            </svg>
           </div>
-          <h3>Fácil Limpieza y Cero Cera</h3>
-          <p>Superficie sellada mate antideslizante que no acumula suciedad profunda. No requiere pulido, encerado ni productos químicos especiales.</p>
+          <h3>Fácil Limpieza & Cero Encerado</h3>
+          <p>Acabado mate que repele manchas domésticas. Se limpia fácilmente con paño húmedo sin químicos abrasivos.</p>
         </div>
 
-        <!-- Benefit 6 -->
-        <div class="spc-benefit-card">
-          <div class="spc-benefit-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        <!-- 6. Mascota / Pet Friendly -->
+        <div class="spc-icon-feature-card">
+          <div class="spc-gold-glyph">
+            <svg viewBox="0 0 64 64" width="58" height="58" fill="none" stroke="url(#spcGoldGrad)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 22 C14 22 10 30 14 38 C16 42 22 40 24 36"/>
+              <path d="M44 22 C50 22 54 30 50 38 C48 42 42 40 40 36"/>
+              <path d="M20 28 C26 22 38 22 44 28 C48 34 46 48 32 52 C18 48 16 34 20 28 Z"/>
+              <ellipse cx="26" cy="36" rx="2" ry="3" fill="url(#spcGoldGrad)"/>
+              <ellipse cx="38" cy="36" rx="2" ry="3" fill="url(#spcGoldGrad)"/>
+              <polygon points="32,41 29,45 35,45" fill="url(#spcGoldGrad)"/>
+            </svg>
           </div>
-          <h3>Pet Friendly y Ecológico</h3>
-          <p>Superficie antideslizante segura para niños y mascotas. Libre de ftalatos dañinos, metales pesados y emisiones de formaldehído.</p>
+          <h3>Pet Friendly & No Tóxico</h3>
+          <p>Superficie antideslizante con agarre para mascotas. Cero emisiones nocivas de formaldehído o metales pesados.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Certifications Pill Strip -->
-  <div class="spc-certifications-strip">
-    <div class="spc-container spc-certs-flex">
-      <div class="spc-certs-intro">
-        <h4>Certificaciones Internacionales</h4>
-        <p>Cumple con estándares mundiales de calidad y seguridad ambiental.</p>
-      </div>
-      <div class="spc-certs-badges">
-        <span class="spc-cert-tag">EPH Certified</span>
-        <span class="spc-cert-tag">ilac-MRA</span>
-        <span class="spc-cert-tag">ANAB Accredited</span>
-        <span class="spc-cert-tag">DAkkS Germany</span>
-        <span class="spc-cert-tag">FloorScore®</span>
-        <span class="spc-cert-tag">CNAS Quality</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Anatomy & Technical Specs Section -->
-  <section class="spc-anatomy" id="especificaciones">
+  <!-- =========================================================================
+       3. CERTIFICACIONES Y MUESTRAS ISOMÉTRICAS (Arte 3 del Diseñador)
+       ========================================================================= -->
+  <section class="spc-certifications-section">
     <div class="spc-container">
-      <div class="spc-section-header">
-        <div class="spc-badge">Estructura Multicapa</div>
-        <h2 class="spc-section-title light-text">Anatomía de Alta Ingeniería</h2>
-        <p class="spc-section-desc" style="color: #6c737a;">5 capas sinérgicas fusionadas bajo calor y alta presión para brindar estabilidad dimensional insuperable.</p>
-      </div>
-
-      <div class="spc-anatomy-grid">
-        <div class="spc-anatomy-media">
-          <img src="{{ 'spc_certifications_planks.jpg' | asset_url }}" alt="Muestras isométricas y certificaciones de Piso SPC Decokasa" width="1080" height="950" loading="lazy">
+      <!-- Barra Ribbon de Sellos Oficiales de Certificación con Frosted Glass -->
+      <div class="spc-glass-ribbon">
+        <div class="spc-seal-item">
+          <span class="spc-seal-text">EPH</span>
+          <small>Success by Quality</small>
         </div>
-
-        <div class="spc-layers-list">
-          <div class="spc-layer-item">
-            <div class="spc-layer-num">1</div>
-            <div class="spc-layer-info">
-              <h4>Recubrimiento UV Cerámico Doble</h4>
-              <p>Protege contra la decoloración solar, manchas y aporta el elegante acabado mate antirreflejo.</p>
-            </div>
-          </div>
-
-          <div class="spc-layer-item">
-            <div class="spc-layer-num">2</div>
-            <div class="spc-layer-info">
-              <h4>Capa de Desgaste (Wear Layer) de 0.3 mm</h4>
-              <p>Película de PVC puro transparente de alta densidad que absorbe la fricción del alto tránsito.</p>
-            </div>
-          </div>
-
-          <div class="spc-layer-item">
-            <div class="spc-layer-num">3</div>
-            <div class="spc-layer-info">
-              <h4>Película Decorativa HD Ultra Realista</h4>
-              <p>Impresión de alta resolución con vetas y nudos naturales sincronizados al tacto.</p>
-            </div>
-          </div>
-
-          <div class="spc-layer-item">
-            <div class="spc-layer-num">4</div>
-            <div class="spc-layer-info">
-              <h4>Núcleo Rígido SPC (Stone Plastic Composite) de 4.0 mm</h4>
-              <p>Composición 70% piedra caliza y polímeros vírgenes. Densidad extrema que no dilata ni encoge.</p>
-            </div>
-          </div>
-
-          <div class="spc-layer-item">
-            <div class="spc-layer-num">5</div>
-            <div class="spc-layer-info">
-              <h4>Base Acústica IXPE de 1.5 mm Integrada</h4>
-              <p>Aislamiento termoacústico superior ya incorporado. No necesitas comprar espumas adicionales.</p>
-            </div>
-          </div>
+        <div class="spc-seal-divider"></div>
+        <div class="spc-seal-item">
+          <span class="spc-seal-text">ilac-MRA</span>
+          <small>Mutual Recognition</small>
+        </div>
+        <div class="spc-seal-divider"></div>
+        <div class="spc-seal-item">
+          <span class="spc-seal-text">ANAB</span>
+          <small>Accredited Board</small>
+        </div>
+        <div class="spc-seal-divider"></div>
+        <div class="spc-seal-item">
+          <span class="spc-seal-text">DAkkS</span>
+          <small>Deutsche Akkreditierungsstelle</small>
+        </div>
+        <div class="spc-seal-divider"></div>
+        <div class="spc-seal-item">
+          <span class="spc-seal-text">floor score</span>
+          <small>Indoor Air Quality</small>
+        </div>
+        <div class="spc-seal-divider"></div>
+        <div class="spc-seal-item">
+          <span class="spc-seal-text">CNAS</span>
+          <small>Conformity Assessment</small>
         </div>
       </div>
 
-      <!-- Ficha Técnica Tabla -->
-      <div class="spc-specs-table-wrap">
-        <table class="spc-specs-table">
-          <tbody>
-            <tr>
-              <th>Dimensiones por Pieza</th>
-              <td>122 cm de largo × 18 cm de ancho</td>
-            </tr>
-            <tr>
-              <th>Espesor Total</th>
-              <td>5.5 mm (4.0 mm núcleo rígido + 1.5 mm espuma acústica IXPE)</td>
-            </tr>
-            <tr>
-              <th>Capa de Desgaste</th>
-              <td>0.3 mm (Tránsito residencial pesado / Comercial moderado)</td>
-            </tr>
-            <tr>
-              <th>Rendimiento por Caja</th>
-              <td>2.196 m² (10 piezas por caja)</td>
-            </tr>
-            <tr>
-              <th>Peso de la Caja</th>
-              <td>19 kg aprox.</td>
-            </tr>
-            <tr>
-              <th>Sistema de Instalación</th>
-              <td>Sistema Click de encastre macho-hembra hermético</td>
-            </tr>
-            <tr>
-              <th>Textura y Acabado</th>
-              <td>Mate con textura sincronizada al grano de la madera</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
+      <!-- Bloque Isométrico 4 Placas + Medidas Ficha Técnica -->
+      <div class="spc-isometric-stage">
+        <div class="spc-isometric-media">
+          <img src="{{ 'spc_certifications_planks.jpg' | asset_url }}" alt="Muestras de Piso SPC Decokasa en perspectiva isométrica con núcleo y base IXPE" class="spc-isometric-img" width="1080" height="950" loading="lazy">
+        </div>
 
-  <!-- Installation Section -->
-  <section class="spc-installation">
-    <div class="spc-container">
-      <div class="spc-install-grid">
-        <div class="spc-install-steps">
-          <div class="spc-badge" style="background: rgba(212,175,55,0.2); color: #f7d070; border-color: rgba(212,175,55,0.4);">Instalación Rápida</div>
-          <h2 class="spc-section-title" style="margin-bottom: 24px;">Renueva en horas con el Sistema Click</h2>
+        <div class="spc-isometric-specs-card">
+          <div class="spc-tag-badge">Ficha Técnica Confirmada</div>
+          <h3>Ingeniería Multicapa de Vanguardia</h3>
+          <p>Cada pieza ha sido calibrada con tolerancias milimétricas para garantizar ensamblaje hermético sin desniveles:</p>
           
-          <div class="spc-step-item">
-            <div class="spc-step-badge">1</div>
-            <div class="spc-step-content">
-              <h4>Asegura un suelo nivelado y limpio</h4>
-              <p>Puede instalarse directamente sobre pisos antiguos (cerámica, porcelanato o cemento pulido) sin necesidad de picar ni demoler.</p>
-            </div>
-          </div>
+          <ul class="spc-specs-checklist">
+            <li>
+              <strong>Medidas por Pieza:</strong> 122 cm de largo × 18 cm de ancho
+            </li>
+            <li>
+              <strong>Espesor Total:</strong> 5.5 mm (4.0 mm SPC + 1.5 mm IXPE preadherida)
+            </li>
+            <li>
+              <strong>Capa de Desgaste (Wear Layer):</strong> 0.3 mm tránsito alto
+            </li>
+            <li>
+              <strong>Rendimiento por Caja:</strong> 2.196 m² (10 piezas exactas)
+            </li>
+            <li>
+              <strong>Peso por Caja:</strong> 19 kg de alta densidad compactada
+            </li>
+            <li>
+              <strong>Textura & Acabado:</strong> Mate sincronizado al poro de madera
+            </li>
+          </ul>
 
-          <div class="spc-step-item">
-            <div class="spc-step-badge">2</div>
-            <div class="spc-step-content">
-              <h4>Encastre en ángulo de 45 grados</h4>
-              <p>Une la lengüeta y la ranura ejerciendo una ligera presión hacia abajo. Se traba firmemente con un 'click' sonoro.</p>
-            </div>
-          </div>
+          <!-- Botón de acción secundario -->
+          <div class="spc-isometric-actions">
+            <a href="https://wa.me/{{ section.settings.whatsapp_phone }}?text=Hola%20Decokasa,%20deseo%20muestras%20f%C3%ADsicas%20del%20Piso%20SPC%20Premium" class="spc-hero-advisor-btn" target="_blank" rel="noopener">
+              <span class="spc-wa-circle">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              </span>
+              <span class="spc-advisor-text">
+                <strong>Solicitar Muestras</strong>
+                <small>Asesor comercial asignado</small>
+              </span>
+            </a>
 
-          <div class="spc-step-item">
-            <div class="spc-step-badge">3</div>
-            <div class="spc-step-content">
-              <h4>Listo para usar de inmediato</h4>
-              <p>Al no usar adhesivos ni pegamentos líquidos, no requiere horas de fraguado. Coloca tus muebles y habita al instante.</p>
-            </div>
+            <a href="#calculadora" class="spc-pill-gold-btn">
+              <svg class="spc-pill-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <rect x="4" y="3" width="16" height="18" rx="2"/>
+                <line x1="8" y1="7" x2="16" y2="7"/>
+                <line x1="8" y1="11" x2="16" y2="11"/>
+              </svg>
+              <span class="spc-pill-btn-label">Cotizar Cajas</span>
+            </a>
           </div>
-        </div>
-
-        <div class="spc-install-media">
-          <img src="{{ 'spc_installation.jpg' | asset_url }}" alt="Instalador colocando Piso SPC con Sistema Click" width="1080" height="820" loading="lazy">
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Interactive SPC Calculator Section -->
-  <section class="spc-calculator-section" id="calculadora">
+  <!-- =========================================================================
+       4. INSTALACIÓN SISTEMA CLICK (Arte 4 del Diseñador)
+       ========================================================================= -->
+  <section class="spc-installation-section" id="instalacion">
+    <div class="spc-container">
+      <div class="spc-install-flex">
+        <div class="spc-install-info">
+          <div class="spc-tag-badge gold-badge">Instalación Fácil & Limpia</div>
+          <h2 class="spc-section-title light-title">Instalación con Sistema Click</h2>
+          <p class="spc-section-sub light-sub">Sin pegamentos olorosos, sin clavos y sin picar tus pisos anteriores. El encastre perimetral permite una instalación rápida y transitable al instante.</p>
+
+          <div class="spc-steps-vertical">
+            <div class="spc-step-card">
+              <div class="spc-step-digit">1</div>
+              <div class="spc-step-body">
+                <h4>Superficie Lisa y Nivelada</h4>
+                <p>Instala directamente sobre cerámico, porcelanato o cemento curado sin demoliciones ni escombros.</p>
+              </div>
+            </div>
+
+            <div class="spc-step-card">
+              <div class="spc-step-digit">2</div>
+              <div class="spc-step-body">
+                <h4>Encastre Click en Ángulo</h4>
+                <p>Inserta la lengüeta a 45 grados y baja suavemente. El mecanismo click asegura un sellado firme e impermeable.</p>
+              </div>
+            </div>
+
+            <div class="spc-step-card">
+              <div class="spc-step-digit">3</div>
+              <div class="spc-step-body">
+                <h4>Uso Inmediato</h4>
+                <p>Al no requerir fraguado ni adhesivos líquidos, puedes habitar y colocar muebles pesados de inmediato.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="spc-install-image-box">
+          <img src="{{ 'spc_installation.jpg' | asset_url }}" alt="Instalador profesional ensamblando duela de piso vinílico SPC con encastre Click" class="spc-install-img" width="1080" height="820" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       5. CALCULADORA INTERACTIVA DE CAJAS & M2
+       ========================================================================= -->
+  <section class="spc-calc-section" id="calculadora">
     <div class="spc-container">
       <div class="spc-section-header">
-        <div class="spc-badge">Herramienta Interactiva</div>
-        <h2 class="spc-section-title light-text">Calcula cuántas cajas necesitas</h2>
-        <p class="spc-section-desc" style="color: #6c737a;">Ingresa el área de tu proyecto en m² y te calcularemos el número exacto de cajas redondeadas con su presupuesto referencial.</p>
+        <div class="spc-tag-badge">Calculadora de Cajas</div>
+        <h2 class="spc-section-title light-title">Calcula cuántas cajas necesitas</h2>
+        <p class="spc-section-sub light-sub">Ingresa el metraje cuadrado de tu ambiente y calculamos las cajas exactas redondeadas con margen recomendado para recortes.</p>
       </div>
 
-      <div class="spc-calculator-card">
-        <!-- Input Form -->
-        <div class="spc-calc-inputs">
-          <h3 class="spc-calc-title">Tus Medidas</h3>
-          <p class="spc-calc-subtitle">Rendimiento: 2.196 m² por caja (10 piezas)</p>
+      <div class="spc-calc-box">
+        <div class="spc-calc-form-part">
+          <h3>Dimensiones de tu Proyecto</h3>
+          <p class="spc-calc-hint">Rendimiento garantizado: <strong>2.196 m²</strong> por caja de 10 duelas.</p>
 
-          <div class="spc-form-group">
-            <label class="spc-form-label" for="spc-calc-area">Área a Revestir (m²)</label>
-            <div class="spc-input-wrapper">
-              <input type="number" id="spc-calc-area" class="spc-input" value="25" min="1" max="1000" step="0.5">
-              <span class="spc-input-suffix">m²</span>
+          <div class="spc-calc-field">
+            <label for="spc-area-input">Área total en metros cuadrados (m²)</label>
+            <div class="spc-number-input-wrap">
+              <input type="number" id="spc-area-input" value="25" min="1" max="1000" step="0.5" class="spc-field-control">
+              <span class="spc-unit-tag">m²</span>
             </div>
           </div>
 
-          <div class="spc-form-group">
-            <label class="spc-form-label">Margen por Desperdicio y Cortes</label>
-            <div class="spc-margin-selector">
-              <button type="button" class="spc-margin-pill" data-margin="0">0% (Exacto)</button>
-              <button type="button" class="spc-margin-pill active" data-margin="5">5% (Recomendado)</button>
-              <button type="button" class="spc-margin-pill" data-margin="10">10% (Cortes Diagonales)</button>
+          <div class="spc-calc-field">
+            <label>Margen de seguridad por recortes</label>
+            <div class="spc-margin-btn-group">
+              <button type="button" class="spc-margin-btn" data-margin="0">0% Exacto</button>
+              <button type="button" class="spc-margin-btn active" data-margin="5">5% Estándar</button>
+              <button type="button" class="spc-margin-btn" data-margin="10">10% Diagonal</button>
             </div>
-            <small style="color: #6c737a; font-size: 12px; margin-top: 6px; display: block;">Recomendamos considerar un 5% a 10% adicional para cortes en paredes y esquinas.</small>
+            <small class="spc-margin-note">Recomendado 5% a 10% para cubrir zócalos, vanos de puerta y esquinas.</small>
           </div>
 
-          <div class="spc-form-group" style="margin-bottom: 0;">
-            <label class="spc-form-label" for="spc-calc-color">Selecciona el Tono Deseado</label>
-            <select id="spc-calc-color" class="spc-input" style="font-size: 15px; font-weight: normal; min-height: 50px;">
-              <option value="Roble Natural">Roble Natural (Cálido)</option>
-              <option value="Arce Claro">Arce Claro (Nórdico)</option>
-              <option value="Gris Ceniza">Gris Ceniza (Moderno)</option>
-              <option value="Teca Profunda">Teca Profunda (Elegante)</option>
+          <div class="spc-calc-field">
+            <label for="spc-color-select">Tonalidad Elegida</label>
+            <select id="spc-color-select" class="spc-field-control">
+              <option value="Roble Natural" selected>Roble Natural (Cálido y Acogedor)</option>
+              <option value="Arce Claro">Arce Claro (Nórdico Luminoso)</option>
+              <option value="Gris Ceniza">Gris Ceniza (Moderno Urbano)</option>
+              <option value="Teca Profunda">Teca Profunda (Elegancia Clásica)</option>
             </select>
           </div>
         </div>
 
-        <!-- Calculated Results Display -->
-        <div class="spc-calc-results">
-          <div>
-            <h3 class="spc-calc-results-title">Resumen de Cotización</h3>
+        <div class="spc-calc-summary-part">
+          <div class="spc-summary-inner">
+            <span class="spc-summary-eyebrow">Presupuesto Estimado</span>
             
-            <div class="spc-boxes-highlight">
-              <span class="spc-boxes-num" id="spc-result-boxes">12</span>
-              <span class="spc-boxes-desc" id="spc-result-desc">Cajas de Piso SPC</span>
+            <div class="spc-big-boxes-indicator">
+              <span class="spc-boxes-digit" id="spc-boxes-count">12</span>
+              <span class="spc-boxes-unit">Cajas de Piso SPC</span>
             </div>
 
-            <div class="spc-results-list">
-              <div class="spc-result-row">
-                <span>Área neta solicitada:</span>
-                <span id="spc-result-net-area">25.00 m²</span>
+            <div class="spc-summary-data-table">
+              <div class="spc-data-line">
+                <span>Área neta indicada:</span>
+                <strong id="spc-net-area-val">25.00 m²</strong>
               </div>
-              <div class="spc-result-row">
-                <span>Área con margen cortes:</span>
-                <span id="spc-result-total-area">26.25 m²</span>
+              <div class="spc-data-line">
+                <span>Área con recortes:</span>
+                <strong id="spc-total-area-val">26.25 m²</strong>
               </div>
-              <div class="spc-result-row">
-                <span>Cobertura real comprada:</span>
-                <span id="spc-result-covered">26.35 m²</span>
+              <div class="spc-data-line">
+                <span>Metros reales entregados:</span>
+                <strong id="spc-covered-area-val">26.35 m²</strong>
               </div>
-              <div class="spc-result-row">
-                <span>Precio por caja:</span>
-                <span>S/ {{ section.settings.price_pen }}</span>
+              <div class="spc-data-line">
+                <span>Precio unitario por caja:</span>
+                <strong>S/ {{ section.settings.price_pen }}</strong>
               </div>
-              <div class="spc-result-row total-row">
+              <div class="spc-data-line spc-total-line">
                 <span>Inversión Estimada:</span>
-                <span id="spc-result-total-price">S/ 1,140.00</span>
+                <strong id="spc-total-cost-val" class="spc-gold-cost">S/ 1,140.00</strong>
               </div>
             </div>
-          </div>
 
-          <!-- Dynamic Quote CTA -->
-          <a id="spc-whatsapp-quote-btn" href="#" class="spc-btn spc-btn-whatsapp" target="_blank" rel="noopener">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            Pedir Cotización por WhatsApp
-          </a>
+            <a id="spc-calc-whatsapp-btn" href="#" class="spc-pill-gold-btn full-width" target="_blank" rel="noopener">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              <span>Enviar Cotización a WhatsApp</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Finishes / Colors Section -->
-  <section class="spc-finishes" id="colores">
+  <!-- =========================================================================
+       6. COLECCIÓN DE 4 ACABADOS EN MADERA
+       ========================================================================= -->
+  <section class="spc-finishes-section" id="tonos">
     <div class="spc-container">
       <div class="spc-section-header">
-        <div class="spc-badge">Gama de Diseños</div>
-        <h2 class="spc-section-title light-text">4 Tonalidades Cálidas y Vanguardistas</h2>
-        <p class="spc-section-desc" style="color: #6c737a;">Texturas que reproducen fielmente los nudos y vetas de la madera natural en tendencia mundial.</p>
+        <div class="spc-tag-badge">Gama de Tonos</div>
+        <h2 class="spc-section-title light-title">Colección de Tonos en Tendencia</h2>
+        <p class="spc-section-sub light-sub">Selección cromática versátil para crear ambientes modernos, escandinavos o contemporáneos.</p>
       </div>
 
-      <div class="spc-colors-grid">
-        <div class="spc-color-card active" data-color="Roble Natural">
-          <div class="spc-color-thumb" style="background-color: #c99c64; background-image: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.15) 0%, transparent 60%);"></div>
-          <h4 class="spc-color-name">Roble Natural</h4>
-          <span class="spc-color-sub">Tono miel clásico y acogedor</span>
+      <div class="spc-swatches-grid">
+        <div class="spc-swatch-card active" data-color="Roble Natural">
+          <div class="spc-swatch-circle" style="background: linear-gradient(135deg, #c7965c 0%, #aa773e 100%);"></div>
+          <h4>Roble Natural</h4>
+          <span>Cálido tradicional</span>
         </div>
 
-        <div class="spc-color-card" data-color="Arce Claro">
-          <div class="spc-color-thumb" style="background-color: #dfcfb2; background-image: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.15) 0%, transparent 60%);"></div>
-          <h4 class="spc-color-name">Arce Claro</h4>
-          <span class="spc-color-sub">Estilo nórdico y luminoso</span>
+        <div class="spc-swatch-card" data-color="Arce Claro">
+          <div class="spc-swatch-circle" style="background: linear-gradient(135deg, #ded2bb 0%, #c4b59b 100%);"></div>
+          <h4>Arce Claro</h4>
+          <span>Estilo nórdico luminoso</span>
         </div>
 
-        <div class="spc-color-card" data-color="Gris Ceniza">
-          <div class="spc-color-thumb" style="background-color: #9ea3a8; background-image: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.15) 0%, transparent 60%);"></div>
-          <h4 class="spc-color-name">Gris Ceniza</h4>
-          <span class="spc-color-sub">Contemporáneo y minimalista</span>
+        <div class="spc-swatch-card" data-color="Gris Ceniza">
+          <div class="spc-swatch-circle" style="background: linear-gradient(135deg, #a6abb0 0%, #878c91 100%);"></div>
+          <h4>Gris Ceniza</h4>
+          <span>Minimalismo contemporáneo</span>
         </div>
 
-        <div class="spc-color-card" data-color="Teca Profunda">
-          <div class="spc-color-thumb" style="background-color: #6b3f20; background-image: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.15) 0%, transparent 60%);"></div>
-          <h4 class="spc-color-name">Teca Profunda</h4>
-          <span class="spc-color-sub">Elegancia sobria de lujo</span>
+        <div class="spc-swatch-card" data-color="Teca Profunda">
+          <div class="spc-swatch-circle" style="background: linear-gradient(135deg, #6c4125 0%, #4a2812 100%);"></div>
+          <h4>Teca Profunda</h4>
+          <span>Sofisticación y contraste</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Customer Testimonials Section -->
-  <section class="spc-testimonials" id="testimonios">
+  <!-- =========================================================================
+       7. TESTIMONIOS VERIFICADOS (Arte 5 del Diseñador - 3 Tarjetas Frosted)
+       ========================================================================= -->
+  <section class="spc-testimonials-section" id="testimonios">
     <div class="spc-container">
       <div class="spc-section-header">
-        <div class="spc-badge">Opiniones Verificadas</div>
-        <h2 class="spc-section-title light-text">Clientes que ya disfrutan sus pisos</h2>
-        <p class="spc-section-desc" style="color: #6c737a;">Experiencias reales de remodelación en hogares y proyectos comerciales en todo el Perú.</p>
+        <div class="spc-tag-badge">Casos de Éxito</div>
+        <h2 class="spc-section-title dark-title">Clientes que ya disfrutan sus pisos</h2>
+        <p class="spc-section-sub dark-sub">Experiencias reales de remodelación residencial y corporativa con entrega puntual.</p>
       </div>
 
-      <div class="spc-testimonials-grid">
-        <!-- Testimonial 1 -->
-        <div class="spc-testimonial-card">
-          <div class="spc-testimonial-header">
-            <img src="{{ 'customer_1.jpg' | asset_url }}" alt="Carlos M." class="spc-customer-avatar" width="56" height="56" loading="lazy">
-            <div class="spc-customer-meta">
-              <h4>Carlos Mendoza</h4>
-              <span>Miraflores, Lima</span>
-            </div>
+      <div class="spc-testimonials-row">
+        <!-- Testimonio 1 -->
+        <div class="spc-frosted-review-card">
+          <div class="spc-avatar-ring">
+            <img src="{{ 'customer_1.jpg' | asset_url }}" alt="Carlos Mendoza cliente de Decokasa" class="spc-customer-face" width="80" height="80" loading="lazy">
           </div>
-          <div class="spc-stars">★★★★★</div>
-          <p class="spc-testimonial-text">"Instalé el Piso SPC en mi departamento de 65m² en solo 2 días. El sistema click es increíble, no tuvimos que sacar los muebles por días y el aislamiento de ruido con la espuma se nota muchísimo."</p>
+          <div class="spc-review-stars">★★★★★</div>
+          <h4 class="spc-customer-name">Carlos Mendoza</h4>
+          <span class="spc-customer-city">Miraflores, Lima</span>
+          <p class="spc-review-quote">"Cambié 70m² de departamento en un fin de semana. No tuvimos que romper nada y la sensación al pisar con la base acústica IXPE es sólida y silenciosa."</p>
         </div>
 
-        <!-- Testimonial 2 -->
-        <div class="spc-testimonial-card">
-          <div class="spc-testimonial-header">
-            <img src="{{ 'customer_2.jpg' | asset_url }}" alt="Valeria R." class="spc-customer-avatar" width="56" height="56" loading="lazy">
-            <div class="spc-customer-meta">
-              <h4>Valeria Rodríguez</h4>
-              <span>Surco, Lima</span>
-            </div>
+        <!-- Testimonio 2 -->
+        <div class="spc-frosted-review-card">
+          <div class="spc-avatar-ring">
+            <img src="{{ 'customer_2.jpg' | asset_url }}" alt="Valeria Rodríguez cliente de Decokasa" class="spc-customer-face" width="80" height="80" loading="lazy">
           </div>
-          <div class="spc-stars">★★★★★</div>
-          <p class="spc-testimonial-text">"Tengo dos perros y buscaba algo que no se raye ni se malogre con el agua. El acabado mate parece madera natural de alta gama y limpiarlo con trapo húmedo es facilísimo."</p>
+          <div class="spc-review-stars">★★★★★</div>
+          <h4 class="spc-customer-name">Valeria Rodríguez</h4>
+          <span class="spc-customer-city">Surco, Lima</span>
+          <p class="spc-review-quote">"Con dos perros el porcelanato se volvía una pista de patinaje y se rayaba. El Piso SPC Decokasa no se raya, no se desliza y se limpia con un trapo húmedo."</p>
         </div>
 
-        <!-- Testimonial 3 -->
-        <div class="spc-testimonial-card">
-          <div class="spc-testimonial-header">
-            <img src="{{ 'customer_3.jpg' | asset_url }}" alt="Diego S." class="spc-customer-avatar" width="56" height="56" loading="lazy">
-            <div class="spc-customer-meta">
-              <h4>Diego Salazar</h4>
-              <span>San Isidro, Lima</span>
-            </div>
+        <!-- Testimonio 3 -->
+        <div class="spc-frosted-review-card">
+          <div class="spc-avatar-ring">
+            <img src="{{ 'customer_3.jpg' | asset_url }}" alt="Diego Salazar cliente de Decokasa" class="spc-customer-face" width="80" height="80" loading="lazy">
           </div>
-          <div class="spc-stars">★★★★★</div>
-          <p class="spc-testimonial-text">"Para la oficina queríamos un cambio moderno sin obras húmedas ni polvo. Excelente asesoría de Decokasa, las cajas llegaron puntuales y el precio por m² es insuperable."</p>
+          <div class="spc-review-stars">★★★★★</div>
+          <h4 class="spc-customer-name">Diego Salazar</h4>
+          <span class="spc-customer-city">San Isidro, Lima</span>
+          <p class="spc-review-quote">"Lo instalamos en la recepción de nuestra oficina. El look de madera natural de alta gama impresionó a los clientes y el costo por caja es súper competitivo."</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Showcase Finished Project -->
-  <section class="spc-showcase" id="galeria">
+  <!-- =========================================================================
+       8. AMBIENTE SHOWCASE (Arte 6 del Diseñador - Sala Corporativa)
+       ========================================================================= -->
+  <section class="spc-showcase-section">
     <div class="spc-container">
-      <div class="spc-showcase-box">
-        <img src="{{ 'spc_showcase_room.jpg' | asset_url }}" alt="Ambiente final terminado con piso SPC Decokasa" width="1080" height="960" loading="lazy">
-        <div class="spc-showcase-caption">
-          <div>
-            <h3>Ambientes que Inspiran Calidez</h3>
-            <p>Juntas milimétricas herméticas y calidez visual inmediata. Adecuado para proyectos residenciales y oficinas.</p>
-          </div>
-          <a href="https://wa.me/{{ section.settings.whatsapp_phone }}?text=Hola%20Decokasa,%20vi%20la%20galer%C3%ADa%20de%20Piso%20SPC%20y%20deseo%20asesor%C3%ADa%20para%20mi%20proyecto" class="spc-btn spc-btn-gold" target="_blank" rel="noopener">
+      <div class="spc-showcase-panel">
+        <img src="{{ 'spc_showcase_room.jpg' | asset_url }}" alt="Ambiente corporativo con Piso SPC Roble Natural terminado" class="spc-showcase-photo" width="1080" height="960" loading="lazy">
+        <div class="spc-showcase-glass-card">
+          <div class="spc-tag-badge gold-badge">Ambientes de Vanguardia</div>
+          <h3>Espacios que Elevan tu Bienestar</h3>
+          <p>Textura sincronizada de madera noble con la resistencia eterna del núcleo mineral SPC.</p>
+          <a href="https://wa.me/{{ section.settings.whatsapp_phone }}?text=Hola%20Decokasa,%20vi%20la%20galer%C3%ADa%20y%20deseo%20cotizar%20Piso%20SPC" class="spc-pill-gold-btn" target="_blank" rel="noopener">
             Cotizar Mi Espacio
           </a>
         </div>
@@ -503,153 +526,119 @@
     </div>
   </section>
 
-  <!-- Final CTA / Contact Form -->
-  <section class="spc-final-cta" id="solicitud">
+  <!-- =========================================================================
+       9. FORMULARIO ASESORÍA Y CTA FINAL
+       ========================================================================= -->
+  <section class="spc-footer-cta-section" id="contacto">
     <div class="spc-container">
-      <div class="spc-cta-box">
-        <div class="spc-badge">Asesoría Personalizada</div>
-        <h2>¿Listo para renovar tus pisos sin complicaciones?</h2>
-        <p>Nuestro equipo de asesores técnicos te ayudará a calcular los metros necesarios, coordinar muestras y gestionar el despacho directo a tu obra o domicilio.</p>
+      <div class="spc-cta-glass-box">
+        <div class="spc-tag-badge">Asesoría Inmediata</div>
+        <h2>¿Listo para transformar tus pisos?</h2>
+        <p>Déjanos tus datos o contáctanos por WhatsApp. Un asesor técnico te apoyará con el cálculo de cajas, muestras físicas y despacho a nivel nacional.</p>
 
-        <form class="spc-cta-form" id="spc-advisor-form" onsubmit="event.preventDefault(); spcSubmitAdvisorForm();">
-          <div class="spc-cta-form-grid">
-            <div>
-              <label class="spc-form-label" for="spc-name">Nombre y Apellido</label>
-              <input type="text" id="spc-name" class="spc-input" placeholder="Ej. Juan Pérez" required>
-            </div>
-            <div>
-              <label class="spc-form-label" for="spc-phone">WhatsApp / Teléfono</label>
-              <input type="tel" id="spc-phone" class="spc-input" placeholder="Ej. 987 654 321" required>
-            </div>
-            <div>
-              <label class="spc-form-label" for="spc-city">Ciudad / Distrito</label>
-              <input type="text" id="spc-city" class="spc-input" placeholder="Ej. Lima, Trujillo, Arequipa...">
-            </div>
-            <div>
-              <label class="spc-form-label" for="spc-notes">Metros aproximados o consultas</label>
-              <input type="text" id="spc-notes" class="spc-input" placeholder="Ej. 45 m² para sala y comedor">
-            </div>
-          </div>
-
-          <div class="spc-cta-btn-row">
-            <button type="submit" class="spc-btn spc-btn-whatsapp">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-              Enviar Solicitud por WhatsApp
+        <form class="spc-lead-form" onsubmit="event.preventDefault(); spcSubmitLead();">
+          <div class="spc-lead-inputs">
+            <input type="text" id="spc-lead-name" class="spc-field-control" placeholder="Tu nombre completo" required>
+            <input type="tel" id="spc-lead-phone" class="spc-field-control" placeholder="Teléfono / WhatsApp (ej. 999 888 777)" required>
+            <input type="text" id="spc-lead-city" class="spc-field-control" placeholder="Ciudad / Distrito (ej. Lima)">
+            <button type="submit" class="spc-pill-gold-btn">
+              Solicitar Asesoría
             </button>
           </div>
-          <p id="spc-form-status" style="margin-top: 16px; font-size: 14px; font-weight: 600; display: none;"></p>
+          <div id="spc-lead-status" style="margin-top: 14px; font-size: 14px; display: none; color: #f5d76e;"></div>
         </form>
       </div>
     </div>
   </section>
 </div>
 
-<!-- Interactive Logic for Calculator and Swatches -->
 <script>
-  (function() {
-    var BOX_COVERAGE = 2.196;
-    var PRICE_PER_BOX = {{ section.settings.price_pen }};
-    var WHATSAPP_PHONE = "{{ section.settings.whatsapp_phone }}";
-    var currentMargin = 5;
+(function() {
+  const pricePerBox = {{ section.settings.price_pen }};
+  const coveragePerBox = 2.196;
 
-    var areaInput = document.getElementById('spc-calc-area');
-    var colorSelect = document.getElementById('spc-calc-color');
-    var marginPills = document.querySelectorAll('.spc-margin-pill');
-    var netAreaEl = document.getElementById('spc-result-net-area');
-    var totalAreaEl = document.getElementById('spc-result-total-area');
-    var coveredEl = document.getElementById('spc-result-covered');
-    var boxesEl = document.getElementById('spc-result-boxes');
-    var totalPriceEl = document.getElementById('spc-result-total-price');
-    var quoteBtn = document.getElementById('spc-whatsapp-quote-btn');
+  const areaInput = document.getElementById('spc-area-input');
+  const marginBtns = document.querySelectorAll('.spc-margin-btn');
+  const colorSelect = document.getElementById('spc-color-select');
+  const boxesCountEl = document.getElementById('spc-boxes-count');
+  const netAreaEl = document.getElementById('spc-net-area-val');
+  const totalAreaEl = document.getElementById('spc-total-area-val');
+  const coveredAreaEl = document.getElementById('spc-covered-area-val');
+  const totalCostEl = document.getElementById('spc-total-cost-val');
+  const waBtn = document.getElementById('spc-calc-whatsapp-btn');
 
-    function updateCalculations() {
-      var netArea = parseFloat(areaInput.value) || 0;
-      if (netArea < 0) netArea = 0;
+  let currentMargin = 5;
 
-      var totalWithMargin = netArea * (1 + (currentMargin / 100));
-      var boxesNeeded = Math.ceil(totalWithMargin / BOX_COVERAGE);
-      if (boxesNeeded < 1 && netArea > 0) boxesNeeded = 1;
+  function recalculate() {
+    if (!areaInput) return;
+    const netArea = parseFloat(areaInput.value) || 0;
+    const areaWithMargin = netArea * (1 + currentMargin / 100);
+    const boxes = Math.ceil(areaWithMargin / coveragePerBox);
+    const totalCovered = boxes * coveragePerBox;
+    const totalCost = boxes * pricePerBox;
+    const selectedColor = colorSelect ? colorSelect.value : 'Roble Natural';
 
-      var actualCovered = boxesNeeded * BOX_COVERAGE;
-      var totalCost = boxesNeeded * PRICE_PER_BOX;
-      var selectedColor = colorSelect ? colorSelect.value : 'Roble Natural';
+    if (boxesCountEl) boxesCountEl.textContent = boxes;
+    if (netAreaEl) netAreaEl.textContent = netArea.toFixed(2) + ' m²';
+    if (totalAreaEl) totalAreaEl.textContent = areaWithMargin.toFixed(2) + ' m²';
+    if (coveredAreaEl) coveredAreaEl.textContent = totalCovered.toFixed(2) + ' m²';
+    if (totalCostEl) totalCostEl.textContent = 'S/ ' + totalCost.toLocaleString('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-      if (netAreaEl) netAreaEl.textContent = netArea.toFixed(2) + ' m²';
-      if (totalAreaEl) totalAreaEl.textContent = totalWithMargin.toFixed(2) + ' m²';
-      if (coveredEl) coveredEl.textContent = actualCovered.toFixed(2) + ' m²';
-      if (boxesEl) boxesEl.textContent = boxesNeeded;
-      if (totalPriceEl) totalPriceEl.textContent = 'S/ ' + totalCost.toLocaleString('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
-      // Update WhatsApp link with prefilled quotation message
-      if (quoteBtn) {
-        var msg = 'Hola Decokasa, calculé ' + netArea.toFixed(1) + ' m² para mi proyecto de Piso SPC (Tono: ' + selectedColor + '). Requiero ' + boxesNeeded + ' cajas (~' + actualCovered.toFixed(2) + ' m²) con un presupuesto estimado de S/ ' + totalCost.toFixed(2) + '. Deseo coordinar compra y despacho.';
-        quoteBtn.href = 'https://wa.me/' + WHATSAPP_PHONE + '?text=' + encodeURIComponent(msg);
-      }
+    if (waBtn) {
+      const msg = encodeURIComponent(
+        `Hola Decokasa, deseo cotizar Piso SPC Premium:\n` +
+        `- Área estimada: ${netArea.toFixed(2)} m² (con ${currentMargin}% recortes = ${areaWithMargin.toFixed(2)} m²)\n` +
+        `- Cajas calculadas: ${boxes} cajas (${totalCovered.toFixed(2)} m²)\n` +
+        `- Color elegido: ${selectedColor}\n` +
+        `- Inversión estimada: S/ ${totalCost.toFixed(2)}\n` +
+        `¿Tienen stock disponible y despacho a mi zona?`
+      );
+      waBtn.href = `https://wa.me/{{ section.settings.whatsapp_phone }}?text=${msg}`;
     }
+  }
 
-    if (areaInput) {
-      areaInput.addEventListener('input', updateCalculations);
-    }
-    if (colorSelect) {
-      colorSelect.addEventListener('change', updateCalculations);
-    }
+  if (areaInput) areaInput.addEventListener('input', recalculate);
+  if (colorSelect) colorSelect.addEventListener('change', recalculate);
 
-    marginPills.forEach(function(pill) {
-      pill.addEventListener('click', function() {
-        marginPills.forEach(function(p) { p.classList.remove('active'); });
-        pill.classList.add('active');
-        currentMargin = parseFloat(pill.getAttribute('data-margin')) || 0;
-        updateCalculations();
-      });
+  marginBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      marginBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentMargin = parseInt(btn.dataset.margin, 10);
+      recalculate();
     });
+  });
 
-    // Swatches selection
-    var colorCards = document.querySelectorAll('.spc-color-card');
-    colorCards.forEach(function(card) {
-      card.addEventListener('click', function() {
-        colorCards.forEach(function(c) { c.classList.remove('active'); });
-        card.classList.add('active');
-        var color = card.getAttribute('data-color');
-        if (colorSelect) {
-          colorSelect.value = color;
-          updateCalculations();
-        }
-      });
+  // Swatch card click
+  document.querySelectorAll('.spc-swatch-card').forEach(card => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.spc-swatch-card').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+      const col = card.dataset.color;
+      if (colorSelect) {
+        colorSelect.value = col;
+        recalculate();
+      }
     });
+  });
 
-    // Form Submission
-    window.spcSubmitAdvisorForm = function() {
-      var name = document.getElementById('spc-name').value.trim();
-      var phone = document.getElementById('spc-phone').value.trim();
-      var city = document.getElementById('spc-city').value.trim();
-      var notes = document.getElementById('spc-notes').value.trim();
-      var statusEl = document.getElementById('spc-form-status');
+  window.spcSubmitLead = function() {
+    const name = document.getElementById('spc-lead-name').value;
+    const phone = document.getElementById('spc-lead-phone').value;
+    const city = document.getElementById('spc-lead-city').value;
+    const status = document.getElementById('spc-lead-status');
+    const msg = encodeURIComponent(`Hola Decokasa, he dejado mis datos en la landing de Piso SPC:\n- Nombre: ${name}\n- Teléfono: ${phone}\n- Ubicación: ${city}`);
+    if (status) {
+      status.style.display = 'block';
+      status.textContent = '¡Redirigiendo a WhatsApp con tu asesor asignado...';
+    }
+    setTimeout(() => {
+      window.open(`https://wa.me/{{ section.settings.whatsapp_phone }}?text=${msg}`, '_blank');
+    }, 600);
+  };
 
-      if (!name || !phone) {
-        if (statusEl) {
-          statusEl.style.display = 'block';
-          statusEl.style.color = '#ef4444';
-          statusEl.textContent = 'Por favor completa tu nombre y WhatsApp.';
-        }
-        return;
-      }
-
-      var msg = 'Hola Decokasa, mi nombre es ' + name + ' (Telf: ' + phone + '). ' +
-                (city ? 'Estoy en: ' + city + '. ' : '') +
-                (notes ? 'Detalle de mi proyecto: ' + notes + '. ' : 'Deseo cotizar Piso SPC.');
-
-      if (statusEl) {
-        statusEl.style.display = 'block';
-        statusEl.style.color = '#10b981';
-        statusEl.textContent = 'Redirigiendo a WhatsApp con tu asesor técnico...';
-      }
-
-      window.open('https://wa.me/' + WHATSAPP_PHONE + '?text=' + encodeURIComponent(msg), '_blank');
-    };
-
-    // Initialize
-    updateCalculations();
-  })();
+  recalculate();
+})();
 </script>
 
 {% schema %}
@@ -665,49 +654,25 @@
     {
       "type": "text",
       "id": "top_announcement",
-      "label": "Barra Superior de Aviso",
-      "default": "Para mayor información o consultas de stock por mayor, contáctanos directamente con un asesor comercial."
-    },
-    {
-      "type": "text",
-      "id": "badge_text",
-      "label": "Texto del Badge",
-      "default": "Piso Vinílico SPC Premium"
-    },
-    {
-      "type": "text",
-      "id": "hero_title_prefix",
-      "label": "Título Prefijo",
-      "default": "Los Pisos del Futuro"
-    },
-    {
-      "type": "text",
-      "id": "hero_title_highlight",
-      "label": "Título Resaltado",
-      "default": "ya están aquí"
-    },
-    {
-      "type": "textarea",
-      "id": "hero_subtitle",
-      "label": "Subtítulo del Hero",
-      "default": "Con Sistema Click de alta precisión, espuma acústica IXPE de 1.5 mm incorporada y de instalación rápida: ¡La mejor opción para revestir y modernizar superficies sin obras sucias ni gastar de más!"
+      "label": "Aviso Superior",
+      "default": "🚚 Despacho Inmediato en Lima y Provincias | 🔒 Garantía Oficial Decokasa 15 Años"
     },
     {
       "type": "number",
       "id": "price_pen",
-      "label": "Precio Promocional por Caja (S/ PEN)",
+      "label": "Precio por Caja (S/)",
       "default": 95
     },
     {
       "type": "text",
       "id": "whatsapp_phone",
-      "label": "Teléfono WhatsApp para Asesoría",
-      "default": "51941599516"
+      "label": "Teléfono WhatsApp (con código)",
+      "default": "51999999999"
     }
   ],
   "presets": [
     {
-      "name": "Landing Piso SPC"
+      "name": "Landing Piso SPC Exclusiva"
     }
   ]
 }
