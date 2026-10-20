@@ -1,5 +1,19 @@
 # DECOKASA — decisiones vigentes
 
+## 20/10/2026 — Arquitectura de landings de producto personalizadas previas a Odoo
+
+Decisión arquitectónica para construir landings enriquecidas de alta conversión para productos especiales antes de recibir el catálogo definitivo de Odoo:
+1. **Aislamiento en Git y producción intacta**: El desarrollo de cada landing especializada se efectúa en una rama dedicada (`feature/landing-[producto]`). La rama `main` (desplegada activamente en Shopify) no se modifica durante la construcción, garantizando cero riesgo en la tienda en vivo.
+2. **Plantilla alternativa nativa OS 2.0**: En lugar de prototipos estáticos o páginas `/pages/` desconectadas, cada landing se implementa directamente como una plantilla de producto nativa (`templates/product.landing-[handle].json`) y secciones modulares (`sections/`). Esto permite:
+   - Mantener la URL canónica `/products/[handle]`.
+   - Conexión nativa con el catálogo y las colecciones sin duplicación de URLs.
+   - Reutilización inmediata de la ficha técnica, cálculo de monto estimado, galería y formulario de asesoría.
+3. **Frontera de datos estricta (Odoo vs. Shopify)**:
+   - *Odoo gobierna*: Título canónico, SKU, variantes reales, precio de lista oficial y disponibilidad/stock.
+   - *Shopify/Tema gobierna*: Contenido editorial y publicitario de alta conversión (heroes promocionales, bloques de beneficios, videos, especificaciones enriquecidas, calculadoras de m² a cajas).
+   - Durante el desarrollo previo a Odoo, la landing consume las variables estándar de Liquid (`product.title`, `current_variant.price`, etc.) con un objeto de respaldo (*fixture*) basado en la ficha técnica real. Al sincronizarse el producto desde Odoo, la landing consumirá automáticamente los datos vivos sin necesidad de rehacer el código visual.
+4. **Vinculación inmediata**: Al ser importado el producto de Odoo a Shopify, solo se asigna la plantilla alternativa `landing-[handle]` al producto en el panel de Shopify (o mediante asignación automatizada por etiqueta/tipo).
+
 ## 09/10/2026 — Ficha de producto nativa basada en la referencia
 
 Ficha predeterminada implementada con galería y miniaturas, datos a dos columnas en escritorio y una en móvil, precio/comparación real de la variante, opciones nativas, cantidad y solicitud al asesor. Título, proveedor, fotos, descripción, variantes, SKU y precios se administran en Productos; formato de imagen, visibilidad de datos, textos y hasta seis bloques informativos se ajustan en Productos > Producto predeterminado > Ficha de producto dentro del editor del tema. No se sobrescriben los ajustes guardados de Shopify.
