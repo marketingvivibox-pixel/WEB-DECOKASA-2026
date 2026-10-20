@@ -1,5 +1,15 @@
 # Avances y validación
 
+## 20/10/2026 — Despliegue a producción y verificación en vivo en Shopify (main)
+
+- Rama principal: `main` (commit `ef55844`).
+- Despliegue y verificación en la tienda en vivo (`https://decokasaperu.myshopify.com/products/piso-spc`):
+  - Tema activo `188927803629` sincronizado automáticamente por Shopify desde GitHub `main`.
+  - Tarjeta de monto estimado a pagar (`.product-estimate-card`) verificada en el HTML en vivo de la tienda.
+  - Recursos CDN de Shopify (`product-detail.css` y `product-detail.js`) entregados con HTTP 200 conteniendo los estilos y la lógica de cálculo en tiempo real.
+  - Soporte de desglose por unidades o cajas (para pisos PVC/SPC), resumen de solicitud en el formulario de contacto y meta de objetivo/regalo especial.
+- Validación técnica: 19 de 19 pruebas unitarias aprobadas (`npm test`) y verificación estática de 8 vistas (`verify_store.py`).
+
 ## 19/10/2026 — Mejora de botón de objetivo y modal interactivo de regalo especial
 
 - Rama secundaria: `feature/monto-estimado`.
