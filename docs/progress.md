@@ -1,3 +1,11 @@
+## 22/10/2026 — Corrección de proporciones móviles de toda la landing SPC
+
+- Fusión previa confirmada en `main`, HEAD `e594fbf`; trabajo continuado allí por petición del usuario. Se identificó que el mapa proporcional estaba limitado a anchos desde 701 px y las reglas móviles reorganizaban la página.
+- Aplicado el mismo lienzo 1080 × 6491 en todos los anchos. Retiradas redistribuciones de 800/700/540 px; escalados texto, imágenes, botones, bordes y sombras. Modificados los tres CSS SPC, generador y modo del JSON; vistas y ZIP sincronizados. Liquid/HTML/JavaScript funcional sin cambios.
+- Verificación de 55 cajas en 12 anchos de 320 a 1440 px: máximo 0,1094 px normalizado frente al mapa; sin desbordamiento. Comparación de escritorio 1080 px contra HEAD: estilos calculados y captura idénticos. Esto comprueba continuidad del escritorio y geometría del mapa, no igualdad píxel a píxel con el PSD.
+- 22/22 pruebas; Theme Check sin hallazgos; ocho vistas/enlaces/IDs/JSON válidos; ZIP de 74 archivos. Calculadora, rechazo de entradas, colores y enlaces comprobados en navegador; pruebas móviles adicionales 320/390/600/700. Imágenes completas y sin errores JavaScript.
+- Entrega local actualizada en `outputs/DECOKASA-SPC-landing` del chat `2026-10-21/este-mokup-es-para-la-pagina-4`: vista, mapa, JSON, capturas y validación. URL local: http://127.0.0.1:8817/?revision=movil-proporcional . Cambios sin commit/push/despliegue; pendientes revisión comercial y configuración con catálogo real.
+
 ## 22/10/2026 — Vista previa local restablecida
 
 - El puerto 8817 no tenía servidor activo; los archivos de la landing seguían disponibles. Reiniciado el servidor HTTP local en 127.0.0.1:8817 desde outputs/DECOKASA-SPC-landing del chat del 21/10.

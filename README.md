@@ -6,7 +6,7 @@ Tema Shopify 0.1.0 en construcción, conectado a GitHub/main y activo en Shopify
 Inicio → catálogo por marca o tipo → landing con ficha completa → formulario → asesor (integración pendiente). Sin pasarelas ni checkout. No emitir `purchase` desde el navegador.
 
 ## Archivos
-- `templates/product.landing-spc.json`: landing SPC reconstruida con recursos del PSD, elementos HTML/CSS/SVG y calculadora. [Guía de configuración SPC](docs/landing-spc.md). Desarrollo local en rama secundaria, pendiente de publicación.
+- `templates/product.landing-spc.json`: landing SPC reconstruida con recursos del PSD, elementos HTML/CSS/SVG y calculadora. [Guía de configuración SPC](docs/landing-spc.md). Rama SPC fusionada en `main`; ajuste móvil proporcional del 22/10/2026 en desarrollo local sobre `main`.
 - `templates/index.json`: portada multimarcas editable; imagen principal y colección destacada.
 - `templates/collection.json`: catálogo adaptable con marcas, filtros nativos vendor/type cuando estén configurados, ordenación, tarjetas y paginación.
 - `templates/product.json`: cada URL `/products/<handle>` es una landing que incluye ficha y formulario.
@@ -23,7 +23,7 @@ Asignar SKU único por variante, unidad/almacén y mapeo Odoo tras validación. 
 El formulario solo simula y no persiste datos personales. Consentimiento de seguimiento de prueba en sessionStorage; rechazar elimina atribución e identificador de visitante. Referencia de solicitud necesaria separada de analítica. UTMs deben contener nombres de campaña sin datos personales. Primer/último origen se conserva en navegación directa durante la sesión si se autoriza; no hay atribución entre sesiones todavía. GA4 y Meta/TikTok pendientes. No hay enlace al CRM activo.
 
 ## Verificación
-`npm test` aprueba 22 pruebas, entre lógica, navegación Liquid y pruebas DOM (filtros, variantes, formulario, consentimiento, ficha y landing SPC). Shopify Theme Check sin errores ni advertencias; ocho HTML y ZIP de 66 archivos verificados. Ficha revisada localmente en escritorio y celular sin desbordamiento. Reintentos conservan referencia solo en la página actual. Pendiente: catálogo/variantes reales, validación con productos publicados y recepción idempotente en Odoo antes del lanzamiento comercial.
+`npm test` aprueba 22 pruebas, entre lógica, navegación Liquid y pruebas DOM (filtros, variantes, formulario, consentimiento, ficha y landing SPC). Shopify Theme Check sin errores ni advertencias; ocho HTML y ZIP de 74 archivos verificados. Ficha revisada localmente en escritorio y celular sin desbordamiento. Reintentos conservan referencia solo en la página actual. Pendiente: catálogo/variantes reales, validación con productos publicados y recepción idempotente en Odoo antes del lanzamiento comercial.
 
 ## Diseño según el mockup original
 
@@ -41,13 +41,13 @@ La franja superior de servicios permanece fija al desplazarse. La portada incluy
 - [Referencia visual inicial](docs/references/mockup-inicial-decokasa-2026-10-02.jpeg).
 - [Demostración navegable](preview/DECOKASA-inicio.html): descargar el repositorio y abrir este HTML en el navegador; GitHub muestra su código.
 - [Vista móvil de la portada](preview/DECOKASA-movil.html): abrir este HTML en el navegador para verla dentro de un marco de teléfono. Para la tienda conectada, usar la vista móvil del editor de temas Shopify.
-- [Paquete del tema](releases/DECOKASA-tema-0.1.0.zip): contiene solo los 66 archivos Shopify de la rama actual. GitHub/main ya sincroniza el tema activo.
+- [Paquete del tema](releases/DECOKASA-tema-0.1.0.zip): contiene solo los 74 archivos Shopify de la rama actual. GitHub/main ya sincroniza el tema activo.
 
 ## Reproducir las verificaciones
 
 Con Node.js 20 o superior: `npm ci` y `npm test`. Incluye pruebas de lógica, seis pruebas de navegación Liquid y la prueba DOM simulada; esta última no comprueba presentación visual ni validación nativa de formularios.
 
-Con Python 3: `python scripts/verify_store.py` revisa las siete páginas, enlaces, anclas, IDs, JSON y esquemas de secciones y regenera el ZIP del tema a partir del código actual.
+Con Python 3: `python scripts/verify_store.py` revisa las ocho páginas, enlaces, anclas, IDs, JSON y esquemas de secciones y regenera el ZIP del tema a partir del código actual.
 
 Después de cambiar portada/cabecera/catálogo/estilos: `node scripts/sync_preview.cjs` regenera las vistas locales desde las secciones Liquid y copia los recursos; luego ejecutar el verificador y las pruebas. La demostración conserva su catálogo ficticio.
 

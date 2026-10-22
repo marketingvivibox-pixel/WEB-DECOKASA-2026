@@ -1,10 +1,16 @@
+## 22/10/2026 — SPC móvil proporcional y continuidad en main
+
+El usuario confirmó que el mockup de 1080 × 6491 px fue pensado para móvil y pidió conservar su distribución también en teléfonos. La composición completa usa una única escala según el ancho del lienzo, con máximo de 1080 px; se eliminó el cambio de distribución hasta 700 px. El JSON de geometría continúa siendo la fuente de posiciones y tamaños. Imágenes, SVG, textos y controles siguen siendo elementos independientes.
+
+La rama SPC ya está fusionada: HEAD local `e594fbf` en `main`, coincidente con la referencia local `origin/main` al iniciar. Por instrucción expresa, continuar esta landing en `main`. El ajuste móvil de esta etapa es local, sin commit/push/despliegue. La vista previa y el ZIP se actualizaron; no se verificó el estado actual de Shopify.
+
 ## 21/10/2026 — Implementación vigente de la landing SPC
 
 La plantilla `product.landing-spc.json` usa los recursos independientes del PSD y contenido HTML/CSS/SVG. No volver a integrar capturas completas de secciones; los recortes anteriores quedan archivados fuera del tema. `layout/theme.liquid` omite cabecera/pie y estilos globales únicamente para esta plantilla, respetando la composición del mockup.
 
 La calculadora lee `product.selected_or_first_available_variant`, título/SKU y `decokasa.coverage_m2` de variante o producto; respaldo editorial 2.196 m² por caja. Tres colores de referencia (Madera natural, Caoba y Gris claro), sin inferir SKU ni seleccionar variantes por apariencia. Sin precios de demostración ni operación de inventario. WhatsApp abre una consulta preparada que el visitante revisa y envía manualmente.
 
-La vista local inyecta `section.settings.spc_design_preview` exclusivamente al generar HTML; este ajuste no existe en el esquema del editor ni en la plantilla del tema. Los dos testimonios y seis sellos del mockup permiten revisar el diseño, claramente identificados como muestra. En Shopify, los testimonios se agregan con bloques autorizados y los sellos solo mediante el ajuste desactivado por defecto. Guía operativa: `docs/landing-spc.md`. Desarrollo local en la rama SPC; publicación pendiente.
+La vista local inyecta `section.settings.spc_design_preview` exclusivamente al generar HTML; este ajuste no existe en el esquema del editor ni en la plantilla del tema. Los dos testimonios y seis sellos del mockup permiten revisar el diseño, claramente identificados como muestra. En Shopify, los testimonios se agregan con bloques autorizados y los sellos solo mediante el ajuste desactivado por defecto. Guía operativa: `docs/landing-spc.md`. Rama SPC fusionada en `main`; continuar según la decisión del 22/10/2026.
 
 # DECOKASA — decisiones vigentes
 
@@ -106,4 +112,4 @@ Para los seis beneficios se usan los trazados originales del PSD, exportados com
 
 Por petición expresa del usuario, el mapa abarca toda la landing. La fuente editable de geometría es `docs/landing-spc-layout.json`: lienzo 1080 × 6491, ocho secciones, 47 cajas absolutas con referencia a las capas. El generador deriva porcentajes y CSS; editar las cajas en píxeles y ejecutar `npm run sync:preview`, sin retocar manualmente el CSS generado. Los porcentajes verticales de los elementos son relativos a su sección, y también se conservan porcentajes respecto de la página completa. Las superposiciones y recortes permiten valores negativos o mayores de 100%.
 
-Desde 701 px la composición escala con el lienzo hasta 1080 px de ancho. Hasta 700 px se reorganiza para mantener texto y controles utilizables. Se verificó concordancia de las cajas con el mapa; no se promete identidad rasterizada de tipografía con el PSD. El mapa de revisión usa la previsualización conservada como referencia, nunca como fondo sustitutivo de la landing. Siguen vigentes las restricciones comerciales de testimonios, sellos y correspondencia entre colores y variantes.
+Desde la corrección del 22/10/2026, la composición escala con el lienzo en todos los anchos, hasta 1080 px; móvil conserva la misma distribución. Se verificó concordancia de las cajas con el mapa en 12 anchos de 320 a 1440 px; no se promete identidad rasterizada de tipografía con el PSD. El mapa de revisión usa la previsualización conservada como referencia, nunca como fondo sustitutivo de la landing. Siguen vigentes las restricciones comerciales de testimonios, sellos y correspondencia entre colores y variantes.

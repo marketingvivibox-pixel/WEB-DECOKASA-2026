@@ -5,7 +5,7 @@
     "width": 1080,
     "height": 6491
   },
-  "mode": "Geometría proporcional desde 701 px; reflujo accesible hasta 700 px.",
+  "mode": "Composición proporcional del lienzo de 1080 px en todos los anchos, incluido móvil; sin reordenar bloques.",
   "method": "x/1080, width/1080, (y-sectionY)/sectionHeight, height/sectionHeight. Coordenadas originales del inventario de capas del PSD. Las cajas tipográficas compensan el ascendente; no equivalen a los límites de tinta.",
   "sections": [
     {
