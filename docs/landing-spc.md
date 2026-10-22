@@ -1,6 +1,6 @@
 # Landing SPC — construcción y configuración
 
-La rama `feature/landing-piso-spc` ya se fusionó en `main` (e594fbf). Por instrucción del usuario, los ajustes continúan en `main`; la corrección móvil del 22/10/2026 permanece local. Plantilla: `templates/product.landing-spc.json`; sección: `sections/landing-piso-spc.liquid`; estilos y comportamiento: `assets/landing-piso-spc.css`, `landing-piso-spc-proportions.css`, `landing-piso-spc-layout.css` y `landing-piso-spc.js`; iconos y botones: `snippets/spc-icon.liquid` y `spc-actions.liquid`.
+La rama `feature/landing-piso-spc` ya se fusionó en `main` (e594fbf). Por instrucción del usuario, los ajustes continúan en `main`; la corrección móvil del 22/10/2026 se publicó en `95c644f` y su sincronización con el tema activo se verificó en Shopify. Plantilla: `templates/product.landing-spc.json`; sección: `sections/landing-piso-spc.liquid`; estilos y comportamiento: `assets/landing-piso-spc.css`, `landing-piso-spc-proportions.css`, `landing-piso-spc-layout.css` y `landing-piso-spc.js`; iconos y botones: `snippets/spc-icon.liquid` y `spc-actions.liquid`.
 
 ## Recursos y composición
 
@@ -22,7 +22,7 @@ Agregar hasta dos testimonios reales mediante bloques de nombre, retrato y texto
 
 `npm run sync:preview` regenera ocho vistas. `npm test` ejecuta 22 pruebas. `python scripts/verify_store.py` comprueba vistas/enlaces/IDs/JSON y genera `releases/DECOKASA-tema-0.1.0.zip`. `npx --yes @shopify/cli@4.9.4 theme check --output json` terminó sin hallazgos el 22/10/2026.
 
-Revisión en Edge a 320, 390, 768, 1080 y 1440 px: sin desbordamiento horizontal, todas las imágenes completas, sin errores JavaScript. Probados cálculo con/sin cortes, entradas inválidas, actualización de consulta por color y teclado. Pendiente revisión en Shopify con catálogo real. La fusión previa está en `main`; no se publicó la corrección móvil de esta etapa ni se comprobó su despliegue en Shopify.
+Revisión en Edge a 320, 390, 768, 1080 y 1440 px: sin desbordamiento horizontal, todas las imágenes completas, sin errores JavaScript. Probados cálculo con/sin cortes, entradas inválidas, actualización de consulta por color y teclado. Corrección móvil publicada en `95c644f` y comprobada en https://decokasaperu.myshopify.com/products/piso-spc el 22/10/2026. El tema activo `WEB-DECOKASA-2026-ALFIN/main` (188927803629) sirve los tres CSS con reglas equivalentes a los archivos locales. En la tienda se verificaron 50 cajas presentes a 320/393/1080 px: error máximo 0,1035 px normalizado, sin desbordamiento ni errores JavaScript; imágenes completas, calculadora con/sin cortes y colores funcionales. Testimonios y sellos permanecen ausentes por su configuración comercial prevista. Pendiente validar catálogo/variantes, testimonios y certificaciones reales.
 
 ## Iconos originales de beneficios — corrección 21/10/2026
 

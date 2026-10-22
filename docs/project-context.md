@@ -2,7 +2,7 @@
 
 El usuario confirmó que el mockup de 1080 × 6491 px fue pensado para móvil y pidió conservar su distribución también en teléfonos. La composición completa usa una única escala según el ancho del lienzo, con máximo de 1080 px; se eliminó el cambio de distribución hasta 700 px. El JSON de geometría continúa siendo la fuente de posiciones y tamaños. Imágenes, SVG, textos y controles siguen siendo elementos independientes.
 
-La rama SPC ya está fusionada: HEAD local `e594fbf` en `main`, coincidente con la referencia local `origin/main` al iniciar. Por instrucción expresa, continuar esta landing en `main`. El ajuste móvil de esta etapa es local, sin commit/push/despliegue. La vista previa y el ZIP se actualizaron; no se verificó el estado actual de Shopify.
+La rama SPC se fusionó en `e594fbf`; por instrucción expresa, los ajustes continúan en `main`. La corrección móvil se registró y envió a GitHub en `95c644f` el 22/10/2026. Shopify sincronizó el tema activo `WEB-DECOKASA-2026-ALFIN/main` (188927803629); se comprobó el producto `/products/piso-spc` en móvil y escritorio, con los tres CSS equivalentes al código local. La vista previa y el ZIP contienen la misma corrección.
 
 ## 21/10/2026 — Implementación vigente de la landing SPC
 

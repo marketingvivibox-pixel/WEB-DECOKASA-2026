@@ -1,3 +1,12 @@
+## 22/10/2026 — Corrección móvil SPC sincronizada y comprobada en Shopify
+
+- El usuario no veía la corrección en la tienda: se confirmó que solo estaba en archivos locales, mientras el tema activo seguía sirviendo los tres CSS anteriores.
+- Registrados los 13 archivos pendientes de la corrección y documentación en `95c644f` (`fix(spc): conservar proporciones del mockup en movil`); push a `origin/main` completado. La integración GitHub de Shopify actualizó el tema `WEB-DECOKASA-2026-ALFIN/main`, id 188927803629, role main.
+- Producto público comprobado: https://decokasaperu.myshopify.com/products/piso-spc . Los tres CSS publicados tienen las mismas reglas CSSOM que los archivos locales; las diferencias de texto de dos archivos son normalización de Shopify. Desaparecieron las redistribuciones móviles anteriores.
+- 50 cajas presentes verificadas respecto al mapa, con coordenadas relativas a cada sección, a 320/393/1080 px: error máximo 0,1035 px normalizado, sin desbordamiento horizontal, imágenes completas y sin errores JavaScript. Calculadora 20 m²: 11 cajas con cortes y 10 sin cortes; selección Caoba funcional. Captura móvil revisada.
+- Cinco entradas del mapa no aparecen en Shopify por la configuración prevista de testimonios/sellos; no se publicaron opiniones ni certificaciones de muestra. Pendientes catálogo/variantes y contenido comercial real.
+- Evidencia local: `work/shopify-spc-before.json`, `work/shopify-spc-verification.json` y `work/shopify-spc-mobile-full.png` en el chat `2026-10-21/este-mokup-es-para-la-pagina-4`. No hubo cambios adicionales en código de tema durante la verificación del despliegue.
+
 ## 22/10/2026 — Corrección de proporciones móviles de toda la landing SPC
 
 - Fusión previa confirmada en `main`, HEAD `e594fbf`; trabajo continuado allí por petición del usuario. Se identificó que el mapa proporcional estaba limitado a anchos desde 701 px y las reglas móviles reorganizaban la página.

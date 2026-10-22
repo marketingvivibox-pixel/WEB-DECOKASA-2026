@@ -6,7 +6,7 @@ Tema Shopify 0.1.0 en construcción, conectado a GitHub/main y activo en Shopify
 Inicio → catálogo por marca o tipo → landing con ficha completa → formulario → asesor (integración pendiente). Sin pasarelas ni checkout. No emitir `purchase` desde el navegador.
 
 ## Archivos
-- `templates/product.landing-spc.json`: landing SPC reconstruida con recursos del PSD, elementos HTML/CSS/SVG y calculadora. [Guía de configuración SPC](docs/landing-spc.md). Rama SPC fusionada en `main`; ajuste móvil proporcional del 22/10/2026 en desarrollo local sobre `main`.
+- `templates/product.landing-spc.json`: landing SPC reconstruida con recursos del PSD, elementos HTML/CSS/SVG y calculadora. [Guía de configuración SPC](docs/landing-spc.md). Rama SPC fusionada en `main`; corrección móvil proporcional publicada en `95c644f` y verificada en Shopify el 22/10/2026.
 - `templates/index.json`: portada multimarcas editable; imagen principal y colección destacada.
 - `templates/collection.json`: catálogo adaptable con marcas, filtros nativos vendor/type cuando estén configurados, ordenación, tarjetas y paginación.
 - `templates/product.json`: cada URL `/products/<handle>` es una landing que incluye ficha y formulario.
