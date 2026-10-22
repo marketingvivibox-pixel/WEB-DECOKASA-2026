@@ -8,3 +8,5 @@ coverage/
 bun.lock
 .shopify/
 .gitignore.repo
+scratch/
+assets/spc-landing/extracted_img_*.jpg

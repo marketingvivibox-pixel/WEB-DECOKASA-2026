@@ -1,0 +1,1315 @@
+{
+  "source": "LANDING SPC_MOCK.psd",
+  "sourceSha256": "22fe04daa860fe33538d8076c8a04ecbaf6510586ecb47b1f23b64b476ad74ed",
+  "canvas": {
+    "width": 1080,
+    "height": 6491
+  },
+  "mode": "Geometría proporcional desde 701 px; reflujo accesible hasta 700 px.",
+  "method": "x/1080, width/1080, (y-sectionY)/sectionHeight, height/sectionHeight. Coordenadas originales del inventario de capas del PSD. Las cajas tipográficas compensan el ascendente; no equivalen a los límites de tinta.",
+  "sections": [
+    {
+      "id": "hero",
+      "selector": ".spc-hero",
+      "x": 0,
+      "y": 0,
+      "width": 1080,
+      "height": 1235,
+      "overlap": 0,
+      "topPercent": 0,
+      "heightPercent": 19.026344
+    },
+    {
+      "id": "intro",
+      "selector": ".spc-intro",
+      "x": 0,
+      "y": 1235,
+      "width": 1080,
+      "height": 987,
+      "overlap": 0,
+      "topPercent": 19.026344,
+      "heightPercent": 15.205669
+    },
+    {
+      "id": "benefits",
+      "selector": ".spc-benefits",
+      "x": 0,
+      "y": 2180,
+      "width": 1080,
+      "height": 795,
+      "overlap": -42,
+      "topPercent": 33.584964,
+      "heightPercent": 12.247728
+    },
+    {
+      "id": "anatomy",
+      "selector": ".spc-anatomy",
+      "x": 0,
+      "y": 2935,
+      "width": 1080,
+      "height": 721,
+      "overlap": -40,
+      "topPercent": 45.216454,
+      "heightPercent": 11.107688
+    },
+    {
+      "id": "installation",
+      "selector": ".spc-installation",
+      "x": 0,
+      "y": 3614,
+      "width": 1080,
+      "height": 802,
+      "overlap": -42,
+      "topPercent": 55.677091,
+      "heightPercent": 12.355569
+    },
+    {
+      "id": "testimonials",
+      "selector": ".spc-testimonials",
+      "x": 0,
+      "y": 4374,
+      "width": 1080,
+      "height": 721,
+      "overlap": -42,
+      "topPercent": 67.385611,
+      "heightPercent": 11.107688
+    },
+    {
+      "id": "showcase",
+      "selector": ".spc-showcase",
+      "x": 0,
+      "y": 5053,
+      "width": 1080,
+      "height": 858,
+      "overlap": -42,
+      "topPercent": 77.846249,
+      "heightPercent": 13.218302
+    },
+    {
+      "id": "footer",
+      "selector": ".spc-footer",
+      "x": 0,
+      "y": 5869,
+      "width": 1080,
+      "height": 622,
+      "overlap": -42,
+      "topPercent": 90.417501,
+      "heightPercent": 9.582499
+    }
+  ],
+  "elements": [
+    {
+      "id": "fondo-portada",
+      "section": "hero",
+      "selector": ".spc-hero > .spc-backdrop",
+      "sourceLayer": 3,
+      "box": {
+        "x": -34,
+        "y": -280,
+        "width": 1117,
+        "height": 2033
+      },
+      "percent": {
+        "left": -3.148148,
+        "top": -22.672065,
+        "width": 103.425926,
+        "height": 164.615385
+      },
+      "pagePercent": {
+        "left": -3.148148,
+        "top": -4.313665,
+        "width": 103.425926,
+        "height": 31.32029
+      },
+      "note": ""
+    },
+    {
+      "id": "anuncio",
+      "section": "hero",
+      "selector": ".spc-announcement",
+      "sourceLayer": 23,
+      "box": {
+        "x": 0,
+        "y": 0,
+        "width": 1080,
+        "height": 80
+      },
+      "percent": {
+        "left": 0,
+        "top": 0,
+        "width": 100,
+        "height": 6.477733
+      },
+      "pagePercent": {
+        "left": 0,
+        "top": 0,
+        "width": 100,
+        "height": 1.232476
+      },
+      "note": ""
+    },
+    {
+      "id": "simbolo",
+      "section": "hero",
+      "selector": ".spc-symbol",
+      "sourceLayer": 42,
+      "box": {
+        "x": 481,
+        "y": 154,
+        "width": 118,
+        "height": 116
+      },
+      "percent": {
+        "left": 44.537037,
+        "top": 12.469636,
+        "width": 10.925926,
+        "height": 9.392713
+      },
+      "pagePercent": {
+        "left": 44.537037,
+        "top": 2.372516,
+        "width": 10.925926,
+        "height": 1.78709
+      },
+      "note": ""
+    },
+    {
+      "id": "titulo-portada",
+      "section": "hero",
+      "selector": ".spc-hero h1",
+      "sourceLayer": [
+        43,
+        47
+      ],
+      "box": {
+        "x": 202,
+        "y": 284,
+        "width": 681,
+        "height": 152
+      },
+      "percent": {
+        "left": 18.703704,
+        "top": 22.995951,
+        "width": 63.055556,
+        "height": 12.307692
+      },
+      "pagePercent": {
+        "left": 18.703704,
+        "top": 4.375289,
+        "width": 63.055556,
+        "height": 2.341704
+      },
+      "note": "Caja tipográfica: se compensa el espacio superior de la fuente web respecto de la tinta del PSD."
+    },
+    {
+      "id": "subtitulo-portada",
+      "section": "hero",
+      "selector": ".spc-hero-heading > p",
+      "sourceLayer": 49,
+      "box": {
+        "x": 275,
+        "y": 447,
+        "width": 531,
+        "height": 67
+      },
+      "percent": {
+        "left": 25.462963,
+        "top": 36.194332,
+        "width": 49.166667,
+        "height": 5.425101
+      },
+      "pagePercent": {
+        "left": 25.462963,
+        "top": 6.886458,
+        "width": 49.166667,
+        "height": 1.032198
+      },
+      "note": ""
+    },
+    {
+      "id": "producto-portada",
+      "section": "hero",
+      "selector": ".spc-hero-product",
+      "sourceLayer": 40,
+      "box": {
+        "x": 219,
+        "y": 591,
+        "width": 642,
+        "height": 867
+      },
+      "percent": {
+        "left": 20.277778,
+        "top": 47.854251,
+        "width": 59.444444,
+        "height": 70.202429
+      },
+      "pagePercent": {
+        "left": 20.277778,
+        "top": 9.104914,
+        "width": 59.444444,
+        "height": 13.356956
+      },
+      "note": ""
+    },
+    {
+      "id": "introduccion",
+      "section": "intro",
+      "selector": ".spc-intro-copy",
+      "sourceLayer": 41,
+      "box": {
+        "x": 181,
+        "y": 1516,
+        "width": 720,
+        "height": 152
+      },
+      "percent": {
+        "left": 16.759259,
+        "top": 28.470111,
+        "width": 66.666667,
+        "height": 15.400203
+      },
+      "pagePercent": {
+        "left": 16.759259,
+        "top": 23.355415,
+        "width": 66.666667,
+        "height": 2.341704
+      },
+      "note": ""
+    },
+    {
+      "id": "acciones-introduccion",
+      "section": "intro",
+      "selector": ".spc-intro > .spc-actions",
+      "sourceLayer": 117,
+      "box": {
+        "x": 139,
+        "y": 1718,
+        "width": 801,
+        "height": 105
+      },
+      "percent": {
+        "left": 12.87037,
+        "top": 48.93617,
+        "width": 74.166667,
+        "height": 10.638298
+      },
+      "pagePercent": {
+        "left": 12.87037,
+        "top": 26.467416,
+        "width": 74.166667,
+        "height": 1.617624
+      },
+      "note": ""
+    },
+    {
+      "id": "barra-colores",
+      "section": "intro",
+      "selector": ".spc-colors",
+      "sourceLayer": 9,
+      "box": {
+        "x": 61,
+        "y": 1876,
+        "width": 957,
+        "height": 225
+      },
+      "percent": {
+        "left": 5.648148,
+        "top": 64.944276,
+        "width": 88.611111,
+        "height": 22.796353
+      },
+      "pagePercent": {
+        "left": 5.648148,
+        "top": 28.901556,
+        "width": 88.611111,
+        "height": 3.466338
+      },
+      "note": ""
+    },
+    {
+      "id": "nota-colores",
+      "section": "intro",
+      "selector": ".spc-intro > .spc-fineprint",
+      "sourceLayer": 50,
+      "box": {
+        "x": 220,
+        "y": 2145,
+        "width": 640,
+        "height": 30
+      },
+      "percent": {
+        "left": 20.37037,
+        "top": 92.198582,
+        "width": 59.259259,
+        "height": 3.039514
+      },
+      "pagePercent": {
+        "left": 20.37037,
+        "top": 33.045756,
+        "width": 59.259259,
+        "height": 0.462178
+      },
+      "note": ""
+    },
+    {
+      "id": "fondo-beneficios",
+      "section": "benefits",
+      "selector": ".spc-benefits > .spc-backdrop",
+      "sourceLayer": 0,
+      "box": {
+        "x": -145,
+        "y": 1896,
+        "width": 1369,
+        "height": 1079
+      },
+      "percent": {
+        "left": -13.425926,
+        "top": -35.72327,
+        "width": 126.759259,
+        "height": 135.72327
+      },
+      "pagePercent": {
+        "left": -13.425926,
+        "top": 29.209675,
+        "width": 126.759259,
+        "height": 16.623016
+      },
+      "note": ""
+    },
+    {
+      "id": "titulo-beneficios",
+      "section": "benefits",
+      "selector": ".spc-benefits h2",
+      "sourceLayer": [
+        63,
+        64
+      ],
+      "box": {
+        "x": 188,
+        "y": 2305,
+        "width": 360,
+        "height": 76
+      },
+      "percent": {
+        "left": 17.407407,
+        "top": 15.72327,
+        "width": 33.333333,
+        "height": 9.559748
+      },
+      "pagePercent": {
+        "left": 17.407407,
+        "top": 35.510707,
+        "width": 33.333333,
+        "height": 1.170852
+      },
+      "note": ""
+    },
+    {
+      "id": "icono-agua",
+      "section": "benefits",
+      "selector": ".spc-benefit-grid li:nth-child(1) .spc-benefit-art",
+      "sourceLayer": 96,
+      "box": {
+        "x": 300,
+        "y": 2449,
+        "width": 93,
+        "height": 125
+      },
+      "percent": {
+        "left": 27.777778,
+        "top": 33.836478,
+        "width": 8.611111,
+        "height": 15.72327
+      },
+      "pagePercent": {
+        "left": 27.777778,
+        "top": 37.729163,
+        "width": 8.611111,
+        "height": 1.925743
+      },
+      "note": ""
+    },
+    {
+      "id": "texto-agua",
+      "section": "benefits",
+      "selector": ".spc-benefit-grid li:nth-child(1) .spc-benefit-caption",
+      "sourceLayer": 93,
+      "box": {
+        "x": 294,
+        "y": 2588,
+        "width": 105,
+        "height": 50
+      },
+      "percent": {
+        "left": 27.222222,
+        "top": 51.320755,
+        "width": 9.722222,
+        "height": 6.289308
+      },
+      "pagePercent": {
+        "left": 27.222222,
+        "top": 39.87059,
+        "width": 9.722222,
+        "height": 0.770297
+      },
+      "note": ""
+    },
+    {
+      "id": "icono-espuma",
+      "section": "benefits",
+      "selector": ".spc-benefit-grid li:nth-child(2) .spc-benefit-art",
+      "sourceLayer": 97,
+      "box": {
+        "x": 498,
+        "y": 2448,
+        "width": 94,
+        "height": 126
+      },
+      "percent": {
+        "left": 46.111111,
+        "top": 33.710692,
+        "width": 8.703704,
+        "height": 15.849057
+      },
+      "pagePercent": {
+        "left": 46.111111,
+        "top": 37.713758,
+        "width": 8.703704,
+        "height": 1.941149
+      },
+      "note": ""
+    },
+    {
+      "id": "texto-espuma",
+      "section": "benefits",
+      "selector": ".spc-benefit-grid li:nth-child(2) .spc-benefit-caption",
+      "sourceLayer": 94,
+      "box": {
+        "x": 508,
+        "y": 2588,
+        "width": 74,
+        "height": 50
+      },
+      "percent": {
+        "left": 47.037037,
+        "top": 51.320755,
+        "width": 6.851852,
+        "height": 6.289308
+      },
+      "pagePercent": {
+        "left": 47.037037,
+        "top": 39.87059,
+        "width": 6.851852,
+        "height": 0.770297
+      },
+      "note": ""
+    },
+    {
+      "id": "icono-transito",
+      "section": "benefits",
+      "selector": ".spc-benefit-grid li:nth-child(3) .spc-benefit-art",
+      "sourceLayer": 98,
+      "box": {
+        "x": 690,
+        "y": 2449,
+        "width": 97,
+        "height": 124
+      },
+      "percent": {
+        "left": 63.888889,
+        "top": 33.836478,
+        "width": 8.981481,
+        "height": 15.597484
+      },
+      "pagePercent": {
+        "left": 63.888889,
+        "top": 37.729163,
+        "width": 8.981481,
+        "height": 1.910337
+      },
+      "note": ""
+    },
+    {
+      "id": "texto-transito",
+      "section": "benefits",
+      "selector": ".spc-benefit-grid li:nth-child(3) .spc-benefit-caption",
+      "sourceLayer": 95,
+      "box": {
+        "x": 689,
+        "y": 2588,
+        "width": 100,
+        "height": 50
+      },
+      "percent": {
+        "left": 63.796296,
+        "top": 51.320755,
+        "width": 9.259259,
+        "height": 6.289308
+      },
+      "pagePercent": {
+        "left": 63.796296,
+        "top": 39.87059,
+        "width": 9.259259,
+        "height": 0.770297
+      },
+      "note": ""
+    },
+    {
+      "id": "icono-click",
+      "section": "benefits",
+      "selector": ".spc-benefit-grid li:nth-child(4) .spc-benefit-art",
+      "sourceLayer": 99,
+      "box": {
+        "x": 295,
+        "y": 2687,
+        "width": 101,
+        "height": 64
+      },
+      "percent": {
+        "left": 27.314815,
+        "top": 63.773585,
+        "width": 9.351852,
+        "height": 8.050314
+      },
+      "pagePercent": {
+        "left": 27.314815,
+        "top": 41.395779,
+        "width": 9.351852,
+        "height": 0.985981
+      },
+      "note": ""
+    },
+    {
+      "id": "texto-click",
+      "section": "benefits",
+      "selector": ".spc-benefit-grid li:nth-child(4) .spc-benefit-caption",
+      "sourceLayer": 101,
+      "box": {
+        "x": 300,
+        "y": 2782,
+        "width": 91,
+        "height": 50
+      },
+      "percent": {
+        "left": 27.777778,
+        "top": 75.72327,
+        "width": 8.425926,
+        "height": 6.289308
+      },
+      "pagePercent": {
+        "left": 27.777778,
+        "top": 42.859344,
+        "width": 8.425926,
+        "height": 0.770297
+      },
+      "note": ""
+    },
+    {
+      "id": "icono-limpieza",
+      "section": "benefits",
+      "selector": ".spc-benefit-grid li:nth-child(5) .spc-benefit-art",
+      "sourceLayer": 103,
+      "box": {
+        "x": 509,
+        "y": 2668,
+        "width": 72,
+        "height": 91
+      },
+      "percent": {
+        "left": 47.12963,
+        "top": 61.383648,
+        "width": 6.666667,
+        "height": 11.446541
+      },
+      "pagePercent": {
+        "left": 47.12963,
+        "top": 41.103066,
+        "width": 6.666667,
+        "height": 1.401941
+      },
+      "note": ""
+    },
+    {
+      "id": "texto-limpieza",
+      "section": "benefits",
+      "selector": ".spc-benefit-grid li:nth-child(5) .spc-benefit-caption",
+      "sourceLayer": 102,
+      "box": {
+        "x": 500,
+        "y": 2782,
+        "width": 91,
+        "height": 50
+      },
+      "percent": {
+        "left": 46.296296,
+        "top": 75.72327,
+        "width": 8.425926,
+        "height": 6.289308
+      },
+      "pagePercent": {
+        "left": 46.296296,
+        "top": 42.859344,
+        "width": 8.425926,
+        "height": 0.770297
+      },
+      "note": ""
+    },
+    {
+      "id": "icono-mascotas",
+      "section": "benefits",
+      "selector": ".spc-benefit-grid li:nth-child(6) .spc-benefit-art",
+      "sourceLayer": 100,
+      "box": {
+        "x": 695,
+        "y": 2685,
+        "width": 85,
+        "height": 70
+      },
+      "percent": {
+        "left": 64.351852,
+        "top": 63.522013,
+        "width": 7.87037,
+        "height": 8.805031
+      },
+      "pagePercent": {
+        "left": 64.351852,
+        "top": 41.364967,
+        "width": 7.87037,
+        "height": 1.078416
+      },
+      "note": ""
+    },
+    {
+      "id": "texto-mascotas",
+      "section": "benefits",
+      "selector": ".spc-benefit-grid li:nth-child(6) .spc-benefit-caption",
+      "sourceLayer": 104,
+      "box": {
+        "x": 693,
+        "y": 2783,
+        "width": 91,
+        "height": 50
+      },
+      "percent": {
+        "left": 64.166667,
+        "top": 75.849057,
+        "width": 8.425926,
+        "height": 6.289308
+      },
+      "pagePercent": {
+        "left": 64.166667,
+        "top": 42.87475,
+        "width": 8.425926,
+        "height": 0.770297
+      },
+      "note": ""
+    },
+    {
+      "id": "marca-agua",
+      "section": "anatomy",
+      "selector": ".spc-anatomy .spc-watermark",
+      "sourceLayer": 26,
+      "box": {
+        "x": -95,
+        "y": 2816,
+        "width": 337,
+        "height": 347
+      },
+      "percent": {
+        "left": -8.796296,
+        "top": -16.504854,
+        "width": 31.203704,
+        "height": 48.127601
+      },
+      "pagePercent": {
+        "left": -8.796296,
+        "top": 43.383146,
+        "width": 31.203704,
+        "height": 5.345864
+      },
+      "note": "Se reconstruye la marca de agua con el símbolo independiente; bbox visible de la capa original empieza en x=0."
+    },
+    {
+      "id": "titulo-ficha",
+      "section": "anatomy",
+      "selector": ".spc-anatomy-copy > h2",
+      "sourceLayer": [
+        57,
+        58
+      ],
+      "box": {
+        "x": 186,
+        "y": 3071,
+        "width": 330,
+        "height": 71
+      },
+      "percent": {
+        "left": 17.222222,
+        "top": 18.862691,
+        "width": 30.555556,
+        "height": 9.847434
+      },
+      "pagePercent": {
+        "left": 17.222222,
+        "top": 47.311662,
+        "width": 30.555556,
+        "height": 1.093822
+      },
+      "note": ""
+    },
+    {
+      "id": "especificaciones",
+      "section": "anatomy",
+      "selector": ".spc-specs",
+      "sourceLayer": [
+        65,
+        67
+      ],
+      "box": {
+        "x": 179,
+        "y": 3168,
+        "width": 330,
+        "height": 169
+      },
+      "percent": {
+        "left": 16.574074,
+        "top": 32.316227,
+        "width": 30.555556,
+        "height": 23.439667
+      },
+      "pagePercent": {
+        "left": 16.574074,
+        "top": 48.806039,
+        "width": 30.555556,
+        "height": 2.603605
+      },
+      "note": ""
+    },
+    {
+      "id": "titulo-capas",
+      "section": "anatomy",
+      "selector": ".spc-anatomy-copy > h3",
+      "sourceLayer": [
+        60,
+        61
+      ],
+      "box": {
+        "x": 186,
+        "y": 3346,
+        "width": 330,
+        "height": 72
+      },
+      "percent": {
+        "left": 17.222222,
+        "top": 57.004161,
+        "width": 30.555556,
+        "height": 9.98613
+      },
+      "pagePercent": {
+        "left": 17.222222,
+        "top": 51.548298,
+        "width": 30.555556,
+        "height": 1.109228
+      },
+      "note": ""
+    },
+    {
+      "id": "lista-capas",
+      "section": "anatomy",
+      "selector": ".spc-layers",
+      "sourceLayer": 68,
+      "box": {
+        "x": 192,
+        "y": 3441,
+        "width": 469,
+        "height": 90
+      },
+      "percent": {
+        "left": 17.777778,
+        "top": 70.180305,
+        "width": 43.425926,
+        "height": 12.482663
+      },
+      "pagePercent": {
+        "left": 17.777778,
+        "top": 53.011863,
+        "width": 43.425926,
+        "height": 1.386535
+      },
+      "note": ""
+    },
+    {
+      "id": "despiece",
+      "section": "anatomy",
+      "selector": ".spc-layer-image",
+      "sourceLayer": 108,
+      "box": {
+        "x": 521,
+        "y": 2920,
+        "width": 559,
+        "height": 583
+      },
+      "percent": {
+        "left": 48.240741,
+        "top": -2.080444,
+        "width": 51.759259,
+        "height": 80.859917
+      },
+      "pagePercent": {
+        "left": 48.240741,
+        "top": 44.985364,
+        "width": 51.759259,
+        "height": 8.981667
+      },
+      "note": "BBox de contenido después del recorte de transparencia: offset (26,38) respecto a la capa."
+    },
+    {
+      "id": "nota-ficha",
+      "section": "anatomy",
+      "selector": ".spc-anatomy > .spc-fineprint",
+      "sourceLayer": 51,
+      "box": {
+        "x": 240,
+        "y": 3570,
+        "width": 600,
+        "height": 30
+      },
+      "percent": {
+        "left": 22.222222,
+        "top": 88.072122,
+        "width": 55.555556,
+        "height": 4.160888
+      },
+      "pagePercent": {
+        "left": 22.222222,
+        "top": 54.99923,
+        "width": 55.555556,
+        "height": 0.462178
+      },
+      "note": ""
+    },
+    {
+      "id": "fondo-instalacion",
+      "section": "installation",
+      "selector": ".spc-installation > .spc-backdrop",
+      "sourceLayer": 5,
+      "box": {
+        "x": 0,
+        "y": 3453,
+        "width": 1080,
+        "height": 939
+      },
+      "percent": {
+        "left": 0,
+        "top": -20.074813,
+        "width": 100,
+        "height": 117.082294
+      },
+      "pagePercent": {
+        "left": 0,
+        "top": 53.196734,
+        "width": 100,
+        "height": 14.466184
+      },
+      "note": ""
+    },
+    {
+      "id": "titulo-calculadora",
+      "section": "installation",
+      "selector": ".spc-installation h2",
+      "sourceLayer": [
+        81,
+        82
+      ],
+      "box": {
+        "x": 187,
+        "y": 3765,
+        "width": 320,
+        "height": 77
+      },
+      "percent": {
+        "left": 17.314815,
+        "top": 18.82793,
+        "width": 29.62963,
+        "height": 9.600998
+      },
+      "pagePercent": {
+        "left": 17.314815,
+        "top": 58.003389,
+        "width": 29.62963,
+        "height": 1.186258
+      },
+      "note": ""
+    },
+    {
+      "id": "calculadora",
+      "section": "installation",
+      "selector": ".spc-calculator",
+      "sourceLayer": [
+        148,
+        149,
+        151,
+        154,
+        157
+      ],
+      "box": {
+        "x": 223,
+        "y": 3888,
+        "width": 633,
+        "height": 277
+      },
+      "percent": {
+        "left": 20.648148,
+        "top": 34.164589,
+        "width": 58.611111,
+        "height": 34.538653
+      },
+      "pagePercent": {
+        "left": 20.648148,
+        "top": 59.898321,
+        "width": 58.611111,
+        "height": 4.267447
+      },
+      "note": "Control funcional en el espacio del formulario del PSD; mantiene el dato comercial validado y reserva espacio para el resultado."
+    },
+    {
+      "id": "acciones-calculadora",
+      "section": "installation",
+      "selector": ".spc-installation .spc-actions",
+      "sourceLayer": 126,
+      "box": {
+        "x": 223,
+        "y": 4215,
+        "width": 633,
+        "height": 83
+      },
+      "percent": {
+        "left": 20.648148,
+        "top": 74.937656,
+        "width": 58.611111,
+        "height": 10.349127
+      },
+      "pagePercent": {
+        "left": 20.648148,
+        "top": 64.936065,
+        "width": 58.611111,
+        "height": 1.278694
+      },
+      "note": ""
+    },
+    {
+      "id": "tablones-perspectiva",
+      "section": "testimonials",
+      "selector": ".spc-perspective",
+      "sourceLayer": 145,
+      "box": {
+        "x": -151,
+        "y": 4318,
+        "width": 561,
+        "height": 441
+      },
+      "percent": {
+        "left": -13.981481,
+        "top": -7.76699,
+        "width": 51.944444,
+        "height": 61.165049
+      },
+      "pagePercent": {
+        "left": -13.981481,
+        "top": 66.522878,
+        "width": 51.944444,
+        "height": 6.794022
+      },
+      "note": "El original incrustado se refleja horizontalmente para recuperar la transformación de la capa 145."
+    },
+    {
+      "id": "presentacion-testimonios",
+      "section": "testimonials",
+      "selector": ".spc-testimonial-intro",
+      "sourceLayer": [
+        70,
+        71,
+        75
+      ],
+      "box": {
+        "x": 188,
+        "y": 4762,
+        "width": 280,
+        "height": 250
+      },
+      "percent": {
+        "left": 17.407407,
+        "top": 53.814147,
+        "width": 25.925926,
+        "height": 34.674064
+      },
+      "pagePercent": {
+        "left": 17.407407,
+        "top": 73.363118,
+        "width": 25.925926,
+        "height": 3.851487
+      },
+      "note": ""
+    },
+    {
+      "id": "tarjetas-testimonios",
+      "section": "testimonials",
+      "selector": ".spc-testimonial-grid",
+      "sourceLayer": [
+        25,
+        33
+      ],
+      "box": {
+        "x": 538,
+        "y": 4508,
+        "width": 472,
+        "height": 623
+      },
+      "percent": {
+        "left": 49.814815,
+        "top": 18.585298,
+        "width": 43.703704,
+        "height": 86.407767
+      },
+      "pagePercent": {
+        "left": 49.814815,
+        "top": 69.450008,
+        "width": 43.703704,
+        "height": 9.597905
+      },
+      "note": "El contenido continúa siendo de muestra hasta validar testimonios reales."
+    },
+    {
+      "id": "fondo-resultados",
+      "section": "showcase",
+      "selector": ".spc-showcase > .spc-backdrop",
+      "sourceLayer": 1,
+      "box": {
+        "x": -45,
+        "y": 5061,
+        "width": 1171,
+        "height": 878
+      },
+      "percent": {
+        "left": -4.166667,
+        "top": 0.932401,
+        "width": 108.425926,
+        "height": 102.331002
+      },
+      "pagePercent": {
+        "left": -4.166667,
+        "top": 77.969496,
+        "width": 108.425926,
+        "height": 13.526421
+      },
+      "note": ""
+    },
+    {
+      "id": "titulo-resultados",
+      "section": "showcase",
+      "selector": ".spc-showcase > h2",
+      "sourceLayer": [
+        78,
+        79
+      ],
+      "box": {
+        "x": 188,
+        "y": 5612,
+        "width": 290,
+        "height": 77
+      },
+      "percent": {
+        "left": 17.407407,
+        "top": 65.151515,
+        "width": 26.851852,
+        "height": 8.974359
+      },
+      "pagePercent": {
+        "left": 17.407407,
+        "top": 86.458173,
+        "width": 26.851852,
+        "height": 1.186258
+      },
+      "note": ""
+    },
+    {
+      "id": "nota-resultados",
+      "section": "showcase",
+      "selector": ".spc-showcase > .spc-fineprint",
+      "sourceLayer": 52,
+      "box": {
+        "x": 210,
+        "y": 5737,
+        "width": 660,
+        "height": 30
+      },
+      "percent": {
+        "left": 19.444444,
+        "top": 79.72028,
+        "width": 61.111111,
+        "height": 3.496503
+      },
+      "pagePercent": {
+        "left": 19.444444,
+        "top": 88.383916,
+        "width": 61.111111,
+        "height": 0.462178
+      },
+      "note": ""
+    },
+    {
+      "id": "barra-sellos",
+      "section": "showcase",
+      "selector": ".spc-seals",
+      "sourceLayer": 164,
+      "box": {
+        "x": 62,
+        "y": 5809,
+        "width": 956,
+        "height": 128
+      },
+      "percent": {
+        "left": 5.740741,
+        "top": 88.111888,
+        "width": 88.518519,
+        "height": 14.918415
+      },
+      "pagePercent": {
+        "left": 5.740741,
+        "top": 89.493144,
+        "width": 88.518519,
+        "height": 1.971961
+      },
+      "note": ""
+    },
+    {
+      "id": "logotipo-cierre",
+      "section": "footer",
+      "selector": ".spc-wordmark",
+      "sourceLayer": 45,
+      "box": {
+        "x": 710,
+        "y": 5994,
+        "width": 225,
+        "height": 52
+      },
+      "percent": {
+        "left": 65.740741,
+        "top": 20.096463,
+        "width": 20.833333,
+        "height": 8.360129
+      },
+      "pagePercent": {
+        "left": 65.740741,
+        "top": 92.343244,
+        "width": 20.833333,
+        "height": 0.801109
+      },
+      "note": ""
+    },
+    {
+      "id": "producto-cierre",
+      "section": "footer",
+      "selector": ".spc-footer-product",
+      "sourceLayer": 135,
+      "box": {
+        "x": 504,
+        "y": 5988,
+        "width": 891,
+        "height": 730
+      },
+      "percent": {
+        "left": 46.666667,
+        "top": 19.131833,
+        "width": 82.5,
+        "height": 117.363344
+      },
+      "pagePercent": {
+        "left": 46.666667,
+        "top": 92.250809,
+        "width": 82.5,
+        "height": 11.246341
+      },
+      "note": "Caja visible tras recortar 92 px transparentes del borde superior de la capa 135 (891 × 822). El contenido conserva su escala y termina en y=6718."
+    },
+    {
+      "id": "texto-cierre",
+      "section": "footer",
+      "selector": ".spc-footer-copy",
+      "sourceLayer": [
+        73,
+        74,
+        76
+      ],
+      "box": {
+        "x": 186,
+        "y": 6065,
+        "width": 290,
+        "height": 190
+      },
+      "percent": {
+        "left": 17.222222,
+        "top": 31.511254,
+        "width": 26.851852,
+        "height": 30.546624
+      },
+      "pagePercent": {
+        "left": 17.222222,
+        "top": 93.437067,
+        "width": 26.851852,
+        "height": 2.92713
+      },
+      "note": ""
+    },
+    {
+      "id": "acciones-cierre",
+      "section": "footer",
+      "selector": ".spc-footer > .spc-actions",
+      "sourceLayer": 136,
+      "box": {
+        "x": 223,
+        "y": 6301,
+        "width": 633,
+        "height": 83
+      },
+      "percent": {
+        "left": 20.648148,
+        "top": 69.453376,
+        "width": 58.611111,
+        "height": 13.344051
+      },
+      "pagePercent": {
+        "left": 20.648148,
+        "top": 97.07287,
+        "width": 58.611111,
+        "height": 1.278694
+      },
+      "note": ""
+    },
+    {
+      "id": "copyright",
+      "section": "footer",
+      "selector": ".spc-copyright",
+      "sourceLayer": 53,
+      "box": {
+        "x": 260,
+        "y": 6431,
+        "width": 560,
+        "height": 30
+      },
+      "percent": {
+        "left": 24.074074,
+        "top": 90.353698,
+        "width": 51.851852,
+        "height": 4.823151
+      },
+      "pagePercent": {
+        "left": 24.074074,
+        "top": 99.075643,
+        "width": 51.851852,
+        "height": 0.462178
+      },
+      "note": ""
+    }
+  ]
+}

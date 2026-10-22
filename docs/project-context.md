@@ -1,4 +1,20 @@
+## 21/10/2026 — Implementación vigente de la landing SPC
+
+La plantilla `product.landing-spc.json` usa los recursos independientes del PSD y contenido HTML/CSS/SVG. No volver a integrar capturas completas de secciones; los recortes anteriores quedan archivados fuera del tema. `layout/theme.liquid` omite cabecera/pie y estilos globales únicamente para esta plantilla, respetando la composición del mockup.
+
+La calculadora lee `product.selected_or_first_available_variant`, título/SKU y `decokasa.coverage_m2` de variante o producto; respaldo editorial 2.196 m² por caja. Tres colores de referencia (Madera natural, Caoba y Gris claro), sin inferir SKU ni seleccionar variantes por apariencia. Sin precios de demostración ni operación de inventario. WhatsApp abre una consulta preparada que el visitante revisa y envía manualmente.
+
+La vista local inyecta `section.settings.spc_design_preview` exclusivamente al generar HTML; este ajuste no existe en el esquema del editor ni en la plantilla del tema. Los dos testimonios y seis sellos del mockup permiten revisar el diseño, claramente identificados como muestra. En Shopify, los testimonios se agregan con bloques autorizados y los sellos solo mediante el ajuste desactivado por defecto. Guía operativa: `docs/landing-spc.md`. Desarrollo local en la rama SPC; publicación pendiente.
+
 # DECOKASA — decisiones vigentes
+
+## 21/10/2026 — Nomenclatura de recursos
+
+Los recursos del mockup deben nombrarse por su contenido visual, incluso cuando la capa original no sea descriptiva. Considerar la integración con Adobe para operaciones compatibles. Convención y archivos actualizados en `docs/references/landing-spc-recursos/LEEME.md`.
+
+## 21/10/2026 — Fuente gráfica de la landing SPC
+
+El nuevo PSD `LANDING SPC_MOCK.psd` es la fuente de los recursos gráficos separados de la landing SPC. Paquete y mapa de integración: `docs/references/landing-spc-recursos/LEEME.md`; trazabilidad: `manifest.json`. Los textos, controles, iconos genéricos y efectos de interfaz se construyen con código; no usar capturas completas de secciones. Los recursos todavía no se conectaron a Liquid. Mantener como material del mockup los retratos y sellos hasta confirmar identidades/usos; los archivos no acreditan testimonios ni certificaciones. Los códigos de las tres muestras proceden de las capas, no sustituyen los SKU ni la fuente comercial de Odoo. Se preservó la rama y los cambios en curso.
 
 ## 20/10/2026 — Arquitectura de landings de producto personalizadas previas a Odoo
 
@@ -81,3 +97,13 @@ El formulario solo simula una referencia, sin transmitir ni persistir contactos;
 Catálogo y fotos reales; configuración PEN y rutas; autoridad de precios y promociones; URL/permisos Odoo; SKU, variantes, unidades, almacenes y operación de cierre; receptor seguro de solicitudes, CRM, consentimiento y medición; pruebas de duplicados, fallos y conciliación antes del lanzamiento comercial. Portada revisada visualmente en Shopify en escritorio y celular el 06/10/2026.
 
 Los backends existentes de Meta/TikTok son de solo lectura. Consultas sobre sus bases publicitarias parten de la carpeta de Drive `18fQUpb1ZMC7jKO-nenhJFXmbQo1Oyr1W`; no iniciar sesión en redes para buscar esos datos ni modificar sus scripts.
+
+### Precisión visual SPC — 21/10/2026
+
+Para los seis beneficios se usan los trazados originales del PSD, exportados como `spc-icono-*.svg`, en lugar de aproximaciones genéricas. La segunda captura entregada por el usuario es la referencia de esta corrección: persona caminando, tablones con encastre y rostro de perro, con texto y distribución editables en HTML/CSS.
+
+### Distribución proporcional de toda la landing SPC — 21/10/2026
+
+Por petición expresa del usuario, el mapa abarca toda la landing. La fuente editable de geometría es `docs/landing-spc-layout.json`: lienzo 1080 × 6491, ocho secciones, 47 cajas absolutas con referencia a las capas. El generador deriva porcentajes y CSS; editar las cajas en píxeles y ejecutar `npm run sync:preview`, sin retocar manualmente el CSS generado. Los porcentajes verticales de los elementos son relativos a su sección, y también se conservan porcentajes respecto de la página completa. Las superposiciones y recortes permiten valores negativos o mayores de 100%.
+
+Desde 701 px la composición escala con el lienzo hasta 1080 px de ancho. Hasta 700 px se reorganiza para mantener texto y controles utilizables. Se verificó concordancia de las cajas con el mapa; no se promete identidad rasterizada de tipografía con el PSD. El mapa de revisión usa la previsualización conservada como referencia, nunca como fondo sustitutivo de la landing. Siguen vigentes las restricciones comerciales de testimonios, sellos y correspondencia entre colores y variantes.

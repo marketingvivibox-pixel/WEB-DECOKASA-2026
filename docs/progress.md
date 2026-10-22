@@ -1,4 +1,48 @@
+## 22/10/2026 — Vista previa local restablecida
+
+- El puerto 8817 no tenía servidor activo; los archivos de la landing seguían disponibles. Reiniciado el servidor HTTP local en 127.0.0.1:8817 desde outputs/DECOKASA-SPC-landing del chat del 21/10.
+- Comprobación en navegador: HTTP 200, 28 imágenes cargadas, 3 hojas de estilo, sin solicitudes fallidas ni errores JavaScript. Vista de 1080 px con altura 6528 px. Sin cambios de diseño ni despliegue.
+
+## 21/10/2026 — Mapa de proporciones aplicado a toda la landing SPC
+
+- Alcance confirmado por el usuario: toda la landing. Registradas 8 secciones y 47 cajas de posición sobre el lienzo de 1080 × 6491 px, con coordenadas absolutas y porcentajes por sección/página en `docs/landing-spc-layout.json`. Fuente: inventario de capas y previsualización conservados de LANDING SPC_MOCK.psd; el original de Downloads no estuvo disponible en esta etapa.
+- `scripts/generate_spc_layout.cjs` deriva porcentajes y `assets/landing-piso-spc-layout.css` de las cajas en píxeles; se ejecuta con `npm run sync:preview`. `landing-piso-spc-proportions.css` escala tipografía y contenido dentro de esas cajas. Composición proporcional desde 701 px, ancho máximo 1080 px; hasta 700 px se conserva la adaptación móvil legible.
+- Aplicados posiciones, tamaños, encuadres y solapamientos de portada, introducción, beneficios, anatomía, instalación, testimonios, ambiente y cierre. Corregidas ubicación de marca de agua, orientación de las muestras en perspectiva y compensación de transparencia del producto final. Se conservan recursos independientes y texto/controles en código.
+- Verificación geométrica: 8 secciones + 47 cajas en anchos 701/768/923/1080/1440, desviación máxima de 0,0761 px normalizada al lienzo frente al mapa. No representa igualdad de píxeles con el PSD; la tipografía y los controles funcionales pueden diferir. Revisión visual completa y móvil realizada.
+- Validación: 22/22 pruebas; Theme Check sin hallazgos; ocho vistas, enlaces, IDs y JSON válidos; ZIP actualizado con 74 archivos de tema. Navegador 320/390/768/1080/1440 sin desbordamiento ni errores, imágenes cargadas y calculadora/colores/teclado operativos. Botones y cálculo comprobados además a 320/390/600/700 px.
+- Entrega local actualizada: `outputs/DECOKASA-SPC-landing/` del chat `2026-10-21/este-mokup-es-para-la-pagina-4`, con landing, mapa interactivo, JSON, capturas y resumen de validación. Mapa comprobado en cuatro anchos, sus selectores y las 47 entradas. Rama `feature/landing-piso-spc`; cambios previos preservados, sin commit/push/despliegue en esta etapa.
+
+## 21/10/2026 — Corrección de beneficios según referencia del usuario
+
+- Sustituidos los seis iconos aproximados por trazados originales recuperados de los objetos inteligentes del PSD: agua, espuma, persona caminando, tablones con encastre, escoba y rostro de perro. Se guardan como SVG independientes con nombres descriptivos `spc-icono-*.svg`, sin texto ni capturas de interfaz.
+- Ajustados encuadre de la sala, título con fondo amarillo redondeado, tamaños/espacios y negritas. Texto de limpieza: «Fácil de limpiar». Adaptación móvil conservada.
+- Modificados sección SPC, CSS, snippet de iconos compartido y sincronizador para copiar SVG. Ocho vistas y ZIP regenerados (72 archivos). 22/22 pruebas aprobadas; Theme Check sin observaciones; cinco anchos de 320 a 1440 px sin desbordamiento, imágenes completas, interacciones correctas y cero errores JavaScript. Revisión visual a 923 y 390 px.
+- Vista local y capturas de outputs actualizadas. Trabajo local en `feature/landing-piso-spc`; sin commit, push ni despliegue.
+
+## 21/10/2026 — Landing SPC reconstruida con recursos independientes
+
+- Trabajo local en `feature/landing-piso-spc` (base 54af9a1). Se reemplazó la composición basada en capturas por HTML/Liquid, CSS y SVG, con los 21 recursos separados del PSD. Cabecera, producto superpuesto, muestras, beneficios, anatomía, calculadora, testimonios de muestra, ambiente y cierre siguen la composición del mockup y se adaptan a móvil.
+- Recursos antiguos y experimentos gráficos retirados de `assets/` y `preview/assets/`, preservados en `docs/references/landing-spc-recortes-anteriores/`; no se incluyen en el ZIP del tema. Nombres descriptivos y originales del paquete conservados.
+- Calculadora corregida: área de 0.01 a 100 000 m², cajas completas, 10% opcional para cortes, resultados obsoletos ocultos al editar y consulta WhatsApp con cantidad/color. Se usan título/SKU del producto y rendimiento por metacampo de variante/producto, con respaldo de sección 2.196 m². Los tres colores son referencias visuales, todavía no variantes comerciales. No se muestran precios ficticios.
+- Testimonios de muestra y sellos solo se muestran automáticamente en la previsualización local. En Shopify, testimonios mediante bloques editoriales y sellos desactivados por defecto hasta validación. Aislamiento de estilos/cabecera general solo en la plantilla `landing-spc`.
+- Corregida la duplicación de metadatos al regenerar las ocho vistas. Validación: 22/22 pruebas aprobadas; Shopify Theme Check sin errores ni advertencias; ocho vistas, enlaces, IDs y JSON válidos; ZIP de 66 archivos regenerado. Navegador Edge: 320, 390, 768, 1080 y 1440 px sin desbordamiento horizontal, imágenes completas y cero errores JavaScript. Cálculo con/sin cortes, rechazo de entradas, color, flechas y teclado comprobados.
+- Vista de diseño y capturas finales en los outputs de este chat. Guía: `docs/landing-spc.md`. Pendiente: validación comercial de colores/variantes/testimonios/sellos y revisión en Shopify con catálogo real. Sin commit, push ni despliegue; `main` no modificado.
+
 # Avances y validación
+
+## 21/10/2026 — Adobe y nombres descriptivos de los recursos
+
+El usuario recuerda la integración disponible con Adobe y pide nombrar cada recurso por su contenido real, aunque la capa carezca de nombre útil. Aplicar esta convención en próximas extracciones; evaluar primero las herramientas Adobe pertinentes. En las capacidades expuestas revisadas no se encontró extracción de capas PSD, por lo que se conserva la extracción local ya validada. Se precisaron siete nombres (escenas, cajas con tablones, muestras en perspectiva y despiece), se actualizaron guía, catálogo y manifiesto tanto en entregables como en repositorio, y se regeneró el ZIP. 21 recursos verificados por huella; enlaces comprobados. Código de la landing sin modificar.
+
+## 21/10/2026 — Recursos separados del PSD para landing SPC
+
+- Fuente: `C:\Users\D. Cordova\Downloads\LANDING SPC_MOCK.psd` (1080 × 6491), SHA-256 `22fe04daa860fe33538d8076c8a04ecbaf6510586ecb47b1f23b64b476ad74ed`.
+- Rama verificada: `feature/landing-piso-spc`; se conservaron los cambios existentes y no se modificó la implementación Liquid/CSS ni sus recursos actuales.
+- Paquete preparado en `docs/references/landing-spc-recursos/`: 21 recursos (2 logotipos PNG, 4 fotografías WebP, 3 productos transparentes WebP, 3 muestras WebP, 1 diagrama transparente WebP, 2 retratos WebP y 6 sellos PNG), con `indice.html`, `LEEME.md` y `manifest.json`.
+- Extracción de originales incrustados y máscaras del PSD; sin capturas de interfaz, textos, botones, controles ni iconos genéricos. Logotipos/sellos renderizados desde PDF a 4× para conservar transparencia y degradados sin problemas de recorte SVG.
+- Validación: 21/21 imágenes decodificadas, dimensiones y huellas verificadas; transparencia comprobada en marca/productos/diagrama/sellos; enlaces del catálogo y copia en repositorio comprobados; lámina de contacto revisada visualmente. PSD original intacto. No se repitieron pruebas de aplicación porque no cambió código.
+- Aclaración frente a notas anteriores: el PSD por sí solo no acredita identidades de los retratos, testimonios reales ni certificaciones. Se entregan como recursos del mockup. Solo hay tres muestras individuales; no inferir un cuarto SKU. Diagrama limitado a 559 × 583 px y tablón isométrico recortado de origen.
+- Pendiente de otra etapa: integrar recursos seleccionados en `assets/`, ajustar encuadres y reemplazar referencias actuales siguiendo el LEEME. No se hizo commit, push ni publicación.
 
 ## 20/10/2026 — Despliegue a producción y verificación en vivo en Shopify (main)
 

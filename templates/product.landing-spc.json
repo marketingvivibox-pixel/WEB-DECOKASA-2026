@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "landing-piso-spc",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
