@@ -1,0 +1,40 @@
+const test = require('node:test');
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const { Liquid } = require('liquidjs');
+const { parseHTML } = require('linkedom');
+const { calculate } = require('../assets/landing-piso-spc.js');
+const root = path.resolve(__dirname, '..');
+test('SPC: rechaza áreas y rendimientos inválidos, sin producir pedidos ficticios', () => {
+  for (const area of ['', 0, 0.001, -1, NaN, Infinity, 100001]) assert.equal(calculate(area, 2.196, true), null);
+  for (const coverage of [0, -1, NaN, Infinity]) assert.equal(calculate(20, coverage, true), null);
+});
+test('SPC: redondea cajas completas, margen opcional y múltiplos exactos', () => {
+  assert.equal(calculate(20, 2.196, true).boxes, 11);
+  assert.equal(calculate(20, 2.196, false).boxes, 10);
+  assert.equal(calculate(21.96, 2.196, false).boxes, 10);
+  assert.equal(calculate(0.01, 2.196, true).boxes, 1);
+  assert.equal(calculate(20, 2.196, true).covered, 11 * 2.196);
+});
+test('SPC: datos nativos y privacidad del contenido de muestra en el tema', async () => {
+  const engine = new Liquid({root:path.join(root, 'snippets'), extname:'.liquid'});
+  engine.registerFilter('asset_url', n => `/assets/${n}`);
+  engine.registerFilter('stylesheet_tag', n => `<link rel="stylesheet" href="${n}">`);
+  const raw = fs.readFileSync(path.join(root, 'sections/landing-piso-spc.liquid'), 'utf8');
+  const schema = JSON.parse(raw.match(/{% schema %}([\s\S]*?){% endschema %}/)[1]);
+  const settings = Object.fromEntries(schema.settings.map(s => [s.id, s.default ?? '']));
+  const context = {section:{id:'spc-test', settings, blocks:[]}, product:{title:'SPC Prueba', selected_or_first_available_variant:{sku:'SKU-REAL', metafields:{decokasa:{coverage_m2:{value:2.5}}}}}};
+  const source = raw.replace(/{% schema %}[\s\S]*?{% endschema %}/, '');
+  const doc = parseHTML(await engine.parseAndRender(source, context)).document;
+  assert.equal(doc.querySelector('[data-spc-page]').dataset.coverage, '2.5');
+  assert.equal(doc.querySelector('[data-spc-page]').dataset.sku, 'SKU-REAL');
+  assert.equal(doc.querySelector('.spc-testimonials'), null);
+  assert.equal(doc.querySelector('.spc-seals'), null);
+  assert.equal(doc.querySelectorAll('[data-color]').length, 3);
+  assert.ok(doc.querySelector('.spc-button--catalog').getAttribute('href').startsWith('#spc-colores-'));
+  assert.equal(doc.querySelectorAll('img[src$=".jpg"]').length, 0);
+  const preview = parseHTML(await engine.parseAndRender(source, {...context, section:{...context.section, settings:{...settings, spc_design_preview:true}}})).document;
+  assert.equal(preview.querySelectorAll('.spc-quote').length, 2);
+  assert.equal(preview.querySelectorAll('.spc-seals img').length, 6);
+});

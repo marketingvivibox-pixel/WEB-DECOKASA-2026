@@ -4,6 +4,7 @@ const path = require('node:path');
 const { Liquid } = require('liquidjs');
 const { parseHTML } = require('linkedom');
 const root = path.resolve(__dirname, '..');
+require('./generate_spc_layout.cjs');
 const engine = new Liquid({ root: [path.join(root, 'snippets'), path.join(root, 'scripts/fixtures')], extname: '.liquid' });
 const {filters, productFixture} = require('./product_fixture.cjs');
 filters(engine);
@@ -66,14 +67,15 @@ async function main() {
     has_only_default_variant: true
   };
   const spcProduct = productFixture(spcEntry, 5);
-  let spcHtml = await section('landing-piso-spc', {}, {product: spcProduct, is_demo: false, shop: {currency: 'PEN'}});
+  // Preview-only setting, deliberately absent from the Shopify editor schema.
+  let spcHtml = await section('landing-piso-spc', {spc_design_preview: true}, {product: spcProduct, is_demo: false, shop: {currency: 'PEN'}});
   landings['landing-piso-spc.html'] = spcHtml;
 
   const previewFiles = [...new Set([...fs.readdirSync(preview).filter(f => f.endsWith('.html') && !['DECOKASA-movil.html', 'render_pdf.html'].includes(f)), 'landing-piso-spc.html'])];
   for (const file of previewFiles) {
     const rawFile = fs.existsSync(path.join(preview, file)) ? fs.readFileSync(path.join(preview, file), 'utf8') : '';
     const { document } = parseHTML(rawFile || '<!doctype html><html><head><title></title></head><body><footer></footer></body></html>');
-    document.querySelectorAll('link[rel="icon"]').forEach(el => el.remove());
+    document.querySelectorAll('link[rel="icon"], meta[charset], meta[name="viewport"], link[href*="landing-piso-spc.css"]').forEach(el => el.remove());
     document.head.insertAdjacentHTML('beforeend', '<link rel="icon" type="image/png" sizes="128x128" href="assets/favicon.png">');
     const content = file === 'DECOKASA-inicio.html' ? home : file === 'catalogo.html' ? catalog : landings[file];
     const footer = document.querySelector('footer')?.outerHTML ?? '';
@@ -81,15 +83,17 @@ async function main() {
     document.querySelectorAll('style').forEach(el => el.remove());
     const isLandingSpc = file === 'landing-piso-spc.html';
     const pageHeader = isLandingSpc ? '' : header;
-    const extraCss = isLandingSpc ? '<link rel="stylesheet" href="assets/landing-piso-spc.css">' : '';
-    const bodyAttr = isLandingSpc ? ' class="landing-page-isolated" style="padding-top:0!important;"' : '';
-    const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">${document.head.innerHTML}<style>${css}</style>${extraCss}</head><body${bodyAttr}>${pageHeader}<main id="main">${content}</main>${footer}${consent}<script>${js}</script>${landings[file] && !isLandingSpc ? '<script src="product-demo.js" defer></script>' : ''}</body></html>`;
+    const pageFooter = isLandingSpc ? '' : footer;
+    const pageConsent = isLandingSpc ? '' : consent;
+    const extraCss = isLandingSpc ? '' : `<style>${css}</style>`;
+    const bodyAttr = isLandingSpc ? ' class="spc-layout"' : '';
+    const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">${document.head.innerHTML}${extraCss}</head><body${bodyAttr}>${pageHeader}<main id="main">${content}</main>${pageFooter}${pageConsent}${isLandingSpc ? '' : `<script>${js}</script>`}${landings[file] && !isLandingSpc ? '<script src="product-demo.js" defer></script>' : ''}</body></html>`;
     fs.writeFileSync(path.join(preview, file), html.replace(/[ \t]+$/gm, ''), 'utf8');
   }
   fs.mkdirSync(path.join(preview, 'assets'), { recursive: true });
-  for (const asset of fs.readdirSync(path.join(root, 'assets')).filter(name => /^(decokasa-.*\.webp|favicon\.png|product-detail\.(css|js)|landing-piso-spc\.(css|js)|spc_.*\.jpg|customer_.*\.jpg)$/.test(name))) {
+  for (const asset of fs.readdirSync(path.join(root, 'assets')).filter(name => /^(decokasa-.*\.webp|favicon\.png|product-detail\.(css|js)|landing-piso-spc(?:-layout|-proportions)?\.(css|js)|spc-.*\.(webp|png|svg))$/.test(name))) {
     fs.copyFileSync(path.join(root, 'assets', asset), path.join(preview, 'assets', asset));
   }
-  console.log('Seven preview pages synchronized with the Shopify sections, including product details.');
+  console.log(`${previewFiles.length} preview pages synchronized with the Shopify sections.`);
 }
 main().catch(error => { console.error(error); process.exitCode = 1; });

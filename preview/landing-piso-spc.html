@@ -1,799 +1,178 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title></title><link rel="stylesheet" href="assets/landing-piso-spc.css"><link rel="stylesheet" href="assets/landing-piso-spc.css"><link rel="stylesheet" href="assets/landing-piso-spc.css"><link rel="stylesheet" href="assets/landing-piso-spc.css"><link rel="icon" type="image/png" sizes="128x128" href="assets/favicon.png"><style>:root{--yellow:#ffcf00;--ink:#191b1d;--paper:#fff;--soft:#f5f5f1;--muted:#575b60;--line:#d6d8da;--error:#a92121;--radius:18px;color-scheme:light;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:var(--paper)}
-*{box-sizing:border-box}body{margin:0;line-height:1.55}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}button,a,input,select,textarea{touch-action:manipulation}button,.button{cursor:pointer}button:active,.button:active{opacity:.75}a:hover{text-decoration:underline}button:hover,.button:hover{filter:brightness(.96)}:focus-visible{outline:3px solid #135aa8;outline-offset:4px}[hidden]{display:none!important}.wrap{width:min(1220px,calc(100% - 40px));margin:auto}.skip{position:absolute;left:16px;top:-90px;padding:12px;background:white;z-index:9}.skip:focus{top:8px}.top{background:var(--ink);color:white;font-size:13px;padding:9px 0}.top .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}.header{border-bottom:1px solid var(--line);padding:22px 0}.header-row{display:flex;align-items:center;gap:36px}.logo{font-size:27px;font-weight:900;letter-spacing:-1px;white-space:nowrap}.logo b{color:var(--ink);background:var(--yellow);border-radius:7px;padding:4px 7px;margin-right:6px}.search{display:flex;flex:1;border:1px solid var(--line);border-radius:50px;overflow:hidden}.search input{border:0;border-radius:0;min-width:0;background:transparent}.search button{border:0;background:var(--yellow);padding:10px 23px;font-weight:bold}.nav{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:12px 0}.nav a{padding:10px 16px;min-height:44px;border-radius:9px}.nav a:first-child{background:var(--yellow);font-weight:bold}.button,button.primary{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 24px;border-radius:9px;border:1px solid var(--ink);background:var(--ink);color:white;font-weight:700;text-decoration:none}.button.yellow{background:var(--yellow);color:var(--ink);border-color:var(--yellow)}.button.outline{background:transparent;color:var(--ink)}.actions{display:flex;gap:12px;flex-wrap:wrap}.hero{background:#f7f4e8;padding:64px 0}.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:50px;align-items:center}.eyebrow{text-transform:uppercase;letter-spacing:2px;font-weight:bold;font-size:12px;color:var(--muted);margin:0 0 12px}h1{font-size:clamp(34px,4.1vw,58px);letter-spacing:-2px;line-height:1.08;margin:0 0 22px;max-width:650px}h1 span{background:var(--yellow);box-decoration-break:clone;padding:0 5px}h2{font-size:clamp(26px,3vw,34px);line-height:1.18;letter-spacing:-1px;margin:0 0 18px}h3{font-size:21px;margin:0 0 10px}p{margin:0 0 20px}.hero p{max-width:490px;color:var(--muted)}.art{background:#e9e7df;border-radius:var(--radius);overflow:hidden;aspect-ratio:1.2;display:grid;place-items:center;position:relative}.art svg{width:90%;height:90%;max-height:340px}.art-label{position:absolute;bottom:12px;right:12px;font-size:12px;background:white;padding:3px 9px;border-radius:6px}.trust{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--line);padding:25px 0;gap:24px}.trust strong{display:block}.trust small{color:var(--muted)}.section{padding:52px 0}.section-head{display:flex;justify-content:space-between;align-items:center;gap:16px}.section-head a{min-height:44px;display:flex;align-items:center;font-weight:bold}.brands{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.brand{border-radius:var(--radius);padding:28px 24px;min-height:174px;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between}.brand strong{font-size:26px;letter-spacing:-1px}.brand small{font-weight:normal;letter-spacing:0;font-size:14px}.xion{background:#18251c;color:#91f691}.baby{background:#edf4f8;color:#146298}.biflex{background:#241d2b;color:#efbaff}.mayor{background:#fff5c8;color:var(--ink)}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.card{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column}.card .art{border-radius:0;aspect-ratio:1.6}.card-body{padding:22px;display:flex;flex-direction:column;align-items:flex-start;flex:1}.card h3{font-size:20px}.tag{font-size:12px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}.price{font-size:27px;font-weight:bold;margin:8px 0}.card .button{margin-top:auto}.note{background:var(--soft);padding:16px;border-radius:9px;color:var(--muted);font-size:14px}.banner{background:var(--yellow);padding:38px;border-radius:var(--radius);display:flex;justify-content:space-between;gap:24px;align-items:center}.banner p{margin:0}.filters{display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:16px;background:var(--soft);padding:20px;border-radius:12px;margin:24px 0}.filters label{margin:0}.filter-links{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}.filter-links a{border:1px solid var(--line);border-radius:8px;padding:10px 14px;min-height:44px}.breadcrumb{display:flex;gap:10px;flex-wrap:wrap;font-size:14px;margin:24px 0}.breadcrumb a{text-decoration:underline;min-height:44px;display:flex;align-items:center}.breadcrumb span{display:flex;align-items:center}.product-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}.product-grid h1{font-size:42px}.product-grid .art{aspect-ratio:1}.detail{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:22px 0;border-top:1px solid var(--line);padding-top:20px}.detail dt{color:var(--muted);font-size:13px}.detail dd{margin:0;font-weight:bold}.calculator{padding:24px;background:#fff6cb;border-radius:var(--radius);margin:22px 0}.calc-fields{display:grid;grid-template-columns:1fr 1fr;gap:16px}.calc-result{font-size:20px;font-weight:bold;display:block;margin-top:16px}label{display:block;font-weight:700;font-size:14px;margin-bottom:16px}input,select,textarea{display:block;width:100%;border:1px solid #a5a9ad;border-radius:8px;padding:12px;background:white;color:var(--ink);min-height:48px;margin-top:6px}input[type=checkbox]{display:inline-block;width:20px;min-height:20px;margin:0 8px 0 0;vertical-align:middle}textarea{min-height:90px;resize:vertical}.form-box{background:var(--soft);padding:28px;border-radius:var(--radius);margin-top:24px}.fields{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}.form-box .note{padding:0}.check{font-weight:normal;font-size:14px;display:flex;align-items:flex-start;gap:8px}.check input{flex:none;margin-top:3px}.status{white-space:pre-line;overflow-wrap:anywhere;margin-top:18px;font-size:14px}.error{color:var(--error)}footer{background:var(--ink);color:white;padding:35px 0;margin-top:42px}footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}footer p{color:#c6c9cc;font-size:13px;margin:8px 0 0}.demo{background:#fff4c0;text-align:center;padding:10px 20px;font-size:13px}.consent{border-top:1px solid var(--line);padding:20px;background:var(--soft)}.consent .wrap{display:flex;align-items:center;gap:18px;flex-wrap:wrap}.consent p{margin:0;flex:1;min-width:220px;font-size:13px}.consent button{min-height:44px;border:1px solid var(--ink);border-radius:7px;background:white;padding:9px 14px}.consent .accept{background:var(--ink);color:white}.empty{padding:40px;text-align:center}.plain{max-width:720px}.rte img{max-width:100%;height:auto}.rte a{text-decoration:underline}.rte p{overflow-wrap:anywhere}
-@media(max-width:900px){.hero-grid{gap:24px}.brands{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:repeat(2,1fr)}.product-grid{gap:24px}.header-row{gap:20px}.header-row>.button{display:none}.hero{padding:38px 0}}
-@media(max-width:620px){.wrap{width:calc(100% - 32px)}.header-row{flex-wrap:wrap;gap:14px}.logo{font-size:24px}.search{flex-basis:100%}.nav{gap:4px}.nav a{padding:10px;font-size:13px}.hero-grid,.product-grid{grid-template-columns:1fr}.hero-grid{gap:28px}.hero h1{font-size:39px;letter-spacing:-1.5px}.hero .art{aspect-ratio:1.5}.trust{grid-template-columns:1fr;gap:16px}.section{padding:32px 0}.cards{grid-template-columns:1fr}.brands{gap:10px}.brand{padding:20px 16px;min-height:150px}.brand strong{font-size:22px}.banner{display:block;padding:24px}.banner .button{margin-top:20px}.filters,.fields{grid-template-columns:1fr}.calc-fields{grid-template-columns:1fr 1fr}.product-grid h1{font-size:34px}.form-box{padding:20px}.section-head{align-items:flex-start}h2{font-size:27px}.top .wrap span{max-width:100%}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title></title><link rel="icon" type="image/png" sizes="128x128" href="assets/favicon.png"></head><body class="spc-layout"><main id="main"><link rel="stylesheet" href="assets/landing-piso-spc.css">
+<link rel="stylesheet" href="assets/landing-piso-spc-proportions.css">
+<link rel="stylesheet" href="assets/landing-piso-spc-layout.css">
+<script src="assets/landing-piso-spc.js" defer></script>
 
-img.art{width:100%;height:auto;object-fit:cover}.product-grid>*,.hero-grid>*{min-width:0}
+<div class="spc-page" data-spc-page data-phone="51941599516" data-product="Piso SPC" data-sku="SPC-DEC-001" data-coverage="2.196">
+  <p class="spc-preview-note">Vista de diseño · Los testimonios y sellos de esta muestra requieren validación antes de publicarse.</p>
+  <div class="spc-canvas">
+    <header class="spc-hero">
+      <img class="spc-backdrop" src="assets/spc-sala-comedor-piso-madera-hero.webp" width="1117" height="2030" alt="" fetchpriority="high">
+      <a class="spc-announcement" href="#spc-colores-preview-landing-piso-spc"><strong>¡Nuevos colores disponibles!</strong> Solicita el catálogo aquí <svg class="spc-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  <path d="m13 8 8 8-8 8"/>
 
-
-/* DECOKASA — layout based on the supplied October 2026 mockup. */
-:root{--yellow:#ffcc00;--ink:#111416;--line:#e6e6e6}
-.wrap{width:min(1520px,calc(100% - 80px))}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.icon{width:25px;height:25px;flex:none;vertical-align:middle}.skip{z-index:100}.service-bar{background:#23282b;color:#fff;font-size:13px}.service-bar>.wrap{min-height:38px;display:flex;align-items:center;justify-content:space-between;gap:18px}.service-items{display:flex;align-items:center;gap:24px}.service-items>*,.wholesale-link{display:flex;align-items:center;gap:10px;min-height:38px}.service-items>*+*{border-left:1px solid #666;padding-left:24px}.service-bar .icon{width:22px;height:22px}.wholesale-link>.icon:last-child{width:14px}.store-header{border-bottom:1px solid #f0f0f0;background:#fff}.store-header-row{min-height:87px;display:flex;align-items:center;gap:clamp(20px,4vw,65px)}.store-logo{display:block;flex:0 0 272px;max-width:272px}.store-logo>img{width:100%;height:auto;display:block}.store-search{display:flex;align-items:center;gap:14px;flex:1;min-width:120px;background:#fafafa;border:1px solid #ddd;border-radius:40px;padding:3px 4px 3px 20px}.store-search input[type=search]{border:0;outline-offset:0;background:transparent;padding:8px 0;margin:0;min-width:0;min-height:44px;font-size:15px}.store-search button{border:0;border-radius:32px;background:var(--yellow);width:68px;height:46px;display:grid;place-items:center;flex:none}.store-search button .icon{width:28px;height:28px}.header-help{display:flex;align-items:center;gap:10px;font-size:14px;white-space:nowrap}.header-help>.icon{width:30px;height:30px}.header-help small{display:block;font-size:11px;color:var(--muted)}.header-catalog{display:grid;place-items:center;min-width:44px;min-height:44px;margin-left:-34px}.header-catalog .icon{width:31px;height:31px}.navigation-shell{border-bottom:1px solid #eee;background:#fff;position:relative;z-index:5}.store-nav{display:flex;align-items:center;gap:35px;min-height:62px}.category-menu{position:relative;flex:0 0 290px}.category-menu summary{list-style:none;display:flex;align-items:center;gap:18px;padding:12px 20px;border-radius:8px;background:var(--yellow);font-weight:700;cursor:pointer;min-height:50px}.category-menu summary::-webkit-details-marker{display:none}.category-menu summary>.icon:last-child{margin-left:auto;width:18px;transition:transform .15s}.category-menu[open] summary>.icon:last-child{transform:rotate(90deg)}.category-panel{position:absolute;top:calc(100% + 7px);left:0;width:100%;background:white;border:1px solid var(--line);box-shadow:0 10px 24px #0002;border-radius:10px;overflow:hidden}.category-panel a{display:block;padding:12px 20px;font-size:14px;min-height:46px}.category-panel a:hover{background:#fff6c9;text-decoration:none}.category-shortcuts{display:flex;justify-content:space-between;align-items:center;flex:1;min-width:0;gap:8px}.category-shortcuts a{display:flex;align-items:center;justify-content:center;gap:16px;min-height:50px;padding:0 12px;font-size:14px;white-space:nowrap}.category-shortcuts a:hover{text-decoration:none;background:#faf9f3;border-radius:6px}.category-shortcuts .icon{width:29px;height:29px}.mockup-crop{position:relative;overflow:hidden;width:100%;isolation:isolate}.mockup-crop img{display:block;width:100%;height:100%;object-fit:cover}.crop-logo{aspect-ratio:284/66}.crop-hero{aspect-ratio:1906/825}.crop-hogar,.crop-xion,.crop-baby,.crop-biflex{aspect-ratio:1860/846}.crop-promo{aspect-ratio:3/1}.crop-promo img{object-fit:contain;object-position:right center}.home-hero{background:#fbfaf6;overflow:hidden}.home-hero-grid{display:grid;grid-template-columns:44% 56%;align-items:center;min-height:390px;width:min(1600px,100%);gap:0}.hero-copy{position:relative;z-index:1;padding:36px 0 28px 40px}.home-hero h1{font-family:'Arial Black',Arial,Helvetica,sans-serif;font-weight:900;font-size:clamp(35px,3.4vw,54px);letter-spacing:-2.8px;line-height:1.02;margin:0 0 24px;max-width:none}.home-hero h1 span{display:block;color:#ffbf00;background:none;padding:0;letter-spacing:-2.8px}.home-hero .actions{gap:16px}.home-hero .button{font-size:17px;min-height:54px;padding:10px 24px;gap:22px;border-radius:10px}.home-hero .button.outline{background:#ffffffb3}.hero-benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:490px;margin-top:30px}.hero-benefits>div{font-size:14px;line-height:1.25}.hero-benefits .icon{display:block;width:38px;height:38px;margin-bottom:9px}.hero-benefits span{display:block}.hero-media{width:100%;align-self:stretch;display:flex;align-items:center;background:#f6efdc;overflow:hidden}.hero-photo{width:100%;height:100%;object-fit:cover;display:block}.hero-media .mockup-crop{flex:none}.home-brands{padding:18px 0 12px}.home-brands h2{font-size:30px;line-height:1.2;font-weight:900;margin:0 0 12px;letter-spacing:-1.1px}.visual-brands{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}.brand-visual{display:block;position:relative;aspect-ratio:366/168;padding:0;min-height:0;overflow:hidden;border-radius:10px;background:#f5f3ec;border:1px solid #ededed;transition:box-shadow .15s}.brand-visual.decokasa{background:linear-gradient(135deg,#fffdf5,#fff0ad)}.brand-visual:hover{box-shadow:0 4px 14px #0002}.brand-visual .mockup-crop{height:100%}.brand-photo{display:block;width:100%;height:100%;object-fit:cover}.brand-go{position:absolute;right:10px;bottom:12px;border:1px solid #eee;background:#fff;border-radius:50%;width:38px;height:38px;display:grid;place-items:center;box-shadow:0 2px 6px #0001}.brand-go .icon{width:19px;height:19px}.opportunity{min-height:74px;border-radius:18px;background:#fff3cc;position:relative;overflow:hidden;display:flex;align-items:center;gap:20px;padding:13px 34px;font-size:26px;font-weight:900;line-height:1.2;margin-bottom:12px}.opportunity:hover{text-decoration:none}.opportunity>span:not(.opportunity-art){position:relative;z-index:1}.opportunity-icon{display:grid;place-items:center;background:var(--yellow);border-radius:14px;width:46px;height:46px;flex:none}.opportunity-icon .icon{width:31px;height:31px}.opportunity-go{display:grid;place-items:center;background:var(--yellow);border-radius:12px;width:42px;height:42px;flex:none}.opportunity-art{width:43%;position:absolute;right:0;top:0;bottom:0;opacity:.9;mask-image:linear-gradient(90deg,transparent,#000 22%)}.opportunity-art .mockup-crop{height:100%}.opportunity>span:nth-child(2){max-width:53%}.how-to{padding:48px 0}.how-to .section-head{margin-bottom:26px}.how-to .section-head h2{margin-bottom:0}.how-to .section-head>p{margin:0;color:var(--muted);font-size:14px}.buy-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:36px}.buy-steps>div{display:flex;align-items:flex-start;gap:16px}.step-number{font-size:22px;font-weight:800;background:#fff3bd;border-radius:12px;min-width:48px;height:48px;display:grid;place-items:center}.buy-steps h3{font-size:17px;margin:0 0 7px}.buy-steps p{color:var(--muted);font-size:14px;line-height:1.65;margin:0}.wholesale-section{padding:0 0 40px}.wholesale-banner{background:#22272a;color:white;border-radius:18px;display:flex;align-items:center;gap:28px;padding:35px}.wholesale-symbol .icon{width:68px;height:68px;color:var(--yellow)}.wholesale-banner .eyebrow{color:var(--yellow)}.wholesale-banner h2{font-size:28px;margin-bottom:8px}.wholesale-banner p:not(.eyebrow){font-size:14px;color:#d6d6d6;margin:0}.wholesale-banner .button{margin-left:auto;flex:none;gap:20px}.home-featured{padding-top:30px}.demo{font-size:12px;background:#f6f6f3;color:#555}footer{margin-top:0}.section-head .icon{width:18px;margin-left:10px}
-@media(min-width:1500px){.home-hero-grid{min-height:396px}.hero-copy{padding-left:46px}.home-hero h1{font-size:54px;letter-spacing:-2.8px}.home-hero h1 span{letter-spacing:-3.5px}}
-@media(max-width:1199px){.wrap{width:calc(100% - 48px)}.store-logo{flex-basis:222px}.store-header-row{gap:26px}.header-catalog{margin-left:-12px}.header-help small{display:none}.header-help span{font-size:12px}.store-nav{gap:14px}.category-menu{flex-basis:235px}.category-menu summary{padding:12px;gap:10px;font-size:14px}.category-shortcuts a{gap:8px;padding:0 6px;font-size:12px}.category-shortcuts .icon{width:23px}.home-hero-grid{width:100%;min-height:350px}.hero-copy{padding-left:24px}.home-hero h1{font-size:43px;letter-spacing:-2px}.home-hero .button{font-size:14px;padding:10px 15px;gap:8px}.home-hero .actions{gap:10px}.hero-benefits{gap:8px;margin-top:24px}.hero-benefits>div{font-size:12px}.hero-benefits .icon{width:30px;height:30px}.visual-brands{gap:12px}.opportunity{font-size:22px}.opportunity>span:nth-child(2){max-width:60%}.opportunity-art{width:34%}.buy-steps{gap:24px}.wholesale-banner h2{font-size:25px}}
-@media(max-width:899px){.visual-brands{grid-template-columns:repeat(2,minmax(0,1fr))}.store-header-row{gap:20px;flex-wrap:wrap;padding:14px 0}.store-logo{flex-basis:225px}.header-help{margin-left:auto}.header-catalog{margin-left:0}.store-search{flex-basis:100%;order:4}.store-nav{flex-wrap:wrap;gap:0;padding:8px 0}.category-menu{flex-basis:100%}.category-menu summary{min-height:46px}.category-panel{z-index:3}.category-shortcuts{flex-basis:100%;overflow:auto;padding-top:7px;justify-content:flex-start;gap:10px;scrollbar-width:thin}.category-shortcuts a{padding:5px 10px;flex:none;font-size:13px}.home-hero-grid{grid-template-columns:1fr 1fr;min-height:0}.hero-copy{padding:28px 0 28px 24px}.home-hero h1{font-size:37px;letter-spacing:-1.8px}.home-hero h1 span{letter-spacing:-1.8px}.home-hero .button{min-height:46px}.hero-benefits{grid-template-columns:repeat(2,1fr);gap:14px}.hero-benefits>div{display:flex;align-items:center;gap:10px}.hero-benefits .icon{margin:0}.hero-media{background:#fbfaf6}.home-brands h2{font-size:27px}.opportunity{font-size:20px;padding:14px 20px;gap:14px}.opportunity>span:nth-child(2){max-width:65%}.opportunity-art{display:none}.opportunity-go{margin-left:auto}.buy-steps{grid-template-columns:1fr;gap:24px}.how-to .section-head>p{display:none}.wholesale-banner{flex-wrap:wrap;padding:28px;gap:20px}.wholesale-banner>div:nth-child(2){flex:1}.wholesale-banner .button{margin-left:88px}.wholesale-symbol .icon{width:48px;height:48px}}
-@media(max-width:599px){.wrap{width:calc(100% - 32px)}.service-bar>.wrap{min-height:32px;justify-content:center}.service-items{gap:0}.service-items>span{display:none}.service-items>*+*{border:0;padding:0}.service-items>a{font-size:11px;min-height:32px}.service-items .icon{width:17px;height:17px}.wholesale-link{display:none}.store-header-row{gap:12px;padding:12px 0}.store-logo{flex-basis:190px;max-width:58%}.header-help{min-height:44px;min-width:44px;justify-content:center}.header-help span{display:none}.header-catalog .icon,.header-help>.icon{width:27px;height:27px}.store-search{padding-left:14px;gap:10px}.store-search>svg{width:20px}.store-search button{width:56px;height:42px}.store-search input[type=search]{font-size:14px}.store-nav{padding:7px 0 3px}.category-shortcuts a{font-size:12px;gap:8px;padding:4px 8px}.category-shortcuts .icon{width:23px}.home-hero-grid{width:100%;grid-template-columns:1fr}.hero-copy{padding:27px 20px 24px}.home-hero h1{font-size:clamp(31px,8.7vw,48px);letter-spacing:-1.7px;line-height:1.08;margin-bottom:22px}.home-hero h1 span{letter-spacing:-1.7px}.home-hero .actions{flex-wrap:nowrap;gap:10px}.home-hero .button{font-size:13px;flex:1;padding:10px 12px;justify-content:space-between;gap:5px}.home-hero .button .icon{width:18px}.hero-benefits{grid-template-columns:repeat(4,1fr);margin-top:22px;gap:10px;max-width:none}.hero-benefits>div{display:block;font-size:10px;line-height:1.4}.hero-benefits .icon{width:28px;height:28px;margin-bottom:7px}.hero-media{max-height:none}.hero-media .crop-hero{transform:none}.home-brands{padding:22px 0 12px}.home-brands h2{font-size:25px}.visual-brands{grid-template-columns:1fr;gap:12px}.brand-visual{border-radius:7px}.brand-go{width:28px;height:28px;right:7px;bottom:7px}.brand-go .icon{width:16px}.opportunity{border-radius:10px;font-size:16px;gap:12px;padding:13px 14px;margin-bottom:0}.opportunity-icon{width:35px;height:35px;border-radius:9px}.opportunity-icon .icon{width:24px}.opportunity>span:nth-child(2){max-width:none;flex:1}.opportunity-go{width:30px;height:36px;border-radius:8px}.opportunity-go .icon{width:18px}.how-to{padding:34px 0}.how-to h2{font-size:25px}.buy-steps{gap:22px}.buy-steps>div{gap:14px}.wholesale-section{padding-bottom:28px}.wholesale-banner{display:block;padding:24px;border-radius:12px}.wholesale-symbol{margin-bottom:18px}.wholesale-banner h2{font-size:26px}.wholesale-banner .button{margin:24px 0 0;min-height:48px}.home-featured{padding-top:26px}}
-/* Mantén accesible la barra de confianza durante el desplazamiento. */
-.service-bar{position:fixed;inset:0 0 auto;z-index:30}
-body{padding-top:var(--service-bar-height,38px)}
-.whatsapp-float{position:fixed;right:24px;bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:40;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-width:56px;min-height:56px;padding:0 18px;border:2px solid #fff;border-radius:999px;background:#0b6e3d;color:#fff;box-shadow:0 5px 18px #0003;font-size:15px;font-weight:700;text-decoration:none;touch-action:manipulation;transition:background-color .18s ease,transform .18s ease}
-.whatsapp-float:hover{background:#07572f;color:#fff;text-decoration:none;transform:translateY(-2px)}
-.whatsapp-float:focus-visible{outline:3px solid #111;outline-offset:3px}
-.whatsapp-float svg{width:25px;height:25px;flex:none;fill:currentColor}
-@media(max-width:599px){body{padding-top:var(--service-bar-height,32px)}.whatsapp-float{right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));min-width:52px;min-height:52px;padding:0 15px;font-size:14px}}
-@media(prefers-reduced-motion:reduce){.whatsapp-float{transition:none}.whatsapp-float:hover{transform:none}}
-
-/* Catalog: the same component is rendered in Shopify and the local demo. */
-.catalog-page{--catalog-surface:#f7f8f8;--catalog-warm:#fff8df;--catalog-accent:#6f5400;padding-bottom:56px}
-.catalog-breadcrumb{margin:12px 0;font-size:13px;color:var(--muted)}
-.catalog-demo-note{display:inline-block;margin:0 0 16px;font-size:12px;border:1px solid #e4d8a6;background:var(--catalog-warm);padding:6px 12px;border-radius:6px;color:var(--catalog-accent)}
-.catalog-intro{display:flex;align-items:center;justify-content:space-between;gap:48px;padding:8px 0 28px}
-.catalog-intro h1{font-size:clamp(32px,3.2vw,48px);letter-spacing:-1.8px;margin:0 0 14px;line-height:1.12}
-.catalog-intro .eyebrow{color:var(--catalog-accent);font-size:11px;letter-spacing:1.6px;margin-bottom:12px}
-.catalog-intro p:not(.eyebrow){font-size:16px;color:var(--muted);max-width:650px;margin:0}
-.catalog-intro-note{display:flex;gap:16px;align-items:center;border-left:3px solid var(--yellow);padding:12px 0 12px 24px;max-width:330px;flex:none;font-size:14px}
-.catalog-intro-note>.icon{width:38px;height:38px}.catalog-intro-note strong,.catalog-intro-note span{display:block}.catalog-intro-note span{font-size:13px;color:var(--muted);margin-top:4px}
-.catalog-brands{display:flex;flex-wrap:wrap;gap:12px;border-bottom:1px solid var(--line);padding-bottom:24px;margin-bottom:32px}
-.catalog-brands a{display:flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:10px 24px;border-radius:8px;background:var(--catalog-surface);border:1px solid var(--line);font-size:14px;font-weight:700}
-.catalog-brands a:hover{border-color:var(--ink);text-decoration:none}.catalog-brands a.is-selected{background:var(--yellow);border-color:var(--yellow)}
-.brand-dot{width:10px;height:10px;border-radius:50%;background:var(--yellow);flex:none}.brand-dot-xion{background:#40744f}.brand-dot-mundo-baby{background:#347f9e}.brand-dot-biflex{background:#8960a5}
-.catalog-layout{display:grid;grid-template-columns:240px minmax(0,1fr);gap:32px;align-items:start}
-.catalog-sidebar,.catalog-results{min-width:0}.catalog-filters{border:1px solid var(--line);border-radius:12px;background:var(--paper);overflow:hidden}
-.catalog-filters summary{list-style:none;display:flex;gap:10px;align-items:center;min-height:56px;padding:16px;font-weight:700;font-size:15px;cursor:pointer;background:var(--catalog-surface)}
-.catalog-filters summary::-webkit-details-marker{display:none}.catalog-filters summary>.icon{width:20px;height:20px}.catalog-filters summary>.icon:last-child{margin-left:auto;width:16px}.catalog-filters[open] summary>.icon:last-child{transform:rotate(90deg)}
-.catalog-filter-body{padding:20px 16px}.catalog-filter-body label{font-size:14px;margin:0 0 24px}.catalog-filter-body select{font-size:14px;padding:10px 30px 10px 10px;min-height:48px}
-.catalog-clear{display:inline-flex;align-items:center;min-height:44px;font-size:13px;font-weight:700;padding:4px 0;background:transparent;border:0;text-decoration:underline;color:var(--muted)}
-.catalog-sidebar-note{margin-top:24px;padding:20px;border-radius:12px;background:var(--catalog-warm)}.catalog-sidebar-note>.icon{display:block;width:28px;height:28px;margin-bottom:12px}.catalog-sidebar-note strong{font-size:14px}.catalog-sidebar-note p{font-size:13px;color:var(--muted);margin:8px 0 0}
-.catalog-search{display:flex;align-items:center;gap:12px;background:var(--catalog-surface);border:1px solid var(--line);border-radius:8px;padding:0 16px;margin:0 0 24px}.catalog-search>.icon{width:21px;height:21px;color:var(--muted)}.catalog-search input{border:0;background:transparent;margin:0;min-width:0;font-size:16px;padding:14px 0;min-height:50px}
-.catalog-toolbar{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-bottom:24px}.catalog-toolbar h2{font-size:22px;letter-spacing:-.5px;margin:0 0 6px}.catalog-toolbar p{margin:0;font-size:13px;color:var(--muted)}
-.catalog-sort{display:flex;align-items:center;gap:12px;margin:0;flex:none;font-size:13px;color:var(--muted);font-weight:400}.catalog-sort select{width:170px;min-height:44px;font-size:14px;margin:0;padding:10px}
-.catalog-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch}
-.catalog-card{border-radius:12px;min-width:0;border-color:var(--line);background:var(--paper);transition:border-color .18s,box-shadow .18s}.catalog-card:hover{border-color:#bcc1c3;box-shadow:0 5px 20px #0000000a}
-.catalog-card-media{display:block;position:relative;aspect-ratio:1.22;background:var(--catalog-surface);overflow:hidden}.catalog-card-media:has(.illustration-audifonos){background:#f0f4f2}.catalog-card-media:has(.illustration-licuadora){background:#f4f2ea}.catalog-card-media:has(.illustration-set-bebe){background:#f0f6f9}.catalog-card-media:has(.illustration-kit-fitness){background:#f5f0f8}.catalog-card-media:has(.illustration-pisos-pvc){background:#f8f3ea}
-.catalog-illustration{width:100%;height:100%;display:block;padding:14px}.catalog-product-photo{width:100%;height:100%;object-fit:contain;display:block;padding:16px}.catalog-image-pending{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:12px;color:var(--muted);font-size:14px}.catalog-image-pending>.icon{width:60px;height:60px}
-.catalog-sample{position:absolute;bottom:10px;left:12px;font-size:10px;background:#ffffffd9;border:1px solid #e4e5e3;padding:3px 7px;border-radius:4px;color:var(--muted)}
-.catalog-card .card-body{padding:20px;align-items:stretch}.catalog-card .tag{font-size:11px;letter-spacing:1px;color:var(--ink)}.catalog-card-category{font-size:12px;color:var(--muted);margin:3px 0 10px}.catalog-card h3{font-size:17px;line-height:1.4;margin:0 0 16px;letter-spacing:-.3px;overflow-wrap:anywhere}.catalog-card-price{font-size:14px;font-weight:700;color:var(--muted);margin:0 0 16px}.catalog-card .button{justify-content:space-between;gap:12px;min-height:44px;border:1px solid var(--line);border-radius:7px;font-size:14px;padding:10px 12px}.catalog-card .button:hover{background:var(--yellow);border-color:var(--yellow);color:var(--ink);text-decoration:none}.catalog-card .button>.icon{width:17px;height:17px}
-.catalog-empty{grid-column:1/-1;text-align:center;border:1px dashed #aeb4b7;border-radius:12px;padding:48px 24px;background:var(--catalog-surface)}.catalog-empty h3{font-size:22px}.catalog-empty p{color:var(--muted);font-size:15px}.catalog-empty .button{display:inline-flex}
-.catalog-help{display:flex;align-items:center;justify-content:space-between;gap:24px;background:var(--catalog-warm);border-radius:12px;margin-top:32px;padding:24px}.catalog-help>div{display:flex;align-items:center;gap:16px;min-width:0}.catalog-help>div>.icon{width:32px;height:32px}.catalog-help strong{font-size:16px}.catalog-help p{font-size:13px;color:var(--muted);margin:4px 0 0}.catalog-help .button{font-size:13px;flex:none;min-height:48px;gap:12px;border-width:1px;border-radius:8px;padding:10px 16px}.catalog-help .button>.icon{width:17px;height:17px}
-.catalog-facet{border:0;padding:0;margin:0 0 24px}.catalog-facet legend,.catalog-filter-heading{font-size:14px;font-weight:700;letter-spacing:0;margin-bottom:12px}.catalog-filter-body .catalog-check{display:flex;align-items:center;gap:10px;min-height:44px;margin:0;font-weight:400}.catalog-check input{width:18px;height:18px;min-height:18px;accent-color:var(--ink);margin:0;flex:none}.catalog-check span{flex:1;overflow-wrap:anywhere}.catalog-check small{color:var(--muted)}.catalog-check:has(input:disabled){opacity:.5}.catalog-route-links{display:grid;margin-bottom:24px}.catalog-route-links a{display:flex;align-items:center;min-height:44px;font-size:14px;overflow-wrap:anywhere}.catalog-filter-body .button{width:100%;font-size:14px;min-height:44px}.catalog-active-filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}.catalog-active-filters:empty{display:none}.catalog-active-filters a{display:flex;align-items:center;gap:16px;min-height:44px;font-size:13px;background:var(--catalog-warm);padding:8px 12px;border-radius:7px}.catalog-pagination{margin-top:24px}
-.catalog-page [hidden]{display:none!important}.catalog-page :focus-visible{outline:3px solid var(--ink);outline-offset:3px}.catalog-page :is(a,button,input,select,summary){scroll-margin-top:calc(var(--service-bar-height,38px) + 16px)}
-@media(max-width:1199px){.catalog-layout{grid-template-columns:210px minmax(0,1fr);gap:24px}.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.catalog-intro-note{max-width:280px;padding-left:16px}.catalog-help{flex-wrap:wrap}.catalog-help .button{margin-left:48px}}
-@media(max-width:899px){.catalog-layout{grid-template-columns:minmax(0,1fr);gap:24px}.catalog-intro-note,.catalog-sidebar-note{display:none}.catalog-intro{padding-bottom:24px}.catalog-brands{margin-bottom:24px}.catalog-filters summary{padding:12px 16px;min-height:48px}.catalog-filter-body{padding:16px}.catalog-filter-body select{max-width:none}.catalog-search{margin-bottom:20px}}
-@media(max-width:599px){.catalog-page{padding-bottom:32px}.catalog-breadcrumb{margin:4px 0;font-size:12px}.catalog-demo-note{font-size:11px;margin-bottom:20px;padding:6px 8px}.catalog-intro{padding:0 0 24px;gap:0}.catalog-intro h1{font-size:34px;letter-spacing:-1.2px}.catalog-intro p:not(.eyebrow){font-size:14px}.catalog-brands{gap:8px;padding-bottom:24px}.catalog-brands a{min-height:44px;font-size:12px;padding:9px 12px;flex:1 1 auto}.brand-dot{width:8px;height:8px}.catalog-layout{gap:20px}.catalog-toolbar{align-items:flex-start;gap:12px;margin-bottom:20px}.catalog-toolbar h2{font-size:18px;line-height:1.3}.catalog-toolbar p{font-size:12px}.catalog-sort{display:block;font-size:11px}.catalog-sort select{width:138px;font-size:13px;margin-top:4px;min-height:44px}.catalog-grid{gap:12px}.catalog-card{border-radius:9px}.catalog-illustration{padding:4px}.catalog-sample{font-size:9px;bottom:7px;left:7px;right:7px;padding:2px 5px;text-align:center}.catalog-card .card-body{padding:12px}.catalog-card .tag{font-size:10px}.catalog-card h3{font-size:14px;letter-spacing:0;line-height:1.4;margin-bottom:12px}.catalog-card-category{font-size:11px;margin-bottom:8px}.catalog-card-price{font-size:12px;margin-bottom:12px}.catalog-card .button{font-size:12px;padding:9px 8px;gap:4px}.catalog-card .button>.icon{width:14px}.catalog-help{display:block;padding:20px;margin-top:24px}.catalog-help strong{font-size:15px}.catalog-help .button{margin:20px 0 0;width:100%;justify-content:space-between}.catalog-empty{padding:32px 16px}.catalog-empty h3{font-size:20px}}
-@media(prefers-reduced-motion:reduce){.catalog-card{transition:none}}
-@media(max-width:899px){.catalog-filter-body select,.catalog-sort select{font-size:16px}}
-
-.catalog-route-links a[aria-current="page"]{font-weight:700;background:#fff3ba;border-radius:6px;padding-inline:8px}
-</style><link rel="stylesheet" href="assets/landing-piso-spc.css"></head><body class="landing-page-isolated" style="padding-top:0!important;"><main id="main">
-
-<link rel="stylesheet" href="assets/landing-piso-spc.css">
-
-<div class="spc-landing" id="piso-spc-landing">
-
-  <!-- Top Announcement Bar -->
-  <div class="spc-topbar">
-    <span>🚚 Despacho Inmediato en Lima y Provincias | 🔒 Garantía Oficial Decokasa 15 Años</span>
-  </div>
-
-
-  <!-- =========================================================================
-       1. HERO SECTION: Luxury Stage con Monograma DK Dorado, Planchas y Dual CTA
-       ========================================================================= -->
-  <section class="spc-hero-stage">
-    <div class="spc-hero-stage-bg" style="background-image: url('assets/spc_hero_banner.jpg');"></div>
-    <div class="spc-hero-overlay"></div>
-
-    <div class="spc-stage-container">
-      <!-- Monograma Emblema DK Dorado Oficial (Techo de casa con monograma) -->
-      <div class="spc-emblem-wrap">
-        <a href="DECOKASA-inicio.html" title="DECOKASA - Volver a la Tienda" class="spc-emblem-link">
-          <svg class="spc-dk-emblem" viewBox="0 0 120 120" width="76" height="76" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="spcGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#fff4b8"/>
-                <stop offset="25%" stop-color="#f5d76e"/>
-                <stop offset="60%" stop-color="#d4af37"/>
-                <stop offset="90%" stop-color="#aa820a"/>
-                <stop offset="100%" stop-color="#7a5b00"/>
-              </linearGradient>
-              <filter id="goldGlow" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur stdDeviation="3" result="blur"/>
-                <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-              </filter>
-            </defs>
-            <!-- Contorno de casa estilizada -->
-            <path d="M60 14 L106 50 V106 H14 V50 Z" stroke="url(#spcGoldGrad)" stroke-width="6.5" stroke-linejoin="round" fill="rgba(18, 16, 12, 0.4)" filter="url(#goldGlow)"/>
-            <!-- Letra D con flecha curva icónica Decokasa -->
-            <path d="M36 50 H51 C58.5 50 63 54.5 63 62 C63 69.5 58.5 74 51 74 H44 V86 H36 Z M44 57 V67 H51 C54 67 56 65 56 62 C56 59 54 57 51 57 Z" fill="url(#spcGoldGrad)"/>
-            <path d="M32 60 L36 55 L40 60 Z" fill="url(#spcGoldGrad)"/>
-            <!-- Letra K -->
-            <path d="M68 50 H76 V66 L89 50 H100 L84 68 L101 86 H89 L76 71 V86 H68 Z" fill="url(#spcGoldGrad)"/>
-          </svg>
-        </a>
+</svg>
+</a>
+      <div class="spc-hero-heading">
+        <img class="spc-symbol" src="assets/spc-marca-simbolo.png" width="1113" height="1097" alt="Decokasa">
+        <h1>Pisos <span>SPC</span></h1><p>Los pisos del futuro</p>
       </div>
+      <img class="spc-hero-product" src="assets/spc-caja-tres-tablones-verticales.webp" width="1515" height="2048" alt="Caja de piso SPC y tablones con acabados madera clara, gris y caoba" loading="eager">
+    </header>
+    <section class="spc-intro spc-rounded" aria-label="Conoce nuestros pisos SPC">
+      <p class="spc-intro-copy"><strong>¡Los Pisos del Futuro ya están aquí!</strong><br>Con Sistema Click, espuma incorporada<br class="spc-desktop-break"> y de instalación rápida: ¡La mejor opción para<br class="spc-desktop-break"> revestir superficies <strong>sin gastar de más!</strong></p>
+      <div class="spc-actions">
+  <a class="spc-button spc-button--contact" href="https://wa.me/51941599516?text=Hola%2C+quiero+asesor%C3%ADa+sobre+Piso+SPC+de+Decokasa." target="_blank" rel="noopener">
+    <svg class="spc-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  <path d="M28 15a12 12 0 0 1-18 10L3 28l2-8A12 12 0 1 1 28 15Z"/><path d="m11 9-2 3c2 6 5 9 11 10l3-3-5-3-2 2-3-4 1-2Z"/>
 
-      <!-- Título de Impacto en Relieve Dorado -->
-      <div class="spc-stage-headings">
-        <h1 class="spc-stage-title">
-          Los Pisos del <span class="spc-gold-shimmer">Futuro</span>
-        </h1>
-        <p class="spc-stage-subtitle">
-          Piso Vinílico SPC Decokasa Premium con Sistema Click y Base Acústica IXPE Incorporada
-        </p>
-      </div>
+</svg>
+<span><strong>Buscar asesoría</strong><small>Contacta un asesor</small></span>
+  </a>
+  <a class="spc-button spc-button--catalog" href="#spc-colores-preview-landing-piso-spc">
+    <svg class="spc-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  <rect x="6" y="3" width="20" height="26" rx="2"/><path d="M11 8h10v7H11zM11 19h10M11 23h6"/>
 
-      <!-- Placas y Empaque Standing (Arte 3D del Diseñador) -->
-      <div class="spc-stage-visual">
-        <img src="assets/spc_hero_banner.jpg" alt="Pisos SPC Decokasa con Caja de Empaque Oficial y Tablones en Roble, Gris y Teca" class="spc-stage-mockup-img" width="1080" height="1310" loading="eager">
-      </div>
-
-      <!-- Dual Call to Action Hero -->
-      <div class="spc-stage-actions">
-        <!-- Botón Asesoría WhatsApp -->
-        <a href="https://wa.me/51999999999?text=Hola%20Decokasa,%20deseo%20asesor%C3%ADa%20sobre%20el%20Piso%20SPC%20Premium" class="spc-hero-advisor-btn" target="_blank" rel="noopener">
-          <span class="spc-wa-circle">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          </span>
-          <span class="spc-advisor-text">
-            <strong>Buscar asesoría</strong>
-            <small>Contacta un asesor en vivo</small>
-          </span>
-        </a>
-
-        <!-- Botón Catálogo Píldora Dorada Oficial -->
-        <a href="#calculadora" class="spc-pill-gold-btn">
-          <svg class="spc-pill-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-            <rect x="4" y="3" width="16" height="18" rx="2"/>
-            <line x1="8" y1="7" x2="16" y2="7"/>
-            <line x1="8" y1="11" x2="16" y2="11"/>
-            <line x1="8" y1="15" x2="12" y2="15"/>
-          </svg>
-          <span class="spc-pill-btn-label">Calcular Cajas & Cotizar</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- =========================================================================
-       2. BENEFITS SECTION: 6 Iconos Lineales Dorados en Habitación Oscura de Lujo
-       ========================================================================= -->
-  <section class="spc-benefits-section" id="beneficios">
-    <div class="spc-benefits-backdrop" style="background-image: url('assets/spc_benefits_bg.jpg');"></div>
-    <div class="spc-benefits-dimmer"></div>
-
-    <div class="spc-container">
-      <div class="spc-section-header">
-        <div class="spc-tag-badge">Atributos Exclusivos</div>
-        <h2 class="spc-section-title light-title">¿Por qué elegir Piso SPC Decokasa?</h2>
-        <p class="spc-section-sub light-sub">Ingeniería Stone Plastic Composite diseñada para soportar el ritmo de vida moderno con acabado de madera noble.</p>
-      </div>
-
-      <!-- Grilla 3x2 con los 6 Iconos Lineales Dorados de la Maqueta -->
-      <div class="spc-designer-icons-grid">
-        <!-- 1. Gota de Agua (100% Impermeable) -->
-        <div class="spc-icon-feature-card">
-          <div class="spc-gold-glyph">
-            <svg viewBox="0 0 64 64" width="58" height="58" fill="none" stroke="url(#spcGoldGrad)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 8 C32 8 14 30 14 42 C14 52 22 60 32 60 C42 60 50 52 50 42 C50 30 32 8 32 8 Z"/>
-              <path d="M32 24 C32 24 22 36 22 43 C22 48 26 52 32 52" stroke-width="2.5" opacity="0.6"/>
-            </svg>
-          </div>
-          <h3>100% Resistente al Agua</h3>
-          <p>Inmune a derrames accidentales, trapeado diario y humedad. No se expande, deforma ni despega.</p>
-        </div>
-
-        <!-- 2. Capas Diamante Multicapa -->
-        <div class="spc-icon-feature-card">
-          <div class="spc-gold-glyph">
-            <svg viewBox="0 0 64 64" width="58" height="58" fill="none" stroke="url(#spcGoldGrad)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 6 L56 22 L32 38 L8 22 Z"/>
-              <path d="M8 32 L32 48 L56 32" opacity="0.85"/>
-              <path d="M8 42 L32 58 L56 42" opacity="0.7"/>
-            </svg>
-          </div>
-          <h3>Núcleo SPC de 5.5 mm con IXPE</h3>
-          <p>Compuesto 70% caliza mineral de extrema rigidez con base acústica IXPE de 1.5 mm preadherida.</p>
-        </div>
-
-        <!-- 3. Figura Caminando (Alto Tránsito) -->
-        <div class="spc-icon-feature-card">
-          <div class="spc-gold-glyph">
-            <svg viewBox="0 0 64 64" width="58" height="58" fill="none" stroke="url(#spcGoldGrad)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="32" cy="14" r="6"/>
-              <path d="M32 24 L24 40 L12 44"/>
-              <path d="M32 24 L40 38 L52 52"/>
-              <path d="M24 40 L34 56"/>
-              <path d="M22 28 L32 24 L42 28"/>
-            </svg>
-          </div>
-          <h3>Alto Tránsito Comercial & Residencial</h3>
-          <p>Capa de desgaste de 0.3 mm con tratamiento cerámico UV que previene rayaduras y desgaste por fricción.</p>
-        </div>
-
-        <!-- 4. Sistema Click Encastre Hermético -->
-        <div class="spc-icon-feature-card">
-          <div class="spc-gold-glyph">
-            <svg viewBox="0 0 64 64" width="58" height="58" fill="none" stroke="url(#spcGoldGrad)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="10" y="20" width="44" height="24" rx="3"/>
-              <path d="M10 32 H26 V38 H38 V32 H54"/>
-              <path d="M22 20 V26 M42 20 V26"/>
-            </svg>
-          </div>
-          <h3>Sistema Click Sin Pegamento</h3>
-          <p>Encastre perimetral patentado tipo macho-hembra. Instalación limpia, rápida, sin polvos ni tiempos de secado.</p>
-        </div>
-
-        <!-- 5. Escoba / Fácil Limpieza -->
-        <div class="spc-icon-feature-card">
-          <div class="spc-gold-glyph">
-            <svg viewBox="0 0 64 64" width="58" height="58" fill="none" stroke="url(#spcGoldGrad)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="48" y1="10" x2="28" y2="38"/>
-              <path d="M28 38 L18 54 H42 L34 38 Z"/>
-              <line x1="24" y1="46" x2="36" y2="46"/>
-            </svg>
-          </div>
-          <h3>Fácil Limpieza & Cero Encerado</h3>
-          <p>Acabado mate que repele manchas domésticas. Se limpia fácilmente con paño húmedo sin químicos abrasivos.</p>
-        </div>
-
-        <!-- 6. Mascota / Pet Friendly -->
-        <div class="spc-icon-feature-card">
-          <div class="spc-gold-glyph">
-            <svg viewBox="0 0 64 64" width="58" height="58" fill="none" stroke="url(#spcGoldGrad)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20 22 C14 22 10 30 14 38 C16 42 22 40 24 36"/>
-              <path d="M44 22 C50 22 54 30 50 38 C48 42 42 40 40 36"/>
-              <path d="M20 28 C26 22 38 22 44 28 C48 34 46 48 32 52 C18 48 16 34 20 28 Z"/>
-              <ellipse cx="26" cy="36" rx="2" ry="3" fill="url(#spcGoldGrad)"/>
-              <ellipse cx="38" cy="36" rx="2" ry="3" fill="url(#spcGoldGrad)"/>
-              <polygon points="32,41 29,45 35,45" fill="url(#spcGoldGrad)"/>
-            </svg>
-          </div>
-          <h3>Pet Friendly & No Tóxico</h3>
-          <p>Superficie antideslizante con agarre para mascotas. Cero emisiones nocivas de formaldehído o metales pesados.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- =========================================================================
-       3. CERTIFICACIONES Y MUESTRAS ISOMÉTRICAS (Arte 3 del Diseñador)
-       ========================================================================= -->
-  <section class="spc-certifications-section">
-    <div class="spc-container">
-      <!-- Barra Ribbon de Sellos Oficiales de Certificación con Frosted Glass -->
-      <div class="spc-glass-ribbon">
-        <div class="spc-seal-item">
-          <span class="spc-seal-text">EPH</span>
-          <small>Success by Quality</small>
-        </div>
-        <div class="spc-seal-divider"></div>
-        <div class="spc-seal-item">
-          <span class="spc-seal-text">ilac-MRA</span>
-          <small>Mutual Recognition</small>
-        </div>
-        <div class="spc-seal-divider"></div>
-        <div class="spc-seal-item">
-          <span class="spc-seal-text">ANAB</span>
-          <small>Accredited Board</small>
-        </div>
-        <div class="spc-seal-divider"></div>
-        <div class="spc-seal-item">
-          <span class="spc-seal-text">DAkkS</span>
-          <small>Deutsche Akkreditierungsstelle</small>
-        </div>
-        <div class="spc-seal-divider"></div>
-        <div class="spc-seal-item">
-          <span class="spc-seal-text">floor score</span>
-          <small>Indoor Air Quality</small>
-        </div>
-        <div class="spc-seal-divider"></div>
-        <div class="spc-seal-item">
-          <span class="spc-seal-text">CNAS</span>
-          <small>Conformity Assessment</small>
-        </div>
-      </div>
-
-      <!-- Bloque Isométrico 4 Placas + Medidas Ficha Técnica -->
-      <div class="spc-isometric-stage">
-        <div class="spc-isometric-media">
-          <img src="assets/spc_certifications_planks.jpg" alt="Muestras de Piso SPC Decokasa en perspectiva isométrica con núcleo y base IXPE" class="spc-isometric-img" width="1080" height="950" loading="lazy">
-        </div>
-
-        <div class="spc-isometric-specs-card">
-          <div class="spc-tag-badge">Ficha Técnica Confirmada</div>
-          <h3>Ingeniería Multicapa de Vanguardia</h3>
-          <p>Cada pieza ha sido calibrada con tolerancias milimétricas para garantizar ensamblaje hermético sin desniveles:</p>
-
-          <ul class="spc-specs-checklist">
-            <li>
-              <strong>Medidas por Pieza:</strong> 122 cm de largo × 18 cm de ancho
-            </li>
-            <li>
-              <strong>Espesor Total:</strong> 5.5 mm (4.0 mm SPC + 1.5 mm IXPE preadherida)
-            </li>
-            <li>
-              <strong>Capa de Desgaste (Wear Layer):</strong> 0.3 mm tránsito alto
-            </li>
-            <li>
-              <strong>Rendimiento por Caja:</strong> 2.196 m² (10 piezas exactas)
-            </li>
-            <li>
-              <strong>Peso por Caja:</strong> 19 kg de alta densidad compactada
-            </li>
-            <li>
-              <strong>Textura & Acabado:</strong> Mate sincronizado al poro de madera
-            </li>
-          </ul>
-
-          <!-- Botón de acción secundario -->
-          <div class="spc-isometric-actions">
-            <a href="https://wa.me/51999999999?text=Hola%20Decokasa,%20deseo%20muestras%20f%C3%ADsicas%20del%20Piso%20SPC%20Premium" class="spc-hero-advisor-btn" target="_blank" rel="noopener">
-              <span class="spc-wa-circle">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-              </span>
-              <span class="spc-advisor-text">
-                <strong>Solicitar Muestras</strong>
-                <small>Asesor comercial asignado</small>
-              </span>
-            </a>
-
-            <a href="#calculadora" class="spc-pill-gold-btn">
-              <svg class="spc-pill-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                <rect x="4" y="3" width="16" height="18" rx="2"/>
-                <line x1="8" y1="7" x2="16" y2="7"/>
-                <line x1="8" y1="11" x2="16" y2="11"/>
-              </svg>
-              <span class="spc-pill-btn-label">Cotizar Cajas</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- =========================================================================
-       4. INSTALACIÓN SISTEMA CLICK (Arte 4 del Diseñador)
-       ========================================================================= -->
-  <section class="spc-installation-section" id="instalacion">
-    <div class="spc-container">
-      <div class="spc-install-flex">
-        <div class="spc-install-info">
-          <div class="spc-tag-badge gold-badge">Instalación Fácil & Limpia</div>
-          <h2 class="spc-section-title light-title">Instalación con Sistema Click</h2>
-          <p class="spc-section-sub light-sub">Sin pegamentos olorosos, sin clavos y sin picar tus pisos anteriores. El encastre perimetral permite una instalación rápida y transitable al instante.</p>
-
-          <div class="spc-steps-vertical">
-            <div class="spc-step-card">
-              <div class="spc-step-digit">1</div>
-              <div class="spc-step-body">
-                <h4>Superficie Lisa y Nivelada</h4>
-                <p>Instala directamente sobre cerámico, porcelanato o cemento curado sin demoliciones ni escombros.</p>
-              </div>
-            </div>
-
-            <div class="spc-step-card">
-              <div class="spc-step-digit">2</div>
-              <div class="spc-step-body">
-                <h4>Encastre Click en Ángulo</h4>
-                <p>Inserta la lengüeta a 45 grados y baja suavemente. El mecanismo click asegura un sellado firme e impermeable.</p>
-              </div>
-            </div>
-
-            <div class="spc-step-card">
-              <div class="spc-step-digit">3</div>
-              <div class="spc-step-body">
-                <h4>Uso Inmediato</h4>
-                <p>Al no requerir fraguado ni adhesivos líquidos, puedes habitar y colocar muebles pesados de inmediato.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="spc-install-image-box">
-          <img src="assets/spc_installation.jpg" alt="Instalador profesional ensamblando duela de piso vinílico SPC con encastre Click" class="spc-install-img" width="1080" height="820" loading="lazy">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- =========================================================================
-       5. CALCULADORA INTERACTIVA DE CAJAS & M2
-       ========================================================================= -->
-  <section class="spc-calc-section" id="calculadora">
-    <div class="spc-container">
-      <div class="spc-section-header">
-        <div class="spc-tag-badge">Calculadora de Cajas</div>
-        <h2 class="spc-section-title light-title">Calcula cuántas cajas necesitas</h2>
-        <p class="spc-section-sub light-sub">Ingresa el metraje cuadrado de tu ambiente y calculamos las cajas exactas redondeadas con margen recomendado para recortes.</p>
-      </div>
-
-      <div class="spc-calc-box">
-        <div class="spc-calc-form-part">
-          <h3>Dimensiones de tu Proyecto</h3>
-          <p class="spc-calc-hint">Rendimiento garantizado: <strong>2.196 m²</strong> por caja de 10 duelas.</p>
-
-          <div class="spc-calc-field">
-            <label for="spc-area-input">Área total en metros cuadrados (m²)</label>
-            <div class="spc-number-input-wrap">
-              <input type="number" id="spc-area-input" value="25" min="1" max="1000" step="0.5" class="spc-field-control">
-              <span class="spc-unit-tag">m²</span>
-            </div>
-          </div>
-
-          <div class="spc-calc-field">
-            <label>Margen de seguridad por recortes</label>
-            <div class="spc-margin-btn-group">
-              <button type="button" class="spc-margin-btn" data-margin="0">0% Exacto</button>
-              <button type="button" class="spc-margin-btn active" data-margin="5">5% Estándar</button>
-              <button type="button" class="spc-margin-btn" data-margin="10">10% Diagonal</button>
-            </div>
-            <small class="spc-margin-note">Recomendado 5% a 10% para cubrir zócalos, vanos de puerta y esquinas.</small>
-          </div>
-
-          <div class="spc-calc-field">
-            <label for="spc-color-select">Tonalidad Elegida</label>
-            <select id="spc-color-select" class="spc-field-control">
-              <option value="Roble Natural" selected>Roble Natural (Cálido y Acogedor)</option>
-              <option value="Arce Claro">Arce Claro (Nórdico Luminoso)</option>
-              <option value="Gris Ceniza">Gris Ceniza (Moderno Urbano)</option>
-              <option value="Teca Profunda">Teca Profunda (Elegancia Clásica)</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="spc-calc-summary-part">
-          <div class="spc-summary-inner">
-            <span class="spc-summary-eyebrow">Presupuesto Estimado</span>
-
-            <div class="spc-big-boxes-indicator">
-              <span class="spc-boxes-digit" id="spc-boxes-count">12</span>
-              <span class="spc-boxes-unit">Cajas de Piso SPC</span>
-            </div>
-
-            <div class="spc-summary-data-table">
-              <div class="spc-data-line">
-                <span>Área neta indicada:</span>
-                <strong id="spc-net-area-val">25.00 m²</strong>
-              </div>
-              <div class="spc-data-line">
-                <span>Área con recortes:</span>
-                <strong id="spc-total-area-val">26.25 m²</strong>
-              </div>
-              <div class="spc-data-line">
-                <span>Metros reales entregados:</span>
-                <strong id="spc-covered-area-val">26.35 m²</strong>
-              </div>
-              <div class="spc-data-line">
-                <span>Precio unitario por caja:</span>
-                <strong>S/ 95</strong>
-              </div>
-              <div class="spc-data-line spc-total-line">
-                <span>Inversión Estimada:</span>
-                <strong id="spc-total-cost-val" class="spc-gold-cost">S/ 1,140.00</strong>
-              </div>
-            </div>
-
-            <a id="spc-calc-whatsapp-btn" href="#" class="spc-pill-gold-btn full-width" target="_blank" rel="noopener">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-              <span>Enviar Cotización a WhatsApp</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- =========================================================================
-       6. COLECCIÓN DE 4 ACABADOS EN MADERA
-       ========================================================================= -->
-  <section class="spc-finishes-section" id="tonos">
-    <div class="spc-container">
-      <div class="spc-section-header">
-        <div class="spc-tag-badge">Gama de Tonos</div>
-        <h2 class="spc-section-title light-title">Colección de Tonos en Tendencia</h2>
-        <p class="spc-section-sub light-sub">Selección cromática versátil para crear ambientes modernos, escandinavos o contemporáneos.</p>
-      </div>
-
-      <div class="spc-swatches-grid">
-        <div class="spc-swatch-card active" data-color="Roble Natural">
-          <div class="spc-swatch-circle" style="background: linear-gradient(135deg, #c7965c 0%, #aa773e 100%);"></div>
-          <h4>Roble Natural</h4>
-          <span>Cálido tradicional</span>
-        </div>
-
-        <div class="spc-swatch-card" data-color="Arce Claro">
-          <div class="spc-swatch-circle" style="background: linear-gradient(135deg, #ded2bb 0%, #c4b59b 100%);"></div>
-          <h4>Arce Claro</h4>
-          <span>Estilo nórdico luminoso</span>
-        </div>
-
-        <div class="spc-swatch-card" data-color="Gris Ceniza">
-          <div class="spc-swatch-circle" style="background: linear-gradient(135deg, #a6abb0 0%, #878c91 100%);"></div>
-          <h4>Gris Ceniza</h4>
-          <span>Minimalismo contemporáneo</span>
-        </div>
-
-        <div class="spc-swatch-card" data-color="Teca Profunda">
-          <div class="spc-swatch-circle" style="background: linear-gradient(135deg, #6c4125 0%, #4a2812 100%);"></div>
-          <h4>Teca Profunda</h4>
-          <span>Sofisticación y contraste</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- =========================================================================
-       7. TESTIMONIOS VERIFICADOS (Arte 5 del Diseñador - 3 Tarjetas Frosted)
-       ========================================================================= -->
-  <section class="spc-testimonials-section" id="testimonios">
-    <div class="spc-container">
-      <div class="spc-section-header">
-        <div class="spc-tag-badge">Casos de Éxito</div>
-        <h2 class="spc-section-title dark-title">Clientes que ya disfrutan sus pisos</h2>
-        <p class="spc-section-sub dark-sub">Experiencias reales de remodelación residencial y corporativa con entrega puntual.</p>
-      </div>
-
-      <div class="spc-testimonials-row">
-        <!-- Testimonio 1 -->
-        <div class="spc-frosted-review-card">
-          <div class="spc-avatar-ring">
-            <img src="assets/customer_1.jpg" alt="Carlos Mendoza cliente de Decokasa" class="spc-customer-face" width="80" height="80" loading="lazy">
-          </div>
-          <div class="spc-review-stars">★★★★★</div>
-          <h4 class="spc-customer-name">Carlos Mendoza</h4>
-          <span class="spc-customer-city">Miraflores, Lima</span>
-          <p class="spc-review-quote">"Cambié 70m² de departamento en un fin de semana. No tuvimos que romper nada y la sensación al pisar con la base acústica IXPE es sólida y silenciosa."</p>
-        </div>
-
-        <!-- Testimonio 2 -->
-        <div class="spc-frosted-review-card">
-          <div class="spc-avatar-ring">
-            <img src="assets/customer_2.jpg" alt="Valeria Rodríguez cliente de Decokasa" class="spc-customer-face" width="80" height="80" loading="lazy">
-          </div>
-          <div class="spc-review-stars">★★★★★</div>
-          <h4 class="spc-customer-name">Valeria Rodríguez</h4>
-          <span class="spc-customer-city">Surco, Lima</span>
-          <p class="spc-review-quote">"Con dos perros el porcelanato se volvía una pista de patinaje y se rayaba. El Piso SPC Decokasa no se raya, no se desliza y se limpia con un trapo húmedo."</p>
-        </div>
-
-        <!-- Testimonio 3 -->
-        <div class="spc-frosted-review-card">
-          <div class="spc-avatar-ring">
-            <img src="assets/customer_3.jpg" alt="Diego Salazar cliente de Decokasa" class="spc-customer-face" width="80" height="80" loading="lazy">
-          </div>
-          <div class="spc-review-stars">★★★★★</div>
-          <h4 class="spc-customer-name">Diego Salazar</h4>
-          <span class="spc-customer-city">San Isidro, Lima</span>
-          <p class="spc-review-quote">"Lo instalamos en la recepción de nuestra oficina. El look de madera natural de alta gama impresionó a los clientes y el costo por caja es súper competitivo."</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- =========================================================================
-       8. AMBIENTE SHOWCASE (Arte 6 del Diseñador - Sala Corporativa)
-       ========================================================================= -->
-  <section class="spc-showcase-section">
-    <div class="spc-container">
-      <div class="spc-showcase-panel">
-        <img src="assets/spc_showcase_room.jpg" alt="Ambiente corporativo con Piso SPC Roble Natural terminado" class="spc-showcase-photo" width="1080" height="960" loading="lazy">
-        <div class="spc-showcase-glass-card">
-          <div class="spc-tag-badge gold-badge">Ambientes de Vanguardia</div>
-          <h3>Espacios que Elevan tu Bienestar</h3>
-          <p>Textura sincronizada de madera noble con la resistencia eterna del núcleo mineral SPC.</p>
-          <a href="https://wa.me/51999999999?text=Hola%20Decokasa,%20vi%20la%20galer%C3%ADa%20y%20deseo%20cotizar%20Piso%20SPC" class="spc-pill-gold-btn" target="_blank" rel="noopener">
-            Cotizar Mi Espacio
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- =========================================================================
-       9. FORMULARIO ASESORÍA Y CTA FINAL
-       ========================================================================= -->
-  <section class="spc-footer-cta-section" id="contacto">
-    <div class="spc-container">
-      <div class="spc-cta-glass-box">
-        <div class="spc-tag-badge">Asesoría Inmediata</div>
-        <h2>¿Listo para transformar tus pisos?</h2>
-        <p>Déjanos tus datos o contáctanos por WhatsApp. Un asesor técnico te apoyará con el cálculo de cajas, muestras físicas y despacho a nivel nacional.</p>
-
-        <form class="spc-lead-form" onsubmit="event.preventDefault(); spcSubmitLead();">
-          <div class="spc-lead-inputs">
-            <input type="text" id="spc-lead-name" class="spc-field-control" placeholder="Tu nombre completo" required>
-            <input type="tel" id="spc-lead-phone" class="spc-field-control" placeholder="Teléfono / WhatsApp (ej. 999 888 777)" required>
-            <input type="text" id="spc-lead-city" class="spc-field-control" placeholder="Ciudad / Distrito (ej. Lima)">
-            <button type="submit" class="spc-pill-gold-btn">
-              Solicitar Asesoría
-            </button>
-          </div>
-          <div id="spc-lead-status" style="margin-top: 14px; font-size: 14px; display: none; color: #f5d76e;"></div>
-        </form>
-      </div>
-    </div>
-  </section>
+</svg>
+<span><strong>Mira el catálogo</strong><small>Explora nuestros colores</small></span>
+  </a>
 </div>
 
-<script>
-(function() {
-  const pricePerBox = 95;
-  const coveragePerBox = 2.196;
+      <div class="spc-colors" id="spc-colores-preview-landing-piso-spc" aria-label="Colores de referencia del piso SPC">
+        <button type="button" class="spc-color-arrow spc-color-arrow--previous" data-color-step="-1" aria-label="Ver color anterior" hidden><svg class="spc-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  <path d="m13 8 8 8-8 8"/>
 
-  const areaInput = document.getElementById('spc-area-input');
-  const marginBtns = document.querySelectorAll('.spc-margin-btn');
-  const colorSelect = document.getElementById('spc-color-select');
-  const boxesCountEl = document.getElementById('spc-boxes-count');
-  const netAreaEl = document.getElementById('spc-net-area-val');
-  const totalAreaEl = document.getElementById('spc-total-area-val');
-  const coveredAreaEl = document.getElementById('spc-covered-area-val');
-  const totalCostEl = document.getElementById('spc-total-cost-val');
-  const waBtn = document.getElementById('spc-calc-whatsapp-btn');
-
-  let currentMargin = 5;
-
-  function recalculate() {
-    if (!areaInput) return;
-    const netArea = parseFloat(areaInput.value) || 0;
-    const areaWithMargin = netArea * (1 + currentMargin / 100);
-    const boxes = Math.ceil(areaWithMargin / coveragePerBox);
-    const totalCovered = boxes * coveragePerBox;
-    const totalCost = boxes * pricePerBox;
-    const selectedColor = colorSelect ? colorSelect.value : 'Roble Natural';
-
-    if (boxesCountEl) boxesCountEl.textContent = boxes;
-    if (netAreaEl) netAreaEl.textContent = netArea.toFixed(2) + ' m²';
-    if (totalAreaEl) totalAreaEl.textContent = areaWithMargin.toFixed(2) + ' m²';
-    if (coveredAreaEl) coveredAreaEl.textContent = totalCovered.toFixed(2) + ' m²';
-    if (totalCostEl) totalCostEl.textContent = 'S/ ' + totalCost.toLocaleString('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
-    if (waBtn) {
-      const msg = encodeURIComponent(
-        `Hola Decokasa, deseo cotizar Piso SPC Premium:\n` +
-        `- Área estimada: ${netArea.toFixed(2)} m² (con ${currentMargin}% recortes = ${areaWithMargin.toFixed(2)} m²)\n` +
-        `- Cajas calculadas: ${boxes} cajas (${totalCovered.toFixed(2)} m²)\n` +
-        `- Color elegido: ${selectedColor}\n` +
-        `- Inversión estimada: S/ ${totalCost.toFixed(2)}\n` +
-        `¿Tienen stock disponible y despacho a mi zona?`
-      );
-      waBtn.href = `https://wa.me/51999999999?text=${msg}`;
-    }
-  }
-
-  if (areaInput) areaInput.addEventListener('input', recalculate);
-  if (colorSelect) colorSelect.addEventListener('change', recalculate);
-
-  marginBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      marginBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      currentMargin = parseInt(btn.dataset.margin, 10);
-      recalculate();
-    });
-  });
-
-  // Swatch card click
-  document.querySelectorAll('.spc-swatch-card').forEach(card => {
-    card.addEventListener('click', () => {
-      document.querySelectorAll('.spc-swatch-card').forEach(c => c.classList.remove('active'));
-      card.classList.add('active');
-      const col = card.dataset.color;
-      if (colorSelect) {
-        colorSelect.value = col;
-        recalculate();
-      }
-    });
-  });
-
-  window.spcSubmitLead = function() {
-    const name = document.getElementById('spc-lead-name').value;
-    const phone = document.getElementById('spc-lead-phone').value;
-    const city = document.getElementById('spc-lead-city').value;
-    const status = document.getElementById('spc-lead-status');
-    const msg = encodeURIComponent(`Hola Decokasa, he dejado mis datos en la landing de Piso SPC:\n- Nombre: ${name}\n- Teléfono: ${phone}\n- Ubicación: ${city}`);
-    if (status) {
-      status.style.display = 'block';
-      status.textContent = '¡Redirigiendo a WhatsApp con tu asesor asignado...';
-    }
-    setTimeout(() => {
-      window.open(`https://wa.me/51999999999?text=${msg}`, '_blank');
-    }, 600);
-  };
-
-  recalculate();
-})();
-</script>
+</svg>
+</button>
+        <div class="spc-color-list">
 
 
-</main><footer></footer><script>(function(root){
-  'use strict';
-  const fields=['utm_source','utm_medium','utm_campaign','utm_content','utm_term','campaign_id','adset_id','adgroup_id','ad_id','creative_id','account_id','platform','fbclid','gclid','ttclid'];
-  function uuid(){ if(root.crypto.randomUUID)return root.crypto.randomUUID(); const b=root.crypto.getRandomValues(new Uint8Array(16));b[6]=(b[6]&15)|64;b[8]=(b[8]&63)|128;return [...b].map((x,i)=>([4,6,8,10].includes(i)?'-':'')+x.toString(16).padStart(2,'0')).join(''); }
-  function boxes(area,waste,coverage){area=Number(area);waste=Number(waste);coverage=Number(coverage);if(!Number.isFinite(area)||area<=0||area>100000||!Number.isFinite(waste)||waste<0||waste>30||!Number.isFinite(coverage)||coverage<=0)throw Error('Revisa los m², la merma (0–30%) y el rendimiento por caja.');return Math.ceil((area*(100+waste)/(100*coverage))-1e-10);}
-  function origin(search,now){const params=new URLSearchParams(search),data={};for(const k of fields){const v=params.get(k);if(v&&v.length<=160&&/^[a-zA-Z0-9_.~%+ -]+$/.test(v))data[k]=v;}return Object.keys(data).length?{...data,captured_at:now}:null;}
-  function updateAttribution(previous,current){if(!current)return previous;return {first:previous?.first||current,last:current};}
-  function requestDraft(previous,snapshot){return previous?.snapshot===snapshot?previous:{id:uuid(),snapshot};}
-  const api={boxes,origin,updateAttribution,uuid,requestDraft};
-  if(typeof module!=='undefined'&&module.exports)module.exports=api;
-  if(!root.document)return;
-  function reserveServiceBar(){
-    const bar=root.document.querySelector('.service-bar');
-    if(!bar)return;
-    const sync=()=>root.document.documentElement.style.setProperty('--service-bar-height',`${bar.getBoundingClientRect().height}px`);
-    sync();
-    if(typeof root.ResizeObserver==='function')new root.ResizeObserver(sync).observe(bar);
-    else root.addEventListener('resize',sync);
-  }
-  reserveServiceBar();
-  function get(key){try{return root.sessionStorage.getItem(key);}catch{return null;}}
-  function set(key,value){try{root.sessionStorage.setItem(key,value);}catch{}}
-  function remove(key){try{root.sessionStorage.removeItem(key);}catch{}}
-  let attribution=null;
-  let consent=get('decokasa.consent')||'unknown';
-  function capture(){if(consent!=='accepted')return;try{attribution=JSON.parse(get('decokasa.attribution')||'null');}catch{attribution=null;}const current=origin(root.location.search,new Date().toISOString());attribution=updateAttribution(attribution,current);set('decokasa.attribution',JSON.stringify(attribution));if(!get('decokasa.visitor'))set('decokasa.visitor',uuid());}
-  capture();
-  function init(){
-    const consentMessage=document.querySelector('[data-consent-message]');
-    function showConsent(){if(consentMessage)consentMessage.textContent=consent==='accepted'?'Seguimiento de prueba permitido. Puedes cambiar tu decisión. No se envían datos a servicios externos.':consent==='rejected'?'Seguimiento opcional desactivado. Puedes seguir usando el formulario.':'¿Permites conservar el origen de esta visita durante la prueba? Es opcional y no envía datos a servicios externos.';}
-    showConsent();
-    document.querySelectorAll('[data-consent]').forEach(button=>button.addEventListener('click',()=>{consent=button.dataset.consent;set('decokasa.consent',consent);set('decokasa.consent_date',new Date().toISOString());if(consent==='accepted')capture();else{attribution=null;remove('decokasa.attribution');remove('decokasa.visitor');}showConsent();}));
-    const brand=document.querySelector('[data-filter-brand]'),category=document.querySelector('[data-filter-category]'),query=document.querySelector('[data-filter-query]');
-    const filters=document.querySelector('[data-catalog-filters]');
-    if(filters && typeof root.matchMedia==='function')filters.open=!root.matchMedia('(max-width: 899px)').matches;
-    document.querySelector('[data-catalog-native-sort]')?.addEventListener('change',()=>document.getElementById('CatalogFilters')?.requestSubmit());
-    if(brand){
-      const p=new URLSearchParams(root.location.search),cards=[...document.querySelectorAll('[data-card]')],grid=document.querySelector('[data-catalog-grid]'),sort=document.querySelector('[data-catalog-sort]');
-      const choices=[...document.querySelectorAll('[data-brand-choice]')];
-      brand.value=p.get('marca')||'';category.value=p.get('categoria')||'';query.value=p.get('q')||'';
-      const normalize=text=>text.toLocaleLowerCase('es').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-      function filter(){
-        let count=0;
-        cards.forEach(card=>{const match=(!brand.value||card.dataset.brand===brand.value)&&(!category.value||card.dataset.category===category.value)&&normalize(card.textContent).includes(normalize(query.value.trim()));card.hidden=!match;if(match)count++;});
-        document.querySelector('[data-count]').textContent=`${count} ${count===1?'producto':'productos'} de muestra`;
-        document.querySelector('[data-empty]').hidden=count>0;
-        choices.forEach(link=>{const active=link.dataset.brandChoice===brand.value;link.classList.toggle('is-selected',active);if(active)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');});
-        if(sort&&grid){const ordered=[...cards];if(sort.value!=='manual')ordered.sort((a,b)=>a.dataset.title.localeCompare(b.dataset.title,'es')*(sort.value==='title-descending'?-1:1));ordered.forEach(card=>grid.appendChild(card));}
-      }
-      [brand,category,query].forEach(input=>input.addEventListener('input',filter));
-      sort?.addEventListener('change',filter);
-      choices.forEach(link=>link.addEventListener('click',event=>{event.preventDefault();brand.value=link.dataset.brandChoice;category.value='';query.value='';filter();}));
-      document.querySelectorAll('[data-filter-clear]').forEach(button=>button.addEventListener('click',()=>{brand.value='';category.value='';query.value='';filter();}));
-      filter();
-    }
-    initForms(document);
-  }
-  function initForms(scope){
-    scope.querySelectorAll('[data-request-form]').forEach(form=>{
-      if(form.dataset.initialized)return;
-      const page=form.closest('[data-product-page]')||scope;
-      const selected=form.querySelector('[name=variant_id]').selectedOptions[0];
-      if(!selected)return;
-      form.dataset.initialized='true';
-      form.querySelector('[data-enable-form]').disabled=false;
-      const select=form.querySelector('[name=variant_id]'),qty=form.querySelector('[name=quantity]'),price=page.querySelector('[data-product-price]'),sku=page.querySelector('[data-sku]');
-      const calc=page.querySelector('[data-pvc]'),result=calc?.querySelector('[data-calc-result]');
-      let draft=null;
-      form.querySelector('fieldset').disabled=false;
-      function calculation(){if(!calc)return;try{const coverage=select.selectedOptions[0].dataset.coverage;const n=boxes(calc.querySelector('[name=area]').value,calc.querySelector('[name=waste]').value,coverage);result.textContent=`${n} cajas · ${(n*Number(coverage)).toLocaleString('es-PE',{maximumFractionDigits:2})} m² de cobertura`;qty.value=n;page.dispatchEvent(new CustomEvent('decokasa:quantity',{bubbles:true}));result.classList.remove('error');}catch(e){result.textContent=e.message;result.classList.add('error');}}
-      function variant(){const o=select.selectedOptions[0];if(!o)return;if(price){price.textContent=new Intl.NumberFormat('es-PE',{style:'currency',currency:form.dataset.currency}).format(Number(o.dataset.price)/100);price.dataset.cents=o.dataset.price;}if(sku)sku.textContent=o.dataset.sku||'Pendiente';calculation();page.dispatchEvent(new CustomEvent('decokasa:quantity',{bubbles:true}));}
-      if(calc){calc.querySelectorAll('input').forEach(i=>i.addEventListener('input',calculation));calculation();}
-      select.addEventListener('change',variant);
-      form.addEventListener('submit',event=>{
-        event.preventDefault();if(!form.reportValidity())return;
-        if(calc && result.classList.contains('error')){result.setAttribute('tabindex','-1');result.focus();return;}
-        const o=select.selectedOptions[0];
-        // Contact values exist only in memory; retries of an unchanged form reuse its reference.
-        draft=requestDraft(draft,JSON.stringify(Array.from(new FormData(form).entries())));
-        const requestId=draft.id;
-        const receipt=form.querySelector('[data-request-status]');
-        // Demo only: never store/log contact fields, send a request, emit GA4 or alter inventory.
-        receipt.textContent=`Simulación completada. Esta solicitud no fue enviada.\nReferencia: ${requestId}\n${qty.value} unidad(es) · ${o.dataset.sku||'SKU pendiente'}\nEl asesor confirmará disponibilidad e importe cuando la tienda esté conectada.`;
-        receipt.hidden=false;receipt.focus();
-      });
-    });
-  }
-  document.addEventListener('shopify:section:load',event=>initForms(event.target));
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
-})(typeof window!=='undefined'?window:globalThis);
-</script></body></html>
+
+            <button class="spc-swatch" type="button" data-color="Madera natural" aria-pressed="true"><img src="assets/spc-muestra-001.webp" width="800" height="800" alt="" loading="lazy"><span>Madera natural</span></button>
+
+            <button class="spc-swatch" type="button" data-color="Caoba" aria-pressed="false"><img src="assets/spc-muestra-019.webp" width="800" height="800" alt="" loading="lazy"><span>Caoba</span></button>
+
+            <button class="spc-swatch" type="button" data-color="Gris claro" aria-pressed="false"><img src="assets/spc-muestra-007.webp" width="800" height="800" alt="" loading="lazy"><span>Gris claro</span></button>
+
+        </div>
+        <button type="button" class="spc-color-arrow" data-color-step="1" aria-label="Ver siguiente color" hidden><svg class="spc-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  <path d="m13 8 8 8-8 8"/>
+
+</svg>
+</button>
+      </div>
+      <p class="spc-color-status" data-color-status aria-live="polite">Madera natural · Color de referencia</p>
+      <p class="spc-fineprint">Para mayor información y disponibilidad, contacta con un asesor de ventas.</p>
+    </section>
+    <section class="spc-benefits">
+      <img class="spc-backdrop" src="assets/spc-sala-divan-piso-gris-beneficios.webp" width="2000" height="1576" alt="" loading="lazy">
+      <div class="spc-section-inner"><h2>La mejor tecnología<br><mark>en pisos flotantes</mark></h2>
+        <ul class="spc-benefit-grid">
+      <li><span class="spc-benefit-art"><img class="spc-benefit-icon spc-benefit-icon--resistencia-agua" src="assets/spc-icono-resistencia-agua.svg" width="120" height="130" alt="" loading="lazy"></span><span class="spc-benefit-caption"><strong>Resistentes</strong><br>al agua</span></li>
+      <li><span class="spc-benefit-art"><img class="spc-benefit-icon spc-benefit-icon--espuma-integrada" src="assets/spc-icono-espuma-integrada.svg" width="120" height="130" alt="" loading="lazy"></span><span class="spc-benefit-caption">Incluyen<br><strong>espuma</strong></span></li>
+      <li><span class="spc-benefit-art"><img class="spc-benefit-icon spc-benefit-icon--transito-residencial" src="assets/spc-icono-transito-residencial.svg" width="120" height="130" alt="" loading="lazy"></span><span class="spc-benefit-caption">Tránsito<br><strong>residencial</strong></span></li>
+      <li><span class="spc-benefit-art"><img class="spc-benefit-icon spc-benefit-icon--sistema-click" src="assets/spc-icono-sistema-click.svg" width="120" height="130" alt="" loading="lazy"></span><span class="spc-benefit-caption">Sistema<br><strong>Click</strong></span></li>
+      <li><span class="spc-benefit-art"><img class="spc-benefit-icon spc-benefit-icon--facil-limpieza" src="assets/spc-icono-facil-limpieza.svg" width="120" height="130" alt="" loading="lazy"></span><span class="spc-benefit-caption">Fácil de<br><strong>limpiar</strong></span></li>
+      <li><span class="spc-benefit-art"><img class="spc-benefit-icon spc-benefit-icon--pet-friendly" src="assets/spc-icono-pet-friendly.svg" width="120" height="130" alt="" loading="lazy"></span><span class="spc-benefit-caption"><strong>Pet<br>friendly</strong></span></li>
+    </ul>
+      </div>
+    </section>
+    <section class="spc-anatomy spc-rounded">
+      <img class="spc-watermark" src="assets/spc-marca-simbolo.png" width="1113" height="1097" alt="" loading="lazy">
+      <div class="spc-anatomy-copy"><h2>Costo accesible<br><mark>Grandes beneficios</mark></h2>
+        <dl class="spc-specs">
+          <div><dt>Medidas</dt><dd>122 × 18 cm</dd></div><div><dt>Una caja</dt><dd>10 planchas</dd></div>
+          <div><dt>Rendimiento</dt><dd>2.196 m² / caja</dd></div><div><dt>Espesor total</dt><dd>5.5 mm</dd></div>
+          <div><dt>Capa de uso</dt><dd>0.3 mm</dd></div><div><dt>Espuma IXPE</dt><dd>1.5 mm</dd></div>
+        </dl>
+        <h3>5 capas de<br><mark>máxima resistencia</mark></h3>
+        <ol class="spc-layers"><li>Protección UV</li><li>Capa de uso</li><li>Diseño decorativo</li><li>Núcleo rígido SPC</li><li>Espuma acústica IXPE</li></ol>
+      </div>
+      <img class="spc-layer-image" src="assets/spc-despiece-capas-piso.webp" width="559" height="583" alt="Despiece del piso SPC: acabado, diseño, núcleo rígido y base de espuma" loading="lazy">
+      <p class="spc-fineprint">¿Necesitas más información? <a href="https://wa.me/51941599516?text=Hola%2C+quiero+asesor%C3%ADa+sobre+Piso+SPC+de+Decokasa." target="_blank" rel="noopener">Consulta con un asesor aquí.</a></p>
+    </section>
+    <section class="spc-installation">
+      <img class="spc-backdrop" src="assets/spc-instalacion-click.webp" width="1080" height="939" alt="Instalación de tablones SPC mediante sistema Click" loading="lazy">
+      <div class="spc-section-inner"><h2>Calcula cuántos<br><mark>pisos necesitas</mark></h2>
+        <form class="spc-calculator" data-spc-calculator>
+          <label for="spc-area-preview-landing-piso-spc">¿Cuánto mide tu espacio?</label>
+          <div class="spc-input-row"><div class="spc-area-field"><input id="spc-area-preview-landing-piso-spc" name="area" type="number" min="0.01" max="100000" step="any" inputmode="decimal" placeholder="Ej. 20" required aria-describedby="spc-calc-help-preview-landing-piso-spc spc-calc-error-preview-landing-piso-spc"><span>m²</span></div><button type="submit">Calcular</button></div>
+          <label class="spc-waste"><input type="checkbox" name="waste" checked> Incluir 10% adicional para cortes</label>
+          <p class="spc-calc-help" id="spc-calc-help-preview-landing-piso-spc">2.196 m² por caja. Cantidad orientativa; el asesor confirma tu pedido.</p>
+          <p class="spc-calc-error" id="spc-calc-error-preview-landing-piso-spc" data-calc-error role="alert" hidden></p>
+          <div class="spc-calc-result" data-calc-result aria-live="polite" hidden><p><strong data-boxes></strong><span data-covered></span></p><a data-calc-contact href="https://wa.me/51941599516?text=Hola%2C+quiero+asesor%C3%ADa+sobre+Piso+SPC+de+Decokasa." target="_blank" rel="noopener">Consultar esta cantidad <svg class="spc-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  <path d="m13 8 8 8-8 8"/>
+
+</svg>
+</a></div>
+          <noscript><p>Activa JavaScript para calcular o consulta la cantidad con un asesor.</p></noscript>
+        </form>
+        <div class="spc-actions">
+  <a class="spc-button spc-button--contact" href="https://wa.me/51941599516?text=Hola%2C+quiero+asesor%C3%ADa+sobre+Piso+SPC+de+Decokasa." target="_blank" rel="noopener">
+    <svg class="spc-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  <path d="M28 15a12 12 0 0 1-18 10L3 28l2-8A12 12 0 1 1 28 15Z"/><path d="m11 9-2 3c2 6 5 9 11 10l3-3-5-3-2 2-3-4 1-2Z"/>
+
+</svg>
+<span><strong>Buscar asesoría</strong><small>Contacta un asesor</small></span>
+  </a>
+  <a class="spc-button spc-button--catalog" href="#spc-colores-preview-landing-piso-spc">
+    <svg class="spc-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  <rect x="6" y="3" width="20" height="26" rx="2"/><path d="M11 8h10v7H11zM11 19h10M11 23h6"/>
+
+</svg>
+<span><strong>Mira el catálogo</strong><small>Explora nuestros colores</small></span>
+  </a>
+</div>
+
+      </div>
+    </section>
+
+      <section class="spc-testimonials spc-rounded">
+        <img class="spc-perspective" src="assets/spc-cuatro-muestras-perspectiva.webp" width="1014" height="796" alt="" loading="lazy">
+        <div class="spc-testimonial-intro"><h2>Nuestros clientes<br><mark>nos recomiendan</mark></h2><p>Conoce las experiencias<br>con nuestro Piso SPC.</p><small>Contenido de muestra.<br>Pendiente de testimonios reales.</small></div>
+        <div class="spc-testimonial-grid">
+
+
+            <figure class="spc-quote"><img src="assets/spc-retrato-mujer-mockup.webp" width="600" height="600" alt="Retrato de muestra del mockup" loading="lazy"><figcaption>Testimonio 01</figcaption><span class="spc-stars" aria-hidden="true">★★★★★</span><blockquote>Espacio para la experiencia de un cliente con nuestros pisos SPC.</blockquote><small>Texto de muestra</small></figure>
+            <figure class="spc-quote"><img src="assets/spc-retrato-hombre-mockup.webp" width="600" height="600" alt="Retrato de muestra del mockup" loading="lazy"><figcaption>Testimonio 02</figcaption><span class="spc-stars" aria-hidden="true">★★★★★</span><blockquote>Espacio para una recomendación real y autorizada de nuestros clientes.</blockquote><small>Texto de muestra</small></figure>
+
+        </div>
+      </section>
+
+    <section class="spc-showcase">
+      <img class="spc-backdrop" src="assets/spc-sala-sofa-gris-piso-madera.webp" width="1946" height="1460" alt="Sala con sofá gris y piso con acabado de madera" loading="lazy">
+      <h2>Resultados<br><mark>y testimonios</mark></h2><p class="spc-fineprint">Los colores y texturas pueden variar. Consulta las muestras con un asesor.</p>
+
+      <div class="spc-seals" aria-label="Sellos del mockup pendientes de validar">
+
+        <img src="assets/spc-sello-eph.png" width="110" height="80" alt="EPH" loading="lazy"><img src="assets/spc-sello-ilac-mra.png" width="110" height="80" alt="ILAC-MRA" loading="lazy"><img src="assets/spc-sello-anab.png" width="110" height="80" alt="ANAB" loading="lazy"><img src="assets/spc-sello-dakks.png" width="110" height="80" alt="DAKKS" loading="lazy"><img src="assets/spc-sello-floorscore.png" width="110" height="80" alt="FLOORSCORE" loading="lazy"><img src="assets/spc-sello-cnas.png" width="110" height="80" alt="CNAS" loading="lazy">
+      </div>
+
+    </section>
+    <footer class="spc-footer spc-rounded">
+      <img class="spc-wordmark" src="assets/spc-marca-logotipo.png" width="1529" height="348" alt="Decokasa Premium" loading="lazy">
+      <img class="spc-footer-product" src="assets/spc-caja-tablon-diagonal.webp" width="1314" height="1077" alt="Caja Decokasa y tablón SPC con acabado de madera" loading="lazy">
+      <div class="spc-footer-copy"><h2>Acabados<br><mark>100% Premium</mark></h2><p><strong>¡Renueva tus pisos!</strong><br>Contáctanos para recibir<br>asesoría personalizada.</p></div>
+      <div class="spc-actions">
+  <a class="spc-button spc-button--contact" href="https://wa.me/51941599516?text=Hola%2C+quiero+asesor%C3%ADa+sobre+Piso+SPC+de+Decokasa." target="_blank" rel="noopener">
+    <svg class="spc-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  <path d="M28 15a12 12 0 0 1-18 10L3 28l2-8A12 12 0 1 1 28 15Z"/><path d="m11 9-2 3c2 6 5 9 11 10l3-3-5-3-2 2-3-4 1-2Z"/>
+
+</svg>
+<span><strong>Buscar asesoría</strong><small>Contacta un asesor</small></span>
+  </a>
+  <a class="spc-button spc-button--catalog" href="#spc-colores-preview-landing-piso-spc">
+    <svg class="spc-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  <rect x="6" y="3" width="20" height="26" rx="2"/><path d="M11 8h10v7H11zM11 19h10M11 23h6"/>
+
+</svg>
+<span><strong>Mira el catálogo</strong><small>Explora nuestros colores</small></span>
+  </a>
+</div>
+
+      <p class="spc-copyright">Decokasa Perú 2026 · Todos los derechos reservados</p>
+    </footer>
+  </div>
+</div>
+
+</main></body></html>
