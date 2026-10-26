@@ -2,7 +2,8 @@
 
 - Sustituida la meta fija por `product.price_max × 1.80`, redondeada a céntimos. Estable entre variantes y cantidades; progreso calculado con las líneas de la solicitud. Tarjeta, importe pendiente y modal comparten la referencia. Retirado el ajuste manual antiguo; productos sin precio positivo no muestran el incentivo.
 - Titan: máximo S/ 300 → S/ 540. Una blanca S/ 279 → 52%, faltan S/ 261; blanca + negra S/ 579 → desbloqueado. Reducir el total vuelve a bloquearlo.
-- 29/29 pruebas aprobadas: mayor precio, disponibilidad, comparación, valores antiguos ignorados, variantes combinadas, redondeo, límite exacto y precio cero. Tres archivos de tema validados con Shopify sin hallazgos. Ocho vistas y ZIP de 74 archivos regenerados y verificados. Sincronización y revisión en tienda pendientes en esta etapa.
+- 29/29 pruebas aprobadas: mayor precio, disponibilidad, comparación, valores antiguos ignorados, variantes combinadas, redondeo, límite exacto y precio cero. Tres archivos de tema validados con Shopify sin hallazgos. Ocho vistas y ZIP de 74 archivos regenerados y verificados.
+- Commit `6583374` enviado a `main`, sincronizado y comprobado en Shopify (tema `188927803629`): meta y modal S/ 540; blanca S/ 279, pendiente S/ 261 (52%); cambio a negro conserva la meta y la selección; ambas S/ 579 desbloquean el regalo; quitar blanca deja negro S/ 300, pendiente S/ 240 (56%) y vuelve a bloquearlo. Consola sin errores. Evidencia: `outputs/titan-meta-80-porciento.png` en el chat de trabajo. Sin cambios de catálogo ni envío de solicitudes.
 
 ## 26/10/2026 — Solicitud con varios colores
 
