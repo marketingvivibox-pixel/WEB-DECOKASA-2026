@@ -10,6 +10,14 @@ La plantilla predeterminada utiliza los productos nativos de Shopify. Presenta g
 
 Los colores nativos de Shopify se muestran como muestras cuando la opción dispone de ellas. En otros casos se usa una miniatura disponible o el nombre de la opción. Los cambios de presentación actualizan precio, SKU e imagen y conservan cantidad y datos escritos en la solicitud. Una combinación inexistente impide solicitar hasta elegir una combinación válida. Sin JavaScript, los enlaces de variantes siguen siendo navegables.
 
+## Varias fotos de un mismo color
+
+En **Productos > producto > variante > Metacampos > Galería de la variante**, selecciona las imágenes del color en el orden deseado. La primera será la principal y las demás aparecerán como miniaturas. Los archivos se pueden subir en Multimedia del producto y seleccionar después en este campo. La imagen nativa de la variante se conserva para tarjetas y otros usos de Shopify.
+
+El campo `decokasa.gallery_images` es una lista ordenada de archivos de imagen de la variante. Al cambiar de color se reemplaza la galería completa. Con una sola foto no se muestran miniaturas redundantes; sin este campo se conserva la galería general del producto, por compatibilidad. Para filtrar por color hay que asignar el campo a cada variante.
+
+Titan 919B: blanco tiene cuatro vistas (tres cuartos, frontal, lateral y reclinada con reposapiés); azul, gris, negro, rojo y verde tienen una foto cada uno. No se deduce el color a partir del nombre del archivo. El producto continúa en borrador.
+
 ## Productos con una landing especial
 
 La ficha estándar es la base. Desarrollo puede crear plantillas alternativas de producto y secciones específicas para cada familia; el equipo las asignará desde el campo **Plantilla del tema** del producto. Se conserva el mismo registro y URL de producto, con sus variantes y datos de Shopify. No es necesario duplicar productos. Las alternativas futuras y sus funciones requieren implementación y revisión propias.

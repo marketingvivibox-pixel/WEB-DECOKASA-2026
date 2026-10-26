@@ -45,8 +45,8 @@ test('Opciones múltiples conservan IDs seleccionados y una combinación inexist
   assert.equal(doc.querySelectorAll('[name=variant_id] option').length, 0);
   assert.ok(doc.querySelector('.product-no-image'));
 });
-async function runtime(fetcher) {
-  const {window, document} = parseHTML(await html());
+async function runtime(fetcher, initialProduct = product()) {
+  const {window, document} = parseHTML(await html(initialProduct));
   delete window.decokasaProductDetail;
   const navigations = [], histories = [], requests = [], loaded = [];
   const location = {href:'https://example.test/products/ficha', origin:'https://example.test', assign:url=>navigations.push(url)};
@@ -57,6 +57,44 @@ async function runtime(fetcher) {
   return {document, window, click, navigations, histories, requests, loaded};
 }
 const settle = async()=>{await new Promise(resolve=>setImmediate(resolve));await new Promise(resolve=>setImmediate(resolve));};
+function groupedProduct(selected = 0) {
+  const p = product(selected);
+  p.variants.forEach((variant, index) => {
+    variant.metafields.decokasa.gallery_images = {value:Array.from({length:index ? 4 : 1}, (_, angle) => ({
+      id:`media-${index}-${angle}`, media_type:'image',
+      preview_image:{src:`/color-${index}-angle-${angle}.webp`, alt:`Color ${index}, ángulo ${angle}`}
+    }))};
+  });
+  return p;
+}
+test('Galería por variante: cuatro ángulos ordenados, foto inicial visible y carga diferida del resto', async () => {
+  const doc = parseHTML(await html(groupedProduct(1))).document;
+  assert.deepEqual([...doc.querySelectorAll('[data-gallery-panel]')].map(el=>el.dataset.galleryPanel), ['media-1-0','media-1-1','media-1-2','media-1-3']);
+  assert.equal(doc.querySelectorAll('[data-gallery-panel]:not([hidden])').length, 1);
+  assert.equal(doc.querySelector('[data-gallery-panel]:not([hidden]) img').getAttribute('src'), '/color-1-angle-0.webp');
+  assert.equal(doc.querySelector('[data-gallery-panel]:not([hidden]) img').getAttribute('loading'), 'eager');
+  assert.ok([...doc.querySelectorAll('[data-gallery-panel][hidden] img')].every(img=>img.getAttribute('loading')==='lazy'));
+  assert.equal(doc.querySelectorAll('[data-gallery-choice]').length, 4);
+  const single = parseHTML(await html(groupedProduct())).document;
+  assert.equal(single.querySelectorAll('[data-gallery-panel]').length, 1);
+  assert.equal(single.querySelectorAll('[data-gallery-choice]').length, 0);
+});
+test('Seleccionar un ángulo y cambiar de color reemplaza la galería sin mezclar fotos', async () => {
+  const nextHTML = await html(groupedProduct());
+  const app = await runtime(()=>({ok:true, text:async()=>nextHTML}), groupedProduct(1));
+  app.click('[data-gallery-choice="media-1-3"]');
+  assert.equal(app.document.querySelector('[data-gallery-panel]:not([hidden])').dataset.galleryPanel, 'media-1-3');
+  assert.equal(app.document.querySelector('[data-gallery-choice="media-1-3"]').getAttribute('aria-current'), 'true');
+  app.document.querySelector('[data-product-quantity]').value='3';
+  app.document.querySelector('[data-product-quantity]').dispatchEvent(new app.window.Event('input', {bubbles:true}));
+  app.document.querySelector('[name=name]').value='Cliente de prueba';
+  app.click('[data-option-link]:not([aria-current])'); await settle();
+  assert.equal(app.document.querySelectorAll('[data-gallery-panel]').length, 1);
+  assert.equal(app.document.querySelector('[data-gallery-panel]:not([hidden])').dataset.galleryPanel, 'media-0-0');
+  assert.equal(app.document.querySelector('[data-product-quantity]').value, '3');
+  assert.equal(app.document.querySelector('[name=name]').value, 'Cliente de prueba');
+  assert.equal(app.navigations.length, 0);
+});
 test('Cambio nativo de variante reemplaza sección y conserva cantidad/contacto sin enviarlos', async () => {
   const nextHTML = await html(product(1));
   const app = await runtime(()=>({ok:true, text:async()=>nextHTML}));

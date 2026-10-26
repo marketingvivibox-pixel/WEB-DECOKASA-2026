@@ -1,6 +1,16 @@
 // Local fixtures only. Never included in the Shopify theme ZIP.
 const escape = value => String(value ?? '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 function filters(engine) {
+  // Shopify's LiquidDoc is documentation only; LiquidJS does not ship this tag yet.
+  engine.registerTag('doc', {
+    parse(tagToken, tokens) {
+      while (tokens.length) {
+        if (tokens.shift().name === 'enddoc') return;
+      }
+      throw new Error('LiquidDoc tag is not closed');
+    },
+    render() { return ''; }
+  });
   engine.registerFilter('image_url', image => image?.src || image);
   engine.registerFilter('image_tag', (src, ...args) => {
     const attrs = Object.fromEntries(args.filter(Array.isArray));

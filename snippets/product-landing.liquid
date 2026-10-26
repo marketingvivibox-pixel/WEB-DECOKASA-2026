@@ -1,18 +1,32 @@
+{% doc %}
+  Renders the product detail and the selected variant's ordered image gallery.
+  @param {product} product - Product whose native data is displayed.
+  @param {boolean} [is_demo] - Show the local sample-data notice.
+  @param {boolean} [pvc] - Enable the floor coverage calculator.
+{% enddoc %}
 {{ 'product-detail.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'product-detail.js' | asset_url }}" defer="defer"></script>
 {% if product != blank %}
   {% assign current_variant = product.selected_or_first_available_variant %}
   {% assign main_image = current_variant.featured_image | default: product.featured_image %}
+  {% assign gallery_images = current_variant.metafields.decokasa.gallery_images.value | where: 'media_type', 'image' %}
+  {% assign main_image_id = main_image.id %}
+  {% if gallery_images.size > 0 %}
+    {% assign main_image_id = gallery_images.first.id %}
+  {% else %}
+    {% assign gallery_images = product.images %}
+  {% endif %}
   <div class="wrap product-page" data-product-page data-section-id="{{ section.id }}" data-product-url="{{ product.url }}" data-gallery-ratio="{{ section.settings.gallery_ratio | default: 'square' }}" data-image-fit="{{ section.settings.image_fit | default: 'contain' }}">
     <nav class="breadcrumb" aria-label="Ruta de navegación"><a href="{{ routes.root_url }}">Inicio</a><span aria-hidden="true">/</span><a href="{{ routes.all_products_collection_url }}">Catálogo</a><span aria-hidden="true">/</span><span>{{ product.title | escape }}</span></nav>
     {% if is_demo %}<p class="product-demo">Vista de muestra · Imágenes ilustrativas y precios ficticios.</p>{% endif %}
     <div class="product-layout">
       <div class="product-gallery" aria-label="Imágenes del producto">
         <div class="product-image-stage">
-          {% for image in product.images %}
+          {% for gallery_item in gallery_images %}
+            {% assign image = gallery_item.preview_image | default: gallery_item %}
             {% assign image_alt = image.alt | default: product.title %}
-            <div class="product-image-panel" data-gallery-panel="{{ image.id }}" {% unless image.id == main_image.id %}hidden{% endunless %}>
-              {% if image.id == main_image.id %}
+            <div class="product-image-panel" data-gallery-panel="{{ gallery_item.id }}" {% unless gallery_item.id == main_image_id %}hidden{% endunless %}>
+              {% if gallery_item.id == main_image_id %}
                 {{ image | image_url: width: 1440 | image_tag: widths: '360, 540, 720, 1080, 1440', sizes: '(min-width: 900px) 46vw, 100vw', loading: 'eager', class: 'product-main-image', alt: image_alt }}
               {% else %}
                 {{ image | image_url: width: 1440 | image_tag: widths: '360, 540, 720, 1080, 1440', sizes: '(min-width: 900px) 46vw, 100vw', loading: 'lazy', class: 'product-main-image', alt: image_alt }}
@@ -22,11 +36,12 @@
             <div class="product-no-image">{% render 'icon', name: 'bag' %}<span>Imagen en preparación</span></div>
           {% endfor %}
         </div>
-        {% if product.images.size > 1 %}
+        {% if gallery_images.size > 1 %}
           <div class="product-thumbnails" aria-label="Elegir imagen">
-            {% for image in product.images %}
+            {% for gallery_item in gallery_images %}
+              {% assign image = gallery_item.preview_image | default: gallery_item %}
               {% assign thumb_alt = image.alt | default: product.title %}
-              <a class="product-thumbnail" href="{{ image | image_url: width: 1440 }}" data-gallery-choice="{{ image.id }}" aria-label="Ver imagen {{ forloop.index }}: {{ thumb_alt | escape }}" {% if image.id == main_image.id %}aria-current="true"{% endif %}>
+              <a class="product-thumbnail" href="{{ image | image_url: width: 1440 }}" data-gallery-choice="{{ gallery_item.id }}" aria-label="Ver imagen {{ forloop.index }}: {{ thumb_alt | escape }}" {% if gallery_item.id == main_image_id %}aria-current="true"{% endif %}>
                 {{ image | image_url: width: 180 | image_tag: widths: '90, 180', sizes: '80px', loading: 'lazy', alt: '' }}
               </a>
             {% endfor %}

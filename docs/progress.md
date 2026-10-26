@@ -1,3 +1,10 @@
+## 26/10/2026 — Titan: galería ordenada por color
+
+- Implementada galería desde `decokasa.gallery_images` de variante, con respaldo en la galería general para otros productos. Una foto principal visible, resto con carga diferida y miniaturas solo cuando hay varias fotos. Conserva cambio de color, cantidad, formulario y controles existentes.
+- Configuradas y releídas en Shopify nueve imágenes: blanco cuatro ángulos (tres cuartos, frontal, lateral y reclinada con reposapiés); cinco colores con una imagen cada uno. Restaurada imagen nativa de blanco y textos alternativos descriptivos. Producto 15464341471469 continúa DRAFT; SKU, precios e inventario preservados.
+- 24/24 pruebas aprobadas, incluyendo selección de ángulo, cambio de color sin mezclar fotos y conservación de cantidad/contacto. Validación nativa Shopify del snippet sin hallazgos. Vistas y ZIP regenerados. `lint`/`build` del manifiesto React no disponibles porque faltan tsc/vite en la instalación existente; no se modificó esa aplicación ni sus dependencias.
+- Guía de mantenimiento actualizada en `docs/product-detail.md`. Verificación del despliegue en Shopify pendiente tras sincronizar GitHub/main.
+
 ## 22/10/2026 — Corrección móvil SPC sincronizada y comprobada en Shopify
 
 - El usuario no veía la corrección en la tienda: se confirmó que solo estaba en archivos locales, mientras el tema activo seguía sirviendo los tres CSS anteriores.

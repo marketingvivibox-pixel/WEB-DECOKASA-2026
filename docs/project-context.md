@@ -1,3 +1,9 @@
+## 26/10/2026 — Galerías de fotos por variante
+
+La ficha predeterminada admite el metacampo PRODUCTVARIANT `decokasa.gallery_images`, lista ordenada de archivos limitada a imágenes y editable como **Galería de la variante**. Usa el identificador del medio, no el de su preview_image, para enlazar paneles y miniaturas. La primera imagen es principal; al cambiar de variante se sustituye la galería completa mediante la actualización de sección existente. Sin el metacampo se conserva product.images. No requiere etiquetas de color en los archivos ni cambios de código para incorporar más ángulos.
+
+Aplicado al borrador Silla gamer Titan / 919B: cuatro fotos de blanco y una por cada otro color. Se conservan los seis SKU 01 acordados, los SKU 03 solo como referencias en el Sheet y los precios/inventario existentes. El usuario está incorporando manualmente productos principales mientras sigue pendiente la aprobación de Odoo de pruebas. El Sheet de revisión continúa como registro de acuerdos. No se publica el producto ni se habilita recepción real de solicitudes.
+
 ## 22/10/2026 — SPC móvil proporcional y continuidad en main
 
 El usuario confirmó que el mockup de 1080 × 6491 px fue pensado para móvil y pidió conservar su distribución también en teléfonos. La composición completa usa una única escala según el ancho del lienzo, con máximo de 1080 px; se eliminó el cambio de distribución hasta 700 px. El JSON de geometría continúa siendo la fuente de posiciones y tamaños. Imágenes, SVG, textos y controles siguen siendo elementos independientes.
