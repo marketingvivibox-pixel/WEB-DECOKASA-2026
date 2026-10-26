@@ -1,3 +1,9 @@
+## 26/10/2026 — Calculadora visual SPC por ambientes
+
+- Registrados los cambios pendientes en `feature/calculadora-visual-spc`: cálculo por medidas de varios ambientes o ingreso directo de m², croquis, desglose de superficie y cajas, y acceso al catálogo desde el resultado.
+- Actualizados estilos adaptables, sección Liquid, acciones y vista previa; paquete del tema regenerado con 74 archivos.
+- Validación: 26/26 pruebas aprobadas; ocho páginas de vista previa, enlaces, IDs, rutas, JSON y esquemas válidos; `git diff --check` sin errores. No se realizó una nueva validación visual en esta tarea de registro ni se desplegó el cambio.
+
 ## 26/10/2026 — Titan: galería ordenada por color
 
 - Implementada galería desde `decokasa.gallery_images` de variante, con respaldo en la galería general para otros productos. Una foto principal visible, resto con carga diferida y miniaturas solo cuando hay varias fotos. Conserva cambio de color, cantidad, formulario y controles existentes.

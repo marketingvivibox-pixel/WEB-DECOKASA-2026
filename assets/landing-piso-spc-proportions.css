@@ -50,24 +50,48 @@
 .spc-layers{display:grid;grid-template-columns:max-content max-content;gap:0 calc(25 * var(--spc-unit));list-style-position:inside;font-size:calc(19 * var(--spc-unit));line-height:1.45;align-content:start}
 .spc-layers li:last-child{grid-column:1/-1}
 .spc-layer-image{object-fit:fill;z-index:1}
-.spc-installation{overflow:hidden;z-index:0}
-.spc-installation:before{background:#0005}
-.spc-calculator{border-radius:calc(24 * var(--spc-unit));background:#181b18e6;box-shadow:0 calc(10 * var(--spc-unit)) calc(30 * var(--spc-unit)) #0003}
-.spc-calculator>label:not(.spc-waste){position:absolute;left:5%;top:10%;font-size:calc(21 * var(--spc-unit))}
-.spc-input-row{position:absolute;left:5%;top:26%;width:51%;height:22%;margin:0;gap:calc(8 * var(--spc-unit))}
-.spc-area-field{padding-right:calc(10 * var(--spc-unit));font-size:calc(20 * var(--spc-unit));border-radius:calc(12 * var(--spc-unit))}
-.spc-area-field input{height:100%;font-size:calc(24 * var(--spc-unit));padding:calc(12 * var(--spc-unit));border-radius:inherit}
-.spc-input-row button{font-size:calc(16 * var(--spc-unit));padding:0 calc(12 * var(--spc-unit));border-radius:calc(12 * var(--spc-unit))}
-.spc-calculator .spc-waste{position:absolute;left:5%;top:52%;font-size:calc(15 * var(--spc-unit));min-height:0;gap:calc(8 * var(--spc-unit))}
-.spc-waste input{width:calc(20 * var(--spc-unit));height:calc(20 * var(--spc-unit));margin:0}
-.spc-page .spc-calc-help{position:absolute;left:5%;top:69%;width:50%;font-size:calc(13 * var(--spc-unit));line-height:1.35;margin:0}
-.spc-calc-result{position:absolute;left:61%;top:14%;width:34%;height:72%;margin:0;padding:0 0 0 4%;border:0;border-left:1px solid #ffffff60}
-.spc-calc-result strong{font-size:calc(32 * var(--spc-unit));line-height:1.2}
-.spc-calc-result span{font-size:calc(15 * var(--spc-unit));line-height:1.35;margin-top:calc(8 * var(--spc-unit))}
-.spc-calc-result a{font-size:calc(16 * var(--spc-unit));line-height:1.2;min-height:calc(44 * var(--spc-unit));gap:calc(8 * var(--spc-unit));margin-top:calc(15 * var(--spc-unit))}
-.spc-calc-result .spc-icon{width:calc(22 * var(--spc-unit));height:calc(22 * var(--spc-unit))}
-.spc-page .spc-calc-error{position:absolute;left:61%;top:14%;width:34%;font-size:calc(16 * var(--spc-unit));margin:0;padding:calc(12 * var(--spc-unit))}
-.spc-calculator noscript{position:absolute;left:61%;top:14%;width:34%;font-size:calc(16 * var(--spc-unit))}
+.spc-page .spc-installation{aspect-ratio:auto!important;min-height:calc(880 * var(--spc-unit))!important;position:relative!important;overflow:visible!important;display:block!important;padding:calc(85 * var(--spc-unit)) calc(24 * var(--spc-unit)) calc(110 * var(--spc-unit))!important}
+.spc-page .spc-installation > .spc-backdrop{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;z-index:-1!important}
+.spc-page .spc-installation h2{position:relative!important;inset:auto!important;width:100%!important;max-width:none!important;height:auto!important;margin:0 auto calc(14 * var(--spc-unit))!important;text-align:center!important;z-index:2!important}
+.spc-page .spc-calculator{position:relative!important;inset:auto!important;width:min(100%, calc(960 * var(--spc-unit)))!important;height:auto!important;margin:0 auto!important;z-index:2!important;box-shadow:0 calc(16 * var(--spc-unit)) calc(40 * var(--spc-unit)) rgba(0,0,0,0.5)!important}
+.spc-page .spc-installation .spc-actions{position:relative!important;inset:auto!important;width:100%!important;max-width:min(100%, calc(960 * var(--spc-unit)))!important;height:auto!important;margin:calc(28 * var(--spc-unit)) auto 0!important;display:flex!important;justify-content:center!important;z-index:2!important}
+.spc-page .spc-installation .spc-actions .spc-button--catalog{min-width:min(100%, calc(360 * var(--spc-unit)))!important}
+@container (max-width: 720px){
+  .spc-page .spc-installation{padding:44px 16px 56px!important;min-height:auto!important}
+  .spc-calc-title-group{margin-bottom:24px!important}
+  .spc-page .spc-installation h2{font-size:26px!important;line-height:1.2!important}
+  .spc-calc-subtitle{font-size:14px!important}
+  .spc-page .spc-calculator{width:100%!important;padding:22px 14px!important;border-radius:20px!important}
+  .spc-calc-grid{grid-template-columns:1fr!important;gap:24px!important}
+  .spc-calc-col-result{position:static!important}
+  .spc-calc-tabs{grid-template-columns:1fr!important;gap:6px!important}
+  .spc-calc-tab{padding:12px 14px!important;font-size:14px!important;min-height:46px!important}
+  .spc-known-meters-toggle{padding:12px 14px!important;gap:10px!important}
+  .spc-known-text strong{font-size:14px!important}
+  .spc-room-card{padding:14px 12px!important}
+  .spc-room-name-input{font-size:14px!important}
+  .spc-dim-box input{font-size:16px!important;padding:12px 10px!important}
+  .spc-direct-input-box input{font-size:22px!important;padding:14px!important}
+  .spc-catalog-cta-btn{min-height:50px!important;font-size:15px!important}
+}
+@media (max-width: 720px){
+  .spc-page .spc-installation{padding:44px 16px 56px!important;min-height:auto!important}
+  .spc-calc-title-group{margin-bottom:24px!important}
+  .spc-page .spc-installation h2{font-size:26px!important;line-height:1.2!important}
+  .spc-calc-subtitle{font-size:14px!important}
+  .spc-page .spc-calculator{width:100%!important;padding:22px 14px!important;border-radius:20px!important}
+  .spc-calc-grid{grid-template-columns:1fr!important;gap:24px!important}
+  .spc-calc-col-result{position:static!important}
+  .spc-calc-tabs{grid-template-columns:1fr!important;gap:6px!important}
+  .spc-calc-tab{padding:12px 14px!important;font-size:14px!important;min-height:46px!important}
+  .spc-known-meters-toggle{padding:12px 14px!important;gap:10px!important}
+  .spc-known-text strong{font-size:14px!important}
+  .spc-room-card{padding:14px 12px!important}
+  .spc-room-name-input{font-size:14px!important}
+  .spc-dim-box input{font-size:16px!important;padding:12px 10px!important}
+  .spc-direct-input-box input{font-size:22px!important;padding:14px!important}
+  .spc-catalog-cta-btn{min-height:50px!important;font-size:15px!important}
+}
 .spc-testimonials{z-index:3;box-shadow:0 calc(16 * var(--spc-unit)) 0 var(--gold)}
 .spc-perspective{object-fit:fill;scale:-1 1}
 .spc-testimonial-intro p{font-size:calc(22 * var(--spc-unit));line-height:1.2;margin-top:calc(30 * var(--spc-unit))}
