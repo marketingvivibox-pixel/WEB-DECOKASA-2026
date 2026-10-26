@@ -3,7 +3,7 @@
 - Incorporada lista por variante: elegir color/cantidad, agregar, repetir; controles independientes y eliminación. Cambiar de color conserva selección y formulario. Agregar un color repetido suma unidades.
 - Total, meta del regalo y resumen del formulario usan todas las líneas con su precio y SKU. Lista vacía impide continuar. Errores de carga conservan la solicitud y permiten reintentar. Formulario aún en simulación, sin envío, reserva ni pagos; calculadoras PVC/SPC preservadas.
 - 27/27 pruebas aprobadas, incluidos precios distintos, acumulación, edición, eliminación, límites, fallo de red y referencia estable por solicitud. Cuatro archivos validados con la herramienta nativa Shopify sin hallazgos. Ocho vistas y ZIP de 74 archivos válidos. Revisión visual local a 320/390 px y escritorio; consola sin errores.
-- Preparado para sincronización a main y comprobación final en Shopify.
+- Commit `104c032` enviado a `main`, sincronizado y verificado en Shopify (tema `188927803629`): blanco ×1 + negro ×1 = S/ 579; blanco ×2 + negro ×1 = S/ 858; eliminación y cambio de color conservan cantidades y recalculan el total. El formulario muestra ambas líneas y la galería blanca conserva cuatro ángulos. Consola sin errores. Titan continúa en borrador y el formulario sigue en simulación.
 
 ## 26/10/2026 — Titan: galería ordenada por color
 
