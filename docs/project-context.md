@@ -106,6 +106,8 @@ El formulario solo simula una referencia, sin transmitir ni persistir contactos;
 
 ## Pendientes
 
+Decisión del 26/10/2026: los productos con varias presentaciones y sin calculadora de cobertura permiten combinar variantes en una misma solicitud. Cada variante conserva su SKU, precio y cantidad; total y regalo se calculan sobre la lista agregada. Cambiar la presentación visible no reemplaza las líneas. El formulario sigue en simulación y la lista vive solo en memoria, sin checkout, reservas, persistencia de contactos ni conexión Odoo.
+
 Catálogo y fotos reales; configuración PEN y rutas; autoridad de precios y promociones; URL/permisos Odoo; SKU, variantes, unidades, almacenes y operación de cierre; receptor seguro de solicitudes, CRM, consentimiento y medición; pruebas de duplicados, fallos y conciliación antes del lanzamiento comercial. Portada revisada visualmente en Shopify en escritorio y celular el 06/10/2026.
 
 Los backends existentes de Meta/TikTok son de solo lectura. Consultas sobre sus bases publicitarias parten de la carpeta de Drive `18fQUpb1ZMC7jKO-nenhJFXmbQo1Oyr1W`; no iniciar sesión en redes para buscar esos datos ni modificar sus scripts.

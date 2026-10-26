@@ -152,17 +152,33 @@
         {% endunless %}
         <p class="product-availability">{% render 'icon', name: 'headphones' %}<span><strong>Disponibilidad a confirmar</strong><small>Un asesor te ayuda con tu compra.</small></span></p>
         {% if pvc or product.metafields.decokasa.coverage_m2.value != blank or current_variant.metafields.decokasa.coverage_m2.value != blank %}{% render 'pvc-calculator' %}{% endif %}
+        {% assign multiple_request = false %}
+        {% unless product.has_only_default_variant or pvc or product.metafields.decokasa.coverage_m2.value != blank or current_variant.metafields.decokasa.coverage_m2.value != blank %}{% assign multiple_request = true %}{% endunless %}
+        {% if multiple_request %}<p class="request-builder-help">Elige una presentación y su cantidad. Agrégala a tu solicitud y repite con los otros colores que quieras.</p>{% endif %}
         <div class="product-purchase" data-purchase-controls>
           <div class="product-quantity"><button type="button" data-quantity-step="-1" aria-label="Disminuir cantidad">−</button><label class="sr-only" for="Quantity-{{ section.id }}">Cantidad</label><input id="Quantity-{{ section.id }}" data-product-quantity type="number" min="1" max="1000000" step="1" value="1" inputmode="numeric"><button type="button" data-quantity-step="1" aria-label="Aumentar cantidad">+</button></div>
+          {% if multiple_request %}
+          <button type="button" class="button yellow product-cta" data-add-request {% if current_variant == blank %}disabled{% endif %}>Agregar a mi solicitud</button>
+          {% else %}
           <a class="button yellow product-cta" href="#solicitud" data-open-request {% if current_variant == blank %}aria-disabled="true"{% endif %}>{{ section.settings.cta_label | default: 'Solicitar compra' | escape }}</a>
+          {% endif %}
         </div>
+        {% if multiple_request %}
+        <section class="request-builder" data-request-builder aria-label="Tu solicitud">
+          <h2>Tu solicitud</h2>
+          <p data-request-empty>Aún no agregaste una presentación.</p>
+          <ul class="request-lines" data-request-lines></ul>
+          <p class="request-builder-status" data-request-builder-status role="status"></p>
+        </section>
+        {% endif %}
         <div class="product-estimate-card" data-estimated-bar>
           <div class="estimate-line">
-            <span class="estimate-title">Monto estimado a pagar:</span>
+            <span class="estimate-title" data-estimated-label>Monto estimado a pagar:</span>
             <strong class="estimate-amount" data-estimated-amount>{{ current_variant.price | money_with_currency }}</strong>
           </div>
           <div class="estimate-breakdown" data-estimated-breakdown>1 unidad × {{ current_variant.price | money_with_currency }}</div>
         </div>
+        {% if multiple_request %}<a class="button yellow request-continue" href="#solicitud" data-open-request aria-disabled="true">{{ section.settings.cta_label | default: 'Solicitar compra' | escape }}</a>{% endif %}
         {% if current_variant == blank %}<p class="error">Esta combinación no existe. Elige otra presentación.</p>{% endif %}
         {% if section.settings.show_sku != false %}<p class="product-sku">SKU: <span data-sku>{{ current_variant.sku | default: 'Pendiente' | escape }}</span></p>{% endif %}
         <details class="product-request" data-request-details><summary>Completar solicitud con un asesor</summary>{% render 'request-form', product: product %}</details>

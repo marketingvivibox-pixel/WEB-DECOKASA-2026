@@ -1,3 +1,10 @@
+## 26/10/2026 — Solicitud con varios colores
+
+- Incorporada lista por variante: elegir color/cantidad, agregar, repetir; controles independientes y eliminación. Cambiar de color conserva selección y formulario. Agregar un color repetido suma unidades.
+- Total, meta del regalo y resumen del formulario usan todas las líneas con su precio y SKU. Lista vacía impide continuar. Errores de carga conservan la solicitud y permiten reintentar. Formulario aún en simulación, sin envío, reserva ni pagos; calculadoras PVC/SPC preservadas.
+- 27/27 pruebas aprobadas, incluidos precios distintos, acumulación, edición, eliminación, límites, fallo de red y referencia estable por solicitud. Cuatro archivos validados con la herramienta nativa Shopify sin hallazgos. Ocho vistas y ZIP de 74 archivos válidos. Revisión visual local a 320/390 px y escritorio; consola sin errores.
+- Preparado para sincronización a main y comprobación final en Shopify.
+
 ## 26/10/2026 — Titan: galería ordenada por color
 
 - Implementada galería desde `decokasa.gallery_images` de variante, con respaldo en la galería general para otros productos. Una foto principal visible, resto con carga diferida y miniaturas solo cuando hay varias fotos. Conserva cambio de color, cantidad, formulario y controles existentes.

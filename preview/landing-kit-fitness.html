@@ -327,17 +327,31 @@ Nuestras marcas</a></div>
 </svg>
 <span><strong>Disponibilidad a confirmar</strong><small>Un asesor te ayuda con tu compra.</small></span></p>
 
+
+
+        <p class="request-builder-help">Elige una presentación y su cantidad. Agrégala a tu solicitud y repite con los otros colores que quieras.</p>
         <div class="product-purchase" data-purchase-controls="">
           <div class="product-quantity"><button type="button" data-quantity-step="-1" aria-label="Disminuir cantidad">−</button><label class="sr-only" for="Quantity-preview-product-landing">Cantidad</label><input id="Quantity-preview-product-landing" data-product-quantity="" type="number" min="1" max="1000000" step="1" value="1" inputmode="numeric"><button type="button" data-quantity-step="1" aria-label="Aumentar cantidad">+</button></div>
-          <a class="button yellow product-cta" href="#solicitud" data-open-request="">Solicitar compra</a>
+
+          <button type="button" class="button yellow product-cta" data-add-request="">Agregar a mi solicitud</button>
+
         </div>
+
+        <section class="request-builder" data-request-builder="" aria-label="Tu solicitud">
+          <h2>Tu solicitud</h2>
+          <p data-request-empty="">Aún no agregaste una presentación.</p>
+          <ul class="request-lines" data-request-lines=""></ul>
+          <p class="request-builder-status" data-request-builder-status="" role="status"></p>
+        </section>
+
         <div class="product-estimate-card" data-estimated-bar="">
           <div class="estimate-line">
-            <span class="estimate-title">Monto estimado a pagar:</span>
+            <span class="estimate-title" data-estimated-label="">Monto estimado a pagar:</span>
             <strong class="estimate-amount" data-estimated-amount="">S/. 159.00 PEN</strong>
           </div>
           <div class="estimate-breakdown" data-estimated-breakdown="">1 unidad × S/. 159.00 PEN</div>
         </div>
+        <a class="button yellow request-continue" href="#solicitud" data-open-request="" aria-disabled="true">Solicitar compra</a>
 
         <p class="product-sku">SKU: <span data-sku="">DEMO-BF-001</span></p>
         <details class="product-request" data-request-details=""><summary>Completar solicitud con un asesor</summary><div class="form-box" id="solicitud"><h2>Solicita tu compra</h2><p>Completa tus datos. Un asesor revisará la disponibilidad y coordinará contigo el importe final y la entrega.</p><p class="note">Prueba local: usa datos ficticios. No se envía esta solicitud ni se confirma una venta.</p><div class="form-estimate-summary" data-form-estimate-summary=""><span class="form-summary-qty">Cantidad seleccionada: <strong data-form-qty="">1 unidad</strong></span><span class="form-summary-total">Total estimado: <strong data-form-total="">S/. 159.00 PEN</strong></span></div><form data-request-form="" data-product-id="DEMO-P-3" data-currency="PEN" action="#solicitud" method="post"><fieldset disabled style="border:0;padding:0;margin:0;min-width:0"><label data-request-variant="">Presentación<select name="variant_id"><option value="DEMO-V-3-A" data-price="15900" data-sku="DEMO-BF-001" data-coverage="" selected>Estándar</option></select></label><label data-request-quantity="">Cantidad<input name="quantity" type="number" min="1" max="1000000" step="1" value="1" required></label><div class="fields"><label>Nombre<input name="name" autocomplete="name" maxlength="100" required></label><label>Teléfono o WhatsApp<input name="phone" type="tel" autocomplete="tel" minlength="7" maxlength="25" required title="Ingresa tu número de contacto."></label><label>Correo (opcional)<input name="email" type="email" autocomplete="email" maxlength="180"></label><label>Ciudad o distrito<input name="district" autocomplete="address-level2" maxlength="100" required></label></div><label>Comentario (opcional)<textarea name="comment" maxlength="1000"></textarea></label><label class="check"><input name="contact_permission" type="checkbox" required>Autorizo que un asesor me contacte para atender esta solicitud.</label><button class="primary" type="submit" disabled data-enable-form="">Simular solicitud</button></fieldset><div data-request-status="" class="status" tabindex="-1" role="status" hidden></div></form><noscript><p class="error">Activa JavaScript para probar el formulario. No envíes datos reales.</p></noscript></div></details>
@@ -412,12 +426,11 @@ Nuestras marcas</a></div>
       if(form.dataset.initialized)return;
       const page=form.closest('[data-product-page]')||scope;
       const selected=form.querySelector('[name=variant_id]').selectedOptions[0];
-      if(!selected)return;
+      if(!selected && !page.querySelector('[data-request-builder]'))return;
       form.dataset.initialized='true';
       form.querySelector('[data-enable-form]').disabled=false;
       const select=form.querySelector('[name=variant_id]'),qty=form.querySelector('[name=quantity]'),price=page.querySelector('[data-product-price]'),sku=page.querySelector('[data-sku]');
       const calc=page.querySelector('[data-pvc]'),result=calc?.querySelector('[data-calc-result]');
-      let draft=null;
       form.querySelector('fieldset').disabled=false;
       function calculation(){if(!calc)return;try{const coverage=select.selectedOptions[0].dataset.coverage;const n=boxes(calc.querySelector('[name=area]').value,calc.querySelector('[name=waste]').value,coverage);result.textContent=`${n} cajas · ${(n*Number(coverage)).toLocaleString('es-PE',{maximumFractionDigits:2})} m² de cobertura`;qty.value=n;page.dispatchEvent(new CustomEvent('decokasa:quantity',{bubbles:true}));result.classList.remove('error');}catch(e){result.textContent=e.message;result.classList.add('error');}}
       function variant(){const o=select.selectedOptions[0];if(!o)return;if(price){price.textContent=new Intl.NumberFormat('es-PE',{style:'currency',currency:form.dataset.currency}).format(Number(o.dataset.price)/100);price.dataset.cents=o.dataset.price;}if(sku)sku.textContent=o.dataset.sku||'Pendiente';calculation();page.dispatchEvent(new CustomEvent('decokasa:quantity',{bubbles:true}));}
@@ -427,12 +440,16 @@ Nuestras marcas</a></div>
         event.preventDefault();if(!form.reportValidity())return;
         if(calc && result.classList.contains('error')){result.setAttribute('tabindex','-1');result.focus();return;}
         const o=select.selectedOptions[0];
-        // Contact values exist only in memory; retries of an unchanged form reuse its reference.
-        draft=requestDraft(draft,JSON.stringify(Array.from(new FormData(form).entries())));
-        const requestId=draft.id;
+        const items = form.decokasaRequestItems?.();
         const receipt=form.querySelector('[data-request-status]');
+        if(items && !items.length){receipt.textContent='Agrega al menos una presentación a tu solicitud.';receipt.hidden=false;receipt.focus();return;}
+        // Contact values exist only in memory; retries of an unchanged form reuse its reference.
+        const values=Array.from(new FormData(form).entries()).filter(([key])=>!items || (key!=='variant_id' && key!=='quantity'));
+        form.decokasaDraft=requestDraft(form.decokasaDraft,JSON.stringify({values,items}));
+        const requestId=form.decokasaDraft.id;
+        const detail=items ? items.map(item=>`${item.title}: ${item.quantity} unidad(es) · ${item.sku||'SKU pendiente'} · S/. ${(item.quantity*item.price_cents/100).toFixed(2)} PEN`).join('\n')+`\nTotal estimado: S/. ${(items.reduce((sum,item)=>sum+item.quantity*item.price_cents,0)/100).toFixed(2)} PEN` : `${qty.value} unidad(es) · ${o.dataset.sku||'SKU pendiente'}`;
         // Demo only: never store/log contact fields, send a request, emit GA4 or alter inventory.
-        receipt.textContent=`Simulación completada. Esta solicitud no fue enviada.\nReferencia: ${requestId}\n${qty.value} unidad(es) · ${o.dataset.sku||'SKU pendiente'}\nEl asesor confirmará disponibilidad e importe cuando la tienda esté conectada.`;
+        receipt.textContent=`Simulación completada. Esta solicitud no fue enviada.\nReferencia: ${requestId}\n${detail}\nEl asesor confirmará disponibilidad e importe cuando la tienda esté conectada.`;
         receipt.hidden=false;receipt.focus();
       });
     });

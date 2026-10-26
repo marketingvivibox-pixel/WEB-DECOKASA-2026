@@ -50,7 +50,10 @@ async function runtime(fetcher, initialProduct = product()) {
   delete window.decokasaProductDetail;
   const navigations = [], histories = [], requests = [], loaded = [];
   const location = {href:'https://example.test/products/ficha', origin:'https://example.test', assign:url=>navigations.push(url)};
-  document.addEventListener('shopify:section:load', event=>loaded.push(event.target));
+  document.addEventListener('shopify:section:load', event=>{
+    loaded.push(event.target);
+    for (const input of event.target.querySelectorAll('input')) input.reportValidity = () => true;
+  });
   for (const input of document.querySelectorAll('input')) input.reportValidity = () => true;
   vm.runInNewContext(fs.readFileSync(path.join(root,'assets/product-detail.js'),'utf8'), {window, document, location, URL, DOMParser, AbortController, Event:window.Event, CustomEvent:window.CustomEvent, history:{replaceState:(_,__,url)=>histories.push(String(url))}, fetch:async(url, options)=>{requests.push({url:String(url), options});return fetcher();}});
   const click = selector=>document.querySelector(selector).dispatchEvent(new window.Event('click', {bubbles:true, cancelable:true}));
@@ -144,13 +147,14 @@ test('El botón de objetivo abre el modal de detalles y actualiza estado al alca
   const quantity = app.document.querySelector('[data-product-quantity]');
   quantity.value = '10';
   quantity.dispatchEvent(new app.window.Event('input', { bubbles: true }));
+  app.click('[data-add-request]');
   assert.ok(actionBtn.classList.contains('unlocked'));
   assert.match(app.document.querySelector('[data-reward-action-text]').textContent, /¡Regalo Desbloqueado!/);
 });
 
 test('La previsualización del monto estimado se actualiza en tiempo real al cambiar la cantidad', async () => {
-  const nextHTML = await html(product(0));
-  const app = await runtime(() => ({ ok: true, text: async () => nextHTML }));
+  const single = {...product(), has_only_default_variant:true, options_with_values:[]};
+  const app = await runtime(() => { throw Error('No network needed'); }, single);
   const estimateEl = app.document.querySelector('[data-estimated-amount]');
   const breakdownEl = app.document.querySelector('[data-estimated-breakdown]');
   const quantity = app.document.querySelector('[data-product-quantity]');
@@ -164,5 +168,80 @@ test('La previsualización del monto estimado se actualiza en tiempo real al cam
   quantity.dispatchEvent(new app.window.Event('input', { bubbles: true }));
   assert.equal(estimateEl.textContent.trim(), 'S/. 480.00 PEN');
   assert.match(breakdownEl.textContent, /4 unidades × S\/\. 120\.00 PEN/);
+});
+
+function chair(selected = 0) {
+  const p = groupedProduct(selected);
+  p.variants.forEach((variant, index) => {
+    variant.title = index ? 'Negro' : 'Blanco';
+    variant.price = index ? 30000 : 27900;
+    const value = p.options_with_values[0].values[index];
+    value.name = variant.title;
+  });
+  p.options_with_values[0].name = 'Color';
+  p.options_with_values[0].selected_value = p.variants[selected].title;
+  return p;
+}
+test('Una solicitud conserva colores, IDs, SKU y precios distintos al cambiar la sección', async () => {
+  const nextHTML = await html(chair(1));
+  const app = await runtime(()=>({ok:true, text:async()=>nextHTML}), chair());
+  const $ = selector=>app.document.querySelector(selector);
+  assert.equal($('[data-open-request]').getAttribute('aria-disabled'), 'true');
+  app.click('[data-add-request]');
+  const draft = {id:'test-reference', snapshot:'test'};
+  $('[data-request-form]').decokasaDraft = draft;
+  app.click('[data-option-link]:not([aria-current])'); await settle();
+  assert.equal($('[data-request-form]').decokasaDraft, draft);
+  app.click('[data-add-request]');
+  const items = JSON.parse(JSON.stringify($('[data-request-form]').decokasaRequestItems()));
+  assert.deepEqual(items.map(item=>[item.title,item.shopify_variant_id,item.sku,item.quantity,item.price_cents]), [
+    ['Blanco','DEMO-V-0-A','SKU-001',1,27900],
+    ['Negro','DEMO-V-0-B','SKU-002',1,30000]
+  ]);
+  assert.equal($('[data-estimated-amount]').textContent, 'S/. 579.00 PEN');
+  assert.equal($('[data-reward-current]').textContent, 'S/. 579.00 PEN');
+  assert.equal($('[data-open-request]').getAttribute('aria-disabled'), 'false');
+  assert.equal(app.document.querySelectorAll('[data-request-form-lines] li').length, 2);
+  assert.equal(app.navigations.length, 0);
+  // Repeating the current color merges quantities, not duplicate lines.
+  app.click('[data-add-request]');
+  assert.equal(app.document.querySelectorAll('[data-request-line]').length, 2);
+  assert.equal($('[data-request-line="DEMO-V-0-B"] [data-line-quantity]').value, '2');
+  assert.equal($('[data-estimated-amount]').textContent, 'S/. 879.00 PEN');
+  app.click('[data-request-line="DEMO-V-0-A"] [data-line-step="1"]');
+  assert.equal($('[data-estimated-amount]').textContent, 'S/. 1158.00 PEN');
+  assert.ok($('[data-reward-modal-open]').classList.contains('unlocked'));
+  app.click('[data-request-line="DEMO-V-0-B"] [data-line-remove]');
+  assert.equal($('[data-estimated-amount]').textContent, 'S/. 558.00 PEN');
+  assert.equal($('[data-reward-modal-open]').classList.contains('unlocked'), false);
+  app.click('[data-line-remove]');
+  assert.equal($('[data-estimated-amount]').textContent, 'S/. 0.00 PEN');
+  assert.equal($('[data-open-request]').getAttribute('aria-disabled'), 'true');
+  assert.equal($('[data-enable-form]').disabled, true);
+});
+test('Cantidades inválidas no se agregan y las ediciones válidas recalculan el total', async () => {
+  const app = await runtime(()=>{throw Error('No network needed');}, chair());
+  const $ = selector=>app.document.querySelector(selector);
+  for (const value of ['0','-1','1.5','1000001','NaN','']) {
+    $('[data-product-quantity]').value = value;
+    app.click('[data-add-request]');
+    assert.equal(app.document.querySelectorAll('[data-request-line]').length, 0);
+  }
+  $('[data-product-quantity]').value = '1'; app.click('[data-add-request]');
+  const input = $('[data-line-quantity]');
+  input.value = '3'; input.dispatchEvent(new app.window.Event('input', {bubbles:true}));
+  assert.equal($('[data-estimated-amount]').textContent, 'S/. 837.00 PEN');
+  input.value = '0'; input.dispatchEvent(new app.window.Event('change', {bubbles:true}));
+  assert.equal(input.value, '3');
+  assert.equal($('[data-estimated-amount]').textContent, 'S/. 837.00 PEN');
+});
+test('Un fallo al cambiar de color conserva la solicitud y permite reintentar', async () => {
+  const app = await runtime(()=>({ok:false}), chair());
+  app.click('[data-add-request]');
+  app.click('[data-option-link]:not([aria-current])'); await settle();
+  assert.equal(app.navigations.length, 0);
+  assert.equal(app.document.querySelectorAll('[data-request-line]').length, 1);
+  assert.equal(app.document.querySelector('[data-estimated-amount]').textContent, 'S/. 279.00 PEN');
+  assert.match(app.document.querySelector('[data-selection-status]').textContent, /reintentar/);
 });
 
