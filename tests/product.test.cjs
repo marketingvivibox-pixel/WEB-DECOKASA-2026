@@ -143,9 +143,9 @@ test('El botón de objetivo abre el modal de detalles y actualiza estado al alca
   app.click('[data-reward-modal-close]');
   assert.equal(actionBtn.getAttribute('aria-expanded'), 'false');
 
-  // Cantidad para superar S/. 1,000 PEN (precio base 120 * 10 = 1200)
+  // Tres unidades de 120 superan la meta de 252 (140, variante más cara, × 1.8).
   const quantity = app.document.querySelector('[data-product-quantity]');
-  quantity.value = '10';
+  quantity.value = '3';
   quantity.dispatchEvent(new app.window.Event('input', { bubbles: true }));
   app.click('[data-add-request]');
   assert.ok(actionBtn.classList.contains('unlocked'));
@@ -180,6 +180,7 @@ function chair(selected = 0) {
   });
   p.options_with_values[0].name = 'Color';
   p.options_with_values[0].selected_value = p.variants[selected].title;
+  p.price_max = 30000;
   return p;
 }
 test('Una solicitud conserva colores, IDs, SKU y precios distintos al cambiar la sección', async () => {
@@ -187,11 +188,16 @@ test('Una solicitud conserva colores, IDs, SKU y precios distintos al cambiar la
   const app = await runtime(()=>({ok:true, text:async()=>nextHTML}), chair());
   const $ = selector=>app.document.querySelector(selector);
   assert.equal($('[data-open-request]').getAttribute('aria-disabled'), 'true');
+  assert.equal($('[data-reward-goal]').dataset.threshold, '54000');
   app.click('[data-add-request]');
+  assert.equal($('[data-reward-percent]').textContent, '52% de la meta');
+  assert.match($('[data-reward-title]').textContent, /261.00 PEN/);
   const draft = {id:'test-reference', snapshot:'test'};
   $('[data-request-form]').decokasaDraft = draft;
   app.click('[data-option-link]:not([aria-current])'); await settle();
   assert.equal($('[data-request-form]').decokasaDraft, draft);
+  assert.equal($('[data-reward-goal]').dataset.threshold, '54000');
+  assert.equal($('[data-reward-current]').textContent, 'S/. 279.00 PEN');
   app.click('[data-add-request]');
   const items = JSON.parse(JSON.stringify($('[data-request-form]').decokasaRequestItems()));
   assert.deepEqual(items.map(item=>[item.title,item.shopify_variant_id,item.sku,item.quantity,item.price_cents]), [
@@ -200,6 +206,8 @@ test('Una solicitud conserva colores, IDs, SKU y precios distintos al cambiar la
   ]);
   assert.equal($('[data-estimated-amount]').textContent, 'S/. 579.00 PEN');
   assert.equal($('[data-reward-current]').textContent, 'S/. 579.00 PEN');
+  assert.equal($('[data-reward-percent]').textContent, '100% de la meta');
+  assert.ok($('[data-reward-goal]').classList.contains('unlocked'));
   assert.equal($('[data-open-request]').getAttribute('aria-disabled'), 'false');
   assert.equal(app.document.querySelectorAll('[data-request-form-lines] li').length, 2);
   assert.equal(app.navigations.length, 0);
@@ -213,11 +221,49 @@ test('Una solicitud conserva colores, IDs, SKU y precios distintos al cambiar la
   assert.ok($('[data-reward-modal-open]').classList.contains('unlocked'));
   app.click('[data-request-line="DEMO-V-0-B"] [data-line-remove]');
   assert.equal($('[data-estimated-amount]').textContent, 'S/. 558.00 PEN');
+  assert.ok($('[data-reward-modal-open]').classList.contains('unlocked'));
+  app.click('[data-line-step="-1"]');
+  assert.equal($('[data-estimated-amount]').textContent, 'S/. 279.00 PEN');
   assert.equal($('[data-reward-modal-open]').classList.contains('unlocked'), false);
   app.click('[data-line-remove]');
   assert.equal($('[data-estimated-amount]').textContent, 'S/. 0.00 PEN');
   assert.equal($('[data-open-request]').getAttribute('aria-disabled'), 'true');
   assert.equal($('[data-enable-form]').disabled, true);
+  assert.equal($('[data-reward-percent]').textContent, '0% de la meta');
+});
+
+test('Meta global usa el mayor precio de venta, aunque la variante no esté disponible, e ignora la meta fija anterior', async () => {
+  const p = chair();
+  p.variants[1].available = false;
+  p.compare_at_price_max = 50000;
+  const doc = parseHTML(await html(p, {reward_threshold:1000})).document;
+  assert.equal(doc.querySelector('[data-reward-goal]').dataset.threshold, '54000');
+  assert.match(doc.querySelector('[data-reward-action-text]').textContent, /540.00 PEN/);
+  assert.match(doc.querySelector('.reward-modal-badge').textContent, /540.00 PEN/);
+  assert.match(doc.querySelector('.reward-modal-lead').textContent, /540.00 PEN/);
+  assert.equal(schema.settings.some(setting => setting.id === 'reward_threshold'), false);
+});
+
+test('Producto único: meta redondeada al céntimo, desbloqueo en el importe exacto y sin meta si el precio es cero', async () => {
+  const single = productFixture({handle:'unico', name:'Producto único', price:1999, has_only_default_variant:true}, 1);
+  const app = await runtime(() => { throw Error('No network needed'); }, single);
+  const $ = selector => app.document.querySelector(selector);
+  assert.equal($('[data-reward-goal]').dataset.threshold, '3598');
+  assert.match($('[data-reward-action-text]').textContent, /35.98 PEN/);
+  assert.match($('[data-reward-title]').textContent, /15.99 PEN/);
+  const quantity = $('[data-product-quantity]');
+  quantity.value = '2'; quantity.dispatchEvent(new app.window.Event('input', {bubbles:true}));
+  assert.ok($('[data-reward-goal]').classList.contains('unlocked'));
+  quantity.value = '1'; quantity.dispatchEvent(new app.window.Event('input', {bubbles:true}));
+  assert.equal($('[data-reward-goal]').classList.contains('unlocked'), false);
+  // An exact-boundary total must qualify, not require one more cent.
+  $('[data-product-price]').dataset.cents = '3598';
+  quantity.dispatchEvent(new app.window.Event('input', {bubbles:true}));
+  assert.ok($('[data-reward-goal]').classList.contains('unlocked'));
+  const noPrice = productFixture({handle:'sin-precio', name:'Por cotizar', price:0, has_only_default_variant:true}, 2);
+  const empty = await runtime(() => { throw Error('No network needed'); }, noPrice);
+  assert.equal(empty.document.querySelector('[data-reward-goal]'), null);
+  assert.equal(empty.document.querySelector('[data-reward-modal]'), null);
 });
 test('Cantidades inválidas no se agregan y las ediciones válidas recalculan el total', async () => {
   const app = await runtime(()=>{throw Error('No network needed');}, chair());

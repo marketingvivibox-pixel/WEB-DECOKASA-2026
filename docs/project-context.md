@@ -1,3 +1,7 @@
+## 26/10/2026 — Meta del regalo según el producto
+
+Decisión del usuario: reemplazar la meta fija por el precio unitario más alto del producto multiplicado por 1.80 (80% adicional). Se usa `product.price_max`, sin precio de comparación ni filtro de disponibilidad, redondeado al céntimo. Cambiar color/modelo o cantidad conserva la meta; el total de las líneas controla el progreso. Titan: máximo S/ 300, meta S/ 540. Regla común a todas las fichas que incluyen la tarjeta de regalo; productos sin precio positivo no la muestran. No cambia el catálogo ni activa envío de solicitudes.
+
 ## 26/10/2026 — Galerías de fotos por variante
 
 La ficha predeterminada admite el metacampo PRODUCTVARIANT `decokasa.gallery_images`, lista ordenada de archivos limitada a imágenes y editable como **Galería de la variante**. Usa el identificador del medio, no el de su preview_image, para enlazar paneles y miniaturas. La primera imagen es principal; al cambiar de variante se sustituye la galería completa mediante la actualización de sección existente. Sin el metacampo se conserva product.images. No requiere etiquetas de color en los archivos ni cambios de código para incorporar más ángulos.

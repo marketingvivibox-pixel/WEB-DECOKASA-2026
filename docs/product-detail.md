@@ -26,6 +26,14 @@ El total y la meta de regalo suman las líneas agregadas usando el precio propio
 
 La calculadora PVC y las landings especiales mantienen su flujo actual. Validación del 26/10/2026: 27 pruebas aprobadas, cuatro archivos de tema validados sin hallazgos, vistas y ZIP regenerados y revisión visual a 320/390 px.
 
+## Meta automática del regalo
+
+La meta de la ficha es **precio de venta unitario más alto del producto × 1.80**, redondeado a céntimos. Incluye todas sus variantes, aunque alguna esté agotada; no utiliza el precio de comparación. En un producto sin variantes se toma su precio único. La meta no cambia al seleccionar otro color/modelo ni al modificar cantidades; cambia el progreso, calculado con el total de la solicitud. Si el producto no tiene un precio positivo, no se muestra la meta.
+
+Ejemplo Titan: precio máximo S/ 300 → meta S/ 540. Blanco ×1 (S/ 279) aporta 52% y faltan S/ 261; blanco ×1 + negro ×1 (S/ 579) desbloquea el regalo. Alcanzar exactamente la meta también califica. La etiqueta, la barra, el importe pendiente y el detalle del regalo comparten la misma referencia. Ya no hay una meta fija editable de S/ 1,000.
+
+Esta regla aplica a la ficha compartida, incluida la que usa la calculadora PVC. No añade una tarjeta nueva a landings especiales que no la utilizan.
+
 ## Productos con una landing especial
 
 La ficha estándar es la base. Desarrollo puede crear plantillas alternativas de producto y secciones específicas para cada familia; el equipo las asignará desde el campo **Plantilla del tema** del producto. Se conserva el mismo registro y URL de producto, con sus variantes y datos de Shopify. No es necesario duplicar productos. Las alternativas futuras y sus funciones requieren implementación y revisión propias.

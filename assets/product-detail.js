@@ -146,10 +146,10 @@
           if (formQtyEl) formQtyEl.textContent = `${qty} ${unitText}`;
           if (formTotalEl) formTotalEl.textContent = formatted;
 
-          // Meta de objetivo: Regalo especial desde S/. 1,000.00 PEN (100,000 centavos)
+          // Liquid supplies 180% of the product's highest unit price, in cents.
           const goalCard = page.querySelector('[data-reward-goal]');
-          if (goalCard) {
-            const thresholdCents = Number(goalCard.dataset.threshold) || 100000;
+          const thresholdCents = Number(goalCard?.dataset.threshold);
+          if (goalCard && Number.isSafeInteger(thresholdCents) && thresholdCents > 0) {
             const percent = Math.min(100, Math.round((totalCents / thresholdCents) * 100));
             const fillEl = goalCard.querySelector('[data-reward-fill]');
             const titleEl = goalCard.querySelector('[data-reward-title]');
@@ -180,7 +180,7 @@
                 titleEl.innerHTML = '¡Felicidades! Has alcanzado la meta y desbloqueaste tu <strong>Regalo Especial</strong> 🎁';
               }
               if (subtextEl) {
-                subtextEl.textContent = `¡Genial! Tu solicitud supera los S/. ${(thresholdCents / 100).toFixed(2)} PEN. Tu asesor confirmará tu regalo sorpresa al coordinar la entrega.`;
+                subtextEl.textContent = `¡Genial! Tu solicitud alcanza la meta de ${money(thresholdCents)}. Tu asesor confirmará tu regalo sorpresa al coordinar la entrega.`;
               }
               if (estimateBar && !estimateBar.querySelector('.reward-unlocked-badge')) {
                 const badge = document.createElement('span');
@@ -191,7 +191,7 @@
             } else {
               goalCard.classList.remove('unlocked');
               if (iconEl) iconEl.textContent = '🎁';
-              if (actionTextEl) actionTextEl.textContent = `Meta S/. ${(thresholdCents / 100).toFixed(0)} · Ver regalo`;
+              if (actionTextEl) actionTextEl.textContent = `Meta ${money(thresholdCents)} · Ver regalo`;
               if (actionBtn) {
                 actionBtn.classList.remove('unlocked');
                 actionBtn.setAttribute('title', 'Ver detalles y beneficios del regalo especial');
