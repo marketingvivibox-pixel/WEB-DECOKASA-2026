@@ -1,3 +1,10 @@
+## 27/10/2026 — Carrusel ilustrativo del mockup habilitado
+
+- El usuario confirmó que las imágenes son generadas por IA y autorizó su uso. Esto no acredita opiniones reales: las cinco tarjetas se presentan como «Ejemplos ilustrativos», con aviso visible «Imágenes de IA · Textos de muestra. No son reseñas de clientes reales», sin estrellas ni insignias de verificación.
+- Opción editable show_illustrative_testimonials, desactivada por defecto y activada en product.landing-spc.json. Los bloques reales tienen prioridad; no se habilitan sellos de certificación. Se conserva el diseño proporcional y el carrusel infinito con pausa, teclado, gesto táctil y movimiento reducido.
+- Calculadora completa conservada: medidas/croquis, ambientes, área directa, cortes y transferencia a solicitud. 20 m² = 11 cajas con cortes y 10 sin cortes. Cobertura 2,196 pendiente de confirmación comercial; solicitud sigue simulada, sin POST ni Odoo.
+- 33/33 pruebas y Theme Check sin hallazgos. Navegador a 320/393/768/1080/1440 px: cinco tarjetas, imágenes cargadas, autoplay/pausa/teclado, calculadora y solicitud correctos, sin errores ni desbordamiento. Deslizamiento táctil y movimiento reducido comprobados a 393 px. Evidencia illustrative-results.json e illustrative-393/1080.png en work/spc-redesign del chat.
+
 ## 27/10/2026 — Calculadora completa en página y testimonios visibles
 
 - Recuperada la calculadora anterior dentro de la landing: medidas, croquis, varios ambientes, área directa, cortes y cajas transferidas a solicitud. Retirados resumen rápido y diálogo adicional; se mantiene el diálogo de solicitud.

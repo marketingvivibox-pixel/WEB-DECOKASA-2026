@@ -1,3 +1,10 @@
+## 27/10/2026 — Carrusel ilustrativo del mockup habilitado
+
+- El usuario confirmó que las imágenes son generadas por IA y autorizó su uso. Esto no acredita opiniones reales: las cinco tarjetas se presentan como «Ejemplos ilustrativos», con aviso visible «Imágenes de IA · Textos de muestra. No son reseñas de clientes reales», sin estrellas ni insignias de verificación.
+- Opción editable show_illustrative_testimonials, desactivada por defecto y activada en product.landing-spc.json. Los bloques reales tienen prioridad; no se habilitan sellos de certificación. Se conserva el diseño proporcional y el carrusel infinito con pausa, teclado, gesto táctil y movimiento reducido.
+- Calculadora completa conservada: medidas/croquis, ambientes, área directa, cortes y transferencia a solicitud. 20 m² = 11 cajas con cortes y 10 sin cortes. Cobertura 2,196 pendiente de confirmación comercial; solicitud sigue simulada, sin POST ni Odoo.
+- 33/33 pruebas y Theme Check sin hallazgos. Navegador a 320/393/768/1080/1440 px: cinco tarjetas, imágenes cargadas, autoplay/pausa/teclado, calculadora y solicitud correctos, sin errores ni desbordamiento. Deslizamiento táctil y movimiento reducido comprobados a 393 px. Evidencia illustrative-results.json e illustrative-393/1080.png en work/spc-redesign del chat.
+
 ## 27/10/2026 — Calculadora y testimonios: comportamiento vigente
 
 La calculadora completa permanece visible dentro de la página, con ambientes/croquis y área directa, sin modal de cálculo ni resumen rápido. Su altura se adapta al contenido en todos los anchos; es una excepción intencional al mapa PSD para conservar la herramienta anterior y su legibilidad móvil. Mantener controles y acciones en flujo normal. La solicitud conserva su único dialog nativo. Testimonios siempre tiene sección visible: sin bloques reales muestra aviso de próximas experiencias y enlace al asesor; con bloques autorizados muestra carrusel. No publicar nombres/comentarios de muestra sin confirmar. La vista local predeterminada refleja el template; SPC_DESIGN_PREVIEW=1 permite muestras explícitas. Esta entrada reemplaza la descripción anterior de calculadora avanzada en diálogo.

@@ -35,12 +35,12 @@
 .spc-v2-city span{font-weight:700}
 .spc-page .spc-quote img{position:absolute;left:calc(31 * var(--spc-unit));top:calc(75 * var(--spc-unit));width:calc(162 * var(--spc-unit));height:calc(162 * var(--spc-unit));border:calc(6 * var(--spc-unit)) solid #eed24f;box-shadow:0 calc(3 * var(--spc-unit)) calc(8 * var(--spc-unit)) #0003;object-fit:cover;object-position:center 14%}
 .spc-page .spc-quote figcaption{position:absolute;left:0;top:calc(262 * var(--spc-unit));width:100%;margin:0;font-size:calc(20 * var(--spc-unit));font-weight:600;line-height:1.2}
-.spc-sample-check{display:inline-flex;align-items:center;justify-content:center;width:calc(17 * var(--spc-unit));height:calc(17 * var(--spc-unit));background:#38a4ef;border-radius:50%;color:white;font-size:calc(12 * var(--spc-unit));vertical-align:middle}
 .spc-page .spc-quote .spc-stars{position:absolute;left:0;top:calc(289 * var(--spc-unit));width:100%;color:#e9c62e;font-size:calc(26 * var(--spc-unit));letter-spacing:0;line-height:1.1}
 .spc-page .spc-quote blockquote{position:absolute;left:calc(30 * var(--spc-unit));top:calc(332 * var(--spc-unit));width:calc(164 * var(--spc-unit));margin:0;font-size:calc(18 * var(--spc-unit));line-height:1.16}
 .spc-quote blockquote strong{display:block;font-weight:700;margin-bottom:calc(24 * var(--spc-unit))}
 .spc-quote blockquote p{font-weight:400}
-.spc-testimonial-sample-note{position:absolute;top:5.3%;left:15%;width:70%;text-align:center;color:#737373;font-size:max(9px,calc(14 * var(--spc-unit)))}
+.spc-testimonial-sample-note{position:absolute;top:5.5%;left:27%;width:59%;margin:0;text-align:center;color:#555;font-size:max(10px,calc(18 * var(--spc-unit)));line-height:1.25}
+.spc-illustrative-label{position:absolute;left:0;top:calc(292 * var(--spc-unit));width:100%;font-size:calc(18 * var(--spc-unit));line-height:1.2;color:#806518}
 .spc-testimonial-pause{position:absolute;right:7.5%;top:9%;width:44px;height:44px;border:0;background:transparent;color:#666;font-size:20px;cursor:pointer;display:grid;place-items:center;border-radius:50%;z-index:2}
 .spc-testimonial-pause:hover{background:#00000008}
 .spc-testimonial-pause:focus-visible,.spc-v2-quotes:focus-visible{outline:2px solid #a58100}

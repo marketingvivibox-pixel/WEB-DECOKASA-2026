@@ -14,6 +14,12 @@
     assign catalog_url = '#' | append: colors_id
   endif
   assign coverage = current_variant.metafields.decokasa.coverage_m2.value | default: product.metafields.decokasa.coverage_m2.value | default: section.settings.coverage_m2 | plus: 0
+  assign illustrative_testimonials = false
+  if section.blocks.size == 0
+    if section.settings.show_illustrative_testimonials or section.settings.spc_design_preview
+      assign illustrative_testimonials = true
+    endif
+  endif
 %}
 
 
@@ -280,7 +286,7 @@
 <a class="spc-button spc-button--order" data-open-request href="#solicitud">Solicitar esta cantidad →</a>
 <div class="spc-v2-calculator-actions">{% render 'spc-actions', contact_url: contact_url, catalog_url: catalog_url %}</div>
 </section>
-<section class="spc-v2-testimonials spc-testimonials{% if section.blocks.size == 0 and section.settings.spc_design_preview != true %} spc-testimonials--pending{% endif %}" aria-label="Testimonios de clientes" data-spc-testimonials>
+<section class="spc-v2-testimonials spc-testimonials{% if illustrative_testimonials %} spc-testimonials--illustrative{% elsif section.blocks.size == 0 %} spc-testimonials--pending{% endif %}" aria-label="Testimonios{% if illustrative_testimonials %} ilustrativos{% else %} de clientes{% endif %}" data-spc-testimonials>
     <img class="spc-v2-testimonials-fondo" src="{{ 'spc-2026-testimonios-fondo.webp' | asset_url }}" width="1080" height="1018" loading="lazy" alt="">
 <div class="spc-v2-testimonial-panel spc-v2-white"></div>
 <div class="spc-v2-socials" aria-hidden="true">
@@ -288,9 +294,9 @@
 <svg viewBox="0 0 35 35"><circle cx="17.5" cy="17.5" r="17"/><rect x="9" y="9" width="17" height="17" rx="5"/><circle class="spc-social-line" cx="17.5" cy="17.5" r="4"/><path d="M23 12h.1"/></svg>
 <svg viewBox="0 0 35 35"><circle cx="17.5" cy="17.5" r="17"/><path d="M20 29V19h4l1-4h-5v-3c0-2 1-2 4-2V6h-4c-4 0-5 2-5 6v3h-3v4h3v10"/></svg>
 </div>
-<div class="spc-v2-testimonials-heading spc-v2-heading"><h2>Testimonios</h2><p>De nuestros clientes</p></div>
-{% if section.settings.spc_design_preview and section.blocks.size == 0 %}<p class="spc-testimonial-sample-note">Vista de diseño · testimonios de muestra</p>{% endif %}
-{% if section.blocks.size > 0 or section.settings.spc_design_preview %}
+<div class="spc-v2-testimonials-heading spc-v2-heading"><h2>Testimonios</h2><p>{% if illustrative_testimonials %}Ejemplos ilustrativos{% else %}De nuestros clientes{% endif %}</p></div>
+{% if illustrative_testimonials %}<p class="spc-testimonial-sample-note">Imágenes de IA · Textos de muestra.<br>No son reseñas de clientes reales.</p>{% endif %}
+{% if section.blocks.size > 0 or illustrative_testimonials %}
 <button class="spc-testimonial-pause" type="button" data-testimonial-pause aria-label="Pausar testimonios" aria-pressed="false" hidden><span aria-hidden="true">Ⅱ</span></button>
 <div class="spc-v2-quotes" tabindex="0" role="region" aria-roledescription="carrusel" aria-label="Testimonios. Desliza o usa las flechas para ver más" data-testimonial-viewport>
 <div class="spc-testimonial-track"><div class="spc-testimonial-group" data-testimonial-original>
@@ -301,12 +307,12 @@
 <figcaption>{{ block.settings.name | escape }}</figcaption><span class="spc-stars" aria-label="5 de 5 estrellas">★★★★★</span>
 <blockquote>{% if block.settings.headline != blank %}<strong>{{ block.settings.headline | escape }}</strong>{% endif %}<p>{{ block.settings.quote | escape }}</p></blockquote>
 </figure>{% endfor %}
-{% if section.settings.spc_design_preview and section.blocks.size == 0 %}
-<figure class="spc-quote spc-quote--sample"><p class="spc-v2-city"><span aria-hidden="true">⌖</span> Lima</p><img src="{{ 'spc-2026-retrato-muestra-lima.webp' | asset_url }}" width="161" height="161" loading="lazy" alt="Retrato de muestra del mockup"><figcaption>Carlos M. <span class="spc-sample-check" aria-hidden="true">✓</span></figcaption><span class="spc-stars" aria-hidden="true">★★★★★</span><blockquote><strong>“Excelente acabado y fácil de limpiar”</strong><p>Tiene una apariencia muy similar a la madera y limpiarlo es bastante sencillo.</p></blockquote></figure>
-<figure class="spc-quote spc-quote--sample"><p class="spc-v2-city"><span aria-hidden="true">⌖</span> Arequipa</p><img src="{{ 'spc-2026-retrato-muestra-arequipa.webp' | asset_url }}" width="161" height="161" loading="lazy" alt="Retrato de muestra del mockup"><figcaption>María R. <span class="spc-sample-check" aria-hidden="true">✓</span></figcaption><span class="spc-stars" aria-hidden="true">★★★★★</span><blockquote><strong>“Mi sala luce completamente diferente”</strong><p>El piso SPC le dio un acabado super elegante, ¡me encantó!</p></blockquote></figure>
-<figure class="spc-quote spc-quote--sample"><p class="spc-v2-city"><span aria-hidden="true">⌖</span> Cañete</p><img src="{{ 'spc-2026-retrato-muestra-canete.webp' | asset_url }}" width="161" height="161" loading="lazy" alt="Retrato de muestra del mockup"><figcaption>Adela J. <span class="spc-sample-check" aria-hidden="true">✓</span></figcaption><span class="spc-stars" aria-hidden="true">★★★★★</span><blockquote><strong>“Renové mi departamento gastando poco”</strong><p>No quería gastar en una remodelación completa, así que busqué el piso SPC. Recomendado.</p></blockquote></figure>
-<figure class="spc-quote spc-quote--sample"><p class="spc-v2-city"><span aria-hidden="true">⌖</span> Huánuco</p><img src="{{ 'spc-2026-retrato-muestra-huanuco.webp' | asset_url }}" width="161" height="161" loading="lazy" alt="Retrato de muestra del mockup"><figcaption>Jhon M. <span class="spc-sample-check" aria-hidden="true">✓</span></figcaption><span class="spc-stars" aria-hidden="true">★★★★★</span><blockquote><strong>“El dormitorio se siente más cálido”</strong><p>Elegí un tono madera para mi dormitorio y me encantó el resultado. Combina muy bien.</p></blockquote></figure>
-<figure class="spc-quote spc-quote--sample"><p class="spc-v2-city"><span aria-hidden="true">⌖</span> Trujillo</p><img src="{{ 'spc-2026-retrato-muestra-trujillo.webp' | asset_url }}" width="161" height="161" loading="lazy" alt="Retrato de muestra del mockup"><figcaption>Lucía Z. <span class="spc-sample-check" aria-hidden="true">✓</span></figcaption><span class="spc-stars" aria-hidden="true">★★★★★</span><blockquote><strong>“La instalación fue más sencilla de lo que pensé”</strong><p>Tenía dudas sobre cómo quedaría la instalación, pero el sistema click facilitó bastante el trabajo.</p></blockquote></figure>
+{% if illustrative_testimonials %}
+<figure class="spc-quote spc-quote--sample"><p class="spc-v2-city"><span aria-hidden="true">⌖</span> Lima</p><img src="{{ 'spc-2026-retrato-muestra-lima.webp' | asset_url }}" width="161" height="161" loading="lazy" alt="Retrato ilustrativo generado con IA"><figcaption>Carlos M.</figcaption><span class="spc-illustrative-label">Ejemplo ilustrativo</span><blockquote><strong>“Excelente acabado y fácil de limpiar”</strong><p>Tiene una apariencia muy similar a la madera y limpiarlo es bastante sencillo.</p></blockquote></figure>
+<figure class="spc-quote spc-quote--sample"><p class="spc-v2-city"><span aria-hidden="true">⌖</span> Arequipa</p><img src="{{ 'spc-2026-retrato-muestra-arequipa.webp' | asset_url }}" width="161" height="161" loading="lazy" alt="Retrato ilustrativo generado con IA"><figcaption>María R.</figcaption><span class="spc-illustrative-label">Ejemplo ilustrativo</span><blockquote><strong>“Mi sala luce completamente diferente”</strong><p>El piso SPC le dio un acabado super elegante, ¡me encantó!</p></blockquote></figure>
+<figure class="spc-quote spc-quote--sample"><p class="spc-v2-city"><span aria-hidden="true">⌖</span> Cañete</p><img src="{{ 'spc-2026-retrato-muestra-canete.webp' | asset_url }}" width="161" height="161" loading="lazy" alt="Retrato ilustrativo generado con IA"><figcaption>Adela J.</figcaption><span class="spc-illustrative-label">Ejemplo ilustrativo</span><blockquote><strong>“Renové mi departamento gastando poco”</strong><p>No quería gastar en una remodelación completa, así que busqué el piso SPC. Recomendado.</p></blockquote></figure>
+<figure class="spc-quote spc-quote--sample"><p class="spc-v2-city"><span aria-hidden="true">⌖</span> Huánuco</p><img src="{{ 'spc-2026-retrato-muestra-huanuco.webp' | asset_url }}" width="161" height="161" loading="lazy" alt="Retrato ilustrativo generado con IA"><figcaption>Jhon M.</figcaption><span class="spc-illustrative-label">Ejemplo ilustrativo</span><blockquote><strong>“El dormitorio se siente más cálido”</strong><p>Elegí un tono madera para mi dormitorio y me encantó el resultado. Combina muy bien.</p></blockquote></figure>
+<figure class="spc-quote spc-quote--sample"><p class="spc-v2-city"><span aria-hidden="true">⌖</span> Trujillo</p><img src="{{ 'spc-2026-retrato-muestra-trujillo.webp' | asset_url }}" width="161" height="161" loading="lazy" alt="Retrato ilustrativo generado con IA"><figcaption>Lucía Z.</figcaption><span class="spc-illustrative-label">Ejemplo ilustrativo</span><blockquote><strong>“La instalación fue más sencilla de lo que pensé”</strong><p>Tenía dudas sobre cómo quedaría la instalación, pero el sistema click facilitó bastante el trabajo.</p></blockquote></figure>
 {% endif %}
 </div></div></div>
 {% else %}<div class="spc-testimonial-pending"><p>Pronto compartiremos aquí las experiencias de nuestros clientes.</p><a href="{{ contact_url | escape }}" target="_blank" rel="noopener">Conversa con un asesor sobre tu proyecto</a></div>{% endif %}
@@ -377,6 +383,13 @@
       "label": "m² por caja (respaldo SPC)",
       "default": "2.196",
       "info": "El metacampo decokasa.coverage_m2 de variante o producto tiene prioridad. Usa punto decimal."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_illustrative_testimonials",
+      "label": "Mostrar ejemplos ilustrativos",
+      "default": false,
+      "info": "Sin testimonios configurados, muestra las cinco tarjetas del mockup identificadas como imágenes de IA y textos de muestra. Los bloques reales tienen prioridad."
     },
     {
       "type": "checkbox",

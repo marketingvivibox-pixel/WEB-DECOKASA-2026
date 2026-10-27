@@ -40,6 +40,17 @@ test('SPC: datos nativos y privacidad del contenido de muestra en el tema', asyn
   const preview = parseHTML(await engine.parseAndRender(source, {...context, section:{...context.section, settings:{...settings, spc_design_preview:true}}})).document;
   assert.equal(preview.querySelectorAll('.spc-quote').length, 5);
   assert.equal(preview.querySelectorAll('.spc-seals img').length, 6);
+  const illustrative = parseHTML(await engine.parseAndRender(source, {...context, section:{...context.section, settings:{...settings, show_illustrative_testimonials:true}}})).document;
+  assert.equal(illustrative.querySelectorAll('.spc-quote--sample').length, 5);
+  assert.ok(illustrative.querySelector('[data-testimonial-viewport]'));
+  assert.match(illustrative.querySelector('.spc-testimonial-sample-note').textContent, /No son reseñas de clientes reales/);
+  assert.equal(illustrative.querySelector('.spc-seals'), null);
+  assert.equal(illustrative.querySelector('.spc-sample-check'), null);
+  assert.equal(illustrative.querySelector('.spc-stars'), null);
+  assert.equal(illustrative.querySelector('.spc-testimonials--pending'), null);
+  assert.ok([...illustrative.querySelectorAll('.spc-quote img')].every(img => img.alt.includes('IA')));
+  const template = JSON.parse(fs.readFileSync(path.join(root, 'templates/product.landing-spc.json'), 'utf8'));
+  assert.equal(template.sections.main.settings.show_illustrative_testimonials, true);
 });
 
 test('SPC: desglose jerárquico incluye netArea, targetArea, wasteArea, leftover y planks', () => {
@@ -98,7 +109,7 @@ test('SPC: testimonios reales conservan contenido escapado y controles sin muest
   const schema = JSON.parse(raw.match(/{% schema %}([\s\S]*?){% endschema %}/)[1]);
   assert.ok(schema.blocks[0].settings.some(s => s.id === 'headline'));
   const doc = parseHTML(await engine.parseAndRender(source, {
-    section:{id:'real-test', settings:{spc_design_preview:true}, blocks:[{settings:{city:'Lima', name:'Ana <script>bad()</script>', headline:'Buen <acabado>', quote:'Una opinión & experiencia real.'}}]},
+    section:{id:'real-test', settings:{spc_design_preview:true, show_illustrative_testimonials:true}, blocks:[{settings:{city:'Lima', name:'Ana <script>bad()</script>', headline:'Buen <acabado>', quote:'Una opinión & experiencia real.'}}]},
     product:{}
   })).document;
   const card=doc.querySelector('.spc-quote');
