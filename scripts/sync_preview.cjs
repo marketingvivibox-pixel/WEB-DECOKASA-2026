@@ -21,7 +21,7 @@ async function section(name, overrides = {}, context = {}) {
   const settings = { ...Object.fromEntries(schema.settings.filter(s => s.id).map(s => [s.id, s.default ?? ''])), ...overrides };
   // The local demo contains five examples; Shopify paginates the real collection.
   const source = raw.replace(/{% schema %}[\s\S]*?{% endschema %}/, '').replace(/{% paginate [\s\S]*?%}/g, '').replace(/{% endpaginate %}/g, '').replace('{% assign is_demo = false %}', `{% assign is_demo = ${context.is_demo === true} %}`);
-  let html = await engine.parseAndRender(source, { section: { id: `preview-${name}`, settings, blocks: [] }, settings: {}, collections, routes, search: { terms: '' }, ...context });
+  let html = await engine.parseAndRender(source, { settings: {}, collections, routes, search: { terms: '' }, ...context, section: { id: `preview-${name}`, blocks: [], ...context.section, settings: {...settings, ...context.section?.settings} } });
   const permanentRoutes = {tecnologia: ['categoria', 'Tecnología'], electrodomesticos: ['categoria', 'Electrodomésticos'], bebes: ['categoria', 'Bebés'], fitness: ['categoria', 'Fitness'], 'hogar-y-acabados': ['categoria', 'Acabados'], decokasa: ['marca', 'DECOKASA'], xion: ['marca', 'Xion'], biflex: ['marca', 'Biflex'], 'mundo-baby': ['marca', 'Mundo Baby']};
   for (const [handle, [key, value]] of Object.entries(permanentRoutes)) html = html.replaceAll(`collections/${handle}`, `catalogo.html?${key}=${encodeURIComponent(value)}`);
   return html.replaceAll('collections/types?q=', 'catalogo.html?categoria=').replaceAll('collections/vendors?q=', 'catalogo.html?marca=');
@@ -68,8 +68,13 @@ async function main() {
     has_only_default_variant: true
   };
   const spcProduct = productFixture(spcEntry, 5);
-  // Preview-only setting, deliberately absent from the Shopify editor schema.
-  let spcHtml = await section('landing-piso-spc', {spc_design_preview: true}, {product: spcProduct, is_demo: false, shop: {currency: 'PEN'}});
+  // The normal preview uses the same settings and blocks as the deployed template.
+  const spcTemplate = JSON.parse(fs.readFileSync(path.join(root, 'templates/product.landing-spc.json'), 'utf8'));
+  const spcMain = spcTemplate.sections.main;
+  const spcBlocks = (spcMain.block_order || Object.keys(spcMain.blocks || {})).map(id => ({id, ...spcMain.blocks[id]}));
+  let spcHtml = await section('landing-piso-spc', spcMain.settings, {product: spcProduct, is_demo: false, shop: {currency: 'PEN'}, section: {
+    settings: {spc_design_preview:process.env.SPC_DESIGN_PREVIEW === '1'}, blocks: spcBlocks
+  }});
   landings['landing-piso-spc.html'] = spcHtml;
 
   const previewFiles = [...new Set([...fs.readdirSync(preview).filter(f => f.endsWith('.html') && !['DECOKASA-movil.html', 'render_pdf.html'].includes(f)), 'landing-piso-spc.html'])];

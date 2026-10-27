@@ -220,7 +220,7 @@
         panels.forEach(panel => {
           panel.hidden = panel.dataset.panel !== mode;
         });
-        if (mode === 'direct' && directArea && page.querySelector('[data-spc-calc-dialog]')?.open) {
+        if (mode === 'direct' && directArea) {
           setTimeout(() => directArea.focus(), 60);
         }
         updateRoomsUI();
@@ -618,7 +618,6 @@
         const calc = invalidRoom ? null : calculate(areaVal, coverage, waste);
         if (!calc) {
           lastCalculation = null;
-          mirrorQuick(null);
           if (errorEl) {
             errorEl.hidden = !invalidRoom && areaVal === 0;
             errorEl.textContent = invalidRoom ? 'Completa el largo y ancho de cada ambiente entre 0,1 y 100 metros.' : 'Ingresa un área válida entre 0,01 y 100 000 m².';
@@ -635,7 +634,6 @@
         }
 
         lastCalculation = { ...calc, includeWaste: waste };
-        mirrorQuick(calc);
 
         if (!calc) {
           if (errorEl) {
@@ -701,7 +699,6 @@
             const target = document.getElementById(href.slice(1));
             if (target) {
               e.preventDefault();
-              page.querySelector('[data-spc-calc-dialog]')?.close();
               target.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
           }
@@ -717,8 +714,7 @@
       function openOrderModal() {
         if (!modalEl) return;
         const opener = document.activeElement;
-        requestReturnFocus = opener?.closest('[data-spc-calc-dialog]')
-          ? page.querySelector('[data-open-calculator]') : opener;
+        requestReturnFocus = opener;
         const reqForm = modalEl.querySelector('[data-request-form]');
         if (reqForm) {
           const fieldset = reqForm.querySelector('fieldset');
@@ -744,7 +740,6 @@
             commentInput.value = `Solicitud de Piso SPC: ${lastCalculation.boxes} cajas calculadas para ${number.format(lastCalculation.netArea)} m² netos${wasteMsg} (cobertura total ${number.format(lastCalculation.covered)} m²).${details}`;
           }
         }
-        page.querySelector('[data-spc-calc-dialog]')?.close();
         modalEl.showModal();
         document.body.classList.add('spc-modal-open');
         scheduleStickyCta();
@@ -899,50 +894,6 @@
         }, { signal: controller.signal });
       }
 
-      const quick = page.querySelector('[data-spc-quick-calculator]');
-      const quickArea = quick?.querySelector('[name="quick_area"]');
-      const quickWaste = quick?.querySelector('[name="quick_waste"]');
-      const quickError = page.querySelector('[data-quick-error]');
-      function mirrorQuick(calc) {
-        const boxes = page.querySelector('[data-quick-boxes]');
-        const covered = page.querySelector('[data-quick-covered]');
-        if (boxes) boxes.textContent = calc ? `${integer.format(calc.boxes)} ${calc.boxes === 1 ? 'caja' : 'cajas'}` : '— cajas';
-        if (covered) covered.textContent = calc ? `Cubren ${number.format(calc.covered)} m²` : `${number.format(Number(page.dataset.coverage))} m² por caja`;
-        if (quickError) {
-          const value = parseFloat(directArea?.value);
-          quickError.hidden = !!calc || !Number.isFinite(value) || (value >= 0.01 && value <= 100000);
-          quickError.textContent = 'Ingresa un área entre 0,01 y 100 000 m².';
-        }
-        if (quickArea && document.activeElement !== quickArea) quickArea.value = calc ? calc.netArea : '';
-        if (quickWaste && wasteCheckbox) quickWaste.checked = wasteCheckbox.checked;
-      }
-      quick?.addEventListener('submit', event => {
-        event.preventDefault();
-        if (!quick.reportValidity()) return;
-        directArea.value = quickArea.value;
-        wasteCheckbox.checked = quickWaste.checked;
-        setMode('direct');
-      });
-      quickArea?.addEventListener('input', () => {
-        directArea.value = quickArea.value;
-        wasteCheckbox.checked = quickWaste.checked;
-        currentMode = 'direct';
-        recalculate();
-      });
-      quickWaste?.addEventListener('change', () => {
-        wasteCheckbox.checked = quickWaste.checked;
-        if (quickArea.value) { directArea.value = quickArea.value; currentMode = 'direct'; }
-        recalculate();
-      });
-      const calcDialog = page.querySelector('[data-spc-calc-dialog]');
-      page.querySelector('[data-open-calculator]')?.addEventListener('click', () => {
-        setMode(lastCalculation ? currentMode : 'dimensions');
-        calcDialog.showModal();
-        document.body.classList.add('spc-modal-open');
-        scheduleStickyCta();
-      });
-      page.querySelector('[data-close-calculator]')?.addEventListener('click', () => calcDialog.close());
-      calcDialog?.addEventListener('close', syncModalState);
       // Initial run
       updateRoomsUI();
       recalculate();

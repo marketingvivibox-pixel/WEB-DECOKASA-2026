@@ -29,7 +29,10 @@ test('SPC: datos nativos y privacidad del contenido de muestra en el tema', asyn
   const doc = parseHTML(await engine.parseAndRender(source, context)).document;
   assert.equal(doc.querySelector('[data-spc-page]').dataset.coverage, '2.5');
   assert.equal(doc.querySelector('[data-spc-page]').dataset.sku, 'SKU-REAL');
-  assert.equal(doc.querySelector('.spc-testimonials'), null);
+  assert.ok(doc.querySelector('.spc-testimonials--pending'));
+  assert.equal(doc.querySelector('.spc-quote'), null);
+  assert.equal(doc.querySelector('[data-testimonial-viewport]'), null);
+  assert.ok(!doc.body.textContent.includes('Carlos M.'));
   assert.equal(doc.querySelector('.spc-seals'), null);
   assert.equal(doc.querySelectorAll('[data-color]').length, 3);
   assert.ok(doc.querySelector('.spc-button--catalog').getAttribute('href').startsWith('#spc-colores-'));
@@ -61,6 +64,9 @@ test('SPC: elementos visuales de la calculadora interactiva (pestañas, ambiente
     product:{title:'Piso SPC', selected_or_first_available_variant:{sku:'SPC-001'}}
   })).document;
 
+  assert.ok(doc.querySelector('[data-spc-calculator]').closest('.spc-v2-calculator'));
+  assert.equal(doc.querySelector('[data-spc-calc-dialog]'), null);
+  assert.equal(doc.querySelector('[data-spc-quick-calculator]'), null);
   assert.equal(doc.querySelectorAll('[data-calc-mode]').length, 2);
   assert.ok(doc.querySelector('[data-calc-mode="dimensions"]'));
   assert.ok(doc.querySelector('[data-calc-mode="direct"]'));

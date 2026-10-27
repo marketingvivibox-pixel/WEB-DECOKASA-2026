@@ -90,71 +90,7 @@
 </section>
 <section class="spc-v2-calculator" id="calculadora-{{ section.id }}" tabindex="-1" aria-label="Calculadora de cajas SPC">
 <img class="spc-v2-instalacion-fondo spc-v2-art" src="{{ 'spc-2026-instalacion-fondo.webp' | asset_url }}" width="1080" height="1040" alt="" loading="lazy">
-<div class="spc-v2-calculator-heading spc-v2-heading spc-v2-light"><h2>Calculadora</h2><p>¿Cuántas cajas necesitas?</p></div>
-<div class="spc-v2-quick-card"><form data-spc-quick-calculator class="spc-v2-quick-form"><label for="spc-quick-area-{{ section.id }}">¿Cuánto mide tu espacio?</label><div class="spc-v2-quick-input"><input id="spc-quick-area-{{ section.id }}" name="quick_area" type="number" min="0.01" max="100000" step="any" inputmode="decimal" placeholder="Ej. 20" required aria-describedby="spc-quick-help-{{ section.id }}"><span>m²</span><button type="submit">Calcular</button></div><label class="spc-v2-quick-waste"><input type="checkbox" name="quick_waste" checked> Incluir 10% para cortes</label><button class="spc-v2-advanced-link" type="button" data-open-calculator>Calcular por ambientes →</button></form><div class="spc-v2-quick-result" aria-live="polite"><strong data-quick-boxes>— cajas</strong><span data-quick-covered>{{ coverage }} m² por caja</span><a data-open-request href="#solicitud">Solicitar esta cantidad →</a></div><p id="spc-quick-help-{{ section.id }}" class="spc-v2-quick-help">Cantidad orientativa. El asesor confirma tu pedido.</p><p class="spc-v2-quick-error" data-quick-error role="alert" hidden></p></div>
-<div class="spc-v2-calculator-actions">{% render 'spc-actions', contact_url: contact_url, catalog_url: catalog_url %}</div>
-</section>
-{% if section.blocks.size > 0 or section.settings.spc_design_preview %}<section class="spc-v2-testimonials spc-testimonials" aria-label="Testimonios de clientes" data-spc-testimonials>
-    <img class="spc-v2-testimonials-fondo" src="{{ 'spc-2026-testimonios-fondo.webp' | asset_url }}" width="1080" height="1018" loading="lazy" alt="">
-<div class="spc-v2-testimonial-panel spc-v2-white"></div>
-<div class="spc-v2-socials" aria-hidden="true">
-<svg viewBox="0 0 35 35"><circle cx="17.5" cy="17.5" r="17"/><path d="M19 8v14a4 4 0 1 1-4-4v3a1.5 1.5 0 1 0 1.5 1.5V8h3c0 4 2 6 5 6v3c-2 0-4-1-5-2"/></svg>
-<svg viewBox="0 0 35 35"><circle cx="17.5" cy="17.5" r="17"/><rect x="9" y="9" width="17" height="17" rx="5"/><circle class="spc-social-line" cx="17.5" cy="17.5" r="4"/><path d="M23 12h.1"/></svg>
-<svg viewBox="0 0 35 35"><circle cx="17.5" cy="17.5" r="17"/><path d="M20 29V19h4l1-4h-5v-3c0-2 1-2 4-2V6h-4c-4 0-5 2-5 6v3h-3v4h3v10"/></svg>
-</div>
-<div class="spc-v2-testimonials-heading spc-v2-heading"><h2>Testimonios</h2><p>De nuestros clientes</p></div>
-{% if section.settings.spc_design_preview and section.blocks.size == 0 %}<p class="spc-testimonial-sample-note">Vista de diseño · testimonios de muestra</p>{% endif %}
-<button class="spc-testimonial-pause" type="button" data-testimonial-pause aria-label="Pausar testimonios" aria-pressed="false" hidden><span aria-hidden="true">Ⅱ</span></button>
-<div class="spc-v2-quotes" tabindex="0" role="region" aria-roledescription="carrusel" aria-label="Testimonios. Desliza o usa las flechas para ver más" data-testimonial-viewport>
-<div class="spc-testimonial-track"><div class="spc-testimonial-group" data-testimonial-original>
-{% for block in section.blocks %}
-<figure class="spc-quote" {{ block.shopify_attributes }}>
-<p class="spc-v2-city"><span aria-hidden="true">⌖</span> {{ block.settings.city | escape }}</p>
-{% if block.settings.portrait != blank %}{{ block.settings.portrait | image_url: width: 320 | image_tag: loading: 'lazy', alt: block.settings.name }}{% endif %}
-<figcaption>{{ block.settings.name | escape }}</figcaption><span class="spc-stars" aria-label="5 de 5 estrellas">★★★★★</span>
-<blockquote>{% if block.settings.headline != blank %}<strong>{{ block.settings.headline | escape }}</strong>{% endif %}<p>{{ block.settings.quote | escape }}</p></blockquote>
-</figure>{% endfor %}
-{% if section.settings.spc_design_preview and section.blocks.size == 0 %}
-<figure class="spc-quote spc-quote--sample"><p class="spc-v2-city"><span aria-hidden="true">⌖</span> Lima</p><img src="{{ 'spc-2026-retrato-muestra-lima.webp' | asset_url }}" width="161" height="161" loading="lazy" alt="Retrato de muestra del mockup"><figcaption>Carlos M. <span class="spc-sample-check" aria-hidden="true">✓</span></figcaption><span class="spc-stars" aria-hidden="true">★★★★★</span><blockquote><strong>“Excelente acabado y fácil de limpiar”</strong><p>Tiene una apariencia muy similar a la madera y limpiarlo es bastante sencillo.</p></blockquote></figure>
-<figure class="spc-quote spc-quote--sample"><p class="spc-v2-city"><span aria-hidden="true">⌖</span> Arequipa</p><img src="{{ 'spc-2026-retrato-muestra-arequipa.webp' | asset_url }}" width="161" height="161" loading="lazy" alt="Retrato de muestra del mockup"><figcaption>María R. <span class="spc-sample-check" aria-hidden="true">✓</span></figcaption><span class="spc-stars" aria-hidden="true">★★★★★</span><blockquote><strong>“Mi sala luce completamente diferente”</strong><p>El piso SPC le dio un acabado super elegante, ¡me encantó!</p></blockquote></figure>
-<figure class="spc-quote spc-quote--sample"><p class="spc-v2-city"><span aria-hidden="true">⌖</span> Cañete</p><img src="{{ 'spc-2026-retrato-muestra-canete.webp' | asset_url }}" width="161" height="161" loading="lazy" alt="Retrato de muestra del mockup"><figcaption>Adela J. <span class="spc-sample-check" aria-hidden="true">✓</span></figcaption><span class="spc-stars" aria-hidden="true">★★★★★</span><blockquote><strong>“Renové mi departamento gastando poco”</strong><p>No quería gastar en una remodelación completa, así que busqué el piso SPC. Recomendado.</p></blockquote></figure>
-<figure class="spc-quote spc-quote--sample"><p class="spc-v2-city"><span aria-hidden="true">⌖</span> Huánuco</p><img src="{{ 'spc-2026-retrato-muestra-huanuco.webp' | asset_url }}" width="161" height="161" loading="lazy" alt="Retrato de muestra del mockup"><figcaption>Jhon M. <span class="spc-sample-check" aria-hidden="true">✓</span></figcaption><span class="spc-stars" aria-hidden="true">★★★★★</span><blockquote><strong>“El dormitorio se siente más cálido”</strong><p>Elegí un tono madera para mi dormitorio y me encantó el resultado. Combina muy bien.</p></blockquote></figure>
-<figure class="spc-quote spc-quote--sample"><p class="spc-v2-city"><span aria-hidden="true">⌖</span> Trujillo</p><img src="{{ 'spc-2026-retrato-muestra-trujillo.webp' | asset_url }}" width="161" height="161" loading="lazy" alt="Retrato de muestra del mockup"><figcaption>Lucía Z. <span class="spc-sample-check" aria-hidden="true">✓</span></figcaption><span class="spc-stars" aria-hidden="true">★★★★★</span><blockquote><strong>“La instalación fue más sencilla de lo que pensé”</strong><p>Tenía dudas sobre cómo quedaría la instalación, pero el sistema click facilitó bastante el trabajo.</p></blockquote></figure>
-{% endif %}
-</div></div></div></section>{% endif %}
-<section class="spc-v2-results">
-<img class="spc-v2-sala-resultados spc-v2-art" src="{{ 'spc-2026-sala-resultados.webp' | asset_url }}" width="1205" height="950" alt="Sala con piso SPC y acabados de madera" loading="lazy">
-<p class="spc-v2-results-note">*Algunos colores y texturas pueden variar. <a href="{{ contact_url | escape }}" target="_blank" rel="noopener">Consultar con un asesor aquí.</a></p>
-<div class="spc-v2-results-heading spc-v2-heading"><h2>Resultados &amp; Acabados</h2><p>Muestras reales</p></div>
-</section>
-<section class="spc-v2-shipping">
-<img class="spc-v2-almacen-envios spc-v2-art" src="{{ 'spc-2026-almacen-envios.webp' | asset_url }}" width="1080" height="1026" alt="" loading="lazy">
-<div class="spc-v2-shipping-stripe" aria-hidden="true"></div>
-<div class="spc-v2-shipping-frame" aria-hidden="true"></div>
-<div class="spc-v2-shipping-social-header" aria-hidden="true">
-  <span class="spc-v2-shipping-avatar"><img src="{{ 'decokasa-logo.webp' | asset_url }}" width="32" height="32" alt="" loading="lazy"></span>
-  <span class="spc-v2-shipping-account"><span><b>decokasa.pe</b><span class="spc-v2-shipping-follow"> · Seguir</span></span><span>Audio original</span></span>
-  <span class="spc-v2-shipping-options">•••</span>
-</div>
-<img class="spc-v2-shipping-person spc-v2-art" src="{{ 'spc-2026-asesoria-envios.webp' | asset_url }}" width="398" height="451" alt="Asesoría para elegir y coordinar el envío de tu piso SPC" loading="lazy">
-<div class="spc-v2-shipping-social-actions" aria-hidden="true">
-  <svg class="spc-v2-shipping-heart" viewBox="0 0 36 36"><path d="M18 31 4 18C-7 6 9-3 18 8 27-3 43 6 32 18Z"/></svg>
-  <svg viewBox="0 0 36 36"><path d="M30 26 32 33 24 30A15 15 0 1 1 30 26Z"/></svg>
-  <svg viewBox="0 0 38 36"><path d="m2 3 34-1-15 31-5-18L2 3Zm14 12L36 2"/></svg>
-  <svg class="spc-v2-shipping-bookmark" viewBox="0 0 34 38"><path d="M4 3h26v32L17 25 4 35Z"/></svg>
-</div>
-<p class="spc-v2-shipping-social-views">{% if section.settings.spc_design_preview %}15.328 views{% else %}Asesoría y envíos · Decokasa{% endif %}</p>
-<div class="spc-v2-shipping-heading spc-v2-heading"><h2><span class="spc-v2-peru-flag" aria-hidden="true"></span><span>¡Nuestros pisos llegan a todo Perú!</span><span class="spc-v2-peru-flag" aria-hidden="true"></span></h2></div>
-<p class="spc-v2-shipping-copy">Realiza tu pedido. elige tu agencia o delivery de<br>preferencia, <strong>¡Y listo!</strong></p>
-<p class="spc-v2-shipping-note">*¡Cotiza tus envíos con los asesores de venta Decokasa!</p>
-</section>
-<footer class="spc-v2-footer spc-v2-white">
-<img class="spc-v2-caja-tablones-footer spc-v2-art" src="{{ 'spc-2026-caja-tablones-footer.webp' | asset_url }}" width="832" height="899" alt="Caja y tablones de piso SPC Decokasa" loading="lazy">
-<div class="spc-v2-footer-heading spc-v2-heading"><h2>Cotiza tus pisos hoy</h2><p>¡Gratis y sin compromiso!</p></div>
-<div class="spc-v2-footer-actions">{% render 'spc-actions', contact_url: contact_url, catalog_url: catalog_url %}</div>
-<p class="spc-v2-copyright">Decokasa Perú {{ 'now' | date: '%Y' }}<br>Todos los derechos reservados</p>
-</footer></div>
-<dialog class="spc-v2-dialog spc-v2-calc-dialog" data-spc-calc-dialog aria-labelledby="spc-dialog-title-{{ section.id }}"><button class="spc-v2-dialog-close" type="button" data-close-calculator aria-label="Cerrar calculadora">×</button><h2 id="spc-dialog-title-{{ section.id }}">Calcula tus pisos por ambientes</h2>
+<div class="spc-calc-title-group"><h2>Calcula cuántos<br><mark>pisos necesitas</mark></h2><p class="spc-calc-subtitle">Ingresa las medidas de tus habitaciones o el área total. Calculamos al instante las cajas exactas con margen para cortes.</p></div>
 <form class="spc-calculator" data-spc-calculator novalidate>
           <div class="spc-calc-header">
             <span class="spc-calc-header-tag">Calculadora Inteligente Decokasa</span>
@@ -341,7 +277,73 @@
           </div>
           <noscript><p class="spc-noscript-warn">Activa JavaScript para usar la calculadora visual interactiva o consulta directamente con un asesor.</p></noscript>
         </form>
-<a class="spc-button spc-button--order" data-open-request href="#solicitud">Solicitar esta cantidad →</a></dialog>
+<a class="spc-button spc-button--order" data-open-request href="#solicitud">Solicitar esta cantidad →</a>
+<div class="spc-v2-calculator-actions">{% render 'spc-actions', contact_url: contact_url, catalog_url: catalog_url %}</div>
+</section>
+<section class="spc-v2-testimonials spc-testimonials{% if section.blocks.size == 0 and section.settings.spc_design_preview != true %} spc-testimonials--pending{% endif %}" aria-label="Testimonios de clientes" data-spc-testimonials>
+    <img class="spc-v2-testimonials-fondo" src="{{ 'spc-2026-testimonios-fondo.webp' | asset_url }}" width="1080" height="1018" loading="lazy" alt="">
+<div class="spc-v2-testimonial-panel spc-v2-white"></div>
+<div class="spc-v2-socials" aria-hidden="true">
+<svg viewBox="0 0 35 35"><circle cx="17.5" cy="17.5" r="17"/><path d="M19 8v14a4 4 0 1 1-4-4v3a1.5 1.5 0 1 0 1.5 1.5V8h3c0 4 2 6 5 6v3c-2 0-4-1-5-2"/></svg>
+<svg viewBox="0 0 35 35"><circle cx="17.5" cy="17.5" r="17"/><rect x="9" y="9" width="17" height="17" rx="5"/><circle class="spc-social-line" cx="17.5" cy="17.5" r="4"/><path d="M23 12h.1"/></svg>
+<svg viewBox="0 0 35 35"><circle cx="17.5" cy="17.5" r="17"/><path d="M20 29V19h4l1-4h-5v-3c0-2 1-2 4-2V6h-4c-4 0-5 2-5 6v3h-3v4h3v10"/></svg>
+</div>
+<div class="spc-v2-testimonials-heading spc-v2-heading"><h2>Testimonios</h2><p>De nuestros clientes</p></div>
+{% if section.settings.spc_design_preview and section.blocks.size == 0 %}<p class="spc-testimonial-sample-note">Vista de diseño · testimonios de muestra</p>{% endif %}
+{% if section.blocks.size > 0 or section.settings.spc_design_preview %}
+<button class="spc-testimonial-pause" type="button" data-testimonial-pause aria-label="Pausar testimonios" aria-pressed="false" hidden><span aria-hidden="true">Ⅱ</span></button>
+<div class="spc-v2-quotes" tabindex="0" role="region" aria-roledescription="carrusel" aria-label="Testimonios. Desliza o usa las flechas para ver más" data-testimonial-viewport>
+<div class="spc-testimonial-track"><div class="spc-testimonial-group" data-testimonial-original>
+{% for block in section.blocks %}
+<figure class="spc-quote" {{ block.shopify_attributes }}>
+<p class="spc-v2-city"><span aria-hidden="true">⌖</span> {{ block.settings.city | escape }}</p>
+{% if block.settings.portrait != blank %}{{ block.settings.portrait | image_url: width: 320 | image_tag: loading: 'lazy', alt: block.settings.name }}{% endif %}
+<figcaption>{{ block.settings.name | escape }}</figcaption><span class="spc-stars" aria-label="5 de 5 estrellas">★★★★★</span>
+<blockquote>{% if block.settings.headline != blank %}<strong>{{ block.settings.headline | escape }}</strong>{% endif %}<p>{{ block.settings.quote | escape }}</p></blockquote>
+</figure>{% endfor %}
+{% if section.settings.spc_design_preview and section.blocks.size == 0 %}
+<figure class="spc-quote spc-quote--sample"><p class="spc-v2-city"><span aria-hidden="true">⌖</span> Lima</p><img src="{{ 'spc-2026-retrato-muestra-lima.webp' | asset_url }}" width="161" height="161" loading="lazy" alt="Retrato de muestra del mockup"><figcaption>Carlos M. <span class="spc-sample-check" aria-hidden="true">✓</span></figcaption><span class="spc-stars" aria-hidden="true">★★★★★</span><blockquote><strong>“Excelente acabado y fácil de limpiar”</strong><p>Tiene una apariencia muy similar a la madera y limpiarlo es bastante sencillo.</p></blockquote></figure>
+<figure class="spc-quote spc-quote--sample"><p class="spc-v2-city"><span aria-hidden="true">⌖</span> Arequipa</p><img src="{{ 'spc-2026-retrato-muestra-arequipa.webp' | asset_url }}" width="161" height="161" loading="lazy" alt="Retrato de muestra del mockup"><figcaption>María R. <span class="spc-sample-check" aria-hidden="true">✓</span></figcaption><span class="spc-stars" aria-hidden="true">★★★★★</span><blockquote><strong>“Mi sala luce completamente diferente”</strong><p>El piso SPC le dio un acabado super elegante, ¡me encantó!</p></blockquote></figure>
+<figure class="spc-quote spc-quote--sample"><p class="spc-v2-city"><span aria-hidden="true">⌖</span> Cañete</p><img src="{{ 'spc-2026-retrato-muestra-canete.webp' | asset_url }}" width="161" height="161" loading="lazy" alt="Retrato de muestra del mockup"><figcaption>Adela J. <span class="spc-sample-check" aria-hidden="true">✓</span></figcaption><span class="spc-stars" aria-hidden="true">★★★★★</span><blockquote><strong>“Renové mi departamento gastando poco”</strong><p>No quería gastar en una remodelación completa, así que busqué el piso SPC. Recomendado.</p></blockquote></figure>
+<figure class="spc-quote spc-quote--sample"><p class="spc-v2-city"><span aria-hidden="true">⌖</span> Huánuco</p><img src="{{ 'spc-2026-retrato-muestra-huanuco.webp' | asset_url }}" width="161" height="161" loading="lazy" alt="Retrato de muestra del mockup"><figcaption>Jhon M. <span class="spc-sample-check" aria-hidden="true">✓</span></figcaption><span class="spc-stars" aria-hidden="true">★★★★★</span><blockquote><strong>“El dormitorio se siente más cálido”</strong><p>Elegí un tono madera para mi dormitorio y me encantó el resultado. Combina muy bien.</p></blockquote></figure>
+<figure class="spc-quote spc-quote--sample"><p class="spc-v2-city"><span aria-hidden="true">⌖</span> Trujillo</p><img src="{{ 'spc-2026-retrato-muestra-trujillo.webp' | asset_url }}" width="161" height="161" loading="lazy" alt="Retrato de muestra del mockup"><figcaption>Lucía Z. <span class="spc-sample-check" aria-hidden="true">✓</span></figcaption><span class="spc-stars" aria-hidden="true">★★★★★</span><blockquote><strong>“La instalación fue más sencilla de lo que pensé”</strong><p>Tenía dudas sobre cómo quedaría la instalación, pero el sistema click facilitó bastante el trabajo.</p></blockquote></figure>
+{% endif %}
+</div></div></div>
+{% else %}<div class="spc-testimonial-pending"><p>Pronto compartiremos aquí las experiencias de nuestros clientes.</p><a href="{{ contact_url | escape }}" target="_blank" rel="noopener">Conversa con un asesor sobre tu proyecto</a></div>{% endif %}
+</section>
+<section class="spc-v2-results">
+<img class="spc-v2-sala-resultados spc-v2-art" src="{{ 'spc-2026-sala-resultados.webp' | asset_url }}" width="1205" height="950" alt="Sala con piso SPC y acabados de madera" loading="lazy">
+<p class="spc-v2-results-note">*Algunos colores y texturas pueden variar. <a href="{{ contact_url | escape }}" target="_blank" rel="noopener">Consultar con un asesor aquí.</a></p>
+<div class="spc-v2-results-heading spc-v2-heading"><h2>Resultados &amp; Acabados</h2><p>Muestras reales</p></div>
+</section>
+<section class="spc-v2-shipping">
+<img class="spc-v2-almacen-envios spc-v2-art" src="{{ 'spc-2026-almacen-envios.webp' | asset_url }}" width="1080" height="1026" alt="" loading="lazy">
+<div class="spc-v2-shipping-stripe" aria-hidden="true"></div>
+<div class="spc-v2-shipping-frame" aria-hidden="true"></div>
+<div class="spc-v2-shipping-social-header" aria-hidden="true">
+  <span class="spc-v2-shipping-avatar"><img src="{{ 'decokasa-logo.webp' | asset_url }}" width="32" height="32" alt="" loading="lazy"></span>
+  <span class="spc-v2-shipping-account"><span><b>decokasa.pe</b><span class="spc-v2-shipping-follow"> · Seguir</span></span><span>Audio original</span></span>
+  <span class="spc-v2-shipping-options">•••</span>
+</div>
+<img class="spc-v2-shipping-person spc-v2-art" src="{{ 'spc-2026-asesoria-envios.webp' | asset_url }}" width="398" height="451" alt="Asesoría para elegir y coordinar el envío de tu piso SPC" loading="lazy">
+<div class="spc-v2-shipping-social-actions" aria-hidden="true">
+  <svg class="spc-v2-shipping-heart" viewBox="0 0 36 36"><path d="M18 31 4 18C-7 6 9-3 18 8 27-3 43 6 32 18Z"/></svg>
+  <svg viewBox="0 0 36 36"><path d="M30 26 32 33 24 30A15 15 0 1 1 30 26Z"/></svg>
+  <svg viewBox="0 0 38 36"><path d="m2 3 34-1-15 31-5-18L2 3Zm14 12L36 2"/></svg>
+  <svg class="spc-v2-shipping-bookmark" viewBox="0 0 34 38"><path d="M4 3h26v32L17 25 4 35Z"/></svg>
+</div>
+<p class="spc-v2-shipping-social-views">{% if section.settings.spc_design_preview %}15.328 views{% else %}Asesoría y envíos · Decokasa{% endif %}</p>
+<div class="spc-v2-shipping-heading spc-v2-heading"><h2><span class="spc-v2-peru-flag" aria-hidden="true"></span><span>¡Nuestros pisos llegan a todo Perú!</span><span class="spc-v2-peru-flag" aria-hidden="true"></span></h2></div>
+<p class="spc-v2-shipping-copy">Realiza tu pedido. elige tu agencia o delivery de<br>preferencia, <strong>¡Y listo!</strong></p>
+<p class="spc-v2-shipping-note">*¡Cotiza tus envíos con los asesores de venta Decokasa!</p>
+</section>
+<footer class="spc-v2-footer spc-v2-white">
+<img class="spc-v2-caja-tablones-footer spc-v2-art" src="{{ 'spc-2026-caja-tablones-footer.webp' | asset_url }}" width="832" height="899" alt="Caja y tablones de piso SPC Decokasa" loading="lazy">
+<div class="spc-v2-footer-heading spc-v2-heading"><h2>Cotiza tus pisos hoy</h2><p>¡Gratis y sin compromiso!</p></div>
+<div class="spc-v2-footer-actions">{% render 'spc-actions', contact_url: contact_url, catalog_url: catalog_url %}</div>
+<p class="spc-v2-copyright">Decokasa Perú {{ 'now' | date: '%Y' }}<br>Todos los derechos reservados</p>
+</footer></div>
+
 <dialog class="spc-v2-dialog spc-v2-request-dialog" data-spc-modal aria-label="Solicitud de piso SPC"><button class="spc-v2-dialog-close" type="button" data-modal-close aria-label="Cerrar solicitud">×</button>{% render 'request-form', product: product %}</dialog>
 <a class="spc-mobile-sticky-cta" data-spc-sticky-cta href="#calculadora-{{ section.id }}" inert><strong>Realizar pedido</strong><span>Calcula tus cajas de piso SPC →</span></a>
 </div>

@@ -13,8 +13,8 @@ Revisión: 27/10/2026. La integración semántica está terminada y validada con
 
 Los cinco archivos fuente con conflictos se resolvieron manualmente. Las vistas previas y el ZIP se regeneraron desde las fuentes finales.
 
-- Calculadora rápida y avanzada por ambientes, cortes, cobertura configurada, redondeo y transferencia de cajas a solicitud.
-- Un único flujo de solicitud con dialog nativo, cierre por Escape, bloqueo de fondo y recuperación del foco. Abrir solicitud desde la calculadora avanzada cierra ese diálogo y devuelve luego el foco a su acceso visible.
+- Calculadora completa visible dentro de la página: ambientes, croquis, área directa, cortes, cobertura configurada, redondeo y transferencia de cajas a solicitud. Altura adaptable para conservar legibilidad móvil; resumen rápido y modal de cálculo retirados tras revisión del usuario.
+- Un único flujo de solicitud con dialog nativo, cierre por Escape, bloqueo de fondo y recuperación del foco. La calculadora no abre un segundo diálogo; al cerrar la solicitud se recupera el foco en su acceso.
 - Botón móvil persistente adaptado al DOM v2. Aparece después del hero, se oculta al llegar a la calculadora y durante los diálogos. Lleva a la calculadora sin abrir el teclado; respeta área segura y mantiene espacio para el pie.
 - Eliminado respaldo fijo de precio. La solicitud usa el precio real configurado; cero se conserva como precio válido y datos ausentes o inválidos muestran «Importe por confirmar».
 - Inicialización y limpieza de controles compatibles con recargas del editor Shopify; sin manejadores duplicados.
@@ -22,7 +22,7 @@ Los cinco archivos fuente con conflictos se resolvieron manualmente. Las vistas 
 
 ## Validación del resultado integrado
 
-- 33/33 pruebas automatizadas aprobadas.
+- 33/33 pruebas automatizadas aprobadas. Restauración posterior comprobada en 320/393/768/1080/1440: medidas 4,5 × 3,2 = 14,40 m² / 8 cajas; área 20 m² = 11 cajas con cortes / 10 sin cortes, ambientes y cantidad transferida correctos. Sin desbordamiento ni errores JS. Evidencia restoration-results.json y restored-*.png.
 - Theme Check mediante Shopify CLI: código 0, sin hallazgos. El validador del plugin no inicia por dependencia ausente @shopify/theme-check-common; se utilizó la CLI como alternativa.
 - Ocho vistas generadas; enlaces, IDs, rutas y JSON válidos. Paquete de tema de 111 archivos regenerado.
 - Calculadora, cantidades, solicitud, precios, foco y botón móvil comprobados a 320/393/768/1080/1440 px, sin errores JavaScript ni desbordamiento horizontal.
@@ -32,7 +32,7 @@ Los cinco archivos fuente con conflictos se resolvieron manualmente. Las vistas 
 
 ## Alcance comercial y publicación
 
-No cambian SKU, inventario ni precios de catálogo. La cobertura permanece configurada: diferencia editorial entre 2,24 m²/caja del PSD y respaldo 2,196 pendiente de confirmar. Testimonios y certificaciones de muestra siguen restringidos a la vista de diseño; la tienda pública requiere contenido real autorizado.
+No cambian SKU, inventario ni precios de catálogo. La cobertura permanece configurada: diferencia editorial entre 2,24 m²/caja del PSD y respaldo 2,196 pendiente de confirmar. Testimonios y certificaciones de muestra siguen restringidos a la vista de diseño; la tienda pública requiere contenido real autorizado. Testimonios conserva siempre su panel visible: sin bloques reales muestra aviso de próximas experiencias y enlace al asesor; con bloques muestra carrusel. La vista local predeterminada reproduce el template publicado, y las muestras requieren SPC_DESIGN_PREVIEW=1.
 
 El formulario continúa identificado como simulación: sin POST, pagos, reserva de existencias ni receptor Odoo operativo. La integración Git y su envío a main no acreditan por sí solos la sincronización del tema Shopify; comprobar el estado del despliegue por separado.
 

@@ -1,3 +1,10 @@
+## 27/10/2026 — Calculadora completa en página y testimonios visibles
+
+- Recuperada la calculadora anterior dentro de la landing: medidas, croquis, varios ambientes, área directa, cortes y cajas transferidas a solicitud. Retirados resumen rápido y diálogo adicional; se mantiene el diálogo de solicitud.
+- Calculadora en flujo normal y altura adaptable para móvil: sin controles superpuestos, campos de 16 px y botones táctiles. El resto del diseño conserva sus proporciones. Separación corregida con cinco capas y testimonios.
+- La sección Testimonios aparece también sin bloques configurados, con aviso de próximas experiencias y enlace al asesor. El carrusel se muestra al agregar testimonios reales; ejemplos del mockup siguen exclusivos del modo de diseño hasta confirmación. La vista local predeterminada reproduce la configuración pública; SPC_DESIGN_PREVIEW=1 habilita muestras.
+- 33/33 pruebas y Theme Check CLI sin hallazgos. Cálculo por medidas, ambientes, área directa, cortes, cantidad de solicitud y ausencia de desbordamiento/errores comprobados a 320/393/768/1080/1440 px. Evidencias restoration-results.json y restored-*.png en work/spc-redesign del chat. Formulario continúa simulado, sin POST ni Odoo; cobertura 2,196 preservada.
+
 ## 27/10/2026 — Rediseño SPC integrado con la última actualización de main
 
 - Rediseño preservado en 2242eee e integrado con main/origin main 2357831. Conflictos reconciliados manualmente conservando mapa PSD 1080 × 10004, once secciones, 71 anclajes y 33 WebP.
