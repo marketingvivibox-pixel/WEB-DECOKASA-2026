@@ -1,6 +1,6 @@
+{{ 'landing-piso-spc-layout.css' | asset_url | stylesheet_tag }}
 {{ 'landing-piso-spc.css' | asset_url | stylesheet_tag }}
 {{ 'landing-piso-spc-proportions.css' | asset_url | stylesheet_tag }}
-{{ 'landing-piso-spc-layout.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'landing-piso-spc.js' | asset_url }}" defer></script>
 {% liquid
   assign current_variant = product.selected_or_first_available_variant
@@ -71,7 +71,7 @@
       <img class="spc-layer-image" src="{{ 'spc-despiece-capas-piso.webp' | asset_url }}" width="559" height="583" alt="Despiece del piso SPC: acabado, diseño, núcleo rígido y base de espuma" loading="lazy">
       <p class="spc-fineprint">¿Necesitas más información? <a href="{{ contact_url | escape }}" target="_blank" rel="noopener">Consulta con un asesor aquí.</a></p>
     </section>
-    <section class="spc-installation">
+    <section class="spc-installation" id="calculadora">
       <img class="spc-backdrop" src="{{ 'spc-instalacion-click.webp' | asset_url }}" width="1080" height="939" alt="Instalación de tablones SPC mediante sistema Click" loading="lazy">
       <div class="spc-section-inner">
         <div class="spc-calc-title-group">
@@ -134,7 +134,7 @@
                       <div class="spc-dim-field">
                         <label for="room-0-len-{{ section.id }}">Largo</label>
                         <div class="spc-dim-box">
-                          <input id="room-0-len-{{ section.id }}" type="number" step="0.01" min="0.1" max="100" inputmode="decimal" placeholder="4.50" data-dim="length">
+                          <input id="room-0-len-{{ section.id }}" type="number" step="0.01" min="0.1" max="100" inputmode="decimal" placeholder="4.50" data-dim="length" style="outline:none!important;box-shadow:none!important;border:none!important;">
                           <span class="spc-unit">m</span>
                         </div>
                       </div>
@@ -142,7 +142,7 @@
                       <div class="spc-dim-field">
                         <label for="room-0-wid-{{ section.id }}">Ancho</label>
                         <div class="spc-dim-box">
-                          <input id="room-0-wid-{{ section.id }}" type="number" step="0.01" min="0.1" max="100" inputmode="decimal" placeholder="3.20" data-dim="width">
+                          <input id="room-0-wid-{{ section.id }}" type="number" step="0.01" min="0.1" max="100" inputmode="decimal" placeholder="3.20" data-dim="width" style="outline:none!important;box-shadow:none!important;border:none!important;">
                           <span class="spc-unit">m</span>
                         </div>
                       </div>
@@ -151,8 +151,13 @@
                 </div>
 
                 <button type="button" class="spc-add-room-btn" data-add-room>
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
-                  <span>+ Agregar otro ambiente (pasillo, L o habitación)</span>
+                  <span class="spc-add-icon-badge" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                  </span>
+                  <span class="spc-add-btn-content">
+                    <strong>+ Agregar otro ambiente</strong>
+                    <span class="spc-add-sub">Calcula sala, comedor, pasillos o habitaciones juntos</span>
+                  </span>
                 </button>
 
                 <!-- Croquis esquemático visual -->
@@ -173,7 +178,7 @@
                 <div class="spc-direct-group">
                   <label for="spc-area-{{ section.id }}">¿Cuántos metros cuadrados (m²) necesitas cubrir?</label>
                   <div class="spc-direct-input-box">
-                    <input id="spc-area-{{ section.id }}" name="area" type="number" min="0.01" max="100000" step="any" inputmode="decimal" placeholder="Ej. 25" aria-describedby="spc-calc-help-{{ section.id }} spc-calc-error-{{ section.id }}">
+                    <input id="spc-area-{{ section.id }}" name="area" type="number" min="0.01" max="100000" step="any" inputmode="decimal" placeholder="Ej. 25" style="outline:none!important;box-shadow:none!important;" aria-describedby="spc-calc-help-{{ section.id }} spc-calc-error-{{ section.id }}">
                     <span class="spc-direct-unit">m²</span>
                   </div>
                   <div class="spc-chips-group">
@@ -259,9 +264,14 @@
           </div>
           <noscript><p class="spc-noscript-warn">Activa JavaScript para usar la calculadora visual interactiva o consulta directamente con un asesor.</p></noscript>
         </form>
-        <div class="spc-actions spc-actions--catalog-only">
-          <a class="spc-button spc-button--catalog" href="{{ catalog_url | escape }}">
-            {% render 'spc-icon', name: 'catalog' %}<span><strong>Mira el catálogo</strong><small>Explora nuestros colores</small></span>
+        <div class="spc-order-actions-wrap" data-spc-order-actions>
+          <a class="spc-button spc-button--order" href="#solicitud" data-open-request>
+            <svg class="spc-order-btn-icon" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+              <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+              <path d="M9 14l2 2 4-4"/>
+            </svg>
+            <span><strong>Realizar pedido</strong><small>Completa tu solicitud con un asesor</small></span>
           </a>
         </div>
       </div>
@@ -299,6 +309,21 @@
       {% render 'spc-actions', contact_url: contact_url, catalog_url: catalog_url %}
       <p class="spc-copyright">Decokasa Perú {{ 'now' | date: '%Y' }} · Todos los derechos reservados</p>
     </footer>
+  </div>
+  <!-- Botón persistente móvil adaptado a Decokasa -->
+  <a id="spc-mobile-sticky-cta" class="spc-mobile-sticky-cta" href="#calculadora" aria-label="Ir a la calculadora y realizar pedido">
+    <span class="spc-sticky-cta-text">Realizar pedido</span>
+    <span class="spc-sticky-cta-arrow" aria-hidden="true">↗</span>
+  </a>
+  <!-- Modal desplegable para Realizar Pedido -->
+  <div class="spc-modal" id="spc-order-modal" data-spc-modal aria-hidden="true" role="dialog" aria-modal="true" aria-label="Solicita tu compra" style="display:none;">
+    <div class="spc-modal-backdrop" data-modal-close></div>
+    <div class="spc-modal-card">
+      <button type="button" class="spc-modal-close" data-modal-close aria-label="Cerrar modal">&times;</button>
+      <div class="spc-modal-content">
+        {% render 'request-form', product: product %}
+      </div>
+    </div>
   </div>
 </div>
 {% schema %}

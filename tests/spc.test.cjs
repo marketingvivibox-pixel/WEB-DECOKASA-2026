@@ -76,4 +76,9 @@ test('SPC: elementos visuales de la calculadora interactiva (pestañas, ambiente
   assert.ok(doc.querySelector('[data-leftover]'));
   assert.ok(doc.querySelector('[data-calc-contact]'));
   assert.ok(doc.querySelector('[data-quick-area]'));
+  const orderBtn = doc.querySelector('[data-open-request]');
+  assert.ok(orderBtn, 'Debe existir el botón de Realizar pedido');
+  assert.equal(orderBtn.getAttribute('href'), '#solicitud');
+  assert.ok(doc.querySelector('#solicitud'), 'Debe existir el formulario con id solicitud');
+  assert.ok(doc.querySelector('.spc-add-icon-badge'), 'El botón de agregar ambiente debe tener badge de icono con relleno');
 });
