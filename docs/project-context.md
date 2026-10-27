@@ -1,3 +1,7 @@
+## 27/10/2026 — Integración vigente del rediseño SPC
+
+La integración incorpora main 2357831 y conserva la geometría PSD 1080 × 10004 (71 anclajes). El botón móvil usa data-spc-sticky-cta y las secciones v2; debe ocultarse al llegar a la calculadora y con diálogos abiertos. Mantener un único inicializador de solicitud y dialog nativo, con foco recuperado al acceso visible cuando procede de la calculadora avanzada. Usar precio real de la opción seleccionada; cero válido y datos inválidos/ausentes como importe por confirmar, sin respaldos monetarios fijos. Conservar ambos accesos del mockup. Formulario continúa simulado y cobertura comercial configurada sin cambios. El informe de integración sustituye el ensayo previo sin merge.
+
 ## 27/10/2026 — Capas visibles y referencias para la integración
 
 Bloque de cinco capas sobre calculadora (z-index 2 frente a 1); tarjetas Click en 3. Filas móviles de 40 unidades con alineación flex y nota y=5995 en el mapa proporcional. No aumentar el recorte para ocultar el error. Main local comprobado en 23578318ee5509696abe2414037d06727573f9a9; producción conserva activos SPC de b70e0b2. Rediseño local en feature/spc-diseno-octubre, sin fusión. Resolver manualmente cinco archivos y adaptar controles al DOM v2; conservar composición del PSD y formulario explícitamente simulado. Informe en docs/landing-spc-merge-compatibility.md.

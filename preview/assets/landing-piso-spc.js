@@ -26,6 +26,7 @@
   if (typeof document === 'undefined' || window.DecokasaSPC) return;
 
   const initialized = new WeakSet();
+  const pageControllers = new WeakMap();
   const escapeXML = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
   const number = new Intl.NumberFormat('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const integer = new Intl.NumberFormat('es-PE', { maximumFractionDigits: 0 });
@@ -710,10 +711,14 @@
       // Order action modal controls
       const orderBtn = page.querySelector('[data-open-request]');
       const modalEl = page.querySelector('[data-spc-modal]');
-      const formBoxEl = page.querySelector('#solicitud');
+      let scheduleStickyCta = () => {};
+      let requestReturnFocus;
 
       function openOrderModal() {
         if (!modalEl) return;
+        const opener = document.activeElement;
+        requestReturnFocus = opener?.closest('[data-spc-calc-dialog]')
+          ? page.querySelector('[data-open-calculator]') : opener;
         const reqForm = modalEl.querySelector('[data-request-form]');
         if (reqForm) {
           const fieldset = reqForm.querySelector('fieldset');
@@ -742,13 +747,22 @@
         page.querySelector('[data-spc-calc-dialog]')?.close();
         modalEl.showModal();
         document.body.classList.add('spc-modal-open');
+        scheduleStickyCta();
       }
 
       function closeOrderModal() {
         modalEl?.close();
       }
-      const syncModalState = () => document.body.classList.toggle('spc-modal-open', !!page.querySelector('dialog[open]'));
-      modalEl?.addEventListener('close', syncModalState);
+      const syncModalState = () => {
+        document.body.classList.toggle('spc-modal-open', !!page.querySelector('dialog[open]'));
+        scheduleStickyCta();
+      };
+      modalEl?.addEventListener('close', () => {
+        syncModalState();
+        if (!page.querySelector('dialog[open]') && requestReturnFocus?.isConnected) {
+          requestReturnFocus.focus({ preventScroll: true });
+        }
+      });
 
       if (orderBtn) {
         orderBtn.addEventListener('click', e => {
@@ -765,11 +779,6 @@
           });
         });
 
-        document.addEventListener('keydown', e => {
-          if (e.key === 'Escape' && modalEl.classList.contains('is-open')) {
-            closeOrderModal();
-          }
-        });
       }
 
       page.querySelectorAll('a[href="#solicitud"]').forEach(link => {
@@ -799,15 +808,18 @@
         const summaryQty = reqForm.closest('.form-box')?.querySelector('[data-form-qty]');
         const summaryTotal = reqForm.closest('.form-box')?.querySelector('[data-form-total]');
         const select = reqForm.querySelector('[name="variant_id"]');
-        const variantOption = select?.selectedOptions[0];
-        const unitPriceCents = variantOption ? parseInt(variantOption.dataset.price, 10) || 9500 : 9500;
         const currency = reqForm.dataset.currency || 'PEN';
 
         function updateFormSummary() {
           const qty = Math.max(1, parseInt(qtyInput?.value, 10) || 1);
           if (summaryQty) summaryQty.textContent = `${qty} ${qty === 1 ? 'caja' : 'cajas'}`;
           if (summaryTotal) {
-            const price = parseInt(select?.selectedOptions[0]?.dataset.price, 10) || unitPriceCents;
+            const rawPrice = select?.selectedOptions[0]?.dataset.price;
+            const price = rawPrice?.trim() ? Number(rawPrice) : NaN;
+            if (!Number.isFinite(price) || price < 0) {
+              summaryTotal.textContent = 'Importe por confirmar';
+              return;
+            }
             const total = (qty * price) / 100;
             summaryTotal.textContent = new Intl.NumberFormat('es-PE', { style: 'currency', currency }).format(total);
           }
@@ -839,12 +851,14 @@
       });
 
       // Mobile Persistent Sticky CTA ("Realizar pedido")
-      const mobileStickyCta = page.querySelector('#spc-mobile-sticky-cta') || document.getElementById('spc-mobile-sticky-cta');
-      const heroSection = page.querySelector('.spc-hero');
-      const calcSection = page.querySelector('#calculadora') || page.querySelector('.spc-installation');
+      const mobileStickyCta = page.querySelector('[data-spc-sticky-cta]');
+      const heroSection = page.querySelector('.spc-v2-hero');
+      const calcSection = page.querySelector('.spc-v2-calculator');
 
       if (mobileStickyCta && calcSection) {
         let ticking = false;
+        let frame;
+        const controller = new AbortController();
 
         const updateStickyCta = () => {
           const heroEnd = heroSection ? heroSection.getBoundingClientRect().bottom : 0;
@@ -857,28 +871,32 @@
           const shouldShow = isMobile && heroEnd < 60 && !calcVisible && !modalOpen;
 
           mobileStickyCta.classList.toggle('is-visible', shouldShow);
+          mobileStickyCta.inert = !shouldShow;
           ticking = false;
         };
 
-        const scheduleStickyCta = () => {
+        scheduleStickyCta = () => {
           if (ticking) return;
           ticking = true;
-          window.requestAnimationFrame(updateStickyCta);
+          frame = window.requestAnimationFrame(updateStickyCta);
         };
 
-        window.addEventListener('scroll', scheduleStickyCta, { passive: true });
-        window.addEventListener('resize', scheduleStickyCta);
+        window.addEventListener('scroll', scheduleStickyCta, { passive: true, signal: controller.signal });
+        window.addEventListener('resize', scheduleStickyCta, { signal: controller.signal });
+        pageControllers.set(page, () => {
+          controller.abort();
+          window.cancelAnimationFrame(frame);
+          pageControllers.delete(page);
+          document.body.classList.remove('spc-modal-open');
+        });
         scheduleStickyCta();
 
         // Smooth scroll to calculator on click
         mobileStickyCta.addEventListener('click', e => {
           e.preventDefault();
-          calcSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          setTimeout(() => {
-            const firstInput = calcSection.querySelector('[data-dim="length"]') || calcSection.querySelector('input');
-            if (firstInput) firstInput.focus({ preventScroll: true });
-          }, 450);
-        });
+          calcSection.focus({ preventScroll: true });
+          calcSection.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' });
+        }, { signal: controller.signal });
       }
 
       const quick = page.querySelector('[data-spc-quick-calculator]');
@@ -921,6 +939,7 @@
         setMode(lastCalculation ? currentMode : 'dimensions');
         calcDialog.showModal();
         document.body.classList.add('spc-modal-open');
+        scheduleStickyCta();
       });
       page.querySelector('[data-close-calculator]')?.addEventListener('click', () => calcDialog.close());
       calcDialog?.addEventListener('close', syncModalState);
@@ -936,6 +955,6 @@
   document.addEventListener('shopify:section:unload', event => {
     const pages = [...event.target.querySelectorAll('[data-spc-page]')];
     if (event.target.matches?.('[data-spc-page]')) pages.unshift(event.target);
-    pages.forEach(page => { testimonialControllers.get(page)?.(); initialized.delete(page); });
+    pages.forEach(page => { testimonialControllers.get(page)?.(); pageControllers.get(page)?.(); initialized.delete(page); });
   });
 })();

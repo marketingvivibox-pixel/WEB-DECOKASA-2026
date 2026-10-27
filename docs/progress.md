@@ -1,3 +1,10 @@
+## 27/10/2026 — Rediseño SPC integrado con la última actualización de main
+
+- Rediseño preservado en 2242eee e integrado con main/origin main 2357831. Conflictos reconciliados manualmente conservando mapa PSD 1080 × 10004, once secciones, 71 anclajes y 33 WebP.
+- Conservadas calculadora por ambientes, cortes, solicitud y funciones generales de variantes/regalo. Botón móvil adaptado al DOM v2; foco y diálogos unificados; respaldo fijo de precio eliminado, usando precio real o importe por confirmar. Ambos accesos del mockup conservados.
+- 33/33 pruebas y Theme Check CLI sin hallazgos. Calculadora/solicitud/botón/carrusel comprobados en 320/393/768/1080/1440 px; cinco capas visibles en 320/393/1080/1440. Sin errores JS ni desbordamiento. Ocho vistas y ZIP de 111 archivos regenerados/verificados.
+- Informe actualizado: docs/landing-spc-merge-compatibility.md. Formulario simulado, sin POST ni integración Odoo. La sincronización Shopify se comprueba separadamente del merge Git.
+
 ## 27/10/2026 — Cinco capas corregidas y compatibilidad de integración revisada
 
 - Corregida superposición del bloque de cinco capas con la calculadora; filas móviles alineadas sin invadir la nota, anclada en y=5995. Mapa vigente: 71 cajas. Revisión 320/393/1080/1440 sin errores JS, imágenes rotas ni desbordamiento.
@@ -45,6 +52,15 @@
 
 - Añadidos controles anterior/siguiente y deslizamiento a la galería, con miniaturas y cambio de variantes conservados. En escritorio, la compra se organiza en un panel compacto con secciones desplegables y límite ligado al borde inferior de la galería; la información del producto queda centrada debajo.
 - 30 pruebas aprobadas, incluidas galería, gestos, variantes y cálculos de solicitud. Vistas de muestra y paquete regenerados y verificados. La herramienta de validación de Shopify no pudo iniciarse por una dependencia ausente; la plantilla se comprobó con las pruebas del proyecto.
+
+## 27/10/2026 — Calculadora visual SPC por ambientes, modal de pedido y botón persistente móvil
+
+- Registrados los cambios en `feature/calculadora-visual-spc`: cálculo por medidas de varios ambientes o ingreso directo de m², croquis esquemático dinámico en tiempo real (SVG con animación y proporciones), desglose jerárquico de superficie y cajas, acceso al catálogo y botón "Realizar pedido".
+- Modal de pedido emergente (`#spc-order-modal`) con fondo difuminado, precarga de ambientes y cajas, completamente extraído del flujo del pie de página.
+- Erradicación total de la línea azul en campos de medida (`outline: none !important; border: none !important; box-shadow: none !important;`).
+- Botón persistente móvil inferior ("Realizar pedido ↗") con visibilidad selectiva por scroll (ocultamiento automático en zona de calculadora).
+- Servidor local con cabeceras `Cache-Control: no-store` y control de versiones por query string (`?v=...`) en `scripts/sync_preview.cjs`.
+
 ## 26/10/2026 — Meta automática del regalo
 
 - Sustituida la meta fija por `product.price_max × 1.80`, redondeada a céntimos. Estable entre variantes y cantidades; progreso calculado con las líneas de la solicitud. Tarjeta, importe pendiente y modal comparten la referencia. Retirado el ajuste manual antiguo; productos sin precio positivo no muestran el incentivo.

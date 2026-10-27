@@ -145,3 +145,11 @@ body.spc-layout{margin:0;padding:0;background:#edeae3}body.spc-layout #main{marg
 .spc-button--order strong{font-size:clamp(18px,2.4vw,23px);font-weight:800;letter-spacing:-0.01em;display:block;line-height:1.15}
 .spc-button--order small{font-size:clamp(12px,1.4vw,14.5px);color:#4a4220;display:block;font-weight:600;line-height:1.2;margin-top:2px}/* Modal Popup para Realizar Pedido */
 body.spc-modal-open{overflow:hidden!important}
+.spc-mobile-sticky-cta{display:none}
+@media(max-width:767px){
+  .spc-page{padding-bottom:calc(88px + env(safe-area-inset-bottom,0px))}
+  .spc-mobile-sticky-cta{display:flex;position:fixed;z-index:50;left:16px;right:16px;bottom:calc(12px + env(safe-area-inset-bottom,0px));min-height:56px;padding:10px 18px;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-radius:28px;background:var(--gold-gradient);color:#262211;box-shadow:0 4px 18px #0004;text-decoration:none;font-size:16px;line-height:1.2;visibility:hidden;pointer-events:none}
+  .spc-mobile-sticky-cta span{font-size:12px}
+  .spc-mobile-sticky-cta.is-visible{visibility:visible;pointer-events:auto}
+  .spc-mobile-sticky-cta:focus-visible{outline:3px solid #fff;outline-offset:3px}
+}
