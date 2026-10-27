@@ -1,3 +1,23 @@
+## 27/10/2026 — Capas visibles y referencias para la integración
+
+Bloque de cinco capas sobre calculadora (z-index 2 frente a 1); tarjetas Click en 3. Filas móviles de 40 unidades con alineación flex y nota y=5995 en el mapa proporcional. No aumentar el recorte para ocultar el error. Main local comprobado en 23578318ee5509696abe2414037d06727573f9a9; producción conserva activos SPC de b70e0b2. Rediseño local en feature/spc-diseno-octubre, sin fusión. Resolver manualmente cinco archivos y adaptar controles al DOM v2; conservar composición del PSD y formulario explícitamente simulado. Informe en docs/landing-spc-merge-compatibility.md.
+
+## 27/10/2026 — Geometría de resultados y envíos
+
+Mapa vigente: 71 cajas sobre 1080 × 10004. Encabezado resultados x150/y8365/780×116; franja x0/y8599/1080×60; tarjeta x312/y8545/458×660; foto x343/y8638/398×451; título envío x245/y9246/590×40, texto x210/y9280/660×80 y nota x300/y9365/480×26. La foto usa el recorte de máscara PSD250; almacén combina solo capas fotográficas/sombras 3/4/6/7. Cabecera y acciones sociales, franja y banderas se construyen en código. Contador 15.328 solo en diseño; leyenda pública sin contador. Mantener estas proporciones compartidas entre móvil y escritorio.
+
+## 27/10/2026 — Carrusel de testimonios
+
+Geometría vigente: 68 cajas. Sección x=0/y=6839/1080×963; panel x=62/y=6886/956×916; tarjetas 224×581 con separación 22 y radio 46, escaladas por ancho del lienzo en móvil/escritorio. Fondo spc-2026-testimonios-fondo.webp 1080×1018 (y=6784–7802) combina solo fotografías/decoración PSD; no incluye textos ni tarjetas. Carrusel continuo a 24 unidades PSD/s, deslizamiento táctil, teclado, pausa y movimiento reducido; copias inertes y ocultas a lectores. Una tarjeta se centra; dos o más llenan el bucle. Mantener política de muestras solo en vista de diseño y testimonios públicos desde bloques autorizados. Campo opcional headline para frase destacada. Corrección local pendiente de revisión del usuario, sin publicar.
+
+## 27/10/2026 — Geometría del bloque Click
+
+El mapa vigente tiene 67 cajas. Fondo Click: x=0, y=4567, 1080 × 889, radio 44,5 unidades; título Click! en Raleway cursiva 251,6115, caja x=−47/y=4643. Instalador por encima del panel superior; borde dorado del tablón desde el trazado original como SVG independiente. Cinco tarjetas de 157–158 × 191, radio 44,5, x=120/294/468/642/816 e y=5353; el panel siguiente comienza en y=5392 detrás de ellas. Mantener textos y tarjetas en código y escalar todas las medidas con el ancho del lienzo, también en móvil. Corrección local pendiente de revisión del usuario.
+
+## 27/10/2026 — Fidelidad del bloque de composición actualizado
+
+El mapa vigente del PSD es 1080 × 10004 (docs/landing-spc-layout.json). La imagen sala-composicion combina únicamente fotografía, retoque de pared enmascarado y sombreado del suelo originales (capas 138/140/141). El texto SPC se construye con Raleway cursiva de 310,125 unidades, peso 400 y tracking −0,03em; nombre a la izquierda, fórmula en negrita y nota blanca. Mantener separados los niños/mascota y todos los textos, sin sustituir el bloque por una captura. Corrección actual en feature/spc-diseno-octubre, aún local.
+
 ## 26/10/2026 — Meta del regalo según el producto
 
 Decisión del usuario: reemplazar la meta fija por el precio unitario más alto del producto multiplicado por 1.80 (80% adicional). Se usa `product.price_max`, sin precio de comparación ni filtro de disponibilidad, redondeado al céntimo. Cambiar color/modelo o cantidad conserva la meta; el total de las líneas controla el progreso. Titan: máximo S/ 300, meta S/ 540. Regla común a todas las fichas que incluyen la tarjeta de regalo; productos sin precio positivo no la muestran. No cambia el catálogo ni activa envío de solicitudes.
@@ -125,3 +145,16 @@ Para los seis beneficios se usan los trazados originales del PSD, exportados com
 Por petición expresa del usuario, el mapa abarca toda la landing. La fuente editable de geometría es `docs/landing-spc-layout.json`: lienzo 1080 × 6491, ocho secciones, 47 cajas absolutas con referencia a las capas. El generador deriva porcentajes y CSS; editar las cajas en píxeles y ejecutar `npm run sync:preview`, sin retocar manualmente el CSS generado. Los porcentajes verticales de los elementos son relativos a su sección, y también se conservan porcentajes respecto de la página completa. Las superposiciones y recortes permiten valores negativos o mayores de 100%.
 
 Desde la corrección del 22/10/2026, la composición escala con el lienzo en todos los anchos, hasta 1080 px; móvil conserva la misma distribución. Se verificó concordancia de las cajas con el mapa en 12 anchos de 320 a 1440 px; no se promete identidad rasterizada de tipografía con el PSD. El mapa de revisión usa la previsualización conservada como referencia, nunca como fondo sustitutivo de la landing. Siguen vigentes las restricciones comerciales de testimonios, sellos y correspondencia entre colores y variantes.
+
+
+### Revisión SPC del PSD actualizado — 27/10/2026
+
+Esta revisión sustituye la geometría anterior de 1080 × 6491: el PSD actual tiene 1080 × 10004, once secciones y 66 cajas. La fuente editable continúa siendo `docs/landing-spc-layout.json`; ejecutar `node scripts/sync_preview.cjs` para regenerar CSS y vistas. `docs/landing-spc-assets-20261027.json` registra la fuente, huella SHA-256 y recursos exportados. Fotos/recortes separados en `spc-2026-*.webp`; textos, trazados y controles editables en código, sin usar capturas de secciones. Raleway local bajo OFL; la tipografía Godshine del hero se aproxima con Raleway.
+
+El mismo lienzo proporcional se aplica de 320 a 1080 px y se centra a anchos mayores. Los diálogos de calculadora/solicitud conservan tipografía legible de 16 px y controles táctiles propios, independientes del escalado del arte. La calculadora rápida y avanzada comparten cobertura; soporta ambientes, dimensiones, cortes y transferencia de cantidad a solicitud. El formulario sigue simulado y no transmite datos.
+
+Se preserva la prioridad de `decokasa.coverage_m2` de variante, luego producto y después configuración de sección. No cambiar automáticamente el respaldo 2,196 a los 2,24 m² del nuevo PSD: confirmar presentación/rendimiento con negocio. Las especificaciones del PSD describen una presentación, sin modificar SKU, precio o inventario. Las tres muestras de tonos son referencias visuales y enlazan al catálogo; no inventan variantes.
+
+`spc_design_preview` es false por defecto y se activa solo en la muestra local para revisar la composición completa. No activar en una tienda pública: incluye retratos, opiniones y sellos de muestra identificados como pendientes. `show_certifications` permanece false hasta validar los sellos; testimonios en Shopify solo desde bloques reales con contenido autorizado. Al omitir bloques condicionales, el flujo se compacta.
+
+Desarrollo aislado en `feature/spc-diseno-octubre` (base main b70e0b2), ruta Documents/Codex/2026-10-21/este-mokup-es-para-la-pagina-4/work/spc-redesign/theme. No fusionado, confirmado en Git ni enviado a Shopify en esta tarea. Checkout principal con calculadora avanzada y cambios pendientes preservado.

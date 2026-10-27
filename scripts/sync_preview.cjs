@@ -91,7 +91,7 @@ async function main() {
     fs.writeFileSync(path.join(preview, file), html.replace(/[ \t]+$/gm, ''), 'utf8');
   }
   fs.mkdirSync(path.join(preview, 'assets'), { recursive: true });
-  for (const asset of fs.readdirSync(path.join(root, 'assets')).filter(name => /^(decokasa-.*\.webp|favicon\.png|product-detail\.(css|js)|landing-piso-spc(?:-layout|-proportions)?\.(css|js)|spc-.*\.(webp|png|svg))$/.test(name))) {
+  for (const asset of fs.readdirSync(path.join(root, 'assets')).filter(name => /^(decokasa-.*\.webp|favicon\.png|product-detail\.(css|js)|landing-piso-spc(?:-layout|-proportions)?\.(css|js)|spc-.*\.(webp|png|svg|ttf|txt))$/.test(name))) {
     fs.copyFileSync(path.join(root, 'assets', asset), path.join(preview, 'assets', asset));
   }
   console.log(`${previewFiles.length} preview pages synchronized with the Shopify sections.`);

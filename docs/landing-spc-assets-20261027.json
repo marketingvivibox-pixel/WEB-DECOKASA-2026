@@ -1,0 +1,743 @@
+{
+  "source": "LANDING SPC_MOCK.psd",
+  "sha256": "47b66cf8d77f9fa480f952b841c82376ff4c1786a496e20eb0ad96d6b142bd89",
+  "canvas": [
+    1080,
+    10004
+  ],
+  "assets": [
+    {
+      "file": "spc-2026-hojas-fondo.webp",
+      "layerIndex": 0,
+      "layerName": "FONDO DE HOJITAS",
+      "bbox": [
+        -87,
+        3830,
+        1167,
+        4666
+      ],
+      "sourceSize": [
+        1254,
+        836
+      ],
+      "exportSize": [
+        1254,
+        836
+      ],
+      "bytes": 310400,
+      "embeddedType": "jpeg"
+    },
+    {
+      "file": "spc-2026-almacen-envios.webp",
+      "layerIndex": 4,
+      "layerName": "spacious-warehouse-with-rows-shelves-forklift",
+      "bbox": [
+        -575,
+        8504,
+        1237,
+        9530
+      ],
+      "sourceSize": [
+        1812,
+        1026
+      ],
+      "exportSize": [
+        1080,
+        1026
+      ],
+      "bytes": 75262,
+      "embeddedType": "jpeg",
+      "compositeLayerIndices": [
+        3,
+        4,
+        6,
+        7
+      ],
+      "exportViewport": [
+        0,
+        8504,
+        1080,
+        9530
+      ],
+      "exportDescription": "Warehouse photograph with original mask and shading only; stripe and card remain in code."
+    },
+    {
+      "file": "spc-2026-caja-tablones-footer.webp",
+      "layerIndex": 37,
+      "layerName": "PISO",
+      "bbox": [
+        -123,
+        9539,
+        709,
+        10438
+      ],
+      "sourceSize": [
+        832,
+        899
+      ],
+      "exportSize": [
+        832,
+        899
+      ],
+      "bytes": 129260,
+      "embeddedType": "8bpb"
+    },
+    {
+      "file": "spc-2026-sala-resultados.webp",
+      "layerIndex": 40,
+      "layerName": "SPC-007 (1)",
+      "bbox": [
+        -58,
+        7649,
+        1147,
+        8599
+      ],
+      "sourceSize": [
+        1205,
+        950
+      ],
+      "exportSize": [
+        1205,
+        950
+      ],
+      "bytes": 129752,
+      "embeddedType": "png"
+    },
+    {
+      "file": "spc-2026-instalacion-fondo.webp",
+      "layerIndex": 47,
+      "layerName": "Capa 13 copia",
+      "bbox": [
+        0,
+        6002,
+        1080,
+        7042
+      ],
+      "sourceSize": [
+        1080,
+        1040
+      ],
+      "exportSize": [
+        1080,
+        1040
+      ],
+      "bytes": 43090
+    },
+    {
+      "file": "spc-2026-retrato-muestra-lima.webp",
+      "layerIndex": 67,
+      "layerName": "pexels-troopper84-32817563",
+      "bbox": [
+        -20,
+        7220,
+        142,
+        7463
+      ],
+      "sourceSize": [
+        162,
+        243
+      ],
+      "exportSize": [
+        162,
+        243
+      ],
+      "bytes": 8792,
+      "embeddedType": "jpeg"
+    },
+    {
+      "file": "spc-2026-retrato-muestra-arequipa.webp",
+      "layerIndex": 75,
+      "layerName": "pexels-ricardopandda-29605580",
+      "bbox": [
+        223,
+        7220,
+        384,
+        7461
+      ],
+      "sourceSize": [
+        161,
+        241
+      ],
+      "exportSize": [
+        161,
+        241
+      ],
+      "bytes": 10276,
+      "embeddedType": "jpeg"
+    },
+    {
+      "file": "spc-2026-retrato-muestra-canete.webp",
+      "layerIndex": 83,
+      "layerName": "pexels-himanuuu-37018540",
+      "bbox": [
+        409,
+        7215,
+        695,
+        7394
+      ],
+      "sourceSize": [
+        286,
+        179
+      ],
+      "exportSize": [
+        286,
+        179
+      ],
+      "bytes": 24802,
+      "embeddedType": "jpeg"
+    },
+    {
+      "file": "spc-2026-retrato-muestra-huanuco.webp",
+      "layerIndex": 91,
+      "layerName": "pexels-luis-dejud-2164514414-40221544",
+      "bbox": [
+        701,
+        7229,
+        877,
+        7499
+      ],
+      "sourceSize": [
+        176,
+        270
+      ],
+      "exportSize": [
+        176,
+        270
+      ],
+      "bytes": 15820,
+      "embeddedType": "jpeg"
+    },
+    {
+      "file": "spc-2026-retrato-muestra-trujillo.webp",
+      "layerIndex": 99,
+      "layerName": "pexels-jeampiere-m-astete-572790218-22669600",
+      "bbox": [
+        962,
+        7192,
+        1181,
+        7470
+      ],
+      "sourceSize": [
+        219,
+        278
+      ],
+      "exportSize": [
+        219,
+        278
+      ],
+      "bytes": 10884,
+      "embeddedType": "jpeg"
+    },
+    {
+      "file": "spc-2026-despiece-cinco-capas.webp",
+      "layerIndex": 110,
+      "layerName": "Capa 45",
+      "bbox": [
+        572,
+        5682,
+        1141,
+        6284
+      ],
+      "sourceSize": [
+        569,
+        602
+      ],
+      "exportSize": [
+        569,
+        602
+      ],
+      "bytes": 58826,
+      "embeddedType": "8bpb"
+    },
+    {
+      "file": "spc-2026-sala-composicion.webp",
+      "layerIndex": 138,
+      "layerName": "Relleno generativo 3",
+      "bbox": [
+        -850,
+        1680,
+        1108,
+        3265
+      ],
+      "sourceSize": [
+        1958,
+        1585
+      ],
+      "exportSize": [
+        1958,
+        1585
+      ],
+      "bytes": 222870,
+      "embeddedType": "8bpb",
+      "compositedLayerIndices": [
+        138,
+        140,
+        141
+      ],
+      "compositionNote": "Fotografía con retoque de pared enmascarado y sombreado del suelo originales del PSD; sin textos ni elementos de interfaz."
+    },
+    {
+      "file": "spc-2026-sala-transicion.webp",
+      "layerIndex": 139,
+      "layerName": "Relleno generativo 4",
+      "bbox": [
+        0,
+        1439,
+        1080,
+        1748
+      ],
+      "sourceSize": [
+        1080,
+        309
+      ],
+      "exportSize": [
+        1080,
+        309
+      ],
+      "bytes": 3744,
+      "embeddedType": "8bpb"
+    },
+    {
+      "file": "spc-2026-ninos-mascota.webp",
+      "layerIndex": 150,
+      "layerName": "Capa 52",
+      "bbox": [
+        189,
+        1916,
+        956,
+        2398
+      ],
+      "sourceSize": [
+        767,
+        482
+      ],
+      "exportSize": [
+        767,
+        482
+      ],
+      "bytes": 71138,
+      "embeddedType": "8bpb"
+    },
+    {
+      "file": "spc-2026-muestra-calida.webp",
+      "layerIndex": 163,
+      "layerName": "SPC-001-B",
+      "bbox": [
+        121,
+        2896,
+        387,
+        3162
+      ],
+      "sourceSize": [
+        266,
+        266
+      ],
+      "exportSize": [
+        266,
+        266
+      ],
+      "bytes": 21932,
+      "embeddedType": "png"
+    },
+    {
+      "file": "spc-2026-muestra-oscura.webp",
+      "layerIndex": 165,
+      "layerName": "SPC-019-B",
+      "bbox": [
+        411,
+        2896,
+        674,
+        3159
+      ],
+      "sourceSize": [
+        263,
+        263
+      ],
+      "exportSize": [
+        263,
+        263
+      ],
+      "bytes": 18466,
+      "embeddedType": "png"
+    },
+    {
+      "file": "spc-2026-muestra-neutra.webp",
+      "layerIndex": 167,
+      "layerName": "SPC-007-B",
+      "bbox": [
+        705,
+        2896,
+        966,
+        3157
+      ],
+      "sourceSize": [
+        261,
+        261
+      ],
+      "exportSize": [
+        261,
+        261
+      ],
+      "bytes": 16152,
+      "embeddedType": "png"
+    },
+    {
+      "file": "spc-2026-click-fondo.webp",
+      "layerIndex": 183,
+      "layerName": "Grupo 1",
+      "bbox": [
+        -350,
+        4420,
+        1557,
+        5479
+      ],
+      "sourceSize": [
+        1907,
+        1059
+      ],
+      "exportSize": [
+        1080,
+        889
+      ],
+      "bytes": 84056,
+      "embeddedType": "8bpb",
+      "compositedLayerIndices": [
+        183,
+        184
+      ],
+      "cropBox": [
+        0,
+        4567,
+        1080,
+        5456
+      ],
+      "compositionNote": "Fotografía recortada al panel original con sombreado del suelo; sin textos, tarjetas ni instalador superpuestos."
+    },
+    {
+      "file": "spc-2026-sello-eph-color.webp",
+      "layerIndex": 188,
+      "layerName": "Capa 26",
+      "bbox": [
+        674,
+        4284,
+        859,
+        4383
+      ],
+      "sourceSize": [
+        185,
+        99
+      ],
+      "exportSize": [
+        185,
+        99
+      ],
+      "bytes": 5230,
+      "embeddedType": "8bpb"
+    },
+    {
+      "file": "spc-2026-sello-dakks-color.webp",
+      "layerIndex": 189,
+      "layerName": "Capa 29",
+      "bbox": [
+        206,
+        4300,
+        429,
+        4393
+      ],
+      "sourceSize": [
+        223,
+        93
+      ],
+      "exportSize": [
+        223,
+        93
+      ],
+      "bytes": 7864,
+      "embeddedType": "8bpb"
+    },
+    {
+      "file": "spc-2026-sello-ilac-color.webp",
+      "layerIndex": 190,
+      "layerName": "Capa 27",
+      "bbox": [
+        710,
+        4141,
+        822,
+        4254
+      ],
+      "sourceSize": [
+        112,
+        113
+      ],
+      "exportSize": [
+        112,
+        113
+      ],
+      "bytes": 15662,
+      "embeddedType": "8bpb"
+    },
+    {
+      "file": "spc-2026-sello-cnas-color.webp",
+      "layerIndex": 191,
+      "layerName": "Objeto inteligente vectorial",
+      "bbox": [
+        479,
+        4300,
+        602,
+        4393
+      ],
+      "sourceSize": [
+        123,
+        93
+      ],
+      "exportSize": [
+        123,
+        93
+      ],
+      "bytes": 3398,
+      "embeddedType": "pdf"
+    },
+    {
+      "file": "spc-2026-sello-floorscore-color.webp",
+      "layerIndex": 192,
+      "layerName": "Capa 30",
+      "bbox": [
+        250,
+        4156,
+        385,
+        4263
+      ],
+      "sourceSize": [
+        135,
+        107
+      ],
+      "exportSize": [
+        135,
+        107
+      ],
+      "bytes": 5598,
+      "embeddedType": "8bpb"
+    },
+    {
+      "file": "spc-2026-sello-anab-color.webp",
+      "layerIndex": 193,
+      "layerName": "Capa 28",
+      "bbox": [
+        473,
+        4138,
+        608,
+        4261
+      ],
+      "sourceSize": [
+        135,
+        123
+      ],
+      "exportSize": [
+        135,
+        123
+      ],
+      "bytes": 6440,
+      "embeddedType": "8bpb"
+    },
+    {
+      "file": "spc-2026-hojas-derecha.webp",
+      "layerIndex": 195,
+      "layerName": "green_leaves",
+      "bbox": [
+        899,
+        4028,
+        1379,
+        4341
+      ],
+      "sourceSize": [
+        480,
+        313
+      ],
+      "exportSize": [
+        480,
+        313
+      ],
+      "bytes": 29466,
+      "embeddedType": "png"
+    },
+    {
+      "file": "spc-2026-hojas-izquierda.webp",
+      "layerIndex": 196,
+      "layerName": "green_leaves copia",
+      "bbox": [
+        -302,
+        4027,
+        179,
+        4340
+      ],
+      "sourceSize": [
+        481,
+        313
+      ],
+      "exportSize": [
+        481,
+        313
+      ],
+      "bytes": 29356,
+      "embeddedType": "png"
+    },
+    {
+      "file": "spc-2026-comedor-hero.webp",
+      "layerIndex": 222,
+      "layerName": "Relleno generativo",
+      "bbox": [
+        -34,
+        -321,
+        1083,
+        1712
+      ],
+      "sourceSize": [
+        1117,
+        2033
+      ],
+      "exportSize": [
+        1117,
+        2033
+      ],
+      "bytes": 73750,
+      "embeddedType": "8bpb"
+    },
+    {
+      "file": "spc-2026-caja-tablones-hero.webp",
+      "layerIndex": 226,
+      "layerName": "spc 02",
+      "bbox": [
+        250,
+        599,
+        830,
+        1384
+      ],
+      "sourceSize": [
+        580,
+        785
+      ],
+      "exportSize": [
+        580,
+        785
+      ],
+      "bytes": 97162,
+      "embeddedType": "png"
+    },
+    {
+      "file": "spc-2026-simbolo-marca.webp",
+      "layerIndex": 228,
+      "layerName": "Objeto inteligente vectorial",
+      "bbox": [
+        481,
+        154,
+        599,
+        270
+      ],
+      "sourceSize": [
+        118,
+        116
+      ],
+      "exportSize": [
+        118,
+        116
+      ],
+      "bytes": 3252,
+      "embeddedType": "pdf"
+    },
+    {
+      "file": "spc-2026-tablones-ficha.webp",
+      "layerIndex": 234,
+      "layerName": "pisos overlay",
+      "bbox": [
+        522,
+        3294,
+        1337,
+        3964
+      ],
+      "sourceSize": [
+        815,
+        670
+      ],
+      "exportSize": [
+        815,
+        670
+      ],
+      "bytes": 132642,
+      "embeddedType": "8bpb"
+    },
+    {
+      "file": "spc-2026-instalador-click.webp",
+      "layerIndex": 237,
+      "layerName": "Capa 54",
+      "bbox": [
+        234,
+        4587,
+        1104,
+        5187
+      ],
+      "sourceSize": [
+        870,
+        600
+      ],
+      "exportSize": [
+        870,
+        600
+      ],
+      "bytes": 76106,
+      "embeddedType": "8bpb"
+    },
+    {
+      "file": "spc-2026-asesoria-envios.webp",
+      "layerIndex": 251,
+      "layerName": "pexels-lil_-gary-ramirez-2154995565-33530402",
+      "bbox": [
+        305,
+        8549,
+        770,
+        9247
+      ],
+      "sourceSize": [
+        465,
+        698
+      ],
+      "exportSize": [
+        398,
+        451
+      ],
+      "bytes": 44026,
+      "embeddedType": "jpeg",
+      "cropInLayer": [
+        38,
+        89,
+        436,
+        540
+      ],
+      "maskLayerIndex": 250,
+      "exportDescription": "Photograph cropped to PSD mask; social UI remains in code."
+    },
+    {
+      "file": "spc-2026-testimonios-fondo.webp",
+      "compositedLayerIndices": [
+        40,
+        47,
+        52,
+        53,
+        54,
+        55,
+        56
+      ],
+      "cropBox": [
+        0,
+        6784,
+        1080,
+        7802
+      ],
+      "exportSize": [
+        1080,
+        1018
+      ],
+      "bytes": 73120,
+      "compositionNote": "Solo fotografía y planchas decorativas del fondo, con sombras recortadas a sus planchas; sin textos, retratos, tarjetas ni panel."
+    }
+  ]
+}

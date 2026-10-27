@@ -35,6 +35,74 @@ test('SPC: datos nativos y privacidad del contenido de muestra en el tema', asyn
   assert.ok(doc.querySelector('.spc-button--catalog').getAttribute('href').startsWith('#spc-colores-'));
   assert.equal(doc.querySelectorAll('img[src$=".jpg"]').length, 0);
   const preview = parseHTML(await engine.parseAndRender(source, {...context, section:{...context.section, settings:{...settings, spc_design_preview:true}}})).document;
-  assert.equal(preview.querySelectorAll('.spc-quote').length, 2);
+  assert.equal(preview.querySelectorAll('.spc-quote').length, 5);
   assert.equal(preview.querySelectorAll('.spc-seals img').length, 6);
+});
+
+test('SPC: desglose jerárquico incluye netArea, targetArea, wasteArea, leftover y planks', () => {
+  const res = calculate(20, 2.196, true);
+  assert.equal(res.boxes, 11);
+  assert.equal(res.netArea, 20);
+  assert.equal(res.targetArea, 22);
+  assert.equal(res.wasteArea, 2);
+  assert.equal(res.planks, 110);
+  assert.ok(res.leftover > 0);
+  assert.equal(res.covered, 11 * 2.196);
+});
+
+test('SPC: elementos visuales de la calculadora interactiva (pestañas, ambientes, desglose y croquis)', async () => {
+  const engine = new Liquid({root:path.join(root, 'snippets'), extname:'.liquid'});
+  engine.registerFilter('asset_url', n => `/assets/${n}`);
+  engine.registerFilter('stylesheet_tag', n => `<link rel="stylesheet" href="${n}">`);
+  const raw = fs.readFileSync(path.join(root, 'sections/landing-piso-spc.liquid'), 'utf8');
+  const source = raw.replace(/{% schema %}[\s\S]*?{% endschema %}/, '');
+  const doc = parseHTML(await engine.parseAndRender(source, {
+    section:{id:'spc-test', settings:{coverage_m2:'2.196', whatsapp_phone:'51941599516'}, blocks:[]},
+    product:{title:'Piso SPC', selected_or_first_available_variant:{sku:'SPC-001'}}
+  })).document;
+
+  assert.equal(doc.querySelectorAll('[data-calc-mode]').length, 2);
+  assert.ok(doc.querySelector('[data-calc-mode="dimensions"]'));
+  assert.ok(doc.querySelector('[data-calc-mode="direct"]'));
+  assert.ok(doc.querySelector('[data-known-meters-toggle]'));
+  assert.ok(doc.querySelector('[data-rooms-container]'));
+  assert.ok(doc.querySelector('[data-add-room]'));
+  assert.ok(doc.querySelector('[data-schematic-stage]'));
+  assert.ok(doc.querySelector('[name="waste"]'));
+  assert.ok(doc.querySelector('[data-boxes]'));
+  assert.ok(doc.querySelector('[data-net-area]'));
+  assert.ok(doc.querySelector('[data-target-area]'));
+  assert.ok(doc.querySelector('[data-covered]'));
+  assert.ok(doc.querySelector('[data-leftover]'));
+  assert.ok(doc.querySelector('[data-calc-contact]'));
+  assert.ok(doc.querySelector('[data-quick-area]'));
+  const orderBtn = doc.querySelector('[data-open-request]');
+  assert.ok(orderBtn, 'Debe existir el botón de Realizar pedido');
+  assert.equal(orderBtn.getAttribute('href'), '#solicitud');
+  assert.ok(doc.querySelector('#solicitud'), 'Debe existir el formulario con id solicitud');
+  assert.ok(doc.querySelector('.spc-add-icon-badge'), 'El botón de agregar ambiente debe tener badge de icono con relleno');
+});
+
+test('SPC: testimonios reales conservan contenido escapado y controles sin muestras', async () => {
+  const engine = new Liquid({root:path.join(root, 'snippets'), extname:'.liquid'});
+  engine.registerFilter('asset_url', n => `/assets/${n}`);
+  engine.registerFilter('stylesheet_tag', n => `<link rel="stylesheet" href="${n}">`);
+  const raw = fs.readFileSync(path.join(root, 'sections/landing-piso-spc.liquid'), 'utf8');
+  const source = raw.replace(/{% schema %}[\s\S]*?{% endschema %}/, '');
+  const schema = JSON.parse(raw.match(/{% schema %}([\s\S]*?){% endschema %}/)[1]);
+  assert.ok(schema.blocks[0].settings.some(s => s.id === 'headline'));
+  const doc = parseHTML(await engine.parseAndRender(source, {
+    section:{id:'real-test', settings:{spc_design_preview:true}, blocks:[{settings:{city:'Lima', name:'Ana <script>bad()</script>', headline:'Buen <acabado>', quote:'Una opinión & experiencia real.'}}]},
+    product:{}
+  })).document;
+  const card=doc.querySelector('.spc-quote');
+  assert.equal(doc.querySelectorAll('.spc-quote').length,1);
+  assert.equal(card.querySelector('figcaption').textContent,'Ana <script>bad()</script>');
+  assert.equal(card.querySelector('script'),null);
+  assert.equal(card.querySelector('blockquote strong').textContent,'Buen <acabado>');
+  assert.equal(card.querySelector('blockquote p').textContent,'Una opinión & experiencia real.');
+  assert.equal(doc.querySelector('.spc-quote--sample'),null);
+  assert.equal(doc.querySelector('.spc-testimonial-sample-note'),null);
+  assert.equal(doc.querySelector('[data-testimonial-viewport]').getAttribute('tabindex'),'0');
+  assert.ok(doc.querySelector('[data-testimonial-pause]'));
 });

@@ -1,3 +1,46 @@
+## 27/10/2026 — Cinco capas corregidas y compatibilidad de integración revisada
+
+- Corregida superposición del bloque de cinco capas con la calculadora; filas móviles alineadas sin invadir la nota, anclada en y=5995. Mapa vigente: 71 cajas. Revisión 320/393/1080/1440 sin errores JS, imágenes rotas ni desbordamiento.
+- 33/33 pruebas, Theme Check CLI sin hallazgos y ocho vistas/ZIP de 111 archivos verificados. Validador del plugin no inicia por dependencia ausente. Evidencias layers-after-*.png y layers-visual.json en work/spc-redesign.
+- Auditados árbol actual del rediseño, base/origin main b70e0b2 y main local 2357831. Cinco archivos con 32 bloques de conflicto en ensayo sin merge. Cuatro activos SPC publicados coinciden con b70e0b2 mediante originales de CDN/mapas de fuentes; producción y main local son versiones distintas. Informe: docs/landing-spc-merge-compatibility.md.
+- Pendiente integrar manualmente calculadora, modal y botón móvil, preservando geometría y funciones comunes. Cambios locales; sin commit, push, fusión ni publicación. Vista: http://127.0.0.1:8818/landing-piso-spc.html?revision=capas-corregidas .
+
+## 27/10/2026 — Resultados y envíos ajustados al mockup
+
+- Medidas del PSD trasladadas al título, franja dorada, tarjeta social, fotografía, acciones decorativas, banderas y textos. Mapa vigente: 71 cajas, once secciones y 33 WebP. Interfaz en Liquid/CSS; únicamente las fotografías y sombras originales se exportan.
+- Foto de asesoría recortada según la máscara original a 398 × 451; almacén a 1080 × 1026 con sombras inferiores originales. Contador de vistas de muestra reservado al modo de diseño; versión pública muestra una leyenda de asesoría sin métricas ficticias.
+- 33/33 pruebas aprobadas; Theme Check CLI sin hallazgos. Validador del plugin no inicia por dependencia ausente @shopify/theme-check-common. Revisión 320/393/1080/1440 sin errores JS, imágenes rotas ni desbordamiento; comparación visual 393/1080 contra PSD. Evidencias results-reference.png, results-after-*.png y results-visual.json en work/spc-redesign.
+- Ocho vistas y ZIP de 111 archivos regenerados y verificados. Cambios locales en feature/spc-diseno-octubre, sin commit, push ni publicación. Vista: http://127.0.0.1:8818/landing-piso-spc.html?revision=resultados-envios . Pendiente revisión visual del usuario.
+
+## 27/10/2026 — Testimonios proporcionales con carrusel infinito
+
+- Reconstruido el bloque según el PSD: panel blanco, fondo fotográfico/decorativo independiente, título, tarjetas altas, retratos con borde dorado, ciudades, nombres, estrellas, frases y textos. Elementos de interfaz en Liquid/CSS; mapa 1080 × 10004 actualizado a 68 cajas y 33 WebP.
+- Carrusel continuo automático, deslizamiento táctil nativo, teclado y pausa. Mantiene el desplazamiento vertical móvil, respeta movimiento reducido y suspende animación fuera de pantalla. Maneja una/dos tarjetas y selección/recarga del editor Shopify. Copias visuales ocultas a tecnologías de asistencia. Las muestras solo aparecen en la vista de diseño identificada; la tienda utiliza bloques reales autorizados.
+- 33/33 pruebas aprobadas; Theme Check CLI sin hallazgos. El validador del plugin no arranca por falta de @shopify/theme-check-common. Interacciones verificadas en 320/393/768/1080/1440 px; gesto horizontal/vertical real simulado a 393 px, bucle, pausa, teclado, movimiento reducido y editor correctos. Sin errores JS, imágenes rotas ni desbordamiento. Evidencias testimonials-after-*.png, testimonials-interactions.json y scripts de comprobación en work/spc-redesign.
+- Ocho vistas y ZIP de 111 archivos regenerados/verificados. Cambios locales en feature/spc-diseno-octubre, sin commit, push ni publicación. Vista: http://127.0.0.1:8818/landing-piso-spc.html?revision=testimonios-infinito . Pendiente revisión visual del usuario.
+
+## 27/10/2026 — Bloque de instalación Click ajustado al PSD
+
+- Corregidos encuadre y bordes redondeados del fondo, tamaño/degradado/posición de Click!, superposición del instalador, texto en dos líneas y cinco tarjetas. Medidas del PSD trasladadas al mapa proporcional 1080 × 10004, ahora con 67 cajas, compartido entre móvil y escritorio.
+- Fondo fotográfico recortado a 1080 × 889 con sombreado original (capas 183/184); brillo del borde del tablón reconstruido desde el trazado original en spc-click-borde-tablon.svg. Textos, tarjetas, sombras y degradados permanecen en código. Mapa, manifest y vistas actualizados.
+- 32/32 pruebas aprobadas y Theme Check CLI sin hallazgos; el validador del plugin sigue sin arrancar por dependencia ausente. Revisión visual a 393/1080/1440 sin errores JS, imágenes rotas ni desbordamiento. Evidencias click-reference.png, click-after-393.png, click-after-1080.png y visual-metrics.json en work/spc-redesign. Ocho vistas y ZIP regenerados y verificados.
+- Cambios locales en feature/spc-diseno-octubre, sin commit, push ni publicación. Vista: http://127.0.0.1:8818/landing-piso-spc.html?revision=click-corregido . Pendiente revisión visual del usuario.
+
+## 27/10/2026 — Corrección del bloque de composición frente al mockup
+
+- Comparadas capturas del usuario con el compuesto del PSD en y=1711–2700. Corregidos tamaño/peso/espaciado y degradado de SPC, separador discontinuo, título alineado a la izquierda, cápsula redondeada/dorada, fórmula en negrita y nota blanca. Ajustes proporcionales en el mapa y CSS, sin mover el recorte de niños/mascota, que ya coincidía.
+- Fondo exportado con las capas fotográficas 138/140/141: incorpora el retoque enmascarado que elimina el cuadro de la pared y el sombreado del suelo. Manifest actualizado; textos, degradados y controles siguen en código.
+- 32/32 pruebas aprobadas y Theme Check sin hallazgos. Visual 393/1080/1440 sin imágenes rotas, desbordamiento ni errores JS. Ocho vistas y ZIP 109 archivos regenerados y verificados. Evidencias composition-reference.png, composition-final-393.png y composition-final-1080.png en work/spc-redesign. Corrección local, sin publicación.
+
+## 27/10/2026 — Rediseño SPC según el PSD actualizado (local)
+
+- Nueva composición proporcional 1080 × 10004: once secciones y 66 cajas en `docs/landing-spc-layout.json`, con las mismas posiciones relativas en móvil y escritorio. Textos, controles, ficha, iconos y calculadora siguen construidos con Liquid/HTML/CSS/SVG; las fotografías y recortes se exportaron individualmente a 32 WebP con nombres descriptivos. Fuente y huella PSD en `docs/landing-spc-assets-20261027.json`.
+- Actualizados hero, composición, colores, ficha técnica, sellos, instalación Click, cinco capas, calculadora, testimonios, resultados, envíos y cierre. Raleway regular/cursiva local con licencia OFL; el título del hero aproxima Godshine Sans Bold, que no está instalado.
+- Conservada calculadora avanzada por ambientes de `feature/calculadora-visual-spc`, con cálculo rápido, cortes opcionales, dimensiones/varios ambientes y transferencia de cajas a la solicitud. El formulario funciona también fuera del modo de muestra; continúa siendo simulación, sin POST, pago, reserva ni Odoo. Cobertura desde variante/producto/configuración; no se sobreescriben datos comerciales.
+- Diferencia por revisar: el PSD indica 2,24 m²/caja (planchas 122 × 18,4 cm), mientras el respaldo existente es 2,196. Se conserva la cobertura configurada. Certificaciones ocultas por defecto; testimonios públicos solo desde bloques reales. La vista de diseño identifica sellos/retratos/textos de muestra pendientes de validación.
+- 32/32 pruebas aprobadas. Revisión visual a 393/1080/1440 px: imágenes completas, sin errores JS ni desbordamiento. Pruebas de uso a 320/393/768/1080/1440 px: cálculo decimal, rechazo de valores inválidos, ambientes, cortes, reapertura, transferencia, simulación sin POST y cierre por Escape correctos. Theme Check de Shopify CLI sin hallazgos; el validador incluido en el plugin no arranca por dependencia ausente. Ocho vistas y paquete de 109 archivos verificados.
+- Trabajo en `feature/spc-diseno-octubre`, basado en `main` b70e0b2, dentro de `work/spc-redesign/theme` del chat del 21/10. Los otros checkouts y cambios pendientes se preservaron. Sin commit, push, fusión ni publicación en Shopify. Vista local: http://127.0.0.1:8818/landing-piso-spc.html . Evidencias visuales/de uso en `work/spc-redesign/`.
+
 ## 27/10/2026 — Galería y distribución de producto
 
 - Añadidos controles anterior/siguiente y deslizamiento a la galería, con miniaturas y cambio de variantes conservados. En escritorio, la compra se organiza en un panel compacto con secciones desplegables y límite ligado al borde inferior de la galería; la información del producto queda centrada debajo.

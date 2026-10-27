@@ -1,158 +1,186 @@
 {
   "source": "LANDING SPC_MOCK.psd",
-  "sourceSha256": "22fe04daa860fe33538d8076c8a04ecbaf6510586ecb47b1f23b64b476ad74ed",
+  "sourceSha256": "47b66cf8d77f9fa480f952b841c82376ff4c1786a496e20eb0ad96d6b142bd89",
   "canvas": {
     "width": 1080,
-    "height": 6491
+    "height": 10004
   },
-  "mode": "Composición proporcional del lienzo de 1080 px en todos los anchos, incluido móvil; sin reordenar bloques.",
-  "method": "x/1080, width/1080, (y-sectionY)/sectionHeight, height/sectionHeight. Coordenadas originales del inventario de capas del PSD. Las cajas tipográficas compensan el ascendente; no equivalen a los límites de tinta.",
+  "mode": "Composición proporcional de 1080 px, con controles accesibles de tamaño mínimo en móvil.",
+  "method": "x/1080, width/1080, (y-sectionY)/sectionHeight, height/sectionHeight. Fotos y recortes individuales; textos y controles nativos.",
   "sections": [
     {
       "id": "hero",
-      "selector": ".spc-hero",
+      "selector": ".spc-v2-hero",
       "x": 0,
       "y": 0,
       "width": 1080,
-      "height": 1235,
+      "height": 1711,
       "overlap": 0,
       "topPercent": 0,
-      "heightPercent": 19.026344
+      "heightPercent": 17.103159
     },
     {
-      "id": "intro",
-      "selector": ".spc-intro",
+      "id": "composition",
+      "selector": ".spc-v2-composition",
       "x": 0,
-      "y": 1235,
+      "y": 1711,
       "width": 1080,
-      "height": 987,
+      "height": 989,
       "overlap": 0,
-      "topPercent": 19.026344,
-      "heightPercent": 15.205669
+      "topPercent": 17.103159,
+      "heightPercent": 9.886046
     },
     {
-      "id": "benefits",
-      "selector": ".spc-benefits",
+      "id": "colors-specs",
+      "selector": ".spc-v2-colors-specs",
       "x": 0,
-      "y": 2180,
+      "y": 2644,
       "width": 1080,
-      "height": 795,
-      "overlap": -42,
-      "topPercent": 33.584964,
-      "heightPercent": 12.247728
+      "height": 1305,
+      "overlap": -56,
+      "topPercent": 26.429428,
+      "heightPercent": 13.044782
     },
     {
-      "id": "anatomy",
-      "selector": ".spc-anatomy",
+      "id": "certifications",
+      "selector": ".spc-v2-certifications",
       "x": 0,
-      "y": 2935,
+      "y": 3830,
       "width": 1080,
-      "height": 721,
-      "overlap": -40,
-      "topPercent": 45.216454,
-      "heightPercent": 11.107688
+      "height": 836,
+      "overlap": -119,
+      "topPercent": 38.284686,
+      "heightPercent": 8.356657
     },
     {
-      "id": "installation",
-      "selector": ".spc-installation",
+      "id": "click",
+      "selector": ".spc-v2-click",
       "x": 0,
-      "y": 3614,
+      "y": 4567,
       "width": 1080,
-      "height": 802,
-      "overlap": -42,
-      "topPercent": 55.677091,
-      "heightPercent": 12.355569
+      "height": 1013,
+      "overlap": -99,
+      "topPercent": 45.651739,
+      "heightPercent": 10.12595
+    },
+    {
+      "id": "layers",
+      "selector": ".spc-v2-layers",
+      "x": 0,
+      "y": 5392,
+      "width": 1080,
+      "height": 765,
+      "overlap": -188,
+      "topPercent": 53.898441,
+      "heightPercent": 7.646941
+    },
+    {
+      "id": "calculator",
+      "selector": ".spc-v2-calculator",
+      "x": 0,
+      "y": 6001,
+      "width": 1080,
+      "height": 1041,
+      "overlap": -156,
+      "topPercent": 59.986006,
+      "heightPercent": 10.405838
     },
     {
       "id": "testimonials",
-      "selector": ".spc-testimonials",
+      "selector": ".spc-v2-testimonials",
       "x": 0,
-      "y": 4374,
+      "y": 6839,
       "width": 1080,
-      "height": 721,
-      "overlap": -42,
-      "topPercent": 67.385611,
-      "heightPercent": 11.107688
+      "height": 963,
+      "overlap": -203,
+      "topPercent": 68.362655,
+      "heightPercent": 9.62615
     },
     {
-      "id": "showcase",
-      "selector": ".spc-showcase",
+      "id": "results",
+      "selector": ".spc-v2-results",
       "x": 0,
-      "y": 5053,
+      "y": 7649,
       "width": 1080,
-      "height": 858,
-      "overlap": -42,
-      "topPercent": 77.846249,
-      "heightPercent": 13.218302
+      "height": 950,
+      "overlap": -153,
+      "topPercent": 76.459416,
+      "heightPercent": 9.496202
+    },
+    {
+      "id": "shipping",
+      "selector": ".spc-v2-shipping",
+      "x": 0,
+      "y": 8504,
+      "width": 1080,
+      "height": 1026,
+      "overlap": -95,
+      "topPercent": 85.005998,
+      "heightPercent": 10.255898
     },
     {
       "id": "footer",
-      "selector": ".spc-footer",
+      "selector": ".spc-v2-footer",
       "x": 0,
-      "y": 5869,
+      "y": 9458,
       "width": 1080,
-      "height": 622,
-      "overlap": -42,
-      "topPercent": 90.417501,
-      "heightPercent": 9.582499
+      "height": 546,
+      "overlap": -72,
+      "topPercent": 94.542183,
+      "heightPercent": 5.457817
     }
   ],
   "elements": [
     {
-      "id": "fondo-portada",
+      "id": "comedor-hero",
       "section": "hero",
-      "selector": ".spc-hero > .spc-backdrop",
-      "sourceLayer": 3,
+      "selector": ".spc-v2-comedor-hero",
       "box": {
         "x": -34,
-        "y": -280,
+        "y": -321,
         "width": 1117,
         "height": 2033
       },
       "percent": {
         "left": -3.148148,
-        "top": -22.672065,
+        "top": -18.760959,
         "width": 103.425926,
-        "height": 164.615385
+        "height": 118.819404
       },
       "pagePercent": {
         "left": -3.148148,
-        "top": -4.313665,
+        "top": -3.208717,
         "width": 103.425926,
-        "height": 31.32029
-      },
-      "note": ""
+        "height": 20.321871
+      }
     },
     {
-      "id": "anuncio",
+      "id": "announcement",
       "section": "hero",
-      "selector": ".spc-announcement",
-      "sourceLayer": 23,
+      "selector": ".spc-v2-announcement",
       "box": {
         "x": 0,
         "y": 0,
         "width": 1080,
-        "height": 80
+        "height": 78
       },
       "percent": {
         "left": 0,
         "top": 0,
         "width": 100,
-        "height": 6.477733
+        "height": 4.558738
       },
       "pagePercent": {
         "left": 0,
         "top": 0,
         "width": 100,
-        "height": 1.232476
-      },
-      "note": ""
+        "height": 0.779688
+      }
     },
     {
-      "id": "simbolo",
+      "id": "simbolo-marca",
       "section": "hero",
-      "selector": ".spc-symbol",
-      "sourceLayer": 42,
+      "selector": ".spc-v2-simbolo-marca",
       "box": {
         "x": 481,
         "y": 154,
@@ -161,1155 +189,1580 @@
       },
       "percent": {
         "left": 44.537037,
-        "top": 12.469636,
+        "top": 9.000584,
         "width": 10.925926,
-        "height": 9.392713
+        "height": 6.779661
       },
       "pagePercent": {
         "left": 44.537037,
-        "top": 2.372516,
+        "top": 1.539384,
         "width": 10.925926,
-        "height": 1.78709
-      },
-      "note": ""
+        "height": 1.159536
+      }
     },
     {
-      "id": "titulo-portada",
+      "id": "title",
       "section": "hero",
-      "selector": ".spc-hero h1",
-      "sourceLayer": [
-        43,
-        47
-      ],
+      "selector": ".spc-v2-title",
       "box": {
-        "x": 202,
-        "y": 284,
-        "width": 681,
-        "height": 152
+        "x": 153,
+        "y": 299,
+        "width": 774,
+        "height": 164
       },
       "percent": {
-        "left": 18.703704,
-        "top": 22.995951,
-        "width": 63.055556,
-        "height": 12.307692
+        "left": 14.166667,
+        "top": 17.475161,
+        "width": 71.666667,
+        "height": 9.585038
       },
       "pagePercent": {
-        "left": 18.703704,
-        "top": 4.375289,
-        "width": 63.055556,
-        "height": 2.341704
-      },
-      "note": "Caja tipográfica: se compensa el espacio superior de la fuente web respecto de la tinta del PSD."
+        "left": 14.166667,
+        "top": 2.988804,
+        "width": 71.666667,
+        "height": 1.639344
+      }
     },
     {
-      "id": "subtitulo-portada",
+      "id": "tagline",
       "section": "hero",
-      "selector": ".spc-hero-heading > p",
-      "sourceLayer": 49,
+      "selector": ".spc-v2-tagline",
       "box": {
-        "x": 275,
-        "y": 447,
-        "width": 531,
-        "height": 67
+        "x": 170,
+        "y": 462,
+        "width": 740,
+        "height": 62
       },
       "percent": {
-        "left": 25.462963,
-        "top": 36.194332,
-        "width": 49.166667,
-        "height": 5.425101
+        "left": 15.740741,
+        "top": 27.001753,
+        "width": 68.518519,
+        "height": 3.623612
       },
       "pagePercent": {
-        "left": 25.462963,
-        "top": 6.886458,
-        "width": 49.166667,
-        "height": 1.032198
-      },
-      "note": ""
+        "left": 15.740741,
+        "top": 4.618153,
+        "width": 68.518519,
+        "height": 0.619752
+      }
     },
     {
-      "id": "producto-portada",
+      "id": "intro-panel",
       "section": "hero",
-      "selector": ".spc-hero-product",
-      "sourceLayer": 40,
-      "box": {
-        "x": 219,
-        "y": 591,
-        "width": 642,
-        "height": 867
-      },
-      "percent": {
-        "left": 20.277778,
-        "top": 47.854251,
-        "width": 59.444444,
-        "height": 70.202429
-      },
-      "pagePercent": {
-        "left": 20.277778,
-        "top": 9.104914,
-        "width": 59.444444,
-        "height": 13.356956
-      },
-      "note": ""
-    },
-    {
-      "id": "introduccion",
-      "section": "intro",
-      "selector": ".spc-intro-copy",
-      "sourceLayer": 41,
-      "box": {
-        "x": 181,
-        "y": 1516,
-        "width": 720,
-        "height": 152
-      },
-      "percent": {
-        "left": 16.759259,
-        "top": 28.470111,
-        "width": 66.666667,
-        "height": 15.400203
-      },
-      "pagePercent": {
-        "left": 16.759259,
-        "top": 23.355415,
-        "width": 66.666667,
-        "height": 2.341704
-      },
-      "note": ""
-    },
-    {
-      "id": "acciones-introduccion",
-      "section": "intro",
-      "selector": ".spc-intro > .spc-actions",
-      "sourceLayer": 117,
-      "box": {
-        "x": 139,
-        "y": 1718,
-        "width": 801,
-        "height": 105
-      },
-      "percent": {
-        "left": 12.87037,
-        "top": 48.93617,
-        "width": 74.166667,
-        "height": 10.638298
-      },
-      "pagePercent": {
-        "left": 12.87037,
-        "top": 26.467416,
-        "width": 74.166667,
-        "height": 1.617624
-      },
-      "note": ""
-    },
-    {
-      "id": "barra-colores",
-      "section": "intro",
-      "selector": ".spc-colors",
-      "sourceLayer": 9,
-      "box": {
-        "x": 61,
-        "y": 1876,
-        "width": 957,
-        "height": 225
-      },
-      "percent": {
-        "left": 5.648148,
-        "top": 64.944276,
-        "width": 88.611111,
-        "height": 22.796353
-      },
-      "pagePercent": {
-        "left": 5.648148,
-        "top": 28.901556,
-        "width": 88.611111,
-        "height": 3.466338
-      },
-      "note": ""
-    },
-    {
-      "id": "nota-colores",
-      "section": "intro",
-      "selector": ".spc-intro > .spc-fineprint",
-      "sourceLayer": 50,
-      "box": {
-        "x": 220,
-        "y": 2145,
-        "width": 640,
-        "height": 30
-      },
-      "percent": {
-        "left": 20.37037,
-        "top": 92.198582,
-        "width": 59.259259,
-        "height": 3.039514
-      },
-      "pagePercent": {
-        "left": 20.37037,
-        "top": 33.045756,
-        "width": 59.259259,
-        "height": 0.462178
-      },
-      "note": ""
-    },
-    {
-      "id": "fondo-beneficios",
-      "section": "benefits",
-      "selector": ".spc-benefits > .spc-backdrop",
-      "sourceLayer": 0,
-      "box": {
-        "x": -145,
-        "y": 1896,
-        "width": 1369,
-        "height": 1079
-      },
-      "percent": {
-        "left": -13.425926,
-        "top": -35.72327,
-        "width": 126.759259,
-        "height": 135.72327
-      },
-      "pagePercent": {
-        "left": -13.425926,
-        "top": 29.209675,
-        "width": 126.759259,
-        "height": 16.623016
-      },
-      "note": ""
-    },
-    {
-      "id": "titulo-beneficios",
-      "section": "benefits",
-      "selector": ".spc-benefits h2",
-      "sourceLayer": [
-        63,
-        64
-      ],
-      "box": {
-        "x": 188,
-        "y": 2305,
-        "width": 360,
-        "height": 76
-      },
-      "percent": {
-        "left": 17.407407,
-        "top": 15.72327,
-        "width": 33.333333,
-        "height": 9.559748
-      },
-      "pagePercent": {
-        "left": 17.407407,
-        "top": 35.510707,
-        "width": 33.333333,
-        "height": 1.170852
-      },
-      "note": ""
-    },
-    {
-      "id": "icono-agua",
-      "section": "benefits",
-      "selector": ".spc-benefit-grid li:nth-child(1) .spc-benefit-art",
-      "sourceLayer": 96,
-      "box": {
-        "x": 300,
-        "y": 2449,
-        "width": 93,
-        "height": 125
-      },
-      "percent": {
-        "left": 27.777778,
-        "top": 33.836478,
-        "width": 8.611111,
-        "height": 15.72327
-      },
-      "pagePercent": {
-        "left": 27.777778,
-        "top": 37.729163,
-        "width": 8.611111,
-        "height": 1.925743
-      },
-      "note": ""
-    },
-    {
-      "id": "texto-agua",
-      "section": "benefits",
-      "selector": ".spc-benefit-grid li:nth-child(1) .spc-benefit-caption",
-      "sourceLayer": 93,
-      "box": {
-        "x": 294,
-        "y": 2588,
-        "width": 105,
-        "height": 50
-      },
-      "percent": {
-        "left": 27.222222,
-        "top": 51.320755,
-        "width": 9.722222,
-        "height": 6.289308
-      },
-      "pagePercent": {
-        "left": 27.222222,
-        "top": 39.87059,
-        "width": 9.722222,
-        "height": 0.770297
-      },
-      "note": ""
-    },
-    {
-      "id": "icono-espuma",
-      "section": "benefits",
-      "selector": ".spc-benefit-grid li:nth-child(2) .spc-benefit-art",
-      "sourceLayer": 97,
-      "box": {
-        "x": 498,
-        "y": 2448,
-        "width": 94,
-        "height": 126
-      },
-      "percent": {
-        "left": 46.111111,
-        "top": 33.710692,
-        "width": 8.703704,
-        "height": 15.849057
-      },
-      "pagePercent": {
-        "left": 46.111111,
-        "top": 37.713758,
-        "width": 8.703704,
-        "height": 1.941149
-      },
-      "note": ""
-    },
-    {
-      "id": "texto-espuma",
-      "section": "benefits",
-      "selector": ".spc-benefit-grid li:nth-child(2) .spc-benefit-caption",
-      "sourceLayer": 94,
-      "box": {
-        "x": 508,
-        "y": 2588,
-        "width": 74,
-        "height": 50
-      },
-      "percent": {
-        "left": 47.037037,
-        "top": 51.320755,
-        "width": 6.851852,
-        "height": 6.289308
-      },
-      "pagePercent": {
-        "left": 47.037037,
-        "top": 39.87059,
-        "width": 6.851852,
-        "height": 0.770297
-      },
-      "note": ""
-    },
-    {
-      "id": "icono-transito",
-      "section": "benefits",
-      "selector": ".spc-benefit-grid li:nth-child(3) .spc-benefit-art",
-      "sourceLayer": 98,
-      "box": {
-        "x": 690,
-        "y": 2449,
-        "width": 97,
-        "height": 124
-      },
-      "percent": {
-        "left": 63.888889,
-        "top": 33.836478,
-        "width": 8.981481,
-        "height": 15.597484
-      },
-      "pagePercent": {
-        "left": 63.888889,
-        "top": 37.729163,
-        "width": 8.981481,
-        "height": 1.910337
-      },
-      "note": ""
-    },
-    {
-      "id": "texto-transito",
-      "section": "benefits",
-      "selector": ".spc-benefit-grid li:nth-child(3) .spc-benefit-caption",
-      "sourceLayer": 95,
-      "box": {
-        "x": 689,
-        "y": 2588,
-        "width": 100,
-        "height": 50
-      },
-      "percent": {
-        "left": 63.796296,
-        "top": 51.320755,
-        "width": 9.259259,
-        "height": 6.289308
-      },
-      "pagePercent": {
-        "left": 63.796296,
-        "top": 39.87059,
-        "width": 9.259259,
-        "height": 0.770297
-      },
-      "note": ""
-    },
-    {
-      "id": "icono-click",
-      "section": "benefits",
-      "selector": ".spc-benefit-grid li:nth-child(4) .spc-benefit-art",
-      "sourceLayer": 99,
-      "box": {
-        "x": 295,
-        "y": 2687,
-        "width": 101,
-        "height": 64
-      },
-      "percent": {
-        "left": 27.314815,
-        "top": 63.773585,
-        "width": 9.351852,
-        "height": 8.050314
-      },
-      "pagePercent": {
-        "left": 27.314815,
-        "top": 41.395779,
-        "width": 9.351852,
-        "height": 0.985981
-      },
-      "note": ""
-    },
-    {
-      "id": "texto-click",
-      "section": "benefits",
-      "selector": ".spc-benefit-grid li:nth-child(4) .spc-benefit-caption",
-      "sourceLayer": 101,
-      "box": {
-        "x": 300,
-        "y": 2782,
-        "width": 91,
-        "height": 50
-      },
-      "percent": {
-        "left": 27.777778,
-        "top": 75.72327,
-        "width": 8.425926,
-        "height": 6.289308
-      },
-      "pagePercent": {
-        "left": 27.777778,
-        "top": 42.859344,
-        "width": 8.425926,
-        "height": 0.770297
-      },
-      "note": ""
-    },
-    {
-      "id": "icono-limpieza",
-      "section": "benefits",
-      "selector": ".spc-benefit-grid li:nth-child(5) .spc-benefit-art",
-      "sourceLayer": 103,
-      "box": {
-        "x": 509,
-        "y": 2668,
-        "width": 72,
-        "height": 91
-      },
-      "percent": {
-        "left": 47.12963,
-        "top": 61.383648,
-        "width": 6.666667,
-        "height": 11.446541
-      },
-      "pagePercent": {
-        "left": 47.12963,
-        "top": 41.103066,
-        "width": 6.666667,
-        "height": 1.401941
-      },
-      "note": ""
-    },
-    {
-      "id": "texto-limpieza",
-      "section": "benefits",
-      "selector": ".spc-benefit-grid li:nth-child(5) .spc-benefit-caption",
-      "sourceLayer": 102,
-      "box": {
-        "x": 500,
-        "y": 2782,
-        "width": 91,
-        "height": 50
-      },
-      "percent": {
-        "left": 46.296296,
-        "top": 75.72327,
-        "width": 8.425926,
-        "height": 6.289308
-      },
-      "pagePercent": {
-        "left": 46.296296,
-        "top": 42.859344,
-        "width": 8.425926,
-        "height": 0.770297
-      },
-      "note": ""
-    },
-    {
-      "id": "icono-mascotas",
-      "section": "benefits",
-      "selector": ".spc-benefit-grid li:nth-child(6) .spc-benefit-art",
-      "sourceLayer": 100,
-      "box": {
-        "x": 695,
-        "y": 2685,
-        "width": 85,
-        "height": 70
-      },
-      "percent": {
-        "left": 64.351852,
-        "top": 63.522013,
-        "width": 7.87037,
-        "height": 8.805031
-      },
-      "pagePercent": {
-        "left": 64.351852,
-        "top": 41.364967,
-        "width": 7.87037,
-        "height": 1.078416
-      },
-      "note": ""
-    },
-    {
-      "id": "texto-mascotas",
-      "section": "benefits",
-      "selector": ".spc-benefit-grid li:nth-child(6) .spc-benefit-caption",
-      "sourceLayer": 104,
-      "box": {
-        "x": 693,
-        "y": 2783,
-        "width": 91,
-        "height": 50
-      },
-      "percent": {
-        "left": 64.166667,
-        "top": 75.849057,
-        "width": 8.425926,
-        "height": 6.289308
-      },
-      "pagePercent": {
-        "left": 64.166667,
-        "top": 42.87475,
-        "width": 8.425926,
-        "height": 0.770297
-      },
-      "note": ""
-    },
-    {
-      "id": "marca-agua",
-      "section": "anatomy",
-      "selector": ".spc-anatomy .spc-watermark",
-      "sourceLayer": 26,
-      "box": {
-        "x": -95,
-        "y": 2816,
-        "width": 337,
-        "height": 347
-      },
-      "percent": {
-        "left": -8.796296,
-        "top": -16.504854,
-        "width": 31.203704,
-        "height": 48.127601
-      },
-      "pagePercent": {
-        "left": -8.796296,
-        "top": 43.383146,
-        "width": 31.203704,
-        "height": 5.345864
-      },
-      "note": "Se reconstruye la marca de agua con el símbolo independiente; bbox visible de la capa original empieza en x=0."
-    },
-    {
-      "id": "titulo-ficha",
-      "section": "anatomy",
-      "selector": ".spc-anatomy-copy > h2",
-      "sourceLayer": [
-        57,
-        58
-      ],
-      "box": {
-        "x": 186,
-        "y": 3071,
-        "width": 330,
-        "height": 71
-      },
-      "percent": {
-        "left": 17.222222,
-        "top": 18.862691,
-        "width": 30.555556,
-        "height": 9.847434
-      },
-      "pagePercent": {
-        "left": 17.222222,
-        "top": 47.311662,
-        "width": 30.555556,
-        "height": 1.093822
-      },
-      "note": ""
-    },
-    {
-      "id": "especificaciones",
-      "section": "anatomy",
-      "selector": ".spc-specs",
-      "sourceLayer": [
-        65,
-        67
-      ],
-      "box": {
-        "x": 179,
-        "y": 3168,
-        "width": 330,
-        "height": 169
-      },
-      "percent": {
-        "left": 16.574074,
-        "top": 32.316227,
-        "width": 30.555556,
-        "height": 23.439667
-      },
-      "pagePercent": {
-        "left": 16.574074,
-        "top": 48.806039,
-        "width": 30.555556,
-        "height": 2.603605
-      },
-      "note": ""
-    },
-    {
-      "id": "titulo-capas",
-      "section": "anatomy",
-      "selector": ".spc-anatomy-copy > h3",
-      "sourceLayer": [
-        60,
-        61
-      ],
-      "box": {
-        "x": 186,
-        "y": 3346,
-        "width": 330,
-        "height": 72
-      },
-      "percent": {
-        "left": 17.222222,
-        "top": 57.004161,
-        "width": 30.555556,
-        "height": 9.98613
-      },
-      "pagePercent": {
-        "left": 17.222222,
-        "top": 51.548298,
-        "width": 30.555556,
-        "height": 1.109228
-      },
-      "note": ""
-    },
-    {
-      "id": "lista-capas",
-      "section": "anatomy",
-      "selector": ".spc-layers",
-      "sourceLayer": 68,
-      "box": {
-        "x": 192,
-        "y": 3441,
-        "width": 469,
-        "height": 90
-      },
-      "percent": {
-        "left": 17.777778,
-        "top": 70.180305,
-        "width": 43.425926,
-        "height": 12.482663
-      },
-      "pagePercent": {
-        "left": 17.777778,
-        "top": 53.011863,
-        "width": 43.425926,
-        "height": 1.386535
-      },
-      "note": ""
-    },
-    {
-      "id": "despiece",
-      "section": "anatomy",
-      "selector": ".spc-layer-image",
-      "sourceLayer": 108,
-      "box": {
-        "x": 521,
-        "y": 2920,
-        "width": 559,
-        "height": 583
-      },
-      "percent": {
-        "left": 48.240741,
-        "top": -2.080444,
-        "width": 51.759259,
-        "height": 80.859917
-      },
-      "pagePercent": {
-        "left": 48.240741,
-        "top": 44.985364,
-        "width": 51.759259,
-        "height": 8.981667
-      },
-      "note": "BBox de contenido después del recorte de transparencia: offset (26,38) respecto a la capa."
-    },
-    {
-      "id": "nota-ficha",
-      "section": "anatomy",
-      "selector": ".spc-anatomy > .spc-fineprint",
-      "sourceLayer": 51,
-      "box": {
-        "x": 240,
-        "y": 3570,
-        "width": 600,
-        "height": 30
-      },
-      "percent": {
-        "left": 22.222222,
-        "top": 88.072122,
-        "width": 55.555556,
-        "height": 4.160888
-      },
-      "pagePercent": {
-        "left": 22.222222,
-        "top": 54.99923,
-        "width": 55.555556,
-        "height": 0.462178
-      },
-      "note": ""
-    },
-    {
-      "id": "fondo-instalacion",
-      "section": "installation",
-      "selector": ".spc-installation > .spc-backdrop",
-      "sourceLayer": 5,
+      "selector": ".spc-v2-intro-panel",
       "box": {
         "x": 0,
-        "y": 3453,
+        "y": 932,
         "width": 1080,
-        "height": 939
+        "height": 779
       },
       "percent": {
         "left": 0,
-        "top": -20.074813,
+        "top": 54.47107,
         "width": 100,
-        "height": 117.082294
+        "height": 45.52893
       },
       "pagePercent": {
         "left": 0,
-        "top": 53.196734,
+        "top": 9.316273,
         "width": 100,
-        "height": 14.466184
-      },
-      "note": ""
+        "height": 7.786885
+      }
     },
     {
-      "id": "titulo-calculadora",
-      "section": "installation",
-      "selector": ".spc-installation h2",
-      "sourceLayer": [
-        81,
-        82
-      ],
+      "id": "caja-tablones-hero",
+      "section": "hero",
+      "selector": ".spc-v2-caja-tablones-hero",
       "box": {
-        "x": 187,
-        "y": 3765,
-        "width": 320,
-        "height": 77
+        "x": 250,
+        "y": 599,
+        "width": 580,
+        "height": 785
       },
       "percent": {
-        "left": 17.314815,
-        "top": 18.82793,
-        "width": 29.62963,
-        "height": 9.600998
+        "left": 23.148148,
+        "top": 35.008767,
+        "width": 53.703704,
+        "height": 45.879603
       },
       "pagePercent": {
-        "left": 17.314815,
-        "top": 58.003389,
-        "width": 29.62963,
-        "height": 1.186258
-      },
-      "note": ""
+        "left": 23.148148,
+        "top": 5.987605,
+        "width": 53.703704,
+        "height": 7.846861
+      }
     },
     {
-      "id": "calculadora",
-      "section": "installation",
-      "selector": ".spc-calculator",
-      "sourceLayer": [
-        148,
-        149,
-        151,
-        154,
-        157
-      ],
+      "id": "intro-copy",
+      "section": "hero",
+      "selector": ".spc-v2-intro-copy",
       "box": {
-        "x": 223,
-        "y": 3888,
-        "width": 633,
-        "height": 277
+        "x": 150,
+        "y": 1442,
+        "width": 780,
+        "height": 185
       },
       "percent": {
-        "left": 20.648148,
-        "top": 34.164589,
-        "width": 58.611111,
-        "height": 34.538653
+        "left": 13.888889,
+        "top": 84.2782,
+        "width": 72.222222,
+        "height": 10.81239
       },
       "pagePercent": {
-        "left": 20.648148,
-        "top": 59.898321,
-        "width": 58.611111,
-        "height": 4.267447
-      },
-      "note": "Control funcional en el espacio del formulario del PSD; mantiene el dato comercial validado y reserva espacio para el resultado."
+        "left": 13.888889,
+        "top": 14.414234,
+        "width": 72.222222,
+        "height": 1.84926
+      }
     },
     {
-      "id": "acciones-calculadora",
-      "section": "installation",
-      "selector": ".spc-installation .spc-actions",
-      "sourceLayer": 126,
+      "id": "sala-composicion",
+      "section": "composition",
+      "selector": ".spc-v2-sala-composicion",
       "box": {
-        "x": 223,
-        "y": 4215,
-        "width": 633,
-        "height": 83
+        "x": -850,
+        "y": 1680,
+        "width": 1958,
+        "height": 1585
       },
       "percent": {
-        "left": 20.648148,
-        "top": 74.937656,
-        "width": 58.611111,
-        "height": 10.349127
+        "left": -78.703704,
+        "top": -3.134479,
+        "width": 181.296296,
+        "height": 160.262892
       },
       "pagePercent": {
-        "left": 20.648148,
-        "top": 64.936065,
-        "width": 58.611111,
-        "height": 1.278694
-      },
-      "note": ""
+        "left": -78.703704,
+        "top": 16.793283,
+        "width": 181.296296,
+        "height": 15.843663
+      }
     },
     {
-      "id": "tablones-perspectiva",
-      "section": "testimonials",
-      "selector": ".spc-perspective",
-      "sourceLayer": 145,
+      "id": "composition-rule",
+      "section": "composition",
+      "selector": ".spc-v2-composition-rule",
       "box": {
-        "x": -151,
-        "y": 4318,
-        "width": 561,
-        "height": 441
+        "x": 45,
+        "y": 1745,
+        "width": 990,
+        "height": 3
       },
       "percent": {
-        "left": -13.981481,
-        "top": -7.76699,
-        "width": 51.944444,
-        "height": 61.165049
+        "left": 4.166667,
+        "top": 3.437816,
+        "width": 91.666667,
+        "height": 0.303337
       },
       "pagePercent": {
-        "left": -13.981481,
-        "top": 66.522878,
-        "width": 51.944444,
-        "height": 6.794022
-      },
-      "note": "El original incrustado se refleja horizontalmente para recuperar la transformación de la capa 145."
+        "left": 4.166667,
+        "top": 17.443023,
+        "width": 91.666667,
+        "height": 0.029988
+      }
     },
     {
-      "id": "presentacion-testimonios",
-      "section": "testimonials",
-      "selector": ".spc-testimonial-intro",
-      "sourceLayer": [
-        70,
-        71,
-        75
-      ],
+      "id": "spc-word",
+      "section": "composition",
+      "selector": ".spc-v2-spc-word",
       "box": {
-        "x": 188,
-        "y": 4762,
-        "width": 280,
-        "height": 250
+        "x": -49,
+        "y": 1754,
+        "width": 620,
+        "height": 311
       },
       "percent": {
-        "left": 17.407407,
-        "top": 53.814147,
-        "width": 25.925926,
-        "height": 34.674064
+        "left": -4.537037,
+        "top": 4.347826,
+        "width": 57.407407,
+        "height": 31.445905
       },
       "pagePercent": {
-        "left": 17.407407,
-        "top": 73.363118,
-        "width": 25.925926,
-        "height": 3.851487
-      },
-      "note": ""
+        "left": -4.537037,
+        "top": 17.532987,
+        "width": 57.407407,
+        "height": 3.108756
+      }
     },
     {
-      "id": "tarjetas-testimonios",
-      "section": "testimonials",
-      "selector": ".spc-testimonial-grid",
-      "sourceLayer": [
-        25,
-        33
-      ],
+      "id": "ninos-mascota",
+      "section": "composition",
+      "selector": ".spc-v2-ninos-mascota",
       "box": {
-        "x": 538,
-        "y": 4508,
-        "width": 472,
-        "height": 623
+        "x": 189,
+        "y": 1916,
+        "width": 767,
+        "height": 482
       },
       "percent": {
-        "left": 49.814815,
-        "top": 18.585298,
-        "width": 43.703704,
-        "height": 86.407767
+        "left": 17.5,
+        "top": 20.728008,
+        "width": 71.018519,
+        "height": 48.736097
       },
       "pagePercent": {
-        "left": 49.814815,
-        "top": 69.450008,
-        "width": 43.703704,
-        "height": 9.597905
-      },
-      "note": "El contenido continúa siendo de muestra hasta validar testimonios reales."
+        "left": 17.5,
+        "top": 19.152339,
+        "width": 71.018519,
+        "height": 4.818073
+      }
     },
     {
-      "id": "fondo-resultados",
-      "section": "showcase",
-      "selector": ".spc-showcase > .spc-backdrop",
-      "sourceLayer": 1,
-      "box": {
-        "x": -45,
-        "y": 5061,
-        "width": 1171,
-        "height": 878
-      },
-      "percent": {
-        "left": -4.166667,
-        "top": 0.932401,
-        "width": 108.425926,
-        "height": 102.331002
-      },
-      "pagePercent": {
-        "left": -4.166667,
-        "top": 77.969496,
-        "width": 108.425926,
-        "height": 13.526421
-      },
-      "note": ""
-    },
-    {
-      "id": "titulo-resultados",
-      "section": "showcase",
-      "selector": ".spc-showcase > h2",
-      "sourceLayer": [
-        78,
-        79
-      ],
-      "box": {
-        "x": 188,
-        "y": 5612,
-        "width": 290,
-        "height": 77
-      },
-      "percent": {
-        "left": 17.407407,
-        "top": 65.151515,
-        "width": 26.851852,
-        "height": 8.974359
-      },
-      "pagePercent": {
-        "left": 17.407407,
-        "top": 86.458173,
-        "width": 26.851852,
-        "height": 1.186258
-      },
-      "note": ""
-    },
-    {
-      "id": "nota-resultados",
-      "section": "showcase",
-      "selector": ".spc-showcase > .spc-fineprint",
-      "sourceLayer": 52,
-      "box": {
-        "x": 210,
-        "y": 5737,
-        "width": 660,
-        "height": 30
-      },
-      "percent": {
-        "left": 19.444444,
-        "top": 79.72028,
-        "width": 61.111111,
-        "height": 3.496503
-      },
-      "pagePercent": {
-        "left": 19.444444,
-        "top": 88.383916,
-        "width": 61.111111,
-        "height": 0.462178
-      },
-      "note": ""
-    },
-    {
-      "id": "barra-sellos",
-      "section": "showcase",
-      "selector": ".spc-seals",
-      "sourceLayer": 164,
+      "id": "composition-pill",
+      "section": "composition",
+      "selector": ".spc-v2-composition-pill",
       "box": {
         "x": 62,
-        "y": 5809,
+        "y": 2421,
         "width": 956,
-        "height": 128
+        "height": 100
       },
       "percent": {
         "left": 5.740741,
-        "top": 88.111888,
+        "top": 71.789687,
         "width": 88.518519,
-        "height": 14.918415
+        "height": 10.111223
       },
       "pagePercent": {
         "left": 5.740741,
-        "top": 89.493144,
+        "top": 24.20032,
         "width": 88.518519,
-        "height": 1.971961
-      },
-      "note": ""
+        "height": 0.9996
+      }
     },
     {
-      "id": "logotipo-cierre",
-      "section": "footer",
-      "selector": ".spc-wordmark",
-      "sourceLayer": 45,
+      "id": "composition-name",
+      "section": "composition",
+      "selector": ".spc-v2-composition-name",
       "box": {
-        "x": 710,
-        "y": 5994,
-        "width": 225,
+        "x": 127,
+        "y": 2397,
+        "width": 825,
+        "height": 53
+      },
+      "percent": {
+        "left": 11.759259,
+        "top": 69.362993,
+        "width": 76.388889,
+        "height": 5.358948
+      },
+      "pagePercent": {
+        "left": 11.759259,
+        "top": 23.960416,
+        "width": 76.388889,
+        "height": 0.529788
+      }
+    },
+    {
+      "id": "composition-material",
+      "section": "composition",
+      "selector": ".spc-v2-composition-material",
+      "box": {
+        "x": 134,
+        "y": 2458,
+        "width": 800,
         "height": 52
       },
       "percent": {
+        "left": 12.407407,
+        "top": 75.530839,
+        "width": 74.074074,
+        "height": 5.257836
+      },
+      "pagePercent": {
+        "left": 12.407407,
+        "top": 24.570172,
+        "width": 74.074074,
+        "height": 0.519792
+      }
+    },
+    {
+      "id": "composition-note",
+      "section": "composition",
+      "selector": ".spc-v2-composition-note",
+      "box": {
+        "x": 100,
+        "y": 2554,
+        "width": 880,
+        "height": 43
+      },
+      "percent": {
+        "left": 9.259259,
+        "top": 85.237614,
+        "width": 81.481481,
+        "height": 4.347826
+      },
+      "pagePercent": {
+        "left": 9.259259,
+        "top": 25.529788,
+        "width": 81.481481,
+        "height": 0.429828
+      }
+    },
+    {
+      "id": "colors-heading",
+      "section": "colors-specs",
+      "selector": ".spc-v2-colors-heading",
+      "box": {
+        "x": 180,
+        "y": 2750,
+        "width": 720,
+        "height": 112
+      },
+      "percent": {
+        "left": 16.666667,
+        "top": 8.122605,
+        "width": 66.666667,
+        "height": 8.582375
+      },
+      "pagePercent": {
+        "left": 16.666667,
+        "top": 27.489004,
+        "width": 66.666667,
+        "height": 1.119552
+      }
+    },
+    {
+      "id": "samples",
+      "section": "colors-specs",
+      "selector": ".spc-v2-samples",
+      "box": {
+        "x": 121,
+        "y": 2896,
+        "width": 845,
+        "height": 415
+      },
+      "percent": {
+        "left": 11.203704,
+        "top": 19.310345,
+        "width": 78.240741,
+        "height": 31.800766
+      },
+      "pagePercent": {
+        "left": 11.203704,
+        "top": 28.948421,
+        "width": 78.240741,
+        "height": 4.148341
+      }
+    },
+    {
+      "id": "spec-rule",
+      "section": "colors-specs",
+      "selector": ".spc-v2-spec-rule",
+      "box": {
+        "x": 45,
+        "y": 3332,
+        "width": 990,
+        "height": 2
+      },
+      "percent": {
+        "left": 4.166667,
+        "top": 52.720307,
+        "width": 91.666667,
+        "height": 0.153257
+      },
+      "pagePercent": {
+        "left": 4.166667,
+        "top": 33.306677,
+        "width": 91.666667,
+        "height": 0.019992
+      }
+    },
+    {
+      "id": "spec-heading",
+      "section": "colors-specs",
+      "selector": ".spc-v2-spec-heading",
+      "box": {
+        "x": 180,
+        "y": 3395,
+        "width": 720,
+        "height": 112
+      },
+      "percent": {
+        "left": 16.666667,
+        "top": 57.547893,
+        "width": 66.666667,
+        "height": 8.582375
+      },
+      "pagePercent": {
+        "left": 16.666667,
+        "top": 33.936425,
+        "width": 66.666667,
+        "height": 1.119552
+      }
+    },
+    {
+      "id": "spec-data",
+      "section": "colors-specs",
+      "selector": ".spc-v2-spec-data",
+      "box": {
+        "x": 180,
+        "y": 3550,
+        "width": 520,
+        "height": 251
+      },
+      "percent": {
+        "left": 16.666667,
+        "top": 69.425287,
+        "width": 48.148148,
+        "height": 19.233716
+      },
+      "pagePercent": {
+        "left": 16.666667,
+        "top": 35.485806,
+        "width": 48.148148,
+        "height": 2.508996
+      }
+    },
+    {
+      "id": "tablones-ficha",
+      "section": "colors-specs",
+      "selector": ".spc-v2-tablones-ficha",
+      "box": {
+        "x": 522,
+        "y": 3294,
+        "width": 815,
+        "height": 670
+      },
+      "percent": {
+        "left": 48.333333,
+        "top": 49.808429,
+        "width": 75.462963,
+        "height": 51.340996
+      },
+      "pagePercent": {
+        "left": 48.333333,
+        "top": 32.926829,
+        "width": 75.462963,
+        "height": 6.697321
+      }
+    },
+    {
+      "id": "hojas-fondo",
+      "section": "certifications",
+      "selector": ".spc-v2-hojas-fondo",
+      "box": {
+        "x": -87,
+        "y": 3830,
+        "width": 1254,
+        "height": 836
+      },
+      "percent": {
+        "left": -8.055556,
+        "top": 0,
+        "width": 116.111111,
+        "height": 100
+      },
+      "pagePercent": {
+        "left": -8.055556,
+        "top": 38.284686,
+        "width": 116.111111,
+        "height": 8.356657
+      }
+    },
+    {
+      "id": "cert-panel",
+      "section": "certifications",
+      "selector": ".spc-v2-cert-panel",
+      "box": {
+        "x": 62,
+        "y": 3852,
+        "width": 956,
+        "height": 767
+      },
+      "percent": {
+        "left": 5.740741,
+        "top": 2.631579,
+        "width": 88.518519,
+        "height": 91.746411
+      },
+      "pagePercent": {
+        "left": 5.740741,
+        "top": 38.504598,
+        "width": 88.518519,
+        "height": 7.666933
+      }
+    },
+    {
+      "id": "cert-heading",
+      "section": "certifications",
+      "selector": ".spc-v2-cert-heading",
+      "box": {
+        "x": 130,
+        "y": 3991,
+        "width": 820,
+        "height": 112
+      },
+      "percent": {
+        "left": 12.037037,
+        "top": 19.258373,
+        "width": 75.925926,
+        "height": 13.397129
+      },
+      "pagePercent": {
+        "left": 12.037037,
+        "top": 39.894042,
+        "width": 75.925926,
+        "height": 1.119552
+      }
+    },
+    {
+      "id": "sello-floorscore-color",
+      "section": "certifications",
+      "selector": ".spc-v2-sello-floorscore-color",
+      "box": {
+        "x": 250,
+        "y": 4156,
+        "width": 135,
+        "height": 107
+      },
+      "percent": {
+        "left": 23.148148,
+        "top": 38.995215,
+        "width": 12.5,
+        "height": 12.799043
+      },
+      "pagePercent": {
+        "left": 23.148148,
+        "top": 41.543383,
+        "width": 12.5,
+        "height": 1.069572
+      }
+    },
+    {
+      "id": "sello-anab-color",
+      "section": "certifications",
+      "selector": ".spc-v2-sello-anab-color",
+      "box": {
+        "x": 473,
+        "y": 4138,
+        "width": 135,
+        "height": 123
+      },
+      "percent": {
+        "left": 43.796296,
+        "top": 36.842105,
+        "width": 12.5,
+        "height": 14.712919
+      },
+      "pagePercent": {
+        "left": 43.796296,
+        "top": 41.363455,
+        "width": 12.5,
+        "height": 1.229508
+      }
+    },
+    {
+      "id": "sello-ilac-color",
+      "section": "certifications",
+      "selector": ".spc-v2-sello-ilac-color",
+      "box": {
+        "x": 710,
+        "y": 4141,
+        "width": 112,
+        "height": 113
+      },
+      "percent": {
         "left": 65.740741,
-        "top": 20.096463,
-        "width": 20.833333,
-        "height": 8.360129
+        "top": 37.200957,
+        "width": 10.37037,
+        "height": 13.516746
       },
       "pagePercent": {
         "left": 65.740741,
-        "top": 92.343244,
-        "width": 20.833333,
-        "height": 0.801109
-      },
-      "note": ""
+        "top": 41.393443,
+        "width": 10.37037,
+        "height": 1.129548
+      }
     },
     {
-      "id": "producto-cierre",
-      "section": "footer",
-      "selector": ".spc-footer-product",
-      "sourceLayer": 135,
+      "id": "sello-dakks-color",
+      "section": "certifications",
+      "selector": ".spc-v2-sello-dakks-color",
       "box": {
-        "x": 504,
-        "y": 5988,
-        "width": 891,
-        "height": 730
+        "x": 206,
+        "y": 4300,
+        "width": 223,
+        "height": 93
       },
       "percent": {
-        "left": 46.666667,
-        "top": 19.131833,
-        "width": 82.5,
-        "height": 117.363344
+        "left": 19.074074,
+        "top": 56.220096,
+        "width": 20.648148,
+        "height": 11.124402
       },
       "pagePercent": {
-        "left": 46.666667,
-        "top": 92.250809,
-        "width": 82.5,
-        "height": 11.246341
-      },
-      "note": "Caja visible tras recortar 92 px transparentes del borde superior de la capa 135 (891 × 822). El contenido conserva su escala y termina en y=6718."
+        "left": 19.074074,
+        "top": 42.982807,
+        "width": 20.648148,
+        "height": 0.929628
+      }
     },
     {
-      "id": "texto-cierre",
-      "section": "footer",
-      "selector": ".spc-footer-copy",
-      "sourceLayer": [
-        73,
-        74,
-        76
-      ],
+      "id": "sello-cnas-color",
+      "section": "certifications",
+      "selector": ".spc-v2-sello-cnas-color",
       "box": {
-        "x": 186,
-        "y": 6065,
-        "width": 290,
-        "height": 190
+        "x": 479,
+        "y": 4300,
+        "width": 123,
+        "height": 93
       },
       "percent": {
-        "left": 17.222222,
-        "top": 31.511254,
-        "width": 26.851852,
-        "height": 30.546624
+        "left": 44.351852,
+        "top": 56.220096,
+        "width": 11.388889,
+        "height": 11.124402
       },
       "pagePercent": {
-        "left": 17.222222,
-        "top": 93.437067,
-        "width": 26.851852,
-        "height": 2.92713
-      },
-      "note": ""
+        "left": 44.351852,
+        "top": 42.982807,
+        "width": 11.388889,
+        "height": 0.929628
+      }
     },
     {
-      "id": "acciones-cierre",
-      "section": "footer",
-      "selector": ".spc-footer > .spc-actions",
-      "sourceLayer": 136,
+      "id": "sello-eph-color",
+      "section": "certifications",
+      "selector": ".spc-v2-sello-eph-color",
       "box": {
-        "x": 223,
-        "y": 6301,
-        "width": 633,
-        "height": 83
+        "x": 674,
+        "y": 4284,
+        "width": 185,
+        "height": 99
       },
       "percent": {
-        "left": 20.648148,
-        "top": 69.453376,
-        "width": 58.611111,
-        "height": 13.344051
+        "left": 62.407407,
+        "top": 54.30622,
+        "width": 17.12963,
+        "height": 11.842105
       },
       "pagePercent": {
-        "left": 20.648148,
-        "top": 97.07287,
-        "width": 58.611111,
-        "height": 1.278694
+        "left": 62.407407,
+        "top": 42.822871,
+        "width": 17.12963,
+        "height": 0.989604
+      }
+    },
+    {
+      "id": "hojas-izquierda",
+      "section": "certifications",
+      "selector": ".spc-v2-hojas-izquierda",
+      "box": {
+        "x": -302,
+        "y": 4027,
+        "width": 481,
+        "height": 313
       },
-      "note": ""
+      "percent": {
+        "left": -27.962963,
+        "top": 23.564593,
+        "width": 44.537037,
+        "height": 37.440191
+      },
+      "pagePercent": {
+        "left": -27.962963,
+        "top": 40.253898,
+        "width": 44.537037,
+        "height": 3.128749
+      }
+    },
+    {
+      "id": "hojas-derecha",
+      "section": "certifications",
+      "selector": ".spc-v2-hojas-derecha",
+      "box": {
+        "x": 899,
+        "y": 4028,
+        "width": 480,
+        "height": 313
+      },
+      "percent": {
+        "left": 83.240741,
+        "top": 23.684211,
+        "width": 44.444444,
+        "height": 37.440191
+      },
+      "pagePercent": {
+        "left": 83.240741,
+        "top": 40.263894,
+        "width": 44.444444,
+        "height": 3.128749
+      }
+    },
+    {
+      "id": "cert-note",
+      "section": "certifications",
+      "selector": ".spc-v2-cert-note",
+      "box": {
+        "x": 210,
+        "y": 4450,
+        "width": 660,
+        "height": 110
+      },
+      "percent": {
+        "left": 19.444444,
+        "top": 74.162679,
+        "width": 61.111111,
+        "height": 13.157895
+      },
+      "pagePercent": {
+        "left": 19.444444,
+        "top": 44.482207,
+        "width": 61.111111,
+        "height": 1.09956
+      }
+    },
+    {
+      "id": "click-fondo",
+      "section": "click",
+      "selector": ".spc-v2-click-fondo",
+      "box": {
+        "x": 0,
+        "y": 4567,
+        "width": 1080,
+        "height": 889
+      },
+      "percent": {
+        "left": 0,
+        "top": 0,
+        "width": 100,
+        "height": 87.759131
+      },
+      "pagePercent": {
+        "left": 0,
+        "top": 45.651739,
+        "width": 100,
+        "height": 8.886445
+      }
+    },
+    {
+      "id": "click-word",
+      "section": "click",
+      "selector": ".spc-v2-click-word",
+      "box": {
+        "x": -47,
+        "y": 4643,
+        "width": 650,
+        "height": 300
+      },
+      "percent": {
+        "left": -4.351852,
+        "top": 7.502468,
+        "width": 60.185185,
+        "height": 29.615005
+      },
+      "pagePercent": {
+        "left": -4.351852,
+        "top": 46.411435,
+        "width": 60.185185,
+        "height": 2.9988
+      }
+    },
+    {
+      "id": "instalador-click",
+      "section": "click",
+      "selector": ".spc-v2-instalador-click",
+      "box": {
+        "x": 234,
+        "y": 4587,
+        "width": 870,
+        "height": 600
+      },
+      "percent": {
+        "left": 21.666667,
+        "top": 1.974334,
+        "width": 80.555556,
+        "height": 59.23001
+      },
+      "pagePercent": {
+        "left": 21.666667,
+        "top": 45.851659,
+        "width": 80.555556,
+        "height": 5.997601
+      }
+    },
+    {
+      "id": "click-copy",
+      "section": "click",
+      "selector": ".spc-v2-click-copy",
+      "box": {
+        "x": 200,
+        "y": 5248,
+        "width": 680,
+        "height": 100
+      },
+      "percent": {
+        "left": 18.518519,
+        "top": 67.226061,
+        "width": 62.962963,
+        "height": 9.871668
+      },
+      "pagePercent": {
+        "left": 18.518519,
+        "top": 52.459016,
+        "width": 62.962963,
+        "height": 0.9996
+      }
+    },
+    {
+      "id": "benefits",
+      "section": "click",
+      "selector": ".spc-v2-benefits",
+      "box": {
+        "x": 120,
+        "y": 5353,
+        "width": 853,
+        "height": 191
+      },
+      "percent": {
+        "left": 11.111111,
+        "top": 77.591313,
+        "width": 78.981481,
+        "height": 18.854886
+      },
+      "pagePercent": {
+        "left": 11.111111,
+        "top": 53.508597,
+        "width": 78.981481,
+        "height": 1.909236
+      }
+    },
+    {
+      "id": "layers-heading",
+      "section": "layers",
+      "selector": ".spc-v2-layers-heading",
+      "box": {
+        "x": 230,
+        "y": 5610,
+        "width": 620,
+        "height": 112
+      },
+      "percent": {
+        "left": 21.296296,
+        "top": 28.496732,
+        "width": 57.407407,
+        "height": 14.640523
+      },
+      "pagePercent": {
+        "left": 21.296296,
+        "top": 56.077569,
+        "width": 57.407407,
+        "height": 1.119552
+      }
+    },
+    {
+      "id": "layer-list",
+      "section": "layers",
+      "selector": ".spc-v2-layer-list",
+      "box": {
+        "x": 175,
+        "y": 5780,
+        "width": 420,
+        "height": 208
+      },
+      "percent": {
+        "left": 16.203704,
+        "top": 50.718954,
+        "width": 38.888889,
+        "height": 27.189542
+      },
+      "pagePercent": {
+        "left": 16.203704,
+        "top": 57.776889,
+        "width": 38.888889,
+        "height": 2.079168
+      }
+    },
+    {
+      "id": "layer-note",
+      "section": "layers",
+      "selector": ".spc-v2-layer-note",
+      "box": {
+        "x": 209,
+        "y": 5995,
+        "width": 340,
+        "height": 80
+      },
+      "percent": {
+        "left": 19.351852,
+        "top": 78.823529,
+        "width": 31.481481,
+        "height": 10.457516
+      },
+      "pagePercent": {
+        "left": 19.351852,
+        "top": 59.92603,
+        "width": 31.481481,
+        "height": 0.79968
+      }
+    },
+    {
+      "id": "despiece-cinco-capas",
+      "section": "layers",
+      "selector": ".spc-v2-despiece-cinco-capas",
+      "box": {
+        "x": 572,
+        "y": 5682,
+        "width": 569,
+        "height": 602
+      },
+      "percent": {
+        "left": 52.962963,
+        "top": 37.908497,
+        "width": 52.685185,
+        "height": 78.69281
+      },
+      "pagePercent": {
+        "left": 52.962963,
+        "top": 56.797281,
+        "width": 52.685185,
+        "height": 6.017593
+      }
+    },
+    {
+      "id": "layer-leaders",
+      "section": "layers",
+      "selector": ".spc-v2-layer-leaders",
+      "box": {
+        "x": 450,
+        "y": 5795,
+        "width": 190,
+        "height": 295
+      },
+      "percent": {
+        "left": 41.666667,
+        "top": 52.679739,
+        "width": 17.592593,
+        "height": 38.562092
+      },
+      "pagePercent": {
+        "left": 41.666667,
+        "top": 57.926829,
+        "width": 17.592593,
+        "height": 2.94882
+      }
+    },
+    {
+      "id": "instalacion-fondo",
+      "section": "calculator",
+      "selector": ".spc-v2-instalacion-fondo",
+      "box": {
+        "x": 0,
+        "y": 6002,
+        "width": 1080,
+        "height": 1040
+      },
+      "percent": {
+        "left": 0,
+        "top": 0.096061,
+        "width": 100,
+        "height": 99.903939
+      },
+      "pagePercent": {
+        "left": 0,
+        "top": 59.996002,
+        "width": 100,
+        "height": 10.395842
+      }
+    },
+    {
+      "id": "calculator-heading",
+      "section": "calculator",
+      "selector": ".spc-v2-calculator-heading",
+      "box": {
+        "x": 180,
+        "y": 6280,
+        "width": 720,
+        "height": 112
+      },
+      "percent": {
+        "left": 16.666667,
+        "top": 26.801153,
+        "width": 66.666667,
+        "height": 10.758886
+      },
+      "pagePercent": {
+        "left": 16.666667,
+        "top": 62.77489,
+        "width": 66.666667,
+        "height": 1.119552
+      }
+    },
+    {
+      "id": "quick-card",
+      "section": "calculator",
+      "selector": ".spc-v2-quick-card",
+      "box": {
+        "x": 182,
+        "y": 6427,
+        "width": 716,
+        "height": 323
+      },
+      "percent": {
+        "left": 16.851852,
+        "top": 40.92219,
+        "width": 66.296296,
+        "height": 31.027858
+      },
+      "pagePercent": {
+        "left": 16.851852,
+        "top": 64.244302,
+        "width": 66.296296,
+        "height": 3.228709
+      }
+    },
+    {
+      "id": "calculator-actions",
+      "section": "calculator",
+      "selector": ".spc-v2-calculator-actions",
+      "box": {
+        "x": 250,
+        "y": 6795,
+        "width": 580,
+        "height": 100
+      },
+      "percent": {
+        "left": 23.148148,
+        "top": 76.272815,
+        "width": 53.703704,
+        "height": 9.606148
+      },
+      "pagePercent": {
+        "left": 23.148148,
+        "top": 67.922831,
+        "width": 53.703704,
+        "height": 0.9996
+      }
+    },
+    {
+      "id": "testimonial-panel",
+      "section": "testimonials",
+      "selector": ".spc-v2-testimonial-panel",
+      "box": {
+        "x": 62,
+        "y": 6886,
+        "width": 956,
+        "height": 916
+      },
+      "percent": {
+        "left": 5.740741,
+        "top": 4.880582,
+        "width": 88.518519,
+        "height": 95.119418
+      },
+      "pagePercent": {
+        "left": 5.740741,
+        "top": 68.832467,
+        "width": 88.518519,
+        "height": 9.156337
+      }
+    },
+    {
+      "id": "socials",
+      "section": "testimonials",
+      "selector": ".spc-v2-socials",
+      "box": {
+        "x": 131,
+        "y": 6943,
+        "width": 130,
+        "height": 35
+      },
+      "percent": {
+        "left": 12.12963,
+        "top": 10.799585,
+        "width": 12.037037,
+        "height": 3.634476
+      },
+      "pagePercent": {
+        "left": 12.12963,
+        "top": 69.402239,
+        "width": 12.037037,
+        "height": 0.34986
+      }
+    },
+    {
+      "id": "testimonials-heading",
+      "section": "testimonials",
+      "selector": ".spc-v2-testimonials-heading",
+      "box": {
+        "x": 200,
+        "y": 6999,
+        "width": 680,
+        "height": 112
+      },
+      "percent": {
+        "left": 18.518519,
+        "top": 16.614746,
+        "width": 62.962963,
+        "height": 11.630322
+      },
+      "pagePercent": {
+        "left": 18.518519,
+        "top": 69.962015,
+        "width": 62.962963,
+        "height": 1.119552
+      }
+    },
+    {
+      "id": "quotes",
+      "section": "testimonials",
+      "selector": ".spc-v2-quotes",
+      "box": {
+        "x": 0,
+        "y": 7136,
+        "width": 1080,
+        "height": 641
+      },
+      "percent": {
+        "left": 0,
+        "top": 30.841121,
+        "width": 100,
+        "height": 66.562825
+      },
+      "pagePercent": {
+        "left": 0,
+        "top": 71.331467,
+        "width": 100,
+        "height": 6.407437
+      }
+    },
+    {
+      "id": "sala-resultados",
+      "section": "results",
+      "selector": ".spc-v2-sala-resultados",
+      "box": {
+        "x": -58,
+        "y": 7649,
+        "width": 1205,
+        "height": 950
+      },
+      "percent": {
+        "left": -5.37037,
+        "top": 0,
+        "width": 111.574074,
+        "height": 100
+      },
+      "pagePercent": {
+        "left": -5.37037,
+        "top": 76.459416,
+        "width": 111.574074,
+        "height": 9.496202
+      }
+    },
+    {
+      "id": "results-note",
+      "section": "results",
+      "selector": ".spc-v2-results-note",
+      "box": {
+        "x": 180,
+        "y": 7742,
+        "width": 720,
+        "height": 60
+      },
+      "percent": {
+        "left": 16.666667,
+        "top": 9.789474,
+        "width": 66.666667,
+        "height": 6.315789
+      },
+      "pagePercent": {
+        "left": 16.666667,
+        "top": 77.389044,
+        "width": 66.666667,
+        "height": 0.59976
+      }
+    },
+    {
+      "id": "results-heading",
+      "section": "results",
+      "selector": ".spc-v2-results-heading",
+      "box": {
+        "x": 150,
+        "y": 8365,
+        "width": 780,
+        "height": 116
+      },
+      "percent": {
+        "left": 13.888889,
+        "top": 75.368421,
+        "width": 72.222222,
+        "height": 12.210526
+      },
+      "pagePercent": {
+        "left": 13.888889,
+        "top": 83.616553,
+        "width": 72.222222,
+        "height": 1.159536
+      }
+    },
+    {
+      "id": "almacen-envios",
+      "section": "shipping",
+      "selector": ".spc-v2-almacen-envios",
+      "box": {
+        "x": 0,
+        "y": 8504,
+        "width": 1080,
+        "height": 1026
+      },
+      "percent": {
+        "left": 0,
+        "top": 0,
+        "width": 100,
+        "height": 100
+      },
+      "pagePercent": {
+        "left": 0,
+        "top": 85.005998,
+        "width": 100,
+        "height": 10.255898
+      }
+    },
+    {
+      "id": "shipping-frame",
+      "section": "shipping",
+      "selector": ".spc-v2-shipping-frame",
+      "box": {
+        "x": 312,
+        "y": 8545,
+        "width": 458,
+        "height": 660
+      },
+      "percent": {
+        "left": 28.888889,
+        "top": 3.996101,
+        "width": 42.407407,
+        "height": 64.327485
+      },
+      "pagePercent": {
+        "left": 28.888889,
+        "top": 85.415834,
+        "width": 42.407407,
+        "height": 6.597361
+      }
+    },
+    {
+      "id": "shipping-person",
+      "section": "shipping",
+      "selector": ".spc-v2-shipping-person",
+      "box": {
+        "x": 343,
+        "y": 8638,
+        "width": 398,
+        "height": 451
+      },
+      "percent": {
+        "left": 31.759259,
+        "top": 13.060429,
+        "width": 36.851852,
+        "height": 43.957115
+      },
+      "pagePercent": {
+        "left": 31.759259,
+        "top": 86.345462,
+        "width": 36.851852,
+        "height": 4.508197
+      }
+    },
+    {
+      "id": "shipping-heading",
+      "section": "shipping",
+      "selector": ".spc-v2-shipping-heading",
+      "box": {
+        "x": 245,
+        "y": 9246,
+        "width": 590,
+        "height": 40
+      },
+      "percent": {
+        "left": 22.685185,
+        "top": 72.319688,
+        "width": 54.62963,
+        "height": 3.898635
+      },
+      "pagePercent": {
+        "left": 22.685185,
+        "top": 92.423031,
+        "width": 54.62963,
+        "height": 0.39984
+      }
+    },
+    {
+      "id": "shipping-copy",
+      "section": "shipping",
+      "selector": ".spc-v2-shipping-copy",
+      "box": {
+        "x": 210,
+        "y": 9280,
+        "width": 660,
+        "height": 80
+      },
+      "percent": {
+        "left": 19.444444,
+        "top": 75.633528,
+        "width": 61.111111,
+        "height": 7.797271
+      },
+      "pagePercent": {
+        "left": 19.444444,
+        "top": 92.762895,
+        "width": 61.111111,
+        "height": 0.79968
+      }
+    },
+    {
+      "id": "shipping-note",
+      "section": "shipping",
+      "selector": ".spc-v2-shipping-note",
+      "box": {
+        "x": 300,
+        "y": 9365,
+        "width": 480,
+        "height": 26
+      },
+      "percent": {
+        "left": 27.777778,
+        "top": 83.918129,
+        "width": 44.444444,
+        "height": 2.534113
+      },
+      "pagePercent": {
+        "left": 27.777778,
+        "top": 93.612555,
+        "width": 44.444444,
+        "height": 0.259896
+      }
+    },
+    {
+      "id": "caja-tablones-footer",
+      "section": "footer",
+      "selector": ".spc-v2-caja-tablones-footer",
+      "box": {
+        "x": -123,
+        "y": 9539,
+        "width": 832,
+        "height": 899
+      },
+      "percent": {
+        "left": -11.388889,
+        "top": 14.835165,
+        "width": 77.037037,
+        "height": 164.652015
+      },
+      "pagePercent": {
+        "left": -11.388889,
+        "top": 95.351859,
+        "width": 77.037037,
+        "height": 8.986405
+      }
+    },
+    {
+      "id": "footer-heading",
+      "section": "footer",
+      "selector": ".spc-v2-footer-heading",
+      "box": {
+        "x": 500,
+        "y": 9572,
+        "width": 520,
+        "height": 112
+      },
+      "percent": {
+        "left": 46.296296,
+        "top": 20.879121,
+        "width": 48.148148,
+        "height": 20.512821
+      },
+      "pagePercent": {
+        "left": 46.296296,
+        "top": 95.681727,
+        "width": 48.148148,
+        "height": 1.119552
+      }
+    },
+    {
+      "id": "footer-actions",
+      "section": "footer",
+      "selector": ".spc-v2-footer-actions",
+      "box": {
+        "x": 594,
+        "y": 9698,
+        "width": 309,
+        "height": 182
+      },
+      "percent": {
+        "left": 55,
+        "top": 43.956044,
+        "width": 28.611111,
+        "height": 33.333333
+      },
+      "pagePercent": {
+        "left": 55,
+        "top": 96.941224,
+        "width": 28.611111,
+        "height": 1.819272
+      }
     },
     {
       "id": "copyright",
       "section": "footer",
-      "selector": ".spc-copyright",
-      "sourceLayer": 53,
+      "selector": ".spc-v2-copyright",
       "box": {
-        "x": 260,
-        "y": 6431,
-        "width": 560,
-        "height": 30
+        "x": 540,
+        "y": 9915,
+        "width": 435,
+        "height": 50
       },
       "percent": {
-        "left": 24.074074,
-        "top": 90.353698,
-        "width": 51.851852,
-        "height": 4.823151
+        "left": 50,
+        "top": 83.699634,
+        "width": 40.277778,
+        "height": 9.157509
       },
       "pagePercent": {
-        "left": 24.074074,
-        "top": 99.075643,
-        "width": 51.851852,
-        "height": 0.462178
+        "left": 50,
+        "top": 99.110356,
+        "width": 40.277778,
+        "height": 0.4998
+      }
+    },
+    {
+      "id": "click-plank-glow",
+      "section": "click",
+      "selector": ".spc-v2-click-plank-glow",
+      "box": {
+        "x": 233,
+        "y": 4888,
+        "width": 828,
+        "height": 300
       },
-      "note": ""
+      "percent": {
+        "left": 21.574074,
+        "top": 31.688055,
+        "width": 76.666667,
+        "height": 29.615005
+      },
+      "pagePercent": {
+        "left": 21.574074,
+        "top": 48.860456,
+        "width": 76.666667,
+        "height": 2.9988
+      }
+    },
+    {
+      "id": "testimonials-fondo",
+      "section": "testimonials",
+      "selector": ".spc-v2-testimonials-fondo",
+      "box": {
+        "x": 0,
+        "y": 6784,
+        "width": 1080,
+        "height": 1018
+      },
+      "percent": {
+        "left": 0,
+        "top": -5.711319,
+        "width": 100,
+        "height": 105.711319
+      },
+      "pagePercent": {
+        "left": 0,
+        "top": 67.812875,
+        "width": 100,
+        "height": 10.17593
+      }
+    },
+    {
+      "id": "shipping-stripe",
+      "section": "shipping",
+      "selector": ".spc-v2-shipping-stripe",
+      "box": {
+        "x": 0,
+        "y": 8599,
+        "width": 1080,
+        "height": 60
+      },
+      "percent": {
+        "left": 0,
+        "top": 9.259259,
+        "width": 100,
+        "height": 5.847953
+      },
+      "pagePercent": {
+        "left": 0,
+        "top": 85.955618,
+        "width": 100,
+        "height": 0.59976
+      }
+    },
+    {
+      "id": "shipping-social-header",
+      "section": "shipping",
+      "selector": ".spc-v2-shipping-social-header",
+      "box": {
+        "x": 343,
+        "y": 8572,
+        "width": 398,
+        "height": 48
+      },
+      "percent": {
+        "left": 31.759259,
+        "top": 6.62768,
+        "width": 36.851852,
+        "height": 4.678363
+      },
+      "pagePercent": {
+        "left": 31.759259,
+        "top": 85.685726,
+        "width": 36.851852,
+        "height": 0.479808
+      }
+    },
+    {
+      "id": "shipping-social-actions",
+      "section": "shipping",
+      "selector": ".spc-v2-shipping-social-actions",
+      "box": {
+        "x": 343,
+        "y": 9107,
+        "width": 398,
+        "height": 38
+      },
+      "percent": {
+        "left": 31.759259,
+        "top": 58.77193,
+        "width": 36.851852,
+        "height": 3.703704
+      },
+      "pagePercent": {
+        "left": 31.759259,
+        "top": 91.033587,
+        "width": 36.851852,
+        "height": 0.379848
+      }
+    },
+    {
+      "id": "shipping-social-views",
+      "section": "shipping",
+      "selector": ".spc-v2-shipping-social-views",
+      "box": {
+        "x": 348,
+        "y": 9152,
+        "width": 390,
+        "height": 26
+      },
+      "percent": {
+        "left": 32.222222,
+        "top": 63.157895,
+        "width": 36.111111,
+        "height": 2.534113
+      },
+      "pagePercent": {
+        "left": 32.222222,
+        "top": 91.483407,
+        "width": 36.111111,
+        "height": 0.259896
+      }
     }
   ]
 }

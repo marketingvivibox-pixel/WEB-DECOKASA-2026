@@ -23,7 +23,7 @@ Asignar SKU único por variante, unidad/almacén y mapeo Odoo tras validación. 
 El formulario solo simula y no persiste datos personales. Consentimiento de seguimiento de prueba en sessionStorage; rechazar elimina atribución e identificador de visitante. Referencia de solicitud necesaria separada de analítica. UTMs deben contener nombres de campaña sin datos personales. Primer/último origen se conserva en navegación directa durante la sesión si se autoriza; no hay atribución entre sesiones todavía. GA4 y Meta/TikTok pendientes. No hay enlace al CRM activo.
 
 ## Verificación
-`npm test` aprueba 29 pruebas, entre lógica, navegación Liquid y pruebas DOM (filtros, variantes, galería por color, solicitud combinada, meta automática del regalo, formulario, consentimiento, ficha y landing SPC). Archivos de tema modificados validados con Shopify sin hallazgos; ocho HTML y ZIP de 74 archivos verificados. Ficha revisada en escritorio y celular sin desbordamiento. Reintentos conservan referencia solo en la página actual. Pendiente: confirmación comercial del catálogo y recepción idempotente en Odoo antes del lanzamiento comercial.
+`npm test` aprueba 32 pruebas, entre lógica, navegación Liquid y pruebas DOM (filtros, variantes, galería por color, solicitud combinada, meta automática del regalo, formulario, consentimiento, ficha y landing SPC). Archivos de tema modificados validados con Shopify sin hallazgos; ocho HTML y ZIP de 109 archivos verificados. Ficha revisada en escritorio y celular sin desbordamiento. Reintentos conservan referencia solo en la página actual. Pendiente: confirmación comercial del catálogo y recepción idempotente en Odoo antes del lanzamiento comercial.
 
 ## Diseño según el mockup original
 
@@ -64,3 +64,8 @@ Estructura visual publicada en el tema activo conectado a GitHub/main mientras l
 3. **Productos > Colecciones** administra nombres, imágenes y origen de productos. Las nueve colecciones creadas están vacías y todavía sin condiciones automáticas; confirmar los campos de Odoo antes de configurarlas. El registro de IDs y pendientes está en `docs/catalog-collections.json`.
 
 El catálogo usa Liquid, ordenación, filtros y paginación de Shopify. No añade aplicaciones ni llamadas a Odoo al cargar. Rendimiento con productos y fotos reales pendiente de medición.
+
+
+## SPC — mockup actualizado del 27/10/2026
+
+Rediseño local proporcional de 1080 × 10004, once secciones y 66 cajas. Consultar `docs/progress.md` para estado y pendientes, `docs/landing-spc-layout.json` para geometría y `docs/landing-spc-assets-20261027.json` para recursos/fuente. Vista generada: `preview/landing-piso-spc.html`; paquete: `releases/DECOKASA-tema-0.1.0.zip`. La muestra activa sellos/testimonios identificados como pendientes; el tema los condiciona a contenido validado. Sin publicación de esta revisión.
