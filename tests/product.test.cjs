@@ -82,6 +82,30 @@ test('Galería por variante: cuatro ángulos ordenados, foto inicial visible y c
   assert.equal(single.querySelectorAll('[data-gallery-panel]').length, 1);
   assert.equal(single.querySelectorAll('[data-gallery-choice]').length, 0);
 });
+test('Flechas y deslizamiento recorren la galería y respetan el cambio de variante', async () => {
+  const nextHTML = await html(groupedProduct());
+  const app = await runtime(()=>({ok:true, text:async()=>nextHTML}), groupedProduct(1));
+  const visible = () => app.document.querySelector('[data-gallery-panel]:not([hidden])').dataset.galleryPanel;
+  const swipe = (x, y) => {
+    const stage = app.document.querySelector('[data-gallery-stage]');
+    for (const [type, px, py] of [['pointerdown', 100, 100], ['pointerup', x, y]]) {
+      const event = new app.window.Event(type, {bubbles:true});
+      Object.assign(event, {pointerType:'touch', isPrimary:true, pointerId:1, clientX:px, clientY:py});
+      stage.dispatchEvent(event);
+    }
+  };
+  assert.equal(app.document.querySelectorAll('[data-gallery-step]:not([hidden])').length, 2);
+  app.click('[data-gallery-step="1"]'); assert.equal(visible(), 'media-1-1');
+  assert.equal(app.document.querySelector('[data-gallery-choice="media-1-1"]').getAttribute('aria-current'), 'true');
+  swipe(25, 105); assert.equal(visible(), 'media-1-2');
+  swipe(175, 100); assert.equal(visible(), 'media-1-1');
+  swipe(80, 180); assert.equal(visible(), 'media-1-1');
+  app.click('[data-gallery-step="-1"]'); app.click('[data-gallery-step="-1"]');
+  assert.equal(visible(), 'media-1-3');
+  app.click('[data-option-link]:not([aria-current])'); await settle();
+  assert.equal(visible(), 'media-0-0');
+  assert.equal(app.document.querySelectorAll('[data-gallery-step]').length, 0);
+});
 test('Seleccionar un ángulo y cambiar de color reemplaza la galería sin mezclar fotos', async () => {
   const nextHTML = await html(groupedProduct());
   const app = await runtime(()=>({ok:true, text:async()=>nextHTML}), groupedProduct(1));

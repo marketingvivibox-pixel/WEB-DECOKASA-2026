@@ -21,7 +21,7 @@
     {% if is_demo %}<p class="product-demo">Vista de muestra · Imágenes ilustrativas y precios ficticios.</p>{% endif %}
     <div class="product-layout">
       <div class="product-gallery" aria-label="Imágenes del producto">
-        <div class="product-image-stage">
+        <div class="product-image-stage" data-gallery-stage>
           {% for gallery_item in gallery_images %}
             {% assign image = gallery_item.preview_image | default: gallery_item %}
             {% assign image_alt = image.alt | default: product.title %}
@@ -35,6 +35,10 @@
           {% else %}
             <div class="product-no-image">{% render 'icon', name: 'bag' %}<span>Imagen en preparación</span></div>
           {% endfor %}
+          {% if gallery_images.size > 1 %}
+            <button class="product-gallery-arrow product-gallery-arrow--previous" type="button" data-gallery-step="-1" aria-label="Imagen anterior" hidden><span aria-hidden="true">&#8249;</span></button>
+            <button class="product-gallery-arrow product-gallery-arrow--next" type="button" data-gallery-step="1" aria-label="Imagen siguiente" hidden><span aria-hidden="true">&#8250;</span></button>
+          {% endif %}
         </div>
         {% if gallery_images.size > 1 %}
           <div class="product-thumbnails" aria-label="Elegir imagen">
@@ -50,6 +54,60 @@
         <p class="sr-only" data-gallery-status role="status"></p>
       </div>
       <div class="product-summary">
+        <div class="product-purchase-panel" data-purchase-panel>
+        <div class="product-purchase-content" data-purchase-content tabindex="0" aria-label="Opciones y detalles de compra">
+        {% if section.settings.show_vendor != false and product.vendor != blank %}<p class="eyebrow product-vendor">{{ product.vendor | escape }}</p>{% endif %}
+        <h1>{{ product.title | escape }}</h1>
+        <div class="product-price-row">
+          {% if section.settings.show_price != false and current_variant != blank %}
+            <span class="product-price" data-product-price data-cents="{{ current_variant.price }}">{{ current_variant.price | money_with_currency }}</span>
+            {% if section.settings.show_compare_price != false and current_variant.compare_at_price > current_variant.price %}<s class="product-compare-price">{{ current_variant.compare_at_price | money_with_currency }}</s>{% endif %}
+          {% else %}<span class="product-price">Precio a consultar</span>{% endif %}
+        </div>
+        <p class="product-price-note">{{ section.settings.price_note | default: 'El asesor confirmará el importe final y la entrega.' | escape }}</p>
+        {% unless product.has_only_default_variant %}
+          <div class="product-options" aria-label="Presentaciones">
+            {% for option in product.options_with_values %}
+              {% assign current_option = option %}
+              <div class="product-option-group" role="group" aria-labelledby="Option-{{ section.id }}-{{ option.position }}">
+                <p id="Option-{{ section.id }}-{{ option.position }}" class="product-option-label">{{ option.name | escape }}: <strong>{{ option.selected_value | escape }}</strong></p>
+                <div class="product-option-values">
+                  {% for value in option.values %}
+                    {% capture option_ids %}{% for other_option in product.options_with_values %}{% if other_option.position == current_option.position %}{{ value.id }}{% else %}{% for selected_value in other_option.values %}{% if selected_value.selected %}{{ selected_value.id }}{% endif %}{% endfor %}{% endif %}{% unless forloop.last %},{% endunless %}{% endfor %}{% endcapture %}
+                    {% assign option_url = value.product_url | default: product.url %}
+                    <a class="product-option" href="{{ option_url }}?option_values={{ option_ids | strip }}" data-option-link {% if value.selected %}aria-current="true"{% endif %}>
+                      {% if value.swatch.image != blank %}{{ value.swatch.image | image_url: width: 100 | image_tag: widths: '50, 100', sizes: '44px', loading: 'lazy', alt: '' }}
+                      {% elsif value.swatch.color != blank %}<span class="product-swatch" style="background-color: {{ value.swatch.color }}" aria-hidden="true"></span>
+                      {% elsif value.variant.featured_image != blank %}{{ value.variant.featured_image | image_url: width: 100 | image_tag: widths: '50, 100', sizes: '44px', loading: 'lazy', alt: '' }}{% endif %}
+                      <span>{{ value.name | escape }}</span>
+                    </a>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% endunless %}
+        <p class="product-availability">{% render 'icon', name: 'headphones' %}<span><strong>Disponibilidad a confirmar</strong><small>Un asesor te ayuda con tu compra.</small></span></p>
+        {% if pvc or product.metafields.decokasa.coverage_m2.value != blank or current_variant.metafields.decokasa.coverage_m2.value != blank %}{% render 'pvc-calculator' %}{% endif %}
+        {% assign multiple_request = false %}
+        {% unless product.has_only_default_variant or pvc or product.metafields.decokasa.coverage_m2.value != blank or current_variant.metafields.decokasa.coverage_m2.value != blank %}{% assign multiple_request = true %}{% endunless %}
+        {% if multiple_request %}<p class="request-builder-help">Elige una presentación y su cantidad. Agrégala a tu solicitud y repite con los otros colores que quieras.</p>{% endif %}
+        <div class="product-purchase" data-purchase-controls>
+          <div class="product-quantity"><button type="button" data-quantity-step="-1" aria-label="Disminuir cantidad">−</button><label class="sr-only" for="Quantity-{{ section.id }}">Cantidad</label><input id="Quantity-{{ section.id }}" data-product-quantity type="number" min="1" max="1000000" step="1" value="1" inputmode="numeric"><button type="button" data-quantity-step="1" aria-label="Aumentar cantidad">+</button></div>
+          {% if multiple_request %}
+          <button type="button" class="button yellow product-cta" data-add-request {% if current_variant == blank %}disabled{% endif %}>Agregar a mi solicitud</button>
+          {% else %}
+          <a class="button yellow product-cta" href="#solicitud" data-open-request {% if current_variant == blank %}aria-disabled="true"{% endif %}>{{ section.settings.cta_label | default: 'Solicitar compra' | escape }}</a>
+          {% endif %}
+        </div>
+        {% if multiple_request %}
+        <details class="request-builder" data-request-builder open>
+          <summary><strong>Tu solicitud</strong><span data-request-count>0 presentaciones</span></summary>
+          <p data-request-empty>Aún no agregaste una presentación.</p>
+          <ul class="request-lines" data-request-lines></ul>
+        </details>
+        <p class="request-builder-status" data-request-builder-status role="status"></p>
+        {% endif %}
         {% assign goal_cents = product.price_max | times: 1.8 | round %}
         {% if goal_cents > 0 %}
         <div class="reward-goal-card hierarchy-top" data-reward-goal data-threshold="{{ goal_cents }}">
@@ -120,58 +178,8 @@
           </div>
         </dialog>
         {% endif %}
-        {% if section.settings.show_vendor != false and product.vendor != blank %}<p class="eyebrow product-vendor">{{ product.vendor | escape }}</p>{% endif %}
-        <h1>{{ product.title | escape }}</h1>
-        <div class="product-price-row">
-          {% if section.settings.show_price != false and current_variant != blank %}
-            <span class="product-price" data-product-price data-cents="{{ current_variant.price }}">{{ current_variant.price | money_with_currency }}</span>
-            {% if section.settings.show_compare_price != false and current_variant.compare_at_price > current_variant.price %}<s class="product-compare-price">{{ current_variant.compare_at_price | money_with_currency }}</s>{% endif %}
-          {% else %}<span class="product-price">Precio a consultar</span>{% endif %}
         </div>
-        <p class="product-price-note">{{ section.settings.price_note | default: 'El asesor confirmará el importe final y la entrega.' | escape }}</p>
-        {% unless product.has_only_default_variant %}
-          <div class="product-options" aria-label="Presentaciones">
-            {% for option in product.options_with_values %}
-              {% assign current_option = option %}
-              <div class="product-option-group" role="group" aria-labelledby="Option-{{ section.id }}-{{ option.position }}">
-                <p id="Option-{{ section.id }}-{{ option.position }}" class="product-option-label">{{ option.name | escape }}: <strong>{{ option.selected_value | escape }}</strong></p>
-                <div class="product-option-values">
-                  {% for value in option.values %}
-                    {% capture option_ids %}{% for other_option in product.options_with_values %}{% if other_option.position == current_option.position %}{{ value.id }}{% else %}{% for selected_value in other_option.values %}{% if selected_value.selected %}{{ selected_value.id }}{% endif %}{% endfor %}{% endif %}{% unless forloop.last %},{% endunless %}{% endfor %}{% endcapture %}
-                    {% assign option_url = value.product_url | default: product.url %}
-                    <a class="product-option" href="{{ option_url }}?option_values={{ option_ids | strip }}" data-option-link {% if value.selected %}aria-current="true"{% endif %}>
-                      {% if value.swatch.image != blank %}{{ value.swatch.image | image_url: width: 100 | image_tag: widths: '50, 100', sizes: '44px', loading: 'lazy', alt: '' }}
-                      {% elsif value.swatch.color != blank %}<span class="product-swatch" style="background-color: {{ value.swatch.color }}" aria-hidden="true"></span>
-                      {% elsif value.variant.featured_image != blank %}{{ value.variant.featured_image | image_url: width: 100 | image_tag: widths: '50, 100', sizes: '44px', loading: 'lazy', alt: '' }}{% endif %}
-                      <span>{{ value.name | escape }}</span>
-                    </a>
-                  {% endfor %}
-                </div>
-              </div>
-            {% endfor %}
-          </div>
-        {% endunless %}
-        <p class="product-availability">{% render 'icon', name: 'headphones' %}<span><strong>Disponibilidad a confirmar</strong><small>Un asesor te ayuda con tu compra.</small></span></p>
-        {% if pvc or product.metafields.decokasa.coverage_m2.value != blank or current_variant.metafields.decokasa.coverage_m2.value != blank %}{% render 'pvc-calculator' %}{% endif %}
-        {% assign multiple_request = false %}
-        {% unless product.has_only_default_variant or pvc or product.metafields.decokasa.coverage_m2.value != blank or current_variant.metafields.decokasa.coverage_m2.value != blank %}{% assign multiple_request = true %}{% endunless %}
-        {% if multiple_request %}<p class="request-builder-help">Elige una presentación y su cantidad. Agrégala a tu solicitud y repite con los otros colores que quieras.</p>{% endif %}
-        <div class="product-purchase" data-purchase-controls>
-          <div class="product-quantity"><button type="button" data-quantity-step="-1" aria-label="Disminuir cantidad">−</button><label class="sr-only" for="Quantity-{{ section.id }}">Cantidad</label><input id="Quantity-{{ section.id }}" data-product-quantity type="number" min="1" max="1000000" step="1" value="1" inputmode="numeric"><button type="button" data-quantity-step="1" aria-label="Aumentar cantidad">+</button></div>
-          {% if multiple_request %}
-          <button type="button" class="button yellow product-cta" data-add-request {% if current_variant == blank %}disabled{% endif %}>Agregar a mi solicitud</button>
-          {% else %}
-          <a class="button yellow product-cta" href="#solicitud" data-open-request {% if current_variant == blank %}aria-disabled="true"{% endif %}>{{ section.settings.cta_label | default: 'Solicitar compra' | escape }}</a>
-          {% endif %}
-        </div>
-        {% if multiple_request %}
-        <section class="request-builder" data-request-builder aria-label="Tu solicitud">
-          <h2>Tu solicitud</h2>
-          <p data-request-empty>Aún no agregaste una presentación.</p>
-          <ul class="request-lines" data-request-lines></ul>
-          <p class="request-builder-status" data-request-builder-status role="status"></p>
-        </section>
-        {% endif %}
+        <div class="product-purchase-footer">
         <div class="product-estimate-card" data-estimated-bar>
           <div class="estimate-line">
             <span class="estimate-title" data-estimated-label>Monto estimado a pagar:</span>
@@ -182,11 +190,15 @@
         {% if multiple_request %}<a class="button yellow request-continue" href="#solicitud" data-open-request aria-disabled="true">{{ section.settings.cta_label | default: 'Solicitar compra' | escape }}</a>{% endif %}
         {% if current_variant == blank %}<p class="error">Esta combinación no existe. Elige otra presentación.</p>{% endif %}
         {% if section.settings.show_sku != false %}<p class="product-sku">SKU: <span data-sku>{{ current_variant.sku | default: 'Pendiente' | escape }}</span></p>{% endif %}
+        </div>
+        </div>
         <details class="product-request" data-request-details><summary>Completar solicitud con un asesor</summary>{% render 'request-form', product: product %}</details>
-        {% if section.settings.show_description != false and product.description != blank %}<details class="product-information" open><summary>Acerca del producto</summary><div class="rte">{{ product.description }}</div></details>{% endif %}
-        {% for block in section.blocks %}<details class="product-information" {{ block.shopify_attributes }}><summary>{{ block.settings.heading | escape }}</summary><div class="rte">{{ block.settings.content }}</div></details>{% endfor %}
         <p class="product-selection-status" data-selection-status role="status" tabindex="-1"></p>
       </div>
+    </div>
+    <div class="product-information-container">
+        {% if section.settings.show_description != false and product.description != blank %}<details class="product-information" open><summary>Acerca del producto</summary><div class="rte">{{ product.description }}</div></details>{% endif %}
+        {% for block in section.blocks %}<details class="product-information" {{ block.shopify_attributes }}><summary>{{ block.settings.heading | escape }}</summary><div class="rte">{{ block.settings.content }}</div></details>{% endfor %}
     </div>
   </div>
 {% else %}<section class="wrap section"><h1>Ficha en preparación</h1><p>Selecciona un producto en el editor del tema para ver su ficha.</p></section>{% endif %}

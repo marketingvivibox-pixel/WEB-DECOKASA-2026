@@ -18,7 +18,8 @@
     // These legacy controls describe only the displayed variant, not the request.
     formQuantity.disabled = true;
     form.decokasaRequestItems = () => lines.map(line => ({...line}));
-    const status = builder.querySelector('[data-request-builder-status]');
+    const status = page.querySelector('[data-request-builder-status]');
+    if (!builder.hasAttribute('data-disclosure-restored') && window.matchMedia?.('(min-width: 900px)').matches) builder.open = false;
     const list = builder.querySelector('[data-request-lines]');
     const summary = document.createElement('ul');
     summary.className = 'request-form-lines';
@@ -32,6 +33,8 @@
         summary.appendChild(item);
       }
       builder.querySelector('[data-request-empty]').hidden = lines.length > 0;
+      const countLabel = builder.querySelector('[data-request-count]');
+      if (countLabel) countLabel.textContent = `${lines.length} ${lines.length === 1 ? 'presentación' : 'presentaciones'}`;
       page.querySelector('[data-open-request]').setAttribute('aria-disabled', String(!lines.length));
       form.querySelector('[data-enable-form]').disabled = !lines.length;
       const receipt = form.querySelector('[data-request-status]');
@@ -113,10 +116,29 @@
     list.addEventListener('change', editQuantity);
     render();
   }
+  function initPurchaseHeight(page) {
+    const panel = page.querySelector('[data-purchase-panel]');
+    const gallery = page.querySelector('.product-gallery');
+    if (!panel || !gallery) return;
+    const update = () => {
+      if (!page.isConnected) { observer?.disconnect(); window.removeEventListener('resize', update); return; }
+      const thumbnails = [...gallery.querySelectorAll('.product-thumbnail')];
+      const images = thumbnails.length ? thumbnails : [gallery.querySelector('[data-gallery-stage]')].filter(Boolean);
+      if (!images.length) return;
+      const bottom = Math.max(...images.map(image => image.getBoundingClientRect().bottom));
+      const top = panel.getBoundingClientRect().top;
+      if (bottom > top) panel.style.setProperty('--purchase-panel-height', `${Math.max(0, bottom - top + 50)}px`);
+    };
+    const observer = typeof ResizeObserver === 'function' ? new ResizeObserver(update) : null;
+    observer?.observe(gallery);
+    window.addEventListener('resize', update);
+    update();
+  }
   function init(scope = document) {
     const pages = scope.matches?.('[data-product-page]') ? [scope] : scope.querySelectorAll('[data-product-page]');
     pages.forEach(page => {
       if (page.dataset.enhanced) return;
+      page.querySelectorAll("[data-gallery-step]").forEach(button => { button.hidden = false; });
       const quantity = page.querySelector('[data-product-quantity]');
       const formQuantity = page.querySelector('[data-request-form] [name=quantity]');
       if (!quantity || !formQuantity) return;
@@ -229,6 +251,7 @@
       });
       quantity.addEventListener('input', () => { formQuantity.value = quantity.value; formQuantity.dispatchEvent(new Event('input', {bubbles: true})); updateEstimated(); });
       page.dataset.enhanced = 'true';
+      initPurchaseHeight(page);
       page.querySelector('[data-purchase-controls]').hidden = false;
       initRequestBuilder(page, updateEstimated);
       sync();
@@ -259,6 +282,9 @@
         if (replacement) { replacement.value = input.value; replacement.checked = input.checked; }
       }
       next.querySelector('[data-request-details]').open = page.querySelector('[data-request-details]').open;
+      const previousBuilder = page.querySelector('[data-request-builder]');
+      const nextBuilder = next.querySelector('[data-request-builder]');
+      if (previousBuilder && nextBuilder) { nextBuilder.open = previousBuilder.open; nextBuilder.dataset.disclosureRestored = 'true'; }
       if (selections.has(page)) selections.set(next, selections.get(page));
       next.querySelector('[data-request-form]').decokasaDraft = page.querySelector('[data-request-form]').decokasaDraft;
       page.replaceWith(next);
@@ -276,16 +302,44 @@
       }
     } finally { page.removeAttribute('aria-busy'); }
   }
+  function showGalleryChoice(page, choice) {
+    page.querySelectorAll('[data-gallery-panel]').forEach(panel => { panel.hidden = panel.dataset.galleryPanel !== choice.dataset.galleryChoice; });
+    page.querySelectorAll('[data-gallery-choice]').forEach(item => { if (item === choice) item.setAttribute('aria-current', 'true'); else item.removeAttribute('aria-current'); });
+    page.querySelector('[data-gallery-status]').textContent = choice.getAttribute('aria-label');
+  }
+  function stepGallery(page, direction) {
+    const choices = [...page.querySelectorAll('[data-gallery-choice]')];
+    if (choices.length < 2) return;
+    const current = choices.findIndex(item => item.getAttribute('aria-current') === 'true');
+    showGalleryChoice(page, choices[(Math.max(current, 0) + direction + choices.length) % choices.length]);
+  }
+  let swipe = null;
+  document.addEventListener('pointerdown', event => {
+    const stage = event.target.closest('[data-gallery-stage]');
+    if (!stage || event.pointerType !== 'touch' || !event.isPrimary || event.target.closest('[data-gallery-step]')) return;
+    swipe = {stage, id: event.pointerId, x: event.clientX, y: event.clientY};
+  });
+  document.addEventListener('pointerup', event => {
+    if (!swipe || event.pointerId !== swipe.id) return;
+    const {stage, x, y} = swipe;
+    swipe = null;
+    const dx = event.clientX - x, dy = event.clientY - y;
+    if (Math.abs(dx) >= 50 && Math.abs(dx) > Math.abs(dy) * 1.25) {
+      const page = stage.closest('[data-product-page]');
+      if (page) stepGallery(page, dx < 0 ? 1 : -1);
+    }
+  });
+  document.addEventListener('pointercancel', event => { if (swipe && event.pointerId === swipe.id) swipe = null; });
   document.addEventListener('click', event => {
     const page = event.target.closest('[data-product-page]');
     if (!page) return;
     const choice = event.target.closest('[data-gallery-choice]');
     if (choice && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) {
       event.preventDefault();
-      page.querySelectorAll('[data-gallery-panel]').forEach(panel => { panel.hidden = panel.dataset.galleryPanel !== choice.dataset.galleryChoice; });
-      page.querySelectorAll('[data-gallery-choice]').forEach(item => { if (item === choice) item.setAttribute('aria-current', 'true'); else item.removeAttribute('aria-current'); });
-      page.querySelector('[data-gallery-status]').textContent = choice.getAttribute('aria-label');
+      showGalleryChoice(page, choice);
     }
+    const galleryStep = event.target.closest('[data-gallery-step]');
+    if (galleryStep) stepGallery(page, Number(galleryStep.dataset.galleryStep));
     const step = event.target.closest('[data-quantity-step]');
     if (step) {
       const input = page.querySelector('[data-product-quantity]');
