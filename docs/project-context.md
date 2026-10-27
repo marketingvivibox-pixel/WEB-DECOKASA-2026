@@ -1,3 +1,7 @@
+## 26/10/2026 — Meta del regalo según el producto
+
+Decisión del usuario: reemplazar la meta fija por el precio unitario más alto del producto multiplicado por 1.80 (80% adicional). Se usa `product.price_max`, sin precio de comparación ni filtro de disponibilidad, redondeado al céntimo. Cambiar color/modelo o cantidad conserva la meta; el total de las líneas controla el progreso. Titan: máximo S/ 300, meta S/ 540. Regla común a todas las fichas que incluyen la tarjeta de regalo; productos sin precio positivo no la muestran. No cambia el catálogo ni activa envío de solicitudes.
+
 ## 26/10/2026 — Galerías de fotos por variante
 
 La ficha predeterminada admite el metacampo PRODUCTVARIANT `decokasa.gallery_images`, lista ordenada de archivos limitada a imágenes y editable como **Galería de la variante**. Usa el identificador del medio, no el de su preview_image, para enlazar paneles y miniaturas. La primera imagen es principal; al cambiar de variante se sustituye la galería completa mediante la actualización de sección existente. Sin el metacampo se conserva product.images. No requiere etiquetas de color en los archivos ni cambios de código para incorporar más ángulos.
@@ -105,6 +109,8 @@ Objetivo: anuncio → solicitud → cliente → oportunidad → pedido → venta
 El formulario solo simula una referencia, sin transmitir ni persistir contactos; no crea clientes, leads ni pedidos. La referencia se reutiliza para reintentos idénticos dentro de la misma página; persistencia duradera pendiente. La atribución de prueba usa `sessionStorage` solo con consentimiento. No hay conexiones Odoo, GA4 ni redes publicitarias. El catálogo, los precios y rendimientos de la demostración son ficticios. La portada usa artes regenerados a partir del mockup original; las ilustraciones de productos demo no son fotografías de catálogo verificadas.
 
 ## Pendientes
+
+Decisión del 26/10/2026: los productos con varias presentaciones y sin calculadora de cobertura permiten combinar variantes en una misma solicitud. Cada variante conserva su SKU, precio y cantidad; total y regalo se calculan sobre la lista agregada. Cambiar la presentación visible no reemplaza las líneas. El formulario sigue en simulación y la lista vive solo en memoria, sin checkout, reservas, persistencia de contactos ni conexión Odoo.
 
 Catálogo y fotos reales; configuración PEN y rutas; autoridad de precios y promociones; URL/permisos Odoo; SKU, variantes, unidades, almacenes y operación de cierre; receptor seguro de solicitudes, CRM, consentimiento y medición; pruebas de duplicados, fallos y conciliación antes del lanzamiento comercial. Portada revisada visualmente en Shopify en escritorio y celular el 06/10/2026.
 

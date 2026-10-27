@@ -1,8 +1,29 @@
-## 26/10/2026 — Calculadora visual SPC por ambientes
+## 27/10/2026 — Galería y distribución de producto
 
-- Registrados los cambios pendientes en `feature/calculadora-visual-spc`: cálculo por medidas de varios ambientes o ingreso directo de m², croquis, desglose de superficie y cajas, y acceso al catálogo desde el resultado.
-- Actualizados estilos adaptables, sección Liquid, acciones y vista previa; paquete del tema regenerado con 74 archivos.
-- Validación: 26/26 pruebas aprobadas; ocho páginas de vista previa, enlaces, IDs, rutas, JSON y esquemas válidos; `git diff --check` sin errores. No se realizó una nueva validación visual en esta tarea de registro ni se desplegó el cambio.
+- Añadidos controles anterior/siguiente y deslizamiento a la galería, con miniaturas y cambio de variantes conservados. En escritorio, la compra se organiza en un panel compacto con secciones desplegables y límite ligado al borde inferior de la galería; la información del producto queda centrada debajo.
+- 30 pruebas aprobadas, incluidas galería, gestos, variantes y cálculos de solicitud. Vistas de muestra y paquete regenerados y verificados. La herramienta de validación de Shopify no pudo iniciarse por una dependencia ausente; la plantilla se comprobó con las pruebas del proyecto.
+
+## 27/10/2026 — Calculadora visual SPC por ambientes, modal de pedido y botón persistente móvil
+
+- Registrados los cambios en `feature/calculadora-visual-spc`: cálculo por medidas de varios ambientes o ingreso directo de m², croquis esquemático dinámico en tiempo real (SVG con animación y proporciones), desglose jerárquico de superficie y cajas, acceso al catálogo y botón "Realizar pedido".
+- Modal de pedido emergente (`#spc-order-modal`) con fondo difuminado, precarga de ambientes y cajas, completamente extraído del flujo del pie de página.
+- Erradicación total de la línea azul en campos de medida (`outline: none !important; border: none !important; box-shadow: none !important;`).
+- Botón persistente móvil inferior ("Realizar pedido ↗") con visibilidad selectiva por scroll (ocultamiento automático en zona de calculadora).
+- Servidor local con cabeceras `Cache-Control: no-store` y control de versiones por query string (`?v=...`) en `scripts/sync_preview.cjs`.
+
+## 26/10/2026 — Meta automática del regalo
+
+- Sustituida la meta fija por `product.price_max × 1.80`, redondeada a céntimos. Estable entre variantes y cantidades; progreso calculado con las líneas de la solicitud. Tarjeta, importe pendiente y modal comparten la referencia. Retirado el ajuste manual antiguo; productos sin precio positivo no muestran el incentivo.
+- Titan: máximo S/ 300 → S/ 540. Una blanca S/ 279 → 52%, faltan S/ 261; blanca + negra S/ 579 → desbloqueado. Reducir el total vuelve a bloquearlo.
+- 29/29 pruebas aprobadas: mayor precio, disponibilidad, comparación, valores antiguos ignorados, variantes combinadas, redondeo, límite exacto y precio cero. Tres archivos de tema validados con Shopify sin hallazgos. Ocho vistas y ZIP de 74 archivos regenerados y verificados.
+- Commit `6583374` enviado a `main`, sincronizado y comprobado en Shopify (tema `188927803629`): meta y modal S/ 540; blanca S/ 279, pendiente S/ 261 (52%); cambio a negro conserva la meta y la selección; ambas S/ 579 desbloquean el regalo; quitar blanca deja negro S/ 300, pendiente S/ 240 (56%) y vuelve a bloquearlo. Consola sin errores. Evidencia: `outputs/titan-meta-80-porciento.png` en el chat de trabajo. Sin cambios de catálogo ni envío de solicitudes.
+
+## 26/10/2026 — Solicitud con varios colores
+
+- Incorporada lista por variante: elegir color/cantidad, agregar, repetir; controles independientes y eliminación. Cambiar de color conserva selección y formulario. Agregar un color repetido suma unidades.
+- Total, meta del regalo y resumen del formulario usan todas las líneas con su precio y SKU. Lista vacía impide continuar. Errores de carga conservan la solicitud y permiten reintentar. Formulario aún en simulación, sin envío, reserva ni pagos; calculadoras PVC/SPC preservadas.
+- 27/27 pruebas aprobadas, incluidos precios distintos, acumulación, edición, eliminación, límites, fallo de red y referencia estable por solicitud. Cuatro archivos validados con la herramienta nativa Shopify sin hallazgos. Ocho vistas y ZIP de 74 archivos válidos. Revisión visual local a 320/390 px y escritorio; consola sin errores.
+- Commit `104c032` enviado a `main`, sincronizado y verificado en Shopify (tema `188927803629`): blanco ×1 + negro ×1 = S/ 579; blanco ×2 + negro ×1 = S/ 858; eliminación y cambio de color conservan cantidades y recalculan el total. El formulario muestra ambas líneas y la galería blanca conserva cuatro ángulos. Consola sin errores. Titan continúa en borrador y el formulario sigue en simulación.
 
 ## 26/10/2026 — Titan: galería ordenada por color
 

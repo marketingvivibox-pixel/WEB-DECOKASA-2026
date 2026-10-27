@@ -148,8 +148,8 @@ Nuestras marcas</a></div>
 
 <main id="main">
 
-<link rel="stylesheet" href="assets/product-detail.css?v=1793132115102">
-<script src="assets/product-detail.js?v=1793132115102" defer="defer"></script>
+<link rel="stylesheet" href="assets/product-detail.css?v=1793137492745">
+<script src="assets/product-detail.js?v=1793137492745" defer="defer"></script>
 
 
 
@@ -163,7 +163,7 @@ Nuestras marcas</a></div>
 
     <div class="product-layout">
       <div class="product-gallery" aria-label="Imágenes del producto">
-        <div class="product-image-stage">
+        <div class="product-image-stage" data-gallery-stage="">
 
 
 
@@ -188,6 +188,10 @@ Nuestras marcas</a></div>
                 <img src="assets/product-audifonos-2.svg" width="440" height="330" sizes="(min-width: 900px) 46vw, 100vw" loading="lazy" class="product-main-image" alt="Audífonos inalámbricos · imagen 3">
 
             </div>
+
+
+            <button class="product-gallery-arrow product-gallery-arrow--previous" type="button" data-gallery-step="-1" aria-label="Imagen anterior" hidden><span aria-hidden="true">‹</span></button>
+            <button class="product-gallery-arrow product-gallery-arrow--next" type="button" data-gallery-step="1" aria-label="Imagen siguiente" hidden><span aria-hidden="true">›</span></button>
 
         </div>
 
@@ -216,75 +220,8 @@ Nuestras marcas</a></div>
         <p class="sr-only" data-gallery-status="" role="status"></p>
       </div>
       <div class="product-summary">
-
-
-        <div class="reward-goal-card hierarchy-top" data-reward-goal="" data-threshold="100000">
-          <div class="reward-goal-badge">
-            <div class="reward-badge-left">
-              <span class="reward-badge-dot"></span>
-              <span class="reward-badge-title">META DE OBJETIVO · REGALO ESPECIAL</span>
-            </div>
-            <button type="button" class="reward-badge-action reward-badge-pill" data-reward-modal-open="" aria-haspopup="dialog" aria-expanded="false" title="Ver detalles y beneficios del regalo especial">
-              <svg class="reward-gift-mini" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="13" rx="2" /><path d="M12 8v13" /><path d="M19 12H5" /><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.5 4.5 0 0 1 12 7.5a4.5 4.5 0 0 1 4.5-4.5 2.5 2.5 0 0 1 0 5z" /></svg>
-              <span class="reward-action-text" data-reward-action-text="">Meta S/. 1000 · Ver regalo</span>
-              <svg class="reward-action-arrow" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
-            </button>
-          </div>
-          <div class="reward-goal-header">
-            <div class="reward-goal-icon" data-reward-icon="">🎁</div>
-            <div class="reward-goal-info">
-              <span class="reward-goal-title" data-reward-title="">¡Agrega <strong data-reward-remaining="">S/. 1000.00 PEN</strong> para desbloquear tu <strong>Regalo Especial</strong>!</span>
-              <span class="reward-goal-subtext" data-reward-subtext="">Al alcanzar un monto de gasto de S/. 1000.00 PEN recibes un regalo especial con tu pedido.</span>
-            </div>
-          </div>
-          <div class="reward-progress-track" role="progressbar" aria-label="Progreso hacia regalo especial" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-            <div class="reward-progress-fill" data-reward-fill="" style="width: 0%;"></div>
-          </div>
-          <div class="reward-goal-footer">
-            <span class="reward-current-label">Total estimado: <strong class="reward-current" data-reward-current="">S/. 129.00 PEN</strong></span>
-            <span class="reward-percent" data-reward-percent="">0% de la meta</span>
-          </div>
-        </div>
-        <dialog class="reward-modal-dialog" data-reward-modal="" aria-labelledby="RewardModalTitle-preview-product-landing">
-          <div class="reward-modal-backdrop" data-reward-modal-close=""></div>
-          <div class="reward-modal-card">
-            <div class="reward-modal-header">
-              <div class="reward-modal-badge">
-                <span>🎁 Beneficio Exclusivo</span>
-                <span>Desde S/. 1000.00 PEN</span>
-              </div>
-              <button type="button" class="reward-modal-close" data-reward-modal-close="" aria-label="Cerrar modal">×</button>
-            </div>
-            <h2 id="RewardModalTitle-preview-product-landing" class="reward-modal-title">Regalo Especial por tu compra en Decokasa</h2>
-            <p class="reward-modal-lead">Por cada solicitud de compra que alcance o supere los <strong>S/. 1000.00 PEN</strong>, nuestro equipo incluye un regalo especial de cortesía en tu pedido.</p>
-            <div class="reward-modal-perks">
-              <div class="reward-perk">
-                <span class="reward-perk-icon">🎁</span>
-                <div>
-                  <strong>Obsequio premium de cortesía</strong>
-                  <p>Accesorios de instalación, complementos de acabado o detalle exclusivo seleccionado para tu categoría de producto.</p>
-                </div>
-              </div>
-              <div class="reward-perk">
-                <span class="reward-perk-icon">⚡</span>
-                <div>
-                  <strong>Activación automática sin cupones</strong>
-                  <p>El total estimado de tu ficha calcula tu progreso al instante. Al enviar tu solicitud, el asesor valida tu regalo en Odoo.</p>
-                </div>
-              </div>
-              <div class="reward-perk">
-                <span class="reward-perk-icon">🏷️</span>
-                <div>
-                  <strong>Válido para todo el catálogo</strong>
-                  <p>Aplica combinando cualquier producto: pisos SPC, pisos PVC, accesorios, tecnología o fitness.</p>
-                </div>
-              </div>
-            </div>
-            <div class="reward-modal-footer">
-              <button type="button" class="button yellow reward-modal-btn" data-reward-modal-close="">¡Entendido! Continuar cotizando</button>
-            </div>
-          </div>
-        </dialog>
+        <div class="product-purchase-panel" data-purchase-panel="">
+        <div class="product-purchase-content" data-purchase-content="" tabindex="0" aria-label="Opciones y detalles de compra">
         <p class="eyebrow product-vendor">Xion</p>
         <h1>Audífonos inalámbricos</h1>
         <div class="product-price-row">
@@ -327,24 +264,114 @@ Nuestras marcas</a></div>
 </svg>
 <span><strong>Disponibilidad a confirmar</strong><small>Un asesor te ayuda con tu compra.</small></span></p>
 
+
+
+        <p class="request-builder-help">Elige una presentación y su cantidad. Agrégala a tu solicitud y repite con los otros colores que quieras.</p>
         <div class="product-purchase" data-purchase-controls="">
           <div class="product-quantity"><button type="button" data-quantity-step="-1" aria-label="Disminuir cantidad">−</button><label class="sr-only" for="Quantity-preview-product-landing">Cantidad</label><input id="Quantity-preview-product-landing" data-product-quantity="" type="number" min="1" max="1000000" step="1" value="1" inputmode="numeric"><button type="button" data-quantity-step="1" aria-label="Aumentar cantidad">+</button></div>
-          <a class="button yellow product-cta" href="#solicitud" data-open-request="">Solicitar compra</a>
+
+          <button type="button" class="button yellow product-cta" data-add-request="">Agregar a mi solicitud</button>
+
         </div>
+
+        <details class="request-builder" data-request-builder="" open>
+          <summary><strong>Tu solicitud</strong><span data-request-count="">0 presentaciones</span></summary>
+          <p data-request-empty="">Aún no agregaste una presentación.</p>
+          <ul class="request-lines" data-request-lines=""></ul>
+        </details>
+        <p class="request-builder-status" data-request-builder-status="" role="status"></p>
+
+
+
+        <div class="reward-goal-card hierarchy-top" data-reward-goal="" data-threshold="26820">
+          <div class="reward-goal-badge">
+            <div class="reward-badge-left">
+              <span class="reward-badge-dot"></span>
+              <span class="reward-badge-title">META DE OBJETIVO · REGALO ESPECIAL</span>
+            </div>
+            <button type="button" class="reward-badge-action reward-badge-pill" data-reward-modal-open="" aria-haspopup="dialog" aria-expanded="false" title="Ver detalles y beneficios del regalo especial">
+              <svg class="reward-gift-mini" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="13" rx="2" /><path d="M12 8v13" /><path d="M19 12H5" /><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.5 4.5 0 0 1 12 7.5a4.5 4.5 0 0 1 4.5-4.5 2.5 2.5 0 0 1 0 5z" /></svg>
+              <span class="reward-action-text" data-reward-action-text="">Meta S/. 268.20 PEN · Ver regalo</span>
+              <svg class="reward-action-arrow" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
+            </button>
+          </div>
+          <div class="reward-goal-header">
+            <div class="reward-goal-icon" data-reward-icon="">🎁</div>
+            <div class="reward-goal-info">
+              <span class="reward-goal-title" data-reward-title="">¡Agrega <strong data-reward-remaining="">S/. 268.20 PEN</strong> para desbloquear tu <strong>Regalo Especial</strong>!</span>
+              <span class="reward-goal-subtext" data-reward-subtext="">Al alcanzar un monto de gasto de S/. 268.20 PEN recibes un regalo especial con tu pedido.</span>
+            </div>
+          </div>
+          <div class="reward-progress-track" role="progressbar" aria-label="Progreso hacia regalo especial" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div class="reward-progress-fill" data-reward-fill="" style="width: 0%;"></div>
+          </div>
+          <div class="reward-goal-footer">
+            <span class="reward-current-label">Total estimado: <strong class="reward-current" data-reward-current="">S/. 129.00 PEN</strong></span>
+            <span class="reward-percent" data-reward-percent="">0% de la meta</span>
+          </div>
+        </div>
+        <dialog class="reward-modal-dialog" data-reward-modal="" aria-labelledby="RewardModalTitle-preview-product-landing">
+          <div class="reward-modal-backdrop" data-reward-modal-close=""></div>
+          <div class="reward-modal-card">
+            <div class="reward-modal-header">
+              <div class="reward-modal-badge">
+                <span>🎁 Beneficio Exclusivo</span>
+                <span>Desde S/. 268.20 PEN</span>
+              </div>
+              <button type="button" class="reward-modal-close" data-reward-modal-close="" aria-label="Cerrar modal">×</button>
+            </div>
+            <h2 id="RewardModalTitle-preview-product-landing" class="reward-modal-title">Regalo Especial por tu compra en Decokasa</h2>
+            <p class="reward-modal-lead">Por cada solicitud de compra que alcance o supere los <strong>S/. 268.20 PEN</strong>, nuestro equipo incluye un regalo especial de cortesía en tu pedido.</p>
+            <div class="reward-modal-perks">
+              <div class="reward-perk">
+                <span class="reward-perk-icon">🎁</span>
+                <div>
+                  <strong>Obsequio premium de cortesía</strong>
+                  <p>Accesorios de instalación, complementos de acabado o detalle exclusivo seleccionado para tu categoría de producto.</p>
+                </div>
+              </div>
+              <div class="reward-perk">
+                <span class="reward-perk-icon">⚡</span>
+                <div>
+                  <strong>Activación automática sin cupones</strong>
+                  <p>El total estimado de tu ficha calcula tu progreso al instante. Al enviar tu solicitud, el asesor valida tu regalo en Odoo.</p>
+                </div>
+              </div>
+              <div class="reward-perk">
+                <span class="reward-perk-icon">🏷️</span>
+                <div>
+                  <strong>Una meta para este producto</strong>
+                  <p>La meta es un 80% más que el precio de una unidad. Si hay varios precios, se toma la presentación más cara; cambiar de color o modelo no cambia la meta.</p>
+                </div>
+              </div>
+            </div>
+            <div class="reward-modal-footer">
+              <button type="button" class="button yellow reward-modal-btn" data-reward-modal-close="">¡Entendido! Continuar cotizando</button>
+            </div>
+          </div>
+        </dialog>
+
+        </div>
+        <div class="product-purchase-footer">
         <div class="product-estimate-card" data-estimated-bar="">
           <div class="estimate-line">
-            <span class="estimate-title">Monto estimado a pagar:</span>
+            <span class="estimate-title" data-estimated-label="">Monto estimado a pagar:</span>
             <strong class="estimate-amount" data-estimated-amount="">S/. 129.00 PEN</strong>
           </div>
           <div class="estimate-breakdown" data-estimated-breakdown="">1 unidad × S/. 129.00 PEN</div>
         </div>
+        <a class="button yellow request-continue" href="#solicitud" data-open-request="" aria-disabled="true">Solicitar compra</a>
 
         <p class="product-sku">SKU: <span data-sku="">DEMO-XI-001</span></p>
+        </div>
+        </div>
         <details class="product-request" data-request-details=""><summary>Completar solicitud con un asesor</summary><div class="form-box" id="solicitud"><h2>Solicita tu compra</h2><p>Completa tus datos. Un asesor revisará la disponibilidad y coordinará contigo el importe final y la entrega.</p><p class="note">Prueba local: usa datos ficticios. No se envía esta solicitud ni se confirma una venta.</p><div class="form-estimate-summary" data-form-estimate-summary=""><span class="form-summary-qty">Cantidad seleccionada: <strong data-form-qty="">1 unidad</strong></span><span class="form-summary-total">Total estimado: <strong data-form-total="">S/. 129.00 PEN</strong></span></div><form data-request-form="" data-product-id="DEMO-P-0" data-currency="PEN" action="#solicitud" method="post"><fieldset disabled style="border:0;padding:0;margin:0;min-width:0"><label data-request-variant="">Presentación<select name="variant_id"><option value="DEMO-V-0-A" data-price="12900" data-sku="DEMO-XI-001" data-coverage="" selected>Estándar</option></select></label><label data-request-quantity="">Cantidad<input name="quantity" type="number" min="1" max="1000000" step="1" value="1" required></label><div class="fields"><label>Nombre<input name="name" autocomplete="name" maxlength="100" required></label><label>Teléfono o WhatsApp<input name="phone" type="tel" autocomplete="tel" minlength="7" maxlength="25" required title="Ingresa tu número de contacto."></label><label>Correo (opcional)<input name="email" type="email" autocomplete="email" maxlength="180"></label><label>Ciudad o distrito<input name="district" autocomplete="address-level2" maxlength="100" required></label></div><label>Comentario (opcional)<textarea name="comment" maxlength="1000"></textarea></label><label class="check"><input name="contact_permission" type="checkbox" required>Autorizo que un asesor me contacte para atender esta solicitud.</label><button class="primary" type="submit" disabled data-enable-form="">Simular solicitud</button></fieldset><div data-request-status="" class="status" tabindex="-1" role="status" hidden></div></form><noscript><p class="error">Activa JavaScript para probar el formulario. No envíes datos reales.</p></noscript></div></details>
-        <details class="product-information" open><summary>Acerca del producto</summary><div class="rte"><p>Explora la presentación y solicita atención para elegir el producto adecuado.</p></div></details>
-
         <p class="product-selection-status" data-selection-status="" role="status" tabindex="-1"></p>
       </div>
+    </div>
+    <div class="product-information-container">
+        <details class="product-information" open><summary>Acerca del producto</summary><div class="rte"><p>Explora la presentación y solicita atención para elegir el producto adecuado.</p></div></details>
+
     </div>
   <script type="application/json" data-preview-variants="">[{"id":"DEMO-V-0-A","title":"Estándar","price":12900,"sku":"DEMO-XI-001","featured_image":{"id":"demo-image-0-0","src":"assets/product-audifonos-0.svg","alt":"Audífonos inalámbricos · imagen 1"},"metafields":{"decokasa":{"coverage_m2":{"value":null}}},"coverage":null,"imageId":"demo-image-0-0","optionValues":"demo-option-0-0"},{"id":"DEMO-V-0-B","title":"Alternativa","price":14900,"sku":"DEMO-XI-002","featured_image":{"id":"demo-image-0-1","src":"assets/product-audifonos-1.svg","alt":"Audífonos inalámbricos · imagen 2"},"metafields":{"decokasa":{"coverage_m2":{"value":null}}},"coverage":null,"imageId":"demo-image-0-1","optionValues":"demo-option-0-1"}]</script></div>
 
@@ -412,12 +439,11 @@ Nuestras marcas</a></div>
       if(form.dataset.initialized)return;
       const page=form.closest('[data-product-page]')||scope;
       const selected=form.querySelector('[name=variant_id]').selectedOptions[0];
-      if(!selected)return;
+      if(!selected && !page.querySelector('[data-request-builder]'))return;
       form.dataset.initialized='true';
       form.querySelector('[data-enable-form]').disabled=false;
       const select=form.querySelector('[name=variant_id]'),qty=form.querySelector('[name=quantity]'),price=page.querySelector('[data-product-price]'),sku=page.querySelector('[data-sku]');
       const calc=page.querySelector('[data-pvc]'),result=calc?.querySelector('[data-calc-result]');
-      let draft=null;
       form.querySelector('fieldset').disabled=false;
       function calculation(){if(!calc)return;try{const coverage=select.selectedOptions[0].dataset.coverage;const n=boxes(calc.querySelector('[name=area]').value,calc.querySelector('[name=waste]').value,coverage);result.textContent=`${n} cajas · ${(n*Number(coverage)).toLocaleString('es-PE',{maximumFractionDigits:2})} m² de cobertura`;qty.value=n;page.dispatchEvent(new CustomEvent('decokasa:quantity',{bubbles:true}));result.classList.remove('error');}catch(e){result.textContent=e.message;result.classList.add('error');}}
       function variant(){const o=select.selectedOptions[0];if(!o)return;if(price){price.textContent=new Intl.NumberFormat('es-PE',{style:'currency',currency:form.dataset.currency}).format(Number(o.dataset.price)/100);price.dataset.cents=o.dataset.price;}if(sku)sku.textContent=o.dataset.sku||'Pendiente';calculation();page.dispatchEvent(new CustomEvent('decokasa:quantity',{bubbles:true}));}
@@ -427,12 +453,16 @@ Nuestras marcas</a></div>
         event.preventDefault();if(!form.reportValidity())return;
         if(calc && result.classList.contains('error')){result.setAttribute('tabindex','-1');result.focus();return;}
         const o=select.selectedOptions[0];
-        // Contact values exist only in memory; retries of an unchanged form reuse its reference.
-        draft=requestDraft(draft,JSON.stringify(Array.from(new FormData(form).entries())));
-        const requestId=draft.id;
+        const items = form.decokasaRequestItems?.();
         const receipt=form.querySelector('[data-request-status]');
+        if(items && !items.length){receipt.textContent='Agrega al menos una presentación a tu solicitud.';receipt.hidden=false;receipt.focus();return;}
+        // Contact values exist only in memory; retries of an unchanged form reuse its reference.
+        const values=Array.from(new FormData(form).entries()).filter(([key])=>!items || (key!=='variant_id' && key!=='quantity'));
+        form.decokasaDraft=requestDraft(form.decokasaDraft,JSON.stringify({values,items}));
+        const requestId=form.decokasaDraft.id;
+        const detail=items ? items.map(item=>`${item.title}: ${item.quantity} unidad(es) · ${item.sku||'SKU pendiente'} · S/. ${(item.quantity*item.price_cents/100).toFixed(2)} PEN`).join('\n')+`\nTotal estimado: S/. ${(items.reduce((sum,item)=>sum+item.quantity*item.price_cents,0)/100).toFixed(2)} PEN` : `${qty.value} unidad(es) · ${o.dataset.sku||'SKU pendiente'}`;
         // Demo only: never store/log contact fields, send a request, emit GA4 or alter inventory.
-        receipt.textContent=`Simulación completada. Esta solicitud no fue enviada.\nReferencia: ${requestId}\n${qty.value} unidad(es) · ${o.dataset.sku||'SKU pendiente'}\nEl asesor confirmará disponibilidad e importe cuando la tienda esté conectada.`;
+        receipt.textContent=`Simulación completada. Esta solicitud no fue enviada.\nReferencia: ${requestId}\n${detail}\nEl asesor confirmará disponibilidad e importe cuando la tienda esté conectada.`;
         receipt.hidden=false;receipt.focus();
       });
     });

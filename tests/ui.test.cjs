@@ -4,6 +4,7 @@ const out=path.resolve(__dirname,'../preview');
 const source=fs.readFileSync(path.resolve(__dirname,'../assets/decokasa.js'),'utf8');
 function load(file,search=''){
   const {window,document}=parseHTML(fs.readFileSync(path.join(out,file),'utf8'));
+  delete window.decokasaProductDetail;
   const data=new Map(); let sends=0;
   for(const select of document.querySelectorAll('select')){
     let selected=select.querySelector('option')?.getAttribute('value')??select.querySelector('option')?.textContent;
@@ -57,4 +58,27 @@ const latest=id();area.value='0';pvc.event(area,'input');pvc.event(form,'submit'
 pvc.event($('[data-consent="accepted"]'),'click');assert.equal(JSON.parse(pvc.data.get('decokasa.attribution')).first.ad_id,'123');
 pvc.event($('[data-consent="rejected"]'),'click');assert.equal(pvc.data.has('decokasa.attribution'),false);assert.equal(pvc.data.has('decokasa.visitor'),false);
 assert.equal(pvc.sends(),0);assert.equal([...pvc.data.keys()].some(k=>k.includes('draft')),false);
-console.log('DOM simulado: catálogo, estado vacío, PVC, variante, formulario/reintentos, consentimiento y cero envíos: correctos. No verifica renderizado visual ni validez nativa de campos.');
+const multi=load('landing-audifonos.html');
+const m=s=>multi.document.querySelector(s);
+multi.event(m('[data-add-request]'),'click');
+multi.event(m('[data-option-link]:not([aria-current])'),'click');
+multi.event(m('[data-add-request]'),'click');
+multi.event(m('[data-open-request]'),'click');
+assert.equal(m('[data-request-details]').open,true);
+const request=m('[data-request-form]');
+multi.event(request,'submit');
+const receipt=()=>m('[data-request-status]').textContent;
+assert.match(receipt(),/Estándar: 1 unidad/);
+assert.match(receipt(),/Alternativa: 1 unidad/);
+assert.match(receipt(),/Total estimado:/);
+const multiReference=receipt().match(/Referencia: ([a-f0-9-]+)/)[1];
+multi.event(request,'submit');assert.ok(receipt().includes(multiReference));
+// Looking at another color without adding it does not change the request identity.
+multi.event(m('[data-option-link]:not([aria-current])'),'click');
+multi.event(request,'submit');assert.ok(receipt().includes(multiReference));
+multi.event(m('[data-line-step="1"]'),'click');
+assert.equal(m('[data-request-status]').hidden,true);
+multi.event(request,'submit');assert.equal(receipt().includes(multiReference),false);
+assert.equal(multi.sends(),0);
+assert.equal([...multi.data.keys()].some(k=>k.includes('draft')),false);
+console.log('DOM simulado: catálogo, PVC, galería, solicitud multicolor, reintentos, consentimiento y cero envíos: correctos. No verifica renderizado visual ni validez nativa de campos.');

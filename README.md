@@ -23,7 +23,7 @@ Asignar SKU único por variante, unidad/almacén y mapeo Odoo tras validación. 
 El formulario solo simula y no persiste datos personales. Consentimiento de seguimiento de prueba en sessionStorage; rechazar elimina atribución e identificador de visitante. Referencia de solicitud necesaria separada de analítica. UTMs deben contener nombres de campaña sin datos personales. Primer/último origen se conserva en navegación directa durante la sesión si se autoriza; no hay atribución entre sesiones todavía. GA4 y Meta/TikTok pendientes. No hay enlace al CRM activo.
 
 ## Verificación
-`npm test` aprueba 22 pruebas, entre lógica, navegación Liquid y pruebas DOM (filtros, variantes, formulario, consentimiento, ficha y landing SPC). Shopify Theme Check sin errores ni advertencias; ocho HTML y ZIP de 74 archivos verificados. Ficha revisada localmente en escritorio y celular sin desbordamiento. Reintentos conservan referencia solo en la página actual. Pendiente: catálogo/variantes reales, validación con productos publicados y recepción idempotente en Odoo antes del lanzamiento comercial.
+`npm test` aprueba 29 pruebas, entre lógica, navegación Liquid y pruebas DOM (filtros, variantes, galería por color, solicitud combinada, meta automática del regalo, formulario, consentimiento, ficha y landing SPC). Archivos de tema modificados validados con Shopify sin hallazgos; ocho HTML y ZIP de 74 archivos verificados. Ficha revisada en escritorio y celular sin desbordamiento. Reintentos conservan referencia solo en la página actual. Pendiente: confirmación comercial del catálogo y recepción idempotente en Odoo antes del lanzamiento comercial.
 
 ## Diseño según el mockup original
 
