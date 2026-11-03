@@ -1,3 +1,9 @@
+## 03/11/2026 — Ajuste puntual SPC al mockup A2
+
+Actualizadas la explicación «¿Qué es el piso SPC?», su párrafo, el borde dorado y el texto de colores según LANDING SPC_MOCK A2.psd (1080 × 10004; SHA256 8350e05c4d440358c4d538ea73f1b318d5ec1ff65b7bb3727978e28272fa747a). Corregido el orden de capas entre ficha técnica y sellos: el panel de certificaciones cubre el fondo técnico y los tablones terminan antes del título. Medidas y tipografías de estos bloques trasladadas al mapa proporcional; once secciones y 71 anclajes. El resto del diseño y las funciones conservados, incluido rendimiento comercial 2,196 m²/caja (no sustituido por 2,24 del PSD).
+
+Validación local: 33/33 pruebas, Theme Check CLI 4.9.4 sin hallazgos, ocho vistas y ZIP de 111 archivos verificados. Revisión visual a 320/393/1080 px sin desbordamiento ni cruce con el título de certificaciones. Validador del plugin no inicia por dependencia ausente; utilizado CLI oficial. Pendiente confirmar sincronización pública tras push. Evidencia en work/spc-a2 del chat este-mokup-es-para-la-pagina-4.
+
 ## 03/11/2026 — Sellos SPC confirmados y habilitados
 
 El usuario confirma expresamente que FloorScore, ANAB, ILAC, DAkkS, CNAS y EPH corresponden al piso SPC vendido. Sustituye el pendiente anterior de confirmación; no constituye una auditoría documental independiente. Activado `show_certifications` en `templates/product.landing-spc.json`; el esquema conserva su valor inicial desactivado para otras instancias. Composición original del PSD preservada: panel blanco, follaje, seis sellos en dos filas, entre ficha técnica y Click. Calculadora y testimonios sin cambios.

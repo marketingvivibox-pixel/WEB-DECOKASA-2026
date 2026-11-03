@@ -45,11 +45,11 @@
       "id": "certifications",
       "selector": ".spc-v2-certifications",
       "x": 0,
-      "y": 3830,
+      "y": 3860,
       "width": 1080,
       "height": 836,
-      "overlap": -119,
-      "topPercent": 38.284686,
+      "overlap": -89,
+      "topPercent": 38.584566,
       "heightPercent": 8.356657
     },
     {
@@ -59,7 +59,7 @@
       "y": 4567,
       "width": 1080,
       "height": 1013,
-      "overlap": -99,
+      "overlap": -129,
       "topPercent": 45.651739,
       "heightPercent": 10.12595
     },
@@ -345,19 +345,19 @@
       "box": {
         "x": 45,
         "y": 1745,
-        "width": 990,
+        "width": 1000,
         "height": 3
       },
       "percent": {
         "left": 4.166667,
         "top": 3.437816,
-        "width": 91.666667,
+        "width": 92.592593,
         "height": 0.303337
       },
       "pagePercent": {
         "left": 4.166667,
         "top": 17.443023,
-        "width": 91.666667,
+        "width": 92.592593,
         "height": 0.029988
       }
     },
@@ -408,118 +408,26 @@
       }
     },
     {
-      "id": "composition-pill",
-      "section": "composition",
-      "selector": ".spc-v2-composition-pill",
-      "box": {
-        "x": 62,
-        "y": 2421,
-        "width": 956,
-        "height": 100
-      },
-      "percent": {
-        "left": 5.740741,
-        "top": 71.789687,
-        "width": 88.518519,
-        "height": 10.111223
-      },
-      "pagePercent": {
-        "left": 5.740741,
-        "top": 24.20032,
-        "width": 88.518519,
-        "height": 0.9996
-      }
-    },
-    {
-      "id": "composition-name",
-      "section": "composition",
-      "selector": ".spc-v2-composition-name",
-      "box": {
-        "x": 127,
-        "y": 2397,
-        "width": 825,
-        "height": 53
-      },
-      "percent": {
-        "left": 11.759259,
-        "top": 69.362993,
-        "width": 76.388889,
-        "height": 5.358948
-      },
-      "pagePercent": {
-        "left": 11.759259,
-        "top": 23.960416,
-        "width": 76.388889,
-        "height": 0.529788
-      }
-    },
-    {
-      "id": "composition-material",
-      "section": "composition",
-      "selector": ".spc-v2-composition-material",
-      "box": {
-        "x": 134,
-        "y": 2458,
-        "width": 800,
-        "height": 52
-      },
-      "percent": {
-        "left": 12.407407,
-        "top": 75.530839,
-        "width": 74.074074,
-        "height": 5.257836
-      },
-      "pagePercent": {
-        "left": 12.407407,
-        "top": 24.570172,
-        "width": 74.074074,
-        "height": 0.519792
-      }
-    },
-    {
-      "id": "composition-note",
-      "section": "composition",
-      "selector": ".spc-v2-composition-note",
-      "box": {
-        "x": 100,
-        "y": 2554,
-        "width": 880,
-        "height": 43
-      },
-      "percent": {
-        "left": 9.259259,
-        "top": 85.237614,
-        "width": 81.481481,
-        "height": 4.347826
-      },
-      "pagePercent": {
-        "left": 9.259259,
-        "top": 25.529788,
-        "width": 81.481481,
-        "height": 0.429828
-      }
-    },
-    {
       "id": "colors-heading",
       "section": "colors-specs",
       "selector": ".spc-v2-colors-heading",
       "box": {
         "x": 180,
-        "y": 2750,
+        "y": 2729,
         "width": 720,
-        "height": 112
+        "height": 125
       },
       "percent": {
         "left": 16.666667,
-        "top": 8.122605,
+        "top": 6.51341,
         "width": 66.666667,
-        "height": 8.582375
+        "height": 9.578544
       },
       "pagePercent": {
         "left": 16.666667,
-        "top": 27.489004,
+        "top": 27.279088,
         "width": 66.666667,
-        "height": 1.119552
+        "height": 1.2495
       }
     },
     {
@@ -527,22 +435,22 @@
       "section": "colors-specs",
       "selector": ".spc-v2-samples",
       "box": {
-        "x": 121,
-        "y": 2896,
+        "x": 117,
+        "y": 2875,
         "width": 845,
-        "height": 415
+        "height": 380
       },
       "percent": {
-        "left": 11.203704,
-        "top": 19.310345,
+        "left": 10.833333,
+        "top": 17.701149,
         "width": 78.240741,
-        "height": 31.800766
+        "height": 29.118774
       },
       "pagePercent": {
-        "left": 11.203704,
-        "top": 28.948421,
+        "left": 10.833333,
+        "top": 28.738505,
         "width": 78.240741,
-        "height": 4.148341
+        "height": 3.798481
       }
     },
     {
@@ -550,22 +458,22 @@
       "section": "colors-specs",
       "selector": ".spc-v2-spec-rule",
       "box": {
-        "x": 45,
-        "y": 3332,
-        "width": 990,
-        "height": 2
+        "x": 40,
+        "y": 3403,
+        "width": 1000,
+        "height": 3
       },
       "percent": {
-        "left": 4.166667,
-        "top": 52.720307,
-        "width": 91.666667,
-        "height": 0.153257
+        "left": 3.703704,
+        "top": 58.16092,
+        "width": 92.592593,
+        "height": 0.229885
       },
       "pagePercent": {
-        "left": 4.166667,
-        "top": 33.306677,
-        "width": 91.666667,
-        "height": 0.019992
+        "left": 3.703704,
+        "top": 34.016393,
+        "width": 92.592593,
+        "height": 0.029988
       }
     },
     {
@@ -574,21 +482,21 @@
       "selector": ".spc-v2-spec-heading",
       "box": {
         "x": 180,
-        "y": 3395,
+        "y": 3455,
         "width": 720,
-        "height": 112
+        "height": 125
       },
       "percent": {
         "left": 16.666667,
-        "top": 57.547893,
+        "top": 62.145594,
         "width": 66.666667,
-        "height": 8.582375
+        "height": 9.578544
       },
       "pagePercent": {
         "left": 16.666667,
-        "top": 33.936425,
+        "top": 34.536186,
         "width": 66.666667,
-        "height": 1.119552
+        "height": 1.2495
       }
     },
     {
@@ -596,20 +504,20 @@
       "section": "colors-specs",
       "selector": ".spc-v2-spec-data",
       "box": {
-        "x": 180,
-        "y": 3550,
+        "x": 174,
+        "y": 3609,
         "width": 520,
         "height": 251
       },
       "percent": {
-        "left": 16.666667,
-        "top": 69.425287,
+        "left": 16.111111,
+        "top": 73.94636,
         "width": 48.148148,
         "height": 19.233716
       },
       "pagePercent": {
-        "left": 16.666667,
-        "top": 35.485806,
+        "left": 16.111111,
+        "top": 36.07557,
         "width": 48.148148,
         "height": 2.508996
       }
@@ -619,22 +527,22 @@
       "section": "colors-specs",
       "selector": ".spc-v2-tablones-ficha",
       "box": {
-        "x": 522,
-        "y": 3294,
-        "width": 815,
-        "height": 670
+        "x": 519,
+        "y": 3314,
+        "width": 851,
+        "height": 699
       },
       "percent": {
-        "left": 48.333333,
-        "top": 49.808429,
-        "width": 75.462963,
-        "height": 51.340996
+        "left": 48.055556,
+        "top": 51.340996,
+        "width": 78.796296,
+        "height": 53.563218
       },
       "pagePercent": {
-        "left": 48.333333,
-        "top": 32.926829,
-        "width": 75.462963,
-        "height": 6.697321
+        "left": 48.055556,
+        "top": 33.126749,
+        "width": 78.796296,
+        "height": 6.987205
       }
     },
     {
@@ -643,7 +551,7 @@
       "selector": ".spc-v2-hojas-fondo",
       "box": {
         "x": -87,
-        "y": 3830,
+        "y": 3860,
         "width": 1254,
         "height": 836
       },
@@ -655,7 +563,7 @@
       },
       "pagePercent": {
         "left": -8.055556,
-        "top": 38.284686,
+        "top": 38.584566,
         "width": 116.111111,
         "height": 8.356657
       }
@@ -666,21 +574,21 @@
       "selector": ".spc-v2-cert-panel",
       "box": {
         "x": 62,
-        "y": 3852,
+        "y": 3899,
         "width": 956,
-        "height": 767
+        "height": 734
       },
       "percent": {
         "left": 5.740741,
-        "top": 2.631579,
+        "top": 4.665072,
         "width": 88.518519,
-        "height": 91.746411
+        "height": 87.799043
       },
       "pagePercent": {
         "left": 5.740741,
-        "top": 38.504598,
+        "top": 38.97441,
         "width": 88.518519,
-        "height": 7.666933
+        "height": 7.337065
       }
     },
     {
@@ -689,21 +597,21 @@
       "selector": ".spc-v2-cert-heading",
       "box": {
         "x": 130,
-        "y": 3991,
+        "y": 4022,
         "width": 820,
-        "height": 112
+        "height": 120
       },
       "percent": {
         "left": 12.037037,
-        "top": 19.258373,
+        "top": 19.37799,
         "width": 75.925926,
-        "height": 13.397129
+        "height": 14.354067
       },
       "pagePercent": {
         "left": 12.037037,
-        "top": 39.894042,
+        "top": 40.203918,
         "width": 75.925926,
-        "height": 1.119552
+        "height": 1.19952
       }
     },
     {
@@ -712,7 +620,7 @@
       "selector": ".spc-v2-sello-floorscore-color",
       "box": {
         "x": 250,
-        "y": 4156,
+        "y": 4186,
         "width": 135,
         "height": 107
       },
@@ -724,7 +632,7 @@
       },
       "pagePercent": {
         "left": 23.148148,
-        "top": 41.543383,
+        "top": 41.843263,
         "width": 12.5,
         "height": 1.069572
       }
@@ -735,7 +643,7 @@
       "selector": ".spc-v2-sello-anab-color",
       "box": {
         "x": 473,
-        "y": 4138,
+        "y": 4168,
         "width": 135,
         "height": 123
       },
@@ -747,7 +655,7 @@
       },
       "pagePercent": {
         "left": 43.796296,
-        "top": 41.363455,
+        "top": 41.663335,
         "width": 12.5,
         "height": 1.229508
       }
@@ -758,7 +666,7 @@
       "selector": ".spc-v2-sello-ilac-color",
       "box": {
         "x": 710,
-        "y": 4141,
+        "y": 4171,
         "width": 112,
         "height": 113
       },
@@ -770,7 +678,7 @@
       },
       "pagePercent": {
         "left": 65.740741,
-        "top": 41.393443,
+        "top": 41.693323,
         "width": 10.37037,
         "height": 1.129548
       }
@@ -781,7 +689,7 @@
       "selector": ".spc-v2-sello-dakks-color",
       "box": {
         "x": 206,
-        "y": 4300,
+        "y": 4330,
         "width": 223,
         "height": 93
       },
@@ -793,7 +701,7 @@
       },
       "pagePercent": {
         "left": 19.074074,
-        "top": 42.982807,
+        "top": 43.282687,
         "width": 20.648148,
         "height": 0.929628
       }
@@ -804,7 +712,7 @@
       "selector": ".spc-v2-sello-cnas-color",
       "box": {
         "x": 479,
-        "y": 4300,
+        "y": 4330,
         "width": 123,
         "height": 93
       },
@@ -816,7 +724,7 @@
       },
       "pagePercent": {
         "left": 44.351852,
-        "top": 42.982807,
+        "top": 43.282687,
         "width": 11.388889,
         "height": 0.929628
       }
@@ -827,7 +735,7 @@
       "selector": ".spc-v2-sello-eph-color",
       "box": {
         "x": 674,
-        "y": 4284,
+        "y": 4314,
         "width": 185,
         "height": 99
       },
@@ -839,7 +747,7 @@
       },
       "pagePercent": {
         "left": 62.407407,
-        "top": 42.822871,
+        "top": 43.122751,
         "width": 17.12963,
         "height": 0.989604
       }
@@ -850,19 +758,19 @@
       "selector": ".spc-v2-hojas-izquierda",
       "box": {
         "x": -302,
-        "y": 4027,
+        "y": 4047,
         "width": 481,
         "height": 313
       },
       "percent": {
         "left": -27.962963,
-        "top": 23.564593,
+        "top": 22.368421,
         "width": 44.537037,
         "height": 37.440191
       },
       "pagePercent": {
         "left": -27.962963,
-        "top": 40.253898,
+        "top": 40.453818,
         "width": 44.537037,
         "height": 3.128749
       }
@@ -873,19 +781,19 @@
       "selector": ".spc-v2-hojas-derecha",
       "box": {
         "x": 899,
-        "y": 4028,
+        "y": 4048,
         "width": 480,
         "height": 313
       },
       "percent": {
         "left": 83.240741,
-        "top": 23.684211,
+        "top": 22.488038,
         "width": 44.444444,
         "height": 37.440191
       },
       "pagePercent": {
         "left": 83.240741,
-        "top": 40.263894,
+        "top": 40.463814,
         "width": 44.444444,
         "height": 3.128749
       }
@@ -896,21 +804,21 @@
       "selector": ".spc-v2-cert-note",
       "box": {
         "x": 210,
-        "y": 4450,
+        "y": 4480,
         "width": 660,
-        "height": 110
+        "height": 90
       },
       "percent": {
         "left": 19.444444,
         "top": 74.162679,
         "width": 61.111111,
-        "height": 13.157895
+        "height": 10.76555
       },
       "pagePercent": {
         "left": 19.444444,
-        "top": 44.482207,
+        "top": 44.782087,
         "width": 61.111111,
-        "height": 1.09956
+        "height": 0.89964
       }
     },
     {
@@ -1763,6 +1671,110 @@
         "width": 36.111111,
         "height": 0.259896
       }
+    },
+    {
+      "id": "composition-heading",
+      "section": "composition",
+      "selector": ".spc-v2-composition-heading",
+      "box": {
+        "x": 180,
+        "y": 2413,
+        "width": 720,
+        "height": 50
+      },
+      "percent": {
+        "left": 16.666667,
+        "top": 70.980789,
+        "width": 66.666667,
+        "height": 5.055612
+      },
+      "pagePercent": {
+        "left": 16.666667,
+        "top": 24.120352,
+        "width": 66.666667,
+        "height": 0.4998
+      }
+    },
+    {
+      "id": "composition-copy",
+      "section": "composition",
+      "selector": ".spc-v2-composition-copy",
+      "box": {
+        "x": 220,
+        "y": 2461,
+        "width": 640,
+        "height": 110
+      },
+      "percent": {
+        "left": 20.37037,
+        "top": 75.834176,
+        "width": 59.259259,
+        "height": 11.122346
+      },
+      "pagePercent": {
+        "left": 20.37037,
+        "top": 24.60016,
+        "width": 59.259259,
+        "height": 1.09956
+      }
+    },
+    {
+      "id": "composition-rim",
+      "section": "composition",
+      "selector": ".spc-v2-composition-rim",
+      "box": {
+        "x": -8,
+        "y": 2624,
+        "width": 1096,
+        "height": 100
+      },
+      "percent": {
+        "left": -0.740741,
+        "top": 92.31547,
+        "width": 101.481481,
+        "height": 10.111223
+      },
+      "pagePercent": {
+        "left": -0.740741,
+        "top": 26.229508,
+        "width": 101.481481,
+        "height": 0.9996
+      }
+    },
+    {
+      "id": "colors-copy",
+      "section": "colors-specs",
+      "selector": ".spc-v2-colors-copy",
+      "box": {
+        "x": 215,
+        "y": 3287,
+        "width": 640,
+        "height": 80
+      },
+      "percent": {
+        "left": 19.907407,
+        "top": 49.272031,
+        "width": 59.259259,
+        "height": 6.130268
+      },
+      "pagePercent": {
+        "left": 19.907407,
+        "top": 32.856857,
+        "width": 59.259259,
+        "height": 0.79968
+      }
+    }
+  ],
+  "revisions": [
+    {
+      "source": "LANDING SPC_MOCK A2.psd",
+      "sourceSha256": "8350e05c4d440358c4d538ea73f1b318d5ec1ff65b7bb3727978e28272fa747a",
+      "sections": [
+        "composition",
+        "colors-specs",
+        "certifications"
+      ],
+      "note": "Ajuste puntual: explicación nativa, borde dorado, texto de colores y orden de paneles/tablones. El rendimiento comercial sigue procediendo de Shopify."
     }
   ]
 }

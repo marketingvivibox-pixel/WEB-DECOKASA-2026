@@ -2,8 +2,8 @@
 .spc-page .spc-v2-hero{aspect-ratio:1080/1711;margin-top:calc(0 * var(--spc-unit))}
 .spc-page .spc-v2-composition{aspect-ratio:1080/989;margin-top:calc(0 * var(--spc-unit))}
 .spc-page .spc-v2-colors-specs{aspect-ratio:1080/1305;margin-top:calc(-56 * var(--spc-unit))}
-.spc-page .spc-v2-certifications{aspect-ratio:1080/836;margin-top:calc(-119 * var(--spc-unit))}
-.spc-page .spc-v2-click{aspect-ratio:1080/1013;margin-top:calc(-99 * var(--spc-unit))}
+.spc-page .spc-v2-certifications{aspect-ratio:1080/836;margin-top:calc(-89 * var(--spc-unit))}
+.spc-page .spc-v2-click{aspect-ratio:1080/1013;margin-top:calc(-129 * var(--spc-unit))}
 .spc-page .spc-v2-layers{aspect-ratio:1080/765;margin-top:calc(-188 * var(--spc-unit))}
 .spc-page .spc-v2-calculator{aspect-ratio:1080/1041;margin-top:calc(-156 * var(--spc-unit))}
 .spc-page .spc-v2-testimonials{aspect-ratio:1080/963;margin-top:calc(-203 * var(--spc-unit))}
@@ -29,37 +29,29 @@
 /* sala-composicion */
 .spc-page .spc-v2-sala-composicion{position:absolute;inset:auto;left:-78.703704%;top:-3.134479%;width:181.296296%;height:160.262892%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
 /* composition-rule */
-.spc-page .spc-v2-composition-rule{position:absolute;inset:auto;left:4.166667%;top:3.437816%;width:91.666667%;height:0.303337%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
+.spc-page .spc-v2-composition-rule{position:absolute;inset:auto;left:4.166667%;top:3.437816%;width:92.592593%;height:0.303337%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
 /* spc-word */
 .spc-page .spc-v2-spc-word{position:absolute;inset:auto;left:-4.537037%;top:4.347826%;width:57.407407%;height:31.445905%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
 /* ninos-mascota */
 .spc-page .spc-v2-ninos-mascota{position:absolute;inset:auto;left:17.5%;top:20.728008%;width:71.018519%;height:48.736097%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
-/* composition-pill */
-.spc-page .spc-v2-composition-pill{position:absolute;inset:auto;left:5.740741%;top:71.789687%;width:88.518519%;height:10.111223%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
-/* composition-name */
-.spc-page .spc-v2-composition-name{position:absolute;inset:auto;left:11.759259%;top:69.362993%;width:76.388889%;height:5.358948%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
-/* composition-material */
-.spc-page .spc-v2-composition-material{position:absolute;inset:auto;left:12.407407%;top:75.530839%;width:74.074074%;height:5.257836%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
-/* composition-note */
-.spc-page .spc-v2-composition-note{position:absolute;inset:auto;left:9.259259%;top:85.237614%;width:81.481481%;height:4.347826%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
 /* colors-heading */
-.spc-page .spc-v2-colors-heading{position:absolute;inset:auto;left:16.666667%;top:8.122605%;width:66.666667%;height:8.582375%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
+.spc-page .spc-v2-colors-heading{position:absolute;inset:auto;left:16.666667%;top:6.51341%;width:66.666667%;height:9.578544%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
 /* samples */
-.spc-page .spc-v2-samples{position:absolute;inset:auto;left:11.203704%;top:19.310345%;width:78.240741%;height:31.800766%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
+.spc-page .spc-v2-samples{position:absolute;inset:auto;left:10.833333%;top:17.701149%;width:78.240741%;height:29.118774%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
 /* spec-rule */
-.spc-page .spc-v2-spec-rule{position:absolute;inset:auto;left:4.166667%;top:52.720307%;width:91.666667%;height:0.153257%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
+.spc-page .spc-v2-spec-rule{position:absolute;inset:auto;left:3.703704%;top:58.16092%;width:92.592593%;height:0.229885%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
 /* spec-heading */
-.spc-page .spc-v2-spec-heading{position:absolute;inset:auto;left:16.666667%;top:57.547893%;width:66.666667%;height:8.582375%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
+.spc-page .spc-v2-spec-heading{position:absolute;inset:auto;left:16.666667%;top:62.145594%;width:66.666667%;height:9.578544%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
 /* spec-data */
-.spc-page .spc-v2-spec-data{position:absolute;inset:auto;left:16.666667%;top:69.425287%;width:48.148148%;height:19.233716%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
+.spc-page .spc-v2-spec-data{position:absolute;inset:auto;left:16.111111%;top:73.94636%;width:48.148148%;height:19.233716%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
 /* tablones-ficha */
-.spc-page .spc-v2-tablones-ficha{position:absolute;inset:auto;left:48.333333%;top:49.808429%;width:75.462963%;height:51.340996%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
+.spc-page .spc-v2-tablones-ficha{position:absolute;inset:auto;left:48.055556%;top:51.340996%;width:78.796296%;height:53.563218%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
 /* hojas-fondo */
 .spc-page .spc-v2-hojas-fondo{position:absolute;inset:auto;left:-8.055556%;top:0%;width:116.111111%;height:100%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
 /* cert-panel */
-.spc-page .spc-v2-cert-panel{position:absolute;inset:auto;left:5.740741%;top:2.631579%;width:88.518519%;height:91.746411%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
+.spc-page .spc-v2-cert-panel{position:absolute;inset:auto;left:5.740741%;top:4.665072%;width:88.518519%;height:87.799043%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
 /* cert-heading */
-.spc-page .spc-v2-cert-heading{position:absolute;inset:auto;left:12.037037%;top:19.258373%;width:75.925926%;height:13.397129%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
+.spc-page .spc-v2-cert-heading{position:absolute;inset:auto;left:12.037037%;top:19.37799%;width:75.925926%;height:14.354067%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
 /* sello-floorscore-color */
 .spc-page .spc-v2-sello-floorscore-color{position:absolute;inset:auto;left:23.148148%;top:38.995215%;width:12.5%;height:12.799043%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
 /* sello-anab-color */
@@ -73,11 +65,11 @@
 /* sello-eph-color */
 .spc-page .spc-v2-sello-eph-color{position:absolute;inset:auto;left:62.407407%;top:54.30622%;width:17.12963%;height:11.842105%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
 /* hojas-izquierda */
-.spc-page .spc-v2-hojas-izquierda{position:absolute;inset:auto;left:-27.962963%;top:23.564593%;width:44.537037%;height:37.440191%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
+.spc-page .spc-v2-hojas-izquierda{position:absolute;inset:auto;left:-27.962963%;top:22.368421%;width:44.537037%;height:37.440191%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
 /* hojas-derecha */
-.spc-page .spc-v2-hojas-derecha{position:absolute;inset:auto;left:83.240741%;top:23.684211%;width:44.444444%;height:37.440191%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
+.spc-page .spc-v2-hojas-derecha{position:absolute;inset:auto;left:83.240741%;top:22.488038%;width:44.444444%;height:37.440191%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
 /* cert-note */
-.spc-page .spc-v2-cert-note{position:absolute;inset:auto;left:19.444444%;top:74.162679%;width:61.111111%;height:13.157895%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
+.spc-page .spc-v2-cert-note{position:absolute;inset:auto;left:19.444444%;top:74.162679%;width:61.111111%;height:10.76555%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
 /* click-fondo */
 .spc-page .spc-v2-click-fondo{position:absolute;inset:auto;left:0%;top:0%;width:100%;height:87.759131%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
 /* click-word */
@@ -152,3 +144,11 @@
 .spc-page .spc-v2-shipping-social-actions{position:absolute;inset:auto;left:31.759259%;top:58.77193%;width:36.851852%;height:3.703704%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
 /* shipping-social-views */
 .spc-page .spc-v2-shipping-social-views{position:absolute;inset:auto;left:32.222222%;top:63.157895%;width:36.111111%;height:2.534113%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
+/* composition-heading */
+.spc-page .spc-v2-composition-heading{position:absolute;inset:auto;left:16.666667%;top:70.980789%;width:66.666667%;height:5.055612%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
+/* composition-copy */
+.spc-page .spc-v2-composition-copy{position:absolute;inset:auto;left:20.37037%;top:75.834176%;width:59.259259%;height:11.122346%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
+/* composition-rim */
+.spc-page .spc-v2-composition-rim{position:absolute;inset:auto;left:-0.740741%;top:92.31547%;width:101.481481%;height:10.111223%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
+/* colors-copy */
+.spc-page .spc-v2-colors-copy{position:absolute;inset:auto;left:19.907407%;top:49.272031%;width:59.259259%;height:6.130268%!important;min-height:0;max-width:none;margin:0!important;padding:0;transform:none}
