@@ -1,3 +1,9 @@
+## 03/11/2026 — Esquinas y uso del piso SPC corregidos y publicados
+
+Publicado 09cfcbb en origin/main y comprobado en Shopify. La foto del hero se recorta con el mismo radio inferior de 50 unidades que la tarjeta blanca; una extensión del fondo de pared cubre las esquinas expuestas. Se eliminan las puntas oscuras sin mover los elementos medidos del mockup. La definición ahora dice «revestimiento vinílico de alta gama para el suelo, con núcleo rígido». Sin cambios funcionales ni cobertura comercial de 2,196 m²/caja.
+
+Validación: 33/33 pruebas, Theme Check CLI 4.9.4 sin hallazgos, ocho vistas y ZIP de 111 archivos verificados. Revisión visual local en móvil y escritorio; publicación comprobada a 393 px sin desbordamiento ni cruce del texto con la franja siguiente. Evidencia: C:/Users/D. Cordova/Documents/Codex/2026-10-21/este-mokup-es-para-la-pagina-4/work/spc-a2/esquinas-suelo-publicado-mobile.png. Tamaño temporal del navegador restablecido.
+
 ## 03/11/2026 — Bordes y escala SPC A2 corregidos y publicados
 
 Publicado d4a41e2 en origin/main y verificado directamente en Shopify. El follaje ocultaba el borde redondeado inferior de la ficha técnica: ahora fondo técnico z1, follaje z0, panel de sellos z2 y tablones z3, sin crear contexto de apilado en la ficha. Texto introductorio a 36 unidades (27,17502 × transformación PSD 1,324746), interlineado 1,2. Geometría A2 preservada; sin cambios funcionales ni rendimiento comercial de 2,196 m²/caja.
