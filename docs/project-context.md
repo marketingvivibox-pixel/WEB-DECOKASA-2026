@@ -1,3 +1,9 @@
+## 03/11/2026 — Miniatura animada integrada en calculadora SPC
+
+A pedido del usuario, la animación de cuadritos se mantiene visible en una miniatura «Tu espacio» junto al resultado compacto. Dibujo de 48 px de alto, área neta y hasta ocho ambientes en dos filas; también funciona con entrada directa de m². La animación aparece al cambiar geometría o agregar ambientes (0,55 s y desfase de 70 ms), sin repetirse por cambios de precio o nombre. Respeta movimiento reducido. El croquis completo permanece plegado en «Ver detalle y croquis», con sus capas visibles también al desactivar animaciones. Conservados cálculo, rendimiento comercial de 2,196 m²/caja, cortes del 10% y solicitud en simulación.
+
+Publicado 289ff73 en origin/main. Validación: 34/34 pruebas, Theme Check CLI 4.9.4 sin hallazgos, ocho vistas y ZIP de 111 archivos verificados; el validador del plugin sigue sin dependencia local. Revisión local a 320/393/1440 px, de uno a ocho ambientes, m² directos y valores inválidos, sin desbordamiento. La miniatura añade unos 70 px al bloque móvil (aproximadamente 874 px a 393 px de ancho). Comprobación en Shopify a 393 px: 5 × 4 m → 20 m², 11 cajas y S/ 1045 con cortes; animación activa, detalle cerrado y sin desbordamiento. Evidencia: C:/Users/D. Cordova/Documents/Codex/2026-10-21/este-mokup-es-para-la-pagina-4/work/spc-calculator/calculadora-mini-animacion-mobile.png. Tamaño temporal del navegador restablecido.
+
 ## 03/11/2026 — Calculadora SPC compacta para móvil
 
 Rediseñada para priorizar medidas, cajas y total estimado juntos, con una única acción «Solicitar esta cantidad». El detalle de superficies y el croquis quedan plegados en «Ver detalle y croquis». Conserva varios ambientes, entrada directa de m², cortes opcionales del 10%, rendimiento de 2,196 m²/caja y formulario de simulación existente. El precio usa la variante Shopify seleccionada; si no existe, indica «Por confirmar». Sin cambios al resto del mockup.
