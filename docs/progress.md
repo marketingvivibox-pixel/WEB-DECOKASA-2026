@@ -2,7 +2,7 @@
 
 Actualizadas la explicación «¿Qué es el piso SPC?», su párrafo, el borde dorado y el texto de colores según LANDING SPC_MOCK A2.psd (1080 × 10004; SHA256 8350e05c4d440358c4d538ea73f1b318d5ec1ff65b7bb3727978e28272fa747a). Corregido el orden de capas entre ficha técnica y sellos: el panel de certificaciones cubre el fondo técnico y los tablones terminan antes del título. Medidas y tipografías de estos bloques trasladadas al mapa proporcional; once secciones y 71 anclajes. El resto del diseño y las funciones conservados, incluido rendimiento comercial 2,196 m²/caja (no sustituido por 2,24 del PSD).
 
-Validación local: 33/33 pruebas, Theme Check CLI 4.9.4 sin hallazgos, ocho vistas y ZIP de 111 archivos verificados. Revisión visual a 320/393/1080 px sin desbordamiento ni cruce con el título de certificaciones. Validador del plugin no inicia por dependencia ausente; utilizado CLI oficial. Pendiente confirmar sincronización pública tras push. Evidencia en work/spc-a2 del chat este-mokup-es-para-la-pagina-4.
+Validación local: 33/33 pruebas, Theme Check CLI 4.9.4 sin hallazgos, ocho vistas y ZIP de 111 archivos verificados. Revisión visual a 320/393/1080 px sin desbordamiento ni cruce con el título de certificaciones. Validador del plugin no inicia por dependencia ausente; utilizado CLI oficial. Publicado en origin/main (ee86941) y verificado en Shopify: nueva explicación presente, seis sellos cargados y calculadora conservada. A 393 px, los tablones terminan 3,16 px antes de la caja del título de certificaciones; sin desbordamiento horizontal. Evidencia: work/spc-a2/correccion-publicada-mobile.png del chat este-mokup-es-para-la-pagina-4.
 
 ## 03/11/2026 — Sellos SPC confirmados y habilitados
 
