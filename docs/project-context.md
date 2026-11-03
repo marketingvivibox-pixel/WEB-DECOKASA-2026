@@ -1,3 +1,9 @@
+## 03/11/2026 — Refinamiento de recorte y superposición SPC A2
+
+El follaje cubría el borde inferior redondeado de la ficha técnica. Fondo blanco separado en una capa de nivel 1, follaje en 0, panel de certificaciones en 2 y tablones en 3; se conserva la geometría medida en el PSD. Texto introductorio corregido a 36 unidades de diseño: 27,17502 del texto PSD × transformación 1,324746. Interlineado 1,2. Sin cambios de funciones ni cobertura comercial.
+
+Validación: 33/33 pruebas aprobadas, ocho vistas y ZIP de 111 archivos verificados; Theme Check CLI 4.9.4 sin hallazgos. Plugin de validación sin dependencia local; CLI oficial utilizado como alternativa. Navegador a 320/393/1080 px sin desbordamiento y composición móvil revisada visualmente. Evidencia local: work/spc-a2/recortes-corregidos-mobile.png del chat este-mokup-es-para-la-pagina-4.
+
 ## 03/11/2026 — Ajuste puntual SPC al mockup A2
 
 Actualizadas la explicación «¿Qué es el piso SPC?», su párrafo, el borde dorado y el texto de colores según LANDING SPC_MOCK A2.psd (1080 × 10004; SHA256 8350e05c4d440358c4d538ea73f1b318d5ec1ff65b7bb3727978e28272fa747a). Corregido el orden de capas entre ficha técnica y sellos: el panel de certificaciones cubre el fondo técnico y los tablones terminan antes del título. Medidas y tipografías de estos bloques trasladadas al mapa proporcional; once secciones y 71 anclajes. El resto del diseño y las funciones conservados, incluido rendimiento comercial 2,196 m²/caja (no sustituido por 2,24 del PSD).
