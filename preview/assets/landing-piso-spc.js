@@ -185,6 +185,9 @@
       const roomsCountEl = form.querySelector('[data-rooms-count]');
       const schematicStage = form.querySelector('[data-schematic-stage]');
       const schematicLegend = form.querySelector('[data-schematic-legend]');
+      const miniSpace = form.querySelector('[data-mini-space]');
+      const miniStage = form.querySelector('[data-mini-stage]');
+      const miniArea = form.querySelector('[data-mini-area]');
       const quickChips = [...form.querySelectorAll('[data-quick-area]')];
 
       let currentMode = 'dimensions';
@@ -524,6 +527,37 @@
         }
       }
 
+      // A small, always-visible room preview. The full labelled sketch stays in details.
+      function renderMiniSpace() {
+        if (!miniSpace || !miniStage) return;
+        const valid = Boolean(lastCalculation);
+        miniSpace.classList.toggle('is-empty', !valid);
+        if (miniArea) miniArea.textContent = valid ? `${number.format(lastCalculation.netArea)} m²` : '— m²';
+        const rooms = !valid ? [{ length: 1, width: 1 }] : currentMode === 'direct'
+          ? [{ length: 1, width: 1 }]
+          : getRoomsData().filter(room => room.valid);
+        // Keep existing nodes (and animation) when only price, cuts or room names change.
+        const signature = JSON.stringify([valid, currentMode, valid ? lastCalculation.netArea : 0, rooms.map(room => [room.length, room.width])]);
+        if (miniStage.dataset.geometry === signature) return;
+        miniStage.dataset.geometry = signature;
+        const columns = Math.min(4, rooms.length);
+        const rows = Math.ceil(rooms.length / columns);
+        const cellWidth = 136 / columns;
+        const cellHeight = 48 / rows;
+        const tiles = rooms.map((room, index) => {
+          const ratio = Math.max(0.5, Math.min(2, room.length / room.width));
+          const height = Math.min(cellHeight - 6, (cellWidth - 8) / ratio);
+          const width = height * ratio;
+          const x = (index % columns) * cellWidth + (cellWidth - width) / 2;
+          const y = Math.floor(index / columns) * cellHeight + (cellHeight - height) / 2;
+          return `<g class="spc-mini-room" style="--mini-delay:${index * 70}ms;transform-origin:${x + width / 2}px ${y + height / 2}px">
+            <rect x="${x}" y="${y}" width="${width}" height="${height}" rx="2"/>
+            <path d="M${x + width / 2} ${y}v${height} M${x} ${y + height / 2}h${width}"/>
+          </g>`;
+        }).join('');
+        miniStage.innerHTML = `<svg viewBox="0 0 136 48" focusable="false" aria-hidden="true">${tiles}</svg>`;
+      }
+
       function attachRoomListeners(card) {
         card.querySelectorAll('input').forEach(inp => {
           inp.addEventListener('input', () => {
@@ -625,6 +659,7 @@
         const calc = invalidRoom ? null : calculate(areaVal, coverage, waste);
         if (!calc) {
           lastCalculation = null;
+          renderMiniSpace();
           if (errorEl) {
             errorEl.hidden = !invalidRoom && areaVal === 0;
             errorEl.textContent = invalidRoom ? 'Completa el largo y ancho de cada ambiente entre 0,1 y 100 metros.' : 'Ingresa un área válida entre 0,01 y 100 000 m².';
@@ -642,6 +677,7 @@
         }
 
         lastCalculation = { ...calc, includeWaste: waste };
+        renderMiniSpace();
         updateEstimate();
 
         if (errorEl) errorEl.hidden = true;
