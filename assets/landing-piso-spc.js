@@ -22,7 +22,14 @@
     };
   }
 
-  if (typeof module !== 'undefined' && module.exports) module.exports = { calculate };
+  function estimateTotal(boxes, rawPrice) {
+    if (rawPrice == null || String(rawPrice).trim() === '') return null;
+    const price = Number(rawPrice);
+    if (!Number.isInteger(boxes) || boxes < 1 || !Number.isFinite(price) || price < 0) return null;
+    return boxes * price / 100;
+  }
+
+  if (typeof module !== 'undefined' && module.exports) module.exports = { calculate, estimateTotal };
   if (typeof document === 'undefined' || window.DecokasaSPC) return;
 
   const initialized = new WeakSet();
@@ -162,6 +169,8 @@
       // Result breakdown fields
       const boxesEl = form.querySelector('[data-boxes]');
       const boxesStatusEl = form.querySelector('[data-boxes-status]');
+      const estimateEl = form.querySelector('[data-calc-estimate]');
+      const targetLabelEl = form.querySelector('[data-target-label]');
       const netAreaEl = form.querySelector('[data-net-area]');
       const targetAreaEl = form.querySelector('[data-target-area]');
       const coveredEl = form.querySelector('[data-covered]');
@@ -171,7 +180,6 @@
       // Mode tabs & panels
       const modeTabs = [...form.querySelectorAll('[data-calc-mode]')];
       const panels = [...form.querySelectorAll('[data-panel]')];
-      const knownMetersToggle = form.querySelector('[data-known-meters-toggle]');
       const roomsContainer = form.querySelector('[data-rooms-container]');
       const addRoomBtn = form.querySelector('[data-add-room]');
       const roomsCountEl = form.querySelector('[data-rooms-count]');
@@ -214,15 +222,9 @@
           tab.setAttribute('aria-selected', String(isActive));
           tab.tabIndex = isActive ? 0 : -1;
         });
-        if (knownMetersToggle) {
-          knownMetersToggle.checked = (mode === 'direct');
-        }
         panels.forEach(panel => {
           panel.hidden = panel.dataset.panel !== mode;
         });
-        if (mode === 'direct' && directArea) {
-          setTimeout(() => directArea.focus(), 60);
-        }
         updateRoomsUI();
         recalculate();
       }
@@ -238,15 +240,6 @@
           modeTabs[next].focus();
         });
       });
-
-      if (knownMetersToggle) {
-        knownMetersToggle.addEventListener('change', () => {
-          const isChecked = typeof knownMetersToggle.checked === 'boolean'
-            ? knownMetersToggle.checked
-            : (knownMetersToggle.checked !== undefined ? !!knownMetersToggle.checked : knownMetersToggle.hasAttribute('checked'));
-          setMode(isChecked ? 'direct' : 'dimensions');
-        });
-      }
 
       const isWasteChecked = () => {
         if (!wasteCheckbox) return true;
@@ -598,6 +591,19 @@
         });
       }
 
+      // Use the same Shopify variant price and currency as the request summary.
+      function updateEstimate() {
+        if (!estimateEl) return;
+        if (!lastCalculation) { estimateEl.textContent = '—'; return; }
+        const request = page.querySelector('#solicitud [data-request-form]');
+        const select = request?.querySelector('[name="variant_id"]');
+        const option = select?.selectedOptions?.[0] || select?.querySelector('option[selected]');
+        const total = estimateTotal(lastCalculation.boxes, option?.dataset.price);
+        estimateEl.textContent = total === null ? estimateEl.dataset.unconfirmed : new Intl.NumberFormat('es-PE', {
+          style: 'currency', currency: request?.dataset.currency || 'PEN'
+        }).format(total);
+      }
+
       // Calculation execution
       function recalculate() {
         let areaVal = 0;
@@ -614,6 +620,7 @@
 
         const coverage = parseFloat(page.dataset.coverage) || 2.196;
         const waste = isWasteChecked();
+        if (targetLabelEl) targetLabelEl.textContent = waste ? 'Con cortes (+10%)' : 'Sin cortes extra';
 
         const calc = invalidRoom ? null : calculate(areaVal, coverage, waste);
         if (!calc) {
@@ -622,7 +629,7 @@
             errorEl.hidden = !invalidRoom && areaVal === 0;
             errorEl.textContent = invalidRoom ? 'Completa el largo y ancho de cada ambiente entre 0,1 y 100 metros.' : 'Ingresa un área válida entre 0,01 y 100 000 m².';
           }
-          if (boxesEl) boxesEl.textContent = '-- cajas';
+          if (boxesEl) boxesEl.textContent = '— cajas';
           if (boxesStatusEl) boxesStatusEl.textContent = 'Ingresa medidas para calcular';
           if (netAreaEl) netAreaEl.textContent = '0.00 m²';
           if (targetAreaEl) targetAreaEl.textContent = '0.00 m²';
@@ -630,19 +637,12 @@
           if (leftoverEl) leftoverEl.textContent = '0.00 m²';
           if (planksTextEl) planksTextEl.textContent = 'Equivale a -- planchas (10 planchas/caja)';
           if (resultCard) resultCard.classList.remove('has-result');
+          updateEstimate();
           return;
         }
 
         lastCalculation = { ...calc, includeWaste: waste };
-
-        if (!calc) {
-          if (errorEl) {
-            errorEl.hidden = false;
-            errorEl.textContent = coverage > 0 ? 'Ingresa un área válida entre 0.01 y 100 000 m².' : 'Consulta al asesor para confirmar el rendimiento por caja.';
-          }
-          if (resultCard) resultCard.classList.remove('has-result');
-          return;
-        }
+        updateEstimate();
 
         if (errorEl) errorEl.hidden = true;
         if (resultCard) resultCard.classList.add('has-result');
@@ -657,7 +657,7 @@
             boxesEl.classList.add('spc-metric-pulse');
           }
         }
-        if (boxesStatusEl) boxesStatusEl.textContent = `Requeridas para ${number.format(calc.targetArea)} m² totales`;
+        if (boxesStatusEl) boxesStatusEl.textContent = `Cubren ${number.format(calc.covered)} m²${waste ? ' · Incluye cortes' : ''}`;
         if (netAreaEl) netAreaEl.textContent = `${number.format(calc.netArea)} m²`;
         if (targetAreaEl) targetAreaEl.textContent = `${number.format(calc.targetArea)} m²`;
         if (coveredEl) coveredEl.textContent = `${number.format(calc.covered)} m²`;
@@ -762,6 +762,15 @@
       if (orderBtn) {
         orderBtn.addEventListener('click', e => {
           e.preventDefault();
+          if (!lastCalculation) {
+            if (errorEl) {
+              errorEl.textContent = 'Completa las medidas para calcular tu cantidad.';
+              errorEl.hidden = false;
+            }
+            const firstIncomplete = [...form.querySelectorAll('[data-dim]')].find(input => !input.value || !input.validity.valid);
+            (currentMode === 'direct' ? directArea : firstIncomplete)?.focus();
+            return;
+          }
           openOrderModal();
         });
       }
@@ -809,7 +818,7 @@
           const qty = Math.max(1, parseInt(qtyInput?.value, 10) || 1);
           if (summaryQty) summaryQty.textContent = `${qty} ${qty === 1 ? 'caja' : 'cajas'}`;
           if (summaryTotal) {
-            const rawPrice = select?.selectedOptions[0]?.dataset.price;
+            const rawPrice = (select?.selectedOptions?.[0] || select?.querySelector('option[selected]'))?.dataset.price;
             const price = rawPrice?.trim() ? Number(rawPrice) : NaN;
             if (!Number.isFinite(price) || price < 0) {
               summaryTotal.textContent = 'Importe por confirmar';
@@ -825,6 +834,7 @@
         }
 
         select?.addEventListener('change', updateFormSummary);
+        select?.addEventListener('change', updateEstimate);
         reqForm.addEventListener('submit', e => {
           e.preventDefault();
           if (!reqForm.reportValidity()) return;
@@ -840,8 +850,8 @@
       form.addEventListener('submit', event => {
         event.preventDefault();
         recalculate();
-        if (contactBtn && lastCalculation) {
-          contactBtn.focus();
+        if (orderBtn && lastCalculation) {
+          orderBtn.focus();
         }
       });
 

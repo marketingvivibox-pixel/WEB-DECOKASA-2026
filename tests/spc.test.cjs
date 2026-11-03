@@ -4,7 +4,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { Liquid } = require('liquidjs');
 const { parseHTML } = require('linkedom');
-const { calculate } = require('../assets/landing-piso-spc.js');
+const { calculate, estimateTotal } = require('../assets/landing-piso-spc.js');
+const { filters } = require('../scripts/product_fixture.cjs');
 const root = path.resolve(__dirname, '..');
 test('SPC: rechaza áreas y rendimientos inválidos, sin producir pedidos ficticios', () => {
   for (const area of ['', 0, 0.001, -1, NaN, Infinity, 100001]) assert.equal(calculate(area, 2.196, true), null);
@@ -17,8 +18,16 @@ test('SPC: redondea cajas completas, margen opcional y múltiplos exactos', () =
   assert.equal(calculate(0.01, 2.196, true).boxes, 1);
   assert.equal(calculate(20, 2.196, true).covered, 11 * 2.196);
 });
+
+test('SPC: el estimado usa cajas completas y precio en céntimos, sin inventar importes', () => {
+  assert.equal(estimateTotal(calculate(20, 2.196, true).boxes, '9990'), 1098.9);
+  assert.equal(estimateTotal(10, '0'), 0);
+  for (const price of [undefined, null, '', ' ', 'sin precio', -1, Infinity]) assert.equal(estimateTotal(10, price), null);
+  for (const boxes of [0, -1, 1.5, Infinity, NaN]) assert.equal(estimateTotal(boxes, 9990), null);
+});
 test('SPC: datos nativos y privacidad del contenido de muestra en el tema', async () => {
   const engine = new Liquid({root:path.join(root, 'snippets'), extname:'.liquid'});
+  filters(engine);
   engine.registerFilter('asset_url', n => `/assets/${n}`);
   engine.registerFilter('stylesheet_tag', n => `<link rel="stylesheet" href="${n}">`);
   const raw = fs.readFileSync(path.join(root, 'sections/landing-piso-spc.liquid'), 'utf8');
@@ -71,6 +80,7 @@ test('SPC: desglose jerárquico incluye netArea, targetArea, wasteArea, leftover
 
 test('SPC: elementos visuales de la calculadora interactiva (pestañas, ambientes, desglose y croquis)', async () => {
   const engine = new Liquid({root:path.join(root, 'snippets'), extname:'.liquid'});
+  filters(engine);
   engine.registerFilter('asset_url', n => `/assets/${n}`);
   engine.registerFilter('stylesheet_tag', n => `<link rel="stylesheet" href="${n}">`);
   const raw = fs.readFileSync(path.join(root, 'sections/landing-piso-spc.liquid'), 'utf8');
@@ -86,7 +96,13 @@ test('SPC: elementos visuales de la calculadora interactiva (pestañas, ambiente
   assert.equal(doc.querySelectorAll('[data-calc-mode]').length, 2);
   assert.ok(doc.querySelector('[data-calc-mode="dimensions"]'));
   assert.ok(doc.querySelector('[data-calc-mode="direct"]'));
-  assert.ok(doc.querySelector('[data-known-meters-toggle]'));
+  assert.equal(doc.querySelector('[data-known-meters-toggle]'), null);
+  assert.equal(doc.querySelector('.spc-calc-details').hasAttribute('open'), false);
+  assert.ok(doc.querySelector('.spc-calc-details [data-schematic-stage]'));
+  assert.ok(doc.querySelector('[data-calc-estimate]'));
+  assert.equal(doc.querySelectorAll('.spc-v2-calculator [data-open-request]').length, 1);
+  assert.equal(doc.querySelector('.spc-v2-calculator .spc-actions'), null);
+  assert.equal(doc.querySelector('[data-calc-mode="direct"]').textContent, 'Tengo los m²');
   assert.ok(doc.querySelector('[data-rooms-container]'));
   assert.ok(doc.querySelector('[data-add-room]'));
   assert.ok(doc.querySelector('[data-schematic-stage]'));
@@ -107,6 +123,7 @@ test('SPC: elementos visuales de la calculadora interactiva (pestañas, ambiente
 
 test('SPC: testimonios reales conservan contenido escapado y controles sin muestras', async () => {
   const engine = new Liquid({root:path.join(root, 'snippets'), extname:'.liquid'});
+  filters(engine);
   engine.registerFilter('asset_url', n => `/assets/${n}`);
   engine.registerFilter('stylesheet_tag', n => `<link rel="stylesheet" href="${n}">`);
   const raw = fs.readFileSync(path.join(root, 'sections/landing-piso-spc.liquid'), 'utf8');

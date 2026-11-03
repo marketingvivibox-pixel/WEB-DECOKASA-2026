@@ -1,1 +1,22 @@
-{"general": {"title": "DECOKASA"}}
+{
+  "general": {"title": "DECOKASA"},
+  "spc": {
+    "calculator": {
+      "title": "Calcula tu piso SPC",
+      "subtitle": "Descubre cuántas cajas necesitas y cuánto cuestan.",
+      "dimensions": "Largo × ancho",
+      "direct": "Tengo los m²",
+      "add_room": "Agregar otro ambiente",
+      "area": "Área que quieres cubrir",
+      "waste": "+10% para cortes",
+      "recommended": "Recomendado",
+      "you_need": "Necesitas",
+      "estimate": "Total estimado",
+      "unconfirmed": "Por confirmar",
+      "request": "Solicitar esta cantidad",
+      "estimate_note": "Importe del piso. Envío por separado.",
+      "details": "Ver detalle y croquis",
+      "colors": "Ver colores disponibles"
+    }
+  }
+}

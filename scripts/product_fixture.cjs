@@ -1,6 +1,8 @@
 // Local fixtures only. Never included in the Shopify theme ZIP.
 const escape = value => String(value ?? '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 function filters(engine) {
+  const translations = require('../locales/es.default.json');
+  engine.registerFilter('t', key => key.split('.').reduce((value, part) => value?.[part], translations) ?? key);
   // Shopify's LiquidDoc is documentation only; LiquidJS does not ship this tag yet.
   engine.registerTag('doc', {
     parse(tagToken, tokens) {

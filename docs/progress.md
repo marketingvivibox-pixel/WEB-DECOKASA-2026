@@ -1,3 +1,9 @@
+## 03/11/2026 — Calculadora SPC compacta para móvil
+
+Rediseñada para priorizar medidas, cajas y total estimado juntos, con una única acción «Solicitar esta cantidad». El detalle de superficies y el croquis quedan plegados en «Ver detalle y croquis». Conserva varios ambientes, entrada directa de m², cortes opcionales del 10%, rendimiento de 2,196 m²/caja y formulario de simulación existente. El precio usa la variante Shopify seleccionada; si no existe, indica «Por confirmar». Sin cambios al resto del mockup.
+
+Validación: 34/34 pruebas, Theme Check CLI 4.9.4 sin hallazgos (validador del plugin sin dependencia local), ocho vistas y ZIP de 111 archivos verificados. Navegador: 320/393/1440 px sin desbordamiento; a 393 px la sección pasa de 2068 a 804 px aproximadamente, un 61% menos. Comprobados 20 m² → 11 cajas con cortes / 10 sin cortes, 35 m² → 18 cajas, dos ambientes de 20+6 m² → 14 cajas, campos inválidos y cantidad trasladada a solicitud. Precios de prueba de 95 PEN/caja coherentes. Publicación y comprobación en Shopify pendientes al registrar esta entrada.
+
 ## 03/11/2026 — Esquinas y uso del piso SPC corregidos y publicados
 
 Publicado 09cfcbb en origin/main y comprobado en Shopify. La foto del hero se recorta con el mismo radio inferior de 50 unidades que la tarjeta blanca; una extensión del fondo de pared cubre las esquinas expuestas. Se eliminan las puntas oscuras sin mover los elementos medidos del mockup. La definición ahora dice «revestimiento vinílico de alta gama para el suelo, con núcleo rígido». Sin cambios funcionales ni cobertura comercial de 2,196 m²/caja.

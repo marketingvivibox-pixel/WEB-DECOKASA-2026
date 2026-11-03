@@ -1,3 +1,9 @@
+## 03/11/2026 — Calculadora SPC compacta para móvil
+
+Rediseñada para priorizar medidas, cajas y total estimado juntos, con una única acción «Solicitar esta cantidad». El detalle de superficies y el croquis quedan plegados en «Ver detalle y croquis». Conserva varios ambientes, entrada directa de m², cortes opcionales del 10%, rendimiento de 2,196 m²/caja y formulario de simulación existente. El precio usa la variante Shopify seleccionada; si no existe, indica «Por confirmar». Sin cambios al resto del mockup.
+
+Validación: 34/34 pruebas, Theme Check CLI 4.9.4 sin hallazgos (validador del plugin sin dependencia local), ocho vistas y ZIP de 111 archivos verificados. Navegador: 320/393/1440 px sin desbordamiento; a 393 px la sección pasa de 2068 a 804 px aproximadamente, un 61% menos. Comprobados 20 m² → 11 cajas con cortes / 10 sin cortes, 35 m² → 18 cajas, dos ambientes de 20+6 m² → 14 cajas, campos inválidos y cantidad trasladada a solicitud. Precios de prueba de 95 PEN/caja coherentes. Publicación y comprobación en Shopify pendientes al registrar esta entrada.
+
 ## 03/11/2026 — Bordes y escala SPC A2 corregidos y publicados
 
 Publicado d4a41e2 en origin/main y verificado directamente en Shopify. El follaje ocultaba el borde redondeado inferior de la ficha técnica: ahora fondo técnico z1, follaje z0, panel de sellos z2 y tablones z3, sin crear contexto de apilado en la ficha. Texto introductorio a 36 unidades (27,17502 × transformación PSD 1,324746), interlineado 1,2. Geometría A2 preservada; sin cambios funcionales ni rendimiento comercial de 2,196 m²/caja.
