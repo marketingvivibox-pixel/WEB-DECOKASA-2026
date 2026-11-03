@@ -2,6 +2,10 @@
 
 La rama `feature/landing-piso-spc` ya se fusionó en `main` (e594fbf). Por instrucción del usuario, los ajustes continúan en `main`; la corrección móvil del 22/10/2026 se publicó en `95c644f` y su sincronización con el tema activo se verificó en Shopify. Plantilla: `templates/product.landing-spc.json`; sección: `sections/landing-piso-spc.liquid`; estilos y comportamiento: `assets/landing-piso-spc.css`, `landing-piso-spc-proportions.css`, `landing-piso-spc-layout.css` y `landing-piso-spc.js`; iconos y botones: `snippets/spc-icon.liquid` y `spc-actions.liquid`.
 
+## 03/11/2026 — Certificaciones confirmadas
+
+El usuario confirmó que FloorScore, ANAB, ILAC, DAkkS, CNAS y EPH corresponden al piso SPC. `show_certifications` queda activado en la plantilla `product.landing-spc.json`, conservando el diseño proporcional del PSD para móvil y escritorio. La opción del esquema sigue desactivada por defecto para otras instancias; las referencias históricas a certificaciones pendientes quedan sustituidas por esta confirmación. Calculadora y testimonios conservados.
+
 ## Recursos y composición
 
 Los 21 recursos `spc-*` proceden del PSD. Fotos/productos/logotipos conservan su contenido y transparencias. Textos, controles, beneficios, bordes y degradados son código. El original y manifiesto se conservan en `docs/references/landing-spc-recursos/`. Los recortes antiguos están en `docs/references/landing-spc-recortes-anteriores/`, fuera de las carpetas del tema; no reutilizarlos para construir la página.

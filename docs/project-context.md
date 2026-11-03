@@ -1,3 +1,9 @@
+## 03/11/2026 — Sellos SPC confirmados y habilitados
+
+El usuario confirma expresamente que FloorScore, ANAB, ILAC, DAkkS, CNAS y EPH corresponden al piso SPC vendido. Sustituye el pendiente anterior de confirmación; no constituye una auditoría documental independiente. Activado `show_certifications` en `templates/product.landing-spc.json`; el esquema conserva su valor inicial desactivado para otras instancias. Composición original del PSD preservada: panel blanco, follaje, seis sellos en dos filas, entre ficha técnica y Click. Calculadora y testimonios sin cambios.
+
+Validación: 6/6 pruebas SPC, Shopify Theme Check CLI 4.9.4 sin hallazgos, ocho vistas y ZIP de 111 archivos verificados. Navegador a 320/393/1080 px: seis imágenes cargadas y sin desbordamiento; calculadora 20 m² con 10% de cortes = 11 cajas. El validador del plugin no inicia por dependencia ausente; usado CLI como alternativa. Publicación/verificación en tienda pendiente al registrar esta entrada; actualizar al comprobarla.
+
 ## 27/10/2026 — Carrusel ilustrativo del mockup habilitado
 
 - El usuario confirmó que las imágenes son generadas por IA y autorizó su uso. Esto no acredita opiniones reales: las cinco tarjetas se presentan como «Ejemplos ilustrativos», con aviso visible «Imágenes de IA · Textos de muestra. No son reseñas de clientes reales», sin estrellas ni insignias de verificación.

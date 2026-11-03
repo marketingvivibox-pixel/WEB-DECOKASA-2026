@@ -51,6 +51,11 @@ test('SPC: datos nativos y privacidad del contenido de muestra en el tema', asyn
   assert.ok([...illustrative.querySelectorAll('.spc-quote img')].every(img => img.alt.includes('IA')));
   const template = JSON.parse(fs.readFileSync(path.join(root, 'templates/product.landing-spc.json'), 'utf8'));
   assert.equal(template.sections.main.settings.show_illustrative_testimonials, true);
+  assert.equal(template.sections.main.settings.show_certifications, true);
+  const configured = parseHTML(await engine.parseAndRender(source, {...context, section:{...context.section, settings:{...settings, ...template.sections.main.settings}}})).document;
+  assert.deepEqual([...configured.querySelectorAll('.spc-seals img')].map(img => img.alt), ['FLOORSCORE', 'ANAB', 'ILAC', 'DAKKS', 'CNAS', 'EPH']);
+  assert.ok(configured.querySelector('.spc-v2-certifications + .spc-v2-click'));
+  assert.ok(configured.querySelector('[data-spc-calculator]'));
 });
 
 test('SPC: desglose jerárquico incluye netArea, targetArea, wasteArea, leftover y planks', () => {

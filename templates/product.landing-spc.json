@@ -3,6 +3,7 @@
     "main": {
       "type": "landing-piso-spc",
       "settings": {
+        "show_certifications": true,
         "show_illustrative_testimonials": true
       }
     }
