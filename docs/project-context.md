@@ -1,3 +1,14 @@
+## 04/11/2026 — Rediseño editorial de SPC solo para escritorio
+
+Con autorización del usuario para cambiar el diseño de escritorio, se reemplaza la composición anterior desde 1024 px. Portada con fotografía amplia, titular «Un nuevo piso. Un nuevo hogar.», fondo cálido, acentos oliva y jerarquía más clara. Los colores se comparan en tres tarjetas amplias; composición, instalación, capas y ficha usan columnas; certificaciones forman una banda; calculadora con croquis visible; resultados, envíos y cierre se reorganizan. Se conservan recursos propios, funciones y aviso de testimonios ilustrativos.
+
+Referencias de sector consultadas: https://www.quick-step.co.uk/en-gb/vinyl, https://www.karndean.com/en-gb/floors/ y https://home.tarkett.com/en_EU/node/id-range-all-in-one-flooring-22479. La adaptación usa la identidad y los recursos de Decokasa. Por debajo de 1024 px se mantiene la versión móvil aprobada, incluida la animación pausada de la calculadora. Sin cambios en JavaScript, datos comerciales ni plantilla PVC.
+
+Validación: 35/35 pruebas, Theme Check CLI 4.9.4 sin hallazgos, ocho vistas y ZIP de 112 archivos verificados. Revisión visual a 1024/1440/1920 px sin desbordamiento; 45/45 medidas móviles a 393 px idénticas a la referencia. Calculadora comprobada con 20 m²: 11 cajas / S/ 1045 con cortes y 10 / S/ 950 sin cortes; entrada directa de 26 m²: 14 / S/ 1330; ocho ambientes con 62 m²: 32 / S/ 3040. Cantidad y detalle de solicitud correctos, sin enviar pedidos. Carrusel y conservación de datos al cambiar de tamaño verificados. Evidencias locales: work/spc-desktop/desktop-editorial/portada-local.png y calculadora-local.png del chat este-mokup-es-para-la-pagina-4.
+
+Trabajo aislado en WEB-DECOKASA-SPC-DESKTOP, rama codex/spc-desktop, base c46d236. Publicación y comprobación remota pendientes al registrar esta entrada.
+
+
 ## 04/11/2026 — Versión de escritorio de la landing SPC
 
 La versión móvil aprobada se conserva por debajo de 1024 px, incluida la calculadora compacta y su animación de 1,2 s con desfase de 160 ms. Desde 1024 px se aplica una composición propia para escritorio, de hasta 1600 px: portada horizontal, explicación/ficha y colores en columnas, seis sellos en fila, instalación y capas ampliadas, carrusel legible, resultados y envíos contiguos y cierre reorganizado. Esta decisión reemplaza la escala única de 1080 px solo para escritorio; el mapa del mockup móvil permanece vigente.
