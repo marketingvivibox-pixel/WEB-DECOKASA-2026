@@ -7,6 +7,40 @@ const { parseHTML } = require('linkedom');
 const { calculate, estimateTotal } = require('../assets/landing-piso-spc.js');
 const { filters } = require('../scripts/product_fixture.cjs');
 const root = path.resolve(__dirname, '..');
+test('SPC: el croquis conserva identidad y resultados al alternar móvil y escritorio', () => {
+  const { runInNewContext } = require('node:vm');
+  const { document } = parseHTML('<main><form><div data-desktop-plan></div><details class="spc-calc-details"><summary>Detalle</summary><div data-schematic-wrap><svg></svg></div><div class="spc-breakdown-details"><strong>11 cajas</strong></div><p class="spc-calc-help">Ayuda</p><p class="spc-planks-info">110 planchas</p></details></form></main>');
+  const page = document.querySelector('main');
+  const form = document.querySelector('form');
+  const details = form.querySelector('details');
+  const desktop = form.querySelector('[data-desktop-plan]');
+  const original = [...details.children];
+  const listeners = new Set();
+  const media = {matches:false, addEventListener:(_, fn) => listeners.add(fn), removeEventListener:(_, fn) => listeners.delete(fn)};
+  const controllers = new WeakMap();
+  const source = fs.readFileSync(path.join(root, 'assets/landing-piso-spc.js'), 'utf8');
+  const layout = source.slice(source.indexOf('  function initCalculatorLayout('), source.indexOf('  function initTestimonials('));
+  runInNewContext(`${layout}\ninitCalculatorLayout(page, form);`, {document, page, form, window:{matchMedia:() => media}, calculatorLayoutControllers:controllers});
+  assert.deepEqual([...details.children], original);
+  for (let cycle = 0; cycle < 3; cycle++) {
+    media.matches = true;
+    listeners.forEach(fn => fn());
+    assert.deepEqual([...desktop.children], original.slice(1));
+    assert.equal(form.querySelectorAll('[data-schematic-wrap]').length, 1);
+    desktop.querySelector('strong').textContent = '32 cajas';
+    media.matches = false;
+    listeners.forEach(fn => fn());
+    assert.deepEqual([...details.children], original);
+    assert.equal(details.querySelector('strong').textContent, '32 cajas');
+    assert.equal(desktop.children.length, 0);
+  }
+  media.matches = true;
+  listeners.forEach(fn => fn());
+  controllers.get(page)();
+  assert.equal(listeners.size, 0);
+  assert.deepEqual([...details.children], original);
+  assert.equal(details.childNodes.length, original.length);
+});
 test('SPC: rechaza áreas y rendimientos inválidos, sin producir pedidos ficticios', () => {
   for (const area of ['', 0, 0.001, -1, NaN, Infinity, 100001]) assert.equal(calculate(area, 2.196, true), null);
   for (const coverage of [0, -1, NaN, Infinity]) assert.equal(calculate(20, coverage, true), null);

@@ -1,3 +1,13 @@
+## 04/11/2026 — Versión de escritorio de la landing SPC
+
+La versión móvil aprobada se conserva por debajo de 1024 px, incluida la calculadora compacta y su animación de 1,2 s con desfase de 160 ms. Desde 1024 px se aplica una composición propia para escritorio, de hasta 1600 px: portada horizontal, explicación/ficha y colores en columnas, seis sellos en fila, instalación y capas ampliadas, carrusel legible, resultados y envíos contiguos y cierre reorganizado. Esta decisión reemplaza la escala única de 1080 px solo para escritorio; el mapa del mockup móvil permanece vigente.
+
+La calculadora muestra medidas y resultado a la izquierda, y croquis/desglose permanentemente visibles a la derecha. Admite ocho ambientes en dos filas; la lista de medidas tiene desplazamiento interno cuando es larga. Al cambiar de tamaño se mueven y restituyen los mismos nodos, preservando datos y funciones. Conserva precio de variante, 2,196 m²/caja, cortes opcionales del 10% y solicitud simulada.
+
+Validación local: 35/35 pruebas, Theme Check CLI 4.9.4 sin hallazgos, ocho vistas y ZIP de 112 archivos verificados. Revisión en 320/393/767/1024/1440/1920 px sin desbordamiento; 45/45 medidas de referencia móvil coinciden con la versión anterior. Verificados 20 m² → 11 cajas / S/ 1045 con cortes; ocho ambientes, 62 m² → 32 cajas / S/ 3040, cantidad/detalle correctos en solicitud, entrada directa y cambio de tamaño sin perder datos. No se envió ningún pedido. Evidencia: work/spc-desktop/calculadora-escritorio.png del chat este-mokup-es-para-la-pagina-4.
+
+Trabajo aislado en WEB-DECOKASA-SPC-DESKTOP, rama codex/spc-desktop, para conservar intactos los cambios concurrentes de PVC del clon principal. Publicación y verificación remota pendientes al registrar esta entrada.
+
 ## 04/11/2026 — Animación de calculadora SPC más pausada
 
 A pedido del usuario, cada cuadrito de la miniatura «Tu espacio» aparece en 1,2 s (antes 0,55 s), con desfase de 160 ms entre ambientes (antes 70 ms). Se mantienen tamaño, diseño, cálculo, movimiento reducido y croquis desplegable. Publicado 200e579 en origin/main y comprobado en Shopify móvil a 393 px: estilos efectivos de 1,2 s / 0,16 s, dos ambientes de 20 + 6 m² → 14 cajas / S/ 1330 con cortes, sin desbordamiento.

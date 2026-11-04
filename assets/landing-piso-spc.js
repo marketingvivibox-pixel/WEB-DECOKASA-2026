@@ -34,11 +34,39 @@
 
   const initialized = new WeakSet();
   const pageControllers = new WeakMap();
+  const calculatorLayoutControllers = new WeakMap();
   const escapeXML = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
   const number = new Intl.NumberFormat('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const integer = new Intl.NumberFormat('es-PE', { maximumFractionDigits: 0 });
 
   const testimonialControllers = new WeakMap();
+  function initCalculatorLayout(page, form) {
+    const desktop = form.querySelector('[data-desktop-plan]');
+    const details = form.querySelector('.spc-calc-details');
+    if (!desktop || !details) return;
+    // Move the same live content between layouts: no duplicate IDs or stale results.
+    const selectors = ['[data-schematic-wrap]', '.spc-breakdown-details', '.spc-calc-help', '.spc-planks-info'];
+    const slots = selectors.map(selector => {
+      const node = details.querySelector(selector);
+      if (!node) return null;
+      const anchor = document.createComment('calculator mobile position');
+      node.before(anchor);
+      return {node, anchor};
+    }).filter(Boolean);
+    const media = window.matchMedia('(min-width: 1024px)');
+    const arrange = () => slots.forEach(({node, anchor}) => {
+      if (media.matches) desktop.append(node);
+      else anchor.after(node);
+    });
+    media.addEventListener('change', arrange);
+    arrange();
+    calculatorLayoutControllers.set(page, () => {
+      media.removeEventListener('change', arrange);
+      slots.forEach(({node, anchor}) => { anchor.after(node); anchor.remove(); });
+      calculatorLayoutControllers.delete(page);
+    });
+  }
+
   function initTestimonials(page) {
     const section = page.querySelector('[data-spc-testimonials]');
     const viewport = section?.querySelector('[data-testimonial-viewport]');
@@ -159,6 +187,7 @@
       const status = page.querySelector('[data-color-status]');
       const form = page.querySelector('[data-spc-calculator]');
       if (!form) return;
+      initCalculatorLayout(page, form);
 
       const directArea = form.querySelector('[name="area"]');
       const wasteCheckbox = form.querySelector('[name="waste"]');
@@ -310,7 +339,7 @@
 
         if (currentMode === 'direct') {
           const directVal = parseFloat(directArea?.value) || 0;
-          if (directVal <= 0) {
+          if (!Number.isFinite(directVal) || directVal < 0.01 || directVal > 100000) {
             schematicStage.innerHTML = `
               <div class="spc-schematic-empty">
                 <svg viewBox="0 0 40 40" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="6" width="28" height="28" rx="3" stroke-dasharray="3 3"/><path d="M6 14h28M14 6v28"/></svg>
@@ -347,7 +376,7 @@
           return;
         }
 
-        const valid = rooms.filter(r => r.length > 0 && r.width > 0);
+        const valid = rooms.filter(r => r.valid);
         if (valid.length === 0) {
           schematicStage.innerHTML = `
             <div class="spc-schematic-empty">
@@ -364,7 +393,8 @@
         if (schematicLegend) schematicLegend.textContent = `${valid.length} ${valid.length === 1 ? 'zona' : 'zonas'} · ${number.format(totalArea)} m² netos`;
 
         const svgW = 420;
-        const svgH = 160;
+        const columns = Math.min(4, valid.length);
+        const svgH = Math.ceil(valid.length / columns) * 160;
         const padding = 16;
 
         let roomRects = [];
@@ -389,38 +419,37 @@
             fontSizeArea: 13.5
           }];
         } else {
-          // 2 or more rooms: group is centered horizontally.
-          // Room 1 naturally slides to the left because groupStartX is significantly to the left!
-          const gap = valid.length === 2 ? 18 : 12;
+          // At most four rooms per row, including the eight-room maximum.
+          const gap = columns === 2 ? 18 : 12;
           const availW = svgW - padding * 2;
-          const totalGap = (valid.length - 1) * gap;
-          const roomW = Math.max(92, Math.min(145, Math.floor((availW - totalGap) / valid.length)));
-          const totalGroupWidth = valid.length * roomW + totalGap;
-          const groupStartX = Math.max(padding, Math.round((svgW - totalGroupWidth) / 2));
+          const totalGap = (columns - 1) * gap;
+          const roomW = Math.min(145, Math.floor((availW - totalGap) / columns));
 
           const maxWid = Math.max(...valid.map(r => r.width), 1);
 
-          let curX = groupStartX;
           roomRects = valid.map((r, i) => {
+            const row = Math.floor(i / columns);
+            const rowColumns = Math.min(columns, valid.length - row * columns);
+            const rowWidth = rowColumns * roomW + (rowColumns - 1) * gap;
+            const x = Math.round((svgW - rowWidth) / 2) + (i % columns) * (roomW + gap);
             const relH = Math.max(0.85, Math.min(1.15, (r.width / maxWid) || 1));
             const h = Math.round(Math.max(90, Math.min(122, 110 * relH)));
-            const y = Math.round((svgH - h) / 2);
+            const y = row * 160 + Math.round((160 - h) / 2);
             const cleanName = (r.name || `Ambiente ${i + 1}`).replace(/\s*\(.*\)/, '').trim() || `Ambiente ${i + 1}`;
-            const maxChars = roomW > 125 ? 15 : roomW > 105 ? 12 : 9;
+            const maxChars = roomW > 125 ? 15 : roomW > 105 ? 12 : 11;
             const displayName = cleanName.length > maxChars ? cleanName.slice(0, maxChars - 1) + '…' : cleanName;
             const rect = {
-              x: curX,
+              x,
               y,
               w: roomW,
               h,
               name: displayName,
               dim: `${number.format(r.length)}m × ${number.format(r.width)}m`,
               area: `${number.format(r.area)} m²`,
-              fontSizeName: valid.length === 2 ? 12 : 11,
+              fontSizeName: columns === 4 ? 10 : valid.length === 2 ? 12 : 11,
               fontSizeDim: valid.length === 2 ? 10 : 9.5,
               fontSizeArea: valid.length === 2 ? 12 : 11
             };
-            curX += roomW + gap;
             return rect;
           });
         }
@@ -459,6 +488,7 @@
             </svg>
           `;
         } else {
+          svg.setAttribute('viewBox', `0 0 ${svgW} ${svgH}`);
           const roomsGroup = svg.querySelector('.spc-svg-rooms-group');
           if (roomsGroup) {
             const existingEls = [...roomsGroup.querySelectorAll('.spc-svg-room')];
@@ -952,6 +982,6 @@
   document.addEventListener('shopify:section:unload', event => {
     const pages = [...event.target.querySelectorAll('[data-spc-page]')];
     if (event.target.matches?.('[data-spc-page]')) pages.unshift(event.target);
-    pages.forEach(page => { testimonialControllers.get(page)?.(); pageControllers.get(page)?.(); initialized.delete(page); });
+    pages.forEach(page => { testimonialControllers.get(page)?.(); pageControllers.get(page)?.(); calculatorLayoutControllers.get(page)?.(); initialized.delete(page); });
   });
 })();
