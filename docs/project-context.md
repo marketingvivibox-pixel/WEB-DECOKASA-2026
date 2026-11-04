@@ -6,7 +6,7 @@ La calculadora muestra medidas y resultado a la izquierda, y croquis/desglose pe
 
 Validación local: 35/35 pruebas, Theme Check CLI 4.9.4 sin hallazgos, ocho vistas y ZIP de 112 archivos verificados. Revisión en 320/393/767/1024/1440/1920 px sin desbordamiento; 45/45 medidas de referencia móvil coinciden con la versión anterior. Verificados 20 m² → 11 cajas / S/ 1045 con cortes; ocho ambientes, 62 m² → 32 cajas / S/ 3040, cantidad/detalle correctos en solicitud, entrada directa y cambio de tamaño sin perder datos. No se envió ningún pedido. Evidencia: work/spc-desktop/calculadora-escritorio.png del chat este-mokup-es-para-la-pagina-4.
 
-Trabajo aislado en WEB-DECOKASA-SPC-DESKTOP, rama codex/spc-desktop, para conservar intactos los cambios concurrentes de PVC del clon principal. Publicación y verificación remota pendientes al registrar esta entrada.
+Trabajo aislado en WEB-DECOKASA-SPC-DESKTOP, rama codex/spc-desktop, para conservar intactos los cambios concurrentes de PVC del clon principal. Publicado b3c5a4c en origin/main y comprobado en Shopify: portada horizontal, calculadora ampliada a 1440 px y versión móvil compacta a 393 px; sin desbordamiento en ambos tamaños. El cálculo de 20 m² mantiene 11 cajas / S/ 1045 al pasar de escritorio a móvil y volver. Evidencias: work/spc-desktop/calculadora-escritorio-shopify.png y calculadora-movil-shopify.png del chat este-mokup-es-para-la-pagina-4. Tamaño temporal del navegador restablecido.
 
 ## 04/11/2026 — Animación de calculadora SPC más pausada
 
