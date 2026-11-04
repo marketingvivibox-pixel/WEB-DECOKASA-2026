@@ -1,3 +1,9 @@
+## 04/11/2026 — Animación de calculadora SPC más pausada
+
+A pedido del usuario, cada cuadrito de la miniatura «Tu espacio» aparece en 1,2 s (antes 0,55 s), con desfase de 160 ms entre ambientes (antes 70 ms). Se mantienen tamaño, diseño, cálculo, movimiento reducido y croquis desplegable. Publicado 200e579 en origin/main y comprobado en Shopify móvil a 393 px: estilos efectivos de 1,2 s / 0,16 s, dos ambientes de 20 + 6 m² → 14 cajas / S/ 1330 con cortes, sin desbordamiento.
+
+Validación: 34/34 pruebas, Theme Check CLI 4.9.4 sin hallazgos, ocho vistas y ZIP de 111 archivos verificados. Evidencia: C:/Users/D. Cordova/Documents/Codex/2026-10-21/este-mokup-es-para-la-pagina-4/work/spc-calculator/calculadora-animacion-lenta-mobile.png. Tamaño temporal del navegador restablecido.
+
 ## 03/11/2026 — Miniatura animada integrada en calculadora SPC
 
 A pedido del usuario, la animación de cuadritos se mantiene visible en una miniatura «Tu espacio» junto al resultado compacto. Dibujo de 48 px de alto, área neta y hasta ocho ambientes en dos filas; también funciona con entrada directa de m². La animación aparece al cambiar geometría o agregar ambientes (0,55 s y desfase de 70 ms), sin repetirse por cambios de precio o nombre. Respeta movimiento reducido. El croquis completo permanece plegado en «Ver detalle y croquis», con sus capas visibles también al desactivar animaciones. Conservados cálculo, rendimiento comercial de 2,196 m²/caja, cortes del 10% y solicitud en simulación.
