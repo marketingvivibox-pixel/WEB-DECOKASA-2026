@@ -2,7 +2,7 @@
 
 El usuario solicita publicar el resultado conservando precio y SKU pendientes. La landing puede ponerse a disposición para consultas por WhatsApp, con «Consultar» y sin checkout. Primero debe existir `product.landing-pvc` en el tema activo; después se activará el producto `15506629263597` y se publicará solo en Tienda online. El borrador evita exponer la plantilla genérica con precio provisional cero mientras falta ese paso. Esta decisión reemplaza la condición anterior de esperar todos los datos comerciales para mostrar la landing.
 
-Tema preparado: `190067343597`, «Decokasa PVC - revision 04 nov 2026», todavía UNPUBLISHED. Incluye PVC y los tres archivos SPC actuales del tema MAIN `188927803629`, verificados por checksum. Integración local con `origin/main` hasta `c46d236`; 39 pruebas y paquete de 160 archivos. La integración bloquea publicar temas o escribir en MAIN; publicación manual por el usuario en Shopify Admin pendiente. No hacer push como vía alternativa ni asumir que el duplicado conserva la conexión GitHub.
+Tema preparado: `190067343597`, «Decokasa PVC - revision 04 nov 2026», todavía UNPUBLISHED. Incluye PVC y los tres archivos SPC actuales del tema MAIN `188927803629`, verificados por checksum. Integración local con `origin/main` hasta `65e09bd`, incluido el nuevo diseño editorial SPC; 39 pruebas y paquete de 160 archivos. La integración bloquea publicar temas o escribir en MAIN; publicación manual por el usuario en Shopify Admin pendiente. No hacer push como vía alternativa ni asumir que el duplicado conserva la conexión GitHub.
 
 ## 04/11/2026 — Producto PVC y landing del mockup preparados
 
@@ -13,6 +13,16 @@ Landing proporcional al PSD LANDING PVC_MOCK_FULL.psd (1080 × 10758), con 43 im
 La revisión automática rechazó escribir en el tema activo: solo permite temas sin publicar. Se duplicó el tema activo 188927803629 y se guardaron/verificaron 49 archivos en el tema UNPUBLISHED 190067343597, «Decokasa PVC - revision 04 nov 2026». No se hizo commit, push ni publicación; cambios locales sobre main, base 200e579. La vista previa por clave del producto en borrador abre el tema activo, y el editor requiere sesión Shopify; renderizado remoto de la nueva plantilla aún por revisar. Producto: https://admin.shopify.com/store/ruik4d-dn/products/15506629263597. Editor de prueba: https://admin.shopify.com/store/ruik4d-dn/themes/190067343597/editor.
 
 Validación: 38/38 pruebas, Theme Check CLI 4.9.4 sin hallazgos, ocho vistas y ZIP de 159 archivos verificados. Plugin Theme Check sin dependencia local; se utilizó CLI oficial. Pruebas visuales locales a 320/393/1440 px sin desbordamiento ni imágenes rotas; catálogo, selección FD802, calculadora, WhatsApp y teclado comprobados. Vista local http://127.0.0.1:8818/landing-pisos-pvc.html?revision=pvc-20-acabados. Evidencias en C:/Users/D. Cordova/Documents/Codex/2026-11-04/pvc-landing/landing-pvc-mobile.png y calculadora-mobile.png. Detalle en docs/landing-pvc.md del repositorio. Pendientes: precio, SKU, existencias, revisión en editor Shopify y publicación por flujo permitido.
+## 04/11/2026 — Rediseño editorial de SPC solo para escritorio
+
+Con autorización del usuario para cambiar el diseño de escritorio, se reemplaza la composición anterior desde 1024 px. Portada con fotografía amplia, titular «Un nuevo piso. Un nuevo hogar.», fondo cálido, acentos oliva y jerarquía más clara. Los colores se comparan en tres tarjetas amplias; composición, instalación, capas y ficha usan columnas; certificaciones forman una banda; calculadora con croquis visible; resultados, envíos y cierre se reorganizan. Se conservan recursos propios, funciones y aviso de testimonios ilustrativos.
+
+Referencias de sector consultadas: https://www.quick-step.co.uk/en-gb/vinyl, https://www.karndean.com/en-gb/floors/ y https://home.tarkett.com/en_EU/node/id-range-all-in-one-flooring-22479. La adaptación usa la identidad y los recursos de Decokasa. Por debajo de 1024 px se mantiene la versión móvil aprobada, incluida la animación pausada de la calculadora. Sin cambios en JavaScript, datos comerciales ni plantilla PVC.
+
+Validación: 35/35 pruebas, Theme Check CLI 4.9.4 sin hallazgos, ocho vistas y ZIP de 112 archivos verificados. Revisión visual a 1024/1440/1920 px sin desbordamiento; 45/45 medidas móviles a 393 px idénticas a la referencia. Calculadora comprobada con 20 m²: 11 cajas / S/ 1045 con cortes y 10 / S/ 950 sin cortes; entrada directa de 26 m²: 14 / S/ 1330; ocho ambientes con 62 m²: 32 / S/ 3040. Cantidad y detalle de solicitud correctos, sin enviar pedidos. Carrusel y conservación de datos al cambiar de tamaño verificados. Evidencias locales: work/spc-desktop/desktop-editorial/portada-local.png y calculadora-local.png del chat este-mokup-es-para-la-pagina-4.
+
+Trabajo aislado en WEB-DECOKASA-SPC-DESKTOP, rama codex/spc-desktop, base c46d236. Publicación y comprobación remota pendientes al registrar esta entrada.
+
 
 ## 04/11/2026 — Versión de escritorio de la landing SPC
 

@@ -1,6 +1,6 @@
 # Landing de Piso PVC autoadhesivo
 
-Estado al 04/11/2026: publicación solicitada por el usuario; producto en borrador y landing instalada en el tema preparado `190067343597`, todavía sin publicar. PVC registrado en `b007802` e integrado localmente con `origin/main` hasta `c46d236`, incluida la mejora SPC publicada en `b3c5a4c`. Sin push. La integración bloquea publicar temas y escribir en el tema activo: el paso de publicar corresponde al usuario en Shopify Admin.
+Estado al 04/11/2026: publicación solicitada por el usuario; producto en borrador y landing instalada en el tema preparado `190067343597`, todavía sin publicar. PVC registrado en `b007802` e integrado localmente con `origin/main` hasta `65e09bd`, incluido el nuevo diseño editorial SPC de escritorio. Sin push. La integración bloquea publicar temas y escribir en el tema activo: el paso de publicar corresponde al usuario en Shopify Admin.
 
 ## Producto y presentación
 

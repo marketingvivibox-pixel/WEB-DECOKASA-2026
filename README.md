@@ -42,7 +42,7 @@ La franja superior de servicios permanece fija al desplazarse. La portada incluy
 - [Referencia visual inicial](docs/references/mockup-inicial-decokasa-2026-10-02.jpeg).
 - [Demostración navegable](preview/DECOKASA-inicio.html): descargar el repositorio y abrir este HTML en el navegador; GitHub muestra su código.
 - [Vista móvil de la portada](preview/DECOKASA-movil.html): abrir este HTML en el navegador para verla dentro de un marco de teléfono. Para la tienda conectada, usar la vista móvil del editor de temas Shopify.
-- [Paquete del tema](releases/DECOKASA-tema-0.1.0.zip): contiene los 160 archivos Shopify de la versión local, incluida la landing PVC y la mejora SPC de escritorio publicada en `b3c5a4c`. El tema sin publicar `190067343597` ya contiene ambos cambios. GitHub/main sincroniza el tema activo anterior; no se ha hecho push de PVC ni publicado el tema preparado.
+- [Paquete del tema](releases/DECOKASA-tema-0.1.0.zip): contiene los 160 archivos Shopify de la versión local, incluida la landing PVC y el diseño editorial SPC de escritorio publicado en `65e09bd`. El tema sin publicar `190067343597` ya contiene ambos cambios. GitHub/main sincroniza el tema activo anterior; no se ha hecho push de PVC ni publicado el tema preparado.
 
 ## Reproducir las verificaciones
 
