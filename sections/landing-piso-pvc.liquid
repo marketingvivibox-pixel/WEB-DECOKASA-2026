@@ -1,0 +1,152 @@
+{{ 'landing-piso-pvc.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'landing-piso-pvc.js' | asset_url }}" defer></script>
+{% liquid
+  assign pvc_id = 'pvc-' | append: section.id
+  assign pvc_coverage = product.metafields.decokasa.coverage_m2.value | default: section.settings.coverage_m2
+  assign pvc_planks = product.metafields.decokasa.planks_per_box.value | default: section.settings.planks_per_box
+  assign pvc_finish_index = nil
+  for option in product.options_with_values
+    if option.name == 'Acabado'
+      assign pvc_finish_index = forloop.index0
+    endif
+  endfor
+  assign pvc_phone = section.settings.whatsapp | remove: '+' | remove: ' '
+  assign pvc_contact = 'https://wa.me/' | append: pvc_phone | append: '?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20piso%20PVC%20autoadhesivo.'
+%}
+<div class="pvc-page" id="{{ pvc_id }}" data-pvc-landing data-phone="{{ pvc_phone | escape }}" data-coverage="{{ pvc_coverage }}" data-product-title="{{ product.title | default: 'Piso PVC autoadhesivo' | escape }}">
+  <a class="pvc-skip" href="#{{ pvc_id }}-calculator">Ir a la calculadora</a>
+  <section class="pvc-hero" aria-label="Piso PVC autoadhesivo Decokasa">
+    <img class="pvc-hero__room" src="{{ 'pvc-ambiente-portada.webp' | asset_url }}" width="1080" height="1007" alt="Ambiente interior con piso de acabado madera" fetchpriority="high">
+    <button class="pvc-announcement" type="button" data-catalog-open>¡Nuevos colores disponibles! <strong>Mira el catálogo aquí</strong> <span aria-hidden="true">↗</span></button>
+    <img class="pvc-logo" src="{{ 'pvc-logo-decokasa.webp' | asset_url }}" width="118" height="116" alt="Decokasa">
+    <h1 class="pvc-hero__title">Pisos <strong>PVC</strong><span class="pvc-sr-only"> autoadhesivos para el suelo</span></h1>
+    <p class="pvc-hero__tagline">{{ section.settings.hero_tagline | escape }}</p>
+    <div class="pvc-hero__intro"><p><strong>✨ ¡Renueva todo tipo de espacios! ✨</strong><br>Los pisos PVC son una gran opción gracias a su <strong>adhesivo incorporado.</strong> Logra grandes resultados con una baja inversión.</p></div>
+    <img class="pvc-hero__product" src="{{ 'pvc-caja-planchas-portada.webp' | asset_url }}" width="596" height="802" alt="Caja y planchas de piso PVC Decokasa en diferentes acabados">
+  </section>
+
+  <section class="pvc-definition" aria-labelledby="{{ pvc_id }}-definition-title">
+    <img class="pvc-definition__floor" src="{{ 'pvc-suelo-definicion.webp' | asset_url }}" width="1080" height="1274" loading="lazy" alt="">
+    <div class="pvc-definition__rule" aria-hidden="true"></div>
+    <img class="pvc-definition__girl" src="{{ 'pvc-nina-dibujando.webp' | asset_url }}" width="767" height="785" loading="lazy" alt="Niña dibujando sobre el piso">
+    <div class="pvc-definition__copy"><h2 id="{{ pvc_id }}-definition-title">¿Qué es el piso PVC?</h2><p>Un <strong>revestimiento vinílico para el suelo</strong> con adhesivo incorporado. Renueva tus ambientes interiores con una instalación práctica, sin aplicar pegamento adicional.</p></div>
+  </section>
+
+  <section class="pvc-install pvc-paper" aria-labelledby="{{ pvc_id }}-install-title">
+    <header class="pvc-heading"><h2 id="{{ pvc_id }}-install-title">¡Fácil de instalar!</h2><p>En tres simples pasos</p></header>
+    <ol class="pvc-steps">
+      <li><img src="{{ 'pvc-instalacion-medir-cortar.webp' | asset_url }}" width="262" height="262" loading="lazy" alt="Medir y cortar una plancha"><h3><b>1.</b> Mide y corta</h3><p>Ajusta las piezas a tu espacio.</p></li>
+      <li><img src="{{ 'pvc-instalacion-retirar-protector.webp' | asset_url }}" width="262" height="262" loading="lazy" alt="Retirar la lámina protectora del adhesivo"><h3><b>2.</b> Retira el protector</h3><p>Despega la lámina posterior.</p></li>
+      <li><img src="{{ 'pvc-instalacion-presionar.webp' | asset_url }}" width="262" height="262" loading="lazy" alt="Presionar el piso PVC sobre la superficie"><h3><b>3.</b> Coloca y presiona</h3><p>Sobre una base lisa, limpia y seca.</p></li>
+    </ol>
+    <div class="pvc-specs">
+      <header class="pvc-heading"><h2>Conoce cada detalle</h2><p>Características del producto</p></header>
+      <dl><div><dt>Medidas</dt><dd>15.2 × 91.4 cm</dd></div><div><dt>1 caja</dt><dd>{{ pvc_planks }} planchas</dd></div><div><dt>Espesor</dt><dd>1.6 mm aprox.</dd></div><div><dt>Rendimiento</dt><dd>{{ pvc_coverage }} m² / caja</dd></div><div><dt>Superficie</dt><dd>Texturizada</dd></div><div><dt>Peso</dt><dd>15 kg aprox.</dd></div></dl>
+      <button type="button" class="pvc-button pvc-button--gold" data-catalog-open>Ver catálogo {% render 'pvc-icon', icon: 'arrow' %}</button>
+    </div>
+    <img class="pvc-fan" src="{{ 'pvc-abanico-acabados.webp' | asset_url }}" width="1088" height="738" loading="lazy" alt="Variedad de tonos y texturas de las planchas PVC">
+  </section>
+
+  <section class="pvc-patterns" aria-labelledby="{{ pvc_id }}-patterns-title">
+    <div class="pvc-patterns__paper pvc-paper">
+      <header class="pvc-heading"><h2 id="{{ pvc_id }}-patterns-title">Un piso, muchas posibilidades</h2><p>Elige cómo instalarlo</p></header>
+      <ol class="pvc-pattern-grid">
+        <li><span aria-hidden="true">1</span><img src="{{ 'pvc-patron-desplazamiento-horizontal.webp' | asset_url }}" width="299" height="185" loading="lazy" alt=""><h3>Desplazamiento horizontal</h3></li>
+        <li><span aria-hidden="true">2</span><img src="{{ 'pvc-patron-escalonado-horizontal.webp' | asset_url }}" width="305" height="186" loading="lazy" alt=""><h3>Escalonado horizontal</h3></li>
+        <li><span aria-hidden="true">3</span><img src="{{ 'pvc-patron-espiga-diagonal.webp' | asset_url }}" width="302" height="184" loading="lazy" alt=""><h3>Espiga diagonal</h3></li>
+        <li><span aria-hidden="true">4</span><img src="{{ 'pvc-patron-desplazamiento-vertical.webp' | asset_url }}" width="291" height="199" loading="lazy" alt=""><h3>Desplazamiento vertical</h3></li>
+      </ol>
+      <p class="pvc-patterns__note">Dale tu estilo a cada ambiente.<br>Considera material adicional para cortes y ajustes.</p>
+    </div>
+  </section>
+
+  <section class="pvc-peel" aria-label="Instalación y beneficios">
+    <img class="pvc-peel__person" src="{{ 'pvc-mujer-instalando.webp' | asset_url }}" width="500" height="580" loading="lazy" alt="Instalación de una plancha de piso PVC autoadhesivo">
+    <p class="pvc-peel__copy">¡Despega, coloca y <strong>transforma tu espacio!</strong><br>Una forma práctica de renovar tus interiores.</p>
+    <ul class="pvc-benefits">
+      <li>{% render 'pvc-icon', icon: 'water' %}<span>Resistentes<br>al agua</span></li>
+      <li>{% render 'pvc-icon', icon: 'peel' %}<span>Adhesivo<br>incorporado</span></li>
+      <li>{% render 'pvc-icon', icon: 'walk' %}<span>Para<br>interiores</span></li>
+      <li>{% render 'pvc-icon', icon: 'cut' %}<span>Fáciles<br>de cortar</span></li>
+      <li>{% render 'pvc-icon', icon: 'texture' %}<span>Textura<br>realista</span></li>
+    </ul>
+  </section>
+
+  <section class="pvc-layers pvc-paper" aria-labelledby="{{ pvc_id }}-layers-title">
+    <header class="pvc-heading"><h2 id="{{ pvc_id }}-layers-title">Cada capa cuenta</h2><p>Conoce su estructura</p></header>
+    <img src="{{ 'pvc-estructura-cinco-capas.webp' | asset_url }}" width="856" height="839" loading="lazy" alt="Vista de las cinco capas que forman el piso PVC autoadhesivo">
+    <ol class="pvc-layers__labels"><li><strong>Capa de desgaste</strong><span>Protección superficial</span></li><li><strong>Capa de PVC</strong><span>Diseño y acabado</span></li><li><strong>Capa media</strong><span>Estabilidad</span></li><li><strong>Tejido de vidrio</strong><span>Refuerzo de la estructura</span></li><li><strong>Autoadhesivo</strong><span>Listo para colocar</span></li></ol>
+  </section>
+
+  <section class="pvc-calculator-section" id="{{ pvc_id }}-calculator" aria-labelledby="{{ pvc_id }}-calculator-title">
+    <header class="pvc-heading"><h2 id="{{ pvc_id }}-calculator-title">Calcula tu nuevo piso</h2><p>Solo necesitas saber los m² de tu espacio</p></header>
+    <div class="pvc-calculator" data-pvc>
+      <div class="pvc-calculator__top"><label for="{{ pvc_id }}-area">¿Cuánto mide tu espacio?</label><div class="pvc-area"><input id="{{ pvc_id }}-area" data-area type="text" inputmode="decimal" value="10" maxlength="9" autocomplete="off" aria-describedby="{{ pvc_id }}-area-error"><span>m²</span></div></div>
+      <label class="pvc-waste"><input type="checkbox" data-waste checked> Agregar 10% para cortes y ajustes</label>
+      <p class="pvc-field-error" id="{{ pvc_id }}-area-error" data-area-error hidden>Ingresa un área entre 0.1 y 10,000 m².</p>
+      <div class="pvc-calculator__result" role="status" aria-live="polite" aria-atomic="true"><span>Necesitarías <strong data-boxes>—</strong></span><small data-covered>Calcula una cantidad referencial de cajas.</small><strong data-total hidden></strong></div>
+      <div class="pvc-mini-floor" aria-hidden="true" data-mini-floor>{% for tile in (1..24) %}<i style="--tile:{{ forloop.index0 }}"></i>{% endfor %}</div>
+      <button class="pvc-selected" data-catalog-open type="button"><span>Acabado: <strong data-selected-name>Elige tu favorito</strong></span><span aria-hidden="true">Cambiar →</span></button>
+      <a href="{{ pvc_contact }}" class="pvc-button pvc-button--green" data-quote target="_blank" rel="noopener">Consultar mi proyecto {% render 'pvc-icon', icon: 'whatsapp' %}</a>
+      <p class="pvc-calculator__note">Cálculo referencial con {{ pvc_coverage }} m² por caja. El asesor confirma presentación, precio y disponibilidad.</p>
+      <noscript><p>Para calcular cajas, divide los m² de tu espacio (más 10% para cortes) entre {{ pvc_coverage }} y redondea hacia arriba. Un asesor te ayudará con el cálculo.</p></noscript>
+    </div>
+  </section>
+
+  <section class="pvc-inspiration" aria-labelledby="{{ pvc_id }}-inspiration-title">
+    <div class="pvc-inspiration__paper pvc-paper"><header class="pvc-heading"><h2 id="{{ pvc_id }}-inspiration-title">Un acabado para ti</h2><p>Inspírate con nuestros tonos</p></header></div>
+    <div class="pvc-finish-rail" data-finish-rail tabindex="0" role="region" aria-label="Acabados de piso PVC. Desliza para ver más.">
+      {% for block in section.blocks %}{% if block.type == 'finish' %}
+        {% assign finish_asset = 'pvc-acabado-' | append: block.settings.code | downcase | append: '.webp' %}
+        <button type="button" class="pvc-inspiration-card" data-pick-finish="{{ block.settings.code | escape }}" aria-label="Consultar acabado {{ block.settings.code | escape }}">
+          {% if block.settings.image != blank %}{{ block.settings.image | image_url: width: 480 | image_tag: loading: 'lazy', alt: block.settings.code }}{% else %}<img src="{{ finish_asset | asset_url }}" width="403" height="111" loading="lazy" alt="Textura {{ block.settings.code | escape }}">{% endif %}
+          <strong>{{ block.settings.code | escape }}</strong><span>Textura tipo madera</span><small>Ver acabado ↗</small>
+        </button>
+      {% endif %}{% endfor %}
+    </div>
+    <div class="pvc-rail-controls"><button type="button" data-rail-prev aria-label="Acabado anterior">←</button><button type="button" data-rail-pause aria-pressed="false">Pausar movimiento</button><button type="button" data-rail-next aria-label="Acabado siguiente">→</button></div>
+    <p class="pvc-inspiration__note">Los tonos pueden variar según la pantalla.<br>Consulta una muestra antes de elegir.</p>
+  </section>
+
+  <section class="pvc-results" aria-labelledby="{{ pvc_id }}-results-title">
+    <header class="pvc-heading"><h2 id="{{ pvc_id }}-results-title">Resultados &amp; Acabados</h2><p>Te acompañamos en tu proyecto</p></header>
+    <div class="pvc-results__warehouse">
+      <div class="pvc-social-card"><div class="pvc-social-card__header"><img src="{{ 'pvc-logo-decokasa.webp' | asset_url }}" width="118" height="116" loading="lazy" alt=""><span><strong>decokasa.pe</strong><small>Asesoría y envíos</small></span><span aria-hidden="true">•••</span></div><img class="pvc-social-card__photo" src="{{ 'pvc-asesoria-envios.webp' | asset_url }}" width="398" height="451" loading="lazy" alt="Asesoría para elegir el acabado de tu piso"><div class="pvc-social-card__footer" aria-hidden="true">♡ &nbsp; ↗ <span>⌑</span></div></div>
+      <div class="pvc-delivery"><h3>🇵🇪 ¡Nuestros pisos llegan a todo Perú! 🇵🇪</h3><p>Realiza tu pedido, elige tu agencia o delivery de preferencia, <strong>¡y listo!</strong></p><small>Cotiza tu envío con los asesores de venta Decokasa.</small></div>
+    </div>
+  </section>
+  <footer class="pvc-closing pvc-paper"><img class="pvc-closing__box" src="{{ 'pvc-caja-cierre.webp' | asset_url }}" width="878" height="705" loading="lazy" alt="Caja de piso PVC autoadhesivo Decokasa"><div class="pvc-closing__copy"><h2>¿Listo para renovar<br>tu espacio?</h2><a class="pvc-button pvc-button--green" href="{{ pvc_contact }}" target="_blank" rel="noopener">Hablar con un asesor {% render 'pvc-icon', icon: 'whatsapp' %}</a><button class="pvc-button pvc-button--gold" type="button" data-catalog-open>Ver catálogo {% render 'pvc-icon', icon: 'arrow' %}</button><p>DECOKASA · Check Azul S.A.C.</p><a class="pvc-store-link" href="{{ routes.root_url }}">Volver a la tienda</a></div></footer>
+
+  <dialog class="pvc-catalog" id="{{ pvc_id }}-catalog" aria-labelledby="{{ pvc_id }}-catalog-title" data-catalog>
+    <header class="pvc-catalog__header"><div><h2 id="{{ pvc_id }}-catalog-title">Encuentra tu acabado</h2><p>Catálogo de pisos PVC</p></div><button class="pvc-catalog__close" type="button" data-catalog-close aria-label="Cerrar catálogo">{% render 'pvc-icon', icon: 'close' %}</button></header>
+    <p class="pvc-catalog__hint">Elige un diseño para consultar disponibilidad y cotizar tu proyecto.</p>
+    <div class="pvc-catalog__grid">{% for block in section.blocks %}{% if block.type == 'finish' %}
+      {% assign finish_asset = 'pvc-acabado-' | append: block.settings.code | downcase | append: '.webp' %}
+      <button class="pvc-swatch" type="button" data-pick-finish="{{ block.settings.code | escape }}" data-finish-sku="{{ block.settings.sku | escape }}" aria-pressed="false" {{ block.shopify_attributes }}>
+        {% if block.settings.image != blank %}{{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block.settings.code }}{% else %}<img src="{{ finish_asset | asset_url }}" width="403" height="111" loading="lazy" alt="Textura del acabado {{ block.settings.code | escape }}">{% endif %}
+        <span>{{ block.settings.code | escape }} <span class="pvc-swatch__check" aria-hidden="true">✓</span></span>
+      </button>
+    {% endif %}{% endfor %}</div>
+    <p class="pvc-catalog__hint">Imágenes referenciales. El asesor confirma el tono y la presentación disponibles.</p>
+  </dialog>
+  <script type="application/json" data-pvc-variants>[{% for variant in product.variants %}{"id":{{ variant.id | json }},"title":{{ variant.title | json }},"finish":{% if pvc_finish_index != nil %}{{ variant.options[pvc_finish_index] | json }}{% else %}null{% endif %},"sku":{{ variant.sku | json }},"price":{{ variant.price | json }},"available":{{ variant.available | json }},"coverage":{{ variant.metafields.decokasa.coverage_m2.value | default: pvc_coverage | json }}}{% unless forloop.last %},{% endunless %}{% endfor %}]</script>
+</div>
+{% schema %}
+{
+  "name": "Landing Piso PVC",
+  "settings": [
+    {"type":"text","id":"hero_tagline","label":"Frase de portada","default":"¡Los pisos en tendencia!"},
+    {"type":"text","id":"whatsapp","label":"WhatsApp con código de país","default":"51941599516"},
+    {"type":"range","id":"coverage_m2","label":"Rendimiento referencial por caja (m²)","min":1,"max":10,"step":0.1,"default":5,"info":"Confirmar con la ficha comercial. El metacampo decokasa.coverage_m2 del producto o variante tiene prioridad."},
+    {"type":"range","id":"planks_per_box","label":"Planchas por caja","min":1,"max":100,"step":1,"default":36}
+  ],
+  "blocks": [{"type":"finish","name":"Acabado","settings":[
+    {"type":"text","id":"code","label":"Código del acabado"},
+    {"type":"image_picker","id":"image","label":"Muestra del acabado","info":"Opcional para los 20 acabados originales del mockup."},
+    {"type":"text","id":"sku","label":"SKU de variante Shopify confirmado","info":"Vincula el precio de una variante real por su SKU exacto. No completar hasta verificar la presentación."}
+  ]}],
+  "max_blocks":40,
+  "presets":[{"name":"Landing Piso PVC"}],
+  "enabled_on":{"templates":["product"]}
+}
+{% endschema %}

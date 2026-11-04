@@ -1,9 +1,12 @@
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),path=require('node:path');
 const {parseHTML}=require('linkedom');
+const test=require('node:test');
+const {Liquid}=require('liquidjs');
+const {filters,productFixture}=require('../scripts/product_fixture.cjs');
 const out=path.resolve(__dirname,'../preview');
 const source=fs.readFileSync(path.resolve(__dirname,'../assets/decokasa.js'),'utf8');
-function load(file,search=''){
-  const {window,document}=parseHTML(fs.readFileSync(path.join(out,file),'utf8'));
+function load(file,search='',html){
+  const {window,document}=parseHTML(html??fs.readFileSync(path.join(out,file),'utf8'));
   delete window.decokasaProductDetail;
   const data=new Map(); let sends=0;
   for(const select of document.querySelectorAll('select')){
@@ -40,7 +43,24 @@ catalog.event(catalog.document.querySelector('[data-brand-choice="Biflex"]'),'cl
 catalog.event(catalog.document.querySelector('[data-filter-clear]'),'click');
 const sort=catalog.document.querySelector('[data-catalog-sort]');sort.value='title-descending';catalog.event(sort,'change');assert.equal(catalog.document.querySelector('[data-catalog-grid] [data-card]').dataset.brand,'Mundo Baby');
 sort.value='manual';catalog.event(sort,'change');assert.match(catalog.document.querySelector('[data-catalog-grid] [data-card]').dataset.title,/Audífonos/);
-const pvc=load('landing-pisos-pvc.html','?utm_source=meta&ad_id=123');
+test('Ficha general PVC conserva calculadora, variantes, solicitudes y consentimiento',async()=>{
+// The public PVC preview now uses its own landing. Keep exercising the general
+// product form against the same demo product instead of depending on that page.
+const root=path.resolve(__dirname,'..');
+const engine=new Liquid({root:path.join(root,'snippets'),extname:'.liquid'});
+filters(engine);engine.registerFilter('asset_url',name=>`assets/${name}`);
+const sectionSource=fs.readFileSync(path.join(root,'sections/product-landing.liquid'),'utf8');
+const schema=JSON.parse(sectionSource.match(/{% schema %}([\s\S]*?){% endschema %}/)[1]);
+const settings=Object.fromEntries(schema.settings.filter(s=>s.id).map(s=>[s.id,s.default]));
+const fixture=JSON.parse(fs.readFileSync(path.join(out,'products.json'),'utf8'))[4];
+const product=productFixture(fixture,4);
+let html=await engine.parseAndRender(sectionSource.replace(/{% schema %}[\s\S]*?{% endschema %}/,''),{product,routes:{root_url:'/',all_products_collection_url:'/collections/all'},section:{id:'generic-pvc-test',settings,blocks:[]}});
+const doc=parseHTML(html).document;
+const variants=product.variants.map((v,n)=>({...v,coverage:v.metafields?.decokasa?.coverage_m2?.value,imageId:v.featured_image?.id,optionValues:product.options_with_values[0]?.values[n]?.id||''}));
+const script=doc.createElement('script');script.type='application/json';script.setAttribute('data-preview-variants','');script.textContent=JSON.stringify(variants);doc.querySelector('[data-product-page]').append(script);
+const consent=parseHTML(fs.readFileSync(path.join(out,'landing-audifonos.html'),'utf8')).document.querySelector('.consent');
+html=doc.toString()+(consent?.outerHTML||'');
+const pvc=load('generic-pvc-test.html','?utm_source=meta&ad_id=123',html);
 const $=s=>pvc.document.querySelector(s),area=$('[name=area]'),quantity=$('[name=quantity]');
 assert.equal($('fieldset').disabled,false);
 area.value='20';pvc.event(area,'input');assert.equal(Number(quantity.value),10);
@@ -58,6 +78,7 @@ const latest=id();area.value='0';pvc.event(area,'input');pvc.event(form,'submit'
 pvc.event($('[data-consent="accepted"]'),'click');assert.equal(JSON.parse(pvc.data.get('decokasa.attribution')).first.ad_id,'123');
 pvc.event($('[data-consent="rejected"]'),'click');assert.equal(pvc.data.has('decokasa.attribution'),false);assert.equal(pvc.data.has('decokasa.visitor'),false);
 assert.equal(pvc.sends(),0);assert.equal([...pvc.data.keys()].some(k=>k.includes('draft')),false);
+});
 const multi=load('landing-audifonos.html');
 const m=s=>multi.document.querySelector(s);
 multi.event(m('[data-add-request]'),'click');

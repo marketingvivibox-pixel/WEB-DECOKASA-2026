@@ -1,0 +1,631 @@
+{
+  "source": "LANDING PVC_MOCK_FULL.psd",
+  "canvas": [
+    1080,
+    10758
+  ],
+  "assets": [
+    {
+      "file": "pvc-ambiente-portada.webp",
+      "layer": "/106/1",
+      "source_bounds": [
+        0,
+        0,
+        1080,
+        1007
+      ],
+      "size": [
+        1080,
+        1007
+      ]
+    },
+    {
+      "file": "pvc-logo-decokasa.webp",
+      "layer": "/106/5",
+      "source_bounds": [
+        481,
+        154,
+        599,
+        270
+      ],
+      "size": [
+        118,
+        116
+      ]
+    },
+    {
+      "file": "pvc-caja-planchas-portada.webp",
+      "layer": "/106/11",
+      "source_bounds": [
+        224,
+        565,
+        820,
+        1367
+      ],
+      "size": [
+        596,
+        802
+      ]
+    },
+    {
+      "file": "pvc-suelo-definicion.webp",
+      "layer": "/102/1",
+      "source_bounds": [
+        0,
+        1566,
+        1080,
+        2840
+      ],
+      "size": [
+        1080,
+        1274
+      ]
+    },
+    {
+      "file": "pvc-nina-dibujando.webp",
+      "layer": "/117",
+      "source_bounds": [
+        174,
+        1630,
+        941,
+        2415
+      ],
+      "size": [
+        767,
+        785
+      ]
+    },
+    {
+      "file": "pvc-instalacion-medir-cortar.webp",
+      "layer": "/103/21/1",
+      "source_bounds": [
+        122,
+        2925,
+        384,
+        3187
+      ],
+      "size": [
+        262,
+        262
+      ]
+    },
+    {
+      "file": "pvc-instalacion-retirar-protector.webp",
+      "layer": "/103/21/3",
+      "source_bounds": [
+        413,
+        2925,
+        675,
+        3187
+      ],
+      "size": [
+        262,
+        262
+      ]
+    },
+    {
+      "file": "pvc-instalacion-presionar.webp",
+      "layer": "/103/21/5",
+      "source_bounds": [
+        704,
+        2925,
+        966,
+        3187
+      ],
+      "size": [
+        262,
+        262
+      ]
+    },
+    {
+      "file": "pvc-abanico-acabados.webp",
+      "layer": "/119",
+      "source_bounds": [
+        439,
+        3514,
+        1527,
+        4252
+      ],
+      "size": [
+        1088,
+        738
+      ]
+    },
+    {
+      "file": "pvc-ambiente-dormitorio.webp",
+      "layer": "/102/2",
+      "source_bounds": [
+        0,
+        3688,
+        1080,
+        5226
+      ],
+      "size": [
+        1080,
+        1538
+      ]
+    },
+    {
+      "file": "pvc-patron-desplazamiento-horizontal.webp",
+      "layer": "/109",
+      "source_bounds": [
+        238,
+        4311,
+        537,
+        4496
+      ],
+      "size": [
+        299,
+        185
+      ]
+    },
+    {
+      "file": "pvc-patron-escalonado-horizontal.webp",
+      "layer": "/112",
+      "source_bounds": [
+        659,
+        4310,
+        964,
+        4496
+      ],
+      "size": [
+        305,
+        186
+      ]
+    },
+    {
+      "file": "pvc-patron-espiga-diagonal.webp",
+      "layer": "/110",
+      "source_bounds": [
+        230,
+        4632,
+        532,
+        4816
+      ],
+      "size": [
+        302,
+        184
+      ]
+    },
+    {
+      "file": "pvc-patron-desplazamiento-vertical.webp",
+      "layer": "/111",
+      "source_bounds": [
+        666,
+        4617,
+        957,
+        4816
+      ],
+      "size": [
+        291,
+        199
+      ]
+    },
+    {
+      "file": "pvc-ambiente-instalacion.webp",
+      "layer": "/103/9",
+      "source_bounds": [
+        0,
+        4886,
+        1080,
+        5960
+      ],
+      "size": [
+        1080,
+        1074
+      ]
+    },
+    {
+      "file": "pvc-mujer-instalando.webp",
+      "layer": "/118",
+      "source_bounds": [
+        177,
+        5050,
+        677,
+        5630
+      ],
+      "size": [
+        500,
+        580
+      ]
+    },
+    {
+      "file": "pvc-estructura-cinco-capas.webp",
+      "layer": "/101/1",
+      "source_bounds": [
+        232,
+        6159,
+        1088,
+        6998
+      ],
+      "size": [
+        856,
+        839
+      ]
+    },
+    {
+      "file": "pvc-fondo-calculadora.webp",
+      "layer": "/29",
+      "source_bounds": [
+        0,
+        6602,
+        1080,
+        8249
+      ],
+      "size": [
+        1080,
+        1647
+      ]
+    },
+    {
+      "file": "pvc-ambiente-sala.webp",
+      "layer": "/24",
+      "source_bounds": [
+        0,
+        7924,
+        1080,
+        9421
+      ],
+      "size": [
+        1080,
+        1497
+      ]
+    },
+    {
+      "file": "pvc-almacen-envios.webp",
+      "layer": "/1",
+      "source_bounds": [
+        0,
+        9264,
+        1080,
+        10290
+      ],
+      "size": [
+        1080,
+        1026
+      ]
+    },
+    {
+      "file": "pvc-asesoria-envios.webp",
+      "layer": "/100",
+      "source_bounds": [
+        343,
+        9398,
+        741,
+        9849
+      ],
+      "size": [
+        398,
+        451
+      ]
+    },
+    {
+      "file": "pvc-caja-cierre.webp",
+      "layer": "/11",
+      "source_bounds": [
+        4,
+        10239,
+        882,
+        10944
+      ],
+      "size": [
+        878,
+        705
+      ]
+    },
+    {
+      "file": "pvc-planchas-cierre.webp",
+      "layer": "/114",
+      "source_bounds": [
+        -272,
+        10327,
+        899,
+        11529
+      ],
+      "size": [
+        1171,
+        1202
+      ]
+    },
+    {
+      "file": "pvc-acabado-fd801.webp",
+      "source": "LANDING PVC_MOCK_POP UP.psd",
+      "source_bounds": [
+        131,
+        4019,
+        534,
+        4130
+      ],
+      "size": [
+        403,
+        111
+      ],
+      "code": "FD801"
+    },
+    {
+      "file": "pvc-acabado-fd802.webp",
+      "source": "LANDING PVC_MOCK_POP UP.psd",
+      "source_bounds": [
+        559,
+        4019,
+        962,
+        4130
+      ],
+      "size": [
+        403,
+        111
+      ],
+      "code": "FD802"
+    },
+    {
+      "file": "pvc-acabado-fd806.webp",
+      "source": "LANDING PVC_MOCK_POP UP.psd",
+      "source_bounds": [
+        131,
+        4176,
+        534,
+        4287
+      ],
+      "size": [
+        403,
+        111
+      ],
+      "code": "FD806"
+    },
+    {
+      "file": "pvc-acabado-fd807.webp",
+      "source": "LANDING PVC_MOCK_POP UP.psd",
+      "source_bounds": [
+        559,
+        4176,
+        962,
+        4287
+      ],
+      "size": [
+        403,
+        111
+      ],
+      "code": "FD807"
+    },
+    {
+      "file": "pvc-acabado-fd809.webp",
+      "source": "LANDING PVC_MOCK_POP UP.psd",
+      "source_bounds": [
+        131,
+        4333,
+        534,
+        4444
+      ],
+      "size": [
+        403,
+        111
+      ],
+      "code": "FD809"
+    },
+    {
+      "file": "pvc-acabado-fd810.webp",
+      "source": "LANDING PVC_MOCK_POP UP.psd",
+      "source_bounds": [
+        559,
+        4333,
+        962,
+        4444
+      ],
+      "size": [
+        403,
+        111
+      ],
+      "code": "FD810"
+    },
+    {
+      "file": "pvc-acabado-fd811.webp",
+      "source": "LANDING PVC_MOCK_POP UP.psd",
+      "source_bounds": [
+        131,
+        4490,
+        534,
+        4601
+      ],
+      "size": [
+        403,
+        111
+      ],
+      "code": "FD811"
+    },
+    {
+      "file": "pvc-acabado-fd814.webp",
+      "source": "LANDING PVC_MOCK_POP UP.psd",
+      "source_bounds": [
+        559,
+        4490,
+        962,
+        4601
+      ],
+      "size": [
+        403,
+        111
+      ],
+      "code": "FD814"
+    },
+    {
+      "file": "pvc-acabado-fd815.webp",
+      "source": "LANDING PVC_MOCK_POP UP.psd",
+      "source_bounds": [
+        131,
+        4647,
+        534,
+        4758
+      ],
+      "size": [
+        403,
+        111
+      ],
+      "code": "FD815"
+    },
+    {
+      "file": "pvc-acabado-fd816.webp",
+      "source": "LANDING PVC_MOCK_POP UP.psd",
+      "source_bounds": [
+        559,
+        4647,
+        962,
+        4758
+      ],
+      "size": [
+        403,
+        111
+      ],
+      "code": "FD816"
+    },
+    {
+      "file": "pvc-acabado-fd817.webp",
+      "source": "LANDING PVC_MOCK_POP UP.psd",
+      "source_bounds": [
+        131,
+        4804,
+        534,
+        4915
+      ],
+      "size": [
+        403,
+        111
+      ],
+      "code": "FD817"
+    },
+    {
+      "file": "pvc-acabado-fd817-1.webp",
+      "source": "LANDING PVC_MOCK_POP UP.psd",
+      "source_bounds": [
+        559,
+        4804,
+        962,
+        4915
+      ],
+      "size": [
+        403,
+        111
+      ],
+      "code": "FD817-1"
+    },
+    {
+      "file": "pvc-acabado-fd818.webp",
+      "source": "LANDING PVC_MOCK_POP UP.psd",
+      "source_bounds": [
+        131,
+        4961,
+        534,
+        5072
+      ],
+      "size": [
+        403,
+        111
+      ],
+      "code": "FD818"
+    },
+    {
+      "file": "pvc-acabado-fd821.webp",
+      "source": "LANDING PVC_MOCK_POP UP.psd",
+      "source_bounds": [
+        559,
+        4961,
+        962,
+        5072
+      ],
+      "size": [
+        403,
+        111
+      ],
+      "code": "FD821"
+    },
+    {
+      "file": "pvc-acabado-fd822.webp",
+      "source": "LANDING PVC_MOCK_POP UP.psd",
+      "source_bounds": [
+        131,
+        5118,
+        534,
+        5229
+      ],
+      "size": [
+        403,
+        111
+      ],
+      "code": "FD822"
+    },
+    {
+      "file": "pvc-acabado-fd823.webp",
+      "source": "LANDING PVC_MOCK_POP UP.psd",
+      "source_bounds": [
+        559,
+        5118,
+        962,
+        5229
+      ],
+      "size": [
+        403,
+        111
+      ],
+      "code": "FD823"
+    },
+    {
+      "file": "pvc-acabado-fd828.webp",
+      "source": "LANDING PVC_MOCK_POP UP.psd",
+      "source_bounds": [
+        131,
+        5275,
+        534,
+        5386
+      ],
+      "size": [
+        403,
+        111
+      ],
+      "code": "FD828"
+    },
+    {
+      "file": "pvc-acabado-7172-4.webp",
+      "source": "LANDING PVC_MOCK_POP UP.psd",
+      "source_bounds": [
+        559,
+        5275,
+        962,
+        5386
+      ],
+      "size": [
+        403,
+        111
+      ],
+      "code": "7172-4"
+    },
+    {
+      "file": "pvc-acabado-7172-8.webp",
+      "source": "LANDING PVC_MOCK_POP UP.psd",
+      "source_bounds": [
+        131,
+        5432,
+        534,
+        5543
+      ],
+      "size": [
+        403,
+        111
+      ],
+      "code": "7172-8"
+    },
+    {
+      "file": "pvc-acabado-7195-8.webp",
+      "source": "LANDING PVC_MOCK_POP UP.psd",
+      "source_bounds": [
+        559,
+        5432,
+        962,
+        5543
+      ],
+      "size": [
+        403,
+        111
+      ],
+      "code": "7195-8"
+    }
+  ]
+}

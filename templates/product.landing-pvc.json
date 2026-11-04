@@ -1,0 +1,32 @@
+{
+  "sections": {
+    "main": {
+      "type": "landing-piso-pvc",
+      "settings": {"hero_tagline":"¡Los pisos en tendencia!","whatsapp":"51941599516","coverage_m2":5,"planks_per_box":36},
+      "blocks": {
+        "fd801":{"type":"finish","settings":{"code":"FD801"}},
+        "fd802":{"type":"finish","settings":{"code":"FD802"}},
+        "fd806":{"type":"finish","settings":{"code":"FD806"}},
+        "fd807":{"type":"finish","settings":{"code":"FD807"}},
+        "fd809":{"type":"finish","settings":{"code":"FD809"}},
+        "fd810":{"type":"finish","settings":{"code":"FD810"}},
+        "fd811":{"type":"finish","settings":{"code":"FD811"}},
+        "fd814":{"type":"finish","settings":{"code":"FD814"}},
+        "fd815":{"type":"finish","settings":{"code":"FD815"}},
+        "fd816":{"type":"finish","settings":{"code":"FD816"}},
+        "fd817":{"type":"finish","settings":{"code":"FD817"}},
+        "fd817_1":{"type":"finish","settings":{"code":"FD817-1"}},
+        "fd818":{"type":"finish","settings":{"code":"FD818"}},
+        "fd821":{"type":"finish","settings":{"code":"FD821"}},
+        "fd822":{"type":"finish","settings":{"code":"FD822"}},
+        "fd823":{"type":"finish","settings":{"code":"FD823"}},
+        "fd828":{"type":"finish","settings":{"code":"FD828"}},
+        "lq7172_4":{"type":"finish","settings":{"code":"7172-4"}},
+        "lq7172_8":{"type":"finish","settings":{"code":"7172-8"}},
+        "lq7195_8":{"type":"finish","settings":{"code":"7195-8"}}
+      },
+      "block_order":["fd801","fd802","fd806","fd807","fd809","fd810","fd811","fd814","fd815","fd816","fd817","fd817_1","fd818","fd821","fd822","fd823","fd828","lq7172_4","lq7172_8","lq7195_8"]
+    }
+  },
+  "order":["main"]
+}

@@ -7,10 +7,11 @@ Inicio → catálogo por marca o tipo → landing con ficha completa → formula
 
 ## Archivos
 - `templates/product.landing-spc.json`: landing SPC reconstruida con recursos del PSD, elementos HTML/CSS/SVG y calculadora. [Guía de configuración SPC](docs/landing-spc.md). Rama SPC fusionada en `main`; corrección móvil proporcional publicada en `95c644f` y verificada en Shopify el 22/10/2026.
+- `templates/product.landing-pvc.json`: landing de Piso PVC autoadhesivo con catálogo de 20 acabados, calculadora compacta y consulta por WhatsApp. Producto en borrador y tema de prueba sin publicar; 36 planchas / 5 m² por caja confirmados. [Guía y estado PVC](docs/landing-pvc.md).
 - `templates/index.json`: portada multimarcas editable; imagen principal y colección destacada.
 - `templates/collection.json`: catálogo adaptable con marcas, filtros nativos vendor/type cuando estén configurados, ordenación, tarjetas y paginación.
 - `templates/product.json`: cada URL `/products/<handle>` es una landing que incluye ficha y formulario.
-- `templates/page.pvc.json` + `sections/pvc-landing.liquid`: página interna PVC con selector de producto. Crear la página `pisos-pvc` y asignar plantilla cuando se trabaje en Shopify.
+- `templates/page.pvc.json` + `sections/pvc-landing.liquid`: plantilla antigua de página PVC, conservada como alternativa independiente. El nuevo producto `piso-pvc` utiliza `product.landing-pvc`.
 - `assets/decokasa.css` / `.js`: estilos compartidos, calculadora y simulación; no bibliotecas ni servicios externos.
 - `assets/product-detail.css` / `.js`: galería, variantes y cantidad de la ficha; se cargan solo donde se utiliza. [Guía para administrar la ficha](docs/product-detail.md).
 - `assets/favicon.png`: símbolo DECOKASA transparente usado como favicon en todas las páginas del tema.
@@ -23,7 +24,7 @@ Asignar SKU único por variante, unidad/almacén y mapeo Odoo tras validación. 
 El formulario solo simula y no persiste datos personales. Consentimiento de seguimiento de prueba en sessionStorage; rechazar elimina atribución e identificador de visitante. Referencia de solicitud necesaria separada de analítica. UTMs deben contener nombres de campaña sin datos personales. Primer/último origen se conserva en navegación directa durante la sesión si se autoriza; no hay atribución entre sesiones todavía. GA4 y Meta/TikTok pendientes. No hay enlace al CRM activo.
 
 ## Verificación
-`npm test` aprueba 32 pruebas, entre lógica, navegación Liquid y pruebas DOM (filtros, variantes, galería por color, solicitud combinada, meta automática del regalo, formulario, consentimiento, ficha y landing SPC). Archivos de tema modificados validados con Shopify sin hallazgos; ocho HTML y ZIP de 109 archivos verificados. Ficha revisada en escritorio y celular sin desbordamiento. Reintentos conservan referencia solo en la página actual. Pendiente: confirmación comercial del catálogo y recepción idempotente en Odoo antes del lanzamiento comercial.
+`npm test` aprueba 38 pruebas, entre lógica, navegación Liquid y pruebas DOM (filtros, variantes, galería por color, solicitud combinada, meta automática del regalo, formulario, consentimiento, ficha y landings SPC/PVC). Shopify Theme Check CLI sin hallazgos; ocho HTML y ZIP de 159 archivos verificados. Ficha y landing PVC revisadas en escritorio y celular sin desbordamiento. Reintentos conservan referencia solo en la página actual. Pendiente: confirmación comercial del catálogo y recepción idempotente en Odoo antes del lanzamiento comercial.
 
 ## Diseño según el mockup original
 
@@ -41,7 +42,7 @@ La franja superior de servicios permanece fija al desplazarse. La portada incluy
 - [Referencia visual inicial](docs/references/mockup-inicial-decokasa-2026-10-02.jpeg).
 - [Demostración navegable](preview/DECOKASA-inicio.html): descargar el repositorio y abrir este HTML en el navegador; GitHub muestra su código.
 - [Vista móvil de la portada](preview/DECOKASA-movil.html): abrir este HTML en el navegador para verla dentro de un marco de teléfono. Para la tienda conectada, usar la vista móvil del editor de temas Shopify.
-- [Paquete del tema](releases/DECOKASA-tema-0.1.0.zip): contiene solo los 74 archivos Shopify de la rama actual. GitHub/main ya sincroniza el tema activo.
+- [Paquete del tema](releases/DECOKASA-tema-0.1.0.zip): contiene los 159 archivos Shopify de la versión local, incluida la landing PVC todavía sin publicar. GitHub/main sincroniza el tema activo; estos cambios PVC aún no se han enviado.
 
 ## Reproducir las verificaciones
 
