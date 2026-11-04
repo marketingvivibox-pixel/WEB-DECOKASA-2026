@@ -1,6 +1,6 @@
 # Landing de Piso PVC autoadhesivo
 
-Estado al 04/11/2026: producto creado en borrador y landing instalada en un tema de prueba sin publicar. Implementación local sobre `main`, base `200e579`, todavía sin commit ni push. La landing SPC publicada se conserva.
+Estado al 04/11/2026: publicación solicitada por el usuario; producto en borrador y landing instalada en el tema preparado `190067343597`, todavía sin publicar. PVC registrado en `b007802` e integrado localmente con `origin/main` hasta `c46d236`, incluida la mejora SPC publicada en `b3c5a4c`. Sin push. La integración bloquea publicar temas y escribir en el tema activo: el paso de publicar corresponde al usuario en Shopify Admin.
 
 ## Producto y presentación
 
@@ -9,7 +9,7 @@ Estado al 04/11/2026: producto creado en borrador y landing instalada en un tema
 - Confirmado por el usuario: **36 planchas / 5 m² por caja**.
 - Metacampos de producto: `decokasa.coverage_m2` = `5.0` y `decokasa.planks_per_box` = `36`.
 - Opción Shopify: **Acabado**, con 20 variantes: FD801, FD802, FD806, FD807, FD809, FD810, FD811, FD814, FD815, FD816, FD817, FD817-1, FD818, FD821, FD822, FD823, FD828, 7172-4, 7172-8 y 7195-8.
-- Precio, SKU y existencias comerciales pendientes. Las variantes tienen precio administrativo provisional de cero, SKU vacío e inventario cero. No activar el producto con esos valores. La landing personalizada muestra «Consultar» cuando no hay precio positivo; no ofrece compra ni presenta el producto como gratuito.
+- Precio, SKU y existencias comerciales pendientes. Las variantes tienen precio administrativo provisional de cero, SKU vacío e inventario cero. El usuario solicita publicar con precio y SKU pendientes: puede activarse para consulta únicamente después de comprobar que `product.landing-pvc` existe en el tema activo. La landing personalizada muestra «Consultar» cuando no hay precio positivo; no ofrece compra ni presenta el producto como gratuito. No habilitar checkout ni otras superficies de venta con esos valores provisionales.
 
 ## Diseño y funcionamiento
 
@@ -27,6 +27,8 @@ Archivos principales: `sections/landing-piso-pvc.liquid`, `assets/landing-piso-p
 
 Tema **Decokasa PVC - revision 04 nov 2026**, ID `190067343597`, estado `UNPUBLISHED`, duplicado del tema activo `188927803629`. Se cargaron y verificaron 49 archivos: 43 imágenes y seis archivos de plantilla/código, incluido `layout/theme.liquid`. Procesamiento finalizado sin errores.
 
+Para preparar la publicación se compararon todos los archivos con el tema activo. Se incorporaron sus versiones actuales de `assets/landing-piso-spc-desktop.css`, `assets/landing-piso-spc.js` y `sections/landing-piso-spc.liquid`; los checksums se comprobaron por lectura posterior. Se conserva el `layout/theme.liquid` compatible con ambas landings. El tema preparado tiene 160 archivos de tema más AGENTS.md, heredado del tema original.
+
 Editor: https://admin.shopify.com/store/ruik4d-dn/themes/190067343597/editor
 
 Vista local: http://127.0.0.1:8818/landing-pisos-pvc.html?revision=pvc-20-acabados
@@ -35,8 +37,9 @@ La revisión automática rechazó modificar el tema activo porque solo permite e
 
 ## Verificación y pendientes
 
-- 38/38 pruebas aprobadas; Shopify Theme Check CLI 4.9.4 sin hallazgos. El validador del plugin no inicia por una dependencia ausente, por lo que se utilizó la herramienta oficial.
-- Ocho vistas locales y ZIP del tema con 159 archivos verificados.
+- 39/39 pruebas aprobadas tras integrar SPC; Shopify Theme Check CLI 5.0.1 sin errores, advertencias ni hallazgos. El validador del plugin no inicia por una dependencia ausente, por lo que se utilizó la herramienta oficial.
+- Ocho vistas locales y ZIP del tema con 160 archivos verificados.
 - Revisión local a 320, 393 y 1440 px sin desbordamiento ni imágenes rotas. Selección FD802, cálculo, enlace WhatsApp, teclado, cierre del catálogo y recuperación del foco comprobados.
 - Evidencias: `C:/Users/D. Cordova/Documents/Codex/2026-11-04/pvc-landing/landing-pvc-mobile.png` y `calculadora-mobile.png` en la misma carpeta.
-- Pendiente completar precio, SKU y existencias; revisar dentro del editor Shopify; decidir y realizar la publicación mediante un flujo permitido. El producto permanece en borrador y el tema sin publicar.
+- Pendiente: el usuario publica «Decokasa PVC - revision 04 nov 2026» desde https://admin.shopify.com/store/ruik4d-dn/themes. Después se debe verificar el rol MAIN y la plantilla, activar el producto y publicarlo únicamente en Tienda online, y revisar su URL pública. El producto permanece en borrador y el tema sin publicar mientras falta ese paso.
+- Completar posteriormente precio, SKU y existencias; revisar también la conexión GitHub del nuevo tema. No asumir que un tema duplicado conserva la sincronización del tema original.

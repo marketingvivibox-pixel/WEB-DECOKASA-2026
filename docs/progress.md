@@ -1,3 +1,11 @@
+## 04/11/2026 — PVC listo para publicación manual, compatible con SPC actual
+
+El usuario solicita publicar. Registrado PVC en `b007802` e integrada localmente la actualización `origin/main` hasta `c46d236`, incluida la mejora de escritorio SPC `b3c5a4c`. Conflictos de documentación resueltos preservando ambos trabajos; generador de vistas conserva los recursos PVC y SPC de escritorio. Vistas y paquete regenerados. Sin push al tema activo.
+
+Comparados todos los archivos de los temas Shopify; copiados al tema sin publicar `190067343597` los tres archivos SPC actuales y verificados por checksum. El layout conserva ambas landings. Verificación final: 39/39 pruebas, Theme Check CLI 5.0.1 sin hallazgos, ocho vistas y ZIP de 160 archivos válidos.
+
+La integración prohíbe publicar temas y escribir en MAIN; la revisión automática había rechazado modificar el tema activo. No se elude esa restricción con CLI, navegador ni push. Falta que el usuario publique «Decokasa PVC - revision 04 nov 2026» en Shopify Admin. Después se verificará la plantilla activa y se activará/publicará el producto 15506629263597 en Tienda online, solo para consulta con precio/SKU pendientes. Hasta entonces producto DRAFT, tema UNPUBLISHED. Verificar conexión GitHub del nuevo tema después del cambio.
+
 ## 04/11/2026 — Producto PVC y landing del mockup preparados
 
 Creado Piso PVC autoadhesivo, producto Shopify 15506629263597 (handle piso-pvc, plantilla landing-pvc), en DRAFT con 20 variantes Acabado. El usuario confirma 36 planchas / 5 m² por caja; precio y SKU pendientes. Metacampos decokasa.coverage_m2 = 5.0 y decokasa.planks_per_box = 36. Inventario provisional cero; no activar hasta completar datos comerciales. El usuario aprueba características verificables y galería de inspiración en lugar de «100% ignífugos» u opiniones ficticias.
@@ -7,6 +15,16 @@ Landing proporcional al PSD LANDING PVC_MOCK_FULL.psd (1080 × 10758), con 43 im
 La revisión automática rechazó escribir en el tema activo: solo permite temas sin publicar. Se duplicó el tema activo 188927803629 y se guardaron/verificaron 49 archivos en el tema UNPUBLISHED 190067343597, «Decokasa PVC - revision 04 nov 2026». No se hizo commit, push ni publicación; cambios locales sobre main, base 200e579. La vista previa por clave del producto en borrador abre el tema activo, y el editor requiere sesión Shopify; renderizado remoto de la nueva plantilla aún por revisar. Producto: https://admin.shopify.com/store/ruik4d-dn/products/15506629263597. Editor de prueba: https://admin.shopify.com/store/ruik4d-dn/themes/190067343597/editor.
 
 Validación: 38/38 pruebas, Theme Check CLI 4.9.4 sin hallazgos, ocho vistas y ZIP de 159 archivos verificados. Plugin Theme Check sin dependencia local; se utilizó CLI oficial. Pruebas visuales locales a 320/393/1440 px sin desbordamiento ni imágenes rotas; catálogo, selección FD802, calculadora, WhatsApp y teclado comprobados. Vista local http://127.0.0.1:8818/landing-pisos-pvc.html?revision=pvc-20-acabados. Evidencias en C:/Users/D. Cordova/Documents/Codex/2026-11-04/pvc-landing/landing-pvc-mobile.png y calculadora-mobile.png. Detalle en docs/landing-pvc.md del repositorio. Pendientes: precio, SKU, existencias, revisión en editor Shopify y publicación por flujo permitido.
+
+## 04/11/2026 — Versión de escritorio de la landing SPC
+
+La versión móvil aprobada se conserva por debajo de 1024 px, incluida la calculadora compacta y su animación de 1,2 s con desfase de 160 ms. Desde 1024 px se aplica una composición propia para escritorio, de hasta 1600 px: portada horizontal, explicación/ficha y colores en columnas, seis sellos en fila, instalación y capas ampliadas, carrusel legible, resultados y envíos contiguos y cierre reorganizado. Esta decisión reemplaza la escala única de 1080 px solo para escritorio; el mapa del mockup móvil permanece vigente.
+
+La calculadora muestra medidas y resultado a la izquierda, y croquis/desglose permanentemente visibles a la derecha. Admite ocho ambientes en dos filas; la lista de medidas tiene desplazamiento interno cuando es larga. Al cambiar de tamaño se mueven y restituyen los mismos nodos, preservando datos y funciones. Conserva precio de variante, 2,196 m²/caja, cortes opcionales del 10% y solicitud simulada.
+
+Validación local: 35/35 pruebas, Theme Check CLI 4.9.4 sin hallazgos, ocho vistas y ZIP de 112 archivos verificados. Revisión en 320/393/767/1024/1440/1920 px sin desbordamiento; 45/45 medidas de referencia móvil coinciden con la versión anterior. Verificados 20 m² → 11 cajas / S/ 1045 con cortes; ocho ambientes, 62 m² → 32 cajas / S/ 3040, cantidad/detalle correctos en solicitud, entrada directa y cambio de tamaño sin perder datos. No se envió ningún pedido. Evidencia: work/spc-desktop/calculadora-escritorio.png del chat este-mokup-es-para-la-pagina-4.
+
+Trabajo aislado en WEB-DECOKASA-SPC-DESKTOP, rama codex/spc-desktop, para conservar intactos los cambios concurrentes de PVC del clon principal. Publicado b3c5a4c en origin/main y comprobado en Shopify: portada horizontal, calculadora ampliada a 1440 px y versión móvil compacta a 393 px; sin desbordamiento en ambos tamaños. El cálculo de 20 m² mantiene 11 cajas / S/ 1045 al pasar de escritorio a móvil y volver. Evidencias: work/spc-desktop/calculadora-escritorio-shopify.png y calculadora-movil-shopify.png del chat este-mokup-es-para-la-pagina-4. Tamaño temporal del navegador restablecido.
 
 ## 04/11/2026 — Animación de calculadora SPC más pausada
 

@@ -1,6 +1,7 @@
 {{ 'landing-piso-spc.css' | asset_url | stylesheet_tag }}
 {{ 'landing-piso-spc-proportions.css' | asset_url | stylesheet_tag }}
 {{ 'landing-piso-spc-layout.css' | asset_url | stylesheet_tag }}
+{{ 'landing-piso-spc-desktop.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'landing-piso-spc.js' | asset_url }}" defer></script>
 {% liquid
   assign current_variant = product.selected_or_first_available_variant
@@ -35,6 +36,7 @@
 <div class="spc-v2-intro-panel spc-v2-white"></div>
 <img class="spc-v2-caja-tablones-hero spc-v2-art" src="{{ 'spc-2026-caja-tablones-hero.webp' | asset_url }}" width="580" height="785" alt="Piso SPC Decokasa en acabados madera clara, gris y caoba" loading="eager" fetchpriority="high">
 <p class="spc-v2-intro-copy">✨ <strong>¡Los Pisos del Futuro ya están aquí!</strong> ✨<br>Con sistema click, espuma incorporada y de instalación rápida son la mejor opción para tu hogar <strong>¡sin gastar de más!</strong> 💸🤩</p>
+<nav class="spc-desktop-hero-actions" aria-label="Explora los pisos SPC"><a class="spc-button spc-button--order" href="#calculadora-{{ section.id }}">Calcula tu proyecto <span aria-hidden="true">→</span></a><a href="#{{ colors_id }}">Explora los colores <span aria-hidden="true">↗</span></a></nav>
 </header>
 <section class="spc-v2-composition" aria-label="Composición del piso SPC">
 <img class="spc-v2-sala-composicion spc-v2-art" src="{{ 'spc-2026-sala-composicion.webp' | asset_url }}" width="1958" height="1585" alt="" loading="lazy">
@@ -79,7 +81,7 @@
 <h2 class="spc-v2-click-word">Click!</h2>
 <img class="spc-v2-instalador-click spc-v2-art" src="{{ 'spc-2026-instalador-click.webp' | asset_url }}" width="870" height="600" alt="Instalador encajando un tablón mediante el sistema Click" loading="lazy">
 <img class="spc-v2-click-plank-glow spc-v2-art" src="{{ 'spc-click-borde-tablon.svg' | asset_url }}" width="828" height="300" alt="" loading="lazy">
-<p class="spc-v2-click-copy">¡Colócalos y retíralos <strong>cuando quieras</strong> gracias al<br>Sistema Click! <b>¡Instala sin pegamentos ni clavos!</b></p>
+<p class="spc-v2-click-copy">¡Colócalos y retíralos <strong>cuando quieras</strong> gracias al<br> Sistema Click! <b>¡Instala sin pegamentos ni clavos!</b></p>
 <ul class="spc-v2-benefits">
 <li><img src="{{ 'spc-icono-resistencia-agua.svg' | asset_url }}" width="120" height="130" alt="" loading="lazy"><span>Resistentes<br><strong>al agua</strong></span></li>
 <li><img src="{{ 'spc-icono-espuma-integrada.svg' | asset_url }}" width="120" height="130" alt="" loading="lazy"><span>Incluyen<br><strong>espuma</strong></span></li>
@@ -152,6 +154,7 @@
         <p class="spc-calc-error" id="spc-calc-error-{{ section.id }}" data-calc-error role="alert" hidden></p>
       </div>
       <div class="spc-calc-col-result">
+        <div class="spc-desktop-plan" data-desktop-plan></div>
         <div class="spc-result-card" data-calc-result>
           <div class="spc-result-summary" role="status" aria-live="polite" aria-atomic="true">
             <div class="spc-result-metrics">

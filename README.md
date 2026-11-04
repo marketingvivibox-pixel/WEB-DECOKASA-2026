@@ -24,7 +24,7 @@ Asignar SKU único por variante, unidad/almacén y mapeo Odoo tras validación. 
 El formulario solo simula y no persiste datos personales. Consentimiento de seguimiento de prueba en sessionStorage; rechazar elimina atribución e identificador de visitante. Referencia de solicitud necesaria separada de analítica. UTMs deben contener nombres de campaña sin datos personales. Primer/último origen se conserva en navegación directa durante la sesión si se autoriza; no hay atribución entre sesiones todavía. GA4 y Meta/TikTok pendientes. No hay enlace al CRM activo.
 
 ## Verificación
-`npm test` aprueba 38 pruebas, entre lógica, navegación Liquid y pruebas DOM (filtros, variantes, galería por color, solicitud combinada, meta automática del regalo, formulario, consentimiento, ficha y landings SPC/PVC). Shopify Theme Check CLI sin hallazgos; ocho HTML y ZIP de 159 archivos verificados. Ficha y landing PVC revisadas en escritorio y celular sin desbordamiento. Reintentos conservan referencia solo en la página actual. Pendiente: confirmación comercial del catálogo y recepción idempotente en Odoo antes del lanzamiento comercial.
+`npm test` aprueba 39 pruebas, entre lógica, navegación Liquid y pruebas DOM (filtros, variantes, galería por color, solicitud combinada, meta automática del regalo, formulario, consentimiento, ficha y landings SPC/PVC). Shopify Theme Check CLI 5.0.1 sin hallazgos; ocho HTML y ZIP de 160 archivos verificados. Ficha y landing PVC revisadas en escritorio y celular sin desbordamiento. Reintentos conservan referencia solo en la página actual. Pendiente: datos comerciales del catálogo y recepción idempotente en Odoo; PVC está preparado para consulta por WhatsApp con precio pendiente.
 
 ## Diseño según el mockup original
 
@@ -42,7 +42,7 @@ La franja superior de servicios permanece fija al desplazarse. La portada incluy
 - [Referencia visual inicial](docs/references/mockup-inicial-decokasa-2026-10-02.jpeg).
 - [Demostración navegable](preview/DECOKASA-inicio.html): descargar el repositorio y abrir este HTML en el navegador; GitHub muestra su código.
 - [Vista móvil de la portada](preview/DECOKASA-movil.html): abrir este HTML en el navegador para verla dentro de un marco de teléfono. Para la tienda conectada, usar la vista móvil del editor de temas Shopify.
-- [Paquete del tema](releases/DECOKASA-tema-0.1.0.zip): contiene los 159 archivos Shopify de la versión local, incluida la landing PVC todavía sin publicar. GitHub/main sincroniza el tema activo; estos cambios PVC aún no se han enviado.
+- [Paquete del tema](releases/DECOKASA-tema-0.1.0.zip): contiene los 160 archivos Shopify de la versión local, incluida la landing PVC y la mejora SPC de escritorio publicada en `b3c5a4c`. El tema sin publicar `190067343597` ya contiene ambos cambios. GitHub/main sincroniza el tema activo anterior; no se ha hecho push de PVC ni publicado el tema preparado.
 
 ## Reproducir las verificaciones
 
