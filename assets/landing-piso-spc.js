@@ -550,7 +550,7 @@
           const width = height * ratio;
           const x = (index % columns) * cellWidth + (cellWidth - width) / 2;
           const y = Math.floor(index / columns) * cellHeight + (cellHeight - height) / 2;
-          return `<g class="spc-mini-room" style="--mini-delay:${index * 70}ms;transform-origin:${x + width / 2}px ${y + height / 2}px">
+          return `<g class="spc-mini-room" style="--mini-delay:${index * 160}ms;transform-origin:${x + width / 2}px ${y + height / 2}px">
             <rect x="${x}" y="${y}" width="${width}" height="${height}" rx="2"/>
             <path d="M${x + width / 2} ${y}v${height} M${x} ${y + height / 2}h${width}"/>
           </g>`;

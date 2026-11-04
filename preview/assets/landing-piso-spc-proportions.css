@@ -159,7 +159,7 @@
 .spc-mini-space-copy strong{color:#f8dc65;font-size:15px;line-height:1.3;overflow-wrap:anywhere}
 .spc-mini-space-stage{height:48px}
 .spc-mini-space-stage svg{display:block;width:100%;height:100%;overflow:visible}
-.spc-mini-room{animation:spcMiniRoomIn .55s cubic-bezier(.16,1,.3,1) both;animation-delay:var(--mini-delay,0ms)}
+.spc-mini-room{animation:spcMiniRoomIn 1.2s cubic-bezier(.16,1,.3,1) both;animation-delay:var(--mini-delay,0ms)}
 .spc-mini-room rect{fill:rgba(235,200,59,.12);stroke:#ebc83b;stroke-width:1.3}
 .spc-mini-room path{fill:none;stroke:rgba(235,200,59,.3);stroke-width:.75}
 .spc-mini-space.is-empty .spc-mini-room{opacity:.3;animation:none}
