@@ -66,7 +66,7 @@ Referencias de sector consultadas: https://www.quick-step.co.uk/en-gb/vinyl, htt
 
 Validación: 35/35 pruebas, Theme Check CLI 4.9.4 sin hallazgos, ocho vistas y ZIP de 112 archivos verificados. Revisión visual a 1024/1440/1920 px sin desbordamiento; 45/45 medidas móviles a 393 px idénticas a la referencia. Calculadora comprobada con 20 m²: 11 cajas / S/ 1045 con cortes y 10 / S/ 950 sin cortes; entrada directa de 26 m²: 14 / S/ 1330; ocho ambientes con 62 m²: 32 / S/ 3040. Cantidad y detalle de solicitud correctos, sin enviar pedidos. Carrusel y conservación de datos al cambiar de tamaño verificados. Evidencias locales: work/spc-desktop/desktop-editorial/portada-local.png y calculadora-local.png del chat este-mokup-es-para-la-pagina-4.
 
-Trabajo aislado en WEB-DECOKASA-SPC-DESKTOP, rama codex/spc-desktop, base c46d236. Publicación y comprobación remota pendientes al registrar esta entrada.
+Publicado 65e09bd en origin/main y verificado en Shopify: nueva portada a 1920 px, calculadora ampliada a 1440 px y versión móvil compacta a 393 px, sin desbordamiento. El cálculo de 20 m² mantiene 11 cajas / S/ 1045 al pasar a móvil. Evidencias: work/spc-desktop/desktop-editorial/portada-shopify.png, calculadora-shopify.png y movil-shopify.png del chat este-mokup-es-para-la-pagina-4. Tamaño temporal del navegador restablecido. Trabajo aislado en WEB-DECOKASA-SPC-DESKTOP para preservar los cambios concurrentes de PVC.
 
 
 
