@@ -1,8 +1,11 @@
-## 05/11/2026 — Causa de la landing PVC ausente confirmada
+## 05/11/2026 — Landing PVC publicada y comprobada
 
-- [x] Releídos producto y tema oficial: `landing-pvc` está asignada, pero faltan sus archivos y el layout publicado solo reconoce SPC.
-- [x] Verificados los 49 cambios locales necesarios: cinco archivos principales, 43 imágenes y ajuste del layout compartido. Las 39 pruebas pasan.
-- [ ] Aplicación al único tema oficial y comprobación visual pública pendientes. La revisión automática bloquea la escritura sobre MAIN; no se ha intentado eludirla. Pasos manuales en [landing-pvc.md](landing-pvc.md).
+- [x] Revisado el procedimiento de SPC y completado `git push origin main`: `46c3ab6` → `a61758a`.
+- [x] Confirmados los 49 archivos sincronizados en el tema oficial MAIN 188927803629 y la landing personalizada en https://decokasaperu.myshopify.com/products/piso-pvc.
+- [x] Verificación pública en escritorio y móvil 393 × 852: catálogo de 20 acabados, selección FD802, cálculo 20 m² + 10% → 5 cajas / 25 m² / S/ 495 estimados y enlace WhatsApp con SKU correcto; sin envío de mensajes.
+- [x] Variante 7172-4 con precio pendiente: importe oculto y consulta disponible. Sin desbordamiento ni imágenes cargadas rotas.
+- [x] Rectificada la interpretación de un bloqueo general: los límites de los conectores no impedían el flujo GitHub autorizado. Rama secundaria SPC preservada.
+- [ ] Pendientes comerciales: tres tarifas LQ y cotejo visual de miniaturas.
 
 ## 05/11/2026 — Limpieza de contexto
 
@@ -12,13 +15,14 @@
 
 - [x] Activado y publicado el producto existente 15506629263597 en Tienda online; lectura posterior ACTIVE y publicación confirmada. URL: https://decokasaperu.myshopify.com/products/piso-pvc.
 - [x] Conservadas 20 variantes con 10 000 cajas por SKU / 200 000 totales. Sin cambios de temas ni de fuentes originales.
-- [ ] Incorporar y comprobar visualmente la landing PVC en el único tema oficial mediante un procedimiento permitido. Los cinco archivos principales consultados siguen ausentes; se conserva el bloqueo sobre MAIN.
+- [x] Landing PVC incorporada al tema oficial y comprobada en su URL pública, escritorio y móvil; 49 archivos confirmados el 05/11 desde `a61758a`.
 - [ ] Confirmar las tres tarifas LQ y cotejar las miniaturas.
 
 ## 05/11/2026 — Regla de un único tema oficial aplicada
 
 - [x] Regla permanente en AGENTS.md: único tema oficial 188927803629; pruebas en rama secundaria y vista previa local.
-- [ ] Integrar PVC y los cambios SPC pendientes en el tema oficial mediante un procedimiento permitido. El producto PVC ya está publicado.
+- [x] PVC integrado y publicado en el tema oficial desde `a61758a`.
+- [ ] Integrar por separado los cambios SPC pendientes de la rama secundaria, preservando PVC.
 
 ## 05/11/2026 — Proveedores de Titan y SPC corregidos
 
@@ -37,7 +41,7 @@
 - [ ] Confirmar tarifa de los tres LQ: 7172-4, 7172-8 y 7195-8; no asumir correspondencia con HM.
 - [x] Configuradas y releídas 10 000 cajas por SKU según instrucción posterior del usuario; ver entrada superior.
 - [ ] Cotejo visual de miniaturas.
-- [ ] Incorporar y comprobar la landing en el tema activo. El producto ya está ACTIVE y publicado; se conserva el bloqueo previo sobre MAIN.
+- [x] Landing incorporada y comprobada en el tema activo el 05/11; producto ACTIVE y publicado.
 
 
 ## 05/11/2026 — Fuentes de SKU y precios indexadas

@@ -9,6 +9,7 @@ Decisión expresa del usuario, 05/11/2026. Tema oficial registrado: **WEB-DECOKA
 - «Crear un producto», «crear una landing» o «publicar el resultado» no autoriza otro tema. Solo una petición explícita del usuario para ese tema concreto puede cambiar esta regla.
 - Las pruebas se realizan en una rama secundaria del repositorio y con vista previa local; nunca en borradores, temas de desarrollo o versiones de prueba en Shopify. No conectar la rama de pruebas a otro tema ni usar vistas previas que creen un tema remoto.
 - Flujo: rama secundaria → pruebas locales → integración en main → actualización del tema oficial existente, respetando las autorizaciones y restricciones vigentes.
+- Canal verificado el 05/11/2026: enviar main con `git push origin main` desde el clon autenticado; Shopify sincroniza esa rama con el tema oficial. Confirmar después los archivos y la URL pública. Una limitación funcional de un conector no demuestra un bloqueo general de publicación; nunca eludir un rechazo real de aprobación.
 - Comprobar el tema de destino antes de cualquier cambio remoto.
 - Si una herramienta bloquea el cambio, conservar el trabajo local y explicar el bloqueo y el paso concreto necesario; nunca resolverlo creando o reutilizando otro tema ni eludiendo la restricción.
 - Esta regla prevalece sobre cualquier plan anterior de publicar borradores paralelos.
