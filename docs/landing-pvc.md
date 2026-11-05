@@ -14,6 +14,12 @@ Se corrige la interpretación anterior: la limitación del conector Shopify y el
 
 Verificación pública: catálogo con 20 acabados; selección FD802; 20 m² con 10% de cortes → 5 cajas / 25 m² y S/ 495 estimados a precio base. El enlace de WhatsApp incluye el acabado, SKU y cálculo correctos, sin enviar mensajes. Al seleccionar 7172-4, cuyo precio está pendiente, se oculta el importe y permanece la consulta. Sin desbordamiento horizontal ni imágenes cargadas rotas. Se conservaron producto, inventario y el trabajo SPC pendiente de la rama secundaria.
 
+## Corrección de la escena de instalación — 05/11/2026
+
+Corregida la figura duplicada: la fotografía de fondo ya incluía a la instaladora y el recorte superpuesto tenía otro encuadre. Ambas capas ahora comparten las coordenadas del PSD de 1080 px: recorte a x=177, y=164 respecto al fondo, ancho 500; cabeza 44 px por encima del final del panel anterior. Ajustados también el cierre del panel y la altura proporcional de la escena para conservar la superposición del mockup.
+
+Cambio `a2b77bc`, probado en rama local e incorporado/publicado por `main` en el único tema oficial. Verificación local a 320/393/1440 px y pública a 393 × 852: figura única, manos y pies alineados, beneficios visibles y sin desbordamiento horizontal. 39/39 pruebas, Theme Check sin hallazgos y comprobación de ocho vistas/ZIP de 160 archivos. Evidencia pública: `C:/Users/D. Cordova/Documents/Codex/2026-11-05/pvc-installation-fix/published-mobile.png`. Se mantienen catálogo, calculadora y datos comerciales.
+
 ## Producto y presentación
 
 - Producto: **Piso PVC autoadhesivo**, ID `15506629263597`, handle `piso-pvc`, plantilla `landing-pvc`.

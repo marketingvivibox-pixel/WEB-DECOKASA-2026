@@ -1,3 +1,10 @@
+## 05/11/2026 — Instaladora PVC alineada con el mockup
+
+- [x] Corregida la duplicación por desalineación entre fondo y recorte; geometría común basada en el PSD de 1080 px.
+- [x] Ajustados el solapamiento con el panel anterior y la altura de la escena, conservando los cinco beneficios y las funcionalidades.
+- [x] Comprobación visual a 320/393/1440 px; 39/39 pruebas, Theme Check sin hallazgos y ocho vistas/ZIP válidos.
+- [x] Publicado `a2b77bc` por GitHub/main en el tema oficial 188927803629 y verificado en la URL pública a 393 × 852. Sin temas adicionales ni cambios comerciales; rama SPC preservada.
+
 ## 05/11/2026 — Landing PVC publicada y comprobada
 
 - [x] Revisado el procedimiento de SPC y completado `git push origin main`: `46c3ab6` → `a61758a`.
