@@ -28,7 +28,10 @@
 {% if section.settings.spc_design_preview %}<p class="spc-preview-note">Vista de diseño · Sellos y testimonios de muestra pendientes de validación.</p>{% endif %}
 <div class="spc-canvas">
 <header class="spc-v2-hero">
+<picture class="spc-responsive-image">
+<source media="(min-width: 1024px)" srcset="{{ 'spc-desktop-sala-principal-768.webp' | asset_url }} 768w, {{ 'spc-desktop-sala-principal.webp' | asset_url }} 1254w" sizes="(min-width: 1600px) 780px, 49vw" width="1254" height="1254">
 <img class="spc-v2-comedor-hero spc-v2-art" src="{{ 'spc-2026-comedor-hero.webp' | asset_url }}" width="1117" height="2033" alt="" loading="eager" fetchpriority="high">
+</picture>
 {% if section.settings.show_top_announcement %}<a class="spc-v2-announcement" href="{{ catalog_url | escape }}">¡Nuevos colores disponibles! <strong>Mira el catálogo aquí →</strong></a>{% endif %}
 <img class="spc-v2-simbolo-marca spc-v2-art" src="{{ 'spc-2026-simbolo-marca.webp' | asset_url }}" width="118" height="116" alt="Decokasa" loading="eager" fetchpriority="high">
 <h1 class="spc-v2-title"><span class="spc-mobile-title">Pisos <em>SPC</em></span><span class="spc-desktop-only">Un nuevo piso.<br>Un nuevo <em>hogar.</em></span></h1>
@@ -37,11 +40,14 @@
 <img class="spc-v2-caja-tablones-hero spc-v2-art" src="{{ 'spc-2026-caja-tablones-hero.webp' | asset_url }}" width="580" height="785" alt="Piso SPC Decokasa en acabados madera clara, gris y caoba" loading="eager" fetchpriority="high">
 <p class="spc-v2-intro-copy">✨ <strong>¡Los Pisos del Futuro ya están aquí!</strong> ✨<br>Con sistema click, espuma incorporada y de instalación rápida son la mejor opción para tu hogar <strong>¡sin gastar de más!</strong> 💸🤩</p>
 <p class="spc-desktop-only spc-desktop-hero-summary">La calidez de la madera, con la practicidad del piso SPC. Elige tu acabado y descubre cuánto necesitas para transformar tu espacio.</p>
-<nav class="spc-desktop-hero-actions" aria-label="Explora los pisos SPC"><a class="spc-button spc-button--order" href="#calculadora-{{ section.id }}">Calcula tu proyecto <span aria-hidden="true">→</span></a><a href="#{{ colors_id }}">Explora los colores <span aria-hidden="true">↗</span></a></nav>
+<nav class="spc-desktop-hero-actions" aria-label="Explora los pisos SPC"><a class="spc-button spc-button--order" data-spc-calculator-link href="#calculadora-{{ section.id }}">Calcula tu proyecto <span aria-hidden="true">→</span></a><a href="#{{ colors_id }}">Explora los colores <span aria-hidden="true">↗</span></a></nav>
 <ul class="spc-desktop-only spc-desktop-hero-facts"><li><strong>Sistema Click</strong><span>Sin pegamentos ni clavos</span></li><li><strong>Espuma integrada</strong><span>Lista para instalar</span></li></ul>
 </header>
 <section class="spc-v2-composition" aria-label="Composición del piso SPC">
+<picture class="spc-responsive-image">
+<source media="(min-width: 1024px)" srcset="{{ 'spc-desktop-ninos-perro-768.webp' | asset_url }} 768w, {{ 'spc-desktop-ninos-perro.webp' | asset_url }} 1536w" sizes="(min-width: 1600px) 780px, 49vw" width="1536" height="1024">
 <img class="spc-v2-sala-composicion spc-v2-art" src="{{ 'spc-2026-sala-composicion.webp' | asset_url }}" width="1958" height="1585" alt="" loading="lazy">
+</picture>
 <span class="spc-v2-composition-rule spc-v2-rule"></span>
 <p class="spc-v2-spc-word">SPC</p>
 <img class="spc-v2-ninos-mascota spc-v2-art" src="{{ 'spc-2026-ninos-mascota.webp' | asset_url }}" width="767" height="482" alt="Niños jugando con su mascota sobre un piso con acabado de madera" loading="lazy">

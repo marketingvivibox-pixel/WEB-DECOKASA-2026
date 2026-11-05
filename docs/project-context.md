@@ -1,3 +1,16 @@
+## 05/11/2026 — Fotografías WebP y navegación suave SPC en escritorio
+
+Regeneradas con referencias las fotografías de sala y de dos niños con golden retriever. WebP adaptativo desde 1024 px: sala 1254 × 1254 (208196 bytes) y familia 1536 × 1024 (172550 bytes), más versiones de 768 px. Son escenas ambientales ilustrativas. Se conserva la composición y los recursos móviles aprobados. El botón «Calcula tu proyecto» incorpora aceleración y frenado progresivos, foco al llegar y cancelación al intervenir el usuario; respeta movimiento reducido. Sin cambios comerciales ni en PVC.
+
+Validación: 38/38 pruebas, Theme Check sin hallazgos, ocho vistas y ZIP de 116 archivos verificados. Escritorio revisado a 1024/1440/1920 px sin desbordamiento; las 13 cajas de referencia móvil a 393 px coinciden exactamente con la versión anterior. En Shopify, ambas fotografías cargan, el botón llega a la calculadora a 30,28 px del borde superior con foco y ancla correctos, y 5 × 4 m con 10% para cortes mantiene 11 cajas / S/ 1045 (24,16 m² de cobertura).
+
+Los cuatro WebP están cargados en Shopify Files. Se duplicó el tema activo sin publicar y se actualizaron únicamente siete archivos (Liquid, CSS de escritorio, JS y cuatro imágenes). Borrador 190101258477: «SPC desktop · imágenes y movimiento · 05 nov». Vista previa: https://decokasaperu.myshopify.com/products/piso-spc?preview_theme_id=190101258477. Archivos verificados; tema sin procesamiento ni errores. Shopify recodificó los WebP: sala 260645/97692 bytes y familia 231670/64771 bytes (grande/768). Manifest con origen, tamaños e IDs: docs/landing-spc-desktop-images-20261105.json.
+
+Pendiente publicar por el administrador: el bloqueo registrado de revisión automática sobre MAIN continúa vigente y no se elude por CLI, navegador o push a main. Este borrador conserva el tema publicado del que se copió; no incorpora los cambios PVC aún locales. Trabajo en WEB-DECOKASA-SPC-DESKTOP, rama codex/spc-desktop; clon principal y cambios concurrentes de PVC preservados.
+
+Evidencias: C:/Users/D. Cordova/Documents/Codex/2026-10-21/este-mokup-es-para-la-pagina-4/work/spc-desktop/desktop-editorial/images-nov05/shopify-hero.webp.png y shopify-familia.png.
+
+
 ## 04/11/2026 — Rediseño editorial de SPC solo para escritorio
 
 Con autorización del usuario para cambiar el diseño de escritorio, se reemplaza la composición anterior desde 1024 px. Portada con fotografía amplia, titular «Un nuevo piso. Un nuevo hogar.», fondo cálido, acentos oliva y jerarquía más clara. Los colores se comparan en tres tarjetas amplias; composición, instalación, capas y ficha usan columnas; certificaciones forman una banda; calculadora con croquis visible; resultados, envíos y cierre se reorganizan. Se conservan recursos propios, funciones y aviso de testimonios ilustrativos.

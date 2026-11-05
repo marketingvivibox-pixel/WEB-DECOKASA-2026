@@ -1,0 +1,88 @@
+{
+  "date": "2026-11-05",
+  "scope": "Solo escritorio desde 1024 px. Composición móvil aprobada conservada.",
+  "mode": "image_gen con imágenes de referencia; regeneración fotográfica. Conversión y redimensionado WebP con Pillow, sin edición de contenido adicional.",
+  "purpose": "Escenas ambientales ilustrativas de la landing SPC; no son muestras técnicas verificadas de tono.",
+  "encoding": {
+    "format": "WebP",
+    "quality": 84,
+    "method": 6
+  },
+  "assets": [
+    {
+      "name": "Sala principal",
+      "reference": "codex-clipboard-5f38154d-ec11-4665-8286-77e123b8e8cd.png",
+      "original": "exec-842eb11a-d5dd-4bc2-b2ed-9884584daf94.png",
+      "prompt": "Use case: precise-object-edit.\nAsset type: editorial hero photograph for a premium SPC flooring landing page, displayed beside text on desktop.\nInput image: editing reference for this same living room, furnishings, floor color and warm natural mood.\nPrimary request: reconstruct this photograph in truly sharp, high resolution quality, recovering convincing fine detail rather than sharpening blur. Keep the cream sofa on the right, wood-framed cream armchair on the left, white fireplace behind, narrow wood shelf, circular wooden coffee table and medium warm brown wood-look plank floor. Preserve the calm Scandinavian room and natural materials.\nComposition: create a balanced square image, 1536 x 1536 or higher. Furniture in the upper half to upper 60 percent, attractive continuous floor in the lower 40 percent. All important furniture should remain recognizable under a slight centered portrait or landscape crop.\nLighting: soft bright daylight from the right, realistic soft shadows, neutral warm whites, no orange filter.\nQuality: high-end interior photography with sharp natural timber grain, subtle individual plank joints, crisp upholstery weave, correct furniture geometry, realistic depth of field with the floor and furniture both in focus.\nConstraints: no people, no added decorations, no text, logos, border, watermark, vignette, fake gloss, blur or oversharpening halos. The image is an illustrative lifestyle scene, not a technical product swatch.",
+      "files": [
+        {
+          "path": "assets/spc-desktop-sala-principal.webp",
+          "width": 1254,
+          "height": 1254,
+          "bytes": 208196,
+          "shopify_media_id": "gid://shopify/MediaImage/46864434692333",
+          "shopify_files_url": "https://cdn.shopify.com/s/files/1/0838/8398/3085/files/spc-desktop-sala-principal.webp?v=1793895239",
+          "shopify_theme_bytes": 260645
+        },
+        {
+          "path": "assets/spc-desktop-sala-principal-768.webp",
+          "width": 768,
+          "height": 768,
+          "bytes": 72206,
+          "shopify_media_id": "gid://shopify/MediaImage/46864566059245",
+          "shopify_files_url": "https://cdn.shopify.com/s/files/1/0838/8398/3085/files/spc-desktop-sala-principal-768.webp?v=1793895425",
+          "shopify_theme_bytes": 97692
+        }
+      ]
+    },
+    {
+      "name": "Niños con perro",
+      "reference": "codex-clipboard-47a68aa4-7ac3-489b-8942-e29a983798d2.png",
+      "original": "exec-ff87e3e7-5095-4d64-b348-6f0b3a0d5649.png",
+      "prompt": "Use case: photorealistic-natural.\nAsset type: lifestyle photograph for the \"What is SPC flooring?\" section of a premium home-improvement website.\nInput image: subject and styling reference. Regenerate the whole photograph coherently, eliminating the obvious rectangular pasted patch and discontinuities in the floor.\nPrimary request: preserve two children and their golden retriever happily sitting together on a warm light oak wood-look floor: a girl with long brown hair, cream sweater and blue jeans to the left of the dog, and a boy in a muted olive hoodie and blue jeans to the right. They are naturally petting the relaxed dog and looking at it, candid and cheerful. A small rope dog toy can remain beside the dog.\nComposition: landscape 1536 x 1024 or larger. Children and dog centered together in the middle 65% of the frame, heads comfortably inside the top edge and feet visible. Frame slightly closer than the reference, with the group occupying about half the image area. Leave 25–30% of the image height as a beautifully detailed continuous wood floor foreground. Keep everyone safe when cropped to a nearly square card. Understated light beige wall and a partial cream sofa in the background, no excessive empty wall.\nStyle: authentic high-end editorial interior photography, realistic skin, hair and dog fur; soft balanced natural daylight; warm neutral palette consistent with an elegant ivory and olive website.\nConstraints: anatomically correct faces, hands and paws, exactly two children and one dog, coherent floor perspective and uninterrupted plank grain across the entire frame, no pasted patches, no excessive shine, no heavy dark overlay, no text, no logo, no watermark. Natural, welcoming and sharp without an artificial CGI look.",
+      "files": [
+        {
+          "path": "assets/spc-desktop-ninos-perro.webp",
+          "width": 1536,
+          "height": 1024,
+          "bytes": 172550,
+          "shopify_media_id": "gid://shopify/MediaImage/46864463003885",
+          "shopify_files_url": "https://cdn.shopify.com/s/files/1/0838/8398/3085/files/spc-desktop-ninos-perro.webp?v=1793895254",
+          "shopify_theme_bytes": 231670
+        },
+        {
+          "path": "assets/spc-desktop-ninos-perro-768.webp",
+          "width": 768,
+          "height": 512,
+          "bytes": 47872,
+          "shopify_media_id": "gid://shopify/MediaImage/46864567107821",
+          "shopify_files_url": "https://cdn.shopify.com/s/files/1/0838/8398/3085/files/spc-desktop-ninos-perro-768.webp?v=1793895436",
+          "shopify_theme_bytes": 64771
+        }
+      ]
+    }
+  ],
+  "shopify_delivery": {
+    "theme_id": "gid://shopify/OnlineStoreTheme/190101258477",
+    "theme_name": "SPC desktop · imágenes y movimiento · 05 nov",
+    "role": "UNPUBLISHED",
+    "based_on_live_theme": "gid://shopify/OnlineStoreTheme/188927803629",
+    "preview_url": "https://decokasaperu.myshopify.com/products/piso-spc?preview_theme_id=190101258477",
+    "verified": "Seven files present; theme processing=false, processingFailed=false. Hero, family photo, eased CTA, focus and calculator verified in Shopify preview.",
+    "publication": "Pending administrator action. Recorded automatic-review block on MAIN; do not bypass with CLI, browser or main push.",
+    "concurrent_pvc": "Not included; preserved in main working tree."
+  },
+  "validation": {
+    "tests_passed": 38,
+    "theme_check": [],
+    "preview_pages": 8,
+    "zip_files": 116,
+    "desktop_widths": [
+      1024,
+      1440,
+      1920
+    ],
+    "mobile_width": 393,
+    "mobile_reference_boxes_unchanged": 13
+  }
+}

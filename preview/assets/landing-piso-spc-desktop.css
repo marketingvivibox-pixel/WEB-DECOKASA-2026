@@ -3,6 +3,7 @@
 .spc-desktop-only,
 .spc-desktop-hero-actions,
 .spc-desktop-plan { display: none; }
+.spc-responsive-image { display: contents; }
 
 @media (min-width: 1024px) {
   .spc-page {
@@ -37,7 +38,8 @@
     overflow: hidden;
     isolation: isolate;
   }
-  .spc-page .spc-canvas > :where(header, section, footer):not(.spc-v2-calculator) > * {
+  .spc-page .spc-canvas > :where(header, section, footer):not(.spc-v2-calculator) > *,
+  .spc-page .spc-responsive-image > img {
     position: relative;
     inset: auto !important;
     width: auto !important;
@@ -104,7 +106,7 @@
     height: clamp(560px, 40vw, 640px) !important;
     min-height: 0;
     object-fit: cover;
-    object-position: 50% 8%;
+    object-position: center;
     border-radius: 6px;
     opacity: 1;
   }
@@ -326,7 +328,7 @@
     height: 480px !important;
     min-height: 0;
     object-fit: cover;
-    object-position: 64% 42%;
+    object-position: center;
   }
   .spc-page .spc-v2-composition-heading {
     grid-column: 2;

@@ -35,11 +35,68 @@
   const initialized = new WeakSet();
   const pageControllers = new WeakMap();
   const calculatorLayoutControllers = new WeakMap();
+  const navigationControllers = new WeakMap();
   const escapeXML = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
   const number = new Intl.NumberFormat('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const integer = new Intl.NumberFormat('es-PE', { maximumFractionDigits: 0 });
 
   const testimonialControllers = new WeakMap();
+  function initDesktopNavigation(page) {
+    const link = page.querySelector('[data-spc-calculator-link]');
+    const hash = link?.getAttribute('href');
+    const target = hash?.startsWith('#') ? document.getElementById(hash.slice(1)) : null;
+    if (!target || !page.contains(target)) return;
+    const desktop = window.matchMedia('(min-width: 1024px)');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const controller = new AbortController();
+    const on = (node, type, fn, options = {}) => node.addEventListener(type, fn, {...options, signal: controller.signal});
+    let frame = 0;
+    const cancel = () => { window.cancelAnimationFrame(frame); frame = 0; };
+    const finish = () => {
+      frame = 0;
+      target.focus({preventScroll: true});
+      if (window.location.hash !== hash) window.history.pushState(null, '', hash);
+    };
+    on(link, 'click', event => {
+      if (!desktop.matches || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      cancel();
+      const start = window.scrollY;
+      const margin = parseFloat(window.getComputedStyle(target).scrollMarginTop) || 0;
+      const end = Math.max(0, Math.min(start + target.getBoundingClientRect().top - margin, document.documentElement.scrollHeight - window.innerHeight));
+      const distance = end - start;
+      if (reducedMotion.matches || Math.abs(distance) < 2) {
+        window.scrollTo({top: end, behavior: 'instant'});
+        finish();
+        return;
+      }
+      const duration = Math.min(1600, Math.max(900, Math.abs(distance) * .35));
+      let started;
+      const tick = time => {
+        started ??= time;
+        const t = Math.min(1, (time - started) / duration);
+        // Smootherstep: both velocity and acceleration settle to zero at each end.
+        const eased = t * t * t * (t * (t * 6 - 15) + 10);
+        window.scrollTo({top: start + distance * eased, behavior: 'instant'});
+        if (t < 1) frame = window.requestAnimationFrame(tick);
+        else finish();
+      };
+      frame = window.requestAnimationFrame(tick);
+    });
+    // Give control back immediately when the visitor starts navigating manually.
+    ['wheel', 'touchstart', 'pointerdown'].forEach(type => on(window, type, cancel, {passive: true}));
+    on(window, 'keydown', event => {
+      if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' ', 'Escape'].includes(event.key)) cancel();
+    });
+    on(window, 'resize', cancel);
+    on(reducedMotion, 'change', cancel);
+    navigationControllers.set(page, () => {
+      cancel();
+      controller.abort();
+      navigationControllers.delete(page);
+    });
+  }
+
   function initCalculatorLayout(page, form) {
     const desktop = form.querySelector('[data-desktop-plan]');
     const details = form.querySelector('.spc-calc-details');
@@ -181,6 +238,7 @@
     pages.forEach(page => {
       if (initialized.has(page)) return;
       initialized.add(page);
+      initDesktopNavigation(page);
       initTestimonials(page);
 
       const swatches = [...page.querySelectorAll('[data-color]')];
@@ -982,6 +1040,6 @@
   document.addEventListener('shopify:section:unload', event => {
     const pages = [...event.target.querySelectorAll('[data-spc-page]')];
     if (event.target.matches?.('[data-spc-page]')) pages.unshift(event.target);
-    pages.forEach(page => { testimonialControllers.get(page)?.(); pageControllers.get(page)?.(); calculatorLayoutControllers.get(page)?.(); initialized.delete(page); });
+    pages.forEach(page => { testimonialControllers.get(page)?.(); pageControllers.get(page)?.(); calculatorLayoutControllers.get(page)?.(); navigationControllers.get(page)?.(); initialized.delete(page); });
   });
 })();

@@ -7,6 +7,89 @@ const { parseHTML } = require('linkedom');
 const { calculate, estimateTotal } = require('../assets/landing-piso-spc.js');
 const { filters } = require('../scripts/product_fixture.cjs');
 const root = path.resolve(__dirname, '..');
+
+function navigationFixture({desktop = true, reduced = false} = {}) {
+  const { runInNewContext } = require('node:vm');
+  const frames = new Map();
+  const controllers = new WeakMap();
+  const positions = [];
+  let next = 0, focused = false;
+  const media = Object.assign(new EventTarget(), {matches: reduced});
+  const link = Object.assign(new EventTarget(), {getAttribute: () => '#calculator'});
+  const window = Object.assign(new EventTarget(), {
+    scrollY: 100, innerHeight: 1000, location: {hash: ''},
+    matchMedia: query => query.includes('min-width') ? {matches: desktop} : media,
+    getComputedStyle: () => ({scrollMarginTop: '30px'}),
+    requestAnimationFrame: callback => { frames.set(++next, callback); return next; },
+    cancelAnimationFrame: id => frames.delete(id),
+    scrollTo: ({top, behavior}) => { assert.equal(behavior, 'instant'); window.scrollY = top; positions.push(top); }
+  });
+  window.history = {pushState: (_, __, hash) => {window.location.hash = hash;}};
+  const target = {getBoundingClientRect: () => ({top: 4100 - window.scrollY}), focus: options => {assert.equal(options.preventScroll, true); focused = true;}};
+  const page = {querySelector: () => link, contains: node => node === target};
+  const document = {getElementById: () => target, documentElement: {scrollHeight: 9000}};
+  const source = fs.readFileSync(path.join(root, 'assets/landing-piso-spc.js'), 'utf8');
+  const navigation = source.slice(source.indexOf('  function initDesktopNavigation('), source.indexOf('  function initCalculatorLayout('));
+  runInNewContext(`${navigation}\ninitDesktopNavigation(page);`, {page, document, window, AbortController, navigationControllers: controllers});
+  return {
+    window, frames, positions,
+    focused: () => focused,
+    cleanup: () => controllers.get(page)(),
+    click: (options = {}) => { const event = Object.assign(new Event('click', {cancelable: true}), {button: 0, ...options}); link.dispatchEvent(event); return event; },
+    step: time => { const pending = [...frames.values()]; frames.clear(); pending.forEach(callback => callback(time)); }
+  };
+}
+
+test('SPC: el CTA de escritorio acelera, frena y enfoca la calculadora sin salto extra', () => {
+  const navigation = navigationFixture();
+  assert.equal(navigation.click().defaultPrevented, true);
+  assert.equal(navigation.window.scrollY, 100);
+  assert.equal(navigation.focused(), false);
+  for (let time = 0; time <= 1500; time += 100) navigation.step(time);
+  assert.equal(navigation.window.scrollY, 4070);
+  assert.equal(navigation.window.location.hash, '#calculator');
+  assert.equal(navigation.focused(), true);
+  assert.equal(navigation.frames.size, 0);
+  const positions = navigation.positions;
+  const advances = positions.slice(1).map((position, index) => position - positions[index]);
+  assert.ok(advances.every(distance => distance >= 0));
+  assert.ok(advances[0] < advances[6] / 4);
+  assert.ok(advances.at(-1) < advances[6] / 4);
+  navigation.cleanup();
+});
+
+test('SPC: desplazamiento cancelable y limpieza al descargar la sección', () => {
+  const navigation = navigationFixture();
+  navigation.click(); navigation.step(0); navigation.step(300);
+  const interrupted = navigation.window.scrollY;
+  navigation.window.dispatchEvent(new Event('wheel'));
+  navigation.step(1600);
+  assert.equal(navigation.window.scrollY, interrupted);
+  assert.equal(navigation.focused(), false);
+  assert.equal(navigation.window.location.hash, '');
+  navigation.click(); navigation.step(2000);
+  navigation.cleanup(); navigation.step(4000);
+  assert.equal(navigation.frames.size, 0);
+  assert.equal(navigation.click().defaultPrevented, false);
+});
+
+test('SPC: respeta movimiento reducido, móvil y clics con modificadores', () => {
+  const reduced = navigationFixture({reduced: true});
+  reduced.click();
+  assert.equal(reduced.window.scrollY, 4070);
+  assert.equal(reduced.frames.size, 0);
+  assert.equal(reduced.focused(), true);
+  reduced.cleanup();
+  const mobile = navigationFixture({desktop: false});
+  assert.equal(mobile.click().defaultPrevented, false);
+  assert.equal(mobile.window.scrollY, 100);
+  mobile.cleanup();
+  const modified = navigationFixture();
+  assert.equal(modified.click({ctrlKey: true}).defaultPrevented, false);
+  assert.equal(modified.frames.size, 0);
+  modified.cleanup();
+});
+
 test('SPC: el croquis conserva identidad y resultados al alternar móvil y escritorio', () => {
   const { runInNewContext } = require('node:vm');
   const { document } = parseHTML('<main><form><div data-desktop-plan></div><details class="spc-calc-details"><summary>Detalle</summary><div data-schematic-wrap><svg></svg></div><div class="spc-breakdown-details"><strong>11 cajas</strong></div><p class="spc-calc-help">Ayuda</p><p class="spc-planks-info">110 planchas</p></details></form></main>');
