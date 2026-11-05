@@ -1,3 +1,9 @@
+## 05/11/2026 — SPC de escritorio: alcance de la publicación autorizada
+
+El usuario autoriza publicar las mejoras aprobadas exclusivamente en escritorio (desde 1024 px): composición editorial, imágenes WebP, navegación con desplazamiento suave, capas interactivas, selección de acabados, calculadora ampliada y animaciones con respeto a movimiento reducido. La versión móvil aprobada conserva su composición, imágenes, enlaces y generación de la solicitud. El JavaScript compartido restablece esos comportamientos al volver a móvil.
+
+Integración de `codex/spc-desktop` (`86e5919`) sobre la producción `73c2657`, preservando la landing PVC y sus últimas correcciones. Único destino: tema oficial MAIN **188927803629 — WEB-DECOKASA-2026-ALFIN/main**, por sincronización GitHub/main. No se modifican productos, precios, existencias ni configuración comercial. Publicación y lectura posterior pendientes en esta entrada; registrar la comprobación al terminar.
+
 ## 05/11/2026 — Landing PVC publicada mediante el flujo GitHub de SPC
 
 Envío completado desde el clon autenticado: `git push origin main`, de `46c3ab6` a `a61758a6bc1f14db6a1a69ccf7b012b64c58af6f`. Shopify sincronizó los 49 cambios de tema en **188927803629 — WEB-DECOKASA-2026-ALFIN/main**; todos se confirmaron por API. El producto conserva `templateSuffix: landing-pvc` y carga su landing en https://decokasaperu.myshopify.com/products/piso-pvc.

@@ -1,3 +1,11 @@
+## 05/11/2026 — Integración del diseño SPC de escritorio
+
+- [x] Integrada la propuesta aprobada de `codex/spc-desktop` (`86e5919`) con la última producción (`73c2657`), conservando las correcciones de PVC.
+- [x] Mejoras de composición, navegación, imágenes WebP, explorador de capas, acabados, calculadora y animaciones limitadas a escritorio desde 1024 px.
+- [x] Conservados los recursos y estilos móviles; enlaces de acabados y comentario de solicitud restauran el comportamiento móvil publicado. Pruebas añadidas para los cambios de breakpoint.
+- [x] Integración validada: 49/49 pruebas, Theme Check sin hallazgos, ocho vistas y ZIP de 166 archivos. Navegación y calculadora comprobadas a 1440 px: 20 m² + 10% = 11 cajas.
+- [ ] Publicar mediante GitHub/main y cotejar los archivos y la página pública del tema oficial 188927803629.
+
 ## 05/11/2026 — Instaladora PVC alineada con el mockup
 
 - [x] Corregida la duplicación por desalineación entre fondo y recorte; geometría común basada en el PSD de 1080 px.

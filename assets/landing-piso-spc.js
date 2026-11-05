@@ -35,11 +35,135 @@
   const initialized = new WeakSet();
   const pageControllers = new WeakMap();
   const calculatorLayoutControllers = new WeakMap();
+  const navigationControllers = new WeakMap();
+  const motionControllers = new WeakMap();
+  const layerControllers = new WeakMap();
+  const finishControllers = new WeakMap();
   const escapeXML = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
   const number = new Intl.NumberFormat('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const integer = new Intl.NumberFormat('es-PE', { maximumFractionDigits: 0 });
 
   const testimonialControllers = new WeakMap();
+  function initDesktopMotion(page) {
+    // Progressive enhancement: content is visible even without JS or animation support.
+    if (!window.IntersectionObserver || !window.Element?.prototype.animate) return;
+    const desktop = window.matchMedia('(min-width: 1024px)');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const controller = new AbortController();
+    const seen = new WeakSet();
+    const active = new Map();
+    const targets = [...page.querySelectorAll([
+      '.spc-v2-composition-heading', '.spc-v2-composition-copy', '.spc-v2-sala-composicion',
+      '.spc-v2-colors-heading', '.spc-v2-sample', '.spc-v2-spec-heading', '.spc-v2-spec-data',
+      '.spc-v2-tablones-ficha', '.spc-v2-cert-heading', '.spc-seals > img',
+      '.spc-v2-click-word', '.spc-v2-click-copy', '.spc-v2-click-fondo', '.spc-v2-benefits > li',
+      '.spc-v2-layers-heading', '.spc-v2-layer-diagram',
+      '.spc-calc-title-group', '.spc-v2-testimonials-heading', '.spc-v2-results-heading',
+      '.spc-v2-shipping-heading', '.spc-v2-shipping-copy', '.spc-v2-footer-heading'
+    ].join(','))];
+    const stop = () => {
+      active.forEach(animation => animation.cancel());
+      active.clear();
+    };
+    const observer = new window.IntersectionObserver(entries => {
+      if (!desktop.matches || reducedMotion.matches) return;
+      entries.forEach(({target, isIntersecting}) => {
+        if (!isIntersecting || seen.has(target)) return;
+        seen.add(target);
+        observer.unobserve(target);
+        if (target.contains(document.activeElement)) return;
+        const group = target.closest('.spc-v2-samples, .spc-v2-benefits, .spc-seals');
+        const index = group ? [...group.children].indexOf(target) : 0;
+        const animation = target.animate([
+          {opacity: 0, transform: 'translate3d(0, 20px, 0)'},
+          {opacity: 1, transform: 'none'}
+        ], {duration: 720, delay: Math.min(240, Math.max(0, index) * 70), easing: 'cubic-bezier(.22, 1, .36, 1)', fill: 'backwards'});
+        active.set(target, animation);
+        animation.onfinish = animation.oncancel = () => active.delete(target);
+      });
+    }, {threshold: .12});
+    const configure = () => {
+      observer.disconnect();
+      stop();
+      if (desktop.matches && !reducedMotion.matches) targets.forEach(target => {
+        if (!seen.has(target)) observer.observe(target);
+      });
+    };
+    const options = {signal: controller.signal};
+    desktop.addEventListener('change', configure, options);
+    reducedMotion.addEventListener('change', configure, options);
+    // A keyboard or pointer interaction always takes priority over an entrance.
+    const revealControl = event => active.forEach((animation, target) => {
+      if (target.contains(event.target)) { animation.cancel(); active.delete(target); }
+    });
+    page.addEventListener('focusin', revealControl, options);
+    page.addEventListener('pointerdown', revealControl, options);
+    configure();
+    motionControllers.set(page, () => {
+      observer.disconnect();
+      stop();
+      controller.abort();
+      motionControllers.delete(page);
+    });
+  }
+
+  function initDesktopNavigation(page) {
+    const links = [...page.querySelectorAll('[data-spc-calculator-link], [data-spc-desktop-anchor]')];
+    if (!links.length) return;
+    const desktop = window.matchMedia('(min-width: 1024px)');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const controller = new AbortController();
+    const on = (node, type, fn, options = {}) => node.addEventListener(type, fn, {...options, signal: controller.signal});
+    let frame = 0;
+    const cancel = () => { window.cancelAnimationFrame(frame); frame = 0; };
+    const finish = (target, hash) => {
+      frame = 0;
+      target.focus({preventScroll: true});
+      if (window.location.hash !== hash) window.history.pushState(null, '', hash);
+    };
+    links.forEach(link => on(link, 'click', event => {
+      if (!desktop.matches || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const hash = link.getAttribute('href');
+      const target = hash?.startsWith('#') ? document.getElementById(hash.slice(1)) : null;
+      if (!target || !page.contains(target)) return;
+      event.preventDefault();
+      cancel();
+      const start = window.scrollY;
+      const margin = parseFloat(window.getComputedStyle(target).scrollMarginTop) || 0;
+      const end = Math.max(0, Math.min(start + target.getBoundingClientRect().top - margin, document.documentElement.scrollHeight - window.innerHeight));
+      const distance = end - start;
+      if (reducedMotion.matches || Math.abs(distance) < 2) {
+        window.scrollTo({top: end, behavior: 'instant'});
+        finish(target, hash);
+        return;
+      }
+      const duration = Math.min(1600, Math.max(900, Math.abs(distance) * .35));
+      let started;
+      const tick = time => {
+        started ??= time;
+        const t = Math.min(1, (time - started) / duration);
+        // Smootherstep: both velocity and acceleration settle to zero at each end.
+        const eased = t * t * t * (t * (t * 6 - 15) + 10);
+        window.scrollTo({top: start + distance * eased, behavior: 'instant'});
+        if (t < 1) frame = window.requestAnimationFrame(tick);
+        else finish(target, hash);
+      };
+      frame = window.requestAnimationFrame(tick);
+    }));
+    // Give control back immediately when the visitor starts navigating manually.
+    ['wheel', 'touchstart', 'pointerdown'].forEach(type => on(window, type, cancel, {passive: true}));
+    on(window, 'keydown', event => {
+      if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' ', 'Escape'].includes(event.key)) cancel();
+    });
+    on(window, 'resize', cancel);
+    on(reducedMotion, 'change', cancel);
+    navigationControllers.set(page, () => {
+      cancel();
+      controller.abort();
+      navigationControllers.delete(page);
+    });
+  }
+
   function initCalculatorLayout(page, form) {
     const desktop = form.querySelector('[data-desktop-plan]');
     const details = form.querySelector('.spc-calc-details');
@@ -174,6 +298,69 @@
     testimonialControllers.set(page, () => { stop(); abort.abort(); observer.disconnect(); resize.disconnect(); track.replaceChildren(original); original.replaceChildren(...cards); button.hidden = true; testimonialControllers.delete(page); initialized.delete(page); });
   }
 
+  function initDesktopLayers(page) {
+    const explorer = page.querySelector('[data-layer-explorer]');
+    if (!explorer) return;
+    const buttons = [...explorer.querySelectorAll('[data-layer-target]')];
+    const markers = [...page.querySelectorAll('[data-layer-marker]')];
+    const title = explorer.querySelector('[data-layer-title]');
+    const description = explorer.querySelector('[data-layer-description]');
+    const fact = explorer.querySelector('[data-layer-fact]');
+    const layers = [
+      ['El acabado empieza en la superficie.', 'La protección UV es la capa exterior del piso. Ayuda a conservar el aspecto de su acabado.', 'Protección superficial'],
+      ['Una capa para el uso de cada día.', 'La capa de desgaste protege el diseño decorativo frente al uso cotidiano del piso.', '0,3 mm de capa de desgaste'],
+      ['La personalidad de tu espacio.', 'Aquí está el diseño que aporta el aspecto de madera. Elige entre tonos cálidos, oscuros o neutros.', 'Acabados con aspecto de madera'],
+      ['El núcleo de tu nuevo piso.', 'El tablero rígido combina polvo de piedra y PVC. Es la base estructural del piso SPC.', '4 mm de espesor del piso'],
+      ['La base ya viene incorporada.', 'Incluye espuma integrada: no necesita una capa de espuma adicional sobre la superficie de instalación.', '1,5 mm de espuma integrada']
+    ];
+    const controller = new AbortController();
+    const choose = index => {
+      const layer = layers[index];
+      if (!layer) return;
+      buttons.forEach((button, i) => button.setAttribute('aria-pressed', String(i === index)));
+      markers.forEach(marker => marker.classList.toggle('is-active', Number(marker.dataset.layerMarker) === index));
+      title.textContent = layer[0];
+      description.textContent = layer[1];
+      fact.textContent = `0${index + 1} / 05 · ${layer[2]}`;
+    };
+    buttons.forEach((button, index) => {
+      button.addEventListener('click', () => choose(index), {signal: controller.signal});
+      button.addEventListener('keydown', event => {
+        if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        const next = event.key === 'Home' ? 0 : event.key === 'End' ? buttons.length - 1 : (index + (event.key === 'ArrowDown' ? 1 : -1) + buttons.length) % buttons.length;
+        choose(next);
+        buttons[next].focus({preventScroll: true});
+      }, {signal: controller.signal});
+    });
+    layerControllers.set(page, () => {controller.abort(); layerControllers.delete(page);});
+  }
+
+  function initDesktopFinishes(page) {
+    const media = window.matchMedia('(min-width: 1024px)');
+    const links = [...page.querySelectorAll('[data-color]')].map(swatch => ({
+      link: swatch.closest('.spc-v2-sample')?.querySelector('a'),
+      color: swatch.dataset.color
+    })).filter(item => item.link);
+    links.forEach(item => {item.original = item.link.getAttribute('href');});
+    const restore = item => {
+      if (item.original === null) item.link.removeAttribute('href');
+      else item.link.setAttribute('href', item.original);
+    };
+    const update = () => links.forEach(item => {
+      if (media.matches && page.dataset.phone) {
+        item.link.href = `https://wa.me/${page.dataset.phone}?text=${encodeURIComponent(`Hola, quisiera consultar el acabado ${item.color} del piso SPC de Decokasa.`)}`;
+      } else restore(item);
+    });
+    media.addEventListener('change', update);
+    update();
+    finishControllers.set(page, () => {
+      media.removeEventListener('change', update);
+      links.forEach(restore);
+      finishControllers.delete(page);
+    });
+  }
+
   function init(scope) {
     const pages = [...scope.querySelectorAll('[data-spc-page]')];
     if (scope.matches?.('[data-spc-page]')) pages.unshift(scope);
@@ -181,7 +368,11 @@
     pages.forEach(page => {
       if (initialized.has(page)) return;
       initialized.add(page);
+      initDesktopNavigation(page);
+      initDesktopMotion(page);
       initTestimonials(page);
+      initDesktopLayers(page);
+      initDesktopFinishes(page);
 
       const swatches = [...page.querySelectorAll('[data-color]')];
       const status = page.querySelector('[data-color-status]');
@@ -236,6 +427,18 @@
         selectedColorIdx = (index + swatches.length) % swatches.length;
         swatches.forEach((swatch, i) => swatch.setAttribute('aria-pressed', String(i === selectedColorIdx)));
         if (status) status.textContent = `${swatches[selectedColorIdx].dataset.color} · Color de referencia`;
+        const swatch = swatches[selectedColorIdx];
+        const source = swatch.querySelector('img');
+        const preview = page.querySelector('[data-finish-image]');
+        if (preview && source) {
+          preview.src = source.src;
+          preview.alt = `Muestra de piso SPC en ${swatch.dataset.color.toLowerCase()}`;
+        }
+        page.querySelectorAll('[data-finish-name], [data-finish-summary]').forEach(node => {node.textContent = swatch.dataset.color;});
+        const finishIndex = page.querySelector('[data-finish-index]');
+        if (finishIndex) finishIndex.textContent = `0${selectedColorIdx + 1} / 0${swatches.length}`;
+        const description = page.querySelector('[data-finish-description]');
+        if (description) description.textContent = ['Un tono cálido para espacios acogedores.', 'Un tono profundo que realza la madera.', 'Un tono neutro para combinar con tu estilo.'][selectedColorIdx] || '';
         contactUpdate();
       };
 
@@ -776,6 +979,7 @@
       const modalEl = page.querySelector('[data-spc-modal]');
       let scheduleStickyCta = () => {};
       let requestReturnFocus;
+      let generatedRequestComment = '';
 
       function openOrderModal() {
         if (!modalEl) return;
@@ -793,17 +997,28 @@
             qtyInput.dispatchEvent(new Event('input', { bubbles: true }));
           }
           const commentInput = reqForm.querySelector('[name="comment"]');
-          if (commentInput && lastCalculation && lastCalculation.boxes > 0) {
-            const wasteMsg = lastCalculation.includeWaste ? ' (+10% merma)' : '';
-            let details = '';
-            if (currentMode === 'dimensions') {
-              const rooms = getRoomsData();
-              if (rooms && rooms.length > 0) {
-                const rDetails = rooms.map(r => `${r.name || 'Ambiente'}: ${number.format(r.length)}m × ${number.format(r.width)}m (${number.format(r.area)} m²)`).join(', ');
-                details = ` [Ambientes: ${rDetails}]`;
+          const desktopRequest = window.matchMedia('(min-width: 1024px)').matches;
+          const canUpdateComment = desktopRequest
+            ? commentInput && (!commentInput.value.trim() || commentInput.value === generatedRequestComment)
+            : commentInput && lastCalculation && lastCalculation.boxes > 0;
+          if (canUpdateComment) {
+            const finish = swatches[selectedColorIdx]?.dataset.color;
+            const finishReference = desktopRequest && finish ? ` Acabado de referencia: ${finish} (por confirmar con el asesor).` : '';
+            if (lastCalculation && lastCalculation.boxes > 0) {
+              const wasteMsg = lastCalculation.includeWaste ? ' (+10% merma)' : '';
+              let details = '';
+              if (currentMode === 'dimensions') {
+                const rooms = getRoomsData();
+                if (rooms && rooms.length > 0) {
+                  const rDetails = rooms.map(r => `${r.name || 'Ambiente'}: ${number.format(r.length)}m × ${number.format(r.width)}m (${number.format(r.area)} m²)`).join(', ');
+                  details = ` [Ambientes: ${rDetails}]`;
+                }
               }
+              generatedRequestComment = `Solicitud de Piso SPC: ${lastCalculation.boxes} cajas calculadas para ${number.format(lastCalculation.netArea)} m² netos${wasteMsg} (cobertura total ${number.format(lastCalculation.covered)} m²).${details}${finishReference}`;
+            } else {
+              generatedRequestComment = `Me gustaría recibir asesoría para mi proyecto con piso SPC.${finishReference}`;
             }
-            commentInput.value = `Solicitud de Piso SPC: ${lastCalculation.boxes} cajas calculadas para ${number.format(lastCalculation.netArea)} m² netos${wasteMsg} (cobertura total ${number.format(lastCalculation.covered)} m²).${details}`;
+            commentInput.value = generatedRequestComment;
           }
         }
         modalEl.showModal();
@@ -971,6 +1186,7 @@
       }
 
       // Initial run
+      chooseColor(0);
       updateRoomsUI();
       recalculate();
     });
@@ -982,6 +1198,6 @@
   document.addEventListener('shopify:section:unload', event => {
     const pages = [...event.target.querySelectorAll('[data-spc-page]')];
     if (event.target.matches?.('[data-spc-page]')) pages.unshift(event.target);
-    pages.forEach(page => { testimonialControllers.get(page)?.(); pageControllers.get(page)?.(); calculatorLayoutControllers.get(page)?.(); initialized.delete(page); });
+    pages.forEach(page => { testimonialControllers.get(page)?.(); pageControllers.get(page)?.(); calculatorLayoutControllers.get(page)?.(); navigationControllers.get(page)?.(); motionControllers.get(page)?.(); layerControllers.get(page)?.(); finishControllers.get(page)?.(); initialized.delete(page); });
   });
 })();
