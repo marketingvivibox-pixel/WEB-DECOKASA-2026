@@ -4,7 +4,8 @@
 - [x] Composición de reseñas del PSD: cinco retratos, decoración y tarjetas legibles en móvil, identificadas como ejemplos ilustrativos. Los bloques reales autorizados sustituyen los ejemplos automáticamente.
 - [x] Carrusel continuo con deslizamiento, teclado, flechas, pausa y respeto a movimiento reducido; catálogo de 20 acabados y calculadora conservados.
 - [x] Verificación local a 320/393/1440 px; 50/50 pruebas, Theme Check sin hallazgos y ocho vistas/ZIP de 173 archivos. Rama `codex/pvc-layers-testimonials`, sobre main `87beef7`.
-- [ ] Publicar por GitHub/main en el único tema oficial 188927803629 y comprobar la URL pública.
+- [x] Publicados `3c525d3` y `cf0f594` por GitHub/main en el único tema oficial 188927803629. Se confirmó la sección y plantilla sincronizadas; URL pública revisada a 393 × 1000 px, con superposición correcta, flechas y pausa funcionales.
+- [x] Nombre del bloque ajustado al límite Shopify de 25 caracteres («Testimonio autorizado»), con prueba de regresión. Las seis pruebas PVC y Theme Check pasan tras este ajuste. Evidencia en `C:/Users/D. Cordova/Documents/Codex/2026-11-05/pvc-layers-reviews`.
 
 ## 05/11/2026 — Espesor total del piso SPC
 

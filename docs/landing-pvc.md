@@ -26,7 +26,9 @@ Las láminas decorativas se superponen ahora al panel «Un piso, muchas posibili
 
 Por petición del usuario se recupera la composición de testimonios del PSD: cinco retratos, ciudades, tarjetas y láminas decorativas. Se identifica el contenido como **ejemplos ilustrativos**, tanto en el encabezado como en cada tarjeta y en la nota inferior; no son reseñas de compradores verificados. No se añaden estrellas, insignias de verificación ni datos estructurados de opiniones. Los bloques «Testimonio autorizado» del editor reemplazan automáticamente estos ejemplos cuando contienen una reseña.
 
-El carrusel continuo permite deslizar, usar flechas, teclado y pausa; respeta movimiento reducido. Las tarjetas mantienen texto legible desde 320 px. Catálogo de 20 acabados, calculadora, SKU, precios y existencias se conservan. Verificación local a 320/393/1440 px sin desbordamiento; 50/50 pruebas, Theme Check sin hallazgos y ocho vistas/ZIP de 173 archivos. Preparado en `codex/pvc-layers-testimonials` para el flujo GitHub/main del único tema oficial.
+El carrusel continuo permite deslizar, usar flechas, teclado y pausa; respeta movimiento reducido. Las tarjetas mantienen texto legible desde 320 px. Catálogo de 20 acabados, calculadora, SKU, precios y existencias se conservan. Verificación local a 320/393/1440 px sin desbordamiento; 50/50 pruebas, Theme Check sin hallazgos y ocho vistas/ZIP de 173 archivos. Publicados `3c525d3` y `cf0f594` mediante GitHub/main en el único tema oficial, tras las pruebas en `codex/pvc-layers-testimonials`.
+
+El ajuste final limita el nombre del bloque a 25 caracteres («Testimonio autorizado»), con prueba de regresión: seis pruebas PVC aprobadas y Theme Check sin hallazgos. Se confirmaron la sección y plantilla sincronizadas en Shopify. Revisión pública a 393 × 1000 px: láminas delante del panel, ejemplos identificados, flecha siguiente y pausa correctas, sin desbordamiento. Capturas: `C:/Users/D. Cordova/Documents/Codex/2026-11-05/pvc-layers-reviews/public-layers-mobile.png` y `public-reviews-mobile.png` en la misma carpeta.
 
 ## Producto y presentación
 
