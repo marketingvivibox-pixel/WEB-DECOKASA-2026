@@ -1,3 +1,11 @@
+## 05/11/2026 — Cinco capas SPC: composición fiel al mockup
+
+Desde 1024 px, «Ultra resistentes» recupera el título centrado, subtítulo en cursiva, nombres a la izquierda, numeración dorada y líneas que identifican las cinco capas del despiece a la derecha. Fondo blanco con degradado suave. El diagrama conserva proporciones sobre un plano de 1040 × 540, con ancho máximo de 1040 px. Imagen, textos y conectores entran como una sola unidad en la animación existente. La versión móvil aprobada mantiene exactamente su geometría.
+
+Pruebas exclusivamente locales en WEB-DECOKASA-SPC-DESKTOP, rama codex/spc-desktop: http://127.0.0.1:8820/landing-piso-spc.html. Regla vigente: integrar después en main y actualizar únicamente el tema oficial 188927803629 — WEB-DECOKASA-2026-ALFIN/main por un procedimiento permitido. Las referencias históricas inferiores a borradores remotos no autorizan reutilizarlos. En este ajuste no se modificó Shopify y se preservaron los cambios concurrentes de PVC y AGENTS.md.
+
+Validación: 41/41 pruebas, Theme Check sin hallazgos, ocho vistas y ZIP de 118 archivos verificados; 1024/1440/1920 px sin desbordamiento; geometría móvil idéntica a 393 px; consola sin errores. Evidencia: C:/Users/D. Cordova/Documents/Codex/2026-10-21/este-mokup-es-para-la-pagina-4/work/spc-desktop/desktop-editorial/capas-nov05.png.
+
 ## 05/11/2026 — Reflejo de instalación y movimiento SPC en escritorio
 
 Restaurado con edición generativa el reflejo dorado del borde de la plancha que sostiene el instalador. Dos WebP adaptativos desde 1024 px: 1382 × 1138 (76224 bytes) y 768 × 632 (31900 bytes). Shopify los recodifica a 125604 y 48440 bytes. Se conserva la imagen original y la composición móvil aprobada.

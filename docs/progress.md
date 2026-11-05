@@ -1,3 +1,12 @@
+## 05/11/2026 — Cinco capas SPC: composición fiel al mockup
+
+- [x] Título centrado, subtítulo en cursiva, etiquetas a la izquierda, despiece a la derecha y conectores dorados hacia cada capa, desde 1024 px.
+- [x] Diagrama proporcional y animación conjunta; composición móvil conservada con medidas idénticas a 393 px.
+- [x] 41/41 pruebas, Theme Check sin hallazgos, ocho vistas y paquete de 118 archivos. Escritorio 1024/1440/1920 sin desbordamiento y consola sin errores.
+- [ ] Integrar en main y actualizar exclusivamente el tema oficial 188927803629 mediante un procedimiento permitido, preservando PVC y las restricciones vigentes.
+
+Resultado disponible en la rama codex/spc-desktop y en http://127.0.0.1:8820/landing-piso-spc.html. Ningún cambio remoto en Shopify en este ajuste. Las pruebas se limitan a rama secundaria y vista previa local, sin reutilizar los borradores remotos mencionados en entradas anteriores. Evidencia: C:/Users/D. Cordova/Documents/Codex/2026-10-21/este-mokup-es-para-la-pagina-4/work/spc-desktop/desktop-editorial/capas-nov05.png.
+
 ## 05/11/2026 — Reflejo de instalación y movimiento SPC en escritorio
 
 Restaurado con edición generativa el reflejo dorado del borde de la plancha que sostiene el instalador. Dos WebP adaptativos desde 1024 px: 1382 × 1138 (76224 bytes) y 768 × 632 (31900 bytes). Shopify los recodifica a 125604 y 48440 bytes. Se conserva la imagen original y la composición móvil aprobada.

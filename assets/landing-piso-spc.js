@@ -55,7 +55,7 @@
       '.spc-v2-colors-heading', '.spc-v2-sample', '.spc-v2-spec-heading', '.spc-v2-spec-data',
       '.spc-v2-tablones-ficha', '.spc-v2-cert-heading', '.spc-seals > img',
       '.spc-v2-click-word', '.spc-v2-click-copy', '.spc-v2-click-fondo', '.spc-v2-benefits > li',
-      '.spc-v2-layers-heading', '.spc-v2-layer-list', '.spc-v2-despiece-cinco-capas',
+      '.spc-v2-layers-heading', '.spc-v2-layer-diagram',
       '.spc-calc-title-group', '.spc-v2-testimonials-heading', '.spc-v2-results-heading',
       '.spc-v2-shipping-heading', '.spc-v2-shipping-copy', '.spc-v2-footer-heading'
     ].join(','))];
