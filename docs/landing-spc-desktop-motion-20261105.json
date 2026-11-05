@@ -1,0 +1,118 @@
+{
+  "date": "2026-11-05",
+  "scope": "Landing SPC: reflejo de instalación y animaciones solo en escritorio desde 1024 px; versión móvil aprobada conservada.",
+  "image": {
+    "reference": "codex-clipboard-0c12cb7c-dc33-475c-b1b1-6c03fed072e8.png",
+    "source": "assets/spc-2026-click-fondo.webp",
+    "generated_original": "exec-434eb39b-dd8c-4bce-bbb9-1304fce9c679.png",
+    "edit": "Reflejo dorado cálido sobre el borde de la plancha, preservando persona, posición, escena y perspectiva.",
+    "prompt": "Use case: precise-object-edit.\nAsset type: installation photo for the desktop Decokasa SPC flooring landing page.\nInput image 1 is the edit target. Restore a polished golden reflection highlighting the wooden plank held by the installer. Add a restrained warm yellow-gold rim light along the long front/lower edge of the plank, with a soft narrow glow that follows its exact perspective, slightly strongest near the center and fading naturally at the tips. This is a tasteful product highlight like the original advertising mockup, not an outline around everything.\nKeep the installer, his identity, anatomy, hands, clothing, pose, all tools, background, floor, plank size, shape, grain, position and crop unchanged. Preserve the photograph's natural colors and realistic lighting. Maintain the input's landscape aspect ratio of 1080:889 and full scene. High-quality clean detail, no added text, no watermark, no extra objects, no dramatic neon, no lens flares. Change only the plank's subtle reflected golden light.",
+    "encoding": {
+      "format": "WebP",
+      "quality": 87,
+      "method": 6
+    },
+    "files": [
+      {
+        "path": "assets/spc-desktop-instalacion-reflejo.webp",
+        "width": 1382,
+        "height": 1138,
+        "bytes": 76224,
+        "shopify_media_id": "gid://shopify/MediaImage/46864875782381",
+        "shopify_files_url": "https://cdn.shopify.com/s/files/1/0838/8398/3085/files/spc-desktop-instalacion-reflejo.webp?v=1793897956",
+        "shopify_theme_bytes": 125604
+      },
+      {
+        "path": "assets/spc-desktop-instalacion-reflejo-768.webp",
+        "width": 768,
+        "height": 632,
+        "bytes": 31900,
+        "shopify_media_id": "gid://shopify/MediaImage/46864876699885",
+        "shopify_files_url": "https://cdn.shopify.com/s/files/1/0838/8398/3085/files/spc-desktop-instalacion-reflejo-768.webp?v=1793897972",
+        "shopify_theme_bytes": 48440
+      }
+    ]
+  },
+  "motion": {
+    "entrance_ms": 720,
+    "translate_y_px": 20,
+    "stagger_ms": 70,
+    "max_delay_ms": 240,
+    "easing": "cubic-bezier(.22,1,.36,1)",
+    "once_per_element": true,
+    "respects_reduced_motion": true,
+    "visible_without_javascript": true,
+    "excludes": [
+      "hero/LCP",
+      "calculator controls",
+      "form controls"
+    ],
+    "interaction_cancels_animation": true,
+    "hover": "Botones, flecha CTA y miniaturas de colores; solo puntero fino."
+  },
+  "validation": {
+    "tests": "41/41",
+    "theme_check": "PASS; sin hallazgos",
+    "preview_pages": 8,
+    "theme_zip_files": 118,
+    "desktop_widths": [
+      1024,
+      1440,
+      1920
+    ],
+    "horizontal_overflow": false,
+    "mobile_width": 393,
+    "mobile_reference": "13 cajas de referencia idénticas; recurso original de instalación conservado.",
+    "shopify_calculator": "5 × 4 m + 10%: 11 cajas, S/ 1045, 24.16 m²; CTA con ancla y foco correctos.",
+    "browser_errors": 0,
+    "screenshot": "C:/Users/D. Cordova/Documents/Codex/2026-10-21/este-mokup-es-para-la-pagina-4/work/spc-desktop/desktop-editorial/motion-nov05/shopify-reflejo-desktop.png"
+  },
+  "shopify": {
+    "preview_url": "https://decokasaperu.myshopify.com/products/piso-spc?preview_theme_id=190101258477",
+    "id": "gid://shopify/OnlineStoreTheme/190101258477",
+    "name": "SPC desktop · imágenes y movimiento · 05 nov",
+    "role": "UNPUBLISHED",
+    "processing": false,
+    "processingFailed": false,
+    "files": {
+      "nodes": [
+        {
+          "filename": "assets/landing-piso-spc-desktop.css",
+          "checksumMd5": "68addeaa09a45aeb69f1c8c62a93c066",
+          "size": "32018",
+          "contentType": "text/css"
+        },
+        {
+          "filename": "assets/landing-piso-spc.js",
+          "checksumMd5": "7dc13a94e78b04a5eeaadf75ed8b5de4",
+          "size": "55313",
+          "contentType": "application/javascript"
+        },
+        {
+          "filename": "assets/spc-desktop-instalacion-reflejo-768.webp",
+          "checksumMd5": "f8698a52bb3be13b7acea1bbefaeb3ac",
+          "size": "48440",
+          "contentType": "image/webp"
+        },
+        {
+          "filename": "assets/spc-desktop-instalacion-reflejo.webp",
+          "checksumMd5": "cb27f3ba85d7111931a0d0c52abc565f",
+          "size": "125604",
+          "contentType": "image/webp"
+        },
+        {
+          "filename": "sections/landing-piso-spc.liquid",
+          "checksumMd5": "a1210a05644add08b3da6e1692cd1450",
+          "size": "32872",
+          "contentType": "application/x-liquid"
+        }
+      ]
+    },
+    "production_updated": false
+  },
+  "notes": [
+    "Shopify recodificó las imágenes al subirlas; los tamaños locales y remotos se registran por separado.",
+    "No eludir el bloqueo previo de MAIN. Publicación final pendiente del administrador.",
+    "Rama codex/spc-desktop; cambios concurrentes de PVC conservados en el clon principal."
+  ]
+}

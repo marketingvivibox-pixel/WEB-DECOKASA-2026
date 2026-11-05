@@ -1,3 +1,16 @@
+## 05/11/2026 — Reflejo de instalación y movimiento SPC en escritorio
+
+Restaurado con edición generativa el reflejo dorado del borde de la plancha que sostiene el instalador. Dos WebP adaptativos desde 1024 px: 1382 × 1138 (76224 bytes) y 768 × 632 (31900 bytes). Shopify los recodifica a 125604 y 48440 bytes. Se conserva la imagen original y la composición móvil aprobada.
+
+Entradas suaves de una sola ejecución al aparecer títulos, imágenes y tarjetas: 720 ms, desplazamiento de 20 px y desfase de 70 ms limitado a 240 ms. Microinteracciones en botones, flecha CTA y colores para puntero fino. Se respeta movimiento reducido, se cancela al interactuar y el contenido queda visible si no hay JavaScript. Hero/LCP y controles de calculadora/formulario no reciben entradas. Navegación suave existente y animación pausada de cuadritos conservadas.
+
+Validación: 41/41 pruebas, Theme Check sin hallazgos, ocho vistas y ZIP de 118 archivos verificados. Escritorio a 1024/1440/1920 px sin desbordamiento; las 13 cajas de referencia móvil a 393 px coinciden exactamente con la versión anterior. En el borrador Shopify, imagen cargada y reflejo comprobado visualmente; CTA con ancla y foco correctos; 5 × 4 m + 10% mantiene 11 cajas / S/ 1045 y 24,16 m² de cobertura. Sin errores de consola.
+
+Actualizados y releídos cinco archivos del borrador 190101258477 («SPC desktop · imágenes y movimiento · 05 nov»), UNPUBLISHED, sin procesamiento ni errores. Vista previa: https://decokasaperu.myshopify.com/products/piso-spc?preview_theme_id=190101258477. Manifest: docs/landing-spc-desktop-motion-20261105.json. Evidencia: C:/Users/D. Cordova/Documents/Codex/2026-10-21/este-mokup-es-para-la-pagina-4/work/spc-desktop/desktop-editorial/motion-nov05/shopify-reflejo-desktop.png.
+
+Trabajo en WEB-DECOKASA-SPC-DESKTOP, rama codex/spc-desktop. Pendiente publicación por el administrador; se conserva el bloqueo previo de MAIN. El clon principal y sus cambios concurrentes de PVC permanecen intactos. Este borrador no incorpora el PVC local pendiente.
+
+
 ## 05/11/2026 — Fotografías WebP y navegación suave SPC en escritorio
 
 Regeneradas con referencias las fotografías de sala y de dos niños con golden retriever. WebP adaptativo desde 1024 px: sala 1254 × 1254 (208196 bytes) y familia 1536 × 1024 (172550 bytes), más versiones de 768 px. Son escenas ambientales ilustrativas. Se conserva la composición y los recursos móviles aprobados. El botón «Calcula tu proyecto» incorpora aceleración y frenado progresivos, foco al llegar y cancelación al intervenir el usuario; respeta movimiento reducido. Sin cambios comerciales ni en PVC.

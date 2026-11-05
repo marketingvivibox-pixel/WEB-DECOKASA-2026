@@ -8,6 +8,104 @@ const { calculate, estimateTotal } = require('../assets/landing-piso-spc.js');
 const { filters } = require('../scripts/product_fixture.cjs');
 const root = path.resolve(__dirname, '..');
 
+function motionFixture({desktop = true, reduced = false} = {}) {
+  const { runInNewContext } = require('node:vm');
+  const controllers = new WeakMap(), observed = new Set(), animations = [];
+  const desktopMedia = Object.assign(new EventTarget(), {matches: desktop});
+  const reducedMedia = Object.assign(new EventTarget(), {matches: reduced});
+  const group = {children: []};
+  const targets = Array.from({length: 3}, (_, index) => ({
+    contains: node => node?.owner === index,
+    closest: () => group,
+    animate: (frames, options) => {
+      const animation = {frames, options, canceled: false, cancel() {this.canceled = true; this.oncancel?.();}};
+      animations.push(animation);
+      return animation;
+    }
+  }));
+  group.children = targets;
+  const page = Object.assign(new EventTarget(), {querySelectorAll: () => targets});
+  let notify;
+  const window = {
+    Element: {prototype: {animate() {}}},
+    matchMedia: query => query.includes('min-width') ? desktopMedia : reducedMedia,
+    IntersectionObserver: class {
+      constructor(callback) {notify = callback;}
+      observe(target) {observed.add(target);}
+      unobserve(target) {observed.delete(target);}
+      disconnect() {observed.clear();}
+    }
+  };
+  const document = {activeElement: null};
+  const source = fs.readFileSync(path.join(root, 'assets/landing-piso-spc.js'), 'utf8');
+  const motion = source.slice(source.indexOf('  function initDesktopMotion('), source.indexOf('  function initDesktopNavigation('));
+  runInNewContext(`${motion}\ninitDesktopMotion(page);`, {page, document, window, AbortController, motionControllers: controllers});
+  return {
+    observed, animations, document,
+    enter: (index, isIntersecting = true) => notify([{target: targets[index], isIntersecting}]),
+    setDesktop: matches => {desktopMedia.matches = matches; desktopMedia.dispatchEvent(new Event('change'));},
+    setReduced: matches => {reducedMedia.matches = matches; reducedMedia.dispatchEvent(new Event('change'));},
+    interact: (index, type) => {
+      const event = new Event(type);
+      Object.defineProperty(event, 'target', {value: {owner: index}});
+      page.dispatchEvent(event);
+    },
+    cleanup: () => controllers.get(page)()
+  };
+}
+
+test('SPC: entradas de escritorio solo al aparecer, una vez y con secuencia limitada', () => {
+  const motion = motionFixture();
+  assert.equal(motion.observed.size, 3);
+  motion.enter(0, false);
+  assert.equal(motion.animations.length, 0);
+  motion.enter(1);
+  assert.equal(motion.animations.length, 1);
+  assert.equal(motion.animations[0].options.delay, 70);
+  assert.equal(motion.animations[0].options.fill, 'backwards');
+  motion.enter(1);
+  assert.equal(motion.animations.length, 1);
+  motion.document.activeElement = {owner: 2};
+  motion.enter(2);
+  assert.equal(motion.animations.length, 1);
+  motion.cleanup();
+  assert.equal(motion.observed.size, 0);
+  assert.equal(motion.animations[0].canceled, true);
+});
+
+test('SPC: móvil y movimiento reducido desactivan entradas incluso durante la animación', () => {
+  const motion = motionFixture({desktop: false});
+  assert.equal(motion.observed.size, 0);
+  motion.setDesktop(true);
+  motion.enter(0);
+  motion.setReduced(true);
+  assert.equal(motion.observed.size, 0);
+  assert.equal(motion.animations[0].canceled, true);
+  motion.enter(1);
+  assert.equal(motion.animations.length, 1);
+  motion.setReduced(false);
+  assert.equal(motion.observed.size, 2);
+  motion.setDesktop(false);
+  assert.equal(motion.observed.size, 0);
+  motion.cleanup();
+  motion.setDesktop(true);
+  assert.equal(motion.observed.size, 0);
+  const reduced = motionFixture({reduced: true});
+  assert.equal(reduced.observed.size, 0);
+  reduced.cleanup();
+});
+
+test('SPC: teclado y puntero muestran inmediatamente el control animado', () => {
+  const motion = motionFixture();
+  motion.enter(0);
+  motion.interact(0, 'focusin');
+  assert.equal(motion.animations[0].canceled, true);
+  motion.enter(1);
+  motion.interact(1, 'pointerdown');
+  assert.equal(motion.animations[1].canceled, true);
+  motion.cleanup();
+});
+
 function navigationFixture({desktop = true, reduced = false} = {}) {
   const { runInNewContext } = require('node:vm');
   const frames = new Map();

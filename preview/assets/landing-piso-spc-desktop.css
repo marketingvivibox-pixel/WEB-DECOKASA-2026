@@ -616,6 +616,21 @@
   .spc-page .spc-v2-shipping-heading { font-size: 26px; }
 }
 
+/* Desktop micro-interactions complement the one-time, below-fold entrances in JS. */
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  .spc-page .spc-button {
+    transition: background-color .2s, border-color .2s, translate .28s cubic-bezier(.22, 1, .36, 1), box-shadow .28s;
+  }
+  .spc-page .spc-button:is(:hover, :focus-visible) {
+    translate: 0 -2px;
+    box-shadow: 0 8px 20px rgb(40 42 37 / .12);
+  }
+  .spc-page .spc-desktop-hero-actions .spc-button span { transition: translate .35s cubic-bezier(.22, 1, .36, 1); }
+  .spc-page .spc-desktop-hero-actions .spc-button:is(:hover, :focus-visible) span { translate: 4px 0; }
+  .spc-page .spc-v2-swatch img { transition: scale .55s cubic-bezier(.22, 1, .36, 1); }
+  .spc-page .spc-v2-swatch:is(:hover, :focus-visible) img { scale: 1.035; }
+}
+
 @media (min-width: 1024px) and (prefers-reduced-motion: reduce) {
   .spc-page .spc-button { transition: none; }
 }

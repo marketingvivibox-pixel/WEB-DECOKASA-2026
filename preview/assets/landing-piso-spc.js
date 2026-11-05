@@ -36,11 +36,75 @@
   const pageControllers = new WeakMap();
   const calculatorLayoutControllers = new WeakMap();
   const navigationControllers = new WeakMap();
+  const motionControllers = new WeakMap();
   const escapeXML = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
   const number = new Intl.NumberFormat('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const integer = new Intl.NumberFormat('es-PE', { maximumFractionDigits: 0 });
 
   const testimonialControllers = new WeakMap();
+  function initDesktopMotion(page) {
+    // Progressive enhancement: content is visible even without JS or animation support.
+    if (!window.IntersectionObserver || !window.Element?.prototype.animate) return;
+    const desktop = window.matchMedia('(min-width: 1024px)');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const controller = new AbortController();
+    const seen = new WeakSet();
+    const active = new Map();
+    const targets = [...page.querySelectorAll([
+      '.spc-v2-composition-heading', '.spc-v2-composition-copy', '.spc-v2-sala-composicion',
+      '.spc-v2-colors-heading', '.spc-v2-sample', '.spc-v2-spec-heading', '.spc-v2-spec-data',
+      '.spc-v2-tablones-ficha', '.spc-v2-cert-heading', '.spc-seals > img',
+      '.spc-v2-click-word', '.spc-v2-click-copy', '.spc-v2-click-fondo', '.spc-v2-benefits > li',
+      '.spc-v2-layers-heading', '.spc-v2-layer-list', '.spc-v2-despiece-cinco-capas',
+      '.spc-calc-title-group', '.spc-v2-testimonials-heading', '.spc-v2-results-heading',
+      '.spc-v2-shipping-heading', '.spc-v2-shipping-copy', '.spc-v2-footer-heading'
+    ].join(','))];
+    const stop = () => {
+      active.forEach(animation => animation.cancel());
+      active.clear();
+    };
+    const observer = new window.IntersectionObserver(entries => {
+      if (!desktop.matches || reducedMotion.matches) return;
+      entries.forEach(({target, isIntersecting}) => {
+        if (!isIntersecting || seen.has(target)) return;
+        seen.add(target);
+        observer.unobserve(target);
+        if (target.contains(document.activeElement)) return;
+        const group = target.closest('.spc-v2-samples, .spc-v2-benefits, .spc-seals');
+        const index = group ? [...group.children].indexOf(target) : 0;
+        const animation = target.animate([
+          {opacity: 0, transform: 'translate3d(0, 20px, 0)'},
+          {opacity: 1, transform: 'none'}
+        ], {duration: 720, delay: Math.min(240, Math.max(0, index) * 70), easing: 'cubic-bezier(.22, 1, .36, 1)', fill: 'backwards'});
+        active.set(target, animation);
+        animation.onfinish = animation.oncancel = () => active.delete(target);
+      });
+    }, {threshold: .12});
+    const configure = () => {
+      observer.disconnect();
+      stop();
+      if (desktop.matches && !reducedMotion.matches) targets.forEach(target => {
+        if (!seen.has(target)) observer.observe(target);
+      });
+    };
+    const options = {signal: controller.signal};
+    desktop.addEventListener('change', configure, options);
+    reducedMotion.addEventListener('change', configure, options);
+    // A keyboard or pointer interaction always takes priority over an entrance.
+    const revealControl = event => active.forEach((animation, target) => {
+      if (target.contains(event.target)) { animation.cancel(); active.delete(target); }
+    });
+    page.addEventListener('focusin', revealControl, options);
+    page.addEventListener('pointerdown', revealControl, options);
+    configure();
+    motionControllers.set(page, () => {
+      observer.disconnect();
+      stop();
+      controller.abort();
+      motionControllers.delete(page);
+    });
+  }
+
   function initDesktopNavigation(page) {
     const link = page.querySelector('[data-spc-calculator-link]');
     const hash = link?.getAttribute('href');
@@ -239,6 +303,7 @@
       if (initialized.has(page)) return;
       initialized.add(page);
       initDesktopNavigation(page);
+      initDesktopMotion(page);
       initTestimonials(page);
 
       const swatches = [...page.querySelectorAll('[data-color]')];
@@ -1040,6 +1105,6 @@
   document.addEventListener('shopify:section:unload', event => {
     const pages = [...event.target.querySelectorAll('[data-spc-page]')];
     if (event.target.matches?.('[data-spc-page]')) pages.unshift(event.target);
-    pages.forEach(page => { testimonialControllers.get(page)?.(); pageControllers.get(page)?.(); calculatorLayoutControllers.get(page)?.(); navigationControllers.get(page)?.(); initialized.delete(page); });
+    pages.forEach(page => { testimonialControllers.get(page)?.(); pageControllers.get(page)?.(); calculatorLayoutControllers.get(page)?.(); navigationControllers.get(page)?.(); motionControllers.get(page)?.(); initialized.delete(page); });
   });
 })();
