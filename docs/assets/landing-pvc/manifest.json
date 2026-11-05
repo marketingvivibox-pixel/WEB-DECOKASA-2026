@@ -626,6 +626,101 @@
         111
       ],
       "code": "7195-8"
+    },
+    {
+      "file": "pvc-retrato-ilustrativo-lima.webp",
+      "layer": "/50",
+      "source_bounds": [
+        -18,
+        8051,
+        143,
+        8212
+      ],
+      "size": [
+        161,
+        161
+      ],
+      "usage": "Retrato del mockup; no identifica a un cliente real ni acredita una reseña."
+    },
+    {
+      "file": "pvc-retrato-ilustrativo-arequipa.webp",
+      "layer": "/58",
+      "source_bounds": [
+        223,
+        8051,
+        384,
+        8212
+      ],
+      "size": [
+        161,
+        161
+      ],
+      "usage": "Retrato del mockup; no identifica a un cliente real ni acredita una reseña."
+    },
+    {
+      "file": "pvc-retrato-ilustrativo-canete.webp",
+      "layer": "/66",
+      "source_bounds": [
+        473,
+        8051,
+        634,
+        8212
+      ],
+      "size": [
+        161,
+        161
+      ],
+      "usage": "Retrato del mockup; no identifica a un cliente real ni acredita una reseña."
+    },
+    {
+      "file": "pvc-retrato-ilustrativo-huanuco.webp",
+      "layer": "/74",
+      "source_bounds": [
+        714,
+        8051,
+        875,
+        8212
+      ],
+      "size": [
+        161,
+        161
+      ],
+      "usage": "Retrato del mockup; no identifica a un cliente real ni acredita una reseña."
+    },
+    {
+      "file": "pvc-retrato-ilustrativo-trujillo.webp",
+      "layer": "/82",
+      "source_bounds": [
+        964,
+        8051,
+        1125,
+        8212
+      ],
+      "size": [
+        161,
+        161
+      ],
+      "usage": "Retrato del mockup; no identifica a un cliente real ni acredita una reseña."
+    },
+    {
+      "file": "pvc-laminas-decorativas-resenas.webp",
+      "layers": [
+        "/40",
+        "/41",
+        "/42",
+        "/43"
+      ],
+      "source_bounds": [
+        0,
+        7726,
+        1080,
+        7976
+      ],
+      "size": [
+        1080,
+        250
+      ],
+      "usage": "Láminas decorativas aisladas; textos y tarjetas se construyen en código."
     }
   ]
 }

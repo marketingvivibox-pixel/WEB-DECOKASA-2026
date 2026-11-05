@@ -20,6 +20,14 @@ Corregida la figura duplicada: la fotografía de fondo ya incluía a la instalad
 
 Cambio `a2b77bc`, probado en rama local e incorporado/publicado por `main` en el único tema oficial. Verificación local a 320/393/1440 px y pública a 393 × 852: figura única, manos y pies alineados, beneficios visibles y sin desbordamiento horizontal. 39/39 pruebas, Theme Check sin hallazgos y comprobación de ocho vistas/ZIP de 160 archivos. Evidencia pública: `C:/Users/D. Cordova/Documents/Codex/2026-11-05/pvc-installation-fix/published-mobile.png`. Se mantienen catálogo, calculadora y datos comerciales.
 
+## Capas y tarjetas del mockup — 05/11/2026
+
+Las láminas decorativas se superponen ahora al panel «Un piso, muchas posibilidades», conservando el borde redondeado y el fondo de la transición. Se elimina el contexto de apilamiento que las dejaba detrás del panel siguiente.
+
+Por petición del usuario se recupera la composición de testimonios del PSD: cinco retratos, ciudades, tarjetas y láminas decorativas. Se identifica el contenido como **ejemplos ilustrativos**, tanto en el encabezado como en cada tarjeta y en la nota inferior; no son reseñas de compradores verificados. No se añaden estrellas, insignias de verificación ni datos estructurados de opiniones. Los bloques «Testimonio real autorizado» del editor reemplazan automáticamente estos ejemplos cuando contienen una reseña.
+
+El carrusel continuo permite deslizar, usar flechas, teclado y pausa; respeta movimiento reducido. Las tarjetas mantienen texto legible desde 320 px. Catálogo de 20 acabados, calculadora, SKU, precios y existencias se conservan. Verificación local a 320/393/1440 px sin desbordamiento; 50/50 pruebas, Theme Check sin hallazgos y ocho vistas/ZIP de 173 archivos. Preparado en `codex/pvc-layers-testimonials` para el flujo GitHub/main del único tema oficial.
+
 ## Producto y presentación
 
 - Producto: **Piso PVC autoadhesivo**, ID `15506629263597`, handle `piso-pvc`, plantilla `landing-pvc`.
@@ -39,15 +47,15 @@ La descripción Shopify incluye presentación, instalación, asesoría/entrega y
 
 ## Diseño y funcionamiento
 
-Fuente: `C:/Users/D. Cordova/Documents/SHOPIFY/LANDING PVC/LANDING PVC_MOCK_FULL.psd` (1080 × 10758) y catálogo complementario. Se extrajeron 43 imágenes WebP, nombradas por contenido. El manifiesto está en `docs/assets/landing-pvc/manifest.json`; textos, botones y distribución se construyen con HTML/CSS, sin capturas completas como secciones.
+Fuente: `C:/Users/D. Cordova/Documents/SHOPIFY/LANDING PVC/LANDING PVC_MOCK_FULL.psd` (1080 × 10758) y catálogo complementario. Hay 49 imágenes WebP nombradas por contenido: 43 iniciales y seis para la composición de testimonios (cinco retratos del PSD y una decoración de láminas). El manifiesto está en `docs/assets/landing-pvc/manifest.json`; textos, botones y distribución se construyen con HTML/CSS, sin capturas completas como secciones.
 
-Archivos principales: `sections/landing-piso-pvc.liquid`, `assets/landing-piso-pvc.css`, `assets/landing-piso-pvc.js`, `snippets/pvc-icon.liquid` y `templates/product.landing-pvc.json`. La página antigua `page.pvc` se conserva como plantilla independiente; este producto utiliza su nueva plantilla de producto.
+Archivos principales: `sections/landing-piso-pvc.liquid`, `assets/landing-piso-pvc.css`, `assets/landing-piso-pvc.js`, `snippets/pvc-icon.liquid`, `snippets/pvc-review.liquid` y `templates/product.landing-pvc.json`. La página antigua `page.pvc` se conserva como plantilla independiente; este producto utiliza su nueva plantilla de producto.
 
 - Catálogo modal con 20 acabados y selección sincronizada con variantes. Usa SKU cuando exista; mientras esté vacío, compara el valor único de Acabado. Nunca empareja variantes por un SKU vacío.
 - Carrusel continuo con pausa, teclado, controles, interacción táctil y preferencia de movimiento reducido.
 - Calculadora compacta: área directa, cortes opcionales del 10%, cajas completas, cobertura y miniatura animada. Ejemplo: 12,5 m² con cortes → 3 cajas / 15 m². Se permiten coma o punto decimal y áreas de 0,1 a 10000 m².
 - Consulta por WhatsApp al `+51 941 599 516`, con acabado, medidas, cajas y precio/stock por confirmar. Solo abre un mensaje para que el cliente lo revise y envíe; no conecta Odoo ni crea pedidos.
-- El usuario aprobó sustituir afirmaciones sin respaldo y testimonios del mockup por características verificables y una galería de inspiración. No se publica «100% ignífugos» ni se atribuyen opiniones ficticias a clientes.
+- Se mantienen características verificables y se excluye «100% ignífugos». La petición posterior recupera el diseño de reseñas del mockup con identificación explícita de ejemplos ilustrativos; las opiniones reales requieren sus bloques propios.
 
 ## Vista previa
 
@@ -56,8 +64,8 @@ Vista local: http://127.0.0.1:8818/landing-pisos-pvc.html?revision=pvc-20-acabad
 
 ## Verificación y pendientes
 
-- 39/39 pruebas aprobadas tras integrar SPC; Shopify Theme Check CLI 5.0.1 sin errores, advertencias ni hallazgos. El validador del plugin no inicia por una dependencia ausente, por lo que se utilizó la herramienta oficial.
-- Ocho vistas locales y ZIP del tema con 160 archivos verificados.
+- 50/50 pruebas aprobadas, conservando SPC; Shopify Theme Check sin errores, advertencias ni hallazgos. El validador del plugin no inicia por una dependencia ausente, por lo que se utilizó la herramienta oficial.
+- Ocho vistas locales y ZIP del tema con 173 archivos verificados.
 - Revisión local a 320, 393 y 1440 px sin desbordamiento ni imágenes rotas. Selección FD802, cálculo, enlace WhatsApp, teclado, cierre del catálogo y recuperación del foco comprobados.
 - Evidencias: `C:/Users/D. Cordova/Documents/Codex/2026-11-04/pvc-landing/landing-pvc-mobile.png` y `calculadora-mobile.png` en la misma carpeta.
 - 05/11: stock de 10 000 cajas en cada uno de los 20 SKU verificado; producto y landing publicados. Los 49 archivos están sincronizados en el tema oficial desde `a61758a`.

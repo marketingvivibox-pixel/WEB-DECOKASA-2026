@@ -12,6 +12,17 @@
   endfor
   assign pvc_phone = section.settings.whatsapp | remove: '+' | remove: ' '
   assign pvc_contact = 'https://wa.me/' | append: pvc_phone | append: '?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20piso%20PVC%20autoadhesivo.'
+  assign pvc_reviews = section.blocks | where: 'type', 'testimonial'
+  assign pvc_review_count = 0
+  for review in pvc_reviews
+    if review.settings.quote != blank
+      assign pvc_review_count = pvc_review_count | plus: 1
+    endif
+  endfor
+  assign pvc_sample_reviews = false
+  if pvc_review_count == 0 and section.settings.show_illustrative_testimonials
+    assign pvc_sample_reviews = true
+  endif
 %}
 <div class="pvc-page" id="{{ pvc_id }}" data-pvc-landing data-phone="{{ pvc_phone | escape }}" data-coverage="{{ pvc_coverage }}" data-product-title="{{ product.title | default: 'Piso PVC autoadhesivo' | escape }}">
   <a class="pvc-skip" href="#{{ pvc_id }}-calculator">Ir a la calculadora</a>
@@ -93,20 +104,30 @@
     </div>
   </section>
 
-  <section class="pvc-inspiration" aria-labelledby="{{ pvc_id }}-inspiration-title">
-    <div class="pvc-inspiration__paper pvc-paper"><header class="pvc-heading"><h2 id="{{ pvc_id }}-inspiration-title">Un acabado para ti</h2><p>Inspírate con nuestros tonos</p></header></div>
-    <div class="pvc-finish-rail" data-finish-rail tabindex="0" role="region" aria-label="Acabados de piso PVC. Desliza para ver más.">
-      {% for block in section.blocks %}{% if block.type == 'finish' %}
-        {% assign finish_asset = 'pvc-acabado-' | append: block.settings.code | downcase | append: '.webp' %}
-        <button type="button" class="pvc-inspiration-card" data-pick-finish="{{ block.settings.code | escape }}" aria-label="Consultar acabado {{ block.settings.code | escape }}">
-          {% if block.settings.image != blank %}{{ block.settings.image | image_url: width: 480 | image_tag: loading: 'lazy', alt: block.settings.code }}{% else %}<img src="{{ finish_asset | asset_url }}" width="403" height="111" loading="lazy" alt="Textura {{ block.settings.code | escape }}">{% endif %}
-          <strong>{{ block.settings.code | escape }}</strong><span>Textura tipo madera</span><small>Ver acabado ↗</small>
-        </button>
-      {% endif %}{% endfor %}
-    </div>
-    <div class="pvc-rail-controls"><button type="button" data-rail-prev aria-label="Acabado anterior">←</button><button type="button" data-rail-pause aria-pressed="false">Pausar movimiento</button><button type="button" data-rail-next aria-label="Acabado siguiente">→</button></div>
-    <p class="pvc-inspiration__note">Los tonos pueden variar según la pantalla.<br>Consulta una muestra antes de elegir.</p>
-  </section>
+  {% if pvc_review_count > 0 or pvc_sample_reviews %}
+    <section class="pvc-testimonials" aria-labelledby="{{ pvc_id }}-testimonials-title">
+      <div class="pvc-testimonials__paper pvc-paper" aria-hidden="true"></div>
+      <img class="pvc-testimonials__planks" src="{{ 'pvc-laminas-decorativas-resenas.webp' | asset_url }}" width="1080" height="250" loading="lazy" alt="">
+      <header class="pvc-heading"><h2 id="{{ pvc_id }}-testimonials-title">Testimonios</h2><p>{% if pvc_sample_reviews %}Ejemplos ilustrativos{% else %}De nuestros clientes{% endif %}</p></header>
+      <div class="pvc-review-rail" data-review-rail tabindex="0" role="region" aria-label="Testimonios{% if pvc_sample_reviews %} ilustrativos{% endif %}. Desliza o usa las flechas para ver más."{% if pvc_sample_reviews %} aria-describedby="{{ pvc_id }}-sample-note"{% endif %}>
+        {% if pvc_sample_reviews %}
+          {% capture pvc_samples %}lima|Lima|Gustavo R.|Excelente acabado y fácil de limpiar|Me encantó el resultado, definitivamente volvería a comprar.~arequipa|Arequipa|Mishell D.|Mi sala luce completamente maravillosa|El piso PVC le dio un acabado distinto a mi sala, ¡me encantó!~canete|Cañete|Grecia C.|Renové mi departamento gastando poco|Es una excelente opción para renovar sin hacer obras.~huanuco|Huánuco|Franco J.|El dormitorio se siente más cálido|Lo instalamos con mi esposa en una tarde y quedó genial.~trujillo|Trujillo|Carley B.|La instalación fue más sencilla de lo que pensé|Quedó tal como lo imaginaba, ¡muy contenta!{% endcapture %}
+          {% assign pvc_sample_cards = pvc_samples | split: '~' %}
+          {% for sample in pvc_sample_cards %}
+            {% assign fields = sample | split: '|' %}
+            {% assign portrait = 'pvc-retrato-ilustrativo-' | append: fields[0] | append: '.webp' %}
+            {% render 'pvc-review', city: fields[1], name: fields[2], headline: fields[3], quote: fields[4], portrait_asset: portrait, sample: true %}
+          {% endfor %}
+        {% else %}
+          {% for block in pvc_reviews %}{% if block.settings.quote != blank %}
+            {% render 'pvc-review', city: block.settings.city, name: block.settings.name, headline: block.settings.headline, quote: block.settings.quote, portrait: block.settings.image, attributes: block.shopify_attributes %}
+          {% endif %}{% endfor %}
+        {% endif %}
+      </div>
+      <div class="pvc-rail-controls" data-rail-controls hidden><button type="button" data-rail-prev aria-label="Testimonio anterior">←</button><button type="button" data-rail-pause aria-pressed="false">Pausar movimiento</button><button type="button" data-rail-next aria-label="Testimonio siguiente">→</button></div>
+      {% if pvc_sample_reviews %}<p class="pvc-testimonials__note" id="{{ pvc_id }}-sample-note">Contenido ilustrativo del diseño.<br>No son reseñas de clientes reales.</p>{% endif %}
+    </section>
+  {% endif %}
 
   <section class="pvc-results" aria-labelledby="{{ pvc_id }}-results-title">
     <header class="pvc-heading"><h2 id="{{ pvc_id }}-results-title">Resultados &amp; Acabados</h2><p>Te acompañamos en tu proyecto</p></header>
@@ -138,12 +159,19 @@
     {"type":"text","id":"hero_tagline","label":"Frase de portada","default":"¡Los pisos en tendencia!"},
     {"type":"text","id":"whatsapp","label":"WhatsApp con código de país","default":"51941599516"},
     {"type":"range","id":"coverage_m2","label":"Rendimiento referencial por caja (m²)","min":1,"max":10,"step":0.1,"default":5,"info":"Confirmar con la ficha comercial. El metacampo decokasa.coverage_m2 del producto o variante tiene prioridad."},
-    {"type":"range","id":"planks_per_box","label":"Planchas por caja","min":1,"max":100,"step":1,"default":36}
+    {"type":"range","id":"planks_per_box","label":"Planchas por caja","min":1,"max":100,"step":1,"default":36},
+    {"type":"checkbox","id":"show_illustrative_testimonials","label":"Mostrar ejemplos ilustrativos","default":false,"info":"Recupera las tarjetas del mockup, identificadas como ejemplos. Al agregar testimonios reales, los ejemplos se reemplazan automáticamente."}
   ],
   "blocks": [{"type":"finish","name":"Acabado","settings":[
     {"type":"text","id":"code","label":"Código del acabado"},
     {"type":"image_picker","id":"image","label":"Muestra del acabado","info":"Opcional para los 20 acabados originales del mockup."},
     {"type":"text","id":"sku","label":"SKU de variante Shopify confirmado","info":"Vincula el precio de una variante real por su SKU exacto. No completar hasta verificar la presentación."}
+  ]},{"type":"testimonial","name":"Testimonio real autorizado","settings":[
+    {"type":"text","id":"city","label":"Ciudad"},
+    {"type":"text","id":"name","label":"Nombre para mostrar"},
+    {"type":"image_picker","id":"image","label":"Foto autorizada"},
+    {"type":"text","id":"headline","label":"Frase destacada"},
+    {"type":"textarea","id":"quote","label":"Reseña","info":"Publica únicamente opiniones reales con autorización del cliente. Deja vacío para no mostrar la tarjeta."}
   ]}],
   "max_blocks":40,
   "presets":[{"name":"Landing Piso PVC"}],

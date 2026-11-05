@@ -1,0 +1,11 @@
+<article class="pvc-review{% if sample %} pvc-review--sample{% endif %}" {{ attributes }}>
+  {% if city != blank %}<p class="pvc-review__city"><svg viewBox="0 0 16 20" aria-hidden="true"><path d="M8 18s6-7.2 6-11A6 6 0 0 0 2 7c0 3.8 6 11 6 11Z"/><circle cx="8" cy="7" r="2"/></svg>{{ city | escape }}</p>{% endif %}
+  {% if sample %}
+    <img class="pvc-review__portrait" src="{{ portrait_asset | asset_url }}" width="161" height="161" loading="lazy" alt="Retrato ilustrativo del mockup">
+  {% elsif portrait != blank %}
+    {{ portrait | image_url: width: 322 | image_tag: class: 'pvc-review__portrait', loading: 'lazy', alt: name }}
+  {% endif %}
+  {% if name != blank %}<h3>{{ name | escape }}</h3>{% endif %}
+  {% if sample %}<span class="pvc-review__label">Ejemplo ilustrativo</span>{% endif %}
+  <blockquote>{% if headline != blank %}<strong>“{{ headline | escape }}”</strong>{% endif %}<p>{{ quote | escape }}</p></blockquote>
+</article>

@@ -2,7 +2,7 @@
   "sections": {
     "main": {
       "type": "landing-piso-pvc",
-      "settings": {"hero_tagline":"¡Los pisos en tendencia!","whatsapp":"51941599516","coverage_m2":5,"planks_per_box":36},
+      "settings": {"hero_tagline":"¡Los pisos en tendencia!","whatsapp":"51941599516","coverage_m2":5,"planks_per_box":36,"show_illustrative_testimonials":true},
       "blocks": {
         "fd801":{"type":"finish","settings":{"code":"FD801"}},
         "fd802":{"type":"finish","settings":{"code":"FD802"}},

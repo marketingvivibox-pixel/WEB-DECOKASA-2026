@@ -53,7 +53,7 @@
     const quote = root.querySelector('[data-quote]');
     const miniFloor = root.querySelector('[data-mini-floor]');
     const catalog = root.querySelector('[data-catalog]');
-    const rail = root.querySelector('[data-finish-rail]');
+    const rail = root.querySelector('[data-review-rail]');
     const pauseButton = root.querySelector('[data-rail-pause]');
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const variants = JSON.parse(root.querySelector('[data-pvc-variants]')?.textContent || '[]');
@@ -130,10 +130,6 @@
       if (source) miniFloor.style.setProperty('--finish', `url("${source.replace(/["\\\n\r]/g, '')}")`);
       update();
       closeCatalog();
-      if (pick.closest('[data-finish-rail]')) {
-        root.querySelector('.pvc-selected').focus({preventScroll: true});
-        root.querySelector('[data-pvc]').scrollIntoView({behavior: motion.matches ? 'instant' : 'smooth', block: 'center'});
-      }
     });
     on(area, 'input', () => { clearTimeout(debounce); debounce = setTimeout(update, 180); });
     on(waste, 'change', () => update());
@@ -145,29 +141,44 @@
 
     if (rail && rail.children.length > 1) {
       const originals = [...rail.children];
-      originals.forEach(card => {
+      const before = document.createDocumentFragment();
+      const after = document.createDocumentFragment();
+      function cloneCard(card) {
         const clone = card.cloneNode(true);
         clone.dataset.railClone = '';
         clone.setAttribute('aria-hidden', 'true');
-        clone.setAttribute('tabindex', '-1');
-        rail.appendChild(clone);
-      });
+        clone.removeAttribute('data-shopify-editor-block');
+        return clone;
+      }
+      originals.forEach(card => {before.appendChild(cloneCard(card)); after.appendChild(cloneCard(card));});
+      rail.prepend(before);
+      rail.append(after);
+      root.querySelector('[data-rail-controls]').hidden = false;
       function measureRail() {
-        const clone = rail.querySelector('[data-rail-clone]');
-        loopWidth = clone.getBoundingClientRect().left - originals[0].getBoundingClientRect().left;
-        railPosition = rail.scrollLeft;
+        const previousWidth = loopWidth;
+        loopWidth = originals[0].getBoundingClientRect().left - rail.firstElementChild.getBoundingClientRect().left;
+        if (!loopWidth) return;
+        // Short collections still need enough trailing cards to fill a wide
+        // viewport at the wrap point. Reuse the same image files.
+        while (rail.scrollWidth < loopWidth * 2 + rail.clientWidth) {
+          originals.forEach(card => rail.appendChild(cloneCard(card)));
+        }
+        // Start with a partial card at the left edge, as in the PSD. Keep the
+        // same position when the viewport changes rather than restarting.
+        railPosition = previousWidth ? loopWidth + ((rail.scrollLeft % previousWidth) / previousWidth) * loopWidth : loopWidth + originals[0].getBoundingClientRect().width * .24;
+        rail.scrollLeft = railPosition;
       }
       function normalizeScroll() {
         if (!loopWidth) return;
-        if (rail.scrollLeft >= loopWidth) rail.scrollLeft -= loopWidth;
-        if (rail.scrollLeft < 0) rail.scrollLeft += loopWidth;
+        if (rail.scrollLeft >= loopWidth * 2) rail.scrollLeft -= loopWidth;
+        if (rail.scrollLeft < loopWidth) rail.scrollLeft += loopWidth;
         railPosition = rail.scrollLeft;
       }
       function stop() {cancelAnimationFrame(railFrame); railFrame = 0; lastTime = 0;}
       function tick(now) {
         if (lastTime && loopWidth) {
           railPosition += Math.min(now - lastTime, 64) * 0.018;
-          if (railPosition >= loopWidth) railPosition -= loopWidth;
+          if (railPosition >= loopWidth * 2) railPosition -= loopWidth;
           rail.scrollLeft = railPosition;
         }
         lastTime = now;
@@ -198,11 +209,18 @@
       function step(direction) {
         paused = true;
         reconcilePlayback();
-        if (direction < 0 && rail.scrollLeft < 1) rail.scrollLeft = loopWidth;
-        rail.scrollBy({left: direction * (originals[0].getBoundingClientRect().width + parseFloat(getComputedStyle(rail).gap)), behavior: motion.matches ? 'instant' : 'smooth'});
+        // Instant steps avoid a browser smooth-scroll being interrupted when
+        // the infinite rail wraps. Touch gestures retain native momentum.
+        rail.scrollLeft += direction * (originals[0].getBoundingClientRect().width + parseFloat(getComputedStyle(rail).gap));
+        normalizeScroll();
       }
       on(root.querySelector('[data-rail-prev]'), 'click', () => step(-1));
       on(root.querySelector('[data-rail-next]'), 'click', () => step(1));
+      on(rail, 'keydown', event => {
+        if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+        event.preventDefault();
+        step(event.key === 'ArrowLeft' ? -1 : 1);
+      });
       const resize = new ResizeObserver(measureRail);
       resize.observe(rail);
       const visibility = new IntersectionObserver(entries => {inView = entries[0].isIntersecting; reconcilePlayback();}, {threshold:0.15});

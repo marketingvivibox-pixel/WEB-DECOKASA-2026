@@ -1,3 +1,11 @@
+## 05/11/2026 — Capas y testimonios PVC recuperados
+
+- [x] Láminas por delante del panel «Un piso, muchas posibilidades», con borde redondeado y transición de fondo conservados.
+- [x] Composición de reseñas del PSD: cinco retratos, decoración y tarjetas legibles en móvil, identificadas como ejemplos ilustrativos. Los bloques reales autorizados sustituyen los ejemplos automáticamente.
+- [x] Carrusel continuo con deslizamiento, teclado, flechas, pausa y respeto a movimiento reducido; catálogo de 20 acabados y calculadora conservados.
+- [x] Verificación local a 320/393/1440 px; 50/50 pruebas, Theme Check sin hallazgos y ocho vistas/ZIP de 173 archivos. Rama `codex/pvc-layers-testimonials`, sobre main `87beef7`.
+- [ ] Publicar por GitHub/main en el único tema oficial 188927803629 y comprobar la URL pública.
+
 ## 05/11/2026 — Espesor total del piso SPC
 
 - Ficha técnica corregida por indicación del usuario: «Espesor total: 5,5 mm», incluyendo los 4 mm del piso y 1,5 mm de espuma. Se conserva la espuma como desglose.

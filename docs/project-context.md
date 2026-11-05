@@ -1,3 +1,9 @@
+## 05/11/2026 — PVC: composición de reseñas y orden de capas
+
+La petición posterior del usuario recupera la sección de reseñas del PSD PVC en lugar del carrusel de texturas. Como no se han confirmado opiniones reales autorizadas, los cinco ejemplos del diseño se identifican como ilustrativos en encabezado, tarjetas y nota; no se agregan estrellas, verificación ni datos estructurados de reseñas. El editor admite bloques «Testimonio real autorizado», que reemplazan los ejemplos automáticamente. El catálogo conserva sus 20 acabados.
+
+Las láminas decorativas deben quedar por encima del panel siguiente, con sus bordes y la transición de fondo del mockup. Pruebas en rama local `codex/pvc-layers-testimonials`, destino único GitHub/main → tema oficial 188927803629. Sin cambios comerciales ni modificaciones del diseño SPC.
+
 ## 05/11/2026 — Espesor total del piso SPC
 
 - Ficha técnica corregida por indicación del usuario: «Espesor total: 5,5 mm», incluyendo los 4 mm del piso y 1,5 mm de espuma. Se conserva la espuma como desglose.
