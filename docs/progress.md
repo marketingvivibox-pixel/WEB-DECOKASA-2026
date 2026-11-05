@@ -4,7 +4,9 @@
 - [x] Mejoras de composición, navegación, imágenes WebP, explorador de capas, acabados, calculadora y animaciones limitadas a escritorio desde 1024 px.
 - [x] Conservados los recursos y estilos móviles; enlaces de acabados y comentario de solicitud restauran el comportamiento móvil publicado. Pruebas añadidas para los cambios de breakpoint.
 - [x] Integración validada: 49/49 pruebas, Theme Check sin hallazgos, ocho vistas y ZIP de 166 archivos. Navegación y calculadora comprobadas a 1440 px: 20 m² + 10% = 11 cajas.
-- [ ] Publicar mediante GitHub/main y cotejar los archivos y la página pública del tema oficial 188927803629.
+- [x] Publicado el merge `e8b617e` mediante GitHub/main en el tema oficial 188927803629: 14/14 archivos cotejados por MD5, incluidos nueve archivos SPC actualizados y cinco archivos base/móvil/PVC preservados.
+- [x] Tienda pública comprobada a 1440 × 1000: navegación, capas, Caoba y calculadora (20 m² + 10% → 11 cajas / 24.16 m² / S/ 1045). A 393 × 852 coinciden las fuentes y posiciones de las 49 imágenes visibles, la geometría principal y los tres enlaces WhatsApp con la versión anterior; sin desbordamiento.
+- [x] Evidencia guardada en `C:/Users/D. Cordova/Documents/Codex/2026-10-21/este-mokup-es-para-la-pagina-4/work/spc-desktop/production-nov05`.
 
 ## 05/11/2026 — Instaladora PVC alineada con el mockup
 
