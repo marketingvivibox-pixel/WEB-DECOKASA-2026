@@ -1,0 +1,347 @@
+{
+  "verified_on": "2026-11-05",
+  "product_id": "gid://shopify/Product/15506629263597",
+  "admin_url": "https://admin.shopify.com/store/ruik4d-dn/products/15506629263597",
+  "title": "Piso PVC autoadhesivo",
+  "status": "ACTIVE",
+  "currency": "PEN",
+  "template": "landing-pvc",
+  "selection_decision": "User confirmed keeping only the 20 finishes in the mockup on 2026-11-05; do not add the other 11 source models.",
+  "source_policy": "The two original Drive Excel sources are read-only. This is an audit of applied Shopify data, not a replacement catalog or automatic synchronization.",
+  "sources": [
+    {
+      "role": "skus",
+      "file_id": "168VY-d5YYd3VqwHhvtnHIPzKnJ_g9Tp1",
+      "gid": "1422187063"
+    },
+    {
+      "role": "prices",
+      "file_id": "1FCYUJLGpAZ3I2qcok2lyHfS4bz3iDols",
+      "gid": "645245379"
+    }
+  ],
+  "presentation": {
+    "selling_unit": "box",
+    "planks_per_box": 36,
+    "coverage_m2_per_box": 5
+  },
+  "fd_price_tiers_pen": [
+    {
+      "minimum_boxes": 1,
+      "price_per_box": "99.00"
+    },
+    {
+      "minimum_boxes": 3,
+      "price_per_box": "92.00"
+    },
+    {
+      "minimum_boxes": 6,
+      "price_per_box": "85.00"
+    },
+    {
+      "minimum_boxes": 12,
+      "price_per_box": "78.00"
+    },
+    {
+      "minimum_boxes": 20,
+      "price_per_box": "71.00"
+    },
+    {
+      "minimum_boxes": 50,
+      "price_per_box": "65.00"
+    }
+  ],
+  "quantity_pricing_implementation": "Informational table in the product description for adviser quotation. No automatic discount or calculator tier logic was added.",
+  "inventory_status": "Configured and read back in Shopify by explicit user instruction: 10,000 available boxes for each of the 20 existing SKUs; tracking enabled. Total 200,000 boxes. This is not a physical stock audit or an Odoo synchronization.",
+  "image_matching_status": "Code-to-SKU mapping verified from text. Embedded source thumbnails have not been visually compared.",
+  "pending": [
+    "Confirm the LQ tariff for 7172-4, 7172-8 and 7195-8; do not assume LQ is HM.",
+    "Visually compare the source thumbnails with the 20 selected finishes.",
+    "Incorporate the PVC files into the existing official theme 188927803629 through a permitted procedure and visually verify the custom landing. Product publication to Online Store is complete."
+  ],
+  "verification": {
+    "sku_count": 20,
+    "fd_price_count": 17,
+    "variant_count_unchanged": true,
+    "description_matches_saved_html": true,
+    "inventory_sku_count": 20,
+    "inventory_per_sku": 10000,
+    "tracked_inventory_items": 20,
+    "total_inventory": 200000
+  },
+  "variants": [
+    {
+      "finish": "FD801",
+      "source_model": "FD801",
+      "shopify_variant_id": "gid://shopify/ProductVariant/68178202624237",
+      "sku": "01CHNJMYDECPI2PVC210000",
+      "price_per_box_pen": "99.00",
+      "shopify_admin_price": "99.00",
+      "price_status": "verified_fd_current_scale",
+      "inventory_item_id": "gid://shopify/InventoryItem/70172161016045",
+      "inventory_available": 10000,
+      "inventory_tracked": true
+    },
+    {
+      "finish": "FD802",
+      "source_model": "FD802",
+      "shopify_variant_id": "gid://shopify/ProductVariant/68178389270765",
+      "sku": "01CHNJMYDECPI2PVC220000",
+      "price_per_box_pen": "99.00",
+      "shopify_admin_price": "99.00",
+      "price_status": "verified_fd_current_scale",
+      "inventory_item_id": "gid://shopify/InventoryItem/70172350251245",
+      "inventory_available": 10000,
+      "inventory_tracked": true
+    },
+    {
+      "finish": "FD806",
+      "source_model": "FD806",
+      "shopify_variant_id": "gid://shopify/ProductVariant/68178389303533",
+      "sku": "01CHNJMYDECPI2PVC170000",
+      "price_per_box_pen": "99.00",
+      "shopify_admin_price": "99.00",
+      "price_status": "verified_fd_current_scale",
+      "inventory_item_id": "gid://shopify/InventoryItem/70172350284013",
+      "inventory_available": 10000,
+      "inventory_tracked": true
+    },
+    {
+      "finish": "FD807",
+      "source_model": "FD807",
+      "shopify_variant_id": "gid://shopify/ProductVariant/68178389336301",
+      "sku": "01CHNJMYDECPI2PVC280000",
+      "price_per_box_pen": "99.00",
+      "shopify_admin_price": "99.00",
+      "price_status": "verified_fd_current_scale",
+      "inventory_item_id": "gid://shopify/InventoryItem/70172350316781",
+      "inventory_available": 10000,
+      "inventory_tracked": true
+    },
+    {
+      "finish": "FD809",
+      "source_model": "FD809",
+      "shopify_variant_id": "gid://shopify/ProductVariant/68178389369069",
+      "sku": "01CHNJMYDECPI2PVC010000",
+      "price_per_box_pen": "99.00",
+      "shopify_admin_price": "99.00",
+      "price_status": "verified_fd_current_scale",
+      "inventory_item_id": "gid://shopify/InventoryItem/70172350349549",
+      "inventory_available": 10000,
+      "inventory_tracked": true
+    },
+    {
+      "finish": "FD810",
+      "source_model": "FD810",
+      "shopify_variant_id": "gid://shopify/ProductVariant/68178389401837",
+      "sku": "01CHNJMYDECPI2PVC290000",
+      "price_per_box_pen": "99.00",
+      "shopify_admin_price": "99.00",
+      "price_status": "verified_fd_current_scale",
+      "inventory_item_id": "gid://shopify/InventoryItem/70172350382317",
+      "inventory_available": 10000,
+      "inventory_tracked": true
+    },
+    {
+      "finish": "FD811",
+      "source_model": "FD811",
+      "shopify_variant_id": "gid://shopify/ProductVariant/68178389434605",
+      "sku": "01CHNJMYDECPI2PVC230000",
+      "price_per_box_pen": "99.00",
+      "shopify_admin_price": "99.00",
+      "price_status": "verified_fd_current_scale",
+      "inventory_item_id": "gid://shopify/InventoryItem/70172350415085",
+      "inventory_available": 10000,
+      "inventory_tracked": true
+    },
+    {
+      "finish": "FD814",
+      "source_model": "FD814",
+      "shopify_variant_id": "gid://shopify/ProductVariant/68178389467373",
+      "sku": "01CHNJMYDECPI2PVC240000",
+      "price_per_box_pen": "99.00",
+      "shopify_admin_price": "99.00",
+      "price_status": "verified_fd_current_scale",
+      "inventory_item_id": "gid://shopify/InventoryItem/70172350447853",
+      "inventory_available": 10000,
+      "inventory_tracked": true
+    },
+    {
+      "finish": "FD815",
+      "source_model": "FD815",
+      "shopify_variant_id": "gid://shopify/ProductVariant/68178389500141",
+      "sku": "01CHNJMYDECPI2PVC300000",
+      "price_per_box_pen": "99.00",
+      "shopify_admin_price": "99.00",
+      "price_status": "verified_fd_current_scale",
+      "inventory_item_id": "gid://shopify/InventoryItem/70172350480621",
+      "inventory_available": 10000,
+      "inventory_tracked": true
+    },
+    {
+      "finish": "FD816",
+      "source_model": "FD816",
+      "shopify_variant_id": "gid://shopify/ProductVariant/68178389532909",
+      "sku": "01CHNJMYDECPI2PVC260000",
+      "price_per_box_pen": "99.00",
+      "shopify_admin_price": "99.00",
+      "price_status": "verified_fd_current_scale",
+      "inventory_item_id": "gid://shopify/InventoryItem/70172350513389",
+      "inventory_available": 10000,
+      "inventory_tracked": true
+    },
+    {
+      "finish": "FD817",
+      "source_model": "FD817",
+      "shopify_variant_id": "gid://shopify/ProductVariant/68178389565677",
+      "sku": "01CHNJMYDECPI2PVC320000",
+      "price_per_box_pen": "99.00",
+      "shopify_admin_price": "99.00",
+      "price_status": "verified_fd_current_scale",
+      "inventory_item_id": "gid://shopify/InventoryItem/70172350546157",
+      "inventory_available": 10000,
+      "inventory_tracked": true
+    },
+    {
+      "finish": "FD817-1",
+      "source_model": "FD817-1",
+      "shopify_variant_id": "gid://shopify/ProductVariant/68178389598445",
+      "sku": "01CHNJMYDECPI2PVC070000",
+      "price_per_box_pen": "99.00",
+      "shopify_admin_price": "99.00",
+      "price_status": "verified_fd_current_scale",
+      "inventory_item_id": "gid://shopify/InventoryItem/70172350578925",
+      "inventory_available": 10000,
+      "inventory_tracked": true
+    },
+    {
+      "finish": "FD818",
+      "source_model": "FD818",
+      "shopify_variant_id": "gid://shopify/ProductVariant/68178389631213",
+      "sku": "01CHNJMYDECPI2PVC030000",
+      "price_per_box_pen": "99.00",
+      "shopify_admin_price": "99.00",
+      "price_status": "verified_fd_current_scale",
+      "inventory_item_id": "gid://shopify/InventoryItem/70172350611693",
+      "inventory_available": 10000,
+      "inventory_tracked": true
+    },
+    {
+      "finish": "FD821",
+      "source_model": "FD821",
+      "shopify_variant_id": "gid://shopify/ProductVariant/68178389663981",
+      "sku": "01CHNJMYDECPI3PVC040000",
+      "price_per_box_pen": "99.00",
+      "shopify_admin_price": "99.00",
+      "price_status": "verified_fd_current_scale",
+      "inventory_item_id": "gid://shopify/InventoryItem/70172350644461",
+      "inventory_available": 10000,
+      "inventory_tracked": true
+    },
+    {
+      "finish": "FD822",
+      "source_model": "FD822",
+      "shopify_variant_id": "gid://shopify/ProductVariant/68178389696749",
+      "sku": "01CHNNIDDECPI2PVC330000",
+      "price_per_box_pen": "99.00",
+      "shopify_admin_price": "99.00",
+      "price_status": "verified_fd_current_scale",
+      "inventory_item_id": "gid://shopify/InventoryItem/70172350677229",
+      "inventory_available": 10000,
+      "inventory_tracked": true
+    },
+    {
+      "finish": "FD823",
+      "source_model": "FD823",
+      "shopify_variant_id": "gid://shopify/ProductVariant/68178389729517",
+      "sku": "01CHNJMYDECPI2PVC340000",
+      "price_per_box_pen": "99.00",
+      "shopify_admin_price": "99.00",
+      "price_status": "verified_fd_current_scale",
+      "inventory_item_id": "gid://shopify/InventoryItem/70172350709997",
+      "inventory_available": 10000,
+      "inventory_tracked": true
+    },
+    {
+      "finish": "FD828",
+      "source_model": "FD828",
+      "shopify_variant_id": "gid://shopify/ProductVariant/68178389762285",
+      "sku": "01CHNJMYDECPI2PVC250000",
+      "price_per_box_pen": "99.00",
+      "shopify_admin_price": "99.00",
+      "price_status": "verified_fd_current_scale",
+      "inventory_item_id": "gid://shopify/InventoryItem/70172350742765",
+      "inventory_available": 10000,
+      "inventory_tracked": true
+    },
+    {
+      "finish": "7172-4",
+      "source_model": "LQ7172-4",
+      "shopify_variant_id": "gid://shopify/ProductVariant/68178389795053",
+      "sku": "01CHNJMYDECPI2PVC140000",
+      "price_per_box_pen": null,
+      "shopify_admin_price": "0.00",
+      "price_status": "pending_lq_confirmation",
+      "inventory_item_id": "gid://shopify/InventoryItem/70172350775533",
+      "inventory_available": 10000,
+      "inventory_tracked": true
+    },
+    {
+      "finish": "7172-8",
+      "source_model": "LQ7172-8",
+      "shopify_variant_id": "gid://shopify/ProductVariant/68178389827821",
+      "sku": "01CHNJMYDECPI2PVC160000",
+      "price_per_box_pen": null,
+      "shopify_admin_price": "0.00",
+      "price_status": "pending_lq_confirmation",
+      "inventory_item_id": "gid://shopify/InventoryItem/70172350808301",
+      "inventory_available": 10000,
+      "inventory_tracked": true
+    },
+    {
+      "finish": "7195-8",
+      "source_model": "LQ7195-8",
+      "shopify_variant_id": "gid://shopify/ProductVariant/68178389860589",
+      "sku": "01CHNNIDDECPI2PVC380000",
+      "price_per_box_pen": null,
+      "shopify_admin_price": "0.00",
+      "price_status": "pending_lq_confirmation",
+      "inventory_item_id": "gid://shopify/InventoryItem/70172350841069",
+      "inventory_available": 10000,
+      "inventory_tracked": true
+    }
+  ],
+  "description_html": "<p>Renueva tus espacios con el piso PVC autoadhesivo Decokasa: un revestimiento vinílico para suelos interiores, con acabado tipo madera y adhesivo incorporado.</p><h3>Presentación</h3><ul>\n<li>Venta por caja completa de <strong>36 planchas</strong>.</li>\n<li>Rendimiento: <strong>5 m² por caja</strong>.</li>\n<li>Selecciona el acabado y confirma su disponibilidad con un asesor antes de realizar el pago.</li>\n</ul><h3>Precios de la línea FD</h3><p>Una caja cuesta <strong>S/ 99</strong>, equivalente a S/ 19,80 por m². Para compras por cantidad, consulta la cotización de tu pedido con un asesor:</p><table>\n<caption>Tarifas por caja de piso PVC FD</caption>\n<thead><tr>\n<th scope=\"col\">Cantidad de cajas</th>\n<th scope=\"col\">Precio por caja</th>\n</tr></thead>\n<tbody>\n<tr>\n<td>1 a 2</td>\n<td>S/ 99</td>\n</tr>\n<tr>\n<td>3 a 5</td>\n<td>S/ 92</td>\n</tr>\n<tr>\n<td>6 a 11</td>\n<td>S/ 85</td>\n</tr>\n<tr>\n<td>12 a 19</td>\n<td>S/ 78</td>\n</tr>\n<tr>\n<td>20 a 49</td>\n<td>S/ 71</td>\n</tr>\n<tr>\n<td>50 o más</td>\n<td>S/ 65</td>\n</tr>\n</tbody>\n</table><p>Para los acabados de la línea LQ, consulta el precio con un asesor. El importe final y el transporte se confirman al cotizar el pedido.</p><h3>Instalación</h3><p>Instala sobre una superficie interior lisa, limpia, seca y nivelada. Mide y corta las piezas, retira el protector del adhesivo y presiona sobre la superficie preparada. Considera material adicional para cortes según las medidas de tu ambiente.</p><h3>Asesoría y entrega</h3><p>Escríbenos por WhatsApp al <a href=\"https://wa.me/51941599516\">+51 941 599 516</a> para elegir el acabado y cotizar las cajas que necesitas. Realizamos entregas en Lima y despachos a provincia mediante la agencia elegida por el cliente. También puedes coordinar el recojo en nuestra tienda de Av. Las Palmeras 343, Torre Azul, San Isidro, Lima.</p>",
+  "inventory": {
+    "verified_on": "2026-11-05",
+    "location_id": "gid://shopify/Location/95621906669",
+    "location_name": "Calle las Palmeras 363",
+    "selling_unit": "box",
+    "available_per_sku": 10000,
+    "sku_count": 20,
+    "total_inventory": 200000,
+    "tracked": true,
+    "source": "Explicit user instruction on 2026-11-05",
+    "physical_stock_audit": false,
+    "odoo_sync": false
+  },
+  "publication": {
+    "verified_on": "2026-11-05",
+    "status": "ACTIVE",
+    "online_store_published": true,
+    "public_url": "https://decokasaperu.myshopify.com/products/piso-pvc",
+    "active_theme_id": "gid://shopify/OnlineStoreTheme/188927803629",
+    "active_theme_name": "WEB-DECOKASA-2026-ALFIN/main",
+    "active_theme_pvc_file_count": 0,
+    "next_action": "Incorporate the PVC files into the existing official theme 188927803629 through a permitted procedure and visually verify landing-pvc. Product activation and Online Store publication are complete. Do not create, duplicate, reuse or publish another theme.",
+    "block": "Shopify integration prohibits writing to MAIN and publishing themes; do not bypass using CLI, browser automation or GitHub push.",
+    "preview_limitation": "Publication verified by Admin API. Public rendering could not be verified: HTTP access was rate-limited and web access failed. The five main PVC template files queried are still absent from MAIN.",
+    "theme_policy_updated_on": "2026-11-05",
+    "theme_policy": "Tema oficial único: WEB-DECOKASA-2026-ALFIN/main (188927803629). Pruebas en rama secundaria y vista previa local; integrar después en main. No crear, duplicar ni reutilizar temas paralelos sin petición explícita para ese tema. Respetar las restricciones de las herramientas. Ver AGENTS.md.",
+    "publication_target_theme_id": "gid://shopify/OnlineStoreTheme/188927803629",
+    "online_store_publication_id": "gid://shopify/Publication/221215064301",
+    "publication_verified_by": "Independent Admin API readback: ACTIVE, publishedOnPublication=true, onlineStoreUrl present.",
+    "active_theme_core_pvc_files_checked": 5,
+    "theme_changes_in_publication_step": false
+  }
+}

@@ -1,20 +1,63 @@
-## 04/11/2026 — PVC listo para publicación manual, compatible con SPC actual
+## 05/11/2026 — Causa de la landing PVC ausente confirmada
 
-El usuario solicita publicar. Registrado PVC en `b007802` e integrada localmente la actualización `origin/main` hasta `65e09bd`, incluido el nuevo diseño editorial de escritorio SPC. Conflictos de documentación resueltos preservando ambos trabajos; generador de vistas conserva los recursos PVC y SPC de escritorio. Vistas y paquete regenerados. Sin push al tema activo.
+- [x] Releídos producto y tema oficial: `landing-pvc` está asignada, pero faltan sus archivos y el layout publicado solo reconoce SPC.
+- [x] Verificados los 49 cambios locales necesarios: cinco archivos principales, 43 imágenes y ajuste del layout compartido. Las 39 pruebas pasan.
+- [ ] Aplicación al único tema oficial y comprobación visual pública pendientes. La revisión automática bloquea la escritura sobre MAIN; no se ha intentado eludirla. Pasos manuales en [landing-pvc.md](landing-pvc.md).
 
-Comparados todos los archivos de los temas Shopify; copiados al tema sin publicar `190067343597` los tres archivos SPC actuales y verificados por checksum. El layout conserva ambas landings. Verificación final: 39/39 pruebas, Theme Check CLI 5.0.1 sin hallazgos, ocho vistas y ZIP de 160 archivos válidos.
+## 05/11/2026 — Limpieza de contexto
 
-La integración prohíbe publicar temas y escribir en MAIN; la revisión automática había rechazado modificar el tema activo. No se elude esa restricción con CLI, navegador ni push. Falta que el usuario publique «Decokasa PVC - revision 04 nov 2026» en Shopify Admin. Después se verificará la plantilla activa y se activará/publicará el producto 15506629263597 en Tienda online, solo para consulta con precio/SKU pendientes. Hasta entonces producto DRAFT, tema UNPUBLISHED. Verificar conexión GitHub del nuevo tema después del cambio.
+- [x] Eliminados enlaces y registros del tema retirado; código y recursos de SPC/PVC conservados.
 
-## 04/11/2026 — Producto PVC y landing del mockup preparados
+## 05/11/2026 — Producto PVC publicado
 
-Creado Piso PVC autoadhesivo, producto Shopify 15506629263597 (handle piso-pvc, plantilla landing-pvc), en DRAFT con 20 variantes Acabado. El usuario confirma 36 planchas / 5 m² por caja; precio y SKU pendientes. Metacampos decokasa.coverage_m2 = 5.0 y decokasa.planks_per_box = 36. Inventario provisional cero; no activar hasta completar datos comerciales. El usuario aprueba características verificables y galería de inspiración en lugar de «100% ignífugos» u opiniones ficticias.
+- [x] Activado y publicado el producto existente 15506629263597 en Tienda online; lectura posterior ACTIVE y publicación confirmada. URL: https://decokasaperu.myshopify.com/products/piso-pvc.
+- [x] Conservadas 20 variantes con 10 000 cajas por SKU / 200 000 totales. Sin cambios de temas ni de fuentes originales.
+- [ ] Incorporar y comprobar visualmente la landing PVC en el único tema oficial mediante un procedimiento permitido. Los cinco archivos principales consultados siguen ausentes; se conserva el bloqueo sobre MAIN.
+- [ ] Confirmar las tres tarifas LQ y cotejar las miniaturas.
 
-Landing proporcional al PSD LANDING PVC_MOCK_FULL.psd (1080 × 10758), con 43 imágenes WebP separadas, catálogo modal de 20 diseños, carrusel continuo accesible, calculadora compacta con miniatura animada y consulta manual por WhatsApp 51941599516. Ejemplo: 12,5 m² + 10% de cortes → 3 cajas / 15 m². Los SKU vacíos no se usan para emparejar variantes; el código de acabado identifica la selección. El precio pendiente se muestra como consulta, no como producto gratuito.
+## 05/11/2026 — Regla de un único tema oficial aplicada
 
-La revisión automática rechazó escribir en el tema activo: solo permite temas sin publicar. Se duplicó el tema activo 188927803629 y se guardaron/verificaron 49 archivos en el tema UNPUBLISHED 190067343597, «Decokasa PVC - revision 04 nov 2026». No se hizo commit, push ni publicación; cambios locales sobre main, base 200e579. La vista previa por clave del producto en borrador abre el tema activo, y el editor requiere sesión Shopify; renderizado remoto de la nueva plantilla aún por revisar. Producto: https://admin.shopify.com/store/ruik4d-dn/products/15506629263597. Editor de prueba: https://admin.shopify.com/store/ruik4d-dn/themes/190067343597/editor.
+- [x] Regla permanente en AGENTS.md: único tema oficial 188927803629; pruebas en rama secundaria y vista previa local.
+- [ ] Integrar PVC y los cambios SPC pendientes en el tema oficial mediante un procedimiento permitido. El producto PVC ya está publicado.
 
-Validación: 38/38 pruebas, Theme Check CLI 4.9.4 sin hallazgos, ocho vistas y ZIP de 159 archivos verificados. Plugin Theme Check sin dependencia local; se utilizó CLI oficial. Pruebas visuales locales a 320/393/1440 px sin desbordamiento ni imágenes rotas; catálogo, selección FD802, calculadora, WhatsApp y teclado comprobados. Vista local http://127.0.0.1:8818/landing-pisos-pvc.html?revision=pvc-20-acabados. Evidencias en C:/Users/D. Cordova/Documents/Codex/2026-11-04/pvc-landing/landing-pvc-mobile.png y calculadora-mobile.png. Detalle en docs/landing-pvc.md del repositorio. Pendientes: precio, SKU, existencias, revisión en editor Shopify y publicación por flujo permitido.
+## 05/11/2026 — Proveedores de Titan y SPC corregidos
+
+- [x] Shopify: Silla gamer Titan = Xion; Piso SPC = DECOKASA, sustituyendo «Mi tienda».
+- [x] Lectura posterior de ambas fichas: proveedor correcto y demás campos retornados sin cambios.
+- [x] Registrada la confirmación del usuario: marcas propias y actividad de fabricante/importador. Sin cambios de tema, commit ni push.
+- [x] Catálogo editable actualizado y releído: Titan en Fichas!I13/L13 y 19 fichas SPC en L25:L41/L127:L128. Historial, formato, fórmulas y revisiones pendientes preservados; fuentes originales de solo lectura intactas.
+
+
+## 05/11/2026 — Ficha PVC con los 20 acabados confirmados
+
+- [x] Decisión del usuario: conservar los 20 acabados del mockup; no agregar los 11 restantes de la fuente.
+- [x] Guardados y releídos los 20 SKU y precios de los 17 acabados FD a S/ 99 por caja de 36 planchas / 5 m².
+- [x] Descripción actualizada con presentación, instalación, entrega y escala FD por cantidad para cotización con asesor; sin descuentos automáticos.
+- [x] Auditoría en `docs/pvc-product-data.json`; originales de Drive conservados sin modificaciones.
+- [ ] Confirmar tarifa de los tres LQ: 7172-4, 7172-8 y 7195-8; no asumir correspondencia con HM.
+- [x] Configuradas y releídas 10 000 cajas por SKU según instrucción posterior del usuario; ver entrada superior.
+- [ ] Cotejo visual de miniaturas.
+- [ ] Incorporar y comprobar la landing en el tema activo. El producto ya está ACTIVE y publicado; se conserva el bloqueo previo sobre MAIN.
+
+
+## 05/11/2026 — Fuentes de SKU y precios indexadas
+
+- [x] Verificados acceso, títulos, formato Excel y contenido de las dos fuentes compartidas; sin escrituras remotas.
+- [x] Registrados enlaces, IDs, pestañas indicadas y regla de solo lectura en [catalog-sources.md](catalog-sources.md), README y contexto del proyecto.
+- [x] Diferenciado el Sheet de trabajo de los originales; documentadas las escalas de precio, comisiones y limitación de imágenes en la lectura textual.
+- [x] Conciliados los SKU de los 20 acabados que el usuario decidió conservar; la actualización posterior de Shopify consta en la entrada superior. Pendientes miniaturas y tarifa LQ; stock configurado posteriormente por instrucción del usuario, ver entrada superior.
+
+
+## 05/11/2026 — Documentación PVC depurada
+
+Consolidado el estado de PVC y retiradas referencias obsoletas a pedido del usuario. Se conservan el producto y su landing dentro del repositorio principal; sin cambios en código ni Shopify.
+
+- Producto `15506629263597` en borrador: 20 acabados y 36 planchas / 5 m² por caja; 20 SKU y 17 precios FD cargados. Pendientes tres precios LQ y existencias comerciales.
+- Comprobado directamente en Shopify el 05/11: sin publicaciones ni URL pública y sin los cinco archivos principales de PVC en el tema activo. Causa de invisibilidad confirmada; sin cambios remotos.
+- Landing registrada en `b007802` e integrada con SPC en `3e7b29d`, sin push. Validación previa: 39/39 pruebas, Theme Check CLI 5.0.1 sin hallazgos, ocho vistas y ZIP de 160 archivos.
+- Pendiente incorporar la plantilla al tema activo `188927803629` por un procedimiento permitido y publicar el producto para consultas. Detalle en [landing-pvc.md](landing-pvc.md).
+
+
 ## 04/11/2026 — Rediseño editorial de SPC solo para escritorio
 
 Con autorización del usuario para cambiar el diseño de escritorio, se reemplaza la composición anterior desde 1024 px. Portada con fotografía amplia, titular «Un nuevo piso. Un nuevo hogar.», fondo cálido, acentos oliva y jerarquía más clara. Los colores se comparan en tres tarjetas amplias; composición, instalación, capas y ficha usan columnas; certificaciones forman una banda; calculadora con croquis visible; resultados, envíos y cierre se reorganizan. Se conservan recursos propios, funciones y aviso de testimonios ilustrativos.
@@ -24,6 +67,7 @@ Referencias de sector consultadas: https://www.quick-step.co.uk/en-gb/vinyl, htt
 Validación: 35/35 pruebas, Theme Check CLI 4.9.4 sin hallazgos, ocho vistas y ZIP de 112 archivos verificados. Revisión visual a 1024/1440/1920 px sin desbordamiento; 45/45 medidas móviles a 393 px idénticas a la referencia. Calculadora comprobada con 20 m²: 11 cajas / S/ 1045 con cortes y 10 / S/ 950 sin cortes; entrada directa de 26 m²: 14 / S/ 1330; ocho ambientes con 62 m²: 32 / S/ 3040. Cantidad y detalle de solicitud correctos, sin enviar pedidos. Carrusel y conservación de datos al cambiar de tamaño verificados. Evidencias locales: work/spc-desktop/desktop-editorial/portada-local.png y calculadora-local.png del chat este-mokup-es-para-la-pagina-4.
 
 Trabajo aislado en WEB-DECOKASA-SPC-DESKTOP, rama codex/spc-desktop, base c46d236. Publicación y comprobación remota pendientes al registrar esta entrada.
+
 
 
 ## 04/11/2026 — Versión de escritorio de la landing SPC
@@ -36,11 +80,13 @@ Validación local: 35/35 pruebas, Theme Check CLI 4.9.4 sin hallazgos, ocho vist
 
 Trabajo aislado en WEB-DECOKASA-SPC-DESKTOP, rama codex/spc-desktop, para conservar intactos los cambios concurrentes de PVC del clon principal. Publicado b3c5a4c en origin/main y comprobado en Shopify: portada horizontal, calculadora ampliada a 1440 px y versión móvil compacta a 393 px; sin desbordamiento en ambos tamaños. El cálculo de 20 m² mantiene 11 cajas / S/ 1045 al pasar de escritorio a móvil y volver. Evidencias: work/spc-desktop/calculadora-escritorio-shopify.png y calculadora-movil-shopify.png del chat este-mokup-es-para-la-pagina-4. Tamaño temporal del navegador restablecido.
 
+
 ## 04/11/2026 — Animación de calculadora SPC más pausada
 
 A pedido del usuario, cada cuadrito de la miniatura «Tu espacio» aparece en 1,2 s (antes 0,55 s), con desfase de 160 ms entre ambientes (antes 70 ms). Se mantienen tamaño, diseño, cálculo, movimiento reducido y croquis desplegable. Publicado 200e579 en origin/main y comprobado en Shopify móvil a 393 px: estilos efectivos de 1,2 s / 0,16 s, dos ambientes de 20 + 6 m² → 14 cajas / S/ 1330 con cortes, sin desbordamiento.
 
 Validación: 34/34 pruebas, Theme Check CLI 4.9.4 sin hallazgos, ocho vistas y ZIP de 111 archivos verificados. Evidencia: C:/Users/D. Cordova/Documents/Codex/2026-10-21/este-mokup-es-para-la-pagina-4/work/spc-calculator/calculadora-animacion-lenta-mobile.png. Tamaño temporal del navegador restablecido.
+
 
 ## 03/11/2026 — Miniatura animada integrada en calculadora SPC
 
@@ -48,11 +94,13 @@ A pedido del usuario, la animación de cuadritos se mantiene visible en una mini
 
 Publicado 289ff73 en origin/main. Validación: 34/34 pruebas, Theme Check CLI 4.9.4 sin hallazgos, ocho vistas y ZIP de 111 archivos verificados; el validador del plugin sigue sin dependencia local. Revisión local a 320/393/1440 px, de uno a ocho ambientes, m² directos y valores inválidos, sin desbordamiento. La miniatura añade unos 70 px al bloque móvil (aproximadamente 874 px a 393 px de ancho). Comprobación en Shopify a 393 px: 5 × 4 m → 20 m², 11 cajas y S/ 1045 con cortes; animación activa, detalle cerrado y sin desbordamiento. Evidencia: C:/Users/D. Cordova/Documents/Codex/2026-10-21/este-mokup-es-para-la-pagina-4/work/spc-calculator/calculadora-mini-animacion-mobile.png. Tamaño temporal del navegador restablecido.
 
+
 ## 03/11/2026 — Calculadora SPC compacta para móvil
 
 Rediseñada para priorizar medidas, cajas y total estimado juntos, con una única acción «Solicitar esta cantidad». El detalle de superficies y el croquis quedan plegados en «Ver detalle y croquis». Conserva varios ambientes, entrada directa de m², cortes opcionales del 10%, rendimiento de 2,196 m²/caja y formulario de simulación existente. El precio usa la variante Shopify seleccionada; si no existe, indica «Por confirmar». Sin cambios al resto del mockup.
 
 Validación: 34/34 pruebas, Theme Check CLI 4.9.4 sin hallazgos (validador del plugin sin dependencia local), ocho vistas y ZIP de 111 archivos verificados. Navegador: 320/393/1440 px sin desbordamiento; a 393 px la sección pasa de 2068 a 804 px aproximadamente, un 61% menos. Comprobados 20 m² → 11 cajas con cortes / 10 sin cortes, 35 m² → 18 cajas, dos ambientes de 20+6 m² → 14 cajas, campos inválidos y cantidad trasladada a solicitud. Precios de prueba de 95 PEN/caja coherentes. Publicado 3d0350e en origin/main y comprobado en Shopify a 393 px: cálculo y solicitud coinciden (20 m² con cortes → 11 cajas / S/ 1045), sin desbordamiento. Evidencia: C:/Users/D. Cordova/Documents/Codex/2026-10-21/este-mokup-es-para-la-pagina-4/work/spc-calculator/calculadora-movil-publicada.png. Tamaño temporal del navegador restablecido.
+
 
 ## 03/11/2026 — Esquinas y uso del piso SPC corregidos y publicados
 
@@ -60,11 +108,13 @@ Publicado 09cfcbb en origin/main y comprobado en Shopify. La foto del hero se re
 
 Validación: 33/33 pruebas, Theme Check CLI 4.9.4 sin hallazgos, ocho vistas y ZIP de 111 archivos verificados. Revisión visual local en móvil y escritorio; publicación comprobada a 393 px sin desbordamiento ni cruce del texto con la franja siguiente. Evidencia: C:/Users/D. Cordova/Documents/Codex/2026-10-21/este-mokup-es-para-la-pagina-4/work/spc-a2/esquinas-suelo-publicado-mobile.png. Tamaño temporal del navegador restablecido.
 
+
 ## 03/11/2026 — Bordes y escala SPC A2 corregidos y publicados
 
 Publicado d4a41e2 en origin/main y verificado directamente en Shopify. El follaje ocultaba el borde redondeado inferior de la ficha técnica: ahora fondo técnico z1, follaje z0, panel de sellos z2 y tablones z3, sin crear contexto de apilado en la ficha. Texto introductorio a 36 unidades (27,17502 × transformación PSD 1,324746), interlineado 1,2. Geometría A2 preservada; sin cambios funcionales ni rendimiento comercial de 2,196 m²/caja.
 
 33/33 pruebas, ocho vistas y ZIP de 111 archivos verificados; Theme Check CLI 4.9.4 sin hallazgos (validador plugin sin dependencia local). Revisión local 320/393/1080 px sin desbordamiento. En Shopify a 393 px se comprueban borde redondeado visible, superposición sobre panel de certificaciones, título libre, seis sellos cargados y calculadora presente. Evidencia: C:/Users/D. Cordova/Documents/Codex/2026-10-21/este-mokup-es-para-la-pagina-4/work/spc-a2/recortes-a2-publicado-mobile.png. Tamaño temporal del navegador restablecido.
+
 
 ## 03/11/2026 — Refinamiento de recorte y superposición SPC A2
 
@@ -72,17 +122,20 @@ El follaje cubría el borde inferior redondeado de la ficha técnica. Fondo blan
 
 Validación: 33/33 pruebas aprobadas, ocho vistas y ZIP de 111 archivos verificados; Theme Check CLI 4.9.4 sin hallazgos. Plugin de validación sin dependencia local; CLI oficial utilizado como alternativa. Navegador a 320/393/1080 px sin desbordamiento y composición móvil revisada visualmente. Evidencia local: work/spc-a2/recortes-corregidos-mobile.png del chat este-mokup-es-para-la-pagina-4.
 
+
 ## 03/11/2026 — Ajuste puntual SPC al mockup A2
 
 Actualizadas la explicación «¿Qué es el piso SPC?», su párrafo, el borde dorado y el texto de colores según LANDING SPC_MOCK A2.psd (1080 × 10004; SHA256 8350e05c4d440358c4d538ea73f1b318d5ec1ff65b7bb3727978e28272fa747a). Corregido el orden de capas entre ficha técnica y sellos: el panel de certificaciones cubre el fondo técnico y los tablones terminan antes del título. Medidas y tipografías de estos bloques trasladadas al mapa proporcional; once secciones y 71 anclajes. El resto del diseño y las funciones conservados, incluido rendimiento comercial 2,196 m²/caja (no sustituido por 2,24 del PSD).
 
 Validación local: 33/33 pruebas, Theme Check CLI 4.9.4 sin hallazgos, ocho vistas y ZIP de 111 archivos verificados. Revisión visual a 320/393/1080 px sin desbordamiento ni cruce con el título de certificaciones. Validador del plugin no inicia por dependencia ausente; utilizado CLI oficial. Publicado en origin/main (ee86941) y verificado en Shopify: nueva explicación presente, seis sellos cargados y calculadora conservada. A 393 px, los tablones terminan 3,16 px antes de la caja del título de certificaciones; sin desbordamiento horizontal. Evidencia: work/spc-a2/correccion-publicada-mobile.png del chat este-mokup-es-para-la-pagina-4.
 
+
 ## 03/11/2026 — Sellos SPC confirmados y habilitados
 
 El usuario confirma expresamente que FloorScore, ANAB, ILAC, DAkkS, CNAS y EPH corresponden al piso SPC vendido. Sustituye el pendiente anterior de confirmación; no constituye una auditoría documental independiente. Activado `show_certifications` en `templates/product.landing-spc.json`; el esquema conserva su valor inicial desactivado para otras instancias. Composición original del PSD preservada: panel blanco, follaje, seis sellos en dos filas, entre ficha técnica y Click. Calculadora y testimonios sin cambios.
 
 Validación: 6/6 pruebas SPC, Shopify Theme Check CLI 4.9.4 sin hallazgos, ocho vistas y ZIP de 111 archivos verificados. Navegador a 320/393/1080 px: seis imágenes cargadas y sin desbordamiento; calculadora 20 m² con 10% de cortes = 11 cajas. El validador del plugin no inicia por dependencia ausente; usado CLI como alternativa. Publicado en origin/main con commit fe404ba y verificado en Shopify: seis sellos visibles con sus imágenes cargadas, sin desbordamiento en la vista pública comprobada, y calculadora presente. Evidencia: work/spc-redesign/certifications-live.png en el chat este-mokup-es-para-la-pagina-4.
+
 
 ## 27/10/2026 — Carrusel ilustrativo del mockup habilitado
 
@@ -91,12 +144,14 @@ Validación: 6/6 pruebas SPC, Shopify Theme Check CLI 4.9.4 sin hallazgos, ocho 
 - Calculadora completa conservada: medidas/croquis, ambientes, área directa, cortes y transferencia a solicitud. 20 m² = 11 cajas con cortes y 10 sin cortes. Cobertura 2,196 pendiente de confirmación comercial; solicitud sigue simulada, sin POST ni Odoo.
 - 33/33 pruebas y Theme Check sin hallazgos. Navegador a 320/393/768/1080/1440 px: cinco tarjetas, imágenes cargadas, autoplay/pausa/teclado, calculadora y solicitud correctos, sin errores ni desbordamiento. Deslizamiento táctil y movimiento reducido comprobados a 393 px. Evidencia illustrative-results.json e illustrative-393/1080.png en work/spc-redesign del chat.
 
+
 ## 27/10/2026 — Calculadora completa en página y testimonios visibles
 
 - Recuperada la calculadora anterior dentro de la landing: medidas, croquis, varios ambientes, área directa, cortes y cajas transferidas a solicitud. Retirados resumen rápido y diálogo adicional; se mantiene el diálogo de solicitud.
 - Calculadora en flujo normal y altura adaptable para móvil: sin controles superpuestos, campos de 16 px y botones táctiles. El resto del diseño conserva sus proporciones. Separación corregida con cinco capas y testimonios.
 - La sección Testimonios aparece también sin bloques configurados, con aviso de próximas experiencias y enlace al asesor. El carrusel se muestra al agregar testimonios reales; ejemplos del mockup siguen exclusivos del modo de diseño hasta confirmación. La vista local predeterminada reproduce la configuración pública; SPC_DESIGN_PREVIEW=1 habilita muestras.
 - 33/33 pruebas y Theme Check CLI sin hallazgos. Cálculo por medidas, ambientes, área directa, cortes, cantidad de solicitud y ausencia de desbordamiento/errores comprobados a 320/393/768/1080/1440 px. Evidencias restoration-results.json y restored-*.png en work/spc-redesign del chat. Formulario continúa simulado, sin POST ni Odoo; cobertura 2,196 preservada.
+
 
 ## 27/10/2026 — Rediseño SPC integrado con la última actualización de main
 
@@ -105,12 +160,14 @@ Validación: 6/6 pruebas SPC, Shopify Theme Check CLI 4.9.4 sin hallazgos, ocho 
 - 33/33 pruebas y Theme Check CLI sin hallazgos. Calculadora/solicitud/botón/carrusel comprobados en 320/393/768/1080/1440 px; cinco capas visibles en 320/393/1080/1440. Sin errores JS ni desbordamiento. Ocho vistas y ZIP de 111 archivos regenerados/verificados.
 - Informe actualizado: docs/landing-spc-merge-compatibility.md. Formulario simulado, sin POST ni integración Odoo. La sincronización Shopify se comprueba separadamente del merge Git.
 
+
 ## 27/10/2026 — Cinco capas corregidas y compatibilidad de integración revisada
 
 - Corregida superposición del bloque de cinco capas con la calculadora; filas móviles alineadas sin invadir la nota, anclada en y=5995. Mapa vigente: 71 cajas. Revisión 320/393/1080/1440 sin errores JS, imágenes rotas ni desbordamiento.
 - 33/33 pruebas, Theme Check CLI sin hallazgos y ocho vistas/ZIP de 111 archivos verificados. Validador del plugin no inicia por dependencia ausente. Evidencias layers-after-*.png y layers-visual.json en work/spc-redesign.
 - Auditados árbol actual del rediseño, base/origin main b70e0b2 y main local 2357831. Cinco archivos con 32 bloques de conflicto en ensayo sin merge. Cuatro activos SPC publicados coinciden con b70e0b2 mediante originales de CDN/mapas de fuentes; producción y main local son versiones distintas. Informe: docs/landing-spc-merge-compatibility.md.
 - Pendiente integrar manualmente calculadora, modal y botón móvil, preservando geometría y funciones comunes. Cambios locales; sin commit, push, fusión ni publicación. Vista: http://127.0.0.1:8818/landing-piso-spc.html?revision=capas-corregidas .
+
 
 ## 27/10/2026 — Resultados y envíos ajustados al mockup
 
@@ -119,12 +176,14 @@ Validación: 6/6 pruebas SPC, Shopify Theme Check CLI 4.9.4 sin hallazgos, ocho 
 - 33/33 pruebas aprobadas; Theme Check CLI sin hallazgos. Validador del plugin no inicia por dependencia ausente @shopify/theme-check-common. Revisión 320/393/1080/1440 sin errores JS, imágenes rotas ni desbordamiento; comparación visual 393/1080 contra PSD. Evidencias results-reference.png, results-after-*.png y results-visual.json en work/spc-redesign.
 - Ocho vistas y ZIP de 111 archivos regenerados y verificados. Cambios locales en feature/spc-diseno-octubre, sin commit, push ni publicación. Vista: http://127.0.0.1:8818/landing-piso-spc.html?revision=resultados-envios . Pendiente revisión visual del usuario.
 
+
 ## 27/10/2026 — Testimonios proporcionales con carrusel infinito
 
 - Reconstruido el bloque según el PSD: panel blanco, fondo fotográfico/decorativo independiente, título, tarjetas altas, retratos con borde dorado, ciudades, nombres, estrellas, frases y textos. Elementos de interfaz en Liquid/CSS; mapa 1080 × 10004 actualizado a 68 cajas y 33 WebP.
 - Carrusel continuo automático, deslizamiento táctil nativo, teclado y pausa. Mantiene el desplazamiento vertical móvil, respeta movimiento reducido y suspende animación fuera de pantalla. Maneja una/dos tarjetas y selección/recarga del editor Shopify. Copias visuales ocultas a tecnologías de asistencia. Las muestras solo aparecen en la vista de diseño identificada; la tienda utiliza bloques reales autorizados.
 - 33/33 pruebas aprobadas; Theme Check CLI sin hallazgos. El validador del plugin no arranca por falta de @shopify/theme-check-common. Interacciones verificadas en 320/393/768/1080/1440 px; gesto horizontal/vertical real simulado a 393 px, bucle, pausa, teclado, movimiento reducido y editor correctos. Sin errores JS, imágenes rotas ni desbordamiento. Evidencias testimonials-after-*.png, testimonials-interactions.json y scripts de comprobación en work/spc-redesign.
 - Ocho vistas y ZIP de 111 archivos regenerados/verificados. Cambios locales en feature/spc-diseno-octubre, sin commit, push ni publicación. Vista: http://127.0.0.1:8818/landing-piso-spc.html?revision=testimonios-infinito . Pendiente revisión visual del usuario.
+
 
 ## 27/10/2026 — Bloque de instalación Click ajustado al PSD
 
@@ -133,11 +192,13 @@ Validación: 6/6 pruebas SPC, Shopify Theme Check CLI 4.9.4 sin hallazgos, ocho 
 - 32/32 pruebas aprobadas y Theme Check CLI sin hallazgos; el validador del plugin sigue sin arrancar por dependencia ausente. Revisión visual a 393/1080/1440 sin errores JS, imágenes rotas ni desbordamiento. Evidencias click-reference.png, click-after-393.png, click-after-1080.png y visual-metrics.json en work/spc-redesign. Ocho vistas y ZIP regenerados y verificados.
 - Cambios locales en feature/spc-diseno-octubre, sin commit, push ni publicación. Vista: http://127.0.0.1:8818/landing-piso-spc.html?revision=click-corregido . Pendiente revisión visual del usuario.
 
+
 ## 27/10/2026 — Corrección del bloque de composición frente al mockup
 
 - Comparadas capturas del usuario con el compuesto del PSD en y=1711–2700. Corregidos tamaño/peso/espaciado y degradado de SPC, separador discontinuo, título alineado a la izquierda, cápsula redondeada/dorada, fórmula en negrita y nota blanca. Ajustes proporcionales en el mapa y CSS, sin mover el recorte de niños/mascota, que ya coincidía.
 - Fondo exportado con las capas fotográficas 138/140/141: incorpora el retoque enmascarado que elimina el cuadro de la pared y el sombreado del suelo. Manifest actualizado; textos, degradados y controles siguen en código.
 - 32/32 pruebas aprobadas y Theme Check sin hallazgos. Visual 393/1080/1440 sin imágenes rotas, desbordamiento ni errores JS. Ocho vistas y ZIP 109 archivos regenerados y verificados. Evidencias composition-reference.png, composition-final-393.png y composition-final-1080.png en work/spc-redesign. Corrección local, sin publicación.
+
 
 ## 27/10/2026 — Rediseño SPC según el PSD actualizado (local)
 
@@ -148,10 +209,12 @@ Validación: 6/6 pruebas SPC, Shopify Theme Check CLI 4.9.4 sin hallazgos, ocho 
 - 32/32 pruebas aprobadas. Revisión visual a 393/1080/1440 px: imágenes completas, sin errores JS ni desbordamiento. Pruebas de uso a 320/393/768/1080/1440 px: cálculo decimal, rechazo de valores inválidos, ambientes, cortes, reapertura, transferencia, simulación sin POST y cierre por Escape correctos. Theme Check de Shopify CLI sin hallazgos; el validador incluido en el plugin no arranca por dependencia ausente. Ocho vistas y paquete de 109 archivos verificados.
 - Trabajo en `feature/spc-diseno-octubre`, basado en `main` b70e0b2, dentro de `work/spc-redesign/theme` del chat del 21/10. Los otros checkouts y cambios pendientes se preservaron. Sin commit, push, fusión ni publicación en Shopify. Vista local: http://127.0.0.1:8818/landing-piso-spc.html . Evidencias visuales/de uso en `work/spc-redesign/`.
 
+
 ## 27/10/2026 — Galería y distribución de producto
 
 - Añadidos controles anterior/siguiente y deslizamiento a la galería, con miniaturas y cambio de variantes conservados. En escritorio, la compra se organiza en un panel compacto con secciones desplegables y límite ligado al borde inferior de la galería; la información del producto queda centrada debajo.
 - 30 pruebas aprobadas, incluidas galería, gestos, variantes y cálculos de solicitud. Vistas de muestra y paquete regenerados y verificados. La herramienta de validación de Shopify no pudo iniciarse por una dependencia ausente; la plantilla se comprobó con las pruebas del proyecto.
+
 
 ## 27/10/2026 — Calculadora visual SPC por ambientes, modal de pedido y botón persistente móvil
 
@@ -161,12 +224,14 @@ Validación: 6/6 pruebas SPC, Shopify Theme Check CLI 4.9.4 sin hallazgos, ocho 
 - Botón persistente móvil inferior ("Realizar pedido ↗") con visibilidad selectiva por scroll (ocultamiento automático en zona de calculadora).
 - Servidor local con cabeceras `Cache-Control: no-store` y control de versiones por query string (`?v=...`) en `scripts/sync_preview.cjs`.
 
+
 ## 26/10/2026 — Meta automática del regalo
 
 - Sustituida la meta fija por `product.price_max × 1.80`, redondeada a céntimos. Estable entre variantes y cantidades; progreso calculado con las líneas de la solicitud. Tarjeta, importe pendiente y modal comparten la referencia. Retirado el ajuste manual antiguo; productos sin precio positivo no muestran el incentivo.
 - Titan: máximo S/ 300 → S/ 540. Una blanca S/ 279 → 52%, faltan S/ 261; blanca + negra S/ 579 → desbloqueado. Reducir el total vuelve a bloquearlo.
 - 29/29 pruebas aprobadas: mayor precio, disponibilidad, comparación, valores antiguos ignorados, variantes combinadas, redondeo, límite exacto y precio cero. Tres archivos de tema validados con Shopify sin hallazgos. Ocho vistas y ZIP de 74 archivos regenerados y verificados.
 - Commit `6583374` enviado a `main`, sincronizado y comprobado en Shopify (tema `188927803629`): meta y modal S/ 540; blanca S/ 279, pendiente S/ 261 (52%); cambio a negro conserva la meta y la selección; ambas S/ 579 desbloquean el regalo; quitar blanca deja negro S/ 300, pendiente S/ 240 (56%) y vuelve a bloquearlo. Consola sin errores. Evidencia: `outputs/titan-meta-80-porciento.png` en el chat de trabajo. Sin cambios de catálogo ni envío de solicitudes.
+
 
 ## 26/10/2026 — Solicitud con varios colores
 
@@ -175,12 +240,14 @@ Validación: 6/6 pruebas SPC, Shopify Theme Check CLI 4.9.4 sin hallazgos, ocho 
 - 27/27 pruebas aprobadas, incluidos precios distintos, acumulación, edición, eliminación, límites, fallo de red y referencia estable por solicitud. Cuatro archivos validados con la herramienta nativa Shopify sin hallazgos. Ocho vistas y ZIP de 74 archivos válidos. Revisión visual local a 320/390 px y escritorio; consola sin errores.
 - Commit `104c032` enviado a `main`, sincronizado y verificado en Shopify (tema `188927803629`): blanco ×1 + negro ×1 = S/ 579; blanco ×2 + negro ×1 = S/ 858; eliminación y cambio de color conservan cantidades y recalculan el total. El formulario muestra ambas líneas y la galería blanca conserva cuatro ángulos. Consola sin errores. Titan continúa en borrador y el formulario sigue en simulación.
 
+
 ## 26/10/2026 — Titan: galería ordenada por color
 
 - Implementada galería desde `decokasa.gallery_images` de variante, con respaldo en la galería general para otros productos. Una foto principal visible, resto con carga diferida y miniaturas solo cuando hay varias fotos. Conserva cambio de color, cantidad, formulario y controles existentes.
 - Configuradas y releídas en Shopify nueve imágenes: blanco cuatro ángulos (tres cuartos, frontal, lateral y reclinada con reposapiés); cinco colores con una imagen cada uno. Restaurada imagen nativa de blanco y textos alternativos descriptivos. Producto 15464341471469 continúa DRAFT; SKU, precios e inventario preservados.
 - 24/24 pruebas aprobadas, incluyendo selección de ángulo, cambio de color sin mezclar fotos y conservación de cantidad/contacto. Validación nativa Shopify del snippet sin hallazgos. Vistas y ZIP regenerados. `lint`/`build` del manifiesto React no disponibles porque faltan tsc/vite en la instalación existente; no se modificó esa aplicación ni sus dependencias.
 - Guía de mantenimiento actualizada en `docs/product-detail.md`. Commit `063e0be` enviado a `main`, sincronizado y comprobado en Shopify (tema 188927803629): cuatro ángulos blancos y cambio de los seis colores sin mezclar fotos; consola sin errores. Sheet del catálogo actualizado y releído en 16 celdas. Producto continúa en borrador; pendientes confirmación de precios actuales, unidad de venta y disponibilidad.
+
 
 ## 22/10/2026 — Corrección móvil SPC sincronizada y comprobada en Shopify
 
@@ -191,6 +258,7 @@ Validación: 6/6 pruebas SPC, Shopify Theme Check CLI 4.9.4 sin hallazgos, ocho 
 - Cinco entradas del mapa no aparecen en Shopify por la configuración prevista de testimonios/sellos; no se publicaron opiniones ni certificaciones de muestra. Pendientes catálogo/variantes y contenido comercial real.
 - Evidencia local: `work/shopify-spc-before.json`, `work/shopify-spc-verification.json` y `work/shopify-spc-mobile-full.png` en el chat `2026-10-21/este-mokup-es-para-la-pagina-4`. No hubo cambios adicionales en código de tema durante la verificación del despliegue.
 
+
 ## 22/10/2026 — Corrección de proporciones móviles de toda la landing SPC
 
 - Fusión previa confirmada en `main`, HEAD `e594fbf`; trabajo continuado allí por petición del usuario. Se identificó que el mapa proporcional estaba limitado a anchos desde 701 px y las reglas móviles reorganizaban la página.
@@ -199,10 +267,12 @@ Validación: 6/6 pruebas SPC, Shopify Theme Check CLI 4.9.4 sin hallazgos, ocho 
 - 22/22 pruebas; Theme Check sin hallazgos; ocho vistas/enlaces/IDs/JSON válidos; ZIP de 74 archivos. Calculadora, rechazo de entradas, colores y enlaces comprobados en navegador; pruebas móviles adicionales 320/390/600/700. Imágenes completas y sin errores JavaScript.
 - Entrega local actualizada en `outputs/DECOKASA-SPC-landing` del chat `2026-10-21/este-mokup-es-para-la-pagina-4`: vista, mapa, JSON, capturas y validación. URL local: http://127.0.0.1:8817/?revision=movil-proporcional . Cambios sin commit/push/despliegue; pendientes revisión comercial y configuración con catálogo real.
 
+
 ## 22/10/2026 — Vista previa local restablecida
 
 - El puerto 8817 no tenía servidor activo; los archivos de la landing seguían disponibles. Reiniciado el servidor HTTP local en 127.0.0.1:8817 desde outputs/DECOKASA-SPC-landing del chat del 21/10.
 - Comprobación en navegador: HTTP 200, 28 imágenes cargadas, 3 hojas de estilo, sin solicitudes fallidas ni errores JavaScript. Vista de 1080 px con altura 6528 px. Sin cambios de diseño ni despliegue.
+
 
 ## 21/10/2026 — Mapa de proporciones aplicado a toda la landing SPC
 
@@ -213,12 +283,14 @@ Validación: 6/6 pruebas SPC, Shopify Theme Check CLI 4.9.4 sin hallazgos, ocho 
 - Validación: 22/22 pruebas; Theme Check sin hallazgos; ocho vistas, enlaces, IDs y JSON válidos; ZIP actualizado con 74 archivos de tema. Navegador 320/390/768/1080/1440 sin desbordamiento ni errores, imágenes cargadas y calculadora/colores/teclado operativos. Botones y cálculo comprobados además a 320/390/600/700 px.
 - Entrega local actualizada: `outputs/DECOKASA-SPC-landing/` del chat `2026-10-21/este-mokup-es-para-la-pagina-4`, con landing, mapa interactivo, JSON, capturas y resumen de validación. Mapa comprobado en cuatro anchos, sus selectores y las 47 entradas. Rama `feature/landing-piso-spc`; cambios previos preservados, sin commit/push/despliegue en esta etapa.
 
+
 ## 21/10/2026 — Corrección de beneficios según referencia del usuario
 
 - Sustituidos los seis iconos aproximados por trazados originales recuperados de los objetos inteligentes del PSD: agua, espuma, persona caminando, tablones con encastre, escoba y rostro de perro. Se guardan como SVG independientes con nombres descriptivos `spc-icono-*.svg`, sin texto ni capturas de interfaz.
 - Ajustados encuadre de la sala, título con fondo amarillo redondeado, tamaños/espacios y negritas. Texto de limpieza: «Fácil de limpiar». Adaptación móvil conservada.
 - Modificados sección SPC, CSS, snippet de iconos compartido y sincronizador para copiar SVG. Ocho vistas y ZIP regenerados (72 archivos). 22/22 pruebas aprobadas; Theme Check sin observaciones; cinco anchos de 320 a 1440 px sin desbordamiento, imágenes completas, interacciones correctas y cero errores JavaScript. Revisión visual a 923 y 390 px.
 - Vista local y capturas de outputs actualizadas. Trabajo local en `feature/landing-piso-spc`; sin commit, push ni despliegue.
+
 
 ## 21/10/2026 — Landing SPC reconstruida con recursos independientes
 
@@ -231,9 +303,11 @@ Validación: 6/6 pruebas SPC, Shopify Theme Check CLI 4.9.4 sin hallazgos, ocho 
 
 # Avances y validación
 
+
 ## 21/10/2026 — Adobe y nombres descriptivos de los recursos
 
 El usuario recuerda la integración disponible con Adobe y pide nombrar cada recurso por su contenido real, aunque la capa carezca de nombre útil. Aplicar esta convención en próximas extracciones; evaluar primero las herramientas Adobe pertinentes. En las capacidades expuestas revisadas no se encontró extracción de capas PSD, por lo que se conserva la extracción local ya validada. Se precisaron siete nombres (escenas, cajas con tablones, muestras en perspectiva y despiece), se actualizaron guía, catálogo y manifiesto tanto en entregables como en repositorio, y se regeneró el ZIP. 21 recursos verificados por huella; enlaces comprobados. Código de la landing sin modificar.
+
 
 ## 21/10/2026 — Recursos separados del PSD para landing SPC
 
@@ -245,6 +319,7 @@ El usuario recuerda la integración disponible con Adobe y pide nombrar cada rec
 - Aclaración frente a notas anteriores: el PSD por sí solo no acredita identidades de los retratos, testimonios reales ni certificaciones. Se entregan como recursos del mockup. Solo hay tres muestras individuales; no inferir un cuarto SKU. Diagrama limitado a 559 × 583 px y tablón isométrico recortado de origen.
 - Pendiente de otra etapa: integrar recursos seleccionados en `assets/`, ajustar encuadres y reemplazar referencias actuales siguiendo el LEEME. No se hizo commit, push ni publicación.
 
+
 ## 20/10/2026 — Despliegue a producción y verificación en vivo en Shopify (main)
 
 - Rama principal: `main` (commit `ef55844`).
@@ -254,6 +329,7 @@ El usuario recuerda la integración disponible con Adobe y pide nombrar cada rec
   - Recursos CDN de Shopify (`product-detail.css` y `product-detail.js`) entregados con HTTP 200 conteniendo los estilos y la lógica de cálculo en tiempo real.
   - Soporte de desglose por unidades o cajas (para pisos PVC/SPC), resumen de solicitud en el formulario de contacto y meta de objetivo/regalo especial.
 - Validación técnica: 19 de 19 pruebas unitarias aprobadas (`npm test`) y verificación estática de 8 vistas (`verify_store.py`).
+
 
 ## 19/10/2026 — Mejora de botón de objetivo y modal interactivo de regalo especial
 
@@ -266,6 +342,7 @@ El usuario recuerda la integración disponible con Adobe y pide nombrar cada rec
   - Optimización táctil de los botones de cantidad (`+`/`-`) y el botón principal de compra (`.product-cta`).
 - Validación: 18 de 18 pruebas unitarias y DOM aprobadas (`npm test`), vistas sincronizadas (`npm run sync:preview`).
 
+
 ## 19/10/2026 — Meta de objetivo con jerarquía superior para regalo especial desde S/. 1,000 PEN
 
 - Rama secundaria: `feature/monto-estimado`.
@@ -277,6 +354,7 @@ El usuario recuerda la integración disponible con Adobe y pide nombrar cada rec
   - Insignia de regalo especial reflejada de forma complementaria en la tarjeta de monto estimado bajo los controles de compra.
 - Validación: 17 de 17 pruebas unitarias y DOM aprobadas (`npm test`), vistas de demostración sincronizadas (`npm run sync:preview`) y probadas en todos los productos.
 
+
 ## 19/10/2026 — Previsualización dinámica de monto estimado en ficha de producto
 
 - Rama secundaria: `feature/monto-estimado`.
@@ -287,6 +365,7 @@ El usuario recuerda la integración disponible con Adobe y pide nombrar cada rec
   - Sincronización con variantes activas y conservación en la simulación de solicitud para el asesor.
 - Validación: 17 de 17 pruebas aprobadas (`node --test`), vistas locales sincronizadas y publicadas en la rama secundaria.
 
+
 ## 09/10/2026 — Ficha predeterminada de producto
 
 - Implementada la ficha solicitada a partir de la captura: galería con miniaturas, marca, título, precio, variantes, cantidad, SKU, descripción y bloques informativos. Dos columnas en escritorio, una en móvil. Configuración desde el editor nativo y datos desde Productos.
@@ -294,6 +373,7 @@ El usuario recuerda la integración disponible con Adobe y pide nombrar cada rec
 - 17 pruebas aprobadas; Theme Check sin hallazgos; siete vistas, enlaces, IDs y JSON válidos; ZIP de 39 archivos regenerado. Navegador: 1254, 390 y 375 px sin desbordamiento, imágenes completas, galería/variantes/cantidad/apertura de solicitud comprobadas, sin errores de consola.
 - Guía creada en docs/product-detail.md. Muestra y capturas de escritorio/móvil disponibles en outputs del chat; productos ilustrativos no importados a Shopify. Recursos específicos limitados a la ficha. Pendientes: revisión con productos/fotos/precios reales, integración del receptor/Odoo, medición de rendimiento y nuevas plantillas especiales.
 - Publicación verificada: commit `07af4a8` enviado a GitHub/main, referencia remota coincidente. Administrador Shopify confirma tema activo `188927803629`, conexión a main, estado Correcto y último guardado reciente. Recursos product-detail.css/js y decokasa.js públicos HTTP 200 con cambios presentes (Shopify minifica JavaScript). El editor muestra Producto predeterminado asignado a cero productos y deshabilitado: comprobar sus controles y la ficha con datos reales cuando exista al menos un producto. No se importaron ejemplos para eludir esta limitación.
+
 
 ## 09/10/2026 — Corrección de categorías y marcas, configuración nativa
 
@@ -305,6 +385,7 @@ El usuario recuerda la integración disponible con Adobe y pide nombrar cada rec
 - Pendientes: configuración automática según campos reales de Odoo, filtros/productos reales y medición de rendimiento con imágenes finales. No se han activado condiciones automáticas, importado productos, instalado aplicaciones ni conectado Odoo.
 
 
+
 ## 09/10/2026 — Estructura visual del catálogo publicada en Shopify
 
 - Se preparó la sección de catálogo con introducción, navegación por marcas, filtros, ordenación, tarjetas con acceso a la landing única y bloque de ayuda del asesor. Conserva amarillo/negro/blanco; tres columnas en escritorio y dos en móvil, con filtros plegables. Título y descripción editables en Shopify.
@@ -314,17 +395,20 @@ El usuario recuerda la integración disponible con Adobe y pide nombrar cada rec
 - El usuario autorizó publicar esta estructura el 09/10/2026. Commit `98ddff4` enviado a GitHub/main, hash remoto confirmado. Catálogo comprobado en el tema activo Shopify `188927803629`: acceso público HTTP 200 sin autenticación, introducción/estilos actualizados, colección real vacía y cero tarjetas de muestra. Revisión visual de escritorio y móvil 390 px sin desbordamiento; filtros plegados en móvil y ordenación nativa Z–A conserva `sort_by=title-descending`. Captura de publicación guardada en outputs del chat.
 - El administrador muestra visibilidad Público y el tema conectado a GitHub/main; no se cambió la visibilidad durante esta tarea. Los ejemplos ilustrados permanecen solo en la muestra local. Pendientes: productos/fotos reales, autoridad de precios y configuración de filtros con productos. Odoo, formularios y medición continúan pendientes.
 
+
 ## 07/10/2026 — Franja superior visible en todo el recorrido
 
 - La franja de servicios ahora permanece fija al borde superior durante todo el desplazamiento de la página, no solo dentro de la sección de cabecera. El tema reserva el espacio inicial y mide la altura de la franja para escritorio y móvil.
 - Se regeneraron las siete vistas locales y el ZIP Shopify de 37 archivos.
 - Validación: siete pruebas Node aprobadas; siete páginas, rutas, enlaces y JSON válidos; Shopify Theme Check sin hallazgos. Commit `448fce6` enviado a GitHub/main y árbol limpio. La sincronización depende de la conexión existente; queda pendiente confirmar visualmente en el administrador Shopify.
 
+
 ## 07/10/2026 — Favicon DECOKASA
 
 - Se añadió `assets/favicon.png`, un favicon PNG transparente de 128 × 128 px basado en el símbolo amarillo del logo DECOKASA. El `<head>` global del tema lo carga en todas las páginas.
 - El sincronizador copia el icono a las vistas locales y el ZIP Shopify actualizado contiene 37 archivos.
 - Validación: siete pruebas Node aprobadas; siete páginas, enlaces y JSON válidos; Shopify Theme Check sin hallazgos. Commit `9d93471` enviado a GitHub/main y referencia remota confirmada. La conexión existente sincroniza los cambios con el tema Shopify; no se realizó verificación visual del favicon en el administrador durante este turno.
+
 
 ## 07/10/2026 — Barra fija y acceso a WhatsApp
 
@@ -333,6 +417,7 @@ El usuario recuerda la integración disponible con Adobe y pide nombrar cada rec
 - Número y mensaje se pueden editar en los ajustes de la sección Inicio. Se actualizaron las siete vistas locales y el ZIP del tema.
 - Validación local: siete pruebas Node aprobadas; siete páginas/rutas/JSON/enlaces verificados; ZIP de 36 archivos. Commit 8508428 enviado a GitHub/main y hash remoto confirmado. La vista de Shopify debe recibir la sincronización por la conexión existente; no se comprobó visualmente en el administrador en este turno.
 
+
 ## 06/10/2026 — DECOKASA con revestimientos y hogar
 
 - Nueva imagen independiente con pisos PVC y SPC, paneles PVC, wall panel, alfombras y artículos para el hogar; logo integrado y composición acorde a las otras marcas. Generada con image_gen, 1860 × 846 px, WebP calidad 94. Original preservado; prompt y dimensiones registrados.
@@ -340,12 +425,14 @@ El usuario recuerda la integración disponible con Adobe y pide nombrar cada rec
 - Siete vistas regeneradas; ZIP actualizado a 36 archivos. Siete pruebas aprobadas, HTML/enlaces/IDs/rutas/JSON válidos y Shopify Theme Check sin hallazgos.
 - Commit 5be5172 enviado a GitHub/main y verificado en Shopify: las cuatro imágenes cargan en el orden solicitado; escritorio de 1905 px sin desbordamiento horizontal. Captura: outputs/DECOKASA-marca-hogar-shopify.png del chat de trabajo. Memoria canónica e índice actualizados.
 
+
 ## 06/10/2026 — DECOKASA encabeza Nuestras marcas
 
 - Orden solicitado: DECOKASA, Xion, Biflex y Mundo Baby. Nueva tarjeta DECOKASA con el logo WebP aprobado sobre fondo amarillo suave y enlace al catálogo por marca; imagen sustituible desde el editor del tema.
 - Se conservan sin cambios los seis WebP existentes y el único bloque mayorista inferior. Cuatro columnas en escritorio, dos en tabletas y una en celular.
 - Siete vistas regeneradas y ZIP de 35 archivos actualizado. Siete pruebas aprobadas, enlaces/IDs/rutas/JSON válidos y Shopify Theme Check sin hallazgos.
 - Commit 0a47458 enviado a GitHub/main y verificado en Shopify: cuatro imágenes cargadas en el orden solicitado; escritorio 1905 px, tableta 753 px y celular 375 px útiles sin desbordamiento horizontal. Captura: outputs/DECOKASA-cuatro-marcas-escritorio.png del chat de trabajo. Memoria canónica e índice actualizados.
+
 
 ## 06/10/2026 — WebP de alta resolución y mayorista sin duplicación
 
@@ -358,6 +445,7 @@ El usuario recuerda la integración disponible con Adobe y pide nombrar cada rec
 
 Las secciones siguientes describen estados anteriores.
 
+
 ## Estado actual — 06/10/2026, diseño según mockup original
 
 - Tema activo en Shopify, conectado a GitHub/main, tienda privada con contraseña. Estado observado en el administrador; no se cambió publicación ni contraseña durante este ajuste.
@@ -369,6 +457,7 @@ Las secciones siguientes describen estados anteriores.
 
 Las entradas siguientes son históricas y describen el estado anterior a esta revisión.
 
+
 ## 06/10/2026 — primera base 0.1.0
 
 Tema Shopify con 27 archivos, siete vistas HTML navegables, calculadora PVC interna y formulario simulado. Documentación histórica y referencia visual preservadas; decisiones actuales en `project-context.md`. Contrato de solicitudes/CRM propuesto, sin conexión real.
@@ -376,6 +465,7 @@ Tema Shopify con 27 archivos, siete vistas HTML navegables, calculadora PVC inte
 Validación previa: Shopify Theme Check sin errores ni advertencias; seis pruebas de lógica aprobadas; siete páginas con enlaces, anclas, IDs y esquemas válidos; prueba DOM simulada aprobada para filtros, variantes, cálculo, referencias y consentimiento, sin envíos de red.
 
 Las pruebas DOM sustituyen la validación nativa de campos por un doble de prueba. No confirman aspecto visual, comportamiento móvil ni integración Shopify/Odoo. Revisión visual pendiente; el navegador de herramientas bloqueó archivos locales y se respetó esa limitación.
+
 
 ## 06/10/2026 — registro en GitHub
 
