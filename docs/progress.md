@@ -1,3 +1,9 @@
+## 05/11/2026 — Espesor total del piso SPC
+
+- Ficha técnica corregida por indicación del usuario: «Espesor total: 5,5 mm», incluyendo los 4 mm del piso y 1,5 mm de espuma. Se conserva la espuma como desglose.
+- Ajuste de contenido compartido entre móvil y escritorio; sin cambios de estilos, distribución, imágenes ni calculadora.
+- Vista previa sincronizada y ZIP regenerado. Theme Check sin hallazgos; ficha revisada en escritorio y móvil 393 × 852 sin desbordamiento. Se conserva el único destino Shopify 188927803629 mediante GitHub/main.
+
 ## 05/11/2026 — Integración del diseño SPC de escritorio
 
 - [x] Integrada la propuesta aprobada de `codex/spc-desktop` (`86e5919`) con la última producción (`73c2657`), conservando las correcciones de PVC.

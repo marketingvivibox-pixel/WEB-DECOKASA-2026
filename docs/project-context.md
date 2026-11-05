@@ -1,3 +1,9 @@
+## 05/11/2026 — Espesor total del piso SPC
+
+- Ficha técnica corregida por indicación del usuario: «Espesor total: 5,5 mm», incluyendo los 4 mm del piso y 1,5 mm de espuma. Se conserva la espuma como desglose.
+- Ajuste de contenido compartido entre móvil y escritorio; sin cambios de estilos, distribución, imágenes ni calculadora.
+- Vista previa sincronizada y ZIP regenerado. Theme Check sin hallazgos; ficha revisada en escritorio y móvil 393 × 852 sin desbordamiento. Se conserva el único destino Shopify 188927803629 mediante GitHub/main.
+
 ## 05/11/2026 — SPC de escritorio: alcance de la publicación autorizada
 
 El usuario autoriza publicar las mejoras aprobadas exclusivamente en escritorio (desde 1024 px): composición editorial, imágenes WebP, navegación con desplazamiento suave, capas interactivas, selección de acabados, calculadora ampliada y animaciones con respeto a movimiento reducido. La versión móvil aprobada conserva su composición, imágenes, enlaces y generación de la solicitud. El JavaScript compartido restablece esos comportamientos al volver a móvil.
