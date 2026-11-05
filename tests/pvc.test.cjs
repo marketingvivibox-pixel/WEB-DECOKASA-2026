@@ -43,6 +43,14 @@ test('PVC advisor quote carries the chosen finish and calculation without invent
   assert.doesNotMatch(quote, /SKU:|S\//);
 });
 
+test('PVC editor schema names fit Shopify upload limits', () => {
+  const source = fs.readFileSync(path.resolve(__dirname, '../sections/landing-piso-pvc.liquid'), 'utf8');
+  const schema = JSON.parse(source.match(/{% schema %}([\s\S]*?){% endschema %}/)[1]);
+  for (const entry of [schema, ...schema.blocks]) {
+    assert.ok(entry.name.length <= 25, `Schema name exceeds 25 characters: ${entry.name}`);
+  }
+});
+
 test('PVC review layout labels mockup samples and preserves the 20-finish catalog and calculator', async () => {
   const root = path.resolve(__dirname, '..');
   const engine = new Liquid({root:path.join(root, 'snippets'), extname:'.liquid'});
