@@ -113,7 +113,7 @@ function navigationFixture({desktop = true, reduced = false} = {}) {
   const positions = [];
   let next = 0, focused = false;
   const media = Object.assign(new EventTarget(), {matches: reduced});
-  const link = Object.assign(new EventTarget(), {getAttribute: () => '#calculator'});
+  const links = ['#calculator', '#finishes', '#missing'].map(hash => Object.assign(new EventTarget(), {getAttribute: () => hash}));
   const window = Object.assign(new EventTarget(), {
     scrollY: 100, innerHeight: 1000, location: {hash: ''},
     matchMedia: query => query.includes('min-width') ? {matches: desktop} : media,
@@ -124,8 +124,9 @@ function navigationFixture({desktop = true, reduced = false} = {}) {
   });
   window.history = {pushState: (_, __, hash) => {window.location.hash = hash;}};
   const target = {getBoundingClientRect: () => ({top: 4100 - window.scrollY}), focus: options => {assert.equal(options.preventScroll, true); focused = true;}};
-  const page = {querySelector: () => link, contains: node => node === target};
-  const document = {getElementById: () => target, documentElement: {scrollHeight: 9000}};
+  const finishes = {getBoundingClientRect: () => ({top: 1100 - window.scrollY}), focus: () => {focused = true;}};
+  const page = {querySelectorAll: () => links, contains: node => node === target || node === finishes};
+  const document = {getElementById: id => ({calculator: target, finishes})[id], documentElement: {scrollHeight: 9000}};
   const source = fs.readFileSync(path.join(root, 'assets/landing-piso-spc.js'), 'utf8');
   const navigation = source.slice(source.indexOf('  function initDesktopNavigation('), source.indexOf('  function initCalculatorLayout('));
   runInNewContext(`${navigation}\ninitDesktopNavigation(page);`, {page, document, window, AbortController, navigationControllers: controllers});
@@ -133,7 +134,7 @@ function navigationFixture({desktop = true, reduced = false} = {}) {
     window, frames, positions,
     focused: () => focused,
     cleanup: () => controllers.get(page)(),
-    click: (options = {}) => { const event = Object.assign(new Event('click', {cancelable: true}), {button: 0, ...options}); link.dispatchEvent(event); return event; },
+    click: (options = {}, index = 0) => { const event = Object.assign(new Event('click', {cancelable: true}), {button: 0, ...options}); links[index].dispatchEvent(event); return event; },
     step: time => { const pending = [...frames.values()]; frames.clear(); pending.forEach(callback => callback(time)); }
   };
 }
@@ -171,6 +172,18 @@ test('SPC: desplazamiento cancelable y limpieza al descargar la sección', () =>
   assert.equal(navigation.click().defaultPrevented, false);
 });
 
+test('SPC: cada acceso navega a su sección y los destinos inexistentes conservan su comportamiento nativo', () => {
+  const navigation = navigationFixture();
+  assert.equal(navigation.click({}, 2).defaultPrevented, false);
+  assert.equal(navigation.frames.size, 0);
+  navigation.click(); navigation.step(0); navigation.step(300);
+  assert.equal(navigation.click({}, 1).defaultPrevented, true);
+  for (let time = 400; time <= 2100; time += 100) navigation.step(time);
+  assert.equal(navigation.window.scrollY, 1070);
+  assert.equal(navigation.window.location.hash, '#finishes');
+  navigation.cleanup();
+});
+
 test('SPC: respeta movimiento reducido, móvil y clics con modificadores', () => {
   const reduced = navigationFixture({reduced: true});
   reduced.click();
@@ -186,6 +199,51 @@ test('SPC: respeta movimiento reducido, móvil y clics con modificadores', () =>
   assert.equal(modified.click({ctrlKey: true}).defaultPrevented, false);
   assert.equal(modified.frames.size, 0);
   modified.cleanup();
+});
+
+test('SPC: capas accesibles con selección exclusiva, teclado circular y limpieza de eventos', () => {
+  const {runInNewContext} = require('node:vm');
+  const controllers = new WeakMap();
+  let focused = -1;
+  const buttons = Array.from({length: 5}, (_, i) => Object.assign(new EventTarget(), {
+    pressed: String(i === 0),
+    setAttribute(name, value) {assert.equal(name, 'aria-pressed'); this.pressed = value;},
+    focus() {focused = i;}
+  }));
+  const markers = buttons.map((_, i) => {
+    const marker = {dataset: {layerMarker: String(i)}, active: i === 0};
+    marker.classList = {toggle: (_, active) => {marker.active = active;}};
+    return marker;
+  });
+  const title = {}, description = {}, fact = {};
+  const explorer = {querySelectorAll: () => buttons, querySelector: selector => ({'[data-layer-title]': title, '[data-layer-description]': description, '[data-layer-fact]': fact})[selector]};
+  const page = {querySelector: () => explorer, querySelectorAll: () => markers};
+  const source = fs.readFileSync(path.join(root, 'assets/landing-piso-spc.js'), 'utf8');
+  const layers = source.slice(source.indexOf('  function initDesktopLayers('), source.indexOf('  function init(scope)'));
+  runInNewContext(`${layers}\ninitDesktopLayers(page);`, {page, AbortController, layerControllers: controllers});
+  const active = index => {
+    assert.deepEqual(buttons.map(button => button.pressed), buttons.map((_, i) => String(i === index)));
+    assert.deepEqual(markers.map(marker => marker.active), markers.map((_, i) => i === index));
+  };
+  const key = (index, value) => {
+    const event = Object.assign(new Event('keydown', {cancelable: true}), {key: value});
+    buttons[index].dispatchEvent(event);
+    return event;
+  };
+  buttons[1].dispatchEvent(new Event('click'));
+  active(1);
+  assert.match(fact.textContent, /0,3 mm/);
+  assert.equal(key(1, 'End').defaultPrevented, true);
+  active(4); assert.equal(focused, 4);
+  assert.match(description.textContent, /espuma integrada/);
+  key(4, 'ArrowDown'); active(0); assert.equal(focused, 0);
+  key(0, 'ArrowUp'); active(4);
+  key(4, 'Home'); active(0);
+  assert.equal(key(0, 'Tab').defaultPrevented, false);
+  controllers.get(page)();
+  buttons[2].dispatchEvent(new Event('click'));
+  active(0);
+  assert.equal(controllers.has(page), false);
 });
 
 test('SPC: el croquis conserva identidad y resultados al alternar móvil y escritorio', () => {
@@ -222,6 +280,70 @@ test('SPC: el croquis conserva identidad y resultados al alternar móvil y escri
   assert.deepEqual([...details.children], original);
   assert.equal(details.childNodes.length, original.length);
 });
+test('SPC: los enlaces de acabados conservan el destino móvil al cruzar el breakpoint', () => {
+  const {runInNewContext} = require('node:vm');
+  const {document} = parseHTML('<main data-phone="51941599516"><div class="spc-v2-sample"><button data-color="Caoba"></button><a href="https://wa.me/51941599516?text=consulta-original">Consultar</a></div></main>');
+  const page = document.querySelector('main');
+  const link = page.querySelector('a');
+  const original = link.getAttribute('href');
+  const media = Object.assign(new EventTarget(), {matches: false});
+  const controllers = new WeakMap();
+  const source = fs.readFileSync(path.join(root, 'assets/landing-piso-spc.js'), 'utf8');
+  const setup = source.slice(source.indexOf('  function initDesktopFinishes('), source.indexOf('  function init(scope)'));
+  runInNewContext(`${setup}\ninitDesktopFinishes(page);`, {page, window:{matchMedia:() => media}, finishControllers:controllers});
+  assert.equal(link.getAttribute('href'), original);
+  for (let cycle = 0; cycle < 3; cycle++) {
+    media.matches = true;
+    media.dispatchEvent(new Event('change'));
+    assert.match(decodeURIComponent(link.href), /acabado Caoba/);
+    media.matches = false;
+    media.dispatchEvent(new Event('change'));
+    assert.equal(link.getAttribute('href'), original);
+  }
+  controllers.get(page)();
+  media.matches = true;
+  media.dispatchEvent(new Event('change'));
+  assert.equal(link.getAttribute('href'), original);
+});
+
+test('SPC: la solicitud de escritorio añade el acabado y conserva el comportamiento móvil publicado', () => {
+  const {runInNewContext} = require('node:vm');
+  const source = fs.readFileSync(path.join(root, 'assets/landing-piso-spc.js'), 'utf8');
+  const open = source.slice(source.indexOf('      function openOrderModal()'), source.indexOf('      function closeOrderModal()'));
+  const build = desktop => {
+    const comment = {value:''};
+    const quantity = {value:0, dispatchEvent() {}};
+    const form = {querySelector: selector => ({'[name="comment"]':comment, '[name="quantity"]':quantity})[selector]};
+    const context = {
+      window:{matchMedia:() => ({matches:desktop})},
+      document:{activeElement:{}, body:{classList:{add() {}}}},
+      modalEl:{querySelector:() => form, showModal() {}},
+      scheduleStickyCta() {}, requestReturnFocus:null, generatedRequestComment:'',
+      lastCalculation:{...calculate(20, 2.196, true), includeWaste:true},
+      currentMode:'direct', swatches:[{dataset:{color:'Caoba'}}], selectedColorIdx:0,
+      number:new Intl.NumberFormat('es-PE', {minimumFractionDigits:2, maximumFractionDigits:2}), Event
+    };
+    runInNewContext(`${open}\nopenOrderModal();`, context);
+    return {context, comment, quantity, reopen:() => runInNewContext('openOrderModal();', context)};
+  };
+  const desktop = build(true);
+  assert.equal(desktop.quantity.value, 11);
+  assert.match(desktop.comment.value, /Acabado de referencia: Caoba/);
+  desktop.comment.value = 'Mi comentario personalizado';
+  desktop.reopen();
+  assert.equal(desktop.comment.value, 'Mi comentario personalizado');
+  const mobile = build(false);
+  assert.equal(mobile.quantity.value, 11);
+  assert.equal(mobile.comment.value, 'Solicitud de Piso SPC: 11 cajas calculadas para 20.00 m² netos (+10% merma) (cobertura total 24.16 m²).');
+  mobile.comment.value = 'Anterior';
+  mobile.reopen();
+  assert.match(mobile.comment.value, /^Solicitud de Piso SPC: 11 cajas/);
+  mobile.context.lastCalculation = null;
+  mobile.comment.value = 'Consulta sin medidas';
+  mobile.reopen();
+  assert.equal(mobile.comment.value, 'Consulta sin medidas');
+});
+
 test('SPC: rechaza áreas y rendimientos inválidos, sin producir pedidos ficticios', () => {
   for (const area of ['', 0, 0.001, -1, NaN, Infinity, 100001]) assert.equal(calculate(area, 2.196, true), null);
   for (const coverage of [0, -1, NaN, Infinity]) assert.equal(calculate(20, coverage, true), null);

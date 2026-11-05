@@ -35,14 +35,15 @@
 {% if section.settings.show_top_announcement %}<a class="spc-v2-announcement" href="{{ catalog_url | escape }}">¡Nuevos colores disponibles! <strong>Mira el catálogo aquí →</strong></a>{% endif %}
 <img class="spc-v2-simbolo-marca spc-v2-art" src="{{ 'spc-2026-simbolo-marca.webp' | asset_url }}" width="118" height="116" alt="Decokasa" loading="eager" fetchpriority="high">
 <h1 class="spc-v2-title"><span class="spc-mobile-title">Pisos <em>SPC</em></span><span class="spc-desktop-only">Un nuevo piso.<br>Un nuevo <em>hogar.</em></span></h1>
-<p class="spc-v2-tagline">Lo nuevo en revestimientos</p>
+<p class="spc-v2-tagline"><span class="spc-mobile-only">Lo nuevo en revestimientos</span><span class="spc-desktop-only">DECOKASA / PISOS SPC</span></p>
 <div class="spc-v2-intro-panel spc-v2-white"></div>
 <img class="spc-v2-caja-tablones-hero spc-v2-art" src="{{ 'spc-2026-caja-tablones-hero.webp' | asset_url }}" width="580" height="785" alt="Piso SPC Decokasa en acabados madera clara, gris y caoba" loading="eager" fetchpriority="high">
 <p class="spc-v2-intro-copy">✨ <strong>¡Los Pisos del Futuro ya están aquí!</strong> ✨<br>Con sistema click, espuma incorporada y de instalación rápida son la mejor opción para tu hogar <strong>¡sin gastar de más!</strong> 💸🤩</p>
 <p class="spc-desktop-only spc-desktop-hero-summary">La calidez de la madera, con la practicidad del piso SPC. Elige tu acabado y descubre cuánto necesitas para transformar tu espacio.</p>
-<nav class="spc-desktop-hero-actions" aria-label="Explora los pisos SPC"><a class="spc-button spc-button--order" data-spc-calculator-link href="#calculadora-{{ section.id }}">Calcula tu proyecto <span aria-hidden="true">→</span></a><a href="#{{ colors_id }}">Explora los colores <span aria-hidden="true">↗</span></a></nav>
+<nav class="spc-desktop-hero-actions" aria-label="Explora los pisos SPC"><a class="spc-button spc-button--order" data-spc-calculator-link href="#calculadora-{{ section.id }}">Calcula tu proyecto <span aria-hidden="true">→</span></a><a data-spc-desktop-anchor href="#acabados-{{ section.id }}">Explora los acabados <span aria-hidden="true">↗</span></a></nav>
 <ul class="spc-desktop-only spc-desktop-hero-facts"><li><strong>Sistema Click</strong><span>Sin pegamentos ni clavos</span></li><li><strong>Espuma integrada</strong><span>Lista para instalar</span></li></ul>
 </header>
+<nav class="spc-desktop-only spc-desktop-section-nav" aria-label="Secciones de pisos SPC"><span>Pisos SPC <small>Diseñados para tu día a día</small></span><div><a data-spc-desktop-anchor href="#acabados-{{ section.id }}">Acabados</a><a data-spc-desktop-anchor href="#beneficios-{{ section.id }}">Beneficios</a><a data-spc-desktop-anchor href="#calculadora-{{ section.id }}">Calculadora</a><a data-spc-desktop-anchor href="#asesoria-{{ section.id }}">Asesoría <span aria-hidden="true">↗</span></a></div></nav>
 <section class="spc-v2-composition" aria-label="Composición del piso SPC">
 <picture class="spc-responsive-image">
 <source media="(min-width: 1024px)" srcset="{{ 'spc-desktop-ninos-perro-768.webp' | asset_url }} 768w, {{ 'spc-desktop-ninos-perro.webp' | asset_url }} 1536w" sizes="(min-width: 1600px) 780px, 49vw" width="1536" height="1024">
@@ -55,9 +56,10 @@
         <p class="spc-v2-composition-copy">El Piso SPC (Stone Plastic Composite), es un tipo de <strong>revestimiento vinílico de alta gama para el suelo</strong>, con núcleo rígido, hecho de polvo de piedra y PVC.</p>
 <div class="spc-v2-composition-rim" aria-hidden="true"></div>
 </section>
-<section class="spc-v2-colors-specs spc-v2-white">
+<section id="acabados-{{ section.id }}" class="spc-v2-colors-specs spc-v2-white" tabindex="-1">
+<figure class="spc-desktop-only spc-finish-preview" aria-label="Acabado seleccionado"><div class="spc-finish-preview-top"><span>Tu selección</span><span data-finish-index>01 / 03</span></div><img data-finish-image src="{{ 'spc-2026-muestra-calida.webp' | asset_url }}" width="266" height="266" alt="Muestra de piso SPC en madera natural" loading="lazy"><figcaption><strong data-finish-name>Madera natural</strong><span data-finish-description>Un tono cálido para espacios acogedores.</span></figcaption><small>Muestra de referencia · Confirma el tono y la disponibilidad con tu asesor.</small></figure>
 <div class="spc-v2-colors-heading spc-v2-heading"><h2>Variedad para elegir</h2><p>Colores disponibles</p></div>
-<div id="{{ colors_id }}" class="spc-v2-samples spc-colors" aria-label="Colores de referencia">
+<div id="{{ colors_id }}" class="spc-v2-samples spc-colors" tabindex="-1" aria-label="Colores de referencia">
 <div class="spc-v2-sample"><button type="button" class="spc-v2-swatch" data-color="Madera natural" aria-pressed="true"><img src="{{ 'spc-2026-muestra-calida.webp' | asset_url }}" width="266" height="266" alt="Madera natural" loading="lazy"><span>Tonos <strong>cálidos</strong></span></button><a class="spc-v2-gold-link" href="{{ contact_url | escape }}" target="_blank" rel="noopener" aria-label="Consultar tonos cálidos">Ver más</a></div>
 <div class="spc-v2-sample"><button type="button" class="spc-v2-swatch" data-color="Caoba" aria-pressed="false"><img src="{{ 'spc-2026-muestra-oscura.webp' | asset_url }}" width="263" height="263" alt="Caoba" loading="lazy"><span>Tonos <strong>oscuros</strong></span></button><a class="spc-v2-gold-link" href="{{ contact_url | escape }}" target="_blank" rel="noopener" aria-label="Consultar tonos oscuros">Ver más</a></div>
 <div class="spc-v2-sample"><button type="button" class="spc-v2-swatch" data-color="Gris claro" aria-pressed="false"><img src="{{ 'spc-2026-muestra-neutra.webp' | asset_url }}" width="261" height="261" alt="Gris claro" loading="lazy"><span>Tonos <strong>neutros</strong></span></button><a class="spc-v2-gold-link" href="{{ contact_url | escape }}" target="_blank" rel="noopener" aria-label="Consultar tonos neutros">Ver más</a></div>
@@ -84,7 +86,7 @@
 <img class="spc-v2-hojas-derecha spc-v2-art" src="{{ 'spc-2026-hojas-derecha.webp' | asset_url }}" width="480" height="313" alt="" loading="lazy">
 <p class="spc-v2-cert-note">Con <strong>certificaciones internacionales</strong> que avalan su salubridad, desempeño y calidad. 🥇</p>
 </section>{% endif %}
-<section class="spc-v2-click">
+<section class="spc-v2-click" id="beneficios-{{ section.id }}" tabindex="-1" aria-label="Beneficios e instalación">
 <picture class="spc-responsive-image">
 <source media="(min-width: 1024px)" srcset="{{ 'spc-desktop-instalacion-reflejo-768.webp' | asset_url }} 768w, {{ 'spc-desktop-instalacion-reflejo.webp' | asset_url }} 1382w" sizes="(min-width: 1600px) 780px, 52vw" width="1382" height="1138">
 <img class="spc-v2-click-fondo spc-v2-art" src="{{ 'spc-2026-click-fondo.webp' | asset_url }}" width="1080" height="889" alt="" loading="lazy">
@@ -107,7 +109,18 @@
 <p class="spc-v2-layer-note">*No necesita que se coloque espuma extra en la superficie a colocar el piso.</p>
 <img class="spc-v2-despiece-cinco-capas spc-v2-art" src="{{ 'spc-2026-despiece-cinco-capas.webp' | asset_url }}" width="569" height="602" alt="Cinco capas del piso SPC: protección UV, resistencia, diseño, tablero rígido y espuma" loading="lazy">
 <svg class="spc-v2-layer-leaders" viewBox="0 0 190 295" fill="none" stroke="#b79c24" stroke-width="1.3" aria-hidden="true"><path d="M0 0H160 M0 40H160 M0 80H160 M0 120H160 M0 160H100L160 275"/><g fill="none"><circle cx="160" cy="0" r="5"/><circle cx="160" cy="40" r="5"/><circle cx="160" cy="80" r="5"/><circle cx="160" cy="120" r="5"/><circle cx="160" cy="275" r="5"/></g></svg>
-<svg class="spc-v2-layer-leaders-desktop spc-desktop-only" viewBox="0 0 1040 540" fill="none" aria-hidden="true" focusable="false"><path d="M315 95H530 M315 135H530 M315 175H530 M315 215H530 M315 255H440L530 340"/><circle cx="530" cy="95" r="4"/><circle cx="530" cy="135" r="4"/><circle cx="530" cy="175" r="4"/><circle cx="530" cy="215" r="4"/><circle cx="530" cy="340" r="4"/></svg>
+<svg class="spc-v2-layer-leaders-desktop spc-desktop-only" viewBox="0 0 1100 660" fill="none" aria-hidden="true" focusable="false"><g data-layer-marker="0" class="is-active"><path d="M450 141H500L542 152"/><circle cx="542" cy="152" r="7"/></g><g data-layer-marker="1"><path d="M450 202H500L542 196"/><circle cx="542" cy="196" r="7"/></g><g data-layer-marker="2"><path d="M450 263H500L542 239"/><circle cx="542" cy="239" r="7"/></g><g data-layer-marker="3"><path d="M450 324H500L542 291"/><circle cx="542" cy="291" r="7"/></g><g data-layer-marker="4"><path d="M450 385H500L542 428"/><circle cx="542" cy="428" r="7"/></g></svg>
+<div class="spc-desktop-only spc-layer-explorer" data-layer-explorer>
+  <p class="spc-layer-eyebrow">EXPLORA CADA CAPA</p>
+  <ol class="spc-layer-controls" aria-label="Capas del piso SPC">
+    <li><button type="button" data-layer-target="0" aria-pressed="true" aria-controls="capa-detalle-{{ section.id }}"><span>01</span>Protección UV<span aria-hidden="true">↗</span></button></li>
+    <li><button type="button" data-layer-target="1" aria-pressed="false" aria-controls="capa-detalle-{{ section.id }}"><span>02</span>Capa de resistencia<span aria-hidden="true">↗</span></button></li>
+    <li><button type="button" data-layer-target="2" aria-pressed="false" aria-controls="capa-detalle-{{ section.id }}"><span>03</span>Diseño decorativo<span aria-hidden="true">↗</span></button></li>
+    <li><button type="button" data-layer-target="3" aria-pressed="false" aria-controls="capa-detalle-{{ section.id }}"><span>04</span>Tablero SPC<span aria-hidden="true">↗</span></button></li>
+    <li><button type="button" data-layer-target="4" aria-pressed="false" aria-controls="capa-detalle-{{ section.id }}"><span>05</span>Espuma integrada<span aria-hidden="true">↗</span></button></li>
+  </ol>
+  <div class="spc-layer-detail" id="capa-detalle-{{ section.id }}" role="status" aria-live="polite" aria-atomic="true"><strong data-layer-title>El acabado empieza en la superficie.</strong><p data-layer-description>La protección UV es la capa exterior del piso. Ayuda a conservar el aspecto de su acabado.</p><span data-layer-fact>01 / 05 · Protección superficial</span></div>
+</div>
 </div>
 </section>
 <section class="spc-v2-calculator" id="calculadora-{{ section.id }}" tabindex="-1" aria-label="Calculadora de cajas SPC">
@@ -170,6 +183,7 @@
       <div class="spc-calc-col-result">
         <div class="spc-desktop-plan" data-desktop-plan></div>
         <div class="spc-result-card" data-calc-result>
+          <p class="spc-desktop-only spc-calc-finish">Acabado de referencia: <strong data-finish-summary>Madera natural</strong> <a data-spc-desktop-anchor href="#acabados-{{ section.id }}">Cambiar</a></p>
           <div class="spc-result-summary" role="status" aria-live="polite" aria-atomic="true">
             <div class="spc-result-metrics">
               <div><span class="spc-metric-label">{{ 'spc.calculator.you_need' | t }}</span><strong class="spc-boxes-val" data-boxes>— cajas</strong></div>
@@ -262,9 +276,10 @@
 <p class="spc-v2-shipping-copy">Realiza tu pedido. elige tu agencia o delivery de<br>preferencia, <strong>¡Y listo!</strong></p>
 <p class="spc-v2-shipping-note">*¡Cotiza tus envíos con los asesores de venta Decokasa!</p>
 </section>
-<footer class="spc-v2-footer spc-v2-white">
+<footer class="spc-v2-footer spc-v2-white" id="asesoria-{{ section.id }}" tabindex="-1" aria-label="Asesoría para tu proyecto">
 <img class="spc-v2-caja-tablones-footer spc-v2-art" src="{{ 'spc-2026-caja-tablones-footer.webp' | asset_url }}" width="832" height="899" alt="Caja y tablones de piso SPC Decokasa" loading="lazy">
 <div class="spc-v2-footer-heading spc-v2-heading"><h2>Cotiza tus pisos hoy</h2><p>¡Gratis y sin compromiso!</p></div>
+<ul class="spc-desktop-only spc-desktop-service"><li><strong>Te ayudamos a elegir</strong><span>Confirmamos acabado, cantidad y disponibilidad antes de tu compra.</span></li><li><strong>Entrega a tu medida</strong><span>Distribución propia en Lima. A provincia, con la agencia que elijas.</span></li><li><strong>También puedes recoger</strong><span>Av. Las Palmeras 343, Torre Azul, San Isidro, Lima. Coordina con tu asesor.</span></li></ul>
 <div class="spc-v2-footer-actions">{% render 'spc-actions', contact_url: contact_url, catalog_url: catalog_url %}</div>
 <p class="spc-v2-copyright">Decokasa Perú {{ 'now' | date: '%Y' }}<br>Todos los derechos reservados</p>
 </footer></div>
