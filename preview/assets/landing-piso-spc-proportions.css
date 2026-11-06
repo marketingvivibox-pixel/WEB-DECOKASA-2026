@@ -43,7 +43,6 @@
 .spc-page .spc-quote blockquote{position:absolute;left:calc(30 * var(--spc-unit));top:calc(332 * var(--spc-unit));width:calc(164 * var(--spc-unit));margin:0;font-size:calc(18 * var(--spc-unit));line-height:1.16}
 .spc-quote blockquote strong{display:block;font-weight:700;margin-bottom:calc(24 * var(--spc-unit))}
 .spc-quote blockquote p{font-weight:400}
-.spc-testimonial-sample-note{position:absolute;top:5.5%;left:27%;width:59%;margin:0;text-align:center;color:#555;font-size:max(10px,calc(18 * var(--spc-unit)));line-height:1.25}
 .spc-illustrative-label{position:absolute;left:0;top:calc(292 * var(--spc-unit));width:100%;font-size:calc(18 * var(--spc-unit));line-height:1.2;color:#806518}
 .spc-testimonial-pause{position:absolute;right:7.5%;top:9%;width:44px;height:44px;border:0;background:transparent;color:#666;font-size:20px;cursor:pointer;display:grid;place-items:center;border-radius:50%;z-index:2}
 .spc-testimonial-pause:hover{background:#00000008}

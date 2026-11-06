@@ -1,3 +1,9 @@
+## 06/11/2026 — Nota inferior de SPC retirada en móvil
+
+- [x] Eliminado el texto específico del contenido compartido, también en móvil; conservadas las etiquetas de ejemplos ilustrativos y el movimiento del carrusel.
+- [x] Vista móvil a 393 × 852 px comprobada, sin nota ni desbordamiento horizontal.
+- [x] 18/18 pruebas SPC y Theme Check sin hallazgos; vistas sincronizadas y paquete de 173 archivos regenerado.
+
 ## 06/11/2026 — Nota inferior de SPC en escritorio
 
 - [x] Retirada visualmente la nota inferior indicada por el usuario en escritorio, conservando las etiquetas de ejemplos ilustrativos y la versión móvil.

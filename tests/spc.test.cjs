@@ -389,7 +389,7 @@ test('SPC: datos nativos y privacidad del contenido de muestra en el tema', asyn
   const illustrative = parseHTML(await engine.parseAndRender(source, {...context, section:{...context.section, settings:{...settings, show_illustrative_testimonials:true}}})).document;
   assert.equal(illustrative.querySelectorAll('.spc-quote--sample').length, 5);
   assert.ok(illustrative.querySelector('[data-testimonial-viewport]'));
-  assert.match(illustrative.querySelector('.spc-testimonial-sample-note').textContent, /No son reseñas de clientes reales/);
+  assert.equal(illustrative.querySelector('.spc-testimonial-sample-note'), null);
   assert.equal(illustrative.querySelector('.spc-seals'), null);
   assert.equal(illustrative.querySelector('.spc-sample-check'), null);
   assert.equal(illustrative.querySelector('.spc-stars'), null);

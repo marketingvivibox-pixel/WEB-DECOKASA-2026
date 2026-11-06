@@ -648,7 +648,6 @@
   .spc-page .spc-v2-testimonials { order: 7; padding: 72px 0 58px; background: #fff; }
   .spc-page .spc-v2-testimonials :is(.spc-v2-testimonial-panel, .spc-v2-testimonials-panel, .spc-v2-testimonials-fondo, .spc-v2-socials, .spc-v2-social-icons, .spc-v2-hojas-testimonios) { display: none; }
   .spc-page .spc-v2-testimonials .spc-v2-testimonials-heading { margin: 0 var(--spc-gutter) !important; }
-  .spc-page .spc-v2-testimonials .spc-testimonial-sample-note { display: none; }
   .spc-page .spc-v2-testimonials .spc-testimonial-pause { position: absolute; top: 80px !important; right: var(--spc-gutter) !important; min-width: 44px; min-height: 44px; color: var(--spc-ink); border-color: var(--spc-line); }
   .spc-page .spc-v2-testimonials .spc-v2-quotes { margin-top: 24px !important; padding: 12px 0; }
   .spc-page .spc-testimonial-track,
