@@ -65,7 +65,7 @@ test('PVC review layout labels mockup samples and preserves the 20-finish catalo
   const render = async section => parseHTML(await engine.parseAndRender(source, {...context, section})).document;
   const doc = await render(context.section);
   assert.equal(doc.querySelectorAll('.pvc-review--sample').length, 5);
-  assert.match(doc.querySelector('.pvc-testimonials__note').textContent, /No son reseñas de clientes reales/);
+  assert.equal(doc.querySelector('.pvc-testimonials .pvc-heading p').textContent, 'Ejemplos ilustrativos');
   assert.ok([...doc.querySelectorAll('.pvc-review')].every(card => card.querySelector('.pvc-review__label').textContent === 'Ejemplo ilustrativo'));
   assert.ok([...doc.querySelectorAll('.pvc-review img')].every(img => img.alt === 'Retrato ilustrativo del mockup'));
   assert.equal(doc.querySelectorAll('.pvc-swatch').length, 20);
@@ -80,7 +80,7 @@ test('PVC review layout labels mockup samples and preserves the 20-finish catalo
   ]});
   assert.equal(real.querySelectorAll('.pvc-review').length, 1);
   assert.equal(real.querySelector('.pvc-review--sample'), null);
-  assert.equal(real.querySelector('.pvc-testimonials__note'), null);
+  assert.equal(real.querySelector('.pvc-testimonials .pvc-heading p').textContent, 'De nuestros clientes');
   assert.equal(real.querySelector('.pvc-review h3').textContent, 'Ana <Cliente>');
   assert.equal(real.querySelector('.pvc-review h3').children.length, 0);
   assert.equal(real.querySelectorAll('.pvc-swatch').length, 20);

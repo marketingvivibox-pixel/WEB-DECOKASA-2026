@@ -109,7 +109,7 @@
       <div class="pvc-testimonials__paper pvc-paper" aria-hidden="true"></div>
       <img class="pvc-testimonials__planks" src="{{ 'pvc-laminas-decorativas-resenas.webp' | asset_url }}" width="1080" height="250" loading="lazy" alt="">
       <header class="pvc-heading"><h2 id="{{ pvc_id }}-testimonials-title">Testimonios</h2><p>{% if pvc_sample_reviews %}Ejemplos ilustrativos{% else %}De nuestros clientes{% endif %}</p></header>
-      <div class="pvc-review-rail" data-review-rail tabindex="0" role="region" aria-label="Testimonios{% if pvc_sample_reviews %} ilustrativos{% endif %}. Desliza o usa las flechas para ver más."{% if pvc_sample_reviews %} aria-describedby="{{ pvc_id }}-sample-note"{% endif %}>
+      <div class="pvc-review-rail" data-review-rail tabindex="0" role="region" aria-label="Testimonios{% if pvc_sample_reviews %} ilustrativos{% endif %}. Desliza o usa las flechas para ver más.">
         {% if pvc_sample_reviews %}
           {% capture pvc_samples %}lima|Lima|Gustavo R.|Excelente acabado y fácil de limpiar|Me encantó el resultado, definitivamente volvería a comprar.~arequipa|Arequipa|Mishell D.|Mi sala luce completamente maravillosa|El piso PVC le dio un acabado distinto a mi sala, ¡me encantó!~canete|Cañete|Grecia C.|Renové mi departamento gastando poco|Es una excelente opción para renovar sin hacer obras.~huanuco|Huánuco|Franco J.|El dormitorio se siente más cálido|Lo instalamos con mi esposa en una tarde y quedó genial.~trujillo|Trujillo|Carley B.|La instalación fue más sencilla de lo que pensé|Quedó tal como lo imaginaba, ¡muy contenta!{% endcapture %}
           {% assign pvc_sample_cards = pvc_samples | split: '~' %}
@@ -125,7 +125,6 @@
         {% endif %}
       </div>
       <div class="pvc-rail-controls" data-rail-controls hidden><button type="button" data-rail-prev aria-label="Testimonio anterior">←</button><button type="button" data-rail-pause aria-pressed="false">Pausar movimiento</button><button type="button" data-rail-next aria-label="Testimonio siguiente">→</button></div>
-      {% if pvc_sample_reviews %}<p class="pvc-testimonials__note" id="{{ pvc_id }}-sample-note">Contenido ilustrativo del diseño.<br>No son reseñas de clientes reales.</p>{% endif %}
     </section>
   {% endif %}
 

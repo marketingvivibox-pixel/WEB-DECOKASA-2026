@@ -1,3 +1,8 @@
+## 06/11/2026 — Nota inferior del carrusel PVC
+
+- [x] Retirada la nota inferior señalada por el usuario, junto con su estilo y referencia de accesibilidad. Se conserva «Ejemplos ilustrativos» en el encabezado y «Ejemplo ilustrativo» en cada tarjeta.
+- [x] Seis pruebas PVC correctas; vistas sincronizadas y paquete del tema regenerado.
+
 ## 05/11/2026 — Capas y testimonios PVC recuperados
 
 - [x] Láminas por delante del panel «Un piso, muchas posibilidades», con borde redondeado y transición de fondo conservados.

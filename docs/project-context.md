@@ -1,3 +1,7 @@
+## 06/11/2026 — PVC: nota inferior retirada
+
+Por petición del usuario se elimina la nota inferior «Contenido ilustrativo del diseño. No son reseñas de clientes reales». Se conserva la identificación de ejemplos ilustrativos en el encabezado y las tarjetas. No cambia el carrusel ni el catálogo.
+
 ## 05/11/2026 — PVC: composición de reseñas y orden de capas
 
 La petición posterior del usuario recupera la sección de reseñas del PSD PVC en lugar del carrusel de texturas. Como no se han confirmado opiniones reales autorizadas, los cinco ejemplos del diseño se identifican como ilustrativos en encabezado, tarjetas y nota; no se agregan estrellas, verificación ni datos estructurados de reseñas. El editor admite bloques «Testimonio autorizado», que reemplazan los ejemplos automáticamente. El catálogo conserva sus 20 acabados.
