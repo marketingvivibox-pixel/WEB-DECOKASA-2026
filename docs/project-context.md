@@ -1,3 +1,7 @@
+## 06/11/2026 — SPC: nota inferior de escritorio retirada
+
+Por petición del usuario se oculta la nota inferior «Imágenes de IA · Textos de muestra. No son reseñas de clientes reales» en escritorio (desde 1024 px). El encabezado y cada tarjeta conservan su identificación como ejemplos ilustrativos. La versión móvil aprobada y el funcionamiento del carrusel se mantienen. Cambio limitado al CSS de escritorio, su copia de vista previa y el paquete del tema.
+
 ## 06/11/2026 — PVC: nota inferior retirada
 
 Por petición del usuario se elimina la nota inferior «Contenido ilustrativo del diseño. No son reseñas de clientes reales». Se conserva la identificación de ejemplos ilustrativos en el encabezado y las tarjetas. No cambia el carrusel ni el catálogo.

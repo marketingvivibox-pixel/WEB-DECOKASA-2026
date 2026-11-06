@@ -1,3 +1,9 @@
+## 06/11/2026 — Nota inferior de SPC en escritorio
+
+- [x] Retirada visualmente la nota inferior indicada por el usuario en escritorio, conservando las etiquetas de ejemplos ilustrativos y la versión móvil.
+- [x] Comprobado a 1440 px: nota oculta y etiquetas visibles. A 393 × 852 px: nota móvil conservada, sin desbordamiento horizontal.
+- [x] Theme Check oficial sin hallazgos, vista previa sincronizada y paquete regenerado; integrado sobre la última actualización PVC sin modificarla.
+
 ## 06/11/2026 — Nota inferior del carrusel PVC
 
 - [x] Retirada la nota inferior señalada por el usuario, junto con su estilo y referencia de accesibilidad. Se conserva «Ejemplos ilustrativos» en el encabezado y «Ejemplo ilustrativo» en cada tarjeta.
