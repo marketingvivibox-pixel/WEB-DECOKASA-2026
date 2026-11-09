@@ -1,3 +1,11 @@
+## 09/11/2026 — Skeletons de carga SPC
+
+- [x] Placeholders proporcionales para las imágenes en móvil y escritorio, con brillo suave únicamente en pantalla y alternativa estática con movimiento reducido.
+- [x] Carga, errores, caché, cambios de acabado, imágenes adaptables y clones del carrusel contemplados; limpieza al descargar la sección Shopify.
+- [x] 54/54 pruebas y Theme Check sin hallazgos; ocho vistas y ZIP de 174 archivos válidos.
+- [x] Comprobación visual con imágenes retenidas a 393 × 852 y 1440 × 1000: geometría estable, sin desbordamiento, calculadora operativa durante la carga.
+- [x] Preparado en rama aislada `codex/spc-loading-skeletons` sobre `9e2db27`, conservando el trabajo PVC independiente. Destino: GitHub/main → tema oficial 188927803629.
+
 ## 09/11/2026 — Conexiones y explorador de capas PVC
 
 - [x] Sustituidas las líneas flotantes por conectores SVG que comparten las coordenadas de la imagen y terminan en cada capa.
