@@ -1,3 +1,7 @@
+## 09/11/2026 — PVC: exploración de las cinco capas
+
+Por petición del usuario, la sección «Cada capa cuenta» adopta desde 1024 px la interacción aprobada en SPC: selector numerado, conector resaltado y explicación de la capa elegida. Los conectores parten del borde de cada control y terminan en puntos de la imagen; el adhesivo se señala por el borde inferior para evitar cruces. Imagen y SVG comparten un marco proporcional. En móvil se mantiene la composición compacta del mockup, con líneas y puntos corregidos. Se admite clic, Tab, flechas, Inicio y Fin; los eventos se limpian al descargar la sección en el editor Shopify. No se modifica el contenido comercial ni el diseño SPC.
+
 ## 06/11/2026 — SPC: nota inferior retirada también en móvil
 
 El usuario extiende la retirada de la nota «Imágenes de IA · Textos de muestra. No son reseñas de clientes reales» a móvil. Se elimina el párrafo compartido y sus estilos ya innecesarios. El encabezado «Ejemplos ilustrativos», las etiquetas de las tarjetas y el carrusel permanecen. Comprobado a 393 × 852 px sin desbordamiento, con 18 pruebas SPC correctas y Theme Check sin hallazgos. Vista previa y ZIP actualizados; publicación por GitHub/main en el único tema oficial 188927803629.

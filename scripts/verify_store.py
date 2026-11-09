@@ -29,7 +29,11 @@ for page in pages:
         if url.fragment:
             anchor=Check();anchor.feed(target.read_text(encoding='utf-8'));assert url.fragment in anchor.ids,(page,href)
 for directory in ['config','locales','templates','docs','preview']:
-    for p in (root/directory).rglob('*.json'):json.loads(p.read_text(encoding='utf-8'))
+    for p in (root/directory).rglob('*.json'):
+        source=p.read_text(encoding='utf-8-sig')
+        if directory in ('config','locales','templates'):
+            source=re.sub(r'\A\s*/\*.*?\*/\s*', '', source, count=1, flags=re.S)
+        json.loads(source)
 for p in (root/'sections').glob('*.liquid'):
     for schema in re.findall(r'{% schema %}(.*?){% endschema %}',p.read_text(encoding='utf-8'),re.S):json.loads(schema)
 theme_dirs=['assets','config','layout','locales','sections','snippets','templates']

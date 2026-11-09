@@ -1,6 +1,6 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const {parseArea, calculate, matchVariant, quoteMessage} = require('../assets/landing-piso-pvc.js');
+const {parseArea, calculate, matchVariant, quoteMessage, initializeLayers} = require('../assets/landing-piso-pvc.js');
 const fs = require('node:fs');
 const path = require('node:path');
 const {Liquid} = require('liquidjs');
@@ -73,6 +73,43 @@ test('PVC review layout labels mockup samples and preserves the 20-finish catalo
   assert.ok(doc.querySelector('[data-pvc] [data-area]'));
   assert.equal(doc.querySelector('[data-pvc-landing]').dataset.coverage, '5');
   assert.equal(doc.querySelector('[data-rail-controls]').hidden, true);
+
+  const landing = doc.querySelector('[data-pvc-landing]');
+  const otherLanding = landing.cloneNode(true);
+  doc.body.appendChild(otherLanding);
+  const listeners = [];
+  initializeLayers(landing, (element, type, callback) => {
+    element.addEventListener(type, callback);
+    listeners.push(() => element.removeEventListener(type, callback));
+  });
+  const buttons = [...landing.querySelectorAll('[data-pvc-layer-target]')];
+  const markers = [...landing.querySelectorAll('[data-pvc-layer-marker]')];
+  let focused;
+  buttons.forEach((button, index) => { button.focus = () => { focused = index; }; });
+  const press = (index, key) => {
+    const event = new doc.defaultView.Event('keydown', {cancelable:true});
+    event.key = key;
+    buttons[index].dispatchEvent(event);
+    assert.equal(event.defaultPrevented, true);
+  };
+  buttons[3].click();
+  assert.equal(landing.querySelector('[data-pvc-layer-title]').textContent, 'Refuerzo de la estructura');
+  assert.deepEqual(buttons.map(button => button.getAttribute('aria-pressed')), ['false', 'false', 'false', 'true', 'false']);
+  assert.deepEqual(markers.map(marker => marker.classList.contains('is-active')), [false, false, false, true, false]);
+  assert.equal(otherLanding.querySelector('[data-pvc-layer-title]').textContent, 'Protección superficial');
+  press(3, 'End');
+  assert.equal(focused, 4);
+  assert.equal(landing.querySelector('[data-pvc-layer-fact]').textContent, '05 / 05 · Autoadhesivo');
+  press(4, 'ArrowDown');
+  assert.equal(focused, 0);
+  press(0, 'ArrowUp');
+  assert.equal(focused, 4);
+  press(4, 'Home');
+  assert.equal(focused, 0);
+  assert.equal(landing.querySelector('[data-pvc-layer-fact]').textContent, '01 / 05 · Capa de desgaste');
+  listeners.forEach(remove => remove());
+  buttons[1].click();
+  assert.equal(buttons[0].getAttribute('aria-pressed'), 'true');
 
   const real = await render({...context.section, blocks:[...blocks,
     {type:'testimonial', settings:{name:'Ana <Cliente>', city:'Lima', headline:'Mi experiencia', quote:'Reseña real autorizada'}},

@@ -85,8 +85,39 @@
 
   <section class="pvc-layers pvc-paper" aria-labelledby="{{ pvc_id }}-layers-title">
     <header class="pvc-heading"><h2 id="{{ pvc_id }}-layers-title">Cada capa cuenta</h2><p>Conoce su estructura</p></header>
-    <img src="{{ 'pvc-estructura-cinco-capas.webp' | asset_url }}" width="856" height="839" loading="lazy" alt="Vista de las cinco capas que forman el piso PVC autoadhesivo">
+  <div class="pvc-layer-diagram">
+    <img class="pvc-layer-image" src="{{ 'pvc-estructura-cinco-capas.webp' | asset_url }}" width="856" height="839" loading="lazy" alt="Vista de las cinco capas que forman el piso PVC autoadhesivo">
     <ol class="pvc-layers__labels"><li><strong>Capa de desgaste</strong><span>Protección superficial</span></li><li><strong>Capa de PVC</strong><span>Diseño y acabado</span></li><li><strong>Capa media</strong><span>Estabilidad</span></li><li><strong>Tejido de vidrio</strong><span>Refuerzo de la estructura</span></li><li><strong>Autoadhesivo</strong><span>Listo para colocar</span></li></ol>
+    <svg class="pvc-layer-leaders pvc-layer-leaders--mobile" viewBox="0 0 1080 900" fill="none" aria-hidden="true" focusable="false">
+      <path d="M485 187H535L622 175"/><circle cx="622" cy="175" r="6"/>
+      <path d="M485 298H512L542 302"/><circle cx="542" cy="302" r="6"/>
+      <path d="M485 409H512L532 427"/><circle cx="532" cy="427" r="6"/>
+      <path d="M485 520H512L553 558"/><circle cx="553" cy="558" r="6"/>
+      <path d="M485 631H520L740 853H916L938 747"/><circle cx="938" cy="747" r="6"/>
+    </svg>
+    <svg class="pvc-layer-leaders pvc-layer-leaders--desktop" viewBox="0 0 1100 820" fill="none" aria-hidden="true" focusable="false">
+      <g data-pvc-layer-marker="0" class="is-active"><path d="M410 155H470L665 164"/><circle cx="665" cy="164" r="7"/></g>
+      <g data-pvc-layer-marker="1"><path d="M410 217H470L590 282"/><circle cx="590" cy="282" r="7"/></g>
+      <g data-pvc-layer-marker="2"><path d="M410 279H450L580 399"/><circle cx="580" cy="399" r="7"/></g>
+      <g data-pvc-layer-marker="3"><path d="M410 341H430L600 522"/><circle cx="600" cy="522" r="7"/></g>
+      <g data-pvc-layer-marker="4"><path d="M410 403H425V630L700 798H930L960 698"/><circle cx="960" cy="698" r="7"/></g>
+    </svg>
+    <div class="pvc-layer-explorer" data-pvc-layer-explorer>
+      <p class="pvc-layer-eyebrow">EXPLORA CADA CAPA</p>
+      <ol class="pvc-layer-controls" aria-label="Capas del piso PVC">
+        <li><button type="button" data-pvc-layer-target="0" aria-pressed="true" aria-controls="{{ pvc_id }}-layer-detail"><span>01</span>Capa de desgaste<span aria-hidden="true">↗</span></button></li>
+        <li><button type="button" data-pvc-layer-target="1" aria-pressed="false" aria-controls="{{ pvc_id }}-layer-detail"><span>02</span>Capa de PVC<span aria-hidden="true">↗</span></button></li>
+        <li><button type="button" data-pvc-layer-target="2" aria-pressed="false" aria-controls="{{ pvc_id }}-layer-detail"><span>03</span>Capa media<span aria-hidden="true">↗</span></button></li>
+        <li><button type="button" data-pvc-layer-target="3" aria-pressed="false" aria-controls="{{ pvc_id }}-layer-detail"><span>04</span>Tejido de vidrio<span aria-hidden="true">↗</span></button></li>
+        <li><button type="button" data-pvc-layer-target="4" aria-pressed="false" aria-controls="{{ pvc_id }}-layer-detail"><span>05</span>Autoadhesivo<span aria-hidden="true">↗</span></button></li>
+      </ol>
+      <div class="pvc-layer-detail" id="{{ pvc_id }}-layer-detail" role="status" aria-live="polite" aria-atomic="true">
+        <strong data-pvc-layer-title>Protección superficial</strong>
+        <p data-pvc-layer-description>La capa exterior protege el diseño y el acabado frente al uso cotidiano del piso.</p>
+        <span data-pvc-layer-fact>01 / 05 · Capa de desgaste</span>
+      </div>
+    </div>
+  </div>
   </section>
 
   <section class="pvc-calculator-section" id="{{ pvc_id }}-calculator" aria-labelledby="{{ pvc_id }}-calculator-title">

@@ -6,6 +6,14 @@ Los **48 archivos nuevos de PVC y el ajuste de `layout/theme.liquid` (49 cambios
 
 **Producto y landing publicados:** ACTIVE en Tienda online, con `templateSuffix: landing-pvc`. La URL [Piso PVC autoadhesivo](https://decokasaperu.myshopify.com/products/piso-pvc) carga la landing personalizada, verificada el 05/11/2026 en escritorio y móvil de 393 × 852 px.
 
+## Conectores y explorador de capas — 09/11/2026
+
+El diagrama de cinco capas utiliza conectores SVG y puntos de destino alineados con la imagen, dentro del mismo sistema proporcional de coordenadas. La conexión del autoadhesivo rodea la parte inferior para llegar a la lámina blanca sin cruzar las demás líneas.
+
+En escritorio (desde 1024 px) se aplica el patrón aprobado de SPC: cinco botones, línea y punto resaltados para la capa seleccionada y una explicación breve. Admite clic, Tab, flechas, Inicio y Fin. En móvil se mantiene la composición compacta con rótulos y conexiones visibles, sin añadir altura por un panel interactivo.
+
+Validación local a 320, 393, 1024 y 1440 px, 51/51 pruebas, Theme Check sin hallazgos y ocho vistas/ZIP de 174 archivos comprobados. El validador local admite el comentario inicial que Shopify agrega a sus archivos JSON, sin modificar la configuración de la tienda. Desarrollo en `codex/pvc-layer-explorer`; integración mediante GitHub/main y el único tema oficial.
+
 ## Publicación y comprobación — 05/11/2026
 
 La causa era que los archivos preparados no se habían enviado a GitHub. Se revisó el flujo usado en SPC y se completó el envío desde el clon autenticado. La lectura posterior de Shopify confirma los 49 archivos en el tema MAIN oficial: plantilla, sección, CSS, JavaScript, snippet, 43 WebP y layout compartido.

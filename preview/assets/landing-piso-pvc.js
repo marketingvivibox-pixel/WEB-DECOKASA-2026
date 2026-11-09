@@ -34,7 +34,43 @@
     return lines.join('\n');
   }
 
-  if (typeof module !== 'undefined' && module.exports) module.exports = {parseArea, calculate, matchVariant, quoteMessage};
+  function initializeLayers(root, on) {
+    const explorer = root.querySelector('[data-pvc-layer-explorer]');
+    if (!explorer) return;
+    const buttons = [...explorer.querySelectorAll('[data-pvc-layer-target]')];
+    const markers = [...root.querySelectorAll('[data-pvc-layer-marker]')];
+    const title = explorer.querySelector('[data-pvc-layer-title]');
+    const description = explorer.querySelector('[data-pvc-layer-description]');
+    const fact = explorer.querySelector('[data-pvc-layer-fact]');
+    const layers = [
+      ['Protección superficial', 'La capa exterior protege el diseño y el acabado frente al uso cotidiano del piso.', 'Capa de desgaste'],
+      ['El acabado que eliges', 'Esta capa aporta el diseño y la textura que dan personalidad a tu espacio.', 'Capa de PVC'],
+      ['Estabilidad desde el interior', 'La capa media forma parte del soporte que da cuerpo y estabilidad a cada plancha.', 'Capa media'],
+      ['Refuerzo de la estructura', 'El tejido de vidrio refuerza la estructura interna de la plancha de PVC.', 'Tejido de vidrio'],
+      ['Retira, coloca y presiona', 'La base autoadhesiva permite colocar la plancha sobre una superficie limpia, seca, lisa y nivelada.', 'Autoadhesivo']
+    ];
+    const choose = index => {
+      const layer = layers[index];
+      if (!layer) return;
+      buttons.forEach(button => button.setAttribute('aria-pressed', String(Number(button.dataset.pvcLayerTarget) === index)));
+      markers.forEach(marker => marker.classList.toggle('is-active', Number(marker.dataset.pvcLayerMarker) === index));
+      title.textContent = layer[0];
+      description.textContent = layer[1];
+      fact.textContent = `0${index + 1} / 05 · ${layer[2]}`;
+    };
+    buttons.forEach((button, index) => {
+      on(button, 'click', () => choose(Number(button.dataset.pvcLayerTarget)));
+      on(button, 'keydown', event => {
+        if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        const next = event.key === 'Home' ? 0 : event.key === 'End' ? buttons.length - 1 : (index + (event.key === 'ArrowDown' ? 1 : -1) + buttons.length) % buttons.length;
+        choose(Number(buttons[next].dataset.pvcLayerTarget));
+        buttons[next].focus({preventScroll: true});
+      });
+    });
+  }
+
+  if (typeof module !== 'undefined' && module.exports) module.exports = {parseArea, calculate, matchVariant, quoteMessage, initializeLayers};
   if (typeof document === 'undefined' || window.DecokasaPvc) return;
   const instances = new Map();
   const number = new Intl.NumberFormat('es-PE', {maximumFractionDigits: 2});
@@ -44,6 +80,7 @@
     if (instances.has(root)) return;
     const events = new AbortController();
     const on = (element, type, callback, options = {}) => element?.addEventListener(type, callback, {...options, signal: events.signal});
+    initializeLayers(root, on);
     const area = root.querySelector('[data-area]');
     const waste = root.querySelector('[data-waste]');
     const error = root.querySelector('[data-area-error]');

@@ -1,3 +1,10 @@
+## 09/11/2026 — Conexiones y explorador de capas PVC
+
+- [x] Sustituidas las líneas flotantes por conectores SVG que comparten las coordenadas de la imagen y terminan en cada capa.
+- [x] Desde 1024 px, selector de cinco capas como el aprobado en SPC: línea activa, explicación y navegación por teclado. En móvil se conserva el esquema compacto con conexiones alineadas.
+- [x] Comprobado a 320/393/1024/1440 px; 51/51 pruebas, Theme Check oficial sin hallazgos, ocho vistas y ZIP de 174 archivos válidos.
+- [x] Rama local `codex/pvc-layer-explorer` sobre `c2f59be`; publicación por GitHub/main en el único tema oficial 188927803629. Catálogo, calculadora, datos comerciales y trabajo SPC independiente conservados.
+
 ## 06/11/2026 — Nota inferior de SPC retirada en móvil
 
 - [x] Eliminado el texto específico del contenido compartido, también en móvil; conservadas las etiquetas de ejemplos ilustrativos y el movimiento del carrusel.
