@@ -8,6 +8,105 @@ const { calculate, estimateTotal } = require('../assets/landing-piso-spc.js');
 const { filters } = require('../scripts/product_fixture.cjs');
 const root = path.resolve(__dirname, '..');
 
+function loadingFixture() {
+  const { runInNewContext } = require('node:vm');
+  const { document, window: dom } = parseHTML('<main><picture><source media="(min-width:1024px)" srcset="desktop.webp"><img src="mobile.webp" width="100" height="80"></picture><img src="cached.webp"><button>Calcular</button></main>');
+  const page = document.querySelector('main');
+  const images = [...page.querySelectorAll('img')];
+  images.forEach((image, index) => Object.defineProperty(image, 'complete', {value: index === 1, writable: true}));
+  const controllers = new WeakMap(), observed = new Set(), frames = new Map();
+  let notify, next = 0;
+  const window = Object.assign(new EventTarget(), {
+    MutationObserver: dom.MutationObserver,
+    IntersectionObserver: class {
+      constructor(callback) {notify = callback;}
+      observe(image) {observed.add(image);}
+      unobserve(image) {observed.delete(image);}
+      disconnect() {observed.clear();}
+    },
+    requestAnimationFrame: callback => {frames.set(++next, callback); return next;},
+    cancelAnimationFrame: id => frames.delete(id)
+  });
+  const source = fs.readFileSync(path.join(root, 'assets/landing-piso-spc.js'), 'utf8');
+  const loading = source.slice(source.indexOf('  function initMediaLoading('), source.indexOf('  function initDesktopMotion('));
+  const initialize = () => runInNewContext(`${loading}\ninitMediaLoading(page);`, {page, window, loadingControllers: controllers});
+  initialize();
+  return {
+    page, images, observed, window, frames, initialize,
+    pending: image => image.classList.contains('spc-media-pending'),
+    visible: (image, isIntersecting) => notify([{target: image, isIntersecting}]),
+    settle: (image, type = 'load') => {image.complete = true; image.dispatchEvent(new dom.Event(type));},
+    flush: async () => {await Promise.resolve(); await Promise.resolve();},
+    resize: () => {window.dispatchEvent(new Event('resize')); const callbacks = [...frames.values()]; frames.clear(); callbacks.forEach(callback => callback());},
+    cleanup: () => controllers.get(page)()
+  };
+}
+
+test('SPC: skeleton solo durante la carga, sin retrasar imágenes en caché ni bloquear controles', () => {
+  const fixture = loadingFixture();
+  const [pending, cached] = fixture.images;
+  assert.equal(fixture.pending(pending), true);
+  assert.equal(fixture.pending(cached), false);
+  assert.equal(pending.getAttribute('width'), '100');
+  assert.equal(pending.getAttribute('height'), '80');
+  assert.equal(pending.parentElement.tagName, 'PICTURE');
+  assert.equal(fixture.page.querySelector('button').disabled, false);
+  fixture.visible(pending, true);
+  assert.equal(pending.classList.contains('spc-media-visible'), true);
+  fixture.visible(pending, false);
+  assert.equal(pending.classList.contains('spc-media-visible'), false);
+  fixture.settle(pending);
+  assert.equal(fixture.pending(pending), false);
+  assert.equal(fixture.observed.size, 0);
+  fixture.cleanup();
+});
+
+test('SPC: skeleton sigue el acabado y la fuente móvil/escritorio; termina también si falla la imagen', async () => {
+  const fixture = loadingFixture();
+  const [responsive, finish] = fixture.images;
+  fixture.settle(responsive);
+  finish.complete = false;
+  finish.src = 'caoba.webp';
+  await fixture.flush();
+  assert.equal(fixture.pending(finish), true);
+  fixture.settle(finish, 'error');
+  assert.equal(fixture.pending(finish), false);
+  assert.equal(fixture.observed.has(finish), false);
+  responsive.complete = false;
+  fixture.resize();
+  assert.equal(fixture.pending(responsive), true);
+  fixture.settle(responsive);
+  fixture.cleanup();
+});
+
+test('SPC: skeleton admite nuevas fotos del carrusel y se limpia al recargar la sección', async () => {
+  const fixture = loadingFixture();
+  const image = fixture.images[0].cloneNode();
+  Object.defineProperty(image, 'complete', {value: false, writable: true});
+  fixture.page.appendChild(image);
+  await fixture.flush();
+  assert.equal(fixture.observed.has(image), true);
+  fixture.settle(image);
+  assert.equal(fixture.pending(image), false);
+  image.complete = false;
+  image.src = 'otra-foto.webp';
+  await fixture.flush();
+  image.remove();
+  await fixture.flush();
+  assert.equal(fixture.observed.has(image), false);
+  fixture.window.dispatchEvent(new Event('resize'));
+  fixture.cleanup();
+  assert.equal(fixture.frames.size, 0);
+  assert.equal(fixture.observed.size, 0);
+  fixture.images[1].complete = false;
+  fixture.images[1].src = 'sin-observador.webp';
+  await fixture.flush();
+  assert.equal(fixture.pending(fixture.images[1]), false);
+  fixture.initialize();
+  assert.equal(fixture.pending(fixture.images[1]), true);
+  fixture.cleanup();
+});
+
 function motionFixture({desktop = true, reduced = false} = {}) {
   const { runInNewContext } = require('node:vm');
   const controllers = new WeakMap(), observed = new Set(), animations = [];

@@ -1,3 +1,9 @@
+## 09/11/2026 — SPC: skeletons en móvil y escritorio
+
+Las imágenes de la landing SPC muestran un fondo neutro con brillo suave mientras cargan, manteniendo sus dimensiones y posiciones. La animación solo funciona en elementos visibles y respeta la preferencia de movimiento reducido. Las imágenes listas o almacenadas en caché aparecen directamente, sin demora; los errores de descarga detienen el placeholder. Se contemplan cambios de acabado, imágenes de escritorio/móvil y copias del carrusel. Textos, botones y calculadora siguen disponibles durante la carga. El diseño y los datos comerciales se conservan.
+
+Validación local: 54/54 pruebas, Theme Check oficial sin hallazgos, ocho vistas y paquete de 174 archivos correctos. Prueba con imágenes retenidas a 393 × 852 y 1440 × 1000: sin desbordamiento ni cambios de geometría al cargar; cálculo de 20 m² + 10% correcto mientras las imágenes esperan. Publicación por el flujo GitHub/main en el único tema oficial 188927803629.
+
 ## 09/11/2026 — PVC: exploración de las cinco capas
 
 Por petición del usuario, la sección «Cada capa cuenta» adopta desde 1024 px la interacción aprobada en SPC: selector numerado, conector resaltado y explicación de la capa elegida. Los conectores parten del borde de cada control y terminan en puntos de la imagen; el adhesivo se señala por el borde inferior para evitar cruces. Imagen y SVG comparten un marco proporcional. En móvil se mantiene la composición compacta del mockup, con líneas y puntos corregidos. Se admite clic, Tab, flechas, Inicio y Fin; los eventos se limpian al descargar la sección en el editor Shopify. No se modifica el contenido comercial ni el diseño SPC.

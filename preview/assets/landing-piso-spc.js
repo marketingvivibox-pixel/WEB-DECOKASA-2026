@@ -39,11 +39,82 @@
   const motionControllers = new WeakMap();
   const layerControllers = new WeakMap();
   const finishControllers = new WeakMap();
+  const loadingControllers = new WeakMap();
   const escapeXML = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
   const number = new Intl.NumberFormat('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const integer = new Intl.NumberFormat('es-PE', { maximumFractionDigits: 0 });
 
   const testimonialControllers = new WeakMap();
+  function initMediaLoading(page) {
+    if (loadingControllers.has(page)) return;
+    const images = new Set();
+    let frame = 0;
+    const visibility = window.IntersectionObserver ? new window.IntersectionObserver(entries => {
+      entries.forEach(({target, isIntersecting}) => {
+        target.classList.toggle('spc-media-visible', isIntersecting && target.classList.contains('spc-media-pending'));
+      });
+    }) : null;
+    const clear = image => {
+      image.classList.remove('spc-media-pending', 'spc-media-visible');
+      visibility?.unobserve(image);
+    };
+    const refresh = image => {
+      if ((image.getAttribute('src') || image.getAttribute('srcset')) && !image.complete) {
+        image.classList.add('spc-media-pending');
+        visibility?.observe(image);
+      } else clear(image);
+    };
+    const loaded = event => refresh(event.currentTarget);
+    const failed = event => clear(event.currentTarget);
+    const watch = image => {
+      if (!images.has(image)) {
+        images.add(image);
+        image.addEventListener('load', loaded);
+        image.addEventListener('error', failed);
+      }
+      refresh(image);
+    };
+    const unwatch = image => {
+      image.removeEventListener('load', loaded);
+      image.removeEventListener('error', failed);
+      clear(image);
+      images.delete(image);
+    };
+    const visit = (node, callback) => {
+      if (node.matches?.('img')) callback(node);
+      node.querySelectorAll?.('img').forEach(callback);
+    };
+    visit(page, watch);
+    const changes = window.MutationObserver ? new window.MutationObserver(records => {
+      records.forEach(record => {
+        if (record.type === 'attributes') {
+          const image = record.target.matches('img') ? record.target : record.target.closest('picture')?.querySelector('img');
+          if (image) watch(image);
+        } else {
+          record.removedNodes.forEach(node => visit(node, image => {if (!page.contains(image)) unwatch(image);}));
+          record.addedNodes.forEach(node => visit(node, watch));
+        }
+      });
+    }) : null;
+    changes?.observe(page, {subtree: true, childList: true, attributes: true, attributeFilter: ['src', 'srcset', 'sizes', 'media']});
+    const resize = () => {
+      window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        images.forEach(image => {if (image.closest('picture')) refresh(image);});
+      });
+    };
+    window.addEventListener('resize', resize);
+    loadingControllers.set(page, () => {
+      changes?.disconnect();
+      window.removeEventListener('resize', resize);
+      window.cancelAnimationFrame(frame);
+      images.forEach(unwatch);
+      visibility?.disconnect();
+      loadingControllers.delete(page);
+    });
+  }
+
   function initDesktopMotion(page) {
     // Progressive enhancement: content is visible even without JS or animation support.
     if (!window.IntersectionObserver || !window.Element?.prototype.animate) return;
@@ -371,6 +442,7 @@
       initDesktopNavigation(page);
       initDesktopMotion(page);
       initTestimonials(page);
+      initMediaLoading(page);
       initDesktopLayers(page);
       initDesktopFinishes(page);
 
@@ -1198,6 +1270,6 @@
   document.addEventListener('shopify:section:unload', event => {
     const pages = [...event.target.querySelectorAll('[data-spc-page]')];
     if (event.target.matches?.('[data-spc-page]')) pages.unshift(event.target);
-    pages.forEach(page => { testimonialControllers.get(page)?.(); pageControllers.get(page)?.(); calculatorLayoutControllers.get(page)?.(); navigationControllers.get(page)?.(); motionControllers.get(page)?.(); layerControllers.get(page)?.(); finishControllers.get(page)?.(); initialized.delete(page); });
+    pages.forEach(page => { loadingControllers.get(page)?.(); testimonialControllers.get(page)?.(); pageControllers.get(page)?.(); calculatorLayoutControllers.get(page)?.(); navigationControllers.get(page)?.(); motionControllers.get(page)?.(); layerControllers.get(page)?.(); finishControllers.get(page)?.(); initialized.delete(page); });
   });
 })();
