@@ -1,3 +1,9 @@
+## 09/11/2026 — Botón SPC desde el primer desplazamiento
+
+- [x] «Realizar pedido» aparece en móvil en cuanto la página se desplaza, sin esperar a salir de la portada. Se oculta al volver arriba, al llegar a la calculadora o al abrir el formulario.
+- [x] Verificado a 393 × 852 px: oculto en 0 px, visible tras 17 px y acceso a la calculadora correcto. En escritorio, a 1440 px, permanece oculto.
+- [x] Integrada la actualización de catálogo c101e91; 59/59 pruebas, Theme Check oficial sin hallazgos; ocho vistas y ZIP de 174 archivos actualizados. Rama codex/spc-early-floating-cta, destino GitHub/main y tema oficial 188927803629.
+
 ## 09/11/2026 — Selección de color en tarjetas de catálogo
 
 - [x] Selector automático para productos presentes y futuros con varias opciones de «Color», «Colores» o «Colour» en la ficha habitual. El color elegido actualiza la imagen, el estado de disponibilidad y el enlace a su variante.

@@ -1,3 +1,7 @@
+## 09/11/2026 — SPC: acceso persistente desde el primer scroll
+
+El botón móvil «Realizar pedido» se muestra desde cualquier desplazamiento positivo de la página. Ya no depende de abandonar la portada. Conserva su diseño, la navegación suave a la calculadora y el respeto a movimiento reducido; se oculta al volver al inicio, mientras la calculadora está en su zona activa o si el formulario está abierto. El escritorio no incorpora este botón móvil.
+
 ## 09/11/2026 — Colores en tarjetas de productos
 
 Las tarjetas de catálogo, inicio y búsqueda incorporan selección automática cuando una ficha habitual tiene varias variantes en una opción Shopify llamada «Color», «Colores» o «Colour». No se mantiene una lista de productos: también funciona con productos creados después. Se usan las muestras de Shopify si existen, una correspondencia para colores comunes y el nombre como texto para el resto. Cada elección actualiza la foto vinculada, la disponibilidad y los enlaces a la variante; sin JavaScript, la muestra abre la variante. Si no hay foto de variante, se identifica la foto general como referencial o se indica la falta de imagen. Las fichas con destino personalizado conservan su enlace y no muestran selector. Los precios siguen como «Precio a consultar».

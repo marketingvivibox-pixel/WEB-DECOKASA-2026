@@ -1210,7 +1210,6 @@
 
       // Mobile Persistent Sticky CTA ("Realizar pedido")
       const mobileStickyCta = page.querySelector('[data-spc-sticky-cta]');
-      const heroSection = page.querySelector('.spc-v2-hero');
       const calcSection = page.querySelector('.spc-v2-calculator');
 
       if (mobileStickyCta && calcSection) {
@@ -1219,14 +1218,12 @@
         const controller = new AbortController();
 
         const updateStickyCta = () => {
-          const heroEnd = heroSection ? heroSection.getBoundingClientRect().bottom : 0;
           const calcRect = calcSection.getBoundingClientRect();
           // The calculator is in the viewport (active zone)
           const calcVisible = calcRect.top < window.innerHeight * 0.75 && calcRect.bottom > window.innerHeight * 0.15;
           const modalOpen = document.body.classList.contains('spc-modal-open');
           const isMobile = window.matchMedia('(max-width: 767px)').matches;
-          // Show on mobile, after scrolling past the hero, NOT visible while inside calculator, and modal closed
-          const shouldShow = isMobile && heroEnd < 60 && !calcVisible && !modalOpen;
+          const shouldShow = isMobile && window.scrollY > 0 && !calcVisible && !modalOpen;
 
           mobileStickyCta.classList.toggle('is-visible', shouldShow);
           mobileStickyCta.inert = !shouldShow;
