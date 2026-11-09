@@ -72,6 +72,14 @@ Archivos principales: `sections/landing-piso-pvc.liquid`, `assets/landing-piso-p
 Vista local: http://127.0.0.1:8818/landing-pisos-pvc.html?revision=pvc-20-acabados
 
 
+## Capas y carga de imágenes — 09/11/2026
+
+- Escritorio: se conserva el explorador de cinco capas, conectores SVG y navegación por teclado aprobados.
+- Móvil: imagen ampliada con números sobre cada capa y líneas cortas; botones de al menos 52 px de alto en dos columnas y explicación legible debajo. El indicador activo se sincroniza con el botón elegido.
+- Skeletons sobre las propias imágenes, sin añadir un bloqueo a la página ni demorar recursos en caché; terminan al cargar o fallar, contemplan copias del carrusel y respetan movimiento reducido.
+- Revisado a 320/393/768/1440 px sin desbordamiento horizontal. Tras integrar la actualización SPC, 55/55 pruebas y Theme Check oficial sin hallazgos; ocho vistas y paquete de 174 archivos válidos.
+- Evidencia local y pública de esta entrega: `C:/Users/D. Cordova/Documents/Codex/2026-11-09/pvc-skeleton-mobile`. Único destino: tema oficial 188927803629 mediante GitHub/main.
+
 ## Verificación y pendientes
 
 - 50/50 pruebas aprobadas, conservando SPC; Shopify Theme Check sin errores, advertencias ni hallazgos. El validador del plugin no inicia por una dependencia ausente, por lo que se utilizó la herramienta oficial.

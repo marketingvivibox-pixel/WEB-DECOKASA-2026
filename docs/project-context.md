@@ -1,3 +1,9 @@
+## 09/11/2026 — PVC: capas legibles en móvil y carga de imágenes
+
+Por petición del usuario, en pantallas menores de 1024 px se reemplaza el esquema de etiquetas pequeñas por una imagen ampliada con cinco números y conectores cortos. Debajo se utiliza el mismo selector accesible de escritorio, en dos columnas táctiles, con una explicación de la capa elegida. El escritorio conserva su composición. La numeración evita depender solo del color para identificar cada capa.
+
+Las imágenes PVC muestran un fondo neutro animado mientras cargan, manteniendo su geometría. La caché se muestra directamente y los errores retiran el estado pendiente; se contemplan las copias del carrusel y la limpieza del editor Shopify. El brillo se desactiva con movimiento reducido. La carga no tapa textos, botones ni calculadora. Se incorpora la actualización SPC `7e53d62`, sin modificar sus fuentes. Verificación local a 320/393/768/1440 px, 55 pruebas integradas y Theme Check oficial correctos. Publicación mediante GitHub/main en el tema oficial 188927803629.
+
 ## 09/11/2026 — SPC: skeletons en móvil y escritorio
 
 Las imágenes de la landing SPC muestran un fondo neutro con brillo suave mientras cargan, manteniendo sus dimensiones y posiciones. La animación solo funciona en elementos visibles y respeta la preferencia de movimiento reducido. Las imágenes listas o almacenadas en caché aparecen directamente, sin demora; los errores de descarga detienen el placeholder. Se contemplan cambios de acabado, imágenes de escritorio/móvil y copias del carrusel. Textos, botones y calculadora siguen disponibles durante la carga. El diseño y los datos comerciales se conservan.

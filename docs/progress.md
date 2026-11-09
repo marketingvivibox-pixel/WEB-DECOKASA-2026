@@ -1,3 +1,10 @@
+## 09/11/2026 — Capas móviles y skeletons PVC
+
+- [x] Imagen ampliada y cinco referencias numeradas con conectores cortos; controles táctiles legibles y explicación de la capa elegida debajo de la imagen. Sustituye las etiquetas diminutas y el recorrido largo del adhesivo en móvil.
+- [x] Skeletons proporcionales en las imágenes, con retirada al cargar o fallar; caché, copias del carrusel y limpieza al descargar la sección contemplados. Movimiento reducido respetado, textos y calculadora siempre disponibles.
+- [x] Revisado a 320/393/768/1440 px, sin desbordamiento y con el diseño de escritorio conservado. 55/55 pruebas integradas, Theme Check oficial sin hallazgos, ocho vistas y ZIP de 174 archivos válidos.
+- [x] Integrada la actualización SPC `7e53d62` conservando ambos cambios. Rama local `codex/pvc-loading-mobile`; único destino GitHub/main → tema oficial 188927803629.
+
 ## 09/11/2026 — Skeletons de carga SPC
 
 - [x] Placeholders proporcionales para las imágenes en móvil y escritorio, con brillo suave únicamente en pantalla y alternativa estática con movimiento reducido.
