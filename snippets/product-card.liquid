@@ -1,9 +1,101 @@
+{% doc %}
+  Renders a catalog card and, for regular product pages, its real color variants.
+  @param {product} product - Product to display.
+  @param {boolean} [demo] - Render a local illustration and demo filter attributes.
+{% enddoc %}
 {% assign landing_url = product.metafields.decokasa.landing_url.value | default: product.url %}
+{% assign color_option = nil %}
+{% for option in product.options_with_values %}
+  {% assign option_name = option.name | strip | downcase %}
+  {% if option_name == 'color' or option_name == 'colores' or option_name == 'colour' %}
+    {% if option.values.size > 1 and landing_url == product.url %}
+      {% assign color_option = option %}
+      {% break %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+{% assign current_variant = product.selected_or_first_available_variant %}
+{% assign card_image = product.featured_image %}
+{% assign card_image_reference = false %}
+{% assign card_url = landing_url %}
+{% if color_option != nil and current_variant != nil %}
+  {% assign card_image = current_variant.featured_image %}
+  {% if card_image == blank and product.featured_image != blank %}
+    {% assign card_image = product.featured_image %}
+    {% assign card_image_reference = true %}
+  {% endif %}
+  {% assign card_url = landing_url | append: '?variant=' | append: current_variant.id %}
+{% endif %}
 <article class="card catalog-card"{% if demo %} data-card data-brand="{{ product.vendor | escape }}" data-category="{{ product.type | escape }}" data-title="{{ product.title | escape }}"{% endif %}>
-  <a class="catalog-card-media" href="{{ landing_url }}" aria-label="Ver {{ product.title | escape }}">
-    {% if demo %}{% render 'catalog-art', handle: product.handle %}<span class="catalog-sample">Ilustración de muestra</span>
-    {% elsif product.featured_image %}{{ product.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '200, 400, 600, 800', sizes: '(min-width: 1200px) 25vw, (min-width: 900px) 33vw, 50vw', class: 'catalog-product-photo' }}
-    {% else %}<div class="catalog-image-pending">{% render 'icon', name: 'box' %}<span>Imagen pendiente</span></div>{% endif %}
+  <a class="catalog-card-media" href="{{ card_url | escape }}" aria-label="Ver {{ product.title | escape }}" data-card-link>
+    {% if demo %}
+      {% render 'catalog-art', handle: product.handle %}<span class="catalog-sample">Ilustración de muestra</span>
+    {% elsif card_image %}
+      {{ card_image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '200, 400, 600, 800', sizes: '(min-width: 1200px) 25vw, (min-width: 900px) 33vw, 50vw', class: 'catalog-product-photo' }}
+    {% else %}
+      <img class="catalog-product-photo" alt="" width="800" height="800" hidden>
+    {% endif %}
+    {% unless demo %}<div class="catalog-image-pending" data-card-image-pending{% if card_image %} hidden{% endif %}>{% render 'icon', name: 'box' %}<span>Imagen pendiente</span></div><span class="catalog-sample" data-card-image-reference{% unless card_image_reference %} hidden{% endunless %}>Imagen referencial</span>{% endunless %}
   </a>
-  <div class="card-body"><span class="tag">{{ product.vendor | escape }}</span><p class="catalog-card-category">{{ product.type | escape }}</p><h3><a href="{{ landing_url }}">{{ product.title | escape }}</a></h3><p class="catalog-card-price">Precio a consultar</p><a class="button outline" href="{{ landing_url }}">Ver producto {% render 'icon', name: 'arrow' %}</a></div>
+  <div class="card-body">
+    <span class="tag">{{ product.vendor | escape }}</span>
+    <p class="catalog-card-category">{{ product.type | escape }}</p>
+    <h3><a href="{{ card_url | escape }}" data-card-link>{{ product.title | escape }}</a></h3>
+    <p class="catalog-card-price">Precio a consultar</p>
+    {% if color_option != nil and current_variant != nil %}
+      {% assign color_index = color_option.position | minus: 1 %}
+      <div class="catalog-colors">
+        <p class="catalog-colors-label" data-card-color-label role="status">Color: <strong>{{ current_variant.options[color_index] | escape }}</strong>{% unless current_variant.available %} <span>(no disponible)</span>{% endunless %}</p>
+        <div class="catalog-color-options" role="group" aria-label="Colores de {{ product.title | escape }}">
+          {% for value in color_option.values %}
+            {% assign color_variant = value.variant %}
+            {% if value.name == current_variant.options[color_index] %}
+              {% assign color_variant = current_variant %}
+            {% elsif color_variant == nil or color_variant.available == false %}
+              {% for candidate in product.variants %}
+                {% if candidate.options[color_index] == value.name %}
+                  {% if color_variant == nil %}{% assign color_variant = candidate %}{% endif %}
+                  {% if candidate.available %}{% assign color_variant = candidate %}{% break %}{% endif %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+            {% if color_variant != nil %}
+              {% assign color_key = value.name | handleize %}
+              {% assign color_hex = '' %}
+              {% case color_key %}
+                {% when 'negro' %}{% assign color_hex = '#1c1c1c' %}
+                {% when 'blanco' %}{% assign color_hex = '#ffffff' %}
+                {% when 'marron', 'cafe' %}{% assign color_hex = '#79513c' %}
+                {% when 'gris' %}{% assign color_hex = '#909499' %}
+                {% when 'azul' %}{% assign color_hex = '#285fa7' %}
+                {% when 'rojo' %}{% assign color_hex = '#c62e32' %}
+                {% when 'verde' %}{% assign color_hex = '#598541' %}
+                {% when 'beige', 'crema' %}{% assign color_hex = '#dfcfaf' %}
+                {% when 'amarillo' %}{% assign color_hex = '#e7c836' %}
+                {% when 'naranja' %}{% assign color_hex = '#e5792e' %}
+                {% when 'rosa', 'rosado' %}{% assign color_hex = '#e1a2b3' %}
+                {% when 'morado', 'violeta' %}{% assign color_hex = '#80619b' %}
+                {% when 'plata' %}{% assign color_hex = '#bdc1c4' %}
+                {% when 'dorado' %}{% assign color_hex = '#c8a25c' %}
+              {% endcase %}
+              {% if value.swatch.color != blank %}{% capture color_hex %}rgb({{ value.swatch.color.rgb }}){% endcapture %}{% endif %}
+              {% assign variant_image = color_variant.featured_image %}
+              {% assign image_reference = false %}
+              {% if variant_image == blank and product.featured_image != blank %}
+                {% assign variant_image = product.featured_image %}
+                {% assign image_reference = true %}
+              {% endif %}
+              {% assign variant_url = landing_url | append: '?variant=' | append: color_variant.id %}
+              <a class="catalog-color-choice{% if color_hex == blank and value.swatch.image == blank %} catalog-color-choice--text{% endif %}" href="{{ variant_url | escape }}" data-card-color data-color-name="{{ value.name | escape }}" data-color-available="{{ color_variant.available }}" data-color-image="{% if variant_image %}{{ variant_image | image_url: width: 800 | escape }}{% endif %}" data-color-image-reference="{{ image_reference }}" data-color-image-alt="{{ product.title | escape }} - {% if image_reference %}Imagen referencial{% else %}{{ value.name | escape }}{% endif %}" aria-label="Ver color {{ value.name | escape }}{% unless color_variant.available %}, no disponible{% endunless %}" title="{{ value.name | escape }}{% unless color_variant.available %} (no disponible){% endunless %}"{% if color_variant.id == current_variant.id %} aria-current="true"{% endif %}>
+                {% if color_hex != blank or value.swatch.image != blank %}
+                  <span class="catalog-color-dot"{% if color_hex != blank %} style="background-color: {{ color_hex | escape }}"{% endif %}>{% if value.swatch.image != blank %}{{ value.swatch.image | image_url: width: 64 | image_tag: loading: 'lazy', alt: '' }}{% endif %}</span>
+                {% else %}<span>{{ value.name | escape }}</span>{% endif %}
+              </a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+    <a class="button outline" href="{{ card_url | escape }}" data-card-link>Ver producto {% render 'icon', name: 'arrow' %}</a>
+  </div>
 </article>

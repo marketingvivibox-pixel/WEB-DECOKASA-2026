@@ -18,6 +18,32 @@
     else root.addEventListener('resize',sync);
   }
   reserveServiceBar();
+  document.addEventListener('click',event=>{
+    const choice=event.target.closest?.('[data-card-color]');
+    if(!choice||event.defaultPrevented||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey||(event.button&&event.button!==0))return;
+    const card=choice.closest('.catalog-card'),photo=card?.querySelector('.catalog-product-photo'),pending=card?.querySelector('[data-card-image-pending]'),reference=card?.querySelector('[data-card-image-reference]');
+    if(!card||!photo||!pending)return;
+    event.preventDefault();
+    card.querySelectorAll('[data-card-color]').forEach(link=>link.removeAttribute('aria-current'));
+    choice.setAttribute('aria-current','true');
+    card.querySelectorAll('[data-card-link]').forEach(link=>link.setAttribute('href',choice.getAttribute('href')));
+    const label=card.querySelector('[data-card-color-label]'),name=document.createElement('strong');
+    name.textContent=choice.dataset.colorName;
+    label.replaceChildren(document.createTextNode('Color: '),name);
+    if(choice.dataset.colorAvailable==='false')label.append(document.createTextNode(' (no disponible)'));
+    if(reference)reference.hidden=choice.dataset.colorImageReference!=='true';
+    if(choice.dataset.colorImage){
+      photo.removeAttribute('srcset');
+      photo.src=choice.dataset.colorImage;
+      photo.alt=choice.dataset.colorImageAlt;
+      photo.hidden=false;
+      pending.hidden=true;
+    }else{
+      photo.hidden=true;
+      pending.querySelector('span').textContent='Imagen de este color no disponible';
+      pending.hidden=false;
+    }
+  });
   function get(key){try{return root.sessionStorage.getItem(key);}catch{return null;}}
   function set(key,value){try{root.sessionStorage.setItem(key,value);}catch{}}
   function remove(key){try{root.sessionStorage.removeItem(key);}catch{}}

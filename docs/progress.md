@@ -1,3 +1,11 @@
+## 09/11/2026 — Selección de color en tarjetas de catálogo
+
+- [x] Selector automático para productos presentes y futuros con varias opciones de «Color», «Colores» o «Colour» en la ficha habitual. El color elegido actualiza la imagen, el estado de disponibilidad y el enlace a su variante.
+- [x] Muestras configuradas en Shopify; colores comunes con respaldo y nombres de otros colores como texto. Si falta imagen de la variante, se identifica la imagen general como referencial o se indica que no hay imagen.
+- [x] Conservados los destinos especiales de los productos, el precio a consultar y los productos sin variantes de color. Las tarjetas se comparten con inicio y búsqueda.
+- [x] Comprobado a 320/393/768/1024/1440 px con fotos reales de la Silla gamer Titan; sin desbordamiento. 59/59 pruebas y Theme Check oficial sin hallazgos. Vistas previas y paquete del tema regenerados.
+- [x] Publicación prevista por GitHub/main en el tema oficial 188927803629.
+
 ## 09/11/2026 — Capas móviles y skeletons PVC
 
 - [x] Imagen ampliada y cinco referencias numeradas con conectores cortos; controles táctiles legibles y explicación de la capa elegida debajo de la imagen. Sustituye las etiquetas diminutas y el recorrido largo del adhesivo en móvil.

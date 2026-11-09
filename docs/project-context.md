@@ -1,3 +1,9 @@
+## 09/11/2026 — Colores en tarjetas de productos
+
+Las tarjetas de catálogo, inicio y búsqueda incorporan selección automática cuando una ficha habitual tiene varias variantes en una opción Shopify llamada «Color», «Colores» o «Colour». No se mantiene una lista de productos: también funciona con productos creados después. Se usan las muestras de Shopify si existen, una correspondencia para colores comunes y el nombre como texto para el resto. Cada elección actualiza la foto vinculada, la disponibilidad y los enlaces a la variante; sin JavaScript, la muestra abre la variante. Si no hay foto de variante, se identifica la foto general como referencial o se indica la falta de imagen. Las fichas con destino personalizado conservan su enlace y no muestran selector. Los precios siguen como «Precio a consultar».
+
+Probado con combinaciones de color y talla, productos sin imágenes, colores sin disponibilidad y sin opciones de color, y enlaces personalizados. 59/59 pruebas, Theme Check oficial sin hallazgos y revisión local a 320/393/768/1024/1440 px con fotos de la Silla gamer Titan. Publicación por GitHub/main en el tema oficial 188927803629.
+
 ## 09/11/2026 — PVC: capas legibles en móvil y carga de imágenes
 
 Por petición del usuario, en pantallas menores de 1024 px se reemplaza el esquema de etiquetas pequeñas por una imagen ampliada con cinco números y conectores cortos. Debajo se utiliza el mismo selector accesible de escritorio, en dos columnas táctiles, con una explicación de la capa elegida. El escritorio conserva su composición. La numeración evita depender solo del color para identificar cada capa.
