@@ -1,6 +1,6 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const {parseArea, calculate, matchVariant, quoteMessage, initializeLayers} = require('../assets/landing-piso-pvc.js');
+const {parseArea, calculate, matchVariant, quoteMessage, initializeLayers, initializeImageLoading} = require('../assets/landing-piso-pvc.js');
 const fs = require('node:fs');
 const path = require('node:path');
 const {Liquid} = require('liquidjs');
@@ -95,7 +95,7 @@ test('PVC review layout labels mockup samples and preserves the 20-finish catalo
   buttons[3].click();
   assert.equal(landing.querySelector('[data-pvc-layer-title]').textContent, 'Refuerzo de la estructura');
   assert.deepEqual(buttons.map(button => button.getAttribute('aria-pressed')), ['false', 'false', 'false', 'true', 'false']);
-  assert.deepEqual(markers.map(marker => marker.classList.contains('is-active')), [false, false, false, true, false]);
+  assert.deepEqual(markers.map(marker => marker.classList.contains('is-active')), [false, false, false, true, false, false, false, false, true, false]);
   assert.equal(otherLanding.querySelector('[data-pvc-layer-title]').textContent, 'Protección superficial');
   press(3, 'End');
   assert.equal(focused, 4);
@@ -123,4 +123,48 @@ test('PVC review layout labels mockup samples and preserves the 20-finish catalo
   assert.equal(real.querySelectorAll('.pvc-swatch').length, 20);
   const disabled = await render({...context.section, settings:{...main.settings, show_illustrative_testimonials:false}});
   assert.equal(disabled.querySelector('.pvc-testimonials'), null);
+});
+
+test('PVC skeleton settles cached, loaded, failed and cloned images, then cleans up on section unload', async () => {
+  const {document, window} = parseHTML('<main><img id="cached"><img id="pending"><img id="failed"><img id="busy" aria-busy="false"></main>');
+  const root = document.querySelector('main');
+  const cached = document.getElementById('cached');
+  const pending = document.getElementById('pending');
+  const failed = document.getElementById('failed');
+  const busy = document.getElementById('busy');
+  [cached, pending, failed, busy].forEach(image => Object.defineProperty(image, 'complete', {value:image === cached}));
+  const removers = [];
+  const dispose = initializeImageLoading(root, (element, type, callback) => {
+    element.addEventListener(type, callback);
+    removers.push(() => element.removeEventListener(type, callback));
+  });
+  assert.equal(cached.classList.contains('pvc-image-loading'), false);
+  assert.equal(cached.hasAttribute('aria-busy'), false);
+  assert.equal(pending.classList.contains('pvc-image-loading'), true);
+  assert.equal(pending.getAttribute('aria-busy'), 'true');
+  pending.dispatchEvent(new window.Event('load'));
+  failed.dispatchEvent(new window.Event('error'));
+  for (const image of [pending, failed]) {
+    assert.equal(image.classList.contains('pvc-image-loading'), false);
+    assert.equal(image.hasAttribute('aria-busy'), false);
+  }
+  const clone = busy.cloneNode();
+  Object.defineProperty(clone, 'complete', {value:true});
+  root.appendChild(clone);
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(clone.classList.contains('pvc-image-loading'), false);
+  assert.equal(clone.hasAttribute('aria-busy'), false);
+  const newImage = document.createElement('img');
+  Object.defineProperty(newImage, 'complete', {value:false});
+  root.appendChild(newImage);
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(newImage.classList.contains('pvc-image-loading'), true);
+  dispose();
+  removers.forEach(remove => remove());
+  assert.equal(root.querySelectorAll('.pvc-image-loading').length, 0);
+  assert.equal(busy.getAttribute('aria-busy'), 'false');
+  const unobserved = document.createElement('img');
+  root.appendChild(unobserved);
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(unobserved.hasAttribute('aria-busy'), false);
 });

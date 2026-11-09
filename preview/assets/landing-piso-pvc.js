@@ -70,7 +70,38 @@
     });
   }
 
-  if (typeof module !== 'undefined' && module.exports) module.exports = {parseArea, calculate, matchVariant, quoteMessage, initializeLayers};
+  function initializeImageLoading(root, on) {
+    const images = new Map();
+    const watch = image => {
+      if (images.has(image)) return;
+      // A carousel clone may inherit the loading class, but not its listeners.
+      const busy = image.classList.contains('pvc-image-loading') ? null : image.getAttribute('aria-busy');
+      const settle = () => {
+        image.classList.remove('pvc-image-loading');
+        if (busy === null) image.removeAttribute('aria-busy');
+        else image.setAttribute('aria-busy', busy);
+      };
+      images.set(image, settle);
+      on(image, 'load', settle);
+      on(image, 'error', settle);
+      // Cached images (including failed requests) must never flash or keep shimmering.
+      if (image.complete) { settle(); return; }
+      image.classList.add('pvc-image-loading');
+      image.setAttribute('aria-busy', 'true');
+    };
+    const scan = node => {
+      if (node.nodeType !== 1) return;
+      if (node.matches('img')) watch(node);
+      node.querySelectorAll('img').forEach(watch);
+    };
+    scan(root);
+    const Observer = root.ownerDocument.defaultView.MutationObserver;
+    const observer = new Observer(records => records.forEach(record => record.addedNodes.forEach(scan)));
+    observer.observe(root, {childList: true, subtree: true});
+    return () => { observer.disconnect(); images.forEach(settle => settle()); images.clear(); };
+  }
+
+  if (typeof module !== 'undefined' && module.exports) module.exports = {parseArea, calculate, matchVariant, quoteMessage, initializeLayers, initializeImageLoading};
   if (typeof document === 'undefined' || window.DecokasaPvc) return;
   const instances = new Map();
   const number = new Intl.NumberFormat('es-PE', {maximumFractionDigits: 2});
@@ -267,8 +298,10 @@
       reconcilePlayback();
     }
     const disposeRail = instances.get(root);
+    const disposeImages = initializeImageLoading(root, on);
     instances.set(root, () => {
       disposeRail?.();
+      disposeImages();
       if (catalog.open) catalog.close();
       unlockDialog();
       events.abort();
