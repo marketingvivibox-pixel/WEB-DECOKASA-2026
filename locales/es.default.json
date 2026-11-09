@@ -1,5 +1,11 @@
 {
   "general": {"title": "DECOKASA"},
+  "pvc": {
+    "sticky_order": {
+      "title": "Realizar pedido",
+      "subtitle": "Calcula tus cajas de piso PVC →"
+    }
+  },
   "spc": {
     "calculator": {
       "title": "Calcula tu piso SPC",

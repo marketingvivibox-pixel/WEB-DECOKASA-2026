@@ -1,3 +1,9 @@
+## 09/11/2026 — PVC: acceso móvil persistente a la calculadora
+
+La landing PVC incorpora el botón móvil «Realizar pedido» con el mismo criterio de SPC: aparece con cualquier desplazamiento positivo y se oculta en el inicio, mientras se utiliza la calculadora o se abre el catálogo. Se presenta hasta 767 px, con el estilo amarillo de la landing, espacio inferior y respeto al área segura. Al pulsarlo desplaza suavemente y enfoca la calculadora; con movimiento reducido el desplazamiento es inmediato. Los eventos se limpian al descargar la sección en Shopify. Escritorio, datos comerciales y barra de vista previa permanecen sin cambios.
+
+Validación local a 320/393/1440 px, 59 pruebas correctas y Theme Check oficial sin hallazgos. Vistas y ZIP regenerados; publicación por GitHub/main en el único tema oficial MAIN 188927803629.
+
 ## 09/11/2026 — SPC: acceso persistente desde el primer scroll
 
 El botón móvil «Realizar pedido» se muestra desde cualquier desplazamiento positivo de la página. Ya no depende de abandonar la portada. Conserva su diseño, la navegación suave a la calculadora y el respeto a movimiento reducido; se oculta al volver al inicio, mientras la calculadora está en su zona activa o si el formulario está abierto. El escritorio no incorpora este botón móvil.

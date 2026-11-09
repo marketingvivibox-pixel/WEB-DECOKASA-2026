@@ -1,3 +1,10 @@
+## 09/11/2026 — Botón móvil PVC desde el primer desplazamiento
+
+- [x] Incorporado «Realizar pedido / Calcula tus cajas de piso PVC» con el comportamiento aprobado en SPC: aparece al comenzar el scroll y se oculta al volver arriba, en la calculadora o con el catálogo abierto.
+- [x] Acceso suave a la calculadora con foco accesible y respeto a movimiento reducido; espacio inferior y área segura del móvil contemplados. El escritorio conserva su diseño y la barra de vista previa de Shopify no se modifica.
+- [x] Verificado en navegador a 320/393/1440 px, sin desbordamiento ni errores de consola; navegación a la calculadora y catálogo correctos. 59/59 pruebas, Theme Check oficial sin hallazgos, ocho vistas y ZIP de 174 archivos válidos. El comando lint no está disponible porque el proyecto no tiene instalado tsc; sintaxis JavaScript comprobada.
+- [x] Preparado en codex/pvc-early-floating-cta sobre 0343ee6 para publicar mediante GitHub/main en el único tema oficial 188927803629.
+
 ## 09/11/2026 — Botón SPC desde el primer desplazamiento
 
 - [x] «Realizar pedido» aparece en móvil en cuanto la página se desplaza, sin esperar a salir de la portada. Se oculta al volver arriba, al llegar a la calculadora o al abrir el formulario.

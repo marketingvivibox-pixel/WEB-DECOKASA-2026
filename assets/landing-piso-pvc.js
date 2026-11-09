@@ -121,6 +121,8 @@
     const quote = root.querySelector('[data-quote]');
     const miniFloor = root.querySelector('[data-mini-floor]');
     const catalog = root.querySelector('[data-catalog]');
+    const stickyCta = root.querySelector('[data-pvc-sticky-cta]');
+    const calculator = root.querySelector('.pvc-calculator-section');
     const rail = root.querySelector('[data-review-rail]');
     const pauseButton = root.querySelector('[data-rail-pause]');
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -130,6 +132,31 @@
     let debounce = 0, animationFrame = 0, tileFrame = 0, railFrame = 0, resumeTimer = 0;
     let paused = motion.matches, hovering = false, touching = false, inView = false, focused = false;
     let lastTime = 0, railPosition = 0, loopWidth = 0;
+
+    function updateStickyCta() {
+      animationFrame = 0;
+      if (!stickyCta || !calculator) return;
+      const rect = calculator.getBoundingClientRect();
+      const calculatorVisible = rect.top < window.innerHeight * 0.75 && rect.bottom > window.innerHeight * 0.15;
+      const visible = window.matchMedia('(max-width: 767px)').matches && window.scrollY > 0 && !calculatorVisible && !catalog.open;
+      stickyCta.classList.toggle('is-visible', visible);
+      stickyCta.inert = !visible;
+    }
+
+    function scheduleStickyCta() {
+      if (!animationFrame) animationFrame = requestAnimationFrame(updateStickyCta);
+    }
+
+    if (stickyCta && calculator) {
+      on(window, 'scroll', scheduleStickyCta, {passive: true});
+      on(window, 'resize', scheduleStickyCta);
+      on(stickyCta, 'click', event => {
+        event.preventDefault();
+        calculator.focus({preventScroll: true});
+        calculator.scrollIntoView({behavior: motion.matches ? 'instant' : 'smooth', block: 'start'});
+      });
+      scheduleStickyCta();
+    }
 
     function animateTiles() {
       cancelAnimationFrame(tileFrame);
@@ -167,6 +194,7 @@
       if (dialogLocked) document.body.style.overflow = previousOverflow;
       dialogLocked = false;
       opener?.focus({preventScroll: true});
+      scheduleStickyCta();
     }
 
     function closeCatalog() { if (catalog.open) catalog.close(); }
@@ -185,6 +213,7 @@
         catalog.showModal();
         document.body.style.overflow = 'hidden';
         dialogLocked = true;
+        updateStickyCta();
       }
       if (event.target.closest('[data-catalog-close]')) closeCatalog();
       const pick = event.target.closest('[data-pick-finish]');

@@ -121,7 +121,7 @@
   </div>
   </section>
 
-  <section class="pvc-calculator-section" id="{{ pvc_id }}-calculator" aria-labelledby="{{ pvc_id }}-calculator-title">
+  <section class="pvc-calculator-section" id="{{ pvc_id }}-calculator" aria-labelledby="{{ pvc_id }}-calculator-title" tabindex="-1">
     <header class="pvc-heading"><h2 id="{{ pvc_id }}-calculator-title">Calcula tu nuevo piso</h2><p>Solo necesitas saber los m² de tu espacio</p></header>
     <div class="pvc-calculator" data-pvc>
       <div class="pvc-calculator__top"><label for="{{ pvc_id }}-area">¿Cuánto mide tu espacio?</label><div class="pvc-area"><input id="{{ pvc_id }}-area" data-area type="text" inputmode="decimal" value="10" maxlength="9" autocomplete="off" aria-describedby="{{ pvc_id }}-area-error"><span>m²</span></div></div>
@@ -168,6 +168,8 @@
     </div>
   </section>
   <footer class="pvc-closing pvc-paper"><img class="pvc-closing__box" src="{{ 'pvc-caja-cierre.webp' | asset_url }}" width="878" height="705" loading="lazy" alt="Caja de piso PVC autoadhesivo Decokasa"><div class="pvc-closing__copy"><h2>¿Listo para renovar<br>tu espacio?</h2><a class="pvc-button pvc-button--green" href="{{ pvc_contact }}" target="_blank" rel="noopener">Hablar con un asesor {% render 'pvc-icon', icon: 'whatsapp' %}</a><button class="pvc-button pvc-button--gold" type="button" data-catalog-open>Ver catálogo {% render 'pvc-icon', icon: 'arrow' %}</button><p>DECOKASA · Check Azul S.A.C.</p><a class="pvc-store-link" href="{{ routes.root_url }}">Volver a la tienda</a></div></footer>
+
+  <a class="pvc-mobile-sticky-cta" data-pvc-sticky-cta href="#{{ pvc_id }}-calculator" inert><strong>{{ 'pvc.sticky_order.title' | t }}</strong><span>{{ 'pvc.sticky_order.subtitle' | t }}</span></a>
 
   <dialog class="pvc-catalog" id="{{ pvc_id }}-catalog" aria-labelledby="{{ pvc_id }}-catalog-title" data-catalog>
     <header class="pvc-catalog__header"><div><h2 id="{{ pvc_id }}-catalog-title">Encuentra tu acabado</h2><p>Catálogo de pisos PVC</p></div><button class="pvc-catalog__close" type="button" data-catalog-close aria-label="Cerrar catálogo">{% render 'pvc-icon', icon: 'close' %}</button></header>
