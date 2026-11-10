@@ -2,6 +2,8 @@
 {{ 'landing-piso-spc-proportions.css' | asset_url | stylesheet_tag }}
 {{ 'landing-piso-spc-layout.css' | asset_url | stylesheet_tag }}
 {{ 'landing-piso-spc-desktop.css' | asset_url | stylesheet_tag }}
+{{ 'request-form.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'request-form.js' | asset_url }}" defer></script>
 <script src="{{ 'landing-piso-spc.js' | asset_url }}" defer></script>
 {% liquid
   assign current_variant = product.selected_or_first_available_variant
@@ -283,7 +285,7 @@
 <p class="spc-v2-copyright">Decokasa Perú {{ 'now' | date: '%Y' }}<br>Todos los derechos reservados</p>
 </footer></div>
 
-<dialog class="spc-v2-dialog spc-v2-request-dialog" data-spc-modal aria-label="Solicitud de piso SPC"><button class="spc-v2-dialog-close" type="button" data-modal-close aria-label="Cerrar solicitud">×</button>{% render 'request-form', product: product %}</dialog>
+<dialog class="spc-v2-dialog spc-v2-request-dialog request-dialog" data-spc-modal aria-labelledby="RequestTitle-{{ section.id }}"><button class="request-close" type="button" data-modal-close aria-label="Cerrar solicitud">×</button>{% render 'request-form', product: product, section_id: section.id %}</dialog>
 <a class="spc-mobile-sticky-cta" data-spc-sticky-cta href="#calculadora-{{ section.id }}" inert><strong>Realizar pedido</strong><span>Calcula tus cajas de piso SPC →</span></a>
 </div>
 {% schema %}

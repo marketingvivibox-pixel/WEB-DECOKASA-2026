@@ -5,6 +5,8 @@
   @param {boolean} [pvc] - Enable the floor coverage calculator.
 {% enddoc %}
 {{ 'product-detail.css' | asset_url | stylesheet_tag }}
+{{ 'request-form.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'request-form.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'product-detail.js' | asset_url }}" defer="defer"></script>
 {% if product != blank %}
   {% assign current_variant = product.selected_or_first_available_variant %}
@@ -192,7 +194,7 @@
         {% if section.settings.show_sku != false %}<p class="product-sku">SKU: <span data-sku>{{ current_variant.sku | default: 'Pendiente' | escape }}</span></p>{% endif %}
         </div>
         </div>
-        <details class="product-request" data-request-details><summary>Completar solicitud con un asesor</summary>{% render 'request-form', product: product %}</details>
+        <dialog class="request-dialog" data-request-details aria-labelledby="RequestTitle-{{ section.id }}"><button class="request-close" type="button" data-request-close aria-label="Cerrar solicitud">×</button>{% render 'request-form', product: product, section_id: section.id %}</dialog>
         <p class="product-selection-status" data-selection-status role="status" tabindex="-1"></p>
       </div>
     </div>

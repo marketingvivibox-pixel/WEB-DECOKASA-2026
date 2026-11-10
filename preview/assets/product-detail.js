@@ -3,6 +3,7 @@
   if (window.decokasaProductDetail) return;
   window.decokasaProductDetail = true;
   const requests = new WeakMap();
+  const requestOpeners = new WeakMap();
   // Selection survives section replacement, but never leaves this page's memory.
   const selections = new WeakMap();
   const money = cents => `S/. ${(cents / 100).toFixed(2)} PEN`;
@@ -24,7 +25,7 @@
     const summary = document.createElement('ul');
     summary.className = 'request-form-lines';
     summary.dataset.requestFormLines = '';
-    form.before(summary);
+    form.querySelector('[data-request-items]').appendChild(summary);
     function refreshSummary() {
       summary.replaceChildren();
       for (const line of lines) {
@@ -257,6 +258,23 @@
       sync();
     });
   }
+  function openRequest(page, opener) {
+    const dialog = page.querySelector('[data-request-details]');
+    if (!dialog) return;
+    if (!dialog.dataset.closeInitialized) {
+      dialog.dataset.closeInitialized = 'true';
+      dialog.addEventListener('close', () => {
+        const trigger = requestOpeners.get(dialog);
+        if (trigger?.isConnected) trigger.focus({preventScroll: true});
+      });
+    }
+    requestOpeners.set(dialog, opener);
+    if (!dialog.open) {
+      if (typeof dialog.showModal === 'function') dialog.showModal();
+      else { dialog.setAttribute('open', ''); dialog.open = true; }
+    }
+    dialog.querySelector('[data-request-step]:not([hidden]) [data-request-step-heading]')?.focus();
+  }
   async function changeOption(page, link) {
     const destination = new URL(link.href, location.href);
     // Combined listings and other products keep Shopify's normal navigation.
@@ -281,7 +299,8 @@
         const replacement = [...next.querySelectorAll('input, textarea')].find(other => other.name === input.name);
         if (replacement) { replacement.value = input.value; replacement.checked = input.checked; }
       }
-      next.querySelector('[data-request-details]').open = page.querySelector('[data-request-details]').open;
+      const requestWasOpen = page.querySelector('[data-request-details]').open;
+      const previousStep = Number(page.querySelector('[data-request-form]').dataset.requestStep || 0);
       const previousBuilder = page.querySelector('[data-request-builder]');
       const nextBuilder = next.querySelector('[data-request-builder]');
       if (previousBuilder && nextBuilder) { nextBuilder.open = previousBuilder.open; nextBuilder.dataset.disclosureRestored = 'true'; }
@@ -294,7 +313,10 @@
       history.replaceState(null, '', destination);
       next.querySelector('[data-selection-status]').textContent = 'Presentación actualizada.';
       const focusLink = [...next.querySelectorAll('[data-option-link]')].find(item => item.getAttribute('href') === link.getAttribute('href'));
-      (focusLink || next.querySelector('[data-selection-status]')).focus({preventScroll: true});
+      if (requestWasOpen) {
+        next.querySelector('[data-request-form]').decokasaShowRequestStep?.(previousStep, false);
+        openRequest(next, next.querySelector('[data-open-request]'));
+      } else (focusLink || next.querySelector('[data-selection-status]')).focus({preventScroll: true});
     } catch (error) {
       if (error.name !== 'AbortError') {
         if (selections.get(page)?.length) page.querySelector('[data-selection-status]').textContent = 'No se pudo cambiar la presentación. Tu solicitud sigue guardada aquí; vuelve a elegir el color para reintentar.';
@@ -352,8 +374,18 @@
       if (cta.getAttribute('aria-disabled') === 'true') return;
       const input = page.querySelector('[data-product-quantity]');
       if (!selections.has(page) && !input.reportValidity()) return;
-      page.querySelector('[data-request-details]').open = true;
-      page.querySelector('[name=name]').focus();
+      openRequest(page, cta);
+    }
+    const requestClose = event.target.closest('[data-request-close]');
+    if (requestClose) {
+      const dialog = requestClose.closest('dialog');
+      if (typeof dialog.close === 'function') dialog.close();
+      else {
+        dialog.removeAttribute('open');
+        dialog.open = false;
+        const trigger = requestOpeners.get(dialog);
+        if (trigger?.isConnected) trigger.focus({preventScroll: true});
+      }
     }
     const modalTrigger = event.target.closest('[data-reward-modal-open]');
     if (modalTrigger) {

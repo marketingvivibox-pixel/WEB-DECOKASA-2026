@@ -1,3 +1,9 @@
+## 10/11/2026 — Solicitud de compra por pasos
+
+Las fichas habituales de producto y la landing de piso SPC presentan la solicitud en una ventana con tres pasos: pedido, contacto y entrega, con progreso visible y validación antes de continuar. Se conserva la selección, incluidos el cálculo y la cantidad de cajas de SPC. También se aplica a los productos que utilicen la ficha compartida en el futuro. La landing actual de PVC conserva su acceso a WhatsApp.
+
+El formulario continúa siendo una simulación: muestra un aviso y no envía datos ni crea pedidos. La conexión con un receptor operativo sigue pendiente.
+
 ## Libro de Reclamaciones — 10/11/2026
 
 La página https://decokasaperu.myshopify.com/pages/libro-de-reclamaciones quedó publicada con acceso desde el pie del tema oficial 188927803629 (commit de integración `b19033f`). Contiene 45 respuestas obligatorias por indicación expresa del usuario; la revisión legal del posible obstáculo para reclamar sigue pendiente. El proveedor es Check Azul S.A.C. (RUC 20610129871), domicilio Av. José Leal n.º 375, Lima, Lima, Lima; responsable Laiz Guerrero. El receptor de la cuenta de atención registra en una hoja privada y cuenta con reintentos horarios; se confirmó la llegada de ambas copias en una prueba. La versión 3 conserva los ceros iniciales de documentos y teléfonos, comprobado también desde la tienda con la prueba LR-2026-000005. Las fichas LR-2026-000001 a LR-2026-000005 son pruebas ficticias, no reclamos reales. El correo automático es provisional hasta corregir SPF, DKIM y DMARC al cambiar el dominio. Falta confirmar el acceso operativo de Laiz. Detalle: `integrations/libro-reclamaciones/README.md`.

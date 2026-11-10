@@ -199,8 +199,10 @@ Nuestras marcas</a></div>
 
 <main id="main">
 
-<link rel="stylesheet" href="assets/product-detail.css?v=1794344598953">
-<script src="assets/product-detail.js?v=1794344598953" defer="defer"></script>
+<link rel="stylesheet" href="assets/product-detail.css?v=1794347883775">
+<link rel="stylesheet" href="assets/request-form.css?v=1794347883775">
+<script src="assets/request-form.js?v=1794347883775" defer="defer"></script>
+<script src="assets/product-detail.js?v=1794347883775" defer="defer"></script>
 
 
 
@@ -416,7 +418,59 @@ Nuestras marcas</a></div>
         <p class="product-sku">SKU: <span data-sku="">DEMO-XI-001</span></p>
         </div>
         </div>
-        <details class="product-request" data-request-details=""><summary>Completar solicitud con un asesor</summary><div class="form-box" id="solicitud"><h2>Solicita tu compra</h2><p>Completa tus datos. Un asesor revisará la disponibilidad y coordinará contigo el importe final y la entrega.</p><p class="note">Prueba local: usa datos ficticios. No se envía esta solicitud ni se confirma una venta.</p><div class="form-estimate-summary" data-form-estimate-summary=""><span class="form-summary-qty">Cantidad seleccionada: <strong data-form-qty="">1 unidad</strong></span><span class="form-summary-total">Total estimado: <strong data-form-total="">S/. 129.00 PEN</strong></span></div><form data-request-form="" data-product-id="DEMO-P-0" data-currency="PEN" action="#solicitud" method="post"><fieldset disabled style="border:0;padding:0;margin:0;min-width:0"><label data-request-variant="">Presentación<select name="variant_id"><option value="DEMO-V-0-A" data-price="12900" data-sku="DEMO-XI-001" data-coverage="" selected>Estándar</option></select></label><label data-request-quantity="">Cantidad<input name="quantity" type="number" min="1" max="1000000" step="1" value="1" required></label><div class="fields"><label>Nombre<input name="name" autocomplete="name" maxlength="100" required></label><label>Teléfono o WhatsApp<input name="phone" type="tel" autocomplete="tel" minlength="7" maxlength="25" required title="Ingresa tu número de contacto."></label><label>Correo (opcional)<input name="email" type="email" autocomplete="email" maxlength="180"></label><label>Ciudad o distrito<input name="district" autocomplete="address-level2" maxlength="100" required></label></div><label>Comentario (opcional)<textarea name="comment" maxlength="1000"></textarea></label><label class="check"><input name="contact_permission" type="checkbox" required>Autorizo que un asesor me contacte para atender esta solicitud.</label><button class="primary" type="submit" disabled data-enable-form="">Simular solicitud</button></fieldset><div data-request-status="" class="status" tabindex="-1" role="status" hidden></div></form><noscript><p class="error">Activa JavaScript para probar el formulario. No envíes datos reales.</p></noscript></div></details>
+        <dialog class="request-dialog" data-request-details="" aria-labelledby="RequestTitle-preview-product-landing"><button class="request-close" type="button" data-request-close="" aria-label="Cerrar solicitud">×</button>
+<div class="form-box request-form-box" id="solicitud">
+  <h2 id="RequestTitle-preview-product-landing">Solicita tu compra</h2>
+  <p class="request-intro">Completa los pasos para preparar tu solicitud.</p>
+  <p class="request-demo-note">Formulario de prueba: usa datos ficticios. La solicitud no se envía.</p>
+
+  <div class="request-progress" aria-label="Progreso de la solicitud">
+    <p class="request-progress-count" data-request-progress="" aria-live="polite">Paso 1 de 3</p>
+    <ol class="request-progress-list">
+      <li data-request-progress-item="" aria-current="step"><span>1</span> Pedido</li>
+      <li data-request-progress-item=""><span>2</span> Contacto</li>
+      <li data-request-progress-item=""><span>3</span> Entrega</li>
+    </ol>
+  </div>
+
+  <form data-request-form="" data-product-id="DEMO-P-0" data-currency="PEN" action="#solicitud" method="post" novalidate>
+    <fieldset disabled class="request-fieldset">
+      <div class="request-step" data-request-step="">
+        <h3 tabindex="-1" data-request-step-heading="">Revisa tu pedido</h3>
+        <p>Esta es la cantidad y el importe estimado de tu selección.</p>
+        <div class="form-estimate-summary" data-form-estimate-summary="">
+          <span class="form-summary-qty">Cantidad seleccionada: <strong data-form-qty="">1 unidad</strong></span>
+          <span class="form-summary-total">Total estimado: <strong data-form-total="">S/. 129.00 PEN</strong></span>
+        </div>
+        <div data-request-items=""></div>
+        <label data-request-variant="">Presentación<select name="variant_id"><option value="DEMO-V-0-A" data-price="12900" data-sku="DEMO-XI-001" data-coverage="" selected>Estándar</option></select></label>
+        <label data-request-quantity="">Cantidad<input name="quantity" type="number" min="1" max="1000000" step="1" value="1" required></label>
+      </div>
+      <div class="request-step" data-request-step="" hidden>
+        <h3 tabindex="-1" data-request-step-heading="">Datos de contacto</h3>
+        <p>Indícanos cómo podría contactarte un asesor.</p>
+        <label>Nombre<input name="name" autocomplete="name" maxlength="100" required></label>
+        <label>Teléfono o WhatsApp<input name="phone" type="tel" autocomplete="tel" minlength="7" maxlength="25" required title="Ingresa tu número de contacto."></label>
+        <label>Correo (opcional)<input name="email" type="email" autocomplete="email" maxlength="180"></label>
+      </div>
+      <div class="request-step" data-request-step="" hidden>
+        <h3 tabindex="-1" data-request-step-heading="">Entrega y confirmación</h3>
+        <p>Cuéntanos dónde recibirías tu pedido.</p>
+        <label>Ciudad o distrito<input name="district" autocomplete="address-level2" maxlength="100" required></label>
+        <label>Comentario (opcional)<textarea name="comment" maxlength="1000"></textarea></label>
+        <label class="request-consent"><input name="contact_permission" type="checkbox" required><span>Autorizo que un asesor me contacte para atender esta solicitud.</span></label>
+      </div>
+      <div class="request-actions">
+        <button class="request-back" type="button" data-request-back="" hidden>Anterior</button>
+        <button class="request-next" type="button" data-request-next="">Siguiente</button>
+        <button class="request-submit" type="submit" disabled data-enable-form="" hidden>Simular solicitud</button>
+      </div>
+    </fieldset>
+    <div data-request-status="" class="status request-status" tabindex="-1" role="status" hidden></div>
+  </form>
+  <noscript><p class="error">Activa JavaScript para probar el formulario. No envíes datos reales.</p></noscript>
+</div>
+</dialog>
         <p class="product-selection-status" data-selection-status="" role="status" tabindex="-1"></p>
       </div>
     </div>
