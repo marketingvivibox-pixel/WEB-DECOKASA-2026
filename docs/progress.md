@@ -1,9 +1,12 @@
-## 10/11/2026 — Libro de Reclamaciones: conexión en preparación
+## 10/11/2026 — Libro de Reclamaciones: conexión terminada
 
 - [x] El receptor de la cuenta de atención generó solicitudes de prueba numeradas. La copia de cliente y la ficha interna llegaron a los buzones de prueba; reintento automático configurado.
 - [x] Preparados el formulario solicitado de 45 respuestas obligatorias, el enlace en el pie de página y la plantilla para el tema oficial; pruebas y Theme Check oficial sin incidencias.
 - [x] La versión 3 desplegada conserva los ceros iniciales de documento y teléfono, verificado con la solicitud de prueba LR-2026-000004. Se corrigieron los datos de la prueba anterior en la hoja.
-- [ ] Integrar con la última versión de GitHub/main, crear la página en Shopify y verificar el recorrido completo. Confirmar acceso operativo de Laiz y revisar con el contador los requisitos aplicables y el riesgo de exigir 45 respuestas.
+- [x] Publicado el commit `b19033f` mediante GitHub/main en el único tema oficial `188927803629`; creada y publicada la página `/pages/libro-de-reclamaciones` con acceso desde el pie de la tienda.
+- [x] Prueba integral desde la tienda: LR-2026-000005 mostró la constancia, conservó los ceros iniciales y registró como enviados los avisos al cliente y a atención. La recepción efectiva de ambas copias se comprobó en una prueba anterior; «Enviado» no garantiza la entrega.
+- [x] Receptor versión 3 y reintento horario activos. LR-2026-000001 a LR-2026-000005 son pruebas ficticias que figuran pendientes y no representan reclamos reales.
+- [ ] Confirmar acceso operativo de Laiz, revisar con el contador los requisitos aplicables y el riesgo de exigir 45 respuestas y corregir SPF/DKIM/DMARC al cambiar el dominio.
 ## 10/11/2026 — Alternativas para escribir a atención
 
 - [x] Añadidas opciones para abrir Gmail, Outlook u otra aplicación, y para copiar la dirección de atención cuando el navegador lo permite. La dirección queda visible en el menú.
