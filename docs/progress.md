@@ -13,7 +13,9 @@
 - [x] Investigación de Botcake, conexión Shopify/POS y asignación por turnos, con dependencias y riesgos documentados en `docs/pancake-botcake-integration.md`.
 - [x] Identificada por elección del usuario la tienda POS de logo rojo y conectado el WhatsApp temporal +51 914 158 397. Aprobada la plantilla de autenticación y preparado un flujo independiente en Botcake con la variable del código.
 - [x] Comprobada la configuración del reparto de conversaciones y detectada una automatización que puede crear pedidos al recibir teléfonos; no se cambiaron estos ajustes compartidos.
-- [ ] Elegir e implementar un servicio privado para generar y verificar códigos y probar la entrega a contactos nuevos y existentes. Aún no se han enviado códigos ni se ha demostrado el primer contacto mediante API.
+- [x] El usuario prefiere Firebase para la conexión. La cuenta de atención mostró la consola inicial sin proyectos; se preparó la creación de «Decokasa Solicitudes» sin aceptar condiciones ni crear el proyecto.
+- [ ] Crear el proyecto tras la autorización para aceptar las condiciones; Cloud Functions requiere Blaze de pago por uso, con cuotas gratuitas, y facturación todavía no aprobada ni activada. Los mensajes de WhatsApp pueden tener costos separados.
+- [ ] Implementar en Firebase la generación y verificación de códigos y probar la entrega a contactos nuevos y existentes. Aún no se han enviado códigos ni se ha demostrado el primer contacto mediante API.
 - [ ] Implementar y probar la entrega de la ficha, su asignación nativa y el manejo de duplicados. Resolver la automatización de pedidos y verificar que la solicitud no cree pedidos ni afecte inventario. La web continúa en modo de prueba y no envía ni registra solicitudes.
 
 ## 10/11/2026 — Formularios de compra progresivos

@@ -1,3 +1,7 @@
+## 10/11/2026 — Firebase para la futura conexión
+
+El usuario prefiere Firebase para la verificación y entrega del formulario. En la cuenta `atencion.decokasa@checkazul.com.pe` se abrió la pantalla inicial y se preparó el nombre «Decokasa Solicitudes»; la aceptación de condiciones y la creación del proyecto esperan autorización. El plan gratuito Spark no necesita medio de pago, pero Cloud Functions requiere Blaze de pago por uso con cuenta de facturación y puede generar cargos. La facturación no está activada. El formulario sigue simulado. Detalles y fuentes: `docs/pancake-botcake-integration.md`.
+
 ## 10/11/2026 — Catálogo de tonos SPC
 
 Las tres familias de la landing abren una ventana con los 11 acabados del catálogo JPG entregado por el usuario. Cálidos: `spc-0018-2`, `spc-0013`, `spc-002-1`; oscuros: `spc-001-2`, `spc-004-1`, `spc-0022`, `spc-0021`; neutros: `spc-0020-1`, `spc-0022-2`, `spc-007`, `spc-0020`. Las muestras conservan los píxeles de la fuente y se recortan en CSS desde un único recurso compartido, sin regenerar vetas o colores.
