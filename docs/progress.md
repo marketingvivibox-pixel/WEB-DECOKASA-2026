@@ -3,7 +3,7 @@
 - [x] Convertidas las solicitudes de las fichas compartidas y de piso SPC en ventanas de tres pasos con indicador de avance, navegación hacia atrás y validación de campos. Se conserva la selección y el cálculo de cajas.
 - [x] Mantenido el aviso de modo de prueba y la simulación sin envío de datos; la conexión a un receptor sigue pendiente.
 - [x] Probado en navegador a 375 y 1280 px en ficha y SPC, incluidas validaciones, conservación de datos, cálculo de 20 m² y cierre con Escape. 76 pruebas automáticas y Theme Check oficial sin hallazgos; vistas y paquete actualizados.
-- [x] Preparada la integración mediante GitHub/main en el tema oficial 188927803629; la sincronización y la tienda se comprobarán después de publicar.
+- [x] Publicado el commit `7f93fb5` en GitHub/main y verificada la sincronización de los seis archivos del tema oficial 188927803629. Comprobado el recorrido en las fichas públicas de Silla gamer Titan y piso SPC a 375 y 1280 px, con solicitudes de red de prueba bloqueadas y sin crear pedidos.
 
 ## 10/11/2026 — Libro de Reclamaciones: conexión terminada
 

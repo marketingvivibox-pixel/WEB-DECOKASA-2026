@@ -2,7 +2,7 @@
 
 Las fichas habituales de producto y la landing de piso SPC presentan la solicitud en una ventana con tres pasos: pedido, contacto y entrega, con progreso visible y validación antes de continuar. Se conserva la selección, incluidos el cálculo y la cantidad de cajas de SPC. También se aplica a los productos que utilicen la ficha compartida en el futuro. La landing actual de PVC conserva su acceso a WhatsApp.
 
-El formulario continúa siendo una simulación: muestra un aviso y no envía datos ni crea pedidos. La conexión con un receptor operativo sigue pendiente.
+El formulario continúa siendo una simulación: muestra un aviso y no envía datos ni crea pedidos. La conexión con un receptor operativo sigue pendiente. Publicado mediante el commit `7f93fb5` en GitHub/main; seis archivos sincronizados en el tema oficial 188927803629 y recorrido verificado en la tienda con Silla gamer Titan y piso SPC, en móvil y escritorio.
 
 ## Libro de Reclamaciones — 10/11/2026
 
