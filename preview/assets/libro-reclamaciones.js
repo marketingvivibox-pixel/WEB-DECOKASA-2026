@@ -7,6 +7,9 @@
   const channel = form.querySelector('[data-book-response-channel]');
   const address = form.querySelector('[data-book-address]');
   const email = form.querySelector('[data-book-email]');
+  const receiptOwner = form.querySelector('[name="q_8"]');
+  const holderDetails = form.querySelector('[data-book-holder-details]');
+  const holderFields = form.querySelectorAll('[data-book-holder-field]');
   const newId = () => {
     if (window.crypto && window.crypto.randomUUID) return window.crypto.randomUUID();
     if (window.crypto && window.crypto.getRandomValues) {
@@ -23,6 +26,13 @@
   };
   channel.addEventListener('change', syncContact);
   syncContact();
+  const syncHolder = () => {
+    const needsHolder = receiptOwner.value === 'No';
+    holderDetails.hidden = !needsHolder;
+    holderFields.forEach(field => { field.disabled = !needsHolder; field.required = needsHolder; });
+  };
+  receiptOwner.addEventListener('change', syncHolder);
+  syncHolder();
   form.addEventListener('input', () => { if (form.dataset.submitted === '1') { id.value = newId(); delete form.dataset.submitted; } });
   form.addEventListener('submit', event => {
     if (!id.value) {

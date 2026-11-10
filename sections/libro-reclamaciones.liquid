@@ -15,6 +15,7 @@
         <p class="book-required">Los campos marcados con * y el dato de contacto correspondiente al medio de respuesta elegido son obligatorios.</p>
         <noscript><p>Para enviar este formulario necesitas activar JavaScript en tu navegador.</p></noscript>
         <input type="hidden" name="request_id" value="" data-book-request-id>
+        <input type="hidden" name="form_version" value="2">
         <div class="book-trap" aria-hidden="true"><label for="book-website">No completar</label><input id="book-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
         <fieldset>
           <legend><span>01</span> Tus datos</legend>
@@ -33,6 +34,9 @@
           <div class="book-grid">
             <label>¿Qué adquiriste? *<select name="item_type" required><option value="">Selecciona una opción</option><option value="Producto">Producto</option><option value="Servicio">Servicio</option></select></label>
             <label>Monto reclamado en soles<input name="amount" type="text" inputmode="decimal" pattern="[0-9]+([.,][0-9]{1,2})?" maxlength="15" placeholder="Ej.: 150.00"><small>Si corresponde.</small></label>
+            <label>Fecha de compra *<input name="purchase_date" type="date" required><small>Ingresa la fecha de tu compra.</small></label>
+            <label>Número de pedido *<input name="order_number" type="text" maxlength="100" required><small>Escríbelo tal como aparece en tu pedido.</small></label>
+            <label class="book-wide">Número de comprobante (factura o boleta) *<input name="receipt_number" type="text" maxlength="100" placeholder="Ej.: F001-00012345" required><small>Incluye la serie y el número, si corresponde.</small></label>
             <label class="book-wide">¿Cómo describes el producto o servicio? *<textarea name="item_description" maxlength="500" rows="3" required></textarea></label>
           </div>
         </fieldset>
@@ -52,6 +56,13 @@
           <div class="book-grid">
             {% for question in book_questions %}
               <label class="book-wide">{{ question | escape }} *<select name="q_{{ forloop.index }}" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
+              {% if forloop.index == 8 %}
+                <div class="book-wide book-holder-details" data-book-holder-details hidden>
+                  <p>Datos de la persona o empresa que figura en el comprobante</p>
+                  <label>Nombre completo o razón social *<input name="receipt_holder_name" maxlength="150" data-book-holder-field disabled></label>
+                  <label>DNI, RUC u otro documento *<input name="receipt_holder_document" maxlength="60" data-book-holder-field disabled></label>
+                </div>
+              {% endif %}
             {% endfor %}
           </div>
         </fieldset>

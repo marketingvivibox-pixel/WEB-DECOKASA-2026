@@ -5,6 +5,13 @@
 - [x] Probado en navegador a 375 y 1280 px en ficha y SPC, incluidas validaciones, conservación de datos, cálculo de 20 m² y cierre con Escape. 76 pruebas automáticas y Theme Check oficial sin hallazgos; vistas y paquete actualizados.
 - [x] Publicado el commit `7f93fb5` en GitHub/main y verificada la sincronización de los seis archivos del tema oficial 188927803629. Comprobado el recorrido en las fichas públicas de Silla gamer Titan y piso SPC a 375 y 1280 px, con solicitudes de red de prueba bloqueadas y sin crear pedidos.
 
+## 10/11/2026 — Datos de compra en el Libro de Reclamaciones
+
+- [x] La página y el receptor incorporan fecha de compra, número de pedido y número de comprobante, con captura manual obligatoria.
+- [x] Si el comprobante corresponde a otra persona, se solicitan nombre o razón social y documento; la hoja, constancia y avisos conservan la información y los ceros iniciales.
+- [x] Migración no destructiva a cinco columnas adicionales; conservación de registros y reintentos antiguos. Verificación local de 80 pruebas.
+- [ ] Revisar con el contador la conveniencia y requisitos legales de 48 respuestas obligatorias (50 si el titular es otra persona).
+
 ## 10/11/2026 — Libro de Reclamaciones: conexión terminada
 
 - [x] El receptor de la cuenta de atención generó solicitudes de prueba numeradas. La copia de cliente y la ficha interna llegaron a los buzones de prueba; reintento automático configurado.

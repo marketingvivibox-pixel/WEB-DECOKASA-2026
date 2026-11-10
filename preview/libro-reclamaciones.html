@@ -197,8 +197,8 @@ Fitness</a><a href="DECOKASA-inicio.html#marcas"><svg class="icon" viewBox="0 0 
 Nuestras marcas</a></div>
 </nav></div>
 
-<main id="main"><link rel="stylesheet" href="assets/libro-reclamaciones.css?v=1794344598953">
-<script src="assets/libro-reclamaciones.js?v=1794344598953" defer></script>
+<main id="main"><link rel="stylesheet" href="assets/libro-reclamaciones.css?v=20261110">
+<script src="assets/libro-reclamaciones.js?v=20261110" defer></script>
 <section class="book-page" aria-labelledby="book-heading">
   <div class="book-wrap">
     <a class="book-back" href="DECOKASA-inicio.html">← Volver a la tienda</a>
@@ -214,6 +214,7 @@ Nuestras marcas</a></div>
         <p class="book-required">Los campos marcados con * y el dato de contacto correspondiente al medio de respuesta elegido son obligatorios.</p>
         <noscript><p>Para enviar este formulario necesitas activar JavaScript en tu navegador.</p></noscript>
         <input type="hidden" name="request_id" value="" data-book-request-id>
+        <input type="hidden" name="form_version" value="2">
         <div class="book-trap" aria-hidden="true"><label for="book-website">No completar</label><input id="book-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
         <fieldset>
           <legend><span>01</span> Tus datos</legend>
@@ -232,6 +233,9 @@ Nuestras marcas</a></div>
           <div class="book-grid">
             <label>¿Qué adquiriste? *<select name="item_type" required><option value="">Selecciona una opción</option><option value="Producto">Producto</option><option value="Servicio">Servicio</option></select></label>
             <label>Monto reclamado en soles<input name="amount" type="text" inputmode="decimal" pattern="[0-9]+([.,][0-9]{1,2})?" maxlength="15" placeholder="Ej.: 150.00"><small>Si corresponde.</small></label>
+            <label>Fecha de compra *<input name="purchase_date" type="date" required><small>Ingresa la fecha de tu compra.</small></label>
+            <label>Número de pedido *<input name="order_number" type="text" maxlength="100" required><small>Escríbelo tal como aparece en tu pedido.</small></label>
+            <label class="book-wide">Número de comprobante (factura o boleta) *<input name="receipt_number" type="text" maxlength="100" placeholder="Ej.: F001-00012345" required><small>Incluye la serie y el número, si corresponde.</small></label>
             <label class="book-wide">¿Cómo describes el producto o servicio? *<textarea name="item_description" maxlength="500" rows="3" required></textarea></label>
           </div>
         </fieldset>
@@ -252,73 +256,114 @@ Nuestras marcas</a></div>
 
               <label class="book-wide">¿La compra se realizó en la web de DECOKASA? *<select name="q_1" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
 
+
               <label class="book-wide">¿La compra se realizó por redes sociales? *<select name="q_2" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
+
 
               <label class="book-wide">¿La compra se realizó a través de WhatsApp? *<select name="q_3" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
 
+
               <label class="book-wide">¿La compra se realizó en un establecimiento físico? *<select name="q_4" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
+
 
               <label class="book-wide">¿La compra se realizó por otro canal? *<select name="q_5" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
 
+
               <label class="book-wide">¿Tienes el número de pedido? *<select name="q_6" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
+
 
               <label class="book-wide">¿Tienes un comprobante de pago? *<select name="q_7" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
 
+
               <label class="book-wide">¿El comprobante está a tu nombre? *<select name="q_8" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
+
+                <div class="book-wide book-holder-details" data-book-holder-details hidden>
+                  <p>Datos de la persona o empresa que figura en el comprobante</p>
+                  <label>Nombre completo o razón social *<input name="receipt_holder_name" maxlength="150" data-book-holder-field disabled></label>
+                  <label>DNI, RUC u otro documento *<input name="receipt_holder_document" maxlength="60" data-book-holder-field disabled></label>
+                </div>
+
 
               <label class="book-wide">¿El pago fue realizado en su totalidad? *<select name="q_9" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
 
+
               <label class="book-wide">¿Se acordó una fecha de entrega? *<select name="q_10" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
+
 
               <label class="book-wide">¿La entrega estaba dirigida a domicilio? *<select name="q_11" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
 
+
               <label class="book-wide">¿El pedido fue entregado? *<select name="q_12" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
+
 
               <label class="book-wide">¿El pedido llegó después de la fecha acordada? *<select name="q_13" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
 
+
               <label class="book-wide">¿El pedido se entregó incompleto? *<select name="q_14" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
+
 
               <label class="book-wide">¿El producto es diferente del que solicitaste? *<select name="q_15" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
 
+
               <label class="book-wide">¿El producto presentó daños visibles? *<select name="q_16" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
+
 
               <label class="book-wide">¿El embalaje estaba dañado? *<select name="q_17" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
 
+
               <label class="book-wide">¿El producto presenta una falla de funcionamiento? *<select name="q_18" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
+
 
               <label class="book-wide">¿El inconveniente apareció durante el primer uso? *<select name="q_19" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
 
+
               <label class="book-wide">¿El producto ha sido utilizado? *<select name="q_20" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
+
 
               <label class="book-wide">¿El servicio fue prestado? *<select name="q_21" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
 
+
               <label class="book-wide">¿El servicio se prestó fuera del plazo acordado? *<select name="q_22" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
+
 
               <label class="book-wide">¿El inconveniente se repitió? *<select name="q_23" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
 
+
               <label class="book-wide">¿El problema persiste? *<select name="q_24" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
+
 
               <label class="book-wide">¿Cuentas con fotos o videos de lo ocurrido? *<select name="q_25" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
 
+
               <label class="book-wide">¿Cuentas con documentos adicionales sobre el caso? *<select name="q_26" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
+
 
               <label class="book-wide">¿Te contactaste anteriormente con atención al cliente? *<select name="q_27" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
 
+
               <label class="book-wide">¿Presentaste antes una solicitud por el mismo caso? *<select name="q_28" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
+
 
               <label class="book-wide">¿Recibiste respuesta a tu comunicación anterior? *<select name="q_29" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
 
+
               <label class="book-wide">¿Se te ofreció alguna solución? *<select name="q_30" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
+
 
               <label class="book-wide">¿La solución ofrecida se cumplió? *<select name="q_31" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
 
+
               <label class="book-wide">¿Solicitas un cambio? *<select name="q_32" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
+
 
               <label class="book-wide">¿Solicitas una devolución de dinero? *<select name="q_33" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
 
+
               <label class="book-wide">¿Solicitas una reparación? *<select name="q_34" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
 
+
               <label class="book-wide">¿Solicitas otra solución distinta a las anteriores? *<select name="q_35" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
+
 
           </div>
         </fieldset>
