@@ -11,8 +11,10 @@
 - [x] Campos separados para departamento, provincia, distrito, dirección y datos opcionales de entrega; ficha consolidada visible al finalizar la simulación de la ficha compartida y de piso SPC.
 - [x] Comprobado el recorrido local en una ficha habitual y en piso SPC, incluidos cantidades, importe calculado y dirección; 84 pruebas automáticas, Theme Check sin errores y nueve vistas/paquete de 185 archivos comprobados tras integrar los cambios recientes de SPC y del Libro de Reclamaciones.
 - [x] Investigación de Botcake, conexión Shopify/POS y asignación por turnos, con dependencias y riesgos documentados en `docs/pancake-botcake-integration.md`.
-- [ ] Implementar y probar un servicio real de verificación por código, el envío de la ficha y su entrada en Pancake/POS/CRM con asignación nativa. El usuario confirma el número conectado y Botcake configurado; aún faltan permisos y validación de la plantilla, el flujo y la ruta de integración.
-- [ ] Asegurar que las solicitudes no afecten existencias y verificar qué ocurre con los pedidos borrador, su vínculo con el chat y el reparto. La web continúa en modo de prueba y no envía ni registra solicitudes.
+- [x] Identificada por elección del usuario la tienda POS de logo rojo y conectado el WhatsApp temporal +51 914 158 397. Aprobada la plantilla de autenticación y preparado un flujo independiente en Botcake con la variable del código.
+- [x] Comprobada la configuración del reparto de conversaciones y detectada una automatización que puede crear pedidos al recibir teléfonos; no se cambiaron estos ajustes compartidos.
+- [ ] Elegir e implementar un servicio privado para generar y verificar códigos y probar la entrega a contactos nuevos y existentes. Aún no se han enviado códigos ni se ha demostrado el primer contacto mediante API.
+- [ ] Implementar y probar la entrega de la ficha, su asignación nativa y el manejo de duplicados. Resolver la automatización de pedidos y verificar que la solicitud no cree pedidos ni afecte inventario. La web continúa en modo de prueba y no envía ni registra solicitudes.
 
 ## 10/11/2026 — Formularios de compra progresivos
 
