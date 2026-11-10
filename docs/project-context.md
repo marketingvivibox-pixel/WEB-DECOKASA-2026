@@ -1,3 +1,7 @@
+## 10/11/2026 — Contacto de atención y CRM de Decokasa
+
+Por indicación del usuario, el WhatsApp de atención y consultas de Decokasa pasa al CRM **+51 914 158 674** (`51914158674` en enlaces internacionales). El acceso «Atención al cliente» de la cabecera ofrece escribir al correo confirmado **atencion.decokasa@checkazul.com.pe** o abrir WhatsApp. El enlace de «Cómo comprar» conserva su destino. Se actualizan también el botón de inicio, la ayuda del catálogo y las landings PVC/SPC; los campos editables existentes se mantienen. Preparado para integrar a GitHub/main en el único tema oficial 188927803629.
+
 ## 09/11/2026 — PVC: acceso móvil persistente a la calculadora
 
 La landing PVC incorpora el botón móvil «Realizar pedido» con el mismo criterio de SPC: aparece con cualquier desplazamiento positivo y se oculta en el inicio, mientras se utiliza la calculadora o se abre el catálogo. Se presenta hasta 767 px, con el estilo amarillo de la landing, espacio inferior y respeto al área segura. Al pulsarlo desplaza suavemente y enfoca la calculadora; con movimiento reducido el desplazamiento es inmediato. Los eventos se limpian al descargar la sección en Shopify. Escritorio, datos comerciales y barra de vista previa permanecen sin cambios.

@@ -1,0 +1,15 @@
+{% liquid
+  assign service_email = 'atencion.decokasa@checkazul.com.pe'
+  assign service_phone = '51914158674'
+%}
+<details class="customer-service customer-service--{{ location }}">
+  <summary aria-label="{{ 'customer_service.title' | t | escape }}">
+    {% render 'icon', name: 'headphones' %}
+    <span>{{ 'customer_service.title' | t }}</span>
+  </summary>
+  <div class="customer-service-panel">
+    <p>{{ 'customer_service.prompt' | t }}</p>
+    <a href="mailto:{{ service_email }}"><strong>{{ 'customer_service.email' | t }}</strong><small>{{ service_email }}</small></a>
+    <a href="https://wa.me/{{ service_phone }}" target="_blank" rel="noopener noreferrer"><strong>{{ 'customer_service.whatsapp' | t }}</strong><small>914 158 674</small></a>
+  </div>
+</details>

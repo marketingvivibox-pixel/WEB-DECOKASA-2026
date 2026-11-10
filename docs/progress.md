@@ -1,3 +1,9 @@
+## 10/11/2026 — Atención al cliente y nuevo CRM de WhatsApp
+
+- [x] El acceso «Atención al cliente» de la cabecera permite elegir correo `atencion.decokasa@checkazul.com.pe` o WhatsApp `+51 914 158 674`, con cierre mediante Escape o clic fuera. El acceso «Cómo comprar» continúa disponible.
+- [x] Actualizado el número para el botón de inicio, el asesor del catálogo y las consultas de pisos PVC y SPC, conservando los ajustes existentes del editor.
+- [x] Verificación local en cinco anchos de pantalla, 61 pruebas, Theme Check oficial y regeneración de las ocho vistas y el paquete del tema. Destino de integración: GitHub/main y el único tema oficial 188927803629.
+
 ## 09/11/2026 — Botón móvil PVC desde el primer desplazamiento
 
 - [x] Incorporado «Realizar pedido / Calcula tus cajas de piso PVC» con el comportamiento aprobado en SPC: aparece al comenzar el scroll y se oculta al volver arriba, en la calculadora o con el catálogo abierto.

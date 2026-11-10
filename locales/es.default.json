@@ -1,5 +1,11 @@
 {
   "general": {"title": "DECOKASA"},
+  "customer_service": {
+    "title": "Atención al cliente",
+    "prompt": "¿Cómo prefieres contactarnos?",
+    "email": "Correo electrónico",
+    "whatsapp": "WhatsApp"
+  },
   "pvc": {
     "sticky_order": {
       "title": "Realizar pedido",

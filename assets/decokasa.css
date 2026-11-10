@@ -66,3 +66,21 @@ body{padding-top:var(--service-bar-height,38px)}
 @media(max-width:899px){.catalog-filter-body select,.catalog-sort select{font-size:16px}}
 
 .catalog-route-links a[aria-current="page"]{font-weight:700;background:#fff3ba;border-radius:6px;padding-inline:8px}
+
+/* Customer service menus share the same contact options in both header positions. */
+.service-items>.customer-service{display:block}
+.customer-service{position:relative}
+.customer-service[open]{z-index:25}
+.customer-service summary{display:flex;align-items:center;gap:10px;min-height:44px;cursor:pointer;list-style:none}
+.customer-service summary::-webkit-details-marker{display:none}
+.customer-service summary:focus-visible,.customer-service-panel a:focus-visible{outline:3px solid #d99f00;outline-offset:3px}
+.customer-service-panel{position:absolute;top:calc(100% + 5px);left:0;z-index:50;width:min(320px,calc(100vw - 32px));padding:8px;background:#fff;color:#23282b;border:1px solid #dedede;border-radius:12px;box-shadow:0 10px 30px #0003;white-space:normal}
+.customer-service-panel p{margin:3px 9px 6px;font-size:13px;line-height:1.35;color:#555}
+.customer-service-panel a{display:block;padding:10px;border-radius:8px;min-height:48px;color:#23282b;text-decoration:none;overflow-wrap:anywhere}
+.customer-service-panel a:hover{background:#fff6c9}
+.customer-service-panel strong,.customer-service-panel small{display:block;font-size:14px;line-height:1.35}
+.customer-service-panel small{margin-top:3px;font-size:12px;color:#555}
+@media(max-width:599px){
+  .service-items>.customer-service{font-size:11px}
+  .customer-service--bar .customer-service-panel{left:50%;transform:translateX(-50%)}
+}

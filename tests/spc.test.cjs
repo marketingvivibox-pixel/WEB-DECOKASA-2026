@@ -381,7 +381,7 @@ test('SPC: el croquis conserva identidad y resultados al alternar móvil y escri
 });
 test('SPC: los enlaces de acabados conservan el destino móvil al cruzar el breakpoint', () => {
   const {runInNewContext} = require('node:vm');
-  const {document} = parseHTML('<main data-phone="51941599516"><div class="spc-v2-sample"><button data-color="Caoba"></button><a href="https://wa.me/51941599516?text=consulta-original">Consultar</a></div></main>');
+  const {document} = parseHTML('<main data-phone="51914158674"><div class="spc-v2-sample"><button data-color="Caoba"></button><a href="https://wa.me/51914158674?text=consulta-original">Consultar</a></div></main>');
   const page = document.querySelector('main');
   const link = page.querySelector('a');
   const original = link.getAttribute('href');
@@ -522,7 +522,7 @@ test('SPC: elementos visuales de la calculadora interactiva (pestañas, ambiente
   const raw = fs.readFileSync(path.join(root, 'sections/landing-piso-spc.liquid'), 'utf8');
   const source = raw.replace(/{% schema %}[\s\S]*?{% endschema %}/, '');
   const doc = parseHTML(await engine.parseAndRender(source, {
-    section:{id:'spc-test', settings:{coverage_m2:'2.196', whatsapp_phone:'51941599516'}, blocks:[]},
+    section:{id:'spc-test', settings:{coverage_m2:'2.196', whatsapp_phone:'51914158674'}, blocks:[]},
     product:{title:'Piso SPC', selected_or_first_available_variant:{sku:'SPC-001'}}
   })).document;
 

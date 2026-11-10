@@ -31,7 +31,7 @@ const home=load('DECOKASA-inicio.html');
 assert.equal(home.document.querySelector('.brand.xion strong').textContent,'XION');
 assert.equal(home.document.querySelector('.brand.baby strong').textContent,'MUNDOBABY');
 assert.equal(home.document.querySelector('.brand.biflex strong').textContent,'BIFLEX');
-assert.equal(home.document.querySelector('.whatsapp-float').getAttribute('href'),'https://wa.me/51941599516?text=Hola%2C+visit%C3%A9+la+tienda+DECOKASA+y+quisiera+ayuda+con+un+producto+o+una+cotizaci%C3%B3n.');
+assert.equal(home.document.querySelector('.whatsapp-float').getAttribute('href'),'https://wa.me/51914158674?text=Hola%2C+visit%C3%A9+la+tienda+DECOKASA+y+quisiera+ayuda+con+un+producto+o+una+cotizaci%C3%B3n.');
 const catalog=load('catalogo.html','?marca=Xion');
 const visible=()=>[...catalog.document.querySelectorAll('[data-card]')].filter(e=>!e.hidden);
 assert.equal(visible().length,2);
@@ -103,3 +103,31 @@ multi.event(request,'submit');assert.equal(receipt().includes(multiReference),fa
 assert.equal(multi.sends(),0);
 assert.equal([...multi.data.keys()].some(k=>k.includes('draft')),false);
 console.log('DOM simulado: catálogo, PVC, galería, solicitud multicolor, reintentos, consentimiento y cero envíos: correctos. No verifica renderizado visual ni validez nativa de campos.');
+
+
+test('Atención al cliente ofrece correo y el WhatsApp del CRM en todas las páginas generales',()=>{
+  const pages=['DECOKASA-inicio.html','catalogo.html','landing-audifonos.html','landing-kit-fitness.html','landing-licuadora.html','landing-set-bebe.html'];
+  for(const page of pages){
+    const {document}=parseHTML(fs.readFileSync(path.join(out,page),'utf8'));
+    const menus=[...document.querySelectorAll('.customer-service')];
+    assert.equal(menus.length,1,page);
+    for(const menu of menus){
+      assert.equal(menu.querySelector('summary').getAttribute('aria-label'),'Atención al cliente',page);
+      assert.equal(menu.querySelector('a[href^="mailto:"]').getAttribute('href'),'mailto:atencion.decokasa@checkazul.com.pe',page);
+      assert.equal(menu.querySelector('a[href^="https://wa.me/"]').getAttribute('href'),'https://wa.me/51914158674',page);
+      assert.match(menu.textContent,/914 158 674/,page);
+    }
+    assert.match(document.querySelector('.header-help').getAttribute('href'),/#como-comprar$/,page);
+    assert.doesNotMatch(document.toString(),/51941599516/,page);
+  }
+});
+
+test('Las consultas de PVC, SPC y catálogo usan el número nuevo',()=>{
+  for(const page of ['landing-piso-spc.html','landing-pisos-pvc.html']){
+    const {document}=parseHTML(fs.readFileSync(path.join(out,page),'utf8'));
+    assert.equal(document.querySelector('[data-phone]').dataset.phone,'51914158674',page);
+    assert.doesNotMatch(document.toString(),/51941599516/,page);
+  }
+  const advisor=catalog.document.querySelector('.catalog-help a');
+  assert.ok(advisor.getAttribute('href').startsWith('https://wa.me/51914158674?'));
+});

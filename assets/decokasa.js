@@ -19,6 +19,14 @@
   }
   reserveServiceBar();
   document.addEventListener('click',event=>{
+    const active=event.target.closest?.('.customer-service');
+    document.querySelectorAll('.customer-service[open]').forEach(menu=>{if(menu!==active)menu.open=false;});
+  });
+  document.addEventListener('keydown',event=>{
+    if(event.key!=='Escape')return;
+    document.querySelectorAll('.customer-service[open]').forEach(menu=>{menu.open=false;menu.querySelector('summary')?.focus();});
+  });
+  document.addEventListener('click',event=>{
     const choice=event.target.closest?.('[data-card-color]');
     if(!choice||event.defaultPrevented||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey||(event.button&&event.button!==0))return;
     const card=choice.closest('.catalog-card'),photo=card?.querySelector('.catalog-product-photo'),pending=card?.querySelector('[data-card-image-pending]'),reference=card?.querySelector('[data-card-image-reference]');

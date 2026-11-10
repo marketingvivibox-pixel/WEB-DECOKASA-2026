@@ -66,6 +66,24 @@ body{padding-top:var(--service-bar-height,38px)}
 @media(max-width:899px){.catalog-filter-body select,.catalog-sort select{font-size:16px}}
 
 .catalog-route-links a[aria-current="page"]{font-weight:700;background:#fff3ba;border-radius:6px;padding-inline:8px}
+
+/* Customer service menus share the same contact options in both header positions. */
+.service-items>.customer-service{display:block}
+.customer-service{position:relative}
+.customer-service[open]{z-index:25}
+.customer-service summary{display:flex;align-items:center;gap:10px;min-height:44px;cursor:pointer;list-style:none}
+.customer-service summary::-webkit-details-marker{display:none}
+.customer-service summary:focus-visible,.customer-service-panel a:focus-visible{outline:3px solid #d99f00;outline-offset:3px}
+.customer-service-panel{position:absolute;top:calc(100% + 5px);left:0;z-index:50;width:min(320px,calc(100vw - 32px));padding:8px;background:#fff;color:#23282b;border:1px solid #dedede;border-radius:12px;box-shadow:0 10px 30px #0003;white-space:normal}
+.customer-service-panel p{margin:3px 9px 6px;font-size:13px;line-height:1.35;color:#555}
+.customer-service-panel a{display:block;padding:10px;border-radius:8px;min-height:48px;color:#23282b;text-decoration:none;overflow-wrap:anywhere}
+.customer-service-panel a:hover{background:#fff6c9}
+.customer-service-panel strong,.customer-service-panel small{display:block;font-size:14px;line-height:1.35}
+.customer-service-panel small{margin-top:3px;font-size:12px;color:#555}
+@media(max-width:599px){
+  .service-items>.customer-service{font-size:11px}
+  .customer-service--bar .customer-service-panel{left:50%;transform:translateX(-50%)}
+}
 </style></head><body>
 
 <a class="skip" href="#main">Ir al contenido</a>
@@ -77,11 +95,23 @@ body{padding-top:var(--service-bar-height,38px)}
 <path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6zM8 12l3 3 5-6"/>
 
 </svg>
- Compra con asesor</span><a href="DECOKASA-inicio.html#como-comprar"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+ Compra con asesor</span>
+<details class="customer-service customer-service--bar">
+  <summary aria-label="Atención al cliente">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
 <path d="M4 13v-2a8 8 0 0 1 16 0v2M4 12H2v7h5v-7zM20 12h2v7h-5v-7zM20 19v2h-5"/>
 
 </svg>
- Atención al cliente</a></div><a class="wholesale-link" href="DECOKASA-inicio.html#mayorista"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+
+    <span>Atención al cliente</span>
+  </summary>
+  <div class="customer-service-panel">
+    <p>¿Cómo prefieres contactarnos?</p>
+    <a href="mailto:atencion.decokasa@checkazul.com.pe"><strong>Correo electrónico</strong><small>atencion.decokasa@checkazul.com.pe</small></a>
+    <a href="https://wa.me/51914158674" target="_blank" rel="noopener noreferrer"><strong>WhatsApp</strong><small>914 158 674</small></a>
+  </div>
+</details>
+</div><a class="wholesale-link" href="DECOKASA-inicio.html#mayorista"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
 <path d="m12 2 10 5v11l-10 5-10-5V7zM2 7l10 5 10-5M12 12v11M7 4.5l10 5V15"/>
 
 </svg>
@@ -396,7 +426,7 @@ Nuestras marcas</a></div>
 <path d="M4 13v-2a8 8 0 0 1 16 0v2M4 12H2v7h5v-7zM20 12h2v7h-5v-7zM20 19v2h-5"/>
 
 </svg>
-<div><strong>¿Necesitas ayuda para elegir?</strong><p>Un asesor te orienta antes de confirmar tu compra.</p></div></div><a class="button outline" href="https://wa.me/51941599516?text=Hola%2C%20estoy%20viendo%20el%20cat%C3%A1logo%20DECOKASA%20y%20quisiera%20ayuda%20para%20elegir%20un%20producto.">Consultar con un asesor <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+<div><strong>¿Necesitas ayuda para elegir?</strong><p>Un asesor te orienta antes de confirmar tu compra.</p></div></div><a class="button outline" href="https://wa.me/51914158674?text=Hola%2C%20estoy%20viendo%20el%20cat%C3%A1logo%20DECOKASA%20y%20quisiera%20ayuda%20para%20elegir%20un%20producto.">Consultar con un asesor <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
 <path d="m9 5 7 7-7 7"/>
 
 </svg>
@@ -426,6 +456,14 @@ Nuestras marcas</a></div>
     else root.addEventListener('resize',sync);
   }
   reserveServiceBar();
+  document.addEventListener('click',event=>{
+    const active=event.target.closest?.('.customer-service');
+    document.querySelectorAll('.customer-service[open]').forEach(menu=>{if(menu!==active)menu.open=false;});
+  });
+  document.addEventListener('keydown',event=>{
+    if(event.key!=='Escape')return;
+    document.querySelectorAll('.customer-service[open]').forEach(menu=>{menu.open=false;menu.querySelector('summary')?.focus();});
+  });
   document.addEventListener('click',event=>{
     const choice=event.target.closest?.('[data-card-color]');
     if(!choice||event.defaultPrevented||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey||(event.button&&event.button!==0))return;
