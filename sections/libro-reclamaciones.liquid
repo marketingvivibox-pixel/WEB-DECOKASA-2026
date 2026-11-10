@@ -37,6 +37,12 @@
             <label>Fecha de compra *<input name="purchase_date" type="date" required><small>Ingresa la fecha de tu compra.</small></label>
             <label>Número de pedido *<input name="order_number" type="text" maxlength="100" required><small>Escríbelo tal como aparece en tu pedido.</small></label>
             <label class="book-wide">Número de comprobante (factura o boleta) *<input name="receipt_number" type="text" maxlength="100" placeholder="Ej.: F001-00012345" required><small>Incluye la serie y el número, si corresponde.</small></label>
+            <label class="book-wide">¿El comprobante está a tu nombre? *<select name="q_8" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select><small>Si está a nombre de otra persona o empresa, selecciona «No» para indicar sus datos.</small></label>
+            <div class="book-wide book-holder-details" data-book-holder-details hidden>
+              <p>Datos de la persona o empresa que figura en el comprobante</p>
+              <label>Nombre completo o razón social *<input name="receipt_holder_name" maxlength="150" data-book-holder-field disabled></label>
+              <label>DNI, RUC u otro documento *<input name="receipt_holder_document" maxlength="60" data-book-holder-field disabled></label>
+            </div>
             <label class="book-wide">¿Cómo describes el producto o servicio? *<textarea name="item_description" maxlength="500" rows="3" required></textarea></label>
           </div>
         </fieldset>
@@ -55,13 +61,8 @@
           {% assign book_questions = '¿La compra se realizó en la web de DECOKASA?|¿La compra se realizó por redes sociales?|¿La compra se realizó a través de WhatsApp?|¿La compra se realizó en un establecimiento físico?|¿La compra se realizó por otro canal?|¿Tienes el número de pedido?|¿Tienes un comprobante de pago?|¿El comprobante está a tu nombre?|¿El pago fue realizado en su totalidad?|¿Se acordó una fecha de entrega?|¿La entrega estaba dirigida a domicilio?|¿El pedido fue entregado?|¿El pedido llegó después de la fecha acordada?|¿El pedido se entregó incompleto?|¿El producto es diferente del que solicitaste?|¿El producto presentó daños visibles?|¿El embalaje estaba dañado?|¿El producto presenta una falla de funcionamiento?|¿El inconveniente apareció durante el primer uso?|¿El producto ha sido utilizado?|¿El servicio fue prestado?|¿El servicio se prestó fuera del plazo acordado?|¿El inconveniente se repitió?|¿El problema persiste?|¿Cuentas con fotos o videos de lo ocurrido?|¿Cuentas con documentos adicionales sobre el caso?|¿Te contactaste anteriormente con atención al cliente?|¿Presentaste antes una solicitud por el mismo caso?|¿Recibiste respuesta a tu comunicación anterior?|¿Se te ofreció alguna solución?|¿La solución ofrecida se cumplió?|¿Solicitas un cambio?|¿Solicitas una devolución de dinero?|¿Solicitas una reparación?|¿Solicitas otra solución distinta a las anteriores?' | split: '|' %}
           <div class="book-grid">
             {% for question in book_questions %}
-              <label class="book-wide">{{ question | escape }} *<select name="q_{{ forloop.index }}" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
-              {% if forloop.index == 8 %}
-                <div class="book-wide book-holder-details" data-book-holder-details hidden>
-                  <p>Datos de la persona o empresa que figura en el comprobante</p>
-                  <label>Nombre completo o razón social *<input name="receipt_holder_name" maxlength="150" data-book-holder-field disabled></label>
-                  <label>DNI, RUC u otro documento *<input name="receipt_holder_document" maxlength="60" data-book-holder-field disabled></label>
-                </div>
+              {% if forloop.index != 8 %}
+                <label class="book-wide">{{ question | escape }} *<select name="q_{{ forloop.index }}" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
               {% endif %}
             {% endfor %}
           </div>
