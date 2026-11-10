@@ -309,6 +309,13 @@ test('el formulario solicita manualmente la compra y pide el titular solo cuando
     assert.ok(document.querySelector('[name="' + name + '"]').hasAttribute('required'), name);
   }
   const block = document.querySelector('[data-book-holder-details]');
+  const purchaseSection = document.querySelector('[name="receipt_number"]').closest('fieldset');
+  for (let index = 1; index <= 35; index++) {
+    assert.equal(document.querySelectorAll('[name="q_' + index + '"]').length, 1);
+  }
+  assert.equal(owner.closest('fieldset'), purchaseSection);
+  assert.ok(owner.closest('label').previousElementSibling.querySelector('[name="receipt_number"]'));
+  assert.equal(block.closest('fieldset'), purchaseSection);
   const fields = [...block.querySelectorAll('[data-book-holder-field]')];
   assert.equal(fields.length, 2);
   assert.equal(block.hidden, true);
