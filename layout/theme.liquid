@@ -22,8 +22,9 @@
     {% unless custom_landing %}{% section 'header' %}{% endunless %}
     <main id="main">{{ content_for_layout }}</main>
     {% unless custom_landing %}
-      <div class="demo">Tienda en preparación · Los formularios son de prueba y todavía no envían solicitudes.</div>
+      {% unless template.suffix == 'libro-reclamaciones' %}<div class="demo">Tienda en preparación · Los formularios son de prueba y todavía no envían solicitudes.</div>{% endunless %}
       {% section 'footer' %}
     {% endunless %}
+    {% render 'book-link' %}
   </body>
 </html>

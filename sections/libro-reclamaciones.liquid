@@ -1,0 +1,73 @@
+{{ 'libro-reclamaciones.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'libro-reclamaciones.js' | asset_url }}" defer></script>
+<section class="book-page" aria-labelledby="book-heading">
+  <div class="book-wrap">
+    <a class="book-back" href="{{ routes.root_url }}">← Volver a la tienda</a>
+    <div class="book-intro">
+      <span class="book-eyebrow">Estamos para escucharte</span>
+      <h1 id="book-heading">Libro de Reclamaciones</h1>
+      <p>Cuéntanos qué sucedió. Registraremos tu reclamo o queja y podrás imprimir una copia; también la enviaremos al correo que indiques.</p>
+      <div class="book-provider"><strong>Check Azul S.A.C.</strong><span>RUC 20610129871</span>{% if section.settings.supplier_address != blank %}<span>Domicilio fiscal: {{ section.settings.supplier_address | escape }}</span>{% endif %}</div>
+    </div>
+
+    {% if section.settings.receiver_url != blank and section.settings.supplier_address != blank %}
+      <form class="book-form" action="{{ section.settings.receiver_url | escape }}" method="post" data-book-form>
+        <p class="book-required">Los campos marcados con * y el dato de contacto correspondiente al medio de respuesta elegido son obligatorios.</p>
+        <noscript><p>Para enviar este formulario necesitas activar JavaScript en tu navegador.</p></noscript>
+        <input type="hidden" name="request_id" value="" data-book-request-id>
+        <div class="book-trap" aria-hidden="true"><label for="book-website">No completar</label><input id="book-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+        <fieldset>
+          <legend><span>01</span> Tus datos</legend>
+          <div class="book-grid">
+            <label class="book-wide">¿Cuáles son tus nombres y apellidos? *<input name="name" autocomplete="name" maxlength="150" required></label>
+            <label>¿Cuál es tu documento de identidad? *<input name="document" maxlength="60" required></label>
+            <label>Teléfono (opcional)<input name="phone" type="tel" autocomplete="tel" maxlength="40"></label>
+            <label class="book-wide">¿Cuál es tu domicilio completo?<input name="address" autocomplete="street-address" maxlength="250" data-book-address><small>Obligatorio si eliges recibir la respuesta por carta.</small></label>
+            <label class="book-wide">¿Cuál es tu correo electrónico?<input name="email" type="email" autocomplete="email" maxlength="254" data-book-email><small>Obligatorio si eliges recibir la respuesta por correo. Si lo indicas, enviaremos aquí tu copia.</small></label>
+            <label>¿Eres menor de edad? *<select name="minor" required data-book-minor><option value="">Selecciona una opción</option><option value="No">No</option><option value="Sí">Sí</option></select></label>
+            <label>Nombre del padre, madre o apoderado<input name="guardian" maxlength="150" data-book-guardian><small>Obligatorio si eres menor de edad.</small></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend><span>02</span> Producto o servicio</legend>
+          <div class="book-grid">
+            <label>¿Qué adquiriste? *<select name="item_type" required><option value="">Selecciona una opción</option><option value="Producto">Producto</option><option value="Servicio">Servicio</option></select></label>
+            <label>Monto reclamado en soles<input name="amount" type="text" inputmode="decimal" pattern="[0-9]+([.,][0-9]{1,2})?" maxlength="15" placeholder="Ej.: 150.00"><small>Si corresponde.</small></label>
+            <label class="book-wide">¿Cómo describes el producto o servicio? *<textarea name="item_description" maxlength="500" rows="3" required></textarea></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend><span>03</span> Cuéntanos lo ocurrido</legend>
+          <div class="book-grid">
+            <label class="book-wide">¿Presentas un reclamo o una queja? *<select name="type" required><option value="">Selecciona una opción</option><option value="Reclamo">Reclamo</option><option value="Queja">Queja</option></select><small>Reclamo: disconformidad con un producto o servicio. Queja: disconformidad con la atención recibida.</small></label>
+            <label class="book-wide">¿Qué ocurrió? *<textarea name="details" maxlength="5000" rows="5" required></textarea></label>
+            <label class="book-wide">¿Qué solución solicitas? *<textarea name="request" maxlength="3000" rows="4" required></textarea></label>
+            <label class="book-wide">¿Cómo deseas recibir la respuesta? *<select name="response_channel" required data-book-response-channel><option value="">Selecciona una opción</option><option value="Correo electrónico">Correo electrónico</option><option value="Carta al domicilio">Carta al domicilio</option></select></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend><span>04</span> Información adicional</legend>
+          <p>Responde cada pregunta. Si no corresponde a tu caso, elige «No aplica»; si no conoces la respuesta, elige «No sé».</p>
+          {% assign book_questions = '¿La compra se realizó en la web de DECOKASA?|¿La compra se realizó por redes sociales?|¿La compra se realizó a través de WhatsApp?|¿La compra se realizó en un establecimiento físico?|¿La compra se realizó por otro canal?|¿Tienes el número de pedido?|¿Tienes un comprobante de pago?|¿El comprobante está a tu nombre?|¿El pago fue realizado en su totalidad?|¿Se acordó una fecha de entrega?|¿La entrega estaba dirigida a domicilio?|¿El pedido fue entregado?|¿El pedido llegó después de la fecha acordada?|¿El pedido se entregó incompleto?|¿El producto es diferente del que solicitaste?|¿El producto presentó daños visibles?|¿El embalaje estaba dañado?|¿El producto presenta una falla de funcionamiento?|¿El inconveniente apareció durante el primer uso?|¿El producto ha sido utilizado?|¿El servicio fue prestado?|¿El servicio se prestó fuera del plazo acordado?|¿El inconveniente se repitió?|¿El problema persiste?|¿Cuentas con fotos o videos de lo ocurrido?|¿Cuentas con documentos adicionales sobre el caso?|¿Te contactaste anteriormente con atención al cliente?|¿Presentaste antes una solicitud por el mismo caso?|¿Recibiste respuesta a tu comunicación anterior?|¿Se te ofreció alguna solución?|¿La solución ofrecida se cumplió?|¿Solicitas un cambio?|¿Solicitas una devolución de dinero?|¿Solicitas una reparación?|¿Solicitas otra solución distinta a las anteriores?' | split: '|' %}
+          <div class="book-grid">
+            {% for question in book_questions %}
+              <label class="book-wide">{{ question | escape }} *<select name="q_{{ forloop.index }}" required><option value="">Selecciona una opción</option><option value="Sí">Sí</option><option value="No">No</option><option value="No sé">No sé</option><option value="No aplica">No aplica</option></select></label>
+            {% endfor %}
+          </div>
+        </fieldset>
+        <div class="book-submit"><p>Responderemos por escrito en un plazo máximo de 15 días hábiles, improrrogables. Presentar este formulario no impide acudir a otras vías de solución ni es requisito previo para denunciar ante Indecopi.</p><p>Tus datos se usarán para registrar y atender tu reclamación.{% if shop.privacy_policy.url != blank %} <a href="{{ shop.privacy_policy.url }}">Conoce nuestra política de privacidad.</a>{% endif %}</p><button type="submit">Enviar reclamación</button><p class="book-hint">Al enviar, verás una constancia que podrás imprimir o guardar.</p></div>
+      </form>
+    {% else %}
+      <div class="book-unavailable"><h2>Atención al cliente</h2><p>Estamos preparando el formulario. Por favor contáctanos en <a href="mailto:atencion.decokasa@checkazul.com.pe">atencion.decokasa@checkazul.com.pe</a>.</p></div>
+    {% endif %}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Libro de reclamaciones",
+  "settings": [
+    {"type":"url","id":"receiver_url","label":"Receptor de reclamaciones"},
+    {"type":"text","id":"supplier_address","label":"Domicilio fiscal del proveedor"}
+  ]
+}
+{% endschema %}

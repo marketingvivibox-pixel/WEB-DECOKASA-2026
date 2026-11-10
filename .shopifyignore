@@ -1,5 +1,6 @@
 README.md
 docs/**
+integrations/**
 tests/**
 scripts/**
 preview/**

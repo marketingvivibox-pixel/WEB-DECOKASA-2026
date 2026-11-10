@@ -1,3 +1,6 @@
+## Libro de Reclamaciones — 10/11/2026
+
+Se prepara una página de Shopify con 45 respuestas obligatorias por indicación expresa del usuario. El proveedor es Check Azul S.A.C. (RUC 20610129871), domicilio Av. José Leal n.º 375, Lima, Lima, Lima; responsable Laiz Guerrero. El receptor privado de la cuenta de atención registró pruebas numeradas y se confirmó la llegada de ambas copias. La versión 3 conserva los ceros iniciales de documentos y teléfonos, comprobado con la prueba LR-2026-000004. El correo automático es provisional hasta corregir SPF, DKIM y DMARC al cambiar el dominio. Detalle operativo: `integrations/libro-reclamaciones/README.md`.
 ## 10/11/2026 — Acceso al correo de atención
 
 La opción de correo del menú «Atención al cliente» muestra la dirección **atencion.decokasa@checkazul.com.pe** y permite abrir un mensaje en Gmail, Outlook u otra aplicación de correo. También permite copiar la dirección cuando el navegador ofrece esta función. Así se dispone de alternativas si no hay una aplicación de correo predeterminada; Gmail y Outlook pueden solicitar el inicio de sesión. El acceso a WhatsApp del CRM se conserva.

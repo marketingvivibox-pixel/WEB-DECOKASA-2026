@@ -30,6 +30,8 @@ async function main() {
   const template = JSON.parse(fs.readFileSync(path.join(root, 'templates/index.json'), 'utf8'));
   const homeSettings = template.sections?.main?.settings ?? {};
   const header = await section('header'), home = await section('home', homeSettings);
+  const bookLink = (await engine.parseAndRender(fs.readFileSync(path.join(root, 'snippets/book-link.liquid'), 'utf8'), {})).replace('/pages/libro-de-reclamaciones', 'libro-reclamaciones.html');
+  const book = await section('libro-reclamaciones', {receiver_url: 'https://example.invalid/preview', supplier_address: 'Av. José Leal n.º 375, Lima, Lima, Lima'}, {shop: {privacy_policy: {url: ''}}});
   const products = JSON.parse(fs.readFileSync(path.join(root, 'preview/products.json'), 'utf8')).map(product => ({...product, title: product.name, vendor: product.brand, type: product.category, url: `landing-${product.handle}.html`}));
   const catalogTemplate = JSON.parse(fs.readFileSync(path.join(root, 'templates/collection.json'), 'utf8'));
   const catalog = await section('catalog', catalogTemplate.sections?.main?.settings ?? {}, {is_demo: true, shop: {vendors: ['DECOKASA', 'Xion', 'Biflex', 'Mundo Baby'], types: [...new Set(products.map(product => product.type))]}, collection: {handle: 'all', title: 'Todos los productos', products, products_count: products.length, sort_by: 'manual'}});
@@ -86,13 +88,13 @@ async function main() {
   pvcProduct.variants = pvcFinishes.map((code, index) => ({id: `pvc-draft-${index}`, title: code, options: [code], sku: '', price: 0, available: false}));
   landings['landing-pisos-pvc.html'] = await section('landing-piso-pvc', pvcMain.settings, {product: pvcProduct, shop: {currency: 'PEN'}, section: {blocks: pvcBlocks}});
 
-  const previewFiles = [...new Set([...fs.readdirSync(preview).filter(f => f.endsWith('.html') && !['DECOKASA-movil.html', 'render_pdf.html'].includes(f)), 'landing-piso-spc.html'])];
+  const previewFiles = [...new Set([...fs.readdirSync(preview).filter(f => f.endsWith('.html') && !['DECOKASA-movil.html', 'render_pdf.html'].includes(f)), 'landing-piso-spc.html', 'libro-reclamaciones.html'])];
   for (const file of previewFiles) {
     const rawFile = fs.existsSync(path.join(preview, file)) ? fs.readFileSync(path.join(preview, file), 'utf8') : '';
     const { document } = parseHTML(rawFile || '<!doctype html><html><head><title></title></head><body><footer></footer></body></html>');
     document.querySelectorAll('link[rel="icon"], meta[charset], meta[name="viewport"], link[href*="landing-piso-spc.css"], link[href*="landing-piso-pvc.css"]').forEach(el => el.remove());
     document.head.insertAdjacentHTML('beforeend', '<link rel="icon" type="image/png" sizes="128x128" href="assets/favicon.png">');
-    const content = file === 'DECOKASA-inicio.html' ? home : file === 'catalogo.html' ? catalog : landings[file];
+    const content = file === 'DECOKASA-inicio.html' ? home : file === 'catalogo.html' ? catalog : file === 'libro-reclamaciones.html' ? book : landings[file];
     const footer = document.querySelector('footer')?.outerHTML ?? '';
     const consent = document.querySelector('[data-consent-banner]')?.outerHTML ?? document.querySelector('.consent')?.outerHTML ?? '';
     document.querySelectorAll('style').forEach(el => el.remove());
@@ -105,11 +107,11 @@ async function main() {
     const extraCss = isCustomLanding ? '' : `<style>${css}</style>`;
     const bodyAttr = isLandingSpc ? ' class="spc-layout"' : isLandingPvc ? ' class="pvc-layout"' : '';
     if (isLandingPvc) document.querySelector('title').textContent = 'Piso PVC autoadhesivo · DECOKASA';
-    const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">${document.head.innerHTML}${extraCss}</head><body${bodyAttr}>${pageHeader}<main id="main">${content}</main>${pageFooter}${pageConsent}${isCustomLanding ? '' : `<script>${js}</script>`}${landings[file] && !isCustomLanding ? '<script src="product-demo.js" defer></script>' : ''}</body></html>`;
+    const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">${document.head.innerHTML}${extraCss}</head><body${bodyAttr}>${pageHeader}<main id="main">${content}</main>${pageFooter}${pageConsent}${bookLink}${isCustomLanding ? '' : `<script>${js}</script>`}${landings[file] && !isCustomLanding ? '<script src="product-demo.js" defer></script>' : ''}</body></html>`;
     fs.writeFileSync(path.join(preview, file), html.replace(/[ \t]+$/gm, ''), 'utf8');
   }
   fs.mkdirSync(path.join(preview, 'assets'), { recursive: true });
-  for (const asset of fs.readdirSync(path.join(root, 'assets')).filter(name => /^(decokasa-.*\.webp|favicon\.png|product-detail\.(css|js)|landing-piso-pvc\.(css|js)|pvc-.*\.webp|landing-piso-spc(?:-layout|-proportions|-desktop)?\.(css|js)|spc-.*\.(webp|png|svg|ttf|txt))$/.test(name))) {
+  for (const asset of fs.readdirSync(path.join(root, 'assets')).filter(name => /^(decokasa-.*\.webp|favicon\.png|product-detail\.(css|js)|libro-reclamaciones\.(css|js)|landing-piso-pvc\.(css|js)|pvc-.*\.webp|landing-piso-spc(?:-layout|-proportions|-desktop)?\.(css|js)|spc-.*\.(webp|png|svg|ttf|txt))$/.test(name))) {
     fs.copyFileSync(path.join(root, 'assets', asset), path.join(preview, 'assets', asset));
   }
   console.log(`${previewFiles.length} preview pages synchronized with the Shopify sections.`);

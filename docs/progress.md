@@ -1,3 +1,9 @@
+## 10/11/2026 — Libro de Reclamaciones: conexión en preparación
+
+- [x] El receptor de la cuenta de atención generó solicitudes de prueba numeradas. La copia de cliente y la ficha interna llegaron a los buzones de prueba; reintento automático configurado.
+- [x] Preparados el formulario solicitado de 45 respuestas obligatorias, el enlace en el pie de página y la plantilla para el tema oficial; pruebas y Theme Check oficial sin incidencias.
+- [x] La versión 3 desplegada conserva los ceros iniciales de documento y teléfono, verificado con la solicitud de prueba LR-2026-000004. Se corrigieron los datos de la prueba anterior en la hoja.
+- [ ] Integrar con la última versión de GitHub/main, crear la página en Shopify y verificar el recorrido completo. Confirmar acceso operativo de Laiz y revisar con el contador los requisitos aplicables y el riesgo de exigir 45 respuestas.
 ## 10/11/2026 — Alternativas para escribir a atención
 
 - [x] Añadidas opciones para abrir Gmail, Outlook u otra aplicación, y para copiar la dirección de atención cuando el navegador lo permite. La dirección queda visible en el menú.

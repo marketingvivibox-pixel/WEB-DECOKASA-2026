@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "libro-reclamaciones",
+      "settings": {
+        "receiver_url": "https://script.google.com/macros/s/AKfycbwx2TTja0bJmt1kweq2v5Ip7_dDEsnPLnYZP7gMm_XUlMWhq7Segf-51M4GXF5sYwPL/exec",
+        "supplier_address": "Av. José Leal n.º 375, Lima, Lima, Lima"
+      }
+    }
+  },
+  "order": ["main"]
+}
