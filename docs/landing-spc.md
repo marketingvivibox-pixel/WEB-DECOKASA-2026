@@ -2,6 +2,20 @@
 
 La rama `feature/landing-piso-spc` ya se fusionó en `main` (e594fbf). Por instrucción del usuario, los ajustes continúan en `main`; la corrección móvil del 22/10/2026 se publicó en `95c644f` y su sincronización con el tema activo se verificó en Shopify. Plantilla: `templates/product.landing-spc.json`; sección: `sections/landing-piso-spc.liquid`; estilos y comportamiento: `assets/landing-piso-spc.css`, `landing-piso-spc-proportions.css`, `landing-piso-spc-layout.css` y `landing-piso-spc.js`; iconos y botones: `snippets/spc-icon.liquid` y `spc-actions.liquid`.
 
+## 10/11/2026 — Acabados disponibles por familia
+
+Las muestras y botones «Ver más» abren `snippets/spc-tone-catalog.liquid`, con estilos en `assets/landing-piso-spc-tones.css` y lógica en `landing-piso-spc.js`. El catálogo usa un único JPG, `assets/spc-catalogo-tonos-2026-11.jpg` (1080 × 1544), idéntico al proporcionado por el usuario. Cada ventana de textura recorta 456 × 124 píxeles de esa fuente; no se muestran sus textos incrustados ni se reconstruyen sus vetas.
+
+| Familia | Códigos del catálogo |
+| --- | --- |
+| Cálidos | spc-0018-2, spc-0013, spc-002-1 |
+| Oscuros | spc-001-2, spc-004-1, spc-0022, spc-0021 |
+| Neutros | spc-0020-1, spc-0022-2, spc-007, spc-0020 |
+
+Las medidas del catálogo son 18 × 122 cm. `spc-0013`, `spc-0020` y `spc-0020-1` indican 5 mm; los otros ocho indican 5,5 mm. Para modificar la selección comercial de la calculadora es necesario confirmar primero SKU/variante y rendimiento por código: estas fichas son muestras con consulta al asesor, no variantes de compra nuevas. Los filtros mantienen la familia de referencia de la calculadora. El enlace WhatsApp incluye el acabado concreto, espesor y medidas y solo abre un mensaje para que el cliente decida enviarlo.
+
+La ventana conserva el foco, se cierra con Escape, botón o fondo y admite desplazamiento interno en pantallas pequeñas. Cada filtro informa cuántos acabados contiene. Se respeta movimiento reducido y se retira el botón móvil persistente mientras la ventana está abierta.
+
 ## 03/11/2026 — Certificaciones confirmadas
 
 El usuario confirmó que FloorScore, ANAB, ILAC, DAkkS, CNAS y EPH corresponden al piso SPC. `show_certifications` queda activado en la plantilla `product.landing-spc.json`, conservando el diseño proporcional del PSD para móvil y escritorio. La opción del esquema sigue desactivada por defecto para otras instancias; las referencias históricas a certificaciones pendientes quedan sustituidas por esta confirmación. Calculadora y testimonios conservados.

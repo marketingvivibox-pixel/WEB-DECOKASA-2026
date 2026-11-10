@@ -1,3 +1,9 @@
+## 10/11/2026 — Catálogo de tonos SPC
+
+Las tres familias de la landing abren una ventana con los 11 acabados del catálogo JPG entregado por el usuario. Cálidos: `spc-0018-2`, `spc-0013`, `spc-002-1`; oscuros: `spc-001-2`, `spc-004-1`, `spc-0022`, `spc-0021`; neutros: `spc-0020-1`, `spc-0022-2`, `spc-007`, `spc-0020`. Las muestras conservan los píxeles de la fuente y se recortan en CSS desde un único recurso compartido, sin regenerar vetas o colores.
+
+Cada ficha muestra el código, 18 × 122 cm y su espesor total según el catálogo: 5 mm para `spc-0013`, `spc-0020` y `spc-0020-1`; 5,5 mm para los demás. Son códigos del catálogo, no un mapeo confirmado con variantes Shopify. El botón de consulta prepara un mensaje manual al WhatsApp configurado con el código y las medidas; no confirma stock ni precio. La calculadora conserva su rendimiento de 2,196 m² por caja y la selección de familia, sin atribuir un rendimiento específico a los nuevos códigos. La configuración de variantes y rendimiento por acabado requiere confirmación comercial aparte.
+
 ## 10/11/2026 — Solicitud de compra por pasos
 
 Las fichas habituales de producto y la landing de piso SPC presentan la solicitud en una ventana con tres pasos: pedido, contacto y entrega, con progreso visible y validación antes de continuar. Se conserva la selección, incluidos el cálculo y la cantidad de cajas de SPC. También se aplica a los productos que utilicen la ficha compartida en el futuro. La landing actual de PVC conserva su acceso a WhatsApp.

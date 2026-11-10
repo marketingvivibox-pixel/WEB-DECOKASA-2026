@@ -1,3 +1,10 @@
+## 10/11/2026 — Ventanas de tonos SPC
+
+- [x] Separados visualmente los 11 acabados del catálogo original y agrupados en 3 cálidos, 4 oscuros y 4 neutros. Código, dimensiones y espesor propios por acabado; consulta manual por WhatsApp.
+- [x] Ventana adaptable con filtros, cierre accesible, Escape, bloqueo del fondo y devolución del foco. El botón móvil persistente se oculta mientras está abierta.
+- [x] Validado en navegador a 320/393/768/1024/1440 px: muestras cargadas, filtros, apertura, cierre, foco y ausencia de desbordamiento. Conservados cálculo de 20 m² + 10% = 11 cajas y formulario de compra progresivo.
+- [ ] Confirmar integración final en GitHub/main y sincronización en el único tema oficial 188927803629.
+
 ## 10/11/2026 — Formularios de compra progresivos
 
 - [x] Convertidas las solicitudes de las fichas compartidas y de piso SPC en ventanas de tres pasos con indicador de avance, navegación hacia atrás y validación de campos. Se conserva la selección y el cálculo de cajas.
