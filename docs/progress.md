@@ -3,7 +3,8 @@
 - [x] Separados visualmente los 11 acabados del catálogo original y agrupados en 3 cálidos, 4 oscuros y 4 neutros. Código, dimensiones y espesor propios por acabado; consulta manual por WhatsApp.
 - [x] Ventana adaptable con filtros, cierre accesible, Escape, bloqueo del fondo y devolución del foco. El botón móvil persistente se oculta mientras está abierta.
 - [x] Validado en navegador a 320/393/768/1024/1440 px: muestras cargadas, filtros, apertura, cierre, foco y ausencia de desbordamiento. Conservados cálculo de 20 m² + 10% = 11 cajas y formulario de compra progresivo.
-- [ ] Confirmar integración final en GitHub/main y sincronización en el único tema oficial 188927803629.
+- [x] Publicado en GitHub/main (`91076c7`) y sincronizado con el único tema oficial `188927803629`; los cinco archivos de la función coinciden por checksum. Comprobación adicional en la tienda pública a 320/393/768/1024/1440 px: filtros, muestras, cierre, accesibilidad, calculadora y formulario progresivo correctos, sin crear pedidos ni enviar consultas.
+- [x] 82/82 pruebas automáticas, Theme Check oficial sin incidencias, nueve vistas locales y paquete del tema actualizados.
 
 ## 10/11/2026 — Formularios de compra progresivos
 
