@@ -51,7 +51,9 @@ const BOOK = Object.freeze({
     'Detalle', 'Pedido', 'Medio de respuesta', 'Estado', 'Responsable',
     'Fecha de respuesta', 'Acciones y observaciones', 'Evidencia de respuesta',
     'Copia al consumidor', 'Aviso interno', 'Identificador de solicitud',
-    'Huella de solicitud', 'Datos originales JSON'
+    'Huella de solicitud', 'Datos originales JSON',
+    'Fecha de compra', 'Número de pedido', 'Número de comprobante',
+    'Titular del comprobante', 'Documento del titular'
   ]
 });
 
@@ -89,6 +91,7 @@ function configurarLibro() {
     const spreadsheet = SpreadsheetApp.create('DECOKASA - Libro de Reclamaciones (privado)');
     const sheet = spreadsheet.getSheets()[0];
     sheet.setName(BOOK.sheetName);
+    if (sheet.getMaxColumns() < BOOK.headers.length) sheet.insertColumnsAfter(sheet.getMaxColumns(), BOOK.headers.length - sheet.getMaxColumns());
     sheet.getRange(1, 1, 1, BOOK.headers.length).setValues([BOOK.headers]);
     sheet.setFrozenRows(1);
     properties.setProperty('BOOK_SPREADSHEET_ID', spreadsheet.getId());
@@ -126,6 +129,7 @@ function doPost(e) {
     if (row) {
       if (sheet.getRange(row, 25).getValue() !== digest) throw new Error('La solicitud cambió. Regresa al formulario para enviarla de nuevo.');
     } else {
+      ensurePurchaseColumns_(sheet);
       const properties = PropertiesService.getScriptProperties();
       const number = Number(properties.getProperty('BOOK_NEXT_NUMBER') || '1');
       if (!Number.isSafeInteger(number) || number < 1) throw new Error('El libro no está configurado correctamente.');
@@ -139,7 +143,8 @@ function doPost(e) {
         data.itemDescription, data.details, data.request, data.responseChannel,
         'Pendiente', properties.getProperty('BOOK_RESPONSIBLE') || BOOK.responsible,
         '', '', '', 'Pendiente', 'Pendiente', requestId, digest,
-        JSON.stringify(Object.assign({supplierAddress: supplierAddress}, data))];
+        JSON.stringify(Object.assign({supplierAddress: supplierAddress}, data)),
+        data.purchaseDate, data.orderNumber, data.receiptNumber, data.receiptHolderName, data.receiptHolderDocument];
       sheet.appendRow(values.map(sheetSafe_));
       SpreadsheetApp.flush();
       row = sheet.getLastRow();
@@ -147,9 +152,12 @@ function doPost(e) {
       // A leading apostrophe forces text and preserves zeros without evaluating formulas.
       sheet.getRange(row, 5).setNumberFormat('@').setValue("'" + data.document);
       sheet.getRange(row, 8).setNumberFormat('@').setValue("'" + data.phone);
+      [data.purchaseDate, data.orderNumber, data.receiptNumber, data.receiptHolderDocument].forEach((value, index) => {
+        if (value) sheet.getRange(row, [27, 28, 29, 31][index]).setNumberFormat('@').setValue("'" + value);
+      });
       SpreadsheetApp.flush();
     }
-    const stored = sheet.getRange(row, 1, 1, BOOK.headers.length).getValues()[0];
+    const stored = sheet.getRange(row, 1, 1, 26).getValues()[0];
     const originalData = JSON.parse(stored[25]);
     try {
       sendPending_(sheet, row);
@@ -182,6 +190,7 @@ function validate_(p) {
     if (!allowed.includes(value)) throw new Error('Por favor selecciona una opción válida en «' + title + '».');
     return value;
   }
+  if (String(p.form_version || '') !== '2') throw new Error('Por favor actualiza la página del formulario para completar los nuevos datos de compra.');
   const data = {
     name: field('name', 'nombres y apellidos', 150, true),
     document: field('document', 'documento de identidad', 60, true),
@@ -207,7 +216,34 @@ function validate_(p) {
     question: question,
     answer: choice('q_' + (index + 1), question, ['Sí', 'No', 'No sé', 'No aplica'])
   }));
+  data.purchaseDate = field('purchase_date', 'fecha de compra', 10, true);
+  const parsedDate = new Date(data.purchaseDate + 'T00:00:00Z');
+  if (!/^(?!0000)\d{4}-\d{2}-\d{2}$/.test(data.purchaseDate) || isNaN(parsedDate.getTime()) || parsedDate.toISOString().slice(0, 10) !== data.purchaseDate) {
+    throw new Error('Por favor revisa la fecha de compra.');
+  }
+  data.orderNumber = field('order_number', 'número de pedido', 100, true);
+  data.receiptNumber = field('receipt_number', 'número de comprobante', 100, true);
+  const differentHolder = data.additional[7].answer === 'No';
+  data.receiptHolderName = differentHolder ? field('receipt_holder_name', 'nombre o razón social del titular del comprobante', 150, true) : '';
+  data.receiptHolderDocument = differentHolder ? field('receipt_holder_document', 'documento del titular del comprobante', 60, true) : '';
   return data;
+}
+
+/* Añade columnas al final sin reemplazar datos o encabezados existentes. */
+function ensurePurchaseColumns_(sheet) {
+  const first = 27;
+  const extra = BOOK.headers.slice(26);
+  const existing = sheet.getMaxColumns();
+  if (existing < BOOK.headers.length) sheet.insertColumnsAfter(existing, BOOK.headers.length - existing);
+  const current = sheet.getRange(1, first, 1, extra.length).getValues()[0];
+  current.forEach((value, index) => {
+    if (value && value !== extra[index]) throw new Error('Las columnas adicionales del registro están ocupadas.');
+    if (!value && sheet.getLastRow() > 1) {
+      const cells = sheet.getRange(2, first + index, sheet.getLastRow() - 1, 1).getValues();
+      if (cells.some(row => row[0] !== '')) throw new Error('Las columnas adicionales del registro contienen datos.');
+    }
+  });
+  current.forEach((value, index) => { if (!value) sheet.getRange(1, first + index).setValue(extra[index]); });
 }
 
 function getSheet_() {
@@ -237,7 +273,7 @@ function digest_(value) {
 }
 
 function sendPending_(sheet, row) {
-  const record = sheet.getRange(row, 1, 1, BOOK.headers.length).getValues()[0];
+  const record = sheet.getRange(row, 1, 1, 26).getValues()[0];
   const data = JSON.parse(record[25]);
   const receipt = receiptText_(record[0], record[1], data);
   if (!data.email && record[21] !== 'No indicado') {
@@ -288,7 +324,14 @@ function receiptText_(id, registeredAt, data) {
     '¿Menor de edad?: ' + data.minor, 'Padre, madre o apoderado: ' + (data.guardian || 'No aplica'),
     '', 'BIEN O SERVICIO', 'Tipo: ' + data.itemType,
     'Monto reclamado: ' + (data.amount ? 'S/ ' + data.amount : 'No indicado'),
-    'Descripción: ' + data.itemDescription, '', 'RECLAMACIÓN', 'Tipo: ' + data.type,
+    'Descripción: ' + data.itemDescription,
+    ...(data.purchaseDate ? [
+      'Fecha de compra: ' + data.purchaseDate.split('-').reverse().join('/'),
+      'Número de pedido: ' + data.orderNumber,
+      'Número de comprobante: ' + data.receiptNumber,
+      ...(data.receiptHolderName ? ['Titular del comprobante: ' + data.receiptHolderName, 'Documento del titular: ' + data.receiptHolderDocument] : [])
+    ] : []),
+    '', 'RECLAMACIÓN', 'Tipo: ' + data.type,
     'Detalle: ' + data.details, 'Pedido: ' + data.request,
     'Medio solicitado para la respuesta: ' + data.responseChannel,
     '', 'INFORMACIÓN ADICIONAL',

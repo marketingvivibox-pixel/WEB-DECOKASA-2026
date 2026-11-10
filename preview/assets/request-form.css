@@ -1,0 +1,76 @@
+.request-dialog {
+  box-sizing: border-box;
+  width: min(560px, calc(100% - 28px));
+  max-width: 560px;
+  max-height: min(90vh, 850px);
+  margin: auto;
+  padding: 0;
+  overflow: auto;
+  border: 0;
+  border-radius: 18px;
+  color: #1d2421;
+  background: #fff;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .24);
+}
+.request-dialog::backdrop { background: rgba(13, 21, 16, .65); }
+.request-dialog *, .request-dialog *::before, .request-dialog *::after { box-sizing: border-box; }
+.request-dialog [hidden] { display: none !important; }
+.request-dialog .request-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 1;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #f3f4f2;
+  color: #1d2421;
+  font: 28px/1 Arial, sans-serif;
+  cursor: pointer;
+}
+.request-dialog .request-form-box {
+  margin: 0;
+  padding: 30px;
+  border: 0;
+  border-radius: 0;
+  background: #fff;
+  color: #1d2421;
+  font-family: inherit;
+}
+.request-dialog .request-form-box h2 { margin: 0 45px 7px 0; font-size: 25px; line-height: 1.2; letter-spacing: -.5px; color: #1d2421; }
+.request-dialog .request-form-box p { margin: 0 0 14px; font-size: 14px; line-height: 1.5; color: #515a53; }
+.request-dialog .request-form-box .request-demo-note { padding: 10px 12px; border-radius: 8px; background: #fff4cf; color: #594613; font-size: 13px; }
+.request-dialog .request-progress { margin: 20px 0 24px; }
+.request-dialog .request-form-box .request-progress-count { margin-bottom: 10px; color: #1d2421; font-weight: 700; }
+.request-dialog .request-progress-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 0; padding: 0; list-style: none; }
+.request-dialog .request-progress-list li { min-width: 0; padding: 8px 0 0; border-top: 4px solid #e5e8e4; color: #6c756e; font-size: 12px; font-weight: 600; }
+.request-dialog .request-progress-list li[aria-current="step"], .request-dialog .request-progress-list li.is-complete { border-color: #e6b900; color: #1d2421; }
+.request-dialog .request-progress-list span { display: inline-grid; width: 20px; height: 20px; margin-right: 3px; place-items: center; border-radius: 50%; background: #eef0ed; font-size: 11px; }
+.request-dialog .request-progress-list li[aria-current="step"] span, .request-dialog .request-progress-list li.is-complete span { background: #ffd42b; }
+.request-dialog .request-fieldset { display: block; min-width: 0; margin: 0; padding: 0; border: 0; }
+.request-dialog .request-step h3 { margin: 0 0 8px; font-size: 19px; line-height: 1.3; color: #1d2421; }
+.request-dialog .form-estimate-summary { display: grid; gap: 8px; margin: 0 0 16px; padding: 14px; border: 1px solid #e1e5df; border-radius: 10px; background: #f8faf7; color: #515a53; font-size: 14px; }
+.request-dialog .form-estimate-summary strong { color: #1d2421; }
+.request-dialog .request-form-lines { margin: 0 0 16px; padding-left: 20px; font-size: 14px; line-height: 1.5; overflow-wrap: anywhere; }
+.request-dialog label { display: block; margin: 0 0 15px; color: #1d2421; font-size: 14px; font-weight: 700; }
+.request-dialog input:not([type="checkbox"]), .request-dialog select, .request-dialog textarea { display: block; width: 100%; min-height: 46px; margin-top: 6px; padding: 10px 12px; border: 1px solid #aab2aa; border-radius: 8px; background: #fff; color: #1d2421; font: inherit; }
+.request-dialog textarea { min-height: 88px; resize: vertical; }
+.request-dialog .request-consent { display: flex; align-items: flex-start; gap: 10px; font-weight: 400; line-height: 1.45; }
+.request-dialog .request-consent input { flex: none; width: 20px; height: 20px; min-height: 0; margin: 1px 0 0; accent-color: #1d2421; }
+.request-dialog .request-actions { display: flex; gap: 10px; margin-top: 22px; }
+.request-dialog .request-actions button { min-height: 48px; padding: 10px 18px; border: 1px solid #1d2421; border-radius: 8px; font: inherit; font-weight: 700; cursor: pointer; }
+.request-dialog .request-actions .request-back { flex: 1; background: #fff; color: #1d2421; }
+.request-dialog .request-actions .request-next, .request-dialog .request-actions .request-submit { flex: 2; border-color: #ffd42b; background: #ffd42b; color: #1d2421; }
+.request-dialog .request-actions button:disabled { opacity: .5; cursor: not-allowed; }
+.request-dialog .request-status { margin-top: 18px; padding: 12px; border-radius: 8px; background: #edf5ec; color: #23452b; font-size: 14px; line-height: 1.5; white-space: pre-line; overflow-wrap: anywhere; }
+.request-dialog :focus-visible { outline: 3px solid #986f00; outline-offset: 2px; }
+@media (max-width: 480px) {
+  .request-dialog { width: calc(100% - 20px); max-height: 92vh; }
+  .request-dialog .request-form-box { padding: 24px 20px; }
+  .request-dialog .request-form-box h2 { font-size: 22px; }
+}

@@ -2,10 +2,11 @@
 
 La página del tema y el enlace del pie conducen al formulario de reclamos y quejas. El receptor es un proyecto privado de Apps Script ejecutado con la cuenta de atención; su URL de recepción es pública y se configura en la plantilla. La hoja de seguimiento permanece privada en Google Drive.
 
-El usuario solicitó 45 respuestas obligatorias: nueve datos principales, el dato de contacto que corresponde al medio de respuesta y 35 preguntas adicionales con «No sé» y «No aplica». El teléfono es opcional. Es necesario que el contador o asesor legal revise el riesgo de que esta extensión dificulte presentar una reclamación.
+El usuario solicitó un mínimo de 45 respuestas obligatorias. El formulario solicita 48: nueve datos principales, el dato de contacto correspondiente al medio de respuesta, 35 preguntas adicionales con «No sé» y «No aplica», y fecha de compra, número de pedido y número de comprobante. Si el comprobante está a nombre de otra persona, también pide el nombre o razón social y el documento de su titular. El teléfono es opcional. Es necesario que el contador o asesor legal revise el riesgo de que esta extensión dificulte presentar una reclamación.
 
 ## Operación
 
+- Los datos de compra y, cuando corresponde, los del titular se guardan al final de la hoja (columnas AA a AE) y se incluyen en la constancia y en los avisos. Los identificadores se almacenan como texto para conservar ceros iniciales.
 - Cada envío válido se registra con un correlativo. El cliente puede imprimir la constancia; cuando indica correo, se intenta enviar una copia. Se remite una ficha al buzón de atención y se reintentan los mensajes pendientes cada hora.
 - Laiz Guerrero revisa el correo y la hoja privada, da seguimiento, registra la respuesta y conserva la evidencia. El plazo legal informado por Indecopi es de 15 días hábiles improrrogables; confirmar los detalles aplicables con el contador.
 - Los registros de prueba se identifican como PRUEBA y no representan reclamaciones reales. Revisar estados de envío y fallos en la hoja; una aceptación por Google no garantiza entrega al destinatario.
