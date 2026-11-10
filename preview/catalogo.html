@@ -592,7 +592,7 @@ Nuestras marcas</a></div>
         const requestId=form.decokasaDraft.id;
         const detail=items ? items.map(item=>`${item.title}: ${item.quantity} unidad(es) · ${item.sku||'SKU pendiente'} · S/. ${(item.quantity*item.price_cents/100).toFixed(2)} PEN`).join('\n')+`\nTotal estimado: S/. ${(items.reduce((sum,item)=>sum+item.quantity*item.price_cents,0)/100).toFixed(2)} PEN` : `${qty.value} unidad(es) · ${o.dataset.sku||'SKU pendiente'}`;
         // Demo only: never store/log contact fields, send a request, emit GA4 or alter inventory.
-        receipt.textContent=`Simulación completada. Esta solicitud no fue enviada.\nReferencia: ${requestId}\n${detail}\nEl asesor confirmará disponibilidad e importe cuando la tienda esté conectada.`;
+        receipt.textContent=window.decokasaRequestForms?.formatSummary(form, {items,reference:requestId}) || `Simulación completada. Esta solicitud no fue enviada.\nReferencia: ${requestId}\n${detail}\nEl asesor confirmará disponibilidad e importe cuando la tienda esté conectada.`;
         receipt.hidden=false;receipt.focus();
       });
     });

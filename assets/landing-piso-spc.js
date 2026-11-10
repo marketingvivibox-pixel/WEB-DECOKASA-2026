@@ -1228,7 +1228,7 @@
           if (!reqForm.reportValidity()) return;
           const statusEl = reqForm.querySelector('[data-request-status]');
           if (statusEl) {
-            statusEl.textContent = 'Simulación completada. No se ha enviado ni registrado una solicitud. Contacta con un asesor para realizar tu pedido.';
+            statusEl.textContent = window.decokasaRequestForms?.formatSummary(reqForm) || 'Simulación completada. No se ha enviado ni registrado una solicitud. Contacta con un asesor para realizar tu pedido.';
             statusEl.hidden = false;
             statusEl.focus();
           }

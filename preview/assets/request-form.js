@@ -2,6 +2,39 @@
   'use strict';
   if (window.decokasaRequestForms) return;
 
+  // Local preview only. These values must not be sent or placed in a URL until
+  // a real, server-verified request flow has been configured and tested.
+  function formatSummary(form, options = {}) {
+    const value = name => form.querySelector(`[name="${name}"]`)?.value?.trim() || '';
+    const lines = ['Simulación completada. Esta solicitud no fue enviada ni registrada.'];
+    if (options.reference) lines.push(`Referencia de prueba: ${options.reference}`);
+    lines.push('', `Producto: ${form.dataset.productTitle || 'Producto seleccionado'}`);
+    if (Array.isArray(options.items)) {
+      for (const item of options.items) {
+        const sku = item.sku ? ` · SKU: ${item.sku}` : '';
+        lines.push(`${item.title}: ${item.quantity} unidad(es)${sku} · S/. ${(item.quantity * item.price_cents / 100).toFixed(2)} PEN`);
+      }
+      const total = options.items.reduce((sum, item) => sum + item.quantity * item.price_cents, 0);
+      lines.push(`Total estimado: S/. ${(total / 100).toFixed(2)} PEN`);
+    } else {
+      const select = form.querySelector('[name="variant_id"]');
+      const option = select?.selectedOptions?.[0] || select?.querySelector('option[selected]') || select?.querySelector('option');
+      if (option) lines.push(`Presentación: ${option.textContent.trim()}${option.dataset.sku ? ` · SKU: ${option.dataset.sku}` : ''}`);
+      lines.push(`Cantidad: ${value('quantity')}`);
+      const total = form.querySelector('[data-form-total]')?.textContent?.trim();
+      if (total) lines.push(`Total estimado: ${total}`);
+    }
+    lines.push('', `Nombre: ${value('name')}`, `Teléfono: ${value('phone')}`);
+    if (value('email')) lines.push(`Correo: ${value('email')}`);
+    lines.push(`Dirección: ${value('street_address')}`);
+    if (value('address_details')) lines.push(`Interior o urbanización: ${value('address_details')}`);
+    lines.push(`Distrito: ${value('district')}`, `Provincia: ${value('province')}`, `Departamento: ${value('department')}`);
+    if (value('address_reference')) lines.push(`Referencia de entrega: ${value('address_reference')}`);
+    if (value('comment')) lines.push(`Comentario: ${value('comment')}`);
+    lines.push('', 'Vista previa de prueba: no confirma el teléfono, la disponibilidad ni el importe.');
+    return lines.join('\n');
+  }
+
   function initForm(form) {
     if (form.dataset.requestStepsInitialized) return;
     const box = form.closest('.request-form-box');
@@ -78,7 +111,7 @@
     if (scope.matches?.('[data-request-form]')) initForm(scope);
     scope.querySelectorAll('[data-request-form]').forEach(initForm);
   }
-  window.decokasaRequestForms = { init };
+  window.decokasaRequestForms = { init, formatSummary };
   document.addEventListener('shopify:section:load', event => init(event.target));
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => init());
   else init();

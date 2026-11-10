@@ -18,8 +18,16 @@
     "name": null,
     "phone": null,
     "email": null,
-    "district": null,
     "comment": null
+  },
+  "delivery_address": {
+    "department": null,
+    "province": null,
+    "district": null,
+    "street_address": null,
+    "address_details": null,
+    "address_reference": null,
+    "country": "PE"
   },
   "contact_permission": {
     "accepted": false,

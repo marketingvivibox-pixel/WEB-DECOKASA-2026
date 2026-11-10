@@ -197,8 +197,8 @@ Fitness</a><a href="DECOKASA-inicio.html#marcas"><svg class="icon" viewBox="0 0 
 Nuestras marcas</a></div>
 </nav></div>
 
-<main id="main"><link rel="stylesheet" href="assets/libro-reclamaciones.css?v=1794349756463">
-<script src="assets/libro-reclamaciones.js?v=1794349756463" defer></script>
+<main id="main"><link rel="stylesheet" href="assets/libro-reclamaciones.css?v=1794350027667">
+<script src="assets/libro-reclamaciones.js?v=1794350027667" defer></script>
 <section class="book-page" aria-labelledby="book-heading">
   <div class="book-wrap">
     <a class="book-back" href="DECOKASA-inicio.html">← Volver a la tienda</a>
@@ -542,7 +542,7 @@ Nuestras marcas</a></div>
         const requestId=form.decokasaDraft.id;
         const detail=items ? items.map(item=>`${item.title}: ${item.quantity} unidad(es) · ${item.sku||'SKU pendiente'} · S/. ${(item.quantity*item.price_cents/100).toFixed(2)} PEN`).join('\n')+`\nTotal estimado: S/. ${(items.reduce((sum,item)=>sum+item.quantity*item.price_cents,0)/100).toFixed(2)} PEN` : `${qty.value} unidad(es) · ${o.dataset.sku||'SKU pendiente'}`;
         // Demo only: never store/log contact fields, send a request, emit GA4 or alter inventory.
-        receipt.textContent=`Simulación completada. Esta solicitud no fue enviada.\nReferencia: ${requestId}\n${detail}\nEl asesor confirmará disponibilidad e importe cuando la tienda esté conectada.`;
+        receipt.textContent=window.decokasaRequestForms?.formatSummary(form, {items,reference:requestId}) || `Simulación completada. Esta solicitud no fue enviada.\nReferencia: ${requestId}\n${detail}\nEl asesor confirmará disponibilidad e importe cuando la tienda esté conectada.`;
         receipt.hidden=false;receipt.focus();
       });
     });

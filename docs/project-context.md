@@ -4,6 +4,12 @@ Las tres familias de la landing abren una ventana con los 11 acabados del catál
 
 Cada ficha muestra el código, 18 × 122 cm y su espesor total según el catálogo: 5 mm para `spc-0013`, `spc-0020` y `spc-0020-1`; 5,5 mm para los demás. Son códigos del catálogo, no un mapeo confirmado con variantes Shopify. El botón de consulta prepara un mensaje manual al WhatsApp configurado con el código y las medidas; no confirma stock ni precio. La calculadora conserva su rendimiento de 2,196 m² por caja y la selección de familia, sin atribuir un rendimiento específico a los nuevos códigos. La configuración de variantes y rendimiento por acabado requiere confirmación comercial aparte.
 
+## 10/11/2026 — Dirección y futura conexión a Pancake
+
+En la ficha compartida y piso SPC la simulación solicita departamento, provincia, distrito y dirección, con interior/urbanización y referencia opcionales. Al terminar presenta una ficha consolidada de prueba: no se transmite ni registra. La simulación no verifica el teléfono.
+
+El usuario solicita verificación real del número mediante código, envío de la ficha al WhatsApp +51 914 158 674 y entrada en Pancake/POS/CRM con reparto nativo. Confirma que ese número está conectado y que Botcake está configurado. Todavía se requieren un servicio privado y acceso para validar la plantilla y el flujo, la llegada al asesor, el reparto y el efecto en inventario. Las solicitudes no deben modificar existencias; no activar la importación ordinaria de pedidos sin resolver su efecto documentado sobre el almacén. Detalle y alternativas: `docs/pancake-botcake-integration.md`.
+
 ## 10/11/2026 — Solicitud de compra por pasos
 
 Las fichas habituales de producto y la landing de piso SPC presentan la solicitud en una ventana con tres pasos: pedido, contacto y entrega, con progreso visible y validación antes de continuar. Se conserva la selección, incluidos el cálculo y la cantidad de cajas de SPC. También se aplica a los productos que utilicen la ficha compartida en el futuro. La landing actual de PVC conserva su acceso a WhatsApp.

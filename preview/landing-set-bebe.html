@@ -199,10 +199,10 @@ Nuestras marcas</a></div>
 
 <main id="main">
 
-<link rel="stylesheet" href="assets/product-detail.css?v=1794349756463">
-<link rel="stylesheet" href="assets/request-form.css?v=1794349756463">
-<script src="assets/request-form.js?v=1794349756463" defer="defer"></script>
-<script src="assets/product-detail.js?v=1794349756463" defer="defer"></script>
+<link rel="stylesheet" href="assets/product-detail.css?v=1794350027667">
+<link rel="stylesheet" href="assets/request-form.css?v=1794350027667">
+<script src="assets/request-form.js?v=1794350027667" defer="defer"></script>
+<script src="assets/product-detail.js?v=1794350027667" defer="defer"></script>
 
 
 
@@ -433,7 +433,7 @@ Nuestras marcas</a></div>
     </ol>
   </div>
 
-  <form data-request-form="" data-product-id="DEMO-P-2" data-currency="PEN" action="#solicitud" method="post" novalidate>
+  <form data-request-form="" data-product-id="DEMO-P-2" data-product-title="Set de cuidado para bebé" data-currency="PEN" action="#solicitud" method="post" novalidate>
     <fieldset disabled class="request-fieldset">
       <div class="request-step" data-request-step="">
         <h3 tabindex="-1" data-request-step-heading="">Revisa tu pedido</h3>
@@ -456,7 +456,12 @@ Nuestras marcas</a></div>
       <div class="request-step" data-request-step="" hidden>
         <h3 tabindex="-1" data-request-step-heading="">Entrega y confirmación</h3>
         <p>Cuéntanos dónde recibirías tu pedido.</p>
-        <label>Ciudad o distrito<input name="district" autocomplete="address-level2" maxlength="100" required></label>
+        <label>Departamento<input name="department" autocomplete="address-level1" maxlength="100" required></label>
+        <label>Provincia<input name="province" autocomplete="address-level2" maxlength="100" required></label>
+        <label>Distrito<input name="district" autocomplete="address-level3" maxlength="100" required></label>
+        <label>Dirección: calle, avenida o jirón y número<input name="street_address" autocomplete="address-line1" maxlength="180" required></label>
+        <label>Interior, piso, lote o urbanización (opcional)<input name="address_details" autocomplete="address-line2" maxlength="180"></label>
+        <label>Referencia para la entrega (opcional)<input name="address_reference" maxlength="180"></label>
         <label>Comentario (opcional)<textarea name="comment" maxlength="1000"></textarea></label>
         <label class="request-consent"><input name="contact_permission" type="checkbox" required><span>Autorizo que un asesor me contacte para atender esta solicitud.</span></label>
       </div>
@@ -618,7 +623,7 @@ Nuestras marcas</a></div>
         const requestId=form.decokasaDraft.id;
         const detail=items ? items.map(item=>`${item.title}: ${item.quantity} unidad(es) · ${item.sku||'SKU pendiente'} · S/. ${(item.quantity*item.price_cents/100).toFixed(2)} PEN`).join('\n')+`\nTotal estimado: S/. ${(items.reduce((sum,item)=>sum+item.quantity*item.price_cents,0)/100).toFixed(2)} PEN` : `${qty.value} unidad(es) · ${o.dataset.sku||'SKU pendiente'}`;
         // Demo only: never store/log contact fields, send a request, emit GA4 or alter inventory.
-        receipt.textContent=`Simulación completada. Esta solicitud no fue enviada.\nReferencia: ${requestId}\n${detail}\nEl asesor confirmará disponibilidad e importe cuando la tienda esté conectada.`;
+        receipt.textContent=window.decokasaRequestForms?.formatSummary(form, {items,reference:requestId}) || `Simulación completada. Esta solicitud no fue enviada.\nReferencia: ${requestId}\n${detail}\nEl asesor confirmará disponibilidad e importe cuando la tienda esté conectada.`;
         receipt.hidden=false;receipt.focus();
       });
     });

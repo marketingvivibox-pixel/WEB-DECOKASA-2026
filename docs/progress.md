@@ -6,6 +6,14 @@
 - [x] Publicado en GitHub/main (`91076c7`) y sincronizado con el único tema oficial `188927803629`; los cinco archivos de la función coinciden por checksum. Comprobación adicional en la tienda pública a 320/393/768/1024/1440 px: filtros, muestras, cierre, accesibilidad, calculadora y formulario progresivo correctos, sin crear pedidos ni enviar consultas.
 - [x] 82/82 pruebas automáticas, Theme Check oficial sin incidencias, nueve vistas locales y paquete del tema actualizados.
 
+## 10/11/2026 — Dirección y conexión de compra asistida
+
+- [x] Campos separados para departamento, provincia, distrito, dirección y datos opcionales de entrega; ficha consolidada visible al finalizar la simulación de la ficha compartida y de piso SPC.
+- [x] Comprobado el recorrido local en una ficha habitual y en piso SPC, incluidos cantidades, importe calculado y dirección; 84 pruebas automáticas, Theme Check sin errores y nueve vistas/paquete de 185 archivos comprobados tras integrar los cambios recientes de SPC y del Libro de Reclamaciones.
+- [x] Investigación de Botcake, conexión Shopify/POS y asignación por turnos, con dependencias y riesgos documentados en `docs/pancake-botcake-integration.md`.
+- [ ] Implementar y probar un servicio real de verificación por código, el envío de la ficha y su entrada en Pancake/POS/CRM con asignación nativa. El usuario confirma el número conectado y Botcake configurado; aún faltan permisos y validación de la plantilla, el flujo y la ruta de integración.
+- [ ] Asegurar que las solicitudes no afecten existencias y verificar qué ocurre con los pedidos borrador, su vínculo con el chat y el reparto. La web continúa en modo de prueba y no envía ni registra solicitudes.
+
 ## 10/11/2026 — Formularios de compra progresivos
 
 - [x] Convertidas las solicitudes de las fichas compartidas y de piso SPC en ventanas de tres pasos con indicador de avance, navegación hacia atrás y validación de campos. Se conserva la selección y el cálculo de cajas.

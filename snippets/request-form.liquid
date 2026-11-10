@@ -17,7 +17,7 @@
     </ol>
   </div>
 
-  <form data-request-form data-product-id="{{ product.id }}" data-currency="{{ cart.currency.iso_code | default: shop.currency | default: 'PEN' }}" action="#solicitud" method="post" novalidate>
+  <form data-request-form data-product-id="{{ product.id }}" data-product-title="{{ product.title | escape }}" data-currency="{{ cart.currency.iso_code | default: shop.currency | default: 'PEN' }}" action="#solicitud" method="post" novalidate>
     <fieldset disabled class="request-fieldset">
       <div class="request-step" data-request-step>
         <h3 tabindex="-1" data-request-step-heading>Revisa tu pedido</h3>
@@ -40,7 +40,12 @@
       <div class="request-step" data-request-step hidden>
         <h3 tabindex="-1" data-request-step-heading>Entrega y confirmación</h3>
         <p>Cuéntanos dónde recibirías tu pedido.</p>
-        <label>Ciudad o distrito<input name="district" autocomplete="address-level2" maxlength="100" required></label>
+        <label>Departamento<input name="department" autocomplete="address-level1" maxlength="100" required></label>
+        <label>Provincia<input name="province" autocomplete="address-level2" maxlength="100" required></label>
+        <label>Distrito<input name="district" autocomplete="address-level3" maxlength="100" required></label>
+        <label>Dirección: calle, avenida o jirón y número<input name="street_address" autocomplete="address-line1" maxlength="180" required></label>
+        <label>Interior, piso, lote o urbanización (opcional)<input name="address_details" autocomplete="address-line2" maxlength="180"></label>
+        <label>Referencia para la entrega (opcional)<input name="address_reference" maxlength="180"></label>
         <label>Comentario (opcional)<textarea name="comment" maxlength="1000"></textarea></label>
         <label class="request-consent"><input name="contact_permission" type="checkbox" required><span>Autorizo que un asesor me contacte para atender esta solicitud.</span></label>
       </div>
