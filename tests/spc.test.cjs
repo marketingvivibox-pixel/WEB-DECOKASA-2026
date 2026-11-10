@@ -379,30 +379,47 @@ test('SPC: el croquis conserva identidad y resultados al alternar móvil y escri
   assert.deepEqual([...details.children], original);
   assert.equal(details.childNodes.length, original.length);
 });
-test('SPC: los enlaces de acabados conservan el destino móvil al cruzar el breakpoint', () => {
+test('SPC: el catálogo abre la familia elegida, cambia de tonos y limpia los eventos al descargar', async () => {
   const {runInNewContext} = require('node:vm');
-  const {document} = parseHTML('<main data-phone="51914158674"><div class="spc-v2-sample"><button data-color="Caoba"></button><a href="https://wa.me/51914158674?text=consulta-original">Consultar</a></div></main>');
+  const engine = new Liquid({root:path.join(root, 'snippets'), extname:'.liquid'});
+  filters(engine);
+  engine.registerFilter('asset_url', n => `/assets/${n}`);
+  const catalog = await engine.renderFile('spc-tone-catalog', {section_id:'test', phone:'51914158674'});
+  const {document, window} = parseHTML(`<main><button data-tone-open="oscuros">Oscuros</button><button data-tone-open="neutros">Neutros</button>${catalog}</main>`);
   const page = document.querySelector('main');
-  const link = page.querySelector('a');
-  const original = link.getAttribute('href');
-  const media = Object.assign(new EventTarget(), {matches: false});
+  const dialog = page.querySelector('dialog');
+  let selected = -1, synced = 0;
+  dialog.showModal = () => {dialog.open = true;};
+  dialog.close = () => {dialog.open = false; dialog.dispatchEvent(new window.Event('close'));};
   const controllers = new WeakMap();
   const source = fs.readFileSync(path.join(root, 'assets/landing-piso-spc.js'), 'utf8');
-  const setup = source.slice(source.indexOf('  function initDesktopFinishes('), source.indexOf('  function init(scope)'));
-  runInNewContext(`${setup}\ninitDesktopFinishes(page);`, {page, window:{matchMedia:() => media}, finishControllers:controllers});
-  assert.equal(link.getAttribute('href'), original);
-  for (let cycle = 0; cycle < 3; cycle++) {
-    media.matches = true;
-    media.dispatchEvent(new Event('change'));
-    assert.match(decodeURIComponent(link.href), /acabado Caoba/);
-    media.matches = false;
-    media.dispatchEvent(new Event('change'));
-    assert.equal(link.getAttribute('href'), original);
-  }
+  const setup = source.slice(source.indexOf('  function initFinishCatalog('), source.indexOf('  function init(scope)'));
+  runInNewContext(`${setup}\ninitFinishCatalog(page, chooseColor, syncModalState);`, {page, chooseColor:index => {selected = index;}, syncModalState:() => {synced++;}, finishControllers:controllers});
+  const visible = () => [...dialog.querySelectorAll('[data-tone-family]')].filter(card => !card.hidden);
+  page.querySelector('[data-tone-open="oscuros"]').click();
+  assert.equal(dialog.open, true);
+  assert.equal(selected, 1);
+  assert.equal(visible().length, 4);
+  assert.ok(visible().every(card => card.dataset.toneFamily === 'oscuros'));
+  dialog.querySelector('[data-tone-content]').scrollTop = 300;
+  dialog.querySelector('[data-tone-filter="calidos"]').click();
+  assert.equal(selected, 0);
+  assert.equal(visible().length, 3);
+  assert.equal(dialog.querySelector('[data-tone-count]').textContent, '3 acabados cálidos');
+  assert.equal(dialog.querySelector('[data-tone-content]').scrollTop, 0);
+  assert.equal(dialog.querySelectorAll('[aria-pressed="true"]').length, 1);
+  dialog.querySelector('[data-tone-close]').click();
+  assert.equal(dialog.open, false);
+  assert.equal(synced, 2);
+  page.querySelector('[data-tone-open="neutros"]').click();
+  assert.equal(selected, 2);
+  assert.equal(visible().length, 4);
+  assert.ok(visible().every(card => card.dataset.toneFamily === 'neutros'));
   controllers.get(page)();
-  media.matches = true;
-  media.dispatchEvent(new Event('change'));
-  assert.equal(link.getAttribute('href'), original);
+  assert.equal(dialog.open, false);
+  assert.equal(controllers.has(page), false);
+  page.querySelector('[data-tone-open="oscuros"]').click();
+  assert.equal(dialog.open, false);
 });
 
 test('SPC: la solicitud de escritorio añade el acabado y conserva el comportamiento móvil publicado', () => {
@@ -481,7 +498,18 @@ test('SPC: datos nativos y privacidad del contenido de muestra en el tema', asyn
   assert.equal(doc.querySelector('.spc-seals'), null);
   assert.equal(doc.querySelectorAll('[data-color]').length, 3);
   assert.ok(doc.querySelector('.spc-button--catalog').getAttribute('href').startsWith('#spc-colores-'));
-  assert.equal(doc.querySelectorAll('img[src$=".jpg"]').length, 0);
+  const tones = [...doc.querySelectorAll('[data-tone-code]')];
+  assert.equal(tones.length, 11);
+  assert.equal(new Set(tones.map(card => card.dataset.toneCode)).size, 11);
+  assert.deepEqual(tones.filter(card => card.querySelector('.spc-tone-thickness').textContent === '5 mm').map(card => card.dataset.toneCode).sort(), ['spc-0013', 'spc-0020', 'spc-0020-1']);
+  assert.ok(tones.every(card => card.querySelector('img').getAttribute('src') === '/assets/spc-catalogo-tonos-2026-11.jpg'));
+  for (const card of tones) {
+    const contact = new URL(card.querySelector('a').getAttribute('href'));
+    assert.equal(contact.pathname, '/51914158674');
+    assert.ok(contact.searchParams.get('text').includes(card.dataset.toneCode));
+    assert.ok(contact.searchParams.get('text').includes(card.querySelector('.spc-tone-thickness').textContent));
+    assert.ok(contact.searchParams.get('text').includes('18 × 122 cm'));
+  }
   const preview = parseHTML(await engine.parseAndRender(source, {...context, section:{...context.section, settings:{...settings, spc_design_preview:true}}})).document;
   assert.equal(preview.querySelectorAll('.spc-quote').length, 5);
   assert.equal(preview.querySelectorAll('.spc-seals img').length, 6);

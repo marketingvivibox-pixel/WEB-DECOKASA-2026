@@ -407,27 +407,62 @@
     layerControllers.set(page, () => {controller.abort(); layerControllers.delete(page);});
   }
 
-  function initDesktopFinishes(page) {
-    const media = window.matchMedia('(min-width: 1024px)');
-    const links = [...page.querySelectorAll('[data-color]')].map(swatch => ({
-      link: swatch.closest('.spc-v2-sample')?.querySelector('a'),
-      color: swatch.dataset.color
-    })).filter(item => item.link);
-    links.forEach(item => {item.original = item.link.getAttribute('href');});
-    const restore = item => {
-      if (item.original === null) item.link.removeAttribute('href');
-      else item.link.setAttribute('href', item.original);
+  function initFinishCatalog(page, chooseColor, syncModalState) {
+    const dialog = page.querySelector('[data-tone-dialog]');
+    if (!dialog) return;
+    const filters = [...dialog.querySelectorAll('[data-tone-filter]')];
+    const cards = [...dialog.querySelectorAll('[data-tone-family]')];
+    const families = ['calidos', 'oscuros', 'neutros'];
+    const labels = ['cálidos', 'oscuros', 'neutros'];
+    const listeners = [];
+    let returnFocus = null;
+    let backdropPointer = false;
+    const listen = (node, type, handler) => {
+      node?.addEventListener(type, handler);
+      listeners.push(() => node?.removeEventListener(type, handler));
     };
-    const update = () => links.forEach(item => {
-      if (media.matches && page.dataset.phone) {
-        item.link.href = `https://wa.me/${page.dataset.phone}?text=${encodeURIComponent(`Hola, quisiera consultar el acabado ${item.color} del piso SPC de Decokasa.`)}`;
-      } else restore(item);
+    const selectFamily = family => {
+      const index = families.indexOf(family);
+      if (index < 0) return;
+      let count = 0;
+      cards.forEach(card => {
+        card.hidden = card.dataset.toneFamily !== family;
+        if (!card.hidden) count++;
+      });
+      filters.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.toneFilter === family)));
+      const status = dialog.querySelector('[data-tone-count]');
+      if (status) status.textContent = `${count} acabados ${labels[index]}`;
+      const content = dialog.querySelector('[data-tone-content]');
+      if (content) content.scrollTop = 0;
+      chooseColor(index);
+    };
+    page.querySelectorAll('[data-tone-open]').forEach(button => listen(button, 'click', () => {
+      returnFocus = button;
+      selectFamily(button.dataset.toneOpen);
+      if (!dialog.open) dialog.showModal();
+      syncModalState();
+      dialog.querySelector('[data-tone-close]')?.focus({preventScroll: true});
+    }));
+    filters.forEach(button => listen(button, 'click', () => selectFamily(button.dataset.toneFilter)));
+    listen(dialog.querySelector('[data-tone-close]'), 'click', () => dialog.close());
+    // A drag/scroll beginning inside the panel must never dismiss it.
+    const outside = event => {
+      const rect = dialog.getBoundingClientRect();
+      return event.target === dialog && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom);
+    };
+    listen(dialog, 'pointerdown', event => {backdropPointer = outside(event);});
+    listen(dialog, 'click', event => {
+      if (backdropPointer && outside(event)) dialog.close();
+      backdropPointer = false;
     });
-    media.addEventListener('change', update);
-    update();
+    listen(dialog, 'close', () => {
+      syncModalState();
+      if (returnFocus?.isConnected) returnFocus.focus({preventScroll: true});
+    });
     finishControllers.set(page, () => {
-      media.removeEventListener('change', update);
-      links.forEach(restore);
+      listeners.forEach(remove => remove());
+      if (dialog.open) dialog.close();
+      syncModalState();
       finishControllers.delete(page);
     });
   }
@@ -444,7 +479,6 @@
       initTestimonials(page);
       initMediaLoading(page);
       initDesktopLayers(page);
-      initDesktopFinishes(page);
 
       const swatches = [...page.querySelectorAll('[data-color]')];
       const status = page.querySelector('[data-color-status]');
@@ -1105,6 +1139,7 @@
         document.body.classList.toggle('spc-modal-open', !!page.querySelector('dialog[open]'));
         scheduleStickyCta();
       };
+      initFinishCatalog(page, chooseColor, syncModalState);
       modalEl?.addEventListener('close', () => {
         syncModalState();
         if (!page.querySelector('dialog[open]') && requestReturnFocus?.isConnected) {

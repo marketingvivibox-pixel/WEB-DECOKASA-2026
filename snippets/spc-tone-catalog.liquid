@@ -1,0 +1,41 @@
+{% comment %}
+  Exact crops of the supplied 1080 × 1544 catalogue; no generated textures.
+  Fields: family | catalogue code | thickness (mm) | crop x | crop y.
+  The original image is cached once; CSS isolates each 456 × 124 sample.
+{% endcomment %}
+{% liquid
+  assign samples = 'calidos|spc-0018-2|5,5|70|338;calidos|spc-0013|5|70|1050;calidos|spc-002-1|5,5|556|1050;oscuros|spc-001-2|5,5|556|338;oscuros|spc-004-1|5,5|556|516;oscuros|spc-0022|5,5|70|694;oscuros|spc-0021|5,5|556|872;neutros|spc-0020-1|5|70|516;neutros|spc-0022-2|5,5|556|694;neutros|spc-007|5,5|70|872;neutros|spc-0020|5|70|1230' | split: ';'
+%}
+<dialog id="spc-tonos-{{ section_id }}" class="spc-tone-dialog" data-tone-dialog aria-labelledby="spc-tonos-title-{{ section_id }}" aria-describedby="spc-tonos-note-{{ section_id }}">
+  <div class="spc-tone-header">
+    <div><p class="spc-tone-eyebrow">ENCUENTRA TU ACABADO</p><h2 id="spc-tonos-title-{{ section_id }}">Tonos de piso SPC</h2></div>
+    <button type="button" class="spc-tone-close" data-tone-close aria-label="Cerrar catálogo de tonos" autofocus>×</button>
+    <div class="spc-tone-filters" role="group" aria-label="Familia de color">
+      <button type="button" data-tone-filter="calidos" aria-pressed="true">Cálidos <span>3</span></button>
+      <button type="button" data-tone-filter="oscuros" aria-pressed="false">Oscuros <span>4</span></button>
+      <button type="button" data-tone-filter="neutros" aria-pressed="false">Neutros <span>4</span></button>
+    </div>
+  </div>
+  <div class="spc-tone-content" data-tone-content>
+    <p class="spc-tone-count" data-tone-count role="status" aria-live="polite">3 acabados cálidos</p>
+    <div class="spc-tone-grid">
+      {% for entry in samples %}
+        {% liquid
+          assign sample = entry | split: '|'
+          assign family = sample[0]
+          assign code = sample[1]
+          assign thickness = sample[2]
+          assign message = 'Hola, me interesa el piso SPC, código ' | append: code | append: ' (' | append: thickness | append: ' mm, 18 × 122 cm). ¿Me confirmas disponibilidad y precio para mi proyecto?' | url_encode
+        %}
+        <article class="spc-tone-card" data-tone-family="{{ family }}" data-tone-code="{{ code }}" {% unless family == 'calidos' %}hidden{% endunless %}>
+          <div class="spc-tone-sample" style="--crop-x: {{ sample[3] }}; --crop-y: {{ sample[4] }};">
+            <img class="spc-tone-atlas" src="{{ 'spc-catalogo-tonos-2026-11.jpg' | asset_url }}" width="1080" height="1544" alt="Textura y color del acabado {{ code }}" loading="lazy">
+          </div>
+          <div class="spc-tone-card-info"><h3>{{ code }}</h3><span class="spc-tone-thickness">{{ thickness }} mm</span><p>18 × 122 cm <span>· Espesor total {{ thickness }} mm</span></p></div>
+          <a class="spc-tone-contact" href="https://wa.me/{{ phone }}?text={{ message }}" target="_blank" rel="noopener" aria-label="Consultar el tono {{ code }} por WhatsApp">Consultar este tono <span aria-hidden="true">↗</span></a>
+        </article>
+      {% endfor %}
+    </div>
+    <p class="spc-tone-note" id="spc-tonos-note-{{ section_id }}">Muestras del catálogo Decokasa. Los tonos pueden variar ligeramente según tu pantalla. Confirma disponibilidad y precio con tu asesor.</p>
+  </div>
+</dialog>

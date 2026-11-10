@@ -2,6 +2,7 @@
 {{ 'landing-piso-spc-proportions.css' | asset_url | stylesheet_tag }}
 {{ 'landing-piso-spc-layout.css' | asset_url | stylesheet_tag }}
 {{ 'landing-piso-spc-desktop.css' | asset_url | stylesheet_tag }}
+{{ 'landing-piso-spc-tones.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'landing-piso-spc.js' | asset_url }}" defer></script>
 {% liquid
   assign current_variant = product.selected_or_first_available_variant
@@ -60,9 +61,9 @@
 <figure class="spc-desktop-only spc-finish-preview" aria-label="Acabado seleccionado"><div class="spc-finish-preview-top"><span>Tu selección</span><span data-finish-index>01 / 03</span></div><img data-finish-image src="{{ 'spc-2026-muestra-calida.webp' | asset_url }}" width="266" height="266" alt="Muestra de piso SPC en madera natural" loading="lazy"><figcaption><strong data-finish-name>Madera natural</strong><span data-finish-description>Un tono cálido para espacios acogedores.</span></figcaption><small>Muestra de referencia · Confirma el tono y la disponibilidad con tu asesor.</small></figure>
 <div class="spc-v2-colors-heading spc-v2-heading"><h2>Variedad para elegir</h2><p>Colores disponibles</p></div>
 <div id="{{ colors_id }}" class="spc-v2-samples spc-colors" tabindex="-1" aria-label="Colores de referencia">
-<div class="spc-v2-sample"><button type="button" class="spc-v2-swatch" data-color="Madera natural" aria-pressed="true"><img src="{{ 'spc-2026-muestra-calida.webp' | asset_url }}" width="266" height="266" alt="Madera natural" loading="lazy"><span>Tonos <strong>cálidos</strong></span></button><a class="spc-v2-gold-link" href="{{ contact_url | escape }}" target="_blank" rel="noopener" aria-label="Consultar tonos cálidos">Ver más</a></div>
-<div class="spc-v2-sample"><button type="button" class="spc-v2-swatch" data-color="Caoba" aria-pressed="false"><img src="{{ 'spc-2026-muestra-oscura.webp' | asset_url }}" width="263" height="263" alt="Caoba" loading="lazy"><span>Tonos <strong>oscuros</strong></span></button><a class="spc-v2-gold-link" href="{{ contact_url | escape }}" target="_blank" rel="noopener" aria-label="Consultar tonos oscuros">Ver más</a></div>
-<div class="spc-v2-sample"><button type="button" class="spc-v2-swatch" data-color="Gris claro" aria-pressed="false"><img src="{{ 'spc-2026-muestra-neutra.webp' | asset_url }}" width="261" height="261" alt="Gris claro" loading="lazy"><span>Tonos <strong>neutros</strong></span></button><a class="spc-v2-gold-link" href="{{ contact_url | escape }}" target="_blank" rel="noopener" aria-label="Consultar tonos neutros">Ver más</a></div>
+<div class="spc-v2-sample"><button type="button" class="spc-v2-swatch" data-color="Madera natural" data-tone-open="calidos" aria-haspopup="dialog" aria-controls="spc-tonos-{{ section.id }}" aria-pressed="true"><img src="{{ 'spc-2026-muestra-calida.webp' | asset_url }}" width="266" height="266" alt="Madera natural" loading="lazy"><span>Tonos <strong>cálidos</strong></span></button><button type="button" class="spc-v2-gold-link" data-tone-open="calidos" aria-haspopup="dialog" aria-controls="spc-tonos-{{ section.id }}" aria-label="Ver tonos cálidos">Ver más</button></div>
+<div class="spc-v2-sample"><button type="button" class="spc-v2-swatch" data-color="Caoba" data-tone-open="oscuros" aria-haspopup="dialog" aria-controls="spc-tonos-{{ section.id }}" aria-pressed="false"><img src="{{ 'spc-2026-muestra-oscura.webp' | asset_url }}" width="263" height="263" alt="Caoba" loading="lazy"><span>Tonos <strong>oscuros</strong></span></button><button type="button" class="spc-v2-gold-link" data-tone-open="oscuros" aria-haspopup="dialog" aria-controls="spc-tonos-{{ section.id }}" aria-label="Ver tonos oscuros">Ver más</button></div>
+<div class="spc-v2-sample"><button type="button" class="spc-v2-swatch" data-color="Gris claro" data-tone-open="neutros" aria-haspopup="dialog" aria-controls="spc-tonos-{{ section.id }}" aria-pressed="false"><img src="{{ 'spc-2026-muestra-neutra.webp' | asset_url }}" width="261" height="261" alt="Gris claro" loading="lazy"><span>Tonos <strong>neutros</strong></span></button><button type="button" class="spc-v2-gold-link" data-tone-open="neutros" aria-haspopup="dialog" aria-controls="spc-tonos-{{ section.id }}" aria-label="Ver tonos neutros">Ver más</button></div>
 <p data-color-status class="spc-visually-hidden" aria-live="polite">Madera natural · Color de referencia</p></div>
 <p class="spc-v2-colors-copy">Los pisos están disponibles en una amplia gama de <strong>colores, texturas y diseños</strong>, ¡Elige tu favorito!</p>
 <span class="spc-v2-spec-rule spc-v2-rule"></span>
@@ -283,6 +284,7 @@
 <p class="spc-v2-copyright">Decokasa Perú {{ 'now' | date: '%Y' }}<br>Todos los derechos reservados</p>
 </footer></div>
 
+{% render 'spc-tone-catalog', section_id: section.id, phone: phone %}
 <dialog class="spc-v2-dialog spc-v2-request-dialog" data-spc-modal aria-label="Solicitud de piso SPC"><button class="spc-v2-dialog-close" type="button" data-modal-close aria-label="Cerrar solicitud">×</button>{% render 'request-form', product: product %}</dialog>
 <a class="spc-mobile-sticky-cta" data-spc-sticky-cta href="#calculadora-{{ section.id }}" inert><strong>Realizar pedido</strong><span>Calcula tus cajas de piso SPC →</span></a>
 </div>

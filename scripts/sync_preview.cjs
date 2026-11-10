@@ -111,7 +111,7 @@ async function main() {
     fs.writeFileSync(path.join(preview, file), html.replace(/[ \t]+$/gm, ''), 'utf8');
   }
   fs.mkdirSync(path.join(preview, 'assets'), { recursive: true });
-  for (const asset of fs.readdirSync(path.join(root, 'assets')).filter(name => /^(decokasa-.*\.webp|favicon\.png|product-detail\.(css|js)|libro-reclamaciones\.(css|js)|landing-piso-pvc\.(css|js)|pvc-.*\.webp|landing-piso-spc(?:-layout|-proportions|-desktop)?\.(css|js)|spc-.*\.(webp|png|svg|ttf|txt))$/.test(name))) {
+  for (const asset of fs.readdirSync(path.join(root, 'assets')).filter(name => /^(decokasa-.*\.webp|favicon\.png|product-detail\.(css|js)|libro-reclamaciones\.(css|js)|landing-piso-pvc\.(css|js)|pvc-.*\.webp|landing-piso-spc(?:-layout|-proportions|-desktop|-tones)?\.(css|js)|spc-catalogo-tonos-2026-11\.jpg|spc-.*\.(webp|png|svg|ttf|txt))$/.test(name))) {
     fs.copyFileSync(path.join(root, 'assets', asset), path.join(preview, 'assets', asset));
   }
   console.log(`${previewFiles.length} preview pages synchronized with the Shopify sections.`);
