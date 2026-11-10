@@ -1,3 +1,7 @@
+{% doc %}
+  Shows the customer service contact options.
+  @param {string} location - Position of the menu in the header.
+{% enddoc %}
 {% liquid
   assign service_email = 'atencion.decokasa@checkazul.com.pe'
   assign service_phone = '51914158674'
@@ -9,7 +13,16 @@
   </summary>
   <div class="customer-service-panel">
     <p>{{ 'customer_service.prompt' | t }}</p>
-    <a href="mailto:{{ service_email }}"><strong>{{ 'customer_service.email' | t }}</strong><small>{{ service_email }}</small></a>
+    <details class="customer-service-email">
+      <summary><strong>{{ 'customer_service.email' | t }}</strong><small>{{ service_email }}</small></summary>
+      <div class="customer-service-email-options">
+        <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to={{ service_email | url_encode }}" target="_blank" rel="noopener noreferrer">{{ 'customer_service.gmail' | t }}</a>
+        <a href="https://outlook.live.com/mail/0/deeplink/compose?to={{ service_email | url_encode }}" target="_blank" rel="noopener noreferrer">{{ 'customer_service.outlook' | t }}</a>
+        <a href="mailto:{{ service_email }}">{{ 'customer_service.other_email' | t }}</a>
+        <button type="button" data-copy-service-email="{{ service_email | escape }}" data-copy-success="{{ 'customer_service.copy_success' | t | escape }}" data-copy-error="{{ 'customer_service.copy_error' | t | escape }}" hidden>{{ 'customer_service.copy_email' | t }}</button>
+        <p class="customer-service-copy-status" data-copy-status role="status" aria-live="polite"></p>
+      </div>
+    </details>
     <a href="https://wa.me/{{ service_phone }}" target="_blank" rel="noopener noreferrer"><strong>{{ 'customer_service.whatsapp' | t }}</strong><small>914 158 674</small></a>
   </div>
 </details>

@@ -1,3 +1,7 @@
+## 10/11/2026 — Acceso al correo de atención
+
+La opción de correo del menú «Atención al cliente» muestra la dirección **atencion.decokasa@checkazul.com.pe** y permite abrir un mensaje en Gmail, Outlook u otra aplicación de correo. También permite copiar la dirección cuando el navegador ofrece esta función. Así se dispone de alternativas si no hay una aplicación de correo predeterminada; Gmail y Outlook pueden solicitar el inicio de sesión. El acceso a WhatsApp del CRM se conserva.
+
 ## 10/11/2026 — Contacto de atención y CRM de Decokasa
 
 Por indicación del usuario, el WhatsApp de atención y consultas de Decokasa pasa al CRM **+51 914 158 674** (`51914158674` en enlaces internacionales). El acceso «Atención al cliente» de la cabecera ofrece escribir al correo confirmado **atencion.decokasa@checkazul.com.pe** o abrir WhatsApp. El enlace de «Cómo comprar» conserva su destino. Se actualizan también el botón de inicio, la ayuda del catálogo y las landings PVC/SPC; los campos editables existentes se mantienen. Preparado para integrar a GitHub/main en el único tema oficial 188927803629.

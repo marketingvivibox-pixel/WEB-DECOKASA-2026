@@ -114,6 +114,12 @@ test('Atención al cliente ofrece correo y el WhatsApp del CRM en todas las pág
     for(const menu of menus){
       assert.equal(menu.querySelector('summary').getAttribute('aria-label'),'Atención al cliente',page);
       assert.equal(menu.querySelector('a[href^="mailto:"]').getAttribute('href'),'mailto:atencion.decokasa@checkazul.com.pe',page);
+      for(const selector of ['a[href^="https://mail.google.com/"]','a[href^="https://outlook.live.com/"]']){
+        const link=menu.querySelector(selector);
+        assert.equal(new URL(link.getAttribute('href')).searchParams.get('to'),'atencion.decokasa@checkazul.com.pe',page);
+        assert.equal(link.getAttribute('target'),'_blank',page);
+      }
+      assert.equal(menu.querySelector('[data-copy-service-email]').getAttribute('data-copy-service-email'),'atencion.decokasa@checkazul.com.pe',page);
       assert.equal(menu.querySelector('a[href^="https://wa.me/"]').getAttribute('href'),'https://wa.me/51914158674',page);
       assert.match(menu.textContent,/914 158 674/,page);
     }

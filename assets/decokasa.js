@@ -18,6 +18,20 @@
     else root.addEventListener('resize',sync);
   }
   reserveServiceBar();
+  if(root.navigator?.clipboard?.writeText){
+    document.querySelectorAll('[data-copy-service-email]').forEach(button=>{button.hidden=false;});
+    document.addEventListener('click',async event=>{
+      const button=event.target.closest?.('[data-copy-service-email]');
+      if(!button)return;
+      const status=button.closest('.customer-service-email-options')?.querySelector('[data-copy-status]');
+      try{
+        await root.navigator.clipboard.writeText(button.dataset.copyServiceEmail);
+        if(status)status.textContent=button.dataset.copySuccess;
+      }catch{
+        if(status)status.textContent=button.dataset.copyError;
+      }
+    });
+  }
   document.addEventListener('click',event=>{
     const active=event.target.closest?.('.customer-service');
     document.querySelectorAll('.customer-service[open]').forEach(menu=>{if(menu!==active)menu.open=false;});

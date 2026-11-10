@@ -80,6 +80,16 @@ body{padding-top:var(--service-bar-height,38px)}
 .customer-service-panel a:hover{background:#fff6c9}
 .customer-service-panel strong,.customer-service-panel small{display:block;font-size:14px;line-height:1.35}
 .customer-service-panel small{margin-top:3px;font-size:12px;color:#555}
+.customer-service-email summary{position:relative;display:block;min-height:48px;padding:10px 32px 10px 10px;border-radius:8px}
+.customer-service-email summary:hover{background:#fff6c9}
+.customer-service-email summary::after{position:absolute;top:12px;right:11px;content:'+';font-size:20px;line-height:1}
+.customer-service-email[open] summary::after{content:'−'}
+.customer-service-email-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;padding:0 10px 10px}
+.customer-service-panel .customer-service-email-options a,.customer-service-panel .customer-service-email-options button{display:flex;align-items:center;justify-content:center;width:100%;min-height:44px;padding:8px;border:1px solid #dedede;border-radius:7px;background:#f5f5f5;color:#23282b;font:inherit;font-size:12px;font-weight:600;line-height:1.25;text-align:center;text-decoration:none;cursor:pointer}
+.customer-service-panel .customer-service-email-options a:hover,.customer-service-panel .customer-service-email-options button:hover{background:#fff6c9}
+.customer-service-panel .customer-service-email-options button:focus-visible{outline:3px solid #d99f00;outline-offset:3px}
+.customer-service-panel .customer-service-email-options button[hidden],.customer-service-copy-status:empty{display:none}
+.customer-service-panel .customer-service-copy-status{grid-column:1/-1;margin:0;font-size:12px}
 @media(max-width:599px){
   .service-items>.customer-service{font-size:11px}
   .customer-service--bar .customer-service-panel{left:50%;transform:translateX(-50%)}

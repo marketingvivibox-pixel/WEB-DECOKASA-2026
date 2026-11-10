@@ -80,6 +80,16 @@ body{padding-top:var(--service-bar-height,38px)}
 .customer-service-panel a:hover{background:#fff6c9}
 .customer-service-panel strong,.customer-service-panel small{display:block;font-size:14px;line-height:1.35}
 .customer-service-panel small{margin-top:3px;font-size:12px;color:#555}
+.customer-service-email summary{position:relative;display:block;min-height:48px;padding:10px 32px 10px 10px;border-radius:8px}
+.customer-service-email summary:hover{background:#fff6c9}
+.customer-service-email summary::after{position:absolute;top:12px;right:11px;content:'+';font-size:20px;line-height:1}
+.customer-service-email[open] summary::after{content:'−'}
+.customer-service-email-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;padding:0 10px 10px}
+.customer-service-panel .customer-service-email-options a,.customer-service-panel .customer-service-email-options button{display:flex;align-items:center;justify-content:center;width:100%;min-height:44px;padding:8px;border:1px solid #dedede;border-radius:7px;background:#f5f5f5;color:#23282b;font:inherit;font-size:12px;font-weight:600;line-height:1.25;text-align:center;text-decoration:none;cursor:pointer}
+.customer-service-panel .customer-service-email-options a:hover,.customer-service-panel .customer-service-email-options button:hover{background:#fff6c9}
+.customer-service-panel .customer-service-email-options button:focus-visible{outline:3px solid #d99f00;outline-offset:3px}
+.customer-service-panel .customer-service-email-options button[hidden],.customer-service-copy-status:empty{display:none}
+.customer-service-panel .customer-service-copy-status{grid-column:1/-1;margin:0;font-size:12px}
 @media(max-width:599px){
   .service-items>.customer-service{font-size:11px}
   .customer-service--bar .customer-service-panel{left:50%;transform:translateX(-50%)}
@@ -96,6 +106,7 @@ body{padding-top:var(--service-bar-height,38px)}
 
 </svg>
  Compra con asesor</span>
+
 <details class="customer-service customer-service--bar">
   <summary aria-label="Atención al cliente">
     <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
@@ -107,7 +118,16 @@ body{padding-top:var(--service-bar-height,38px)}
   </summary>
   <div class="customer-service-panel">
     <p>¿Cómo prefieres contactarnos?</p>
-    <a href="mailto:atencion.decokasa@checkazul.com.pe"><strong>Correo electrónico</strong><small>atencion.decokasa@checkazul.com.pe</small></a>
+    <details class="customer-service-email">
+      <summary><strong>Correo electrónico</strong><small>atencion.decokasa@checkazul.com.pe</small></summary>
+      <div class="customer-service-email-options">
+        <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=atencion.decokasa%40checkazul.com.pe" target="_blank" rel="noopener noreferrer">Abrir Gmail</a>
+        <a href="https://outlook.live.com/mail/0/deeplink/compose?to=atencion.decokasa%40checkazul.com.pe" target="_blank" rel="noopener noreferrer">Abrir Outlook</a>
+        <a href="mailto:atencion.decokasa@checkazul.com.pe">Otra aplicación</a>
+        <button type="button" data-copy-service-email="atencion.decokasa@checkazul.com.pe" data-copy-success="Correo copiado." data-copy-error="No se pudo copiar. Selecciona la dirección de arriba." hidden>Copiar correo</button>
+        <p class="customer-service-copy-status" data-copy-status role="status" aria-live="polite"></p>
+      </div>
+    </details>
     <a href="https://wa.me/51914158674" target="_blank" rel="noopener noreferrer"><strong>WhatsApp</strong><small>914 158 674</small></a>
   </div>
 </details>
@@ -456,6 +476,20 @@ Nuestras marcas</a></div>
     else root.addEventListener('resize',sync);
   }
   reserveServiceBar();
+  if(root.navigator?.clipboard?.writeText){
+    document.querySelectorAll('[data-copy-service-email]').forEach(button=>{button.hidden=false;});
+    document.addEventListener('click',async event=>{
+      const button=event.target.closest?.('[data-copy-service-email]');
+      if(!button)return;
+      const status=button.closest('.customer-service-email-options')?.querySelector('[data-copy-status]');
+      try{
+        await root.navigator.clipboard.writeText(button.dataset.copyServiceEmail);
+        if(status)status.textContent=button.dataset.copySuccess;
+      }catch{
+        if(status)status.textContent=button.dataset.copyError;
+      }
+    });
+  }
   document.addEventListener('click',event=>{
     const active=event.target.closest?.('.customer-service');
     document.querySelectorAll('.customer-service[open]').forEach(menu=>{if(menu!==active)menu.open=false;});

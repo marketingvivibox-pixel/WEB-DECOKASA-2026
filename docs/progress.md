@@ -1,3 +1,9 @@
+## 10/11/2026 — Alternativas para escribir a atención
+
+- [x] Añadidas opciones para abrir Gmail, Outlook u otra aplicación, y para copiar la dirección de atención cuando el navegador lo permite. La dirección queda visible en el menú.
+- [x] Comprobados los enlaces, la copia y el manejo de errores en vistas de inicio y catálogo; revisado el diseño en cinco anchos y los accesos de teclado. Verificados los destinos web de los proveedores.
+- [x] 61 pruebas correctas y Theme Check oficial sin hallazgos. Publicación mediante GitHub/main en el tema oficial 188927803629.
+
 ## 10/11/2026 — Atención al cliente y nuevo CRM de WhatsApp
 
 - [x] El acceso «Atención al cliente» de la cabecera permite elegir correo `atencion.decokasa@checkazul.com.pe` o WhatsApp `+51 914 158 674`, con cierre mediante Escape o clic fuera. El acceso «Cómo comprar» continúa disponible.

@@ -6,6 +6,7 @@ const { Liquid } = require('liquidjs');
 const { parseHTML } = require('linkedom');
 const root = path.resolve(__dirname, '..');
 const engine = new Liquid({ root: path.join(root, 'snippets'), extname: '.liquid' });
+require('../scripts/product_fixture.cjs').filters(engine);
 engine.registerFilter('handleize', value => String(value).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-'));
 engine.registerFilter('asset_url', value => `/assets/${value}`);
 const collections = require('./catalog-collections.json');

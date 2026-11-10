@@ -4,6 +4,12 @@
     "title": "Atención al cliente",
     "prompt": "¿Cómo prefieres contactarnos?",
     "email": "Correo electrónico",
+    "gmail": "Abrir Gmail",
+    "outlook": "Abrir Outlook",
+    "other_email": "Otra aplicación",
+    "copy_email": "Copiar correo",
+    "copy_success": "Correo copiado.",
+    "copy_error": "No se pudo copiar. Selecciona la dirección de arriba.",
     "whatsapp": "WhatsApp"
   },
   "pvc": {
