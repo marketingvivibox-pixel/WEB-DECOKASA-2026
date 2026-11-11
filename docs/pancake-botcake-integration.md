@@ -9,15 +9,19 @@
 - Se preparó y guardó el flujo independiente [Verificación Decokasa](https://botcake.io/waba_1474651969056962/flows/453474934/flow_preview), ID `453474934`, para el canal `waba_1474651969056962`. El cuerpo y el botón de la plantilla usan la variable `{{code}}`. No se configuró un disparador automático ni se enviaron mensajes de prueba.
 - El formulario de la web sigue en modo de demostración: no envía códigos, no verifica teléfonos y no transmite fichas. Conservar esa indicación hasta que toda la ruta esté implementada y probada.
 
-## Alojamiento elegido: Firebase, aún sin crear
+## Alojamiento elegido: proyecto Firebase creado
 
-El usuario prefiere Firebase para alojar la conexión. La consola abierta con la cuenta `atencion.decokasa@checkazul.com.pe` mostró el inicio de Firebase sin proyectos. Se preparó el nombre **Decokasa Solicitudes**, pero no se aceptaron las condiciones de Google ni se creó el proyecto; se solicitó autorización expresa para ello. El identificador sugerido no debe tratarse como definitivo hasta crear el proyecto.
+Con autorización del usuario se aceptaron las condiciones de Firebase y se creó **Decokasa Solicitudes**, identificador `decokasa-solicitudes`, en la cuenta `atencion.decokasa@checkazul.com.pe`. La consola confirmó el proyecto y el plan gratuito Spark. Todavía no se han configurado ni desplegado servicios para el formulario.
 
 Crear un proyecto en el plan Spark no requiere medio de pago. La opción prevista de Cloud Functions para generar y comprobar códigos necesita el plan Blaze de pago por uso y una cuenta de facturación; tiene cuotas gratuitas y pueden existir otros cargos. No se ha activado facturación ni se ha desplegado ningún servicio. Antes de contratar o vincular facturación debe explicarse y autorizarse el gasto. Consultar [planes de Firebase](https://firebase.google.com/docs/projects/billing/firebase-pricing-plans) y [precios](https://firebase.google.com/pricing/). Los envíos por WhatsApp pueden tener cargos separados.
 
 ## Verificación de teléfono pendiente
 
 La [documentación de Botcake para códigos OTP](https://docs.pancake.biz/pancake/st-f8/st-p4/st-s8?lang=vi) describe el uso de una plantilla y un flujo. La [API de Botcake](https://docs.pancake.biz/botcake/st-f7/st-p2?lang=en) documenta el envío de flujos a un identificador de cliente de la página. Aún se debe comprobar cómo iniciar el envío a un número que nunca haya escrito al canal y si el servicio o la cuenta imponen costes o requisitos adicionales.
+
+Una respuesta exitosa de la API no demuestra por sí sola que WhatsApp haya entregado el código: también hay que comprobar el estado real de entrega o fallo, como indican las [novedades de Botcake](https://docs.pancake.biz/botcake/st-f9/st-p1?lang=en). El [emulador local de Firebase](https://firebase.google.com/docs/functions/faq-and-troubleshooting) permite desarrollar y probar partes de la solución sin vincular una cuenta de facturación, pero no acredita la entrega real ni el comportamiento del reparto en Pancake.
+
+Firebase Authentication ofrece como alternativa el envío de códigos por SMS. Requiere facturación, puede generar cargos por SMS y precisa consentimiento informado, reCAPTCHA, autorización del dominio y una política de regiones; las tarifas se deben comprobar al momento de la configuración. Esta opción no se ha elegido ni activado y tampoco resuelve por sí sola la entrega de la ficha a Pancake. Fuentes: [verificación telefónica en la web](https://firebase.google.com/docs/auth/web/phone-auth), [precios de Identity Platform](https://cloud.google.com/identity-platform/pricing) y [preguntas frecuentes de Firebase Authentication](https://firebase.google.com/docs/auth/faq-and-troubleshooting).
 
 Hace falta elegir e implementar un servicio privado que genere el código con aleatoriedad segura, lo vincule al teléfono y la solicitud, compruebe su caducidad real de cinco minutos y limite intentos, reenvíos y abuso. Debe impedir reutilizaciones, proteger las credenciales en el servidor, tratar fallos de entrega y evitar exponer datos personales en URLs, analítica o registros. Ningún token se generó ni se registró durante esta investigación.
 
@@ -33,7 +37,7 @@ El contrato de la solicitud prohíbe crear pedidos o reservas y modificar invent
 
 ## Validaciones pendientes
 
-1. Crear y configurar Firebase tras la autorización correspondiente; decidir la facturación y los permisos necesarios sin exponer credenciales.
+1. Configurar los servicios de Firebase; evaluar y autorizar la facturación y los permisos necesarios sin exponer credenciales. El proyecto ya existe en Spark.
 2. Comprobar, con un número autorizado, el primer contacto, la entrega del código y el tratamiento de errores.
 3. Implementar la comprobación real y probar códigos correctos, erróneos, caducados y reutilizados, cambios de teléfono, límites de intentos, reenvíos y protección de datos.
 4. Probar la entrega de la ficha y el reparto para contactos nuevos y existentes, incluyendo sesiones abandonadas, fallos y reintentos sin duplicados.

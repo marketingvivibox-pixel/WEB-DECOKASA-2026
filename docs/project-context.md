@@ -1,6 +1,6 @@
-## 10/11/2026 — Firebase para la futura conexión
+## 11/11/2026 — Proyecto Firebase creado para la futura conexión
 
-El usuario prefiere Firebase para la verificación y entrega del formulario. En la cuenta `atencion.decokasa@checkazul.com.pe` se abrió la pantalla inicial y se preparó el nombre «Decokasa Solicitudes»; la aceptación de condiciones y la creación del proyecto esperan autorización. El plan gratuito Spark no necesita medio de pago, pero Cloud Functions requiere Blaze de pago por uso con cuenta de facturación y puede generar cargos. La facturación no está activada. El formulario sigue simulado. Detalles y fuentes: `docs/pancake-botcake-integration.md`.
+Con autorización del usuario se aceptaron las condiciones de Firebase y se creó «Decokasa Solicitudes» (`decokasa-solicitudes`) desde la cuenta `atencion.decokasa@checkazul.com.pe`. La consola confirma el plan gratuito Spark. Cloud Functions requiere Blaze de pago por uso con cuenta de facturación y puede generar cargos; no se ha activado facturación ni se ha desplegado el servicio. El formulario sigue simulado. Detalles y fuentes: `docs/pancake-botcake-integration.md`.
 
 ## 10/11/2026 — Catálogo de tonos SPC
 
