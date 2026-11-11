@@ -1,3 +1,7 @@
+# Libro de Reclamaciones: respaldo y protección — 11/11/2026
+
+Índice, programa de Google, copia fechada, recuperación y pruebas: [integrations/libro-reclamaciones](../integrations/libro-reclamaciones/README.md). El teléfono es opcional; Apps Script activo versión 6. El respaldo del código no incluye registros ni propiedades privadas y el repositorio es público. La copia de la hoja en el Drive de Atención es puntual, no automática. Las alertas de GitHub no impiden por sí mismas una modificación directa al tema o a `main`. Las notas cronológicas anteriores que mencionan teléfono obligatorio describen un estado superado.
+
 ## 11/11/2026 — Proyecto Firebase creado para la futura conexión
 
 Con autorización del usuario se aceptaron las condiciones de Firebase y se creó «Decokasa Solicitudes» (`decokasa-solicitudes`) desde la cuenta `atencion.decokasa@checkazul.com.pe`. La consola confirma el plan gratuito Spark. Cloud Functions requiere Blaze de pago por uso con cuenta de facturación y puede generar cargos; no se ha activado facturación ni se ha desplegado el servicio. El formulario sigue simulado. Detalles y fuentes: `docs/pancake-botcake-integration.md`.

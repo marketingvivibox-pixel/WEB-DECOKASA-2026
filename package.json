@@ -9,7 +9,8 @@
     "start": "tsx server.ts",
     "preview": "vite preview",
     "lint": "tsc --noEmit",
-    "test": "node --test tests/store.test.cjs tests/ui.test.cjs tests/catalog.test.cjs tests/catalog-colors.test.cjs tests/product.test.cjs tests/request-form.test.cjs tests/spc.test.cjs tests/pvc.test.cjs tests/libro-reclamaciones.test.cjs",
+    "test": "node --test tests/store.test.cjs tests/ui.test.cjs tests/catalog.test.cjs tests/catalog-colors.test.cjs tests/product.test.cjs tests/request-form.test.cjs tests/spc.test.cjs tests/pvc.test.cjs tests/libro-reclamaciones.test.cjs && node integrations/libro-reclamaciones/verificar-respaldo.cjs",
+    "test:libro": "node integrations/libro-reclamaciones/ejecutar-pruebas.cjs",
     "sync:preview": "node scripts/sync_preview.cjs"
   },
   "dependencies": {

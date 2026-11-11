@@ -2,7 +2,11 @@
 
 **Regla inamovible:** un único tema Shopify, el oficial existente `WEB-DECOKASA-2026-ALFIN/main` (`188927803629`). No crear, duplicar ni reutilizar temas paralelos. Cada landing se integra dentro de ese tema. Las pruebas se hacen en una rama secundaria y vista previa local, sin borradores ni versiones de prueba en Shopify; después se integra en main y se actualiza el tema oficial según las autorizaciones vigentes. Ver [AGENTS.md](AGENTS.md).
 
-Tema Shopify 0.1.0 en construcción, conectado a GitHub/main y activo en Shopify. Acceso público verificado el 09/10/2026. Sin receptor de formularios ni sincronización de stock: el formulario está deliberadamente en modo simulación.
+Tema Shopify 0.1.0 en construcción, conectado a GitHub/main y activo en Shopify. Acceso público verificado el 09/10/2026. Los formularios de solicitudes comerciales siguen en modo simulación y no hay sincronización de stock. El Libro de Reclamaciones tiene su propio receptor en Google, independiente de esos formularios.
+
+## Libro de Reclamaciones
+
+La [carpeta central del Libro de Reclamaciones](integrations/libro-reclamaciones/README.md) reúne el índice de sus componentes, la copia de seguridad, el programa de Google y las instrucciones para verificarlo o recuperarlo. El registro de clientes permanece privado en Google Drive; no se guarda en este repositorio público.
 
 
 ## Recorrido

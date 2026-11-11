@@ -1,0 +1,55 @@
+{
+  "descripcion": "Copia de seguridad del Libro de Reclamaciones: textos normalizados a LF para comprobar su integridad entre sistemas.",
+  "fecha": "2026-11-11",
+  "revisionOrigen": "c74f5b73465b01ebd3feb1061a652b67a136afb3",
+  "files": [
+    {
+      "original": "templates/page.libro-reclamaciones.json",
+      "copia": "integrations/libro-reclamaciones/respaldo-2026-11-11/templates/page.libro-reclamaciones.json",
+      "sha256": "6f0d74cf239f9fa96bf47110d264a35496b9a181fa2c633626e0e61786489768",
+      "compararOriginal": true
+    },
+    {
+      "original": "sections/libro-reclamaciones.liquid",
+      "copia": "integrations/libro-reclamaciones/respaldo-2026-11-11/sections/libro-reclamaciones.liquid",
+      "sha256": "3a8f057c3048c2634042aa22311d0366713d9d5528b949322f7d25ebdfc546bf",
+      "compararOriginal": true
+    },
+    {
+      "original": "assets/libro-reclamaciones.css",
+      "copia": "integrations/libro-reclamaciones/respaldo-2026-11-11/assets/libro-reclamaciones.css",
+      "sha256": "ff25cac173bffd41a40d234709f208febd75c783ed1e855235c89f7bd2d559ad",
+      "compararOriginal": true
+    },
+    {
+      "original": "assets/libro-reclamaciones.js",
+      "copia": "integrations/libro-reclamaciones/respaldo-2026-11-11/assets/libro-reclamaciones.js",
+      "sha256": "d9d48b3464549eac42eb29e62c876886164c9496542f83e0665d6d8943167ccf",
+      "compararOriginal": true
+    },
+    {
+      "original": "assets/libro-ubigeo.js",
+      "copia": "integrations/libro-reclamaciones/respaldo-2026-11-11/assets/libro-ubigeo.js",
+      "sha256": "a6ad946621ad5d8cf5329b8a45362a7a21df873b49ece813f03b10c3e5ff076a",
+      "compararOriginal": true
+    },
+    {
+      "original": "snippets/book-link.liquid",
+      "copia": "integrations/libro-reclamaciones/respaldo-2026-11-11/snippets/book-link.liquid",
+      "sha256": "9b61f3132c7a851468c2785774857f8645c6fd42775d765c9ce3b1d9fd6a6071",
+      "compararOriginal": true
+    },
+    {
+      "original": "layout/theme.liquid",
+      "copia": "integrations/libro-reclamaciones/respaldo-2026-11-11/layout/theme.liquid",
+      "sha256": "f4e6e737bb138e3cc2cbf75146df5ded84f42df5e677567fd7ef2ee57c1f2bca",
+      "compararOriginal": false
+    },
+    {
+      "original": "integrations/libro-reclamaciones/Code.gs",
+      "copia": "integrations/libro-reclamaciones/respaldo-2026-11-11/integrations/libro-reclamaciones/Code.gs",
+      "sha256": "68b49d438725a3882fbcfab37d405e2b03c4e788032b5ea224ea157a07f9a3b1",
+      "compararOriginal": true
+    }
+  ]
+}

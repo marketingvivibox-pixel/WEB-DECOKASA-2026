@@ -23,3 +23,7 @@ La base 0.1.0 usa formulario de simulación y datos ficticios. Distinguir demost
 Código de tema: `assets/`, `config/`, `layout/`, `locales/`, `sections/`, `snippets/`, `templates/`. Documentar avances confirmados en `docs/progress.md` y decisiones nuevas en `docs/project-context.md`. Actualizar vistas y paquete si cambia el tema. Ejecutar las verificaciones pertinentes antes de dar cambios por concluidos.
 
 Los backends existentes de Meta/TikTok son de solo lectura. Para consultas sobre bases publicitarias revisar primero la carpeta Drive `18fQUpb1ZMC7jKO-nenhJFXmbQo1Oyr1W`; no modificar scripts ni iniciar sesión en esas redes para recuperar datos.
+
+## Libro de Reclamaciones
+
+El índice, la copia fechada y el procedimiento de recuperación están en `integrations/libro-reclamaciones/README.md`. Ante cambios del tema, conservar sus componentes y enlaces, ejecutar `npm ci --prefix integrations/libro-reclamaciones/pruebas --ignore-scripts` y `npm run test:libro`, revisar el resultado antes de integrar y comprobar la página publicada. Si el cambio afecta al libro deliberadamente, probarlo y actualizar una nueva copia fechada y su manifiesto sin borrar la referencia anterior. La comprobación de GitHub no bloquea por sí sola cambios directos en `main` o Shopify. No subir registros, datos personales ni claves al repositorio público.

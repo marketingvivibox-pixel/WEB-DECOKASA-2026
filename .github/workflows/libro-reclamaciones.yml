@@ -1,0 +1,23 @@
+name: Comprobar Libro de Reclamaciones
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  comprobar-libro:
+    name: Respaldo y pruebas del libro
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: integrations/libro-reclamaciones/pruebas/package-lock.json
+      - run: npm ci --prefix integrations/libro-reclamaciones/pruebas --ignore-scripts --no-audit --no-fund
+      - run: npm run test:libro

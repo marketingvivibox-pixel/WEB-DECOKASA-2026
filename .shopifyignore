@@ -5,6 +5,7 @@ tests/**
 scripts/**
 preview/**
 .git/**
+.github/**
 releases/**
 package.json
 package-lock.json

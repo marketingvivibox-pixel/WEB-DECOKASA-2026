@@ -1,3 +1,11 @@
+# Libro de Reclamaciones: respaldo — 11/11/2026
+
+- Carpeta central [integrations/libro-reclamaciones](../integrations/libro-reclamaciones/README.md) con índice, código de Google, copia fechada de componentes del tema, manifiesto y recuperación.
+- `npm run test:libro` comprueba el flujo simulado y detecta cambios en los archivos específicos o la pérdida de los puntos de enlace. GitHub Actions repite las comprobaciones cuando se ejecuta. Debe revisarse el resultado; no equivale a un bloqueo de cambios directos ni a una prueba de entrega real.
+- Verificadas 89 pruebas de la tienda, incluidas 24 del libro. El verificador detectó en copias aisladas cambios en el formulario, eliminación del enlace y daño del respaldo. Los siete archivos del tema coinciden con el tema oficial activo.
+- Hoja de seguimiento: copia puntual privada en Drive de la cuenta de Atención; no existe copia automática de futuras fichas. No publicar datos personales en el repositorio público.
+- Pendiente operacional: copias periódicas privadas y resolver SPF/DKIM/DMARC al cambiar de dominio. Los correos de prueba ya han llegado a spam.
+
 ## 11/11/2026 — Datos personales del Libro de Reclamaciones
 
 - [x] Separados nombres y apellidos; agregados selector de tipo de documento y número independiente, teléfono obligatorio por indicación del usuario y listas dependientes de departamento, provincia y distrito antes de la dirección.
