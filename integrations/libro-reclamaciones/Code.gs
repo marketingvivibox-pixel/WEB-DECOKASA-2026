@@ -53,7 +53,9 @@ const BOOK = Object.freeze({
     'Copia al consumidor', 'Aviso interno', 'Identificador de solicitud',
     'Huella de solicitud', 'Datos originales JSON',
     'Fecha de compra', 'Número de pedido', 'Número de comprobante',
-    'Titular del comprobante', 'Documento del titular'
+    'Titular del comprobante', 'Documento del titular',
+    'Nombres', 'Apellidos', 'Tipo de documento', 'Departamento', 'Provincia',
+    'Distrito', 'Dirección'
   ]
 });
 
@@ -144,7 +146,9 @@ function doPost(e) {
         'Pendiente', properties.getProperty('BOOK_RESPONSIBLE') || BOOK.responsible,
         '', '', '', 'Pendiente', 'Pendiente', requestId, digest,
         JSON.stringify(Object.assign({supplierAddress: supplierAddress}, data)),
-        data.purchaseDate, data.orderNumber, data.receiptNumber, data.receiptHolderName, data.receiptHolderDocument];
+        data.purchaseDate, data.orderNumber, data.receiptNumber, data.receiptHolderName, data.receiptHolderDocument,
+        data.firstName || '', data.lastName || '', data.documentType || '', data.department || '',
+        data.province || '', data.district || '', data.streetAddress || ''];
       sheet.appendRow(values.map(sheetSafe_));
       SpreadsheetApp.flush();
       row = sheet.getLastRow();
@@ -190,13 +194,17 @@ function validate_(p) {
     if (!allowed.includes(value)) throw new Error('Por favor selecciona una opción válida en «' + title + '».');
     return value;
   }
-  if (String(p.form_version || '') !== '2') throw new Error('Por favor actualiza la página del formulario para completar los nuevos datos de compra.');
+  const version = String(p.form_version || '');
+  if (!['2', '3'].includes(version)) throw new Error('Por favor actualiza la página del formulario para completar tus datos.');
+  const current = version === '3';
+  const firstName = current ? field('given_name', 'nombres', 75, true) : '';
+  const lastName = current ? field('family_name', 'apellidos', 75, true) : '';
   const data = {
-    name: field('name', 'nombres y apellidos', 150, true),
+    name: current ? firstName + ' ' + lastName : field('name', 'nombres y apellidos', 150, true),
     document: field('document', 'documento de identidad', 60, true),
     address: field('address', 'domicilio', 250, false),
     email: field('email', 'correo electrónico', 254, false),
-    phone: field('phone', 'teléfono', 40, false),
+    phone: field('phone', 'teléfono', 40, current),
     minor: choice('minor', 'menor de edad', ['Sí', 'No']),
     guardian: field('guardian', 'padre, madre o apoderado', 150, false),
     itemType: choice('item_type', 'bien o servicio', ['Producto', 'Servicio']),
@@ -226,6 +234,23 @@ function validate_(p) {
   const differentHolder = data.additional[7].answer === 'No';
   data.receiptHolderName = differentHolder ? field('receipt_holder_name', 'nombre o razón social del titular del comprobante', 150, true) : '';
   data.receiptHolderDocument = differentHolder ? field('receipt_holder_document', 'documento del titular del comprobante', 60, true) : '';
+  if (current) {
+    const location = key => {
+      const value = field(key, key, 100, false);
+      return value === '__otro__' ? field(key + '_other', key, 100, true) : value;
+    };
+    data.firstName = firstName;
+    data.lastName = lastName;
+    data.documentType = choice('document_type', 'tipo de documento', ['DNI', 'Carné de extranjería', 'Pasaporte', 'RUC', 'Otro']);
+    data.department = location('department');
+    data.province = location('province');
+    data.district = location('district');
+    data.streetAddress = data.address;
+    if (data.responseChannel === 'Carta al domicilio' && (!data.department || !data.province || !data.district)) {
+      throw new Error('Por favor indica departamento, provincia y distrito para recibir la respuesta.');
+    }
+    data.address = [data.streetAddress, data.district, data.province, data.department].filter(Boolean).join(', ');
+  }
   return data;
 }
 
@@ -234,8 +259,8 @@ function ensurePurchaseColumns_(sheet) {
   const first = 27;
   const extra = BOOK.headers.slice(26);
   const existing = sheet.getMaxColumns();
-  if (existing < BOOK.headers.length) sheet.insertColumnsAfter(existing, BOOK.headers.length - existing);
-  const current = sheet.getRange(1, first, 1, extra.length).getValues()[0];
+  const count = Math.max(0, Math.min(extra.length, existing - first + 1));
+  const current = count ? sheet.getRange(1, first, 1, count).getValues()[0] : [];
   current.forEach((value, index) => {
     if (value && value !== extra[index]) throw new Error('Las columnas adicionales del registro están ocupadas.');
     if (!value && sheet.getLastRow() > 1) {
@@ -243,7 +268,8 @@ function ensurePurchaseColumns_(sheet) {
       if (cells.some(row => row[0] !== '')) throw new Error('Las columnas adicionales del registro contienen datos.');
     }
   });
-  current.forEach((value, index) => { if (!value) sheet.getRange(1, first + index).setValue(extra[index]); });
+  if (existing < BOOK.headers.length) sheet.insertColumnsAfter(existing, BOOK.headers.length - existing);
+  extra.forEach((value, index) => { if (!current[index]) sheet.getRange(1, first + index).setValue(value); });
 }
 
 function getSheet_() {
@@ -319,7 +345,12 @@ function receiptText_(id, registeredAt, data) {
     'Proveedor: ' + BOOK.provider + ' · RUC ' + BOOK.ruc,
     'Domicilio fiscal del proveedor: ' + data.supplierAddress,
     '', 'IDENTIFICACIÓN DEL CONSUMIDOR',
-    'Nombres y apellidos: ' + data.name, 'Documento: ' + data.document,
+    ...(data.firstName ? ['Nombres: ' + data.firstName, 'Apellidos: ' + data.lastName, 'Tipo de documento: ' + data.documentType] : ['Nombres y apellidos: ' + data.name]),
+    'Documento: ' + data.document,
+    ...(data.firstName ? [
+      'Departamento: ' + (data.department || 'No indicado'), 'Provincia: ' + (data.province || 'No indicado'),
+      'Distrito: ' + (data.district || 'No indicado'), 'Dirección: ' + (data.streetAddress || 'No indicada')
+    ] : []),
     'Domicilio: ' + (data.address || 'No indicado'), 'Correo: ' + (data.email || 'No indicado'), 'Teléfono: ' + (data.phone || 'No indicado'),
     '¿Menor de edad?: ' + data.minor, 'Padre, madre o apoderado: ' + (data.guardian || 'No aplica'),
     '', 'BIEN O SERVICIO', 'Tipo: ' + data.itemType,

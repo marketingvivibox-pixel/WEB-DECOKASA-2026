@@ -88,6 +88,57 @@ function request(overrides = {}) {
   } };
 }
 
+function currentRequest(overrides = {}) {
+  return request({
+    form_version: '3', given_name: 'Ana María', family_name: 'Pérez Solís',
+    document_type: 'DNI', document: '00123456', phone: '0999888777',
+    department: 'LIMA', province: 'LIMA', district: 'MIRAFLORES', address: 'Calle Prueba 123',
+    ...overrides
+  });
+}
+
+test('la ficha actual conserva por separado identidad y ubicación en hoja, constancia y correos', () => {
+  const h = harness();
+  const result = h.doPost(currentRequest());
+  assert.match(result.content, /Tu reclamación fue registrada/);
+  assert.equal(h.rows[1][3], 'Ana María Pérez Solís');
+  assert.equal(h.rows[1][4], '00123456');
+  assert.equal(h.rows[1][7], '0999888777');
+  assert.equal(h.rows[1][5], 'Calle Prueba 123, MIRAFLORES, LIMA, LIMA');
+  assert.deepEqual(h.rows[0].slice(31), ['Nombres', 'Apellidos', 'Tipo de documento', 'Departamento', 'Provincia', 'Distrito', 'Dirección']);
+  assert.deepEqual(Array.from(h.rows[1].slice(31)), ['Ana María', 'Pérez Solís', 'DNI', 'LIMA', 'LIMA', 'MIRAFLORES', 'Calle Prueba 123']);
+  for (const text of [result.content, ...h.sent.map(mail => mail.body)]) {
+    for (const value of ['Nombres: Ana María', 'Apellidos: Pérez Solís', 'Tipo de documento: DNI', 'Departamento: LIMA', 'Provincia: LIMA', 'Distrito: MIRAFLORES', 'Dirección: Calle Prueba 123']) assert.ok(text.includes(value), value);
+  }
+  assert.match(h.doPost(currentRequest()).content, /LR-2026-000001/);
+  assert.equal(h.rows.length, 2);
+  assert.equal(h.sent.length, 2);
+});
+
+test('la versión actual exige nombres, apellidos, tipo y número de documento y teléfono', () => {
+  for (const values of [{given_name: ''}, {family_name: ''}, {document_type: ''}, {document_type: 'Inexistente'}, {document: ''}, {phone: ''}]) {
+    const h = harness();
+    assert.match(h.doPost(currentRequest(values)).content, /No pudimos confirmar el envío/);
+    assert.equal(h.rows.length, 1);
+    assert.equal(h.sent.length, 0);
+  }
+});
+
+test('carta requiere ubicación completa; el correo admite domicilio omitido y ubicación alternativa', () => {
+  for (const field of ['department', 'province', 'district', 'address']) {
+    const h = harness();
+    assert.match(h.doPost(currentRequest({response_channel: 'Carta al domicilio', [field]: ''})).content, /No pudimos confirmar el envío/);
+    assert.equal(h.rows.length, 1);
+  }
+  const h = harness();
+  assert.match(h.doPost(currentRequest({department: '', province: '', district: '', address: ''})).content, /Tu reclamación fue registrada/);
+  assert.match(h.sent[0].body, /Domicilio: No indicado/);
+  const other = harness();
+  assert.match(other.doPost(currentRequest({department: '__otro__', department_other: 'Exterior', province: '__otro__', province_other: 'Provincia extranjera', district: '__otro__', district_other: 'Distrito extranjero'})).content, /Tu reclamación fue registrada/);
+  assert.deepEqual(Array.from(other.rows[1].slice(34, 37)), ['Exterior', 'Provincia extranjera', 'Distrito extranjero']);
+  assert.match(harness().doPost(currentRequest({department: '__otro__', department_other: ''})).content, /No pudimos confirmar el envío/);
+});
+
 test('registra una sola ficha, envía las dos copias y la constancia es imprimible', () => {
   const h = harness();
   const result = h.doPost(request());
@@ -107,8 +158,8 @@ test('registra una sola ficha, envía las dos copias y la constancia es imprimib
   assert.match(result.content, /Fecha de compra: 02\/10\/2026/);
   assert.match(h.sent[0].body, /Número de pedido: 0000123/);
   assert.match(h.sent[1].body, /Número de comprobante: F001-0000456/);
-  assert.deepEqual(h.rows[0].slice(26), ['Fecha de compra', 'Número de pedido', 'Número de comprobante', 'Titular del comprobante', 'Documento del titular']);
-  assert.deepEqual(Array.from(h.rows[1].slice(26)), ['2026-10-02', '0000123', 'F001-0000456', '', '']);
+  assert.deepEqual(h.rows[0].slice(26, 31), ['Fecha de compra', 'Número de pedido', 'Número de comprobante', 'Titular del comprobante', 'Documento del titular']);
+  assert.deepEqual(Array.from(h.rows[1].slice(26, 31)), ['2026-10-02', '0000123', 'F001-0000456', '', '']);
   const repeated = h.doPost(request());
   assert.match(repeated.content, /LR-2026-000001/);
   assert.equal(h.rows.length, 2);
@@ -173,7 +224,7 @@ test('exige y conserva los datos del titular distinto en hoja, constancia y amba
   const result = h.doPost(request({ q_8: 'No', receipt_holder_name: 'Titular Prueba', receipt_holder_document: '00123456', receipt_number: '00000005' }));
   assert.match(result.content, /Titular del comprobante: Titular Prueba/);
   assert.match(result.content, /Documento del titular: 00123456/);
-  assert.deepEqual(Array.from(h.rows[1].slice(26)), ['2026-10-02', '0000123', '00000005', 'Titular Prueba', '00123456']);
+  assert.deepEqual(Array.from(h.rows[1].slice(26, 31)), ['2026-10-02', '0000123', '00000005', 'Titular Prueba', '00123456']);
   for (const mail of h.sent) {
     assert.match(mail.body, /Titular del comprobante: Titular Prueba/);
     assert.match(mail.body, /Documento del titular: 00123456/);
@@ -184,7 +235,7 @@ test('ignora datos residuales del titular cuando el comprobante sí está a nomb
   const h = harness();
   const receipt = h.doPost(request({ q_8: 'Sí', receipt_holder_name: 'Dato anterior', receipt_holder_document: '999' }));
   assert.doesNotMatch(receipt.content, /Titular del comprobante: Dato anterior/);
-  assert.deepEqual(Array.from(h.rows[1].slice(29)), ['', '']);
+  assert.deepEqual(Array.from(h.rows[1].slice(29, 31)), ['', '']);
 });
 
 test('evita ocupar columnas adicionales que ya contienen datos o encabezados ajenos', () => {
@@ -230,7 +281,7 @@ test('acepta el teléfono vacío y conserva las 35 respuestas adicionales en amb
   }
 });
 
-test('la página y el receptor usan las mismas 35 preguntas y mantienen el teléfono opcional', () => {
+test('la página y el receptor usan las mismas 35 preguntas y exigen el teléfono nuevo', () => {
   const page = fs.readFileSync(path.join(__dirname, '../sections/libro-reclamaciones.liquid'), 'utf8');
   const match = page.match(/assign book_questions = '([^']+)' \| split: '\|'/);
   assert.ok(match);
@@ -238,7 +289,7 @@ test('la página y el receptor usan las mismas 35 preguntas y mantienen el telé
   assert.equal(match[1].split('|').length, 35);
   assert.match(page, /name="q_{{ forloop.index }}" required/);
   assert.match(page, /<input name="phone"[^>]*>/);
-  assert.doesNotMatch(page.match(/<input name="phone"[^>]*>/)[0], /required/);
+  assert.match(page.match(/<input name="phone"[^>]*>/)[0], /required/);
 });
 
 test('admite carta sin correo y conserva una constancia imprimible sin reintentos al cliente', () => {
@@ -328,4 +379,49 @@ test('el formulario solicita manualmente la compra y pide el titular solo cuando
   owner.dispatchEvent(new window.Event('change'));
   assert.equal(block.hidden, true);
   assert.ok(fields.every(field => field.disabled && !field.required));
+});
+
+test('las listas de ubicación dependen entre sí y permiten indicar otra ubicación', () => {
+  const { parseHTML } = require('linkedom');
+  const { window, document } = parseHTML(fs.readFileSync(path.join(__dirname, '../preview/libro-reclamaciones.html'), 'utf8'));
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../assets/libro-ubigeo.js'), 'utf8'), { window });
+  assert.equal(Object.keys(window.DECOKASA_UBIGEO).length, 25);
+  assert.equal(Object.values(window.DECOKASA_UBIGEO).reduce((n, provinces) => n + Object.keys(provinces).length, 0), 196);
+  const department = document.querySelector('[name="department"]');
+  const province = document.querySelector('[name="province"]');
+  const district = document.querySelector('[name="district"]');
+  const channel = document.querySelector('[name="response_channel"]');
+  for (const select of [department, province, district, channel]) {
+    let value = '';
+    Object.defineProperty(select, 'value', { get: () => value, set: next => { value = next; } });
+  }
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../assets/libro-reclamaciones.js'), 'utf8'), { window, document, Uint8Array });
+  assert.equal(province.disabled, true);
+  assert.equal(district.disabled, true);
+  assert.ok([...department.querySelectorAll('option')].some(option => option.value === 'LIMA'));
+  department.value = 'LIMA';
+  department.dispatchEvent(new window.Event('change'));
+  assert.equal(province.disabled, false);
+  assert.ok([...province.querySelectorAll('option')].some(option => option.value === 'LIMA'));
+  province.value = 'LIMA';
+  province.dispatchEvent(new window.Event('change'));
+  assert.ok([...district.querySelectorAll('option')].some(option => option.value === 'MIRAFLORES'));
+  district.value = 'MIRAFLORES';
+  channel.value = 'Carta al domicilio';
+  channel.dispatchEvent(new window.Event('change'));
+  assert.ok([department, province, district].every(select => select.required));
+  assert.equal(document.querySelector('[name="address"]').required, true);
+  department.value = '__otro__';
+  department.dispatchEvent(new window.Event('change'));
+  assert.equal(province.value, '__otro__');
+  assert.equal(district.value, '__otro__');
+  for (const key of ['department', 'province', 'district']) {
+    assert.equal(document.querySelector('[data-book-other-label="' + key + '"]').hidden, false);
+    assert.equal(document.querySelector('[name="' + key + '_other"]').required, true);
+  }
+  department.value = 'LIMA';
+  department.dispatchEvent(new window.Event('change'));
+  assert.equal(province.value, '');
+  assert.equal(district.value, '');
+  assert.equal(document.querySelector('[name="district_other"]').disabled, true);
 });

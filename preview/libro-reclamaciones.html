@@ -198,7 +198,8 @@ Nuestras marcas</a></div>
 </nav></div>
 
 <main id="main"><link rel="stylesheet" href="assets/libro-reclamaciones.css?v=1794350027667">
-<script src="assets/libro-reclamaciones.js?v=1794350027667" defer></script>
+<script src="assets/libro-ubigeo.js" defer></script>
+<script src="assets/libro-reclamaciones.js" defer></script>
 <section class="book-page" aria-labelledby="book-heading">
   <div class="book-wrap">
     <a class="book-back" href="DECOKASA-inicio.html">← Volver a la tienda</a>
@@ -214,15 +215,23 @@ Nuestras marcas</a></div>
         <p class="book-required">Los campos marcados con * y el dato de contacto correspondiente al medio de respuesta elegido son obligatorios.</p>
         <noscript><p>Para enviar este formulario necesitas activar JavaScript en tu navegador.</p></noscript>
         <input type="hidden" name="request_id" value="" data-book-request-id>
-        <input type="hidden" name="form_version" value="2">
+        <input type="hidden" name="form_version" value="3">
         <div class="book-trap" aria-hidden="true"><label for="book-website">No completar</label><input id="book-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
         <fieldset>
           <legend><span>01</span> Tus datos</legend>
           <div class="book-grid">
-            <label class="book-wide">¿Cuáles son tus nombres y apellidos? *<input name="name" autocomplete="name" maxlength="150" required></label>
-            <label>¿Cuál es tu documento de identidad? *<input name="document" maxlength="60" required></label>
-            <label>Teléfono (opcional)<input name="phone" type="tel" autocomplete="tel" maxlength="40"></label>
-            <label class="book-wide">¿Cuál es tu domicilio completo?<input name="address" autocomplete="street-address" maxlength="250" data-book-address><small>Obligatorio si eliges recibir la respuesta por carta.</small></label>
+            <label>Nombres *<input name="given_name" autocomplete="given-name" maxlength="75" required></label>
+            <label>Apellidos *<input name="family_name" autocomplete="family-name" maxlength="75" required></label>
+            <label>Tipo de documento *<select name="document_type" required><option value="">Selecciona una opción</option><option value="DNI">DNI</option><option value="Carné de extranjería">Carné de extranjería (CE)</option><option value="Pasaporte">Pasaporte</option><option value="RUC">RUC</option><option value="Otro">Otro</option></select></label>
+            <label>Número de documento *<input name="document" maxlength="60" required></label>
+            <label class="book-wide">Teléfono *<input name="phone" type="tel" autocomplete="tel" maxlength="40" required></label>
+            <label>Departamento<select name="department" data-book-location="department"><option value="">Selecciona un departamento</option><option value="__otro__">Otro / no figura</option></select></label>
+            <label data-book-other-label="department" hidden>Especifica el departamento<input name="department_other" maxlength="100" data-book-other="department" disabled></label>
+            <label>Provincia<select name="province" data-book-location="province" disabled><option value="">Selecciona primero un departamento</option></select></label>
+            <label data-book-other-label="province" hidden>Especifica la provincia<input name="province_other" maxlength="100" data-book-other="province" disabled></label>
+            <label>Distrito<select name="district" data-book-location="district" disabled><option value="">Selecciona primero una provincia</option></select></label>
+            <label data-book-other-label="district" hidden>Especifica el distrito<input name="district_other" maxlength="100" data-book-other="district" disabled></label>
+            <label class="book-wide">¿Cuál es tu dirección completa?<input name="address" autocomplete="street-address" maxlength="250" data-book-address><small>Departamento, provincia, distrito y dirección son obligatorios si eliges recibir la respuesta por carta.</small></label>
             <label class="book-wide">¿Cuál es tu correo electrónico?<input name="email" type="email" autocomplete="email" maxlength="254" data-book-email><small>Obligatorio si eliges recibir la respuesta por correo. Si lo indicas, enviaremos aquí tu copia.</small></label>
             <label>¿Eres menor de edad? *<select name="minor" required data-book-minor><option value="">Selecciona una opción</option><option value="No">No</option><option value="Sí">Sí</option></select></label>
             <label>Nombre del padre, madre o apoderado<input name="guardian" maxlength="150" data-book-guardian><small>Obligatorio si eres menor de edad.</small></label>

@@ -1,3 +1,10 @@
+## 11/11/2026 — Datos personales del Libro de Reclamaciones
+
+- [x] Separados nombres y apellidos; agregados selector de tipo de documento y número independiente, teléfono obligatorio por indicación del usuario y listas dependientes de departamento, provincia y distrito antes de la dirección.
+- [x] La dirección y las tres ubicaciones son obligatorias al elegir respuesta por carta; se ofrece una alternativa para ubicaciones no listadas. La versión 3 del formulario conserva los nuevos datos en las columnas AF:AL y en las comunicaciones; el receptor mantiene compatibilidad con la versión anterior.
+- [x] Actualizado el proyecto de Apps Script existente a la implementación versión 5. Pruebas automatizadas 88/88 y validación oficial de los tres archivos del tema sin incidencias.
+- [ ] Revisar con el contador o asesor legal la exigencia del teléfono y la extensión del formulario: Indecopi ha indicado que no debe condicionarse el registro al teléfono.
+
 ## 10/11/2026 — Ventanas de tonos SPC
 
 - [x] Separados visualmente los 11 acabados del catálogo original y agrupados en 3 cálidos, 4 oscuros y 4 neutros. Código, dimensiones y espesor propios por acabado; consulta manual por WhatsApp.
