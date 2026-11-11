@@ -2,7 +2,7 @@
 
 La página del tema y el enlace del pie conducen al formulario de reclamos y quejas. El receptor es un proyecto privado de Apps Script ejecutado con la cuenta de atención; su URL de recepción es pública y se configura en la plantilla. La hoja de seguimiento permanece privada en Google Drive.
 
-El usuario solicitó un mínimo de 45 respuestas obligatorias. El formulario incluye 35 preguntas adicionales con «No sé» y «No aplica», además de los datos principales, fecha de compra, número de pedido y número de comprobante. Si el comprobante está a nombre de otra persona, también pide el nombre o razón social y el documento de su titular. Por indicación expresa del usuario, el teléfono es obligatorio. Departamento, provincia, distrito y dirección son obligatorios cuando se elige recibir la respuesta por carta. Es necesario que el contador o asesor legal revise el riesgo de que esta extensión y la exigencia del teléfono dificulten presentar una reclamación; Indecopi ha señalado que no se debe condicionar su registro al número telefónico.
+El usuario solicitó un mínimo de 45 respuestas obligatorias. El formulario incluye 35 preguntas adicionales con «No sé» y «No aplica», además de los datos principales, fecha de compra, número de pedido y número de comprobante. Si el comprobante está a nombre de otra persona, también pide el nombre o razón social y el documento de su titular. El teléfono es opcional por decisión del usuario. Departamento, provincia, distrito y dirección son obligatorios cuando se elige recibir la respuesta por carta. Es necesario que el contador o asesor legal revise el riesgo de que la extensión y los demás campos obligatorios dificulten presentar una reclamación.
 
 ## Operación
 

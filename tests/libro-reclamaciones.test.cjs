@@ -115,13 +115,22 @@ test('la ficha actual conserva por separado identidad y ubicación en hoja, cons
   assert.equal(h.sent.length, 2);
 });
 
-test('la versión actual exige nombres, apellidos, tipo y número de documento y teléfono', () => {
-  for (const values of [{given_name: ''}, {family_name: ''}, {document_type: ''}, {document_type: 'Inexistente'}, {document: ''}, {phone: ''}]) {
+test('la versión actual exige nombres, apellidos, tipo y número de documento', () => {
+  for (const values of [{given_name: ''}, {family_name: ''}, {document_type: ''}, {document_type: 'Inexistente'}, {document: ''}]) {
     const h = harness();
     assert.match(h.doPost(currentRequest(values)).content, /No pudimos confirmar el envío/);
     assert.equal(h.rows.length, 1);
     assert.equal(h.sent.length, 0);
   }
+});
+
+test('la versión actual registra sin teléfono y envía ambas copias', () => {
+  const h = harness();
+  const result = h.doPost(currentRequest({phone: ''}));
+  assert.match(result.content, /Tu reclamación fue registrada/);
+  assert.equal(h.rows[1][7], '');
+  assert.equal(h.sent.length, 2);
+  for (const text of [result.content, ...h.sent.map(mail => mail.body)]) assert.match(text, /Teléfono: No indicado/);
 });
 
 test('carta requiere ubicación completa; el correo admite domicilio omitido y ubicación alternativa', () => {
@@ -281,7 +290,7 @@ test('acepta el teléfono vacío y conserva las 35 respuestas adicionales en amb
   }
 });
 
-test('la página y el receptor usan las mismas 35 preguntas y exigen el teléfono nuevo', () => {
+test('la página y el receptor usan las mismas 35 preguntas y el teléfono es opcional', () => {
   const page = fs.readFileSync(path.join(__dirname, '../sections/libro-reclamaciones.liquid'), 'utf8');
   const match = page.match(/assign book_questions = '([^']+)' \| split: '\|'/);
   assert.ok(match);
@@ -289,7 +298,7 @@ test('la página y el receptor usan las mismas 35 preguntas y exigen el teléfon
   assert.equal(match[1].split('|').length, 35);
   assert.match(page, /name="q_{{ forloop.index }}" required/);
   assert.match(page, /<input name="phone"[^>]*>/);
-  assert.match(page.match(/<input name="phone"[^>]*>/)[0], /required/);
+  assert.doesNotMatch(page.match(/<input name="phone"[^>]*>/)[0], /required/);
 });
 
 test('admite carta sin correo y conserva una constancia imprimible sin reintentos al cliente', () => {

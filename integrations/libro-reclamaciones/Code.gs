@@ -155,7 +155,7 @@ function doPost(e) {
       // appendRow can reinterpret identifiers as numbers even in preformatted cells.
       // A leading apostrophe forces text and preserves zeros without evaluating formulas.
       sheet.getRange(row, 5).setNumberFormat('@').setValue("'" + data.document);
-      sheet.getRange(row, 8).setNumberFormat('@').setValue("'" + data.phone);
+      sheet.getRange(row, 8).setNumberFormat('@').setValue(data.phone ? "'" + data.phone : '');
       [data.purchaseDate, data.orderNumber, data.receiptNumber, data.receiptHolderDocument].forEach((value, index) => {
         if (value) sheet.getRange(row, [27, 28, 29, 31][index]).setNumberFormat('@').setValue("'" + value);
       });
@@ -204,7 +204,7 @@ function validate_(p) {
     document: field('document', 'documento de identidad', 60, true),
     address: field('address', 'domicilio', 250, false),
     email: field('email', 'correo electrónico', 254, false),
-    phone: field('phone', 'teléfono', 40, current),
+    phone: field('phone', 'teléfono', 40, false),
     minor: choice('minor', 'menor de edad', ['Sí', 'No']),
     guardian: field('guardian', 'padre, madre o apoderado', 150, false),
     itemType: choice('item_type', 'bien o servicio', ['Producto', 'Servicio']),
