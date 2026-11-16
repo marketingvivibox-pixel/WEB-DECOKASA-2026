@@ -1,3 +1,10 @@
+## 16/11/2026 - Propuesta de movimiento para inicio y catálogo
+
+- [x] Entradas de cabecera, portada, marcas, promociones, pasos de compra, filtros, tarjetas y pie. Cortina de cheurones con salida hacia la derecha.
+- [x] Portada y catálogo comprobados en Chrome de escritorio y en vista de 390 px. Se observó la cortina sobre la página saliente en escritorio.
+- [x] Vistas locales de inicio y catálogo actualizadas. Validador de estructura y paquete Shopify regenerado.
+- [ ] Pendiente revisión visual de la propuesta y eventual integración en el tema oficial.
+
 # Libro de Reclamaciones: respaldo — 11/11/2026
 
 - Carpeta central [integrations/libro-reclamaciones](../integrations/libro-reclamaciones/README.md) con índice, código de Google, copia fechada de componentes del tema, manifiesto y recuperación.

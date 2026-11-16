@@ -1,4 +1,10 @@
 {%- liquid
+  assign storefront_motion = false
+  unless request.design_mode
+    if request.page_type == 'index' or request.page_type == 'collection'
+      assign storefront_motion = true
+    endif
+  endunless
   assign custom_landing = false
   if template.suffix == 'landing-spc' or template.suffix == 'landing-pvc'
     assign custom_landing = true
@@ -17,12 +23,17 @@
       {{ 'decokasa.css' | asset_url | stylesheet_tag }}
       <script src="{{ 'decokasa.js' | asset_url }}" defer></script>
     {% endunless %}
+    {% if storefront_motion %}
+      {{ 'decokasa-motion.css' | asset_url | stylesheet_tag }}
+      <script src="{{ 'decokasa-motion.js' | asset_url }}" defer></script>
+    {% endif %}
   </head>
-  <body{% if template.suffix == 'landing-spc' %} class="spc-layout"{% elsif template.suffix == 'landing-pvc' %} class="pvc-layout"{% endif %}>
+  <body{% if template.suffix == 'landing-spc' %} class="spc-layout"{% elsif template.suffix == 'landing-pvc' %} class="pvc-layout"{% endif %}{% if storefront_motion %} data-motion-home="{{ routes.root_url | escape }}" data-motion-catalog="{{ routes.all_products_collection_url | escape }}"{% endif %}>
+    {% if storefront_motion %}<div class="motion-curtain" aria-hidden="true"></div>{% endif %}
     {% unless custom_landing %}{% section 'header' %}{% endunless %}
     <main id="main">{{ content_for_layout }}</main>
     {% unless custom_landing %}
-      {% unless template.suffix == 'libro-reclamaciones' %}<div class="demo">Tienda en preparación · Los formularios son de prueba y todavía no envían solicitudes.</div>{% endunless %}
+      {% unless template.suffix == 'libro-reclamaciones' %}<div class="demo" data-motion>Tienda en preparación · Los formularios son de prueba y todavía no envían solicitudes.</div>{% endunless %}
       {% section 'footer' %}
     {% endunless %}
     {% render 'book-link' %}

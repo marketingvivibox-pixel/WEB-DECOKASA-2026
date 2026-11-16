@@ -1,3 +1,9 @@
+## 16/11/2026 - Animaciones reutilizables de inicio y catálogo
+
+Primera propuesta en `codex/decokasa-animaciones`. Las entradas duran 880 ms con desplazamiento corto y desfase de 75 ms dentro de cada grupo. La portada utiliza un acercamiento leve en la imagen principal y conserva su visibilidad durante el movimiento. La cortina usa cheurones negro grafito y dorado que van de izquierda a derecha durante 1,12 s entre inicio y catálogo, en ambos sentidos. Se respeta la preferencia de movimiento reducido y el efecto se omite dentro del editor Shopify.
+
+Para futuros diseños, `assets/decokasa-motion.css` concentra duración, curva, distancia y colores. En el marcado, `data-motion` añade una entrada, `data-motion="settle"` mueve suavemente un elemento visible, `data-motion="image"` escala el contenido de un marco y `data-motion-group` escalona los elementos hermanos marcados. `assets/decokasa-motion.js` activa cada entrada al llegar a la zona visible. El tema carga ambos recursos en el inicio y las colecciones. Las selecciones, enlaces y filtros conservan su navegación normal.
+
 # Libro de Reclamaciones: respaldo y protección — 11/11/2026
 
 Índice, programa de Google, copia fechada, recuperación y pruebas: [integrations/libro-reclamaciones](../integrations/libro-reclamaciones/README.md). El teléfono es opcional; Apps Script activo versión 6. El respaldo del código no incluye registros ni propiedades privadas y el repositorio es público. La copia de la hoja en el Drive de Atención es puntual, no automática. Las alertas de GitHub no impiden por sí mismas una modificación directa al tema o a `main`. Las notas cronológicas anteriores que mencionan teléfono obligatorio describen un estado superado.

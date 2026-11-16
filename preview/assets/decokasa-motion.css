@@ -1,0 +1,166 @@
+:root {
+  --motion-duration: 880ms;
+  --motion-stagger: 75ms;
+  --motion-distance: 18px;
+  --motion-ease: cubic-bezier(.2, .72, .25, 1);
+  --motion-curtain-half: 560ms;
+  --motion-curtain-duration: calc(2 * var(--motion-curtain-half));
+  --motion-curtain-ease: cubic-bezier(.65, 0, .35, 1);
+  --motion-curtain-base: #151719;
+  --motion-curtain-stripe: #292b2d;
+  --motion-curtain-accent: #caa746;
+  --motion-curtain-shape: polygon(
+    0 0, 92% 0, 100% 50%, 92% 100%, 0 100%, 8% 50%
+  );
+  --motion-curtain-paint:
+    repeating-linear-gradient(24deg, var(--motion-curtain-base) 0 14vw,
+      var(--motion-curtain-accent) 14vw calc(14vw + 1px),
+      var(--motion-curtain-stripe) calc(14vw + 1px) 19vw,
+      var(--motion-curtain-base) 19vw 25vw) top / 100% 50% no-repeat,
+    repeating-linear-gradient(156deg, var(--motion-curtain-base) 0 14vw,
+      var(--motion-curtain-accent) 14vw calc(14vw + 1px),
+      var(--motion-curtain-stripe) calc(14vw + 1px) 19vw,
+      var(--motion-curtain-base) 19vw 25vw) bottom / 100% 50% no-repeat,
+    var(--motion-curtain-base);
+}
+
+.motion-curtain {
+  display: none;
+  position: fixed;
+  inset: 0 -12vw;
+  z-index: 2147483647;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media screen and (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  .motion-curtain {
+    display: block;
+  }
+
+  @supports (view-transition-name: decokasa-curtain) {
+    .motion-curtain {
+      view-transition-name: decokasa-curtain;
+    }
+
+    ::view-transition {
+      pointer-events: none;
+    }
+
+    ::view-transition-group(root) {
+      animation-duration: var(--motion-curtain-duration);
+    }
+
+    ::view-transition-old(root) {
+      animation: none;
+      mix-blend-mode: normal;
+    }
+
+    ::view-transition-new(root) {
+      animation: motion-swap var(--motion-curtain-duration) step-end both;
+      mix-blend-mode: normal;
+    }
+
+    ::view-transition-group(decokasa-curtain) {
+      z-index: 1;
+      inset: 0 -12vw;
+      width: auto;
+      height: auto;
+      clip-path: var(--motion-curtain-shape);
+      background: var(--motion-curtain-paint);
+      animation: motion-curtain-cross var(--motion-curtain-duration) linear both;
+    }
+
+    ::view-transition-image-pair(decokasa-curtain) {
+      display: none;
+    }
+  }
+
+  .motion-curtain[data-curtain-state] {
+    opacity: 1;
+    clip-path: var(--motion-curtain-shape);
+    background: var(--motion-curtain-paint);
+  }
+
+  .motion-curtain[data-curtain-state="cover"] {
+    animation: motion-curtain-cover var(--motion-curtain-half) var(--motion-curtain-ease) both;
+  }
+
+  .motion-curtain[data-curtain-state="reveal"] {
+    animation: motion-curtain-reveal var(--motion-curtain-half) var(--motion-curtain-ease) both;
+  }
+
+  [data-motion-active] {
+    animation: motion-rise var(--motion-duration) var(--motion-ease) var(--motion-delay, 0ms) backwards;
+  }
+
+  [data-motion="settle"][data-motion-active] {
+    animation-name: motion-settle;
+  }
+
+  [data-motion="image"][data-motion-active] {
+    animation: none;
+  }
+
+  [data-motion="image"][data-motion-active] > * {
+    animation: motion-image var(--motion-duration) var(--motion-ease) backwards;
+  }
+
+  [data-motion-active]:focus-within {
+    animation: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    [data-motion-home] :is(.brand-photo, .catalog-product-photo, .catalog-illustration, .brand-go .icon, .opportunity-go .icon) {
+      transition: scale 550ms var(--motion-ease), translate 550ms var(--motion-ease);
+    }
+
+    [data-motion-home] :is(.brand-visual:hover .brand-photo, .catalog-card-media:hover :is(.catalog-product-photo, .catalog-illustration)) {
+      scale: 1.035;
+    }
+
+    [data-motion-home] :is(.brand-visual:hover .brand-go .icon, .opportunity:hover .opportunity-go .icon) {
+      translate: 4px 0;
+    }
+  }
+}
+
+@keyframes motion-rise {
+  from { opacity: .5; translate: 0 var(--motion-distance); }
+  to { opacity: 1; translate: 0 0; }
+}
+
+@keyframes motion-settle {
+  from { translate: 0 8px; }
+  to { translate: 0 0; }
+}
+
+@keyframes motion-image {
+  from { scale: 1.025; }
+  to { scale: 1; }
+}
+
+@keyframes motion-swap {
+  0% { opacity: 0; }
+  50%, 100% { opacity: 1; }
+}
+
+@keyframes motion-curtain-cross {
+  0% { transform: translateX(-100%); animation-timing-function: var(--motion-curtain-ease); }
+  50% { transform: translateX(0); animation-timing-function: var(--motion-curtain-ease); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes motion-curtain-cover {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes motion-curtain-reveal {
+  from { transform: translateX(0); }
+  to { transform: translateX(100%); }
+}
