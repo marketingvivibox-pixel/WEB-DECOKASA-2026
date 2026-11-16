@@ -44,7 +44,7 @@
     const choice=event.target.closest?.('[data-card-color]');
     if(!choice||event.defaultPrevented||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey||(event.button&&event.button!==0))return;
     const card=choice.closest('.catalog-card'),photo=card?.querySelector('.catalog-product-photo'),pending=card?.querySelector('[data-card-image-pending]'),reference=card?.querySelector('[data-card-image-reference]');
-    if(!card||!photo||!pending)return;
+    if(!card)return;
     event.preventDefault();
     card.querySelectorAll('[data-card-color]').forEach(link=>link.removeAttribute('aria-current'));
     choice.setAttribute('aria-current','true');
@@ -53,6 +53,11 @@
     name.textContent=choice.dataset.colorName;
     label.replaceChildren(document.createTextNode('Color: '),name);
     if(choice.dataset.colorAvailable==='false')label.append(document.createTextNode(' (no disponible)'));
+    const price=card.querySelector('[data-card-price]'),compare=card.querySelector('[data-card-compare]');
+    if(price)price.textContent=choice.dataset.colorPrice;
+    if(compare){compare.textContent=choice.dataset.colorCompare;compare.hidden=!choice.dataset.colorCompare;}
+    card.dispatchEvent(new CustomEvent('decokasa:card-variant',{bubbles:true,detail:choice.dataset}));
+    if(!photo||!pending)return;
     if(reference)reference.hidden=choice.dataset.colorImageReference!=='true';
     if(choice.dataset.colorImage){
       photo.removeAttribute('srcset');

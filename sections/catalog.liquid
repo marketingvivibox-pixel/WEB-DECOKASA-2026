@@ -8,20 +8,17 @@
   <div class="wrap">
     <nav class="breadcrumb catalog-breadcrumb" data-motion="settle" aria-label="Ruta de navegación"><a href="{{ routes.root_url }}">Inicio</a><span aria-hidden="true">/</span><span>Catálogo</span></nav>
     {% if is_demo %}<p class="catalog-demo-note" data-motion="settle">Vista de muestra · Productos e ilustraciones de ejemplo.</p>{% endif %}
-    <div class="catalog-intro">
-      <div data-motion="settle"><p class="eyebrow">Nuestras marcas, un solo lugar</p><h1>{{ section.settings.heading | escape }}</h1><p>{{ section.settings.description | escape }}</p></div>
-      <div class="catalog-intro-note" data-motion="settle">{% render 'icon', name: 'headphones' %}<div><strong>Elige con ayuda de un asesor</strong><span>Consulta el precio, la disponibilidad y la entrega.</span></div></div>
-    </div>
-    <nav class="catalog-brands" data-motion-group aria-label="Explorar marcas">
-      {% assign selected_brand = '' %}{% unless is_demo %}{% for vendor in catalog_brands %}{% assign brand_collection = vendor %}{% if brand_collection.url == blank %}{% assign brand_collection = collections[vendor] %}{% endif %}{% if collection.handle == brand_collection.handle %}{% assign selected_brand = brand_collection.handle %}{% endif %}{% endfor %}{% endunless %}
-      <a class="catalog-brand-all{% if selected_brand == blank %} is-selected{% endif %}" data-motion="settle" href="{{ routes.all_products_collection_url }}" {% if is_demo %}data-brand-choice=""{% endif %}{% if selected_brand == blank %} aria-current="page"{% endif %}>Todas las marcas</a>
-      {% for vendor in catalog_brands %}{% assign brand_collection = vendor %}{% if brand_collection.url == blank %}{% assign brand_collection = collections[vendor] %}{% endif %}{% if brand_collection.url != blank %}<a{% if selected_brand == brand_collection.handle %} class="is-selected" aria-current="page"{% endif %} href="{{ brand_collection.url }}" data-motion="settle" {% if is_demo %}data-brand-choice="{{ brand_collection.title | escape }}"{% endif %}><span class="brand-dot brand-dot-{{ brand_collection.handle }}" aria-hidden="true"></span>{{ brand_collection.title | escape }}</a>{% endif %}{% endfor %}
-    </nav>
+    <h1 class="sr-only">{{ section.settings.heading | escape }}</h1>
     <div class="catalog-layout">
       <aside class="catalog-sidebar" aria-label="Filtros del catálogo">
         <details class="catalog-filters" data-motion data-catalog-filters open>
           <summary>{% render 'icon', name: 'filter' %}<span>Filtrar productos</span>{% render 'icon', name: 'arrow' %}</summary>
           <div class="catalog-filter-body">
+            <nav class="catalog-brands" data-motion-group aria-label="Explorar marcas">
+            {% assign selected_brand = '' %}{% unless is_demo %}{% for vendor in catalog_brands %}{% assign brand_collection = vendor %}{% if brand_collection.url == blank %}{% assign brand_collection = collections[vendor] %}{% endif %}{% if collection.handle == brand_collection.handle %}{% assign selected_brand = brand_collection.handle %}{% endif %}{% endfor %}{% endunless %}
+            <a class="catalog-brand-all{% if selected_brand == blank %} is-selected{% endif %}" data-motion="settle" href="{{ routes.all_products_collection_url }}" {% if is_demo %}data-brand-choice=""{% endif %}{% if selected_brand == blank %} aria-current="page"{% endif %}>Todas las marcas</a>
+            {% for vendor in catalog_brands %}{% assign brand_collection = vendor %}{% if brand_collection.url == blank %}{% assign brand_collection = collections[vendor] %}{% endif %}{% if brand_collection.url != blank %}<a{% if selected_brand == brand_collection.handle %} class="is-selected" aria-current="page"{% endif %} href="{{ brand_collection.url }}" data-motion="settle" {% if is_demo %}data-brand-choice="{{ brand_collection.title | escape }}"{% endif %}><span class="brand-dot brand-dot-{{ brand_collection.handle }}" aria-hidden="true"></span>{{ brand_collection.title | escape }}</a>{% endif %}{% endfor %}
+            </nav>
             {% if is_demo %}
               <label>Marca<select data-filter-brand><option value="">Todas las marcas</option>{% for vendor in shop.vendors %}<option>{{ vendor | escape }}</option>{% endfor %}</select></label>
               <label>Categoría<select data-filter-category><option value="">Todas las categorías</option>{% for type in shop.types %}<option>{{ type | escape }}</option>{% endfor %}</select></label>

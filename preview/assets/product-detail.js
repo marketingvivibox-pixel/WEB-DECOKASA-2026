@@ -64,7 +64,7 @@
       }
       refreshSummary();
     }
-    page.querySelector('[data-add-request]').addEventListener('click', () => {
+    page.querySelector('[data-add-request]').addEventListener('click', event => {
       if (!quantity.reportValidity() || !validQuantity(quantity.value)) return;
       const option = form.querySelector('[name=variant_id] option');
       if (!option?.value) return;
@@ -75,6 +75,9 @@
       if (!validQuantity(count)) { status.textContent = 'La cantidad máxima por presentación es 1 000 000.'; return; }
       if (existing) existing.quantity = count;
       else lines.push({shopify_product_id: form.dataset.productId, shopify_variant_id: option.value, sku: option.dataset.sku || '', title: option.textContent.trim(), quantity: count, price_cents: price});
+      if (event.currentTarget.hasAttribute('data-interface-mirror') && !page.hasAttribute('data-cart-prefill')) {
+        page.dispatchEvent(new CustomEvent('decokasa:cart-add', {bubbles: true, detail: {quantity: Number(quantity.value)}}));
+      }
       quantity.value = '1';
       quantity.dispatchEvent(new Event('input', {bubbles: true}));
       render();

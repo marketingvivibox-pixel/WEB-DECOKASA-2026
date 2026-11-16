@@ -1,3 +1,29 @@
+## 16/11/2026 — Integración temporal del rediseño en producción
+
+- [x] Guardada la versión anterior en GitHub (commit `9863c09` y etiqueta `respaldo/main-antes-rediseno-20261116`).
+- [x] La fusión trae el tema revisado de `c38fa73`. Pasaron las 89 pruebas, incluidas 24 del Libro de Reclamaciones, y Shopify Theme Check sobre el paquete de 199 archivos.
+
+
+## 16/11/2026 — Rediseño de las interfaces principales
+
+- [x] Aplicadas las seis maquetas de inicio, catálogo y ficha general a escritorio y móvil en `codex/rediseño-interfaces`, a partir de `fef92ea`.
+- [x] Actualizadas la navegación, portada, filtros, tarjetas, ficha y pie. El carrito y favoritos se guardan en el navegador y las líneas del carrito abren la solicitud con asesor.
+- [x] Comprobados en Chrome los anchos de 320, 390 y 1440 px, la navegación y el paso de una variante con cantidad a la solicitud. La vista local usa imágenes y precios de muestra.
+- [x] Pasaron las 89 pruebas y la verificación del respaldo del Libro de Reclamaciones. Shopify Theme Check validó el paquete de 193 archivos sin hallazgos.
+
+## 16/11/2026 — Proporciones de las maquetas y fotografías de inicio
+
+- [x] Aplicadas las proporciones de cabecera, carruseles, mosaico, catálogo, ficha general y pie. El contenido ocupa el 87 % en móvil y el 68 % en escritorio.
+- [x] Sustituida la foto de la primera marquesina en ambos formatos. El mosaico tiene cuatro fotografías de categorías con enlaces a sus colecciones.
+- [x] Comprobados inicio, catálogo y ficha general en Chrome a ocho anchos entre 320 y 1920 px. Las proporciones se mantienen en cada formato y los cambios de imagen de la galería funcionan.
+- [x] Pasaron las 89 pruebas y la comprobación del respaldo del Libro. Se regeneró el paquete de 199 archivos y Shopify Theme Check terminó sin hallazgos.
+
+## 16/11/2026 — Corrección de la vista local de escritorio
+
+- [x] Ajustados el menú y los círculos de marcas al ancho de escritorio definido en las maquetas. La vista local carga la versión de los recursos que corresponde al contenido generado.
+- [x] Recargada la pestaña de escritorio a 935 px. Se comprobaron la portada nueva, los siete accesos en una fila y las cuatro categorías por necesidad.
+- [x] Verificada la portada en cinco anchos entre 900 y 1920 px. Pasaron las 89 pruebas y Shopify Theme Check terminó sin hallazgos en el paquete regenerado.
+
 ## 16/11/2026 - Propuesta de movimiento para inicio y catálogo
 
 - [x] Entradas de cabecera, portada, marcas, promociones, pasos de compra, filtros, tarjetas y pie. Cortina de cheurones con salida hacia la derecha.

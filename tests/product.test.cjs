@@ -28,10 +28,11 @@ test('Ficha Liquid: rutas, galería, variantes y ajustes editoriales sin datos d
   assert.equal(doc.querySelectorAll('[name=variant_id] option').length, 1);
   assert.equal(doc.querySelector('.product-demo'), null);
   const hidden = parseHTML(await html(product(), {show_price:false, show_sku:false, show_vendor:false, show_description:false})).document;
-  assert.equal(hidden.querySelector('[data-product-price]'), null);
-  assert.equal(hidden.querySelector('.product-sku'), null);
-  assert.equal(hidden.querySelector('.product-vendor'), null);
-  assert.equal(hidden.querySelector('.product-information'), null);
+  assert.ok(!hidden.querySelector('[data-product-price]'));
+  assert.ok(!hidden.querySelector('dd[data-sku]'));
+  assert.ok(!hidden.querySelector('.product-vendor'));
+  assert.ok(!hidden.querySelector('.interface-product-description'));
+  assert.ok(!hidden.querySelector('.product-information'));
 });
 test('Opciones múltiples conservan IDs seleccionados y una combinación inexistente no permite solicitar', async () => {
   const p = product();
@@ -132,7 +133,7 @@ test('Cambio nativo de variante reemplaza sección y conserva cantidad/contacto 
   app.click('[data-option-link]:not([aria-current])');
   await settle();
   assert.match(app.document.querySelector('[data-product-price]').textContent, /140.00/);
-  assert.equal(app.document.querySelector('[data-sku]').textContent, 'SKU-002');
+  assert.equal(app.document.querySelector('dd[data-sku]').textContent, 'SKU-002');
   assert.equal(app.document.querySelector('[data-product-quantity]').value, '3');
   assert.equal(app.document.querySelector('[name=name]').value, 'Cliente de prueba');
   assert.equal(app.document.querySelector('[data-request-details]').open, true);
