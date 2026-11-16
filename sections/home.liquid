@@ -1,14 +1,105 @@
-<section class="home-hero" aria-labelledby="home-title"><div class="wrap home-hero-grid"><div class="hero-copy"><h1 id="home-title" data-motion="settle">{{ section.settings.heading | escape }}<span>{{ section.settings.heading_accent | escape }}</span></h1><div class="actions" data-motion="settle"><a class="button yellow" href="{{ routes.all_products_collection_url }}">{{ section.settings.primary_label | escape }}{% render 'icon', name: 'arrow' %}</a><a class="button outline" href="{{ routes.all_products_collection_url }}">Ver categorías{% render 'icon', name: 'arrow' %}</a></div><div class="hero-benefits" data-motion-group><div data-motion="settle">{% render 'icon', name: 'truck' %}<span>Coordina<br>tu envío</span></div><div data-motion="settle">{% render 'icon', name: 'shield' %}<span>Compra<br>con asesor</span></div><div data-motion="settle">{% render 'icon', name: 'form' %}<span>Solicita<br>tu producto</span></div><div data-motion="settle">{% render 'icon', name: 'headphones' %}<span>Atención<br>personalizada</span></div></div></div><div class="hero-media" data-motion="image">{% if section.settings.hero_image != blank %}{{ section.settings.hero_image | image_url: width: 1600 | image_tag: widths: '640, 960, 1600', sizes: '(min-width: 900px) 56vw, 100vw', loading: 'eager', fetchpriority: 'high', class: 'hero-photo' }}{% else %}{% render 'reference-image', crop: 'hero', loading: 'eager' %}{% endif %}</div></div></section>
-<section class="wrap home-brands" id="marcas" aria-labelledby="brands-title"><h2 id="brands-title" data-motion>Nuestras marcas</h2><div class="brands visual-brands" data-motion-group>
-<a class="brand decokasa brand-visual" data-motion href="{% render 'catalog-url', routes: routes, collections: collections, selected_collection: section.settings.decokasa_collection, default_handle: 'decokasa' %}"><strong class="sr-only">DECOKASA</strong><span class="sr-only"> · Pisos PVC y SPC, paneles PVC, wall panel, alfombras y artículos para el hogar</span>{% if section.settings.decokasa_image != blank %}{{ section.settings.decokasa_image | image_url: width: 1200 | image_tag: widths: '400, 800, 1200', sizes: '(min-width: 900px) 24vw, (min-width: 600px) 48vw, 100vw', loading: 'lazy', class: 'brand-photo', alt: '' }}{% else %}{% render 'reference-image', crop: 'hogar' %}{% endif %}<span class="brand-go">{% render 'icon', name: 'arrow' %}</span></a>
-<a class="brand xion brand-visual" data-motion href="{% render 'catalog-url', routes: routes, collections: collections, selected_collection: section.settings.xion_collection, default_handle: 'xion' %}"><strong class="sr-only">XION</strong><span class="sr-only"> · Tecnología y electrodomésticos</span>{% if section.settings.xion_image != blank %}{{ section.settings.xion_image | image_url: width: 1200 | image_tag: widths: '400, 800, 1200', sizes: '(min-width: 900px) 24vw, (min-width: 600px) 48vw, 100vw', loading: 'lazy', class: 'brand-photo', alt: '' }}{% else %}{% render 'reference-image', crop: 'xion' %}{% endif %}<span class="brand-go">{% render 'icon', name: 'arrow' %}</span></a>
-<a class="brand biflex brand-visual" data-motion href="{% render 'catalog-url', routes: routes, collections: collections, selected_collection: section.settings.biflex_collection, default_handle: 'biflex' %}"><strong class="sr-only">BIFLEX</strong><span class="sr-only"> · Activa tu día</span>{% if section.settings.biflex_image != blank %}{{ section.settings.biflex_image | image_url: width: 1200 | image_tag: widths: '400, 800, 1200', sizes: '(min-width: 900px) 24vw, (min-width: 600px) 48vw, 100vw', loading: 'lazy', class: 'brand-photo', alt: '' }}{% else %}{% render 'reference-image', crop: 'biflex' %}{% endif %}<span class="brand-go">{% render 'icon', name: 'arrow' %}</span></a>
-<a class="brand baby brand-visual" data-motion href="{% render 'catalog-url', routes: routes, collections: collections, selected_collection: section.settings.baby_collection, default_handle: 'mundo-baby' %}"><strong class="sr-only">MUNDOBABY</strong><span class="sr-only"> · Para acompañar su crecimiento</span>{% if section.settings.baby_image != blank %}{{ section.settings.baby_image | image_url: width: 1200 | image_tag: widths: '400, 800, 1200', sizes: '(min-width: 900px) 24vw, (min-width: 600px) 48vw, 100vw', loading: 'lazy', class: 'brand-photo', alt: '' }}{% else %}{% render 'reference-image', crop: 'baby' %}{% endif %}<span class="brand-go">{% render 'icon', name: 'arrow' %}</span></a>
-</div></section>
-<div class="wrap"><a class="opportunity" data-motion href="{{ routes.all_products_collection_url }}"><span class="opportunity-icon">{% render 'icon', name: 'tag' %}</span><span>{{ section.settings.promo_text | escape }}</span><span class="opportunity-go">{% render 'icon', name: 'arrow' %}</span><span class="opportunity-art" aria-hidden="true">{% render 'reference-image', crop: 'promo' %}</span></a></div>
-{% if section.settings.featured_collection != blank %}<section class="wrap section home-featured"><div class="section-head" data-motion><h2>Explora el catálogo</h2><a href="{{ routes.all_products_collection_url }}">Ver todos {% render 'icon', name: 'arrow' %}</a></div><div class="cards" data-motion-group>{% for product in section.settings.featured_collection.products limit: 3 %}{% render 'product-card', product: product %}{% endfor %}</div></section>{% endif %}
-<section class="wrap section how-to" id="como-comprar"><div class="section-head" data-motion><div><p class="eyebrow">Así de fácil</p><h2>Elige. Solicita. Coordina.</h2></div><p>Tu próxima compra empieza aquí.</p></div><div class="buy-steps" data-motion-group><div data-motion><span class="step-number">01</span><div><h3>Encuentra tu producto</h3><p>Explora el catálogo por categoría o marca y conoce cada producto en su página.</p></div></div><div data-motion><span class="step-number">02</span><div><h3>Completa tu solicitud</h3><p>Indica la presentación y cantidad que necesitas en el formulario del producto.</p></div></div><div data-motion><span class="step-number">03</span><div><h3>Coordina con un asesor</h3><p>Confirma disponibilidad, importe final, forma de pago y entrega antes de comprar.</p></div></div></div></section>
-<section class="wrap wholesale-section" id="mayorista"><div class="wholesale-banner" data-motion><div class="wholesale-symbol">{% render 'icon', name: 'box' %}</div><div><p class="eyebrow">División mayorista</p><h2>Más posibilidades para tu negocio.</h2><p>Explora los productos e indica la cantidad que buscas en tu solicitud.</p></div><a class="button yellow" href="{{ routes.all_products_collection_url }}">Ver productos {% render 'icon', name: 'arrow' %}</a></div></section>
+{% assign brand_crops = 'hogar|xion|biflex|baby' | split: '|' %}
+{% assign brand_names = 'DECOKASA|Xion|Biflex|Mundo Baby' | split: '|' %}
+{% assign brand_handles = 'decokasa|xion|biflex|mundo-baby' | split: '|' %}
+{% assign brand_keys = 'decokasa|xion|biflex|baby' | split: '|' %}
+{% assign brand_symbols = 'box|headphones|fitness|baby' | split: '|' %}
+{% assign slide_titles = 'Acabados para renovar tu hogar|Encuentra ideas para cada ambiente' | split: '|' %}
+{% assign slide_assets = 'spc-2026-sala-composicion.webp|pvc-ambiente-sala.webp' | split: '|' %}
+{% assign is_demo = false %}
+{% assign featured = section.settings.featured_collection | default: collections.all %}
+{% capture hero_track %}HomeHero-{{ section.id }}{% endcapture %}
+{% capture featured_track %}HomeFeatured-{{ section.id }}{% endcapture %}
+
+<section class="interface-hero" aria-label="Destacados de DECOKASA" data-carousel data-carousel-hero>
+  <div class="interface-track interface-hero-track" id="{{ hero_track }}" data-carousel-track tabindex="0" aria-label="Diapositivas destacadas">
+    <div class="interface-slide interface-slide--first">
+      {% if section.settings.hero_image != blank %}
+        {{ section.settings.hero_image | image_url: width: 1920 | image_tag: widths: '640, 960, 1440, 1920', sizes: '100vw', loading: 'eager', fetchpriority: 'high', class: 'interface-slide-image', alt: '' }}
+      {% else %}{% render 'reference-image', crop: 'hero', loading: 'eager' %}{% endif %}
+      <div class="wrap interface-slide-content" data-motion="settle">
+        <h1>{{ section.settings.heading | escape }} <span>{{ section.settings.heading_accent | escape }}</span></h1>
+        <a class="button interface-button" href="{{ routes.all_products_collection_url }}">{{ section.settings.primary_label | escape }}</a>
+      </div>
+    </div>
+    {% for title in slide_titles %}
+      {% assign slide_setting_id = 'hero_image_' | append: forloop.index0 %}
+      {% assign extra_image = section.settings[slide_setting_id] %}
+      <div class="interface-slide">
+        {% if extra_image != blank %}
+          {{ extra_image | image_url: width: 1920 | image_tag: widths: '640, 960, 1440, 1920', sizes: '100vw', loading: 'lazy', class: 'interface-slide-image', alt: '' }}
+        {% else %}<img class="interface-slide-image" src="{{ slide_assets[forloop.index0] | asset_url }}" alt="" width="1440" height="810" loading="lazy">{% endif %}
+        <div class="wrap interface-slide-content">
+          <h2>{{ title }}</h2>
+          <a class="button interface-button" href="{% render 'catalog-url', routes: routes, collections: collections, default_handle: 'hogar-y-acabados' %}">Explorar acabados</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  {% render 'storefront-carousel-controls', track_id: hero_track, dots: true %}
+</section>
+
+<section class="wrap interface-brands" id="marcas" aria-labelledby="InterfaceBrandsTitle">
+  <h2 id="InterfaceBrandsTitle" data-motion>Nuestras marcas</h2>
+  <div class="interface-brand-list" data-motion-group>
+    {% for name in brand_names %}
+      {% assign collection_setting = brand_keys[forloop.index0] | append: '_collection' %}
+      <a class="interface-brand interface-brand--{{ brand_crops[forloop.index0] }}" data-motion href="{% render 'catalog-url', routes: routes, collections: collections, selected_collection: section.settings[collection_setting], default_handle: brand_handles[forloop.index0] %}">
+        <span class="interface-brand-medallion">{% render 'icon', name: brand_symbols[forloop.index0] %}<strong>{{ name }}</strong></span>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="interface-showcase" aria-labelledby="InterfaceShowcaseTitle">
+  <div class="wrap">
+    <h2 id="InterfaceShowcaseTitle" data-motion>{{ section.settings.promo_text | escape }}</h2>
+    <div class="interface-mosaic" data-motion-group>
+      {% for name in brand_names %}
+        {% assign collection_setting = brand_keys[forloop.index0] | append: '_collection' %}
+        {% assign image_setting = brand_keys[forloop.index0] | append: '_image' %}
+        {% assign brand_image = section.settings[image_setting] %}
+        <a class="interface-tile interface-tile--{{ brand_crops[forloop.index0] }}" data-motion href="{% render 'catalog-url', routes: routes, collections: collections, selected_collection: section.settings[collection_setting], default_handle: brand_handles[forloop.index0] %}">
+          {% if brand_image != blank %}
+            {{ brand_image | image_url: width: 1200 | image_tag: widths: '360, 640, 960, 1200', sizes: '(min-width: 900px) 32vw, 100vw', loading: 'lazy', class: 'interface-tile-image', alt: '' }}
+          {% else %}{% render 'reference-image', crop: brand_crops[forloop.index0] %}{% endif %}
+          <span class="interface-tile-label">{{ name }} {% render 'icon', name: 'arrow' %}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% if featured.products.size > 0 %}
+  <section class="wrap interface-featured" data-carousel aria-labelledby="InterfaceFeaturedTitle">
+    <div class="interface-section-heading" data-motion><h2 id="InterfaceFeaturedTitle">Lo más popular</h2><a href="{{ routes.all_products_collection_url }}">Ver catálogo {% render 'icon', name: 'arrow' %}</a></div>
+    <div class="interface-track interface-product-track" id="{{ featured_track }}" data-carousel-track tabindex="0" aria-label="Productos populares">
+      {% for product in featured.products limit: 10 %}{% render 'product-card', product: product, demo: is_demo %}{% endfor %}
+    </div>
+    {% render 'storefront-carousel-controls', track_id: featured_track %}
+  </section>
+{% endif %}
+
+<section class="interface-how" id="como-comprar" aria-labelledby="InterfaceHowTitle">
+  <div class="wrap">
+    <h2 id="InterfaceHowTitle" data-motion>¿Cómo comprar en DECOKASA?</h2>
+    <ol class="interface-steps" data-motion-group>
+      <li data-motion><span aria-hidden="true">1</span><div><h3>Elige tu producto</h3><p>Explora las marcas y selecciona tu presentación.</p></div></li>
+      <li data-motion><span aria-hidden="true">2</span><div><h3>Completa tu solicitud</h3><p>Indica la cantidad que necesitas y tus datos de contacto.</p></div></li>
+      <li data-motion><span aria-hidden="true">3</span><div><h3>Coordina con un asesor</h3><p>Confirma disponibilidad, pago y entrega.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="wrap interface-wholesale" id="mayorista">
+  <div class="interface-wholesale-banner" data-motion>
+    <img class="interface-wholesale-image" src="{{ 'spc-2026-almacen-envios.webp' | asset_url }}" alt="" width="1440" height="810" loading="lazy">
+    <div class="interface-wholesale-copy">
+      <h2>División mayorista</h2>
+      <p>Encuentra productos para tu negocio y consulta por las cantidades que necesitas.</p>
+      <a class="button interface-button" href="{{ routes.all_products_collection_url }}">Explorar productos</a>
+    </div>
+  </div>
+</section>
 {% assign whatsapp_phone = section.settings.whatsapp_phone | remove: ' ' | remove: '+' | remove: '-' | remove: '(' | remove: ')' | remove: '.' %}
 {% assign whatsapp_href = section.settings.whatsapp_url %}
 {% assign whatsapp_text = section.settings.whatsapp_message | url_encode %}
@@ -117,6 +208,16 @@
       "type": "collection",
       "id": "featured_collection",
       "label": "Colección destacada"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_0",
+      "label": "Fotografía de la diapositiva 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_1",
+      "label": "Fotografía de la diapositiva 2"
     }
   ],
   "presets": [

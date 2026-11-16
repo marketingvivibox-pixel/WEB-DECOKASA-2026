@@ -21,6 +21,8 @@
     {{ content_for_header }}
     {% unless custom_landing %}
       {{ 'decokasa.css' | asset_url | stylesheet_tag }}
+      {{ 'decokasa-interface.css' | asset_url | stylesheet_tag }}
+      <script src="{{ 'decokasa-interface.js' | asset_url }}" defer></script>
       <script src="{{ 'decokasa.js' | asset_url }}" defer></script>
     {% endunless %}
     {% if storefront_motion %}
@@ -28,7 +30,7 @@
       <script src="{{ 'decokasa-motion.js' | asset_url }}" defer></script>
     {% endif %}
   </head>
-  <body{% if template.suffix == 'landing-spc' %} class="spc-layout"{% elsif template.suffix == 'landing-pvc' %} class="pvc-layout"{% endif %}{% if storefront_motion %} data-motion-home="{{ routes.root_url | escape }}" data-motion-catalog="{{ routes.all_products_collection_url | escape }}"{% endif %}>
+  <body{% if template.suffix == 'landing-spc' %} class="spc-layout"{% elsif template.suffix == 'landing-pvc' %} class="pvc-layout"{% else %} class="storefront-interface"{% endif %}{% if storefront_motion %} data-motion-home="{{ routes.root_url | escape }}" data-motion-catalog="{{ routes.all_products_collection_url | escape }}"{% endif %}>
     {% if storefront_motion %}<div class="motion-curtain" aria-hidden="true"></div>{% endif %}
     {% unless custom_landing %}{% section 'header' %}{% endunless %}
     <main id="main">{{ content_for_layout }}</main>
@@ -36,6 +38,6 @@
       {% unless template.suffix == 'libro-reclamaciones' %}<div class="demo" data-motion>Tienda en preparación · Los formularios son de prueba y todavía no envían solicitudes.</div>{% endunless %}
       {% section 'footer' %}
     {% endunless %}
-    {% render 'book-link' %}
+    {% if custom_landing %}{% render 'book-link' %}{% endif %}
   </body>
 </html>

@@ -1,16 +1,62 @@
 {% assign default_categories = 'tecnologia|electrodomesticos|bebes|fitness|hogar-y-acabados' | split: '|' %}
 {% assign catalog_types = settings.catalog_categories | default: default_categories %}
 <a class="skip" href="#main">Ir al contenido</a>
-<div class="service-bar" data-motion="settle"><div class="wrap"><div class="service-items"><span>{% render 'icon', name: 'truck' %} Coordina tu envío</span><span>{% render 'icon', name: 'shield' %} Compra con asesor</span>{% render 'customer-service', location: 'bar' %}</div><a class="wholesale-link" href="{{ routes.root_url }}#mayorista">{% render 'icon', name: 'box' %} División mayorista {% render 'icon', name: 'arrow' %}</a></div></div>
-<header class="store-header" data-motion="settle"><div class="wrap store-header-row">
-<a class="store-logo" href="{{ routes.root_url }}" aria-label="DECOKASA, inicio">{% if section.settings.logo != blank %}{{ section.settings.logo | image_url: width: 560 | image_tag: widths: '280, 560', sizes: '280px', loading: 'eager', alt: 'DECOKASA' }}{% else %}{% render 'reference-image', crop: 'logo', loading: 'eager' %}{% endif %}</a>
-<form class="store-search" action="{{ routes.search_url }}" method="get" role="search"><label class="sr-only" for="store-search">Buscar productos</label>{% render 'icon', name: 'search' %}<input id="store-search" type="search" name="q" placeholder="Buscar productos…" value="{{ search.terms | escape }}"><input type="hidden" name="type" value="product"><button type="submit" aria-label="Buscar">{% render 'icon', name: 'search' %}</button></form>
-<a class="header-help" href="{{ routes.root_url }}#como-comprar">{% render 'icon', name: 'headphones' %}<span>¿Cómo comprar? <small>Te acompañamos</small></span></a><a class="header-catalog" href="{{ routes.all_products_collection_url }}" aria-label="Explorar catálogo">{% render 'icon', name: 'bag' %}</a>
-</div></header>
-<div class="navigation-shell" data-motion="settle"><nav class="wrap store-nav" aria-label="Navegación principal">
-<details class="category-menu"><summary>{% render 'icon', name: 'menu' %}<span>Todas las categorías</span>{% render 'icon', name: 'arrow' %}</summary><div class="category-panel"><a href="{{ routes.all_products_collection_url }}">Ver todo el catálogo</a>{% for type in catalog_types %}{% assign category_collection = type %}{% if category_collection.url == blank %}{% assign category_collection = collections[type] %}{% endif %}{% if category_collection.url != blank %}<a href="{{ category_collection.url }}">{{ category_collection.title | escape }}</a>{% endif %}{% endfor %}</div></details>
-<div class="category-shortcuts">{% assign category_icons = 'headphones|blender|baby|fitness' | split: '|' %}{% for type in catalog_types limit: 4 %}{% assign category_collection = type %}{% if category_collection.url == blank %}{% assign category_collection = collections[type] %}{% endif %}{% if category_collection.url != blank %}<a href="{{ category_collection.url }}">{% render 'icon', name: category_icons[forloop.index0] %}{{ category_collection.title | escape }}</a>{% endif %}{% endfor %}<a href="{{ routes.root_url }}#marcas">{% render 'icon', name: 'tag' %}Nuestras marcas</a></div>
-</nav></div>
+<div class="service-bar interface-promo" data-motion="settle">
+  <a href="{{ routes.root_url }}#como-comprar">
+    {% for i in (1..9) %}
+      <span{% unless forloop.first %} aria-hidden="true"{% endunless %}>{{ section.settings.announcement | escape }}</span>
+    {% endfor %}
+  </a>
+</div>
+<header class="store-header" data-motion="settle">
+  <div class="wrap store-header-row">
+    <a class="store-logo" href="{{ routes.root_url }}" aria-label="DECOKASA, inicio">
+      {% if section.settings.logo != blank %}{{ section.settings.logo | image_url: width: 480 | image_tag: widths: '160, 320, 480', sizes: '180px', loading: 'eager', alt: 'DECOKASA' }}{% else %}{% render 'reference-image', crop: 'logo', loading: 'eager' %}{% endif %}
+    </a>
+    <form class="store-search" action="{{ routes.search_url }}" method="get" role="search">
+      <label class="sr-only" for="store-search">Buscar productos</label>
+      <input id="store-search" type="search" name="q" placeholder="¿Qué estás buscando?" value="{{ search.terms | escape }}">
+      <input type="hidden" name="type" value="product">
+      <button type="submit" aria-label="Buscar">{% render 'icon', name: 'search' %}</button>
+    </form>
+    {% render 'customer-service', location: 'header' %}
+    <button class="header-catalog" type="button" data-interface-cart aria-label="Abrir carrito" aria-haspopup="dialog" hidden>
+      {% render 'icon', name: 'bag' %}<span class="interface-cart-count" data-interface-cart-count hidden></span>
+    </button>
+  </div>
+</header>
+<div class="navigation-shell" data-motion="settle">
+  <nav class="wrap store-nav" aria-label="Navegación principal">
+    <a href="{{ routes.all_products_collection_url }}">Ver todo</a>
+    {% for type in catalog_types %}
+      {% assign category_collection = type %}
+      {% if category_collection.url == blank %}{% assign category_collection = collections[type] %}{% endif %}
+      {% if category_collection.url != blank %}<a href="{{ category_collection.url }}">{{ category_collection.title | escape }}</a>{% endif %}
+    {% endfor %}
+    <a href="{{ routes.root_url }}#marcas">Nuestras marcas</a>
+  </nav>
+</div>
+{% render 'storefront-cart' %}
 {% schema %}
-{"name":"Cabecera","settings":[{"type":"image_picker","id":"logo","label":"Logo DECOKASA"}],"presets":[{"name":"Cabecera"}]}
+{
+  "name": "Cabecera",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo DECOKASA"
+    },
+    {
+      "type": "text",
+      "id": "announcement",
+      "label": "Texto de la franja superior",
+      "default": "Compra con asesor · Coordina tu envío"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cabecera"
+    }
+  ]
+}
 {% endschema %}

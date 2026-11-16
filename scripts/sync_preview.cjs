@@ -29,11 +29,12 @@ async function section(name, overrides = {}, context = {}) {
 async function main() {
   const template = JSON.parse(fs.readFileSync(path.join(root, 'templates/index.json'), 'utf8'));
   const homeSettings = template.sections?.main?.settings ?? {};
-  const header = await section('header'), home = await section('home', homeSettings);
-  const sharedFooter = await section('footer');
+  const products = require('../preview/products.json').map((entry, index) => productFixture(entry, index));
+  collections.all = {products};
+  const header = await section('header'), home = await section('home', homeSettings, {is_demo: true});
+  const sharedFooter = (await section('footer')).replace('/pages/libro-de-reclamaciones', 'libro-reclamaciones.html');
   const bookLink = (await engine.parseAndRender(fs.readFileSync(path.join(root, 'snippets/book-link.liquid'), 'utf8'), {})).replace('/pages/libro-de-reclamaciones', 'libro-reclamaciones.html');
   const book = await section('libro-reclamaciones', {receiver_url: 'https://example.invalid/preview', supplier_address: 'Av. José Leal n.º 375, Lima, Lima, Lima'}, {shop: {privacy_policy: {url: ''}}});
-  const products = JSON.parse(fs.readFileSync(path.join(root, 'preview/products.json'), 'utf8')).map(product => ({...product, title: product.name, vendor: product.brand, type: product.category, url: `landing-${product.handle}.html`}));
   const catalogTemplate = JSON.parse(fs.readFileSync(path.join(root, 'templates/collection.json'), 'utf8'));
   const catalog = await section('catalog', catalogTemplate.sections?.main?.settings ?? {}, {is_demo: true, shop: {vendors: ['DECOKASA', 'Xion', 'Biflex', 'Mundo Baby'], types: [...new Set(products.map(product => product.type))]}, collection: {handle: 'all', title: 'Todos los productos', products, products_count: products.length, sort_by: 'manual'}});
   const css = fs.readFileSync(path.join(root, 'assets/decokasa.css'), 'utf8');
@@ -41,22 +42,24 @@ async function main() {
   const preview = path.join(root, 'preview');
   fs.mkdirSync(path.join(preview, 'assets'), { recursive: true });
   const landings = {};
-  for (const [index, entry] of products.entries()) {
-    const product = productFixture({...entry, name: entry.title}, index);
+  for (const product of products) {
     for (let n = 0; n < product.images.length; n++) {
-      const isFlooring = entry.handle.includes('pvc') || entry.handle.includes('spc');
-      let art = await engine.parseAndRender(isFlooring ? "{% render 'pvc-art' %}" : "{% render 'demo-art' %}", {});
+      const isFlooring = product.handle.includes('pvc') || product.handle.includes('spc');
+      const source = isFlooring ? "{% render 'pvc-art' %}" : "{% render 'catalog-art', handle: handle %}";
+      let art = await engine.parseAndRender(source, {handle: product.handle});
+      if (product.handle === 'licuadora' && n === 1) art = art.replaceAll('#333d3f', '#c62e32').replaceAll('#323b3d', '#aa272b');
+      if (product.handle === 'kit-fitness' && n === 1) art = art.replaceAll('#a789bb', '#598541').replaceAll('#5c4b70', '#47673b');
       art = art.match(/<svg[\s\S]*?<\/svg>/)[0];
       if (n) art = art.replace('fill="none"', `fill="none" style="background:${n === 1 ? '#fff6cb' : '#f0f2f4'}"`);
       fs.writeFileSync(path.join(preview, product.images[n].src), art);
     }
-    let html = await section('product-landing', {}, {product, is_demo: false, shop: {currency: 'PEN'}});
+    let html = await section('product-landing', {}, {product, is_demo: true, shop: {currency: 'PEN'}});
     const variants = product.variants.map((variant, n) => ({...variant, coverage: variant.metafields?.decokasa?.coverage_m2?.value, imageId: variant.featured_image?.id, optionValues: product.options_with_values[0]?.values[n]?.id || ''}));
     html += `<script type="application/json" data-preview-variants>${JSON.stringify(variants)}</script>`;
     // Keep the fixture data inside the product root for the local adapter.
     const parsed = parseHTML(html).document;
     parsed.querySelector('[data-product-page]').appendChild(parsed.querySelector('[data-preview-variants]'));
-    landings[`landing-${entry.handle}.html`] = parsed.toString();
+    landings[`landing-${product.handle}.html`] = parsed.toString();
   }
 
   // Generate the custom "Piso SPC" product landing from sections/landing-piso-spc.liquid
@@ -93,12 +96,12 @@ async function main() {
   for (const file of previewFiles) {
     const rawFile = fs.existsSync(path.join(preview, file)) ? fs.readFileSync(path.join(preview, file), 'utf8') : '';
     const { document } = parseHTML(rawFile || '<!doctype html><html><head><title></title></head><body><footer></footer></body></html>');
-    document.querySelectorAll('link[rel="icon"], meta[charset], meta[name="viewport"], link[href*="landing-piso-spc.css"], link[href*="landing-piso-pvc.css"], [data-preview-motion]').forEach(el => el.remove());
+    document.querySelectorAll('link[rel="icon"], meta[charset], meta[name="viewport"], link[href*="landing-piso-spc.css"], link[href*="landing-piso-pvc.css"], [data-preview-motion], [data-preview-interface]').forEach(el => el.remove());
     document.head.insertAdjacentHTML('beforeend', '<link rel="icon" type="image/png" sizes="128x128" href="assets/favicon.png">');
     const content = file === 'DECOKASA-inicio.html' ? home : file === 'catalogo.html' ? catalog : file === 'libro-reclamaciones.html' ? book : landings[file];
     const motionPage = file === routes.root_url || file === routes.all_products_collection_url;
-    const footer = motionPage ? sharedFooter.slice(0, sharedFooter.indexOf('</footer>') + '</footer>'.length) : document.querySelector('footer')?.outerHTML ?? '';
-    const consent = document.querySelector('[data-consent-banner]')?.outerHTML ?? document.querySelector('.consent')?.outerHTML ?? '';
+    const footer = sharedFooter.slice(0, sharedFooter.indexOf('</footer>') + '</footer>'.length);
+    const consent = sharedFooter.slice(sharedFooter.indexOf('</footer>') + '</footer>'.length);
     document.querySelectorAll('style').forEach(el => el.remove());
     const isLandingSpc = file === 'landing-piso-spc.html';
     const isLandingPvc = file === 'landing-pisos-pvc.html';
@@ -108,15 +111,16 @@ async function main() {
     const pageConsent = isCustomLanding ? '' : consent;
     const extraCss = isCustomLanding ? '' : `<style>${css}</style>`;
     const motionAssets = motionPage ? '<link data-preview-motion rel="stylesheet" href="assets/decokasa-motion.css"><script data-preview-motion src="assets/decokasa-motion.js" defer></script>' : '';
+    const interfaceAssets = isCustomLanding ? '' : '<link data-preview-interface rel="stylesheet" href="assets/decokasa-interface.css"><script data-preview-interface src="assets/decokasa-interface.js" defer></script>';
     const curtain = motionPage ? '<div class="motion-curtain" aria-hidden="true"></div>' : '';
     const bodyAttr = isLandingSpc ? ' class="spc-layout"' : isLandingPvc ? ' class="pvc-layout"' :
-      motionPage ? ` data-motion-home="${routes.root_url}" data-motion-catalog="${routes.all_products_collection_url}"` : '';
+      motionPage ? ` class="storefront-interface" data-motion-home="${routes.root_url}" data-motion-catalog="${routes.all_products_collection_url}"` : ' class="storefront-interface"';
     if (isLandingPvc) document.querySelector('title').textContent = 'Piso PVC autoadhesivo · DECOKASA';
-    const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">${document.head.innerHTML}${extraCss}${motionAssets}</head><body${bodyAttr}>${curtain}${pageHeader}<main id="main">${content}</main>${pageFooter}${pageConsent}${bookLink}${isCustomLanding ? '' : `<script>${js}</script>`}${landings[file] && !isCustomLanding ? '<script src="product-demo.js" defer></script>' : ''}</body></html>`;
+    const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">${document.head.innerHTML}${extraCss}${interfaceAssets}${motionAssets}</head><body${bodyAttr}>${curtain}${pageHeader}<main id="main">${content}</main>${pageFooter}${pageConsent}${isCustomLanding ? bookLink : ''}${isCustomLanding ? '' : `<script>${js}</script>`}${landings[file] && !isCustomLanding ? '<script src="product-demo.js" defer></script>' : ''}</body></html>`;
     fs.writeFileSync(path.join(preview, file), html.replace(/[ \t]+$/gm, ''), 'utf8');
   }
   fs.mkdirSync(path.join(preview, 'assets'), { recursive: true });
-  for (const asset of fs.readdirSync(path.join(root, 'assets')).filter(name => /^(decokasa-.*\.webp|decokasa-motion\.(css|js)|favicon\.png|product-detail\.(css|js)|request-form\.(css|js)|libro-reclamaciones\.(css|js)|libro-ubigeo\.js|landing-piso-pvc\.(css|js)|pvc-.*\.webp|landing-piso-spc(?:-layout|-proportions|-desktop|-tones)?\.(css|js)|spc-catalogo-tonos-2026-11\.jpg|spc-.*\.(webp|png|svg|ttf|txt))$/.test(name))) {
+  for (const asset of fs.readdirSync(path.join(root, 'assets')).filter(name => /^(decokasa-.*\.webp|decokasa-(?:motion|interface)\.(css|js)|favicon\.png|product-detail\.(css|js)|request-form\.(css|js)|libro-reclamaciones\.(css|js)|libro-ubigeo\.js|landing-piso-pvc\.(css|js)|pvc-.*\.webp|landing-piso-spc(?:-layout|-proportions|-desktop|-tones)?\.(css|js)|spc-catalogo-tonos-2026-11\.jpg|spc-.*\.(webp|png|svg|ttf|txt))$/.test(name))) {
     fs.copyFileSync(path.join(root, 'assets', asset), path.join(preview, 'assets', asset));
   }
   console.log(`${previewFiles.length} preview pages synchronized with the Shopify sections.`);

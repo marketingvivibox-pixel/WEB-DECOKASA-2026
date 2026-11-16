@@ -1,4 +1,73 @@
-<footer><div class="wrap" data-motion><div><a class="logo" href="{{ routes.root_url }}">DECOKASA</a><p>Hogar, tecnología, familia y deporte.</p></div><div><strong>Tu compra, acompañada por un asesor.</strong><p>Consulta disponibilidad, importe final y entrega antes de confirmar.</p></div></div></footer><aside class="consent" aria-label="Preferencias de seguimiento de prueba"><div class="wrap"><p data-consent-message></p><button class="accept" data-consent="accepted">Permitir seguimiento</button><button data-consent="rejected">Continuar sin seguimiento</button></div></aside>
+<footer class="interface-footer">
+  <div class="wrap interface-footer-grid">
+    <details data-footer-disclosure open>
+      <summary>Información legal</summary>
+      <ul>
+        <li>{% render 'book-link' %}</li>
+        {% if shop.privacy_policy.url != blank %}<li><a href="{{ shop.privacy_policy.url }}">Política de privacidad</a></li>{% endif %}
+        {% if shop.terms_of_service.url != blank %}<li><a href="{{ shop.terms_of_service.url }}">Términos y condiciones</a></li>{% endif %}
+        <li>Check Azul S.A.C. · RUC 20610129871</li>
+      </ul>
+    </details>
+    <details data-footer-disclosure open>
+      <summary>Ubicación y atención</summary>
+      <ul>
+        <li>Av. José Leal n.º 375, Lima</li>
+        {% if section.settings.hours != blank %}<li>{{ section.settings.hours | escape }}</li>{% endif %}
+        <li><a href="{{ routes.root_url }}#como-comprar">Cómo comprar</a></li>
+        <li><a href="{{ routes.root_url }}#mayorista">División mayorista</a></li>
+      </ul>
+    </details>
+    <details data-footer-disclosure open>
+      <summary>Contáctanos</summary>
+      <ul>
+        <li><a href="https://wa.me/51914158674">WhatsApp · 914 158 674</a></li>
+        <li><a href="mailto:atencion.decokasa@checkazul.com.pe">atencion.decokasa@checkazul.com.pe</a></li>
+      </ul>
+    </details>
+    <a class="interface-footer-logo" href="{{ routes.root_url }}" aria-label="DECOKASA, inicio">{% render 'reference-image', crop: 'logo' %}</a>
+    {% if section.settings.instagram_url != blank or section.settings.facebook_url != blank or section.settings.tiktok_url != blank %}
+      <nav class="interface-socials" aria-label="Redes sociales">
+        {% if section.settings.instagram_url != blank %}<a href="{{ section.settings.instagram_url }}">Instagram</a>{% endif %}
+        {% if section.settings.facebook_url != blank %}<a href="{{ section.settings.facebook_url }}">Facebook</a>{% endif %}
+        {% if section.settings.tiktok_url != blank %}<a href="{{ section.settings.tiktok_url }}">TikTok</a>{% endif %}
+      </nav>
+    {% endif %}
+  </div>
+  <div class="interface-footer-strip"><span>© DECOKASA</span><span>Compra con asesoría en Perú</span></div>
+</footer>
+<aside class="consent" aria-label="Preferencias de seguimiento de prueba">
+  <div class="wrap"><p data-consent-message></p><button class="accept" data-consent="accepted">Permitir seguimiento</button><button data-consent="rejected">Continuar sin seguimiento</button></div>
+</aside>
 {% schema %}
-{"name": "Pie de página", "settings": [], "presets": [{"name": "Pie de página"}]}
+{
+  "name": "Pie de página",
+  "settings": [
+    {
+      "type": "text",
+      "id": "hours",
+      "label": "Horario de atención"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram"
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook"
+    },
+    {
+      "type": "url",
+      "id": "tiktok_url",
+      "label": "Tiktok"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pie de página"
+    }
+  ]
+}
 {% endschema %}

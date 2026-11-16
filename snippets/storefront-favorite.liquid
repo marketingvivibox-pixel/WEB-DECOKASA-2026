@@ -1,0 +1,6 @@
+{% doc %}
+  @param {product} product - Product that can be saved in this browser.
+{% enddoc %}
+<button class="interface-favorite" type="button" data-interface-favorite="{{ product.handle | escape }}" aria-label="Guardar {{ product.title | escape }} en favoritos" aria-pressed="false" hidden>
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20.8 8.5c0 4.1-5.3 7.8-8.8 10.5-3.5-2.7-8.8-6.4-8.8-10.5a4.6 4.6 0 0 1 8.8-1.9 4.6 4.6 0 0 1 8.8 1.9Z"/></svg>
+</button>

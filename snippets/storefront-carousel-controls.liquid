@@ -1,0 +1,9 @@
+{% doc %}
+  @param {string} track_id - ID of the controlled track.
+  @param {boolean} [dots] - Show slide indicators.
+{% enddoc %}
+<div class="interface-carousel-controls" data-carousel-controls hidden>
+  <button type="button" data-carousel-step="-1" aria-controls="{{ track_id }}" aria-label="Anterior"><span aria-hidden="true">‹</span></button>
+  {% if dots %}<div class="interface-carousel-dots" data-carousel-dots></div>{% endif %}
+  <button type="button" data-carousel-step="1" aria-controls="{{ track_id }}" aria-label="Siguiente"><span aria-hidden="true">›</span></button>
+</div>

@@ -39,8 +39,8 @@ test('La colección de marca conserva su botón activo y la categoría conserva 
 });
 test('Cabecera e inicio llevan a colecciones permanentes', async () => {
   const header = await render('header'), home = await render('home');
-  assert.deepEqual([...header.querySelectorAll('.category-panel a')].map(a => a.getAttribute('href')), ['/collections/all', '/collections/tecnologia', '/collections/electrodomesticos', '/collections/bebes', '/collections/fitness', '/collections/hogar-y-acabados']);
-  assert.deepEqual([...home.querySelectorAll('.brand-visual')].map(a => a.getAttribute('href')), ['/collections/decokasa', '/collections/xion', '/collections/biflex', '/collections/mundo-baby']);
+  assert.deepEqual([...header.querySelectorAll('.store-nav a:not(:last-child)')].map(a => a.getAttribute('href')), ['/collections/all', '/collections/tecnologia', '/collections/electrodomesticos', '/collections/bebes', '/collections/fitness', '/collections/hogar-y-acabados']);
+  assert.deepEqual([...home.querySelectorAll('.interface-tile')].map(a => a.getAttribute('href')), ['/collections/decokasa', '/collections/xion', '/collections/biflex', '/collections/mundo-baby']);
 });
 test('Los filtros nativos configurados conservan selección y botón de aplicación', async () => {
   const doc = await render('catalog', {filters: [{param_name: 'filter.p.vendor', values: [{param_name: 'filter.p.vendor', value: 'Xion', label: 'Xion', count: 1, active: true}]}]});
@@ -55,13 +55,13 @@ test('Las selecciones del editor reemplazan marcas, categorías y tarjetas sin e
   assert.deepEqual([...catalog.querySelectorAll('.catalog-brands a')].map(a => a.textContent.trim()), ['Todas las marcas', 'Nueva marca']);
   assert.equal(catalog.querySelector('.catalog-brands [aria-current=page]').getAttribute('href'), changed.url);
   const header = await render('header', {}, settings);
-  assert.equal(header.querySelector('.category-shortcuts a').getAttribute('href'), changed.url);
+  assert.equal(header.querySelector('.store-nav a:nth-child(2)').getAttribute('href'), changed.url);
   const home = await render('home', {}, {}, {xion_collection: changed});
-  assert.equal(home.querySelector('.brand.xion').getAttribute('href'), changed.url);
+  assert.equal(home.querySelector('.interface-brand--xion').getAttribute('href'), changed.url);
 });
 test('No se generan enlaces a colecciones iniciales eliminadas o no disponibles', async () => {
   const header = await render('header', {}, {}, {}, {});
-  assert.equal(header.querySelectorAll('.category-panel a').length, 1);
+  assert.equal(header.querySelectorAll('.store-nav a[href^="/collections/"]').length, 1);
   const home = await render('home', {}, {}, {}, {});
-  assert.ok([...home.querySelectorAll('.brand-visual')].every(a => a.getAttribute('href') === '/collections/all'));
+  assert.ok([...home.querySelectorAll('.interface-tile')].every(a => a.getAttribute('href') === '/collections/all'));
 });

@@ -28,9 +28,9 @@ function load(file,search='',html){
   return {document,data,window,sends:()=>sends,event:(el,name)=>el.dispatchEvent(new window.Event(name,{cancelable:true,bubbles:true}))};
 }
 const home=load('DECOKASA-inicio.html');
-assert.equal(home.document.querySelector('.brand.xion strong').textContent,'XION');
-assert.equal(home.document.querySelector('.brand.baby strong').textContent,'MUNDOBABY');
-assert.equal(home.document.querySelector('.brand.biflex strong').textContent,'BIFLEX');
+assert.equal(home.document.querySelector('.interface-brand--xion strong').textContent,'Xion');
+assert.equal(home.document.querySelector('.interface-brand--baby strong').textContent,'Mundo Baby');
+assert.equal(home.document.querySelector('.interface-brand--biflex strong').textContent,'Biflex');
 assert.equal(home.document.querySelector('.whatsapp-float').getAttribute('href'),'https://wa.me/51914158674?text=Hola%2C+visit%C3%A9+la+tienda+DECOKASA+y+quisiera+ayuda+con+un+producto+o+una+cotizaci%C3%B3n.');
 const catalog=load('catalogo.html','?marca=Xion');
 const visible=()=>[...catalog.document.querySelectorAll('[data-card]')].filter(e=>!e.hidden);
@@ -68,7 +68,7 @@ const form=$('[data-request-form]');
 const id=()=> $('[data-request-status]').textContent.match(/Referencia: ([a-f0-9-]+)/)[1];
 assert.equal(pvc.event(form,'submit'),false);const first=id();pvc.event(form,'submit');assert.equal(id(),first);
 area.value='22';pvc.event(area,'input');pvc.event(form,'submit');assert.notEqual(id(),first);
-const variant=$('[data-option-link]:not([aria-current])');pvc.event(variant,'click');assert.equal(Number(quantity.value),10);assert.equal($('[data-sku]').textContent,'DEMO-PVC-002');assert.match($('[data-product-price]').textContent,/119/);
+const variant=$('[data-option-link]:not([aria-current])');pvc.event(variant,'click');assert.equal(Number(quantity.value),10);assert.equal($('dd[data-sku]').textContent,'DEMO-PVC-002');assert.match($('[data-product-price]').textContent,/119/);
 assert.equal(Number($('[data-product-quantity]').value),10);
 pvc.event($('[data-quantity-step="1"]'),'click');assert.equal(Number(quantity.value),11);
 pvc.event($('[data-open-request]'),'click');assert.equal($('[data-request-details]').open,true);
@@ -123,7 +123,7 @@ test('Atención al cliente ofrece correo y el WhatsApp del CRM en todas las pág
       assert.equal(menu.querySelector('a[href^="https://wa.me/"]').getAttribute('href'),'https://wa.me/51914158674',page);
       assert.match(menu.textContent,/914 158 674/,page);
     }
-    assert.match(document.querySelector('.header-help').getAttribute('href'),/#como-comprar$/,page);
+    assert.match(document.querySelector('.interface-promo a').getAttribute('href'),/#como-comprar$/,page);
     assert.doesNotMatch(document.toString(),/51941599516/,page);
   }
 });

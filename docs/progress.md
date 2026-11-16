@@ -1,3 +1,10 @@
+## 16/11/2026 — Rediseño de las interfaces principales
+
+- [x] Aplicadas las seis maquetas de inicio, catálogo y ficha general a escritorio y móvil en `codex/rediseño-interfaces`, a partir de `fef92ea`.
+- [x] Actualizadas la navegación, portada, filtros, tarjetas, ficha y pie. El carrito y favoritos se guardan en el navegador y las líneas del carrito abren la solicitud con asesor.
+- [x] Comprobados en Chrome los anchos de 320, 390 y 1440 px, la navegación y el paso de una variante con cantidad a la solicitud. La vista local usa imágenes y precios de muestra.
+- [x] Pasaron las 89 pruebas y la verificación del respaldo del Libro de Reclamaciones. Shopify Theme Check validó el paquete de 193 archivos sin hallazgos.
+
 ## 16/11/2026 - Propuesta de movimiento para inicio y catálogo
 
 - [x] Entradas de cabecera, portada, marcas, promociones, pasos de compra, filtros, tarjetas y pie. Cortina de cheurones con salida hacia la derecha.

@@ -26,7 +26,11 @@
   {% endif %}
   {% assign card_url = landing_url | append: '?variant=' | append: current_variant.id %}
 {% endif %}
-<article class="card catalog-card" data-motion{% if demo %} data-card data-brand="{{ product.vendor | escape }}" data-category="{{ product.type | escape }}" data-title="{{ product.title | escape }}"{% endif %}>
+{% assign quick_add = false %}
+{% if landing_url == product.url and product.metafields.decokasa.coverage_m2.value == blank %}
+  {% if product.has_only_default_variant or product.options_with_values.size == 1 and color_option != nil %}{% assign quick_add = true %}{% endif %}
+{% endif %}
+<article class="card catalog-card" data-interface-title="{{ product.title | escape }}" data-motion{% if demo %} data-card data-brand="{{ product.vendor | escape }}" data-category="{{ product.type | escape }}" data-title="{{ product.title | escape }}"{% endif %}>
   <a class="catalog-card-media" href="{{ card_url | escape }}" aria-label="Ver {{ product.title | escape }}" data-card-link>
     {% if demo %}
       {% render 'catalog-art', handle: product.handle %}<span class="catalog-sample">Ilustración de muestra</span>
@@ -37,11 +41,15 @@
     {% endif %}
     {% unless demo %}<div class="catalog-image-pending" data-card-image-pending{% if card_image %} hidden{% endif %}>{% render 'icon', name: 'box' %}<span>Imagen pendiente</span></div><span class="catalog-sample" data-card-image-reference{% unless card_image_reference %} hidden{% endunless %}>Imagen referencial</span>{% endunless %}
   </a>
+  {% render 'storefront-favorite', product: product %}
   <div class="card-body">
     <span class="tag">{{ product.vendor | escape }}</span>
     <p class="catalog-card-category">{{ product.type | escape }}</p>
     <h3><a href="{{ card_url | escape }}" data-card-link>{{ product.title | escape }}</a></h3>
-    <p class="catalog-card-price">Precio a consultar</p>
+    <div class="catalog-card-price">
+      <strong data-card-price>{% if current_variant.price > 0 %}{{ current_variant.price | money_with_currency }}{% else %}Precio a consultar{% endif %}</strong>
+      <s data-card-compare{% unless current_variant.compare_at_price > current_variant.price %} hidden{% endunless %}>{% if current_variant.compare_at_price > current_variant.price %}{{ current_variant.compare_at_price | money_with_currency }}{% endif %}</s>
+    </div>
     {% if color_option != nil and current_variant != nil %}
       {% assign color_index = color_option.position | minus: 1 %}
       <div class="catalog-colors">
@@ -86,7 +94,7 @@
                 {% assign image_reference = true %}
               {% endif %}
               {% assign variant_url = landing_url | append: '?variant=' | append: color_variant.id %}
-              <a class="catalog-color-choice{% if color_hex == blank and value.swatch.image == blank %} catalog-color-choice--text{% endif %}" href="{{ variant_url | escape }}" data-card-color data-color-name="{{ value.name | escape }}" data-color-available="{{ color_variant.available }}" data-color-image="{% if variant_image %}{{ variant_image | image_url: width: 800 | escape }}{% endif %}" data-color-image-reference="{{ image_reference }}" data-color-image-alt="{{ product.title | escape }} - {% if image_reference %}Imagen referencial{% else %}{{ value.name | escape }}{% endif %}" aria-label="Ver color {{ value.name | escape }}{% unless color_variant.available %}, no disponible{% endunless %}" title="{{ value.name | escape }}{% unless color_variant.available %} (no disponible){% endunless %}"{% if color_variant.id == current_variant.id %} aria-current="true"{% endif %}>
+              <a class="catalog-color-choice{% if color_hex == blank and value.swatch.image == blank %} catalog-color-choice--text{% endif %}" href="{{ variant_url | escape }}" data-card-color data-color-name="{{ value.name | escape }}" data-color-available="{{ color_variant.available }}" data-color-cart="{% if color_variant.available and color_variant.metafields.decokasa.coverage_m2.value == blank %}true{% else %}false{% endif %}" data-color-variant="{{ color_variant.id }}" data-color-price="{% if color_variant.price > 0 %}{{ color_variant.price | money_with_currency | escape }}{% else %}Precio a consultar{% endif %}" data-color-compare="{% if color_variant.compare_at_price > color_variant.price %}{{ color_variant.compare_at_price | money_with_currency | escape }}{% endif %}" data-color-image="{% if variant_image %}{{ variant_image | image_url: width: 800 | escape }}{% endif %}" data-color-image-reference="{{ image_reference }}" data-color-image-alt="{{ product.title | escape }} - {% if image_reference %}Imagen referencial{% else %}{{ value.name | escape }}{% endif %}" aria-label="Ver color {{ value.name | escape }}{% unless color_variant.available %}, no disponible{% endunless %}" title="{{ value.name | escape }}{% unless color_variant.available %} (no disponible){% endunless %}"{% if color_variant.id == current_variant.id %} aria-current="true"{% endif %}>
                 {% if color_hex != blank or value.swatch.image != blank %}
                   <span class="catalog-color-dot"{% if color_hex != blank %} style="background-color: {{ color_hex | escape }}"{% endif %}>{% if value.swatch.image != blank %}{{ value.swatch.image | image_url: width: 64 | image_tag: loading: 'lazy', alt: '' }}{% endif %}</span>
                 {% else %}<span>{{ value.name | escape }}</span>{% endif %}
@@ -96,6 +104,6 @@
         </div>
       </div>
     {% endif %}
-    <a class="button outline" href="{{ card_url | escape }}" data-card-link>Ver producto {% render 'icon', name: 'arrow' %}</a>
+    <a class="button interface-card-action" href="{{ card_url | escape }}" data-card-link{% if quick_add %} data-interface-card-add data-variant="{{ current_variant.id }}" data-available="{% if current_variant.available and current_variant.metafields.decokasa.coverage_m2.value == blank %}true{% else %}false{% endif %}" aria-label="Ver {{ product.title | escape }}"{% endif %}>{% render 'icon', name: 'bag' %}<span data-card-action-label>Ver {% if quick_add %}ficha{% else %}producto{% endif %}</span></a>
   </div>
 </article>

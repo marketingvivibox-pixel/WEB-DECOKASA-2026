@@ -18,12 +18,13 @@
   {% else %}
     {% assign gallery_images = product.images %}
   {% endif %}
-  <div class="wrap product-page" data-product-page data-section-id="{{ section.id }}" data-product-url="{{ product.url }}" data-gallery-ratio="{{ section.settings.gallery_ratio | default: 'square' }}" data-image-fit="{{ section.settings.image_fit | default: 'contain' }}">
+  <div class="wrap product-page" data-product-page data-interface-title="{{ product.title | escape }}" data-section-id="{{ section.id }}" data-product-url="{{ product.url }}" data-gallery-ratio="{{ section.settings.gallery_ratio | default: 'square' }}" data-image-fit="{{ section.settings.image_fit | default: 'contain' }}">
     <nav class="breadcrumb" aria-label="Ruta de navegación"><a href="{{ routes.root_url }}">Inicio</a><span aria-hidden="true">/</span><a href="{{ routes.all_products_collection_url }}">Catálogo</a><span aria-hidden="true">/</span><span>{{ product.title | escape }}</span></nav>
     {% if is_demo %}<p class="product-demo">Vista de muestra · Imágenes ilustrativas y precios ficticios.</p>{% endif %}
     <div class="product-layout">
       <div class="product-gallery" aria-label="Imágenes del producto">
         <div class="product-image-stage" data-gallery-stage>
+          {% render 'storefront-favorite', product: product %}
           {% for gallery_item in gallery_images %}
             {% assign image = gallery_item.preview_image | default: gallery_item %}
             {% assign image_alt = image.alt | default: product.title %}
@@ -60,6 +61,7 @@
         <div class="product-purchase-content" data-purchase-content tabindex="0" aria-label="Opciones y detalles de compra">
         {% if section.settings.show_vendor != false and product.vendor != blank %}<p class="eyebrow product-vendor">{{ product.vendor | escape }}</p>{% endif %}
         <h1>{{ product.title | escape }}</h1>
+        {% if section.settings.show_description != false and product.description != blank %}<div class="rte interface-product-description">{{ product.description }}</div>{% endif %}
         <div class="product-price-row">
           {% if section.settings.show_price != false and current_variant != blank %}
             <span class="product-price" data-product-price data-cents="{{ current_variant.price }}">{{ current_variant.price | money_with_currency }}</span>
@@ -89,7 +91,7 @@
             {% endfor %}
           </div>
         {% endunless %}
-        <p class="product-availability">{% render 'icon', name: 'headphones' %}<span><strong>Disponibilidad a confirmar</strong><small>Un asesor te ayuda con tu compra.</small></span></p>
+        <p class="product-availability">{% render 'icon', name: 'headphones' %}<span><strong>{% if current_variant.available %}Disponible para solicitar{% else %}Disponibilidad a confirmar{% endif %}</strong><small>Un asesor te ayuda con tu compra.</small></span></p>
         {% if pvc or product.metafields.decokasa.coverage_m2.value != blank or current_variant.metafields.decokasa.coverage_m2.value != blank %}{% render 'pvc-calculator' %}{% endif %}
         {% assign multiple_request = false %}
         {% unless product.has_only_default_variant or pvc or product.metafields.decokasa.coverage_m2.value != blank or current_variant.metafields.decokasa.coverage_m2.value != blank %}{% assign multiple_request = true %}{% endunless %}
@@ -97,8 +99,11 @@
         <div class="product-purchase" data-purchase-controls>
           <div class="product-quantity"><button type="button" data-quantity-step="-1" aria-label="Disminuir cantidad">−</button><label class="sr-only" for="Quantity-{{ section.id }}">Cantidad</label><input id="Quantity-{{ section.id }}" data-product-quantity type="number" min="1" max="1000000" step="1" value="1" inputmode="numeric"><button type="button" data-quantity-step="1" aria-label="Aumentar cantidad">+</button></div>
           {% if multiple_request %}
-          <button type="button" class="button yellow product-cta" data-add-request {% if current_variant == blank %}disabled{% endif %}>Agregar a mi solicitud</button>
+          <button type="button" class="button interface-card-action product-cta" data-add-request{% if current_variant.available %} data-interface-mirror{% endif %} {% if current_variant == blank %}disabled{% endif %}>{% render 'icon', name: 'bag' %}<span>{% if current_variant.available %}Agregar al carrito{% else %}Agregar a mi solicitud{% endif %}</span></button>
           {% else %}
+          {% unless pvc or product.metafields.decokasa.coverage_m2.value != blank or current_variant.metafields.decokasa.coverage_m2.value != blank %}
+            {% if current_variant.available %}<button type="button" class="button interface-card-action product-cta" data-interface-product-add hidden>{% render 'icon', name: 'bag' %} Agregar al carrito</button>{% endif %}
+          {% endunless %}
           <a class="button yellow product-cta" href="#solicitud" data-open-request {% if current_variant == blank %}aria-disabled="true"{% endif %}>{{ section.settings.cta_label | default: 'Solicitar compra' | escape }}</a>
           {% endif %}
         </div>
@@ -191,16 +196,28 @@
         </div>
         {% if multiple_request %}<a class="button yellow request-continue" href="#solicitud" data-open-request aria-disabled="true">{{ section.settings.cta_label | default: 'Solicitar compra' | escape }}</a>{% endif %}
         {% if current_variant == blank %}<p class="error">Esta combinación no existe. Elige otra presentación.</p>{% endif %}
-        {% if section.settings.show_sku != false %}<p class="product-sku">SKU: <span data-sku>{{ current_variant.sku | default: 'Pendiente' | escape }}</span></p>{% endif %}
+        <p class="interface-delivery">{% render 'icon', name: 'box' %} La entrega se coordina con tu asesor.</p>
         </div>
         </div>
         <dialog class="request-dialog" data-request-details aria-labelledby="RequestTitle-{{ section.id }}"><button class="request-close" type="button" data-request-close aria-label="Cerrar solicitud">×</button>{% render 'request-form', product: product, section_id: section.id %}</dialog>
         <p class="product-selection-status" data-selection-status role="status" tabindex="-1"></p>
       </div>
-    </div>
-    <div class="product-information-container">
-        {% if section.settings.show_description != false and product.description != blank %}<details class="product-information" open><summary>Acerca del producto</summary><div class="rte">{{ product.description }}</div></details>{% endif %}
+      <div class="product-information-container">
+        {% assign specs_type = product.type | default: '' %}
+        {% assign specs_vendor = '' %}
+        {% if section.settings.show_vendor != false %}{% assign specs_vendor = product.vendor | default: '' %}{% endif %}
+        {% if specs_type != blank or specs_vendor != blank or section.settings.show_sku != false %}
+        <details class="product-information" open>
+          <summary>Especificaciones</summary>
+          <dl class="interface-specs">
+            {% if specs_type != blank %}<div><dt>Categoría</dt><dd>{{ specs_type | escape }}</dd></div>{% endif %}
+            {% if specs_vendor != blank %}<div><dt>Marca</dt><dd>{{ specs_vendor | escape }}</dd></div>{% endif %}
+            {% if section.settings.show_sku != false %}<div><dt>SKU</dt><dd data-sku>{{ current_variant.sku | default: 'Pendiente' | escape }}</dd></div>{% endif %}
+          </dl>
+        </details>
+        {% endif %}
         {% for block in section.blocks %}<details class="product-information" {{ block.shopify_attributes }}><summary>{{ block.settings.heading | escape }}</summary><div class="rte">{{ block.settings.content }}</div></details>{% endfor %}
+      </div>
     </div>
   </div>
 {% else %}<section class="wrap section"><h1>Ficha en preparación</h1><p>Selecciona un producto en el editor del tema para ver su ficha.</p></section>{% endif %}

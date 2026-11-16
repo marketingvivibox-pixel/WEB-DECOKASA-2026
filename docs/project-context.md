@@ -1,3 +1,7 @@
+## 16/11/2026 — Implementación de las maquetas principales
+
+La rama `codex/rediseño-interfaces` reúne el inicio, catálogo y ficha general en escritorio y móvil. El tema usa los datos del catálogo Shopify y permite editar los recursos de la portada. Para mantener la compra asistida, el carrito guarda productos, variantes y cantidades en el navegador y abre la solicitud de cada producto con su cantidad seleccionada. Las fichas personalizadas de SPC y PVC conservan su recorrido propio. La demostración local emplea imágenes y precios de muestra.
+
 ## 16/11/2026 - Animaciones reutilizables de inicio y catálogo
 
 Primera propuesta en `codex/decokasa-animaciones`. Las entradas duran 880 ms con desplazamiento corto y desfase de 75 ms dentro de cada grupo. La portada utiliza un acercamiento leve en la imagen principal y conserva su visibilidad durante el movimiento. La cortina usa cheurones negro grafito y dorado que van de izquierda a derecha durante 1,12 s entre inicio y catálogo, en ambos sentidos. Se respeta la preferencia de movimiento reducido y el efecto se omite dentro del editor Shopify.
