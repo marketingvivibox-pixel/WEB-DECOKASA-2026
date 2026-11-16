@@ -3,7 +3,7 @@
 - [x] Entradas de cabecera, portada, marcas, promociones, pasos de compra, filtros, tarjetas y pie. Cortina de cheurones con salida hacia la derecha.
 - [x] Portada y catálogo comprobados en Chrome de escritorio y en vista de 390 px. Se observó la cortina sobre la página saliente en escritorio.
 - [x] Vistas locales de inicio y catálogo actualizadas. Validador de estructura y paquete Shopify regenerado.
-- [ ] Pendiente revisión visual de la propuesta y eventual integración en el tema oficial.
+- [x] Integrado en main para su publicación por GitHub en el tema oficial 188927803629. Pasaron 89 pruebas, incluidas las 24 del Libro de Reclamaciones. Theme Check sin hallazgos en el ZIP del tema.
 
 # Libro de Reclamaciones: respaldo — 11/11/2026
 
