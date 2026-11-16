@@ -40,7 +40,10 @@ test('La colección de marca conserva su botón activo y la categoría conserva 
 test('Cabecera e inicio llevan a colecciones permanentes', async () => {
   const header = await render('header'), home = await render('home');
   assert.deepEqual([...header.querySelectorAll('.store-nav a:not(:last-child)')].map(a => a.getAttribute('href')), ['/collections/all', '/collections/tecnologia', '/collections/electrodomesticos', '/collections/bebes', '/collections/fitness', '/collections/hogar-y-acabados']);
-  assert.deepEqual([...home.querySelectorAll('.interface-tile')].map(a => a.getAttribute('href')), ['/collections/decokasa', '/collections/xion', '/collections/biflex', '/collections/mundo-baby']);
+  assert.deepEqual([...home.querySelectorAll('.interface-brand')].map(a => a.getAttribute('href')), ['/collections/decokasa', '/collections/xion', '/collections/biflex', '/collections/mundo-baby']);
+  const tiles = [...home.querySelectorAll('.interface-tile')];
+  assert.deepEqual(tiles.map(a => a.getAttribute('href')), ['/collections/hogar-y-acabados', '/collections/electrodomesticos', '/collections/fitness', '/collections/bebes']);
+  assert.deepEqual(tiles.map(a => a.querySelector('.interface-tile-label').textContent.trim()), ['Renueva pisos y paredes', 'Equipa tu cocina', 'Entrena en casa', 'Cuida a tu bebé']);
 });
 test('Los filtros nativos configurados conservan selección y botón de aplicación', async () => {
   const doc = await render('catalog', {filters: [{param_name: 'filter.p.vendor', values: [{param_name: 'filter.p.vendor', value: 'Xion', label: 'Xion', count: 1, active: true}]}]});

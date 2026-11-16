@@ -3,6 +3,9 @@
 {% assign brand_handles = 'decokasa|xion|biflex|mundo-baby' | split: '|' %}
 {% assign brand_keys = 'decokasa|xion|biflex|baby' | split: '|' %}
 {% assign brand_symbols = 'box|headphones|fitness|baby' | split: '|' %}
+{% assign category_keys = 'acabados|cocina|fitness|bebes' | split: '|' %}
+{% assign category_titles = 'Renueva pisos y paredes|Equipa tu cocina|Entrena en casa|Cuida a tu bebé' | split: '|' %}
+{% assign category_handles = 'hogar-y-acabados|electrodomesticos|fitness|bebes' | split: '|' %}
 {% assign slide_titles = 'Acabados para renovar tu hogar|Encuentra ideas para cada ambiente' | split: '|' %}
 {% assign slide_assets = 'spc-2026-sala-composicion.webp|pvc-ambiente-sala.webp' | split: '|' %}
 {% assign is_demo = false %}
@@ -13,9 +16,18 @@
 <section class="interface-hero" aria-label="Destacados de DECOKASA" data-carousel data-carousel-hero>
   <div class="interface-track interface-hero-track" id="{{ hero_track }}" data-carousel-track tabindex="0" aria-label="Diapositivas destacadas">
     <div class="interface-slide interface-slide--first">
-      {% if section.settings.hero_image != blank %}
-        {{ section.settings.hero_image | image_url: width: 1920 | image_tag: widths: '640, 960, 1440, 1920', sizes: '100vw', loading: 'eager', fetchpriority: 'high', class: 'interface-slide-image', alt: '' }}
-      {% else %}{% render 'reference-image', crop: 'hero', loading: 'eager' %}{% endif %}
+      <picture class="interface-slide-picture">
+        {% if section.settings.hero_image_mobile != blank %}
+          <source media="(width < 900px)" srcset="{{ section.settings.hero_image_mobile | image_url: width: 1000 }}">
+        {% elsif section.settings.hero_image == blank %}
+          <source media="(width < 900px)" srcset="{{ 'decokasa-inicio-portada-movil.webp' | asset_url }}">
+        {% endif %}
+        {% if section.settings.hero_image != blank %}
+          {{ section.settings.hero_image | image_url: width: 1920 | image_tag: widths: '640, 960, 1440, 1920', sizes: '100vw', loading: 'eager', fetchpriority: 'high', class: 'interface-slide-image', alt: '' }}
+        {% else %}
+          <img class="interface-slide-image" src="{{ 'decokasa-inicio-portada.webp' | asset_url }}" alt="" width="1920" height="803" fetchpriority="high">
+        {% endif %}
+      </picture>
       <div class="wrap interface-slide-content" data-motion="settle">
         <h1>{{ section.settings.heading | escape }} <span>{{ section.settings.heading_accent | escape }}</span></h1>
         <a class="button interface-button" href="{{ routes.all_products_collection_url }}">{{ section.settings.primary_label | escape }}</a>
@@ -54,15 +66,19 @@
   <div class="wrap">
     <h2 id="InterfaceShowcaseTitle" data-motion>{{ section.settings.promo_text | escape }}</h2>
     <div class="interface-mosaic" data-motion-group>
-      {% for name in brand_names %}
-        {% assign collection_setting = brand_keys[forloop.index0] | append: '_collection' %}
-        {% assign image_setting = brand_keys[forloop.index0] | append: '_image' %}
-        {% assign brand_image = section.settings[image_setting] %}
-        <a class="interface-tile interface-tile--{{ brand_crops[forloop.index0] }}" data-motion href="{% render 'catalog-url', routes: routes, collections: collections, selected_collection: section.settings[collection_setting], default_handle: brand_handles[forloop.index0] %}">
-          {% if brand_image != blank %}
-            {{ brand_image | image_url: width: 1200 | image_tag: widths: '360, 640, 960, 1200', sizes: '(min-width: 900px) 32vw, 100vw', loading: 'lazy', class: 'interface-tile-image', alt: '' }}
-          {% else %}{% render 'reference-image', crop: brand_crops[forloop.index0] %}{% endif %}
-          <span class="interface-tile-label">{{ name }} {% render 'icon', name: 'arrow' %}</span>
+      {% for key in category_keys %}
+        {% assign image_setting = 'category_image_' | append: key %}
+        {% assign category_image = section.settings[image_setting] %}
+        {% assign image_sizes = '(min-width: 900px) 22vw, 43vw' %}
+        {% if forloop.first or forloop.last %}{% assign image_sizes = '(min-width: 900px) 22vw, 87vw' %}{% endif %}
+        <a class="interface-tile interface-tile--{{ key }}" data-motion href="{% render 'catalog-url', routes: routes, collections: collections, default_handle: category_handles[forloop.index0] %}">
+          {% if category_image != blank %}
+            {{ category_image | image_url: width: 900 | image_tag: widths: '360, 640, 900', sizes: image_sizes, loading: 'lazy', class: 'interface-tile-image', alt: '' }}
+          {% else %}
+            {% assign category_photo = 'decokasa-categoria-' | append: key | append: '.webp' %}
+            <img class="interface-tile-image" src="{{ category_photo | asset_url }}" alt="" width="900" height="600" loading="lazy">
+          {% endif %}
+          <span class="interface-tile-label">{{ category_titles[forloop.index0] }} {% render 'icon', name: 'arrow' %}</span>
         </a>
       {% endfor %}
     </div>
@@ -130,55 +146,57 @@
     {
       "type": "image_picker",
       "id": "hero_image",
-      "label": "Imagen principal (solo fotografía)"
-    },
-    {
-      "type": "paragraph",
-      "content": "Artes WebP de alta resolución incluidos. Puedes sustituirlos aquí. Fotografía principal recomendada: 1906 × 825 px o superior. Tarjetas: 1860 × 846 px o superior."
+      "label": "Fotografía principal de escritorio"
     },
     {
       "type": "image_picker",
-      "id": "decokasa_image",
-      "label": "Imagen DECOKASA"
+      "id": "hero_image_mobile",
+      "label": "Fotografía principal de móvil",
+      "info": "Recomendamos una foto vertical con espacio para el título en la parte inferior."
+    },
+    {
+      "type": "image_picker",
+      "id": "category_image_acabados",
+      "label": "Fotografía de pisos y paredes"
     },
     {
       "type": "collection",
       "id": "decokasa_collection",
       "label": "Colección de DECOKASA",
-      "info": "Destino de esta tarjeta. Sin selección se usa la colección inicial si está disponible."
+      "info": "Destino en Nuestras marcas. Sin selección se usa la colección inicial si está disponible."
     },
     {
       "type": "image_picker",
-      "id": "xion_image",
-      "label": "Imagen Xion"
+      "id": "category_image_cocina",
+      "label": "Fotografía de cocina"
     },
     {
       "type": "collection",
       "id": "xion_collection",
       "label": "Colección de Xion",
-      "info": "Destino de esta tarjeta. Sin selección se usa la colección inicial si está disponible."
+      "info": "Destino en Nuestras marcas. Sin selección se usa la colección inicial si está disponible."
     },
     {
       "type": "image_picker",
-      "id": "biflex_image",
-      "label": "Imagen Biflex"
+      "id": "category_image_fitness",
+      "label": "Fotografía de entrenamiento"
     },
     {
       "type": "collection",
       "id": "biflex_collection",
       "label": "Colección de Biflex",
-      "info": "Destino de esta tarjeta. Sin selección se usa la colección inicial si está disponible."
+      "info": "Destino en Nuestras marcas. Sin selección se usa la colección inicial si está disponible."
     },
     {
       "type": "image_picker",
-      "id": "baby_image",
-      "label": "Imagen Mundo Baby"
+      "id": "category_image_bebes",
+      "label": "Fotografía de cuidado del bebé"
     },
     {
       "type": "collection",
       "id": "baby_collection",
       "label": "Colección de Mundo Baby",
-      "info": "Destino de esta tarjeta. Sin selección se usa la colección inicial si está disponible."
+      "info": "Destino en Nuestras marcas. Sin selección se usa la colección inicial si está disponible."
     },
     {
       "type": "text",

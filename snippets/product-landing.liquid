@@ -18,7 +18,9 @@
   {% else %}
     {% assign gallery_images = product.images %}
   {% endif %}
-  <div class="wrap product-page" data-product-page data-interface-title="{{ product.title | escape }}" data-section-id="{{ section.id }}" data-product-url="{{ product.url }}" data-gallery-ratio="{{ section.settings.gallery_ratio | default: 'square' }}" data-image-fit="{{ section.settings.image_fit | default: 'contain' }}">
+  {% assign gallery_sizes = '(min-width: 900px) 35vw, 87vw' %}
+  {% if gallery_images.size > 1 %}{% assign gallery_sizes = '(min-width: 900px) 35vw, 64vw' %}{% endif %}
+  <div class="wrap product-page" data-product-page data-interface-title="{{ product.title | escape }}" data-section-id="{{ section.id }}" data-product-url="{{ product.url }}" data-gallery-ratio="{{ section.settings.gallery_ratio | default: 'responsive' }}" data-image-fit="{{ section.settings.image_fit | default: 'contain' }}">
     <nav class="breadcrumb" aria-label="Ruta de navegación"><a href="{{ routes.root_url }}">Inicio</a><span aria-hidden="true">/</span><a href="{{ routes.all_products_collection_url }}">Catálogo</a><span aria-hidden="true">/</span><span>{{ product.title | escape }}</span></nav>
     {% if is_demo %}<p class="product-demo">Vista de muestra · Imágenes ilustrativas y precios ficticios.</p>{% endif %}
     <div class="product-layout">
@@ -30,9 +32,9 @@
             {% assign image_alt = image.alt | default: product.title %}
             <div class="product-image-panel" data-gallery-panel="{{ gallery_item.id }}" {% unless gallery_item.id == main_image_id %}hidden{% endunless %}>
               {% if gallery_item.id == main_image_id %}
-                {{ image | image_url: width: 1440 | image_tag: widths: '360, 540, 720, 1080, 1440', sizes: '(min-width: 900px) 46vw, 100vw', loading: 'eager', class: 'product-main-image', alt: image_alt }}
+                {{ image | image_url: width: 1440 | image_tag: widths: '360, 540, 720, 1080, 1440', sizes: gallery_sizes, loading: 'eager', class: 'product-main-image', alt: image_alt }}
               {% else %}
-                {{ image | image_url: width: 1440 | image_tag: widths: '360, 540, 720, 1080, 1440', sizes: '(min-width: 900px) 46vw, 100vw', loading: 'lazy', class: 'product-main-image', alt: image_alt }}
+                {{ image | image_url: width: 1440 | image_tag: widths: '360, 540, 720, 1080, 1440', sizes: gallery_sizes, loading: 'lazy', class: 'product-main-image', alt: image_alt }}
               {% endif %}
             </div>
           {% else %}
@@ -49,7 +51,7 @@
               {% assign image = gallery_item.preview_image | default: gallery_item %}
               {% assign thumb_alt = image.alt | default: product.title %}
               <a class="product-thumbnail" href="{{ image | image_url: width: 1440 }}" data-gallery-choice="{{ gallery_item.id }}" aria-label="Ver imagen {{ forloop.index }}: {{ thumb_alt | escape }}" {% if gallery_item.id == main_image_id %}aria-current="true"{% endif %}>
-                {{ image | image_url: width: 180 | image_tag: widths: '90, 180', sizes: '80px', loading: 'lazy', alt: '' }}
+                {{ image | image_url: width: 360 | image_tag: widths: '90, 180, 360', sizes: '(min-width: 900px) 7vw, 22vw', loading: 'lazy', alt: '' }}
               </a>
             {% endfor %}
           </div>

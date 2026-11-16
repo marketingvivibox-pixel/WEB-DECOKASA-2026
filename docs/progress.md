@@ -5,6 +5,13 @@
 - [x] Comprobados en Chrome los anchos de 320, 390 y 1440 px, la navegación y el paso de una variante con cantidad a la solicitud. La vista local usa imágenes y precios de muestra.
 - [x] Pasaron las 89 pruebas y la verificación del respaldo del Libro de Reclamaciones. Shopify Theme Check validó el paquete de 193 archivos sin hallazgos.
 
+## 16/11/2026 — Proporciones de las maquetas y fotografías de inicio
+
+- [x] Aplicadas las proporciones de cabecera, carruseles, mosaico, catálogo, ficha general y pie. El contenido ocupa el 87 % en móvil y el 68 % en escritorio.
+- [x] Sustituida la foto de la primera marquesina en ambos formatos. El mosaico tiene cuatro fotografías de categorías con enlaces a sus colecciones.
+- [x] Comprobados inicio, catálogo y ficha general en Chrome a ocho anchos entre 320 y 1920 px. Las proporciones se mantienen en cada formato y los cambios de imagen de la galería funcionan.
+- [x] Pasaron las 89 pruebas y la comprobación del respaldo del Libro. Se regeneró el paquete de 199 archivos y Shopify Theme Check terminó sin hallazgos.
+
 ## 16/11/2026 - Propuesta de movimiento para inicio y catálogo
 
 - [x] Entradas de cabecera, portada, marcas, promociones, pasos de compra, filtros, tarjetas y pie. Cortina de cheurones con salida hacia la derecha.

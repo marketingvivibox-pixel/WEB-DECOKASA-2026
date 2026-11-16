@@ -2,6 +2,10 @@
 
 La rama `codex/rediseño-interfaces` reúne el inicio, catálogo y ficha general en escritorio y móvil. El tema usa los datos del catálogo Shopify y permite editar los recursos de la portada. Para mantener la compra asistida, el carrito guarda productos, variantes y cantidades en el navegador y abre la solicitud de cada producto con su cantidad seleccionada. Las fichas personalizadas de SPC y PVC conservan su recorrido propio. La demostración local emplea imágenes y precios de muestra.
 
+Las proporciones se midieron en las seis maquetas. El ancho de contenido de las interfaces principales es del 87 % para móvil y del 68 % desde 900 px. La primera marquesina mide el 65 % o el 32,6 % de su ancho, respectivamente. El mosaico mantiene tres filas en móvil y dos en escritorio, con dos tarjetas que ocupan toda la altura en este último formato. El catálogo muestra dos o tres columnas y reserva el 21 % para filtros en escritorio. La ficha reparte el espacio de escritorio entre galería y datos en una relación de 55 a 45, y dedica el 25,5 % de la galería móvil a las miniaturas cuando las hay. Los textos y los controles mantienen tamaños mínimos para facilitar su uso.
+
+La primera diapositiva tiene fotografías propias para móvil y escritorio. «Descubre todo lo que tenemos para ti» enlaza a colecciones según cuatro necesidades: renovar pisos y paredes, equipar la cocina, entrenar en casa y cuidar al bebé. Las imágenes de las cuatro tarjetas se pueden sustituir desde el editor del tema.
+
 ## 16/11/2026 - Animaciones reutilizables de inicio y catálogo
 
 Primera propuesta en `codex/decokasa-animaciones`. Las entradas duran 880 ms con desplazamiento corto y desfase de 75 ms dentro de cada grupo. La portada utiliza un acercamiento leve en la imagen principal y conserva su visibilidad durante el movimiento. La cortina usa cheurones negro grafito y dorado que van de izquierda a derecha durante 1,12 s entre inicio y catálogo, en ambos sentidos. Se respeta la preferencia de movimiento reducido y el efecto se omite dentro del editor Shopify.
