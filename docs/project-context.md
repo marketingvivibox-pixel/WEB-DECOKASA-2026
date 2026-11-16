@@ -6,6 +6,8 @@ Las proporciones se midieron en las seis maquetas. El ancho de contenido de las 
 
 La primera diapositiva tiene fotografías propias para móvil y escritorio. «Descubre todo lo que tenemos para ti» enlaza a colecciones según cuatro necesidades: renovar pisos y paredes, equipar la cocina, entrenar en casa y cuidar al bebé. Las imágenes de las cuatro tarjetas se pueden sustituir desde el editor del tema.
 
+En escritorio, los siete accesos se reparten el ancho proporcional del menú y los textos e iconos de marcas se ajustan al diámetro de sus círculos. La vista local añade a los recursos de interfaz una versión calculada a partir del contenido para que una recarga aplique los cambios de diseño.
+
 ## 16/11/2026 - Animaciones reutilizables de inicio y catálogo
 
 Primera propuesta en `codex/decokasa-animaciones`. Las entradas duran 880 ms con desplazamiento corto y desfase de 75 ms dentro de cada grupo. La portada utiliza un acercamiento leve en la imagen principal y conserva su visibilidad durante el movimiento. La cortina usa cheurones negro grafito y dorado que van de izquierda a derecha durante 1,12 s entre inicio y catálogo, en ambos sentidos. Se respeta la preferencia de movimiento reducido y el efecto se omite dentro del editor Shopify.

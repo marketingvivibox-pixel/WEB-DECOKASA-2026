@@ -1,4 +1,5 @@
 // Render the demo header, homepage and catalog from the real Shopify sections.
+const { createHash } = require('node:crypto');
 const fs = require('node:fs');
 const path = require('node:path');
 const { Liquid } = require('liquidjs');
@@ -10,6 +11,11 @@ const {filters, productFixture} = require('./product_fixture.cjs');
 filters(engine);
 const buildVersion = Date.now();
 engine.registerFilter('asset_url', name => (name.endsWith('.css') || name.endsWith('.js')) ? `assets/${name}?v=${buildVersion}` : `assets/${name}`);
+function interfaceAssetUrl(name) {
+  const contents = fs.readFileSync(path.join(root, 'assets', name));
+  const version = createHash('sha256').update(contents).digest('hex').slice(0, 12);
+  return `assets/${name}?v=${version}`;
+}
 engine.registerFilter('url_for_vendor', name => `catalogo.html?marca=${encodeURIComponent(name)}`);
 engine.registerFilter('url_for_type', name => `catalogo.html?categoria=${encodeURIComponent(name)}`);
 engine.registerFilter('handleize', name => String(name).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''));
@@ -93,6 +99,7 @@ async function main() {
   landings['landing-pisos-pvc.html'] = await section('landing-piso-pvc', pvcMain.settings, {product: pvcProduct, shop: {currency: 'PEN'}, section: {blocks: pvcBlocks}});
 
   const previewFiles = [...new Set([...fs.readdirSync(preview).filter(f => f.endsWith('.html') && !['DECOKASA-movil.html', 'render_pdf.html'].includes(f)), 'landing-piso-spc.html', 'libro-reclamaciones.html'])];
+  const interfaceAssets = `<link data-preview-interface rel="stylesheet" href="${interfaceAssetUrl('decokasa-interface.css')}"><script data-preview-interface src="${interfaceAssetUrl('decokasa-interface.js')}" defer></script>`;
   for (const file of previewFiles) {
     const rawFile = fs.existsSync(path.join(preview, file)) ? fs.readFileSync(path.join(preview, file), 'utf8') : '';
     const { document } = parseHTML(rawFile || '<!doctype html><html><head><title></title></head><body><footer></footer></body></html>');
@@ -111,12 +118,11 @@ async function main() {
     const pageConsent = isCustomLanding ? '' : consent;
     const extraCss = isCustomLanding ? '' : `<style>${css}</style>`;
     const motionAssets = motionPage ? '<link data-preview-motion rel="stylesheet" href="assets/decokasa-motion.css"><script data-preview-motion src="assets/decokasa-motion.js" defer></script>' : '';
-    const interfaceAssets = isCustomLanding ? '' : '<link data-preview-interface rel="stylesheet" href="assets/decokasa-interface.css"><script data-preview-interface src="assets/decokasa-interface.js" defer></script>';
     const curtain = motionPage ? '<div class="motion-curtain" aria-hidden="true"></div>' : '';
     const bodyAttr = isLandingSpc ? ' class="spc-layout"' : isLandingPvc ? ' class="pvc-layout"' :
       motionPage ? ` class="storefront-interface" data-motion-home="${routes.root_url}" data-motion-catalog="${routes.all_products_collection_url}"` : ' class="storefront-interface"';
     if (isLandingPvc) document.querySelector('title').textContent = 'Piso PVC autoadhesivo · DECOKASA';
-    const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">${document.head.innerHTML}${extraCss}${interfaceAssets}${motionAssets}</head><body${bodyAttr}>${curtain}${pageHeader}<main id="main">${content}</main>${pageFooter}${pageConsent}${isCustomLanding ? bookLink : ''}${isCustomLanding ? '' : `<script>${js}</script>`}${landings[file] && !isCustomLanding ? '<script src="product-demo.js" defer></script>' : ''}</body></html>`;
+    const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">${document.head.innerHTML}${extraCss}${isCustomLanding ? '' : interfaceAssets}${motionAssets}</head><body${bodyAttr}>${curtain}${pageHeader}<main id="main">${content}</main>${pageFooter}${pageConsent}${isCustomLanding ? bookLink : ''}${isCustomLanding ? '' : `<script>${js}</script>`}${landings[file] && !isCustomLanding ? '<script src="product-demo.js" defer></script>' : ''}</body></html>`;
     fs.writeFileSync(path.join(preview, file), html.replace(/[ \t]+$/gm, ''), 'utf8');
   }
   fs.mkdirSync(path.join(preview, 'assets'), { recursive: true });

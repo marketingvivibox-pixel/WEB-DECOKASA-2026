@@ -12,6 +12,12 @@
 - [x] Comprobados inicio, catálogo y ficha general en Chrome a ocho anchos entre 320 y 1920 px. Las proporciones se mantienen en cada formato y los cambios de imagen de la galería funcionan.
 - [x] Pasaron las 89 pruebas y la comprobación del respaldo del Libro. Se regeneró el paquete de 199 archivos y Shopify Theme Check terminó sin hallazgos.
 
+## 16/11/2026 — Corrección de la vista local de escritorio
+
+- [x] Ajustados el menú y los círculos de marcas al ancho de escritorio definido en las maquetas. La vista local carga la versión de los recursos que corresponde al contenido generado.
+- [x] Recargada la pestaña de escritorio a 935 px. Se comprobaron la portada nueva, los siete accesos en una fila y las cuatro categorías por necesidad.
+- [x] Verificada la portada en cinco anchos entre 900 y 1920 px. Pasaron las 89 pruebas y Shopify Theme Check terminó sin hallazgos en el paquete regenerado.
+
 ## 16/11/2026 - Propuesta de movimiento para inicio y catálogo
 
 - [x] Entradas de cabecera, portada, marcas, promociones, pasos de compra, filtros, tarjetas y pie. Cortina de cheurones con salida hacia la derecha.
