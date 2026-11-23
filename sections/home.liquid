@@ -1,8 +1,7 @@
-{% assign brand_crops = 'hogar|xion|biflex|baby' | split: '|' %}
-{% assign brand_names = 'DECOKASA|Xion|Biflex|Mundo Baby' | split: '|' %}
-{% assign brand_handles = 'decokasa|xion|biflex|mundo-baby' | split: '|' %}
-{% assign brand_keys = 'decokasa|xion|biflex|baby' | split: '|' %}
-{% assign brand_symbols = 'box|headphones|fitness|baby' | split: '|' %}
+{% assign brand_crops = 'xion|baby|biflex|hogar' | split: '|' %}
+{% assign brand_names = 'Xion|Mundo Baby|Biflex|DECOKASA' | split: '|' %}
+{% assign brand_handles = 'xion|mundo-baby|biflex|decokasa' | split: '|' %}
+{% assign brand_keys = 'xion|baby|biflex|decokasa' | split: '|' %}
 {% assign category_keys = 'acabados|cocina|fitness|bebes' | split: '|' %}
 {% assign category_titles = 'Renueva pisos y paredes|Equipa tu cocina|Entrena en casa|Cuida a tu bebé' | split: '|' %}
 {% assign category_handles = 'hogar-y-acabados|electrodomesticos|fitness|bebes' | split: '|' %}
@@ -56,7 +55,8 @@
     {% for name in brand_names %}
       {% assign collection_setting = brand_keys[forloop.index0] | append: '_collection' %}
       <a class="interface-brand interface-brand--{{ brand_crops[forloop.index0] }}" data-motion href="{% render 'catalog-url', routes: routes, collections: collections, selected_collection: section.settings[collection_setting], default_handle: brand_handles[forloop.index0] %}">
-        <span class="interface-brand-medallion">{% render 'icon', name: brand_symbols[forloop.index0] %}<strong>{{ name }}</strong></span>
+        {% assign brand_logo = 'decokasa-marca-' | append: brand_keys[forloop.index0] | append: '.webp' %}
+        <img class="interface-brand-logo" src="{{ brand_logo | asset_url }}" alt="" width="660" height="111" loading="lazy"><strong class="sr-only">{{ name }}</strong>
       </a>
     {% endfor %}
   </div>
@@ -87,7 +87,7 @@
 
 {% if featured.products.size > 0 %}
   <section class="wrap interface-featured" data-carousel aria-labelledby="InterfaceFeaturedTitle">
-    <div class="interface-section-heading" data-motion><h2 id="InterfaceFeaturedTitle">Lo más popular</h2><a href="{{ routes.all_products_collection_url }}">Ver catálogo {% render 'icon', name: 'arrow' %}</a></div>
+    <div class="interface-section-heading" data-motion><h2 id="InterfaceFeaturedTitle">Descubre todo lo mejor para tu hogar</h2><a href="{{ routes.all_products_collection_url }}">Ver catálogo {% render 'icon', name: 'arrow' %}</a></div>
     <div class="interface-track interface-product-track" id="{{ featured_track }}" data-carousel-track tabindex="0" aria-label="Productos populares">
       {% for product in featured.products limit: 10 %}{% render 'product-card', product: product, demo: is_demo %}{% endfor %}
     </div>
@@ -97,18 +97,18 @@
 
 <section class="interface-how" id="como-comprar" aria-labelledby="InterfaceHowTitle">
   <div class="wrap">
-    <h2 id="InterfaceHowTitle" data-motion>¿Cómo comprar en DECOKASA?</h2>
+    <h2 id="InterfaceHowTitle" data-motion>¿Cómo comprar en Decokasa?</h2>
     <ol class="interface-steps" data-motion-group>
-      <li data-motion><span aria-hidden="true">1</span><div><h3>Elige tu producto</h3><p>Explora las marcas y selecciona tu presentación.</p></div></li>
-      <li data-motion><span aria-hidden="true">2</span><div><h3>Completa tu solicitud</h3><p>Indica la cantidad que necesitas y tus datos de contacto.</p></div></li>
-      <li data-motion><span aria-hidden="true">3</span><div><h3>Coordina con un asesor</h3><p>Confirma disponibilidad, pago y entrega.</p></div></li>
+      <li data-motion><span aria-hidden="true">1</span><div><h3>Encuentra tu producto</h3><p>Explora el catálogo por categoría y conoce cada producto.</p></div></li>
+      <li data-motion><span aria-hidden="true">2</span><div><h3>Completa tu solicitud</h3><p>Indica la presentación y cantidad que necesitas en el formulario.</p></div></li>
+      <li data-motion><span aria-hidden="true">3</span><div><h3>Coordina con un asesor</h3><p>Confirma disponibilidad, importe final, forma de pago y entrega.</p></div></li>
     </ol>
   </div>
 </section>
 
 <section class="wrap interface-wholesale" id="mayorista">
   <div class="interface-wholesale-banner" data-motion>
-    <img class="interface-wholesale-image" src="{{ 'spc-2026-almacen-envios.webp' | asset_url }}" alt="" width="1440" height="810" loading="lazy">
+    <img class="interface-wholesale-image" src="{{ 'decokasa-mayorista-2026.webp' | asset_url }}" alt="" width="1440" height="810" loading="lazy">
     <div class="interface-wholesale-copy">
       <h2>División mayorista</h2>
       <p>Encuentra productos para tu negocio y consulta por las cantidades que necesitas.</p>
@@ -202,7 +202,7 @@
       "type": "text",
       "id": "promo_text",
       "label": "Texto de la franja",
-      "default": "Descubre todo lo que tenemos para ti."
+      "default": "Descubre todo lo mejor para tu hogar"
     },
     {
       "type": "text",

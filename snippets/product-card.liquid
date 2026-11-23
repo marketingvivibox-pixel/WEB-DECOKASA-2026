@@ -41,7 +41,6 @@
     {% endif %}
     {% unless demo %}<div class="catalog-image-pending" data-card-image-pending{% if card_image %} hidden{% endif %}>{% render 'icon', name: 'box' %}<span>Imagen pendiente</span></div><span class="catalog-sample" data-card-image-reference{% unless card_image_reference %} hidden{% endunless %}>Imagen referencial</span>{% endunless %}
   </a>
-  {% render 'storefront-favorite', product: product %}
   <div class="card-body">
     <span class="tag">{{ product.vendor | escape }}</span>
     <p class="catalog-card-category">{{ product.type | escape }}</p>
@@ -104,6 +103,9 @@
         </div>
       </div>
     {% endif %}
+    <div class="interface-card-actions">
     <a class="button interface-card-action" href="{{ card_url | escape }}" data-card-link{% if quick_add %} data-interface-card-add data-variant="{{ current_variant.id }}" data-available="{% if current_variant.available and current_variant.metafields.decokasa.coverage_m2.value == blank %}true{% else %}false{% endif %}" aria-label="Ver {{ product.title | escape }}"{% endif %}>{% render 'icon', name: 'bag' %}<span data-card-action-label>Ver {% if quick_add %}ficha{% else %}producto{% endif %}</span></a>
+    {% render 'storefront-favorite', product: product %}
+    </div>
   </div>
 </article>

@@ -12,7 +12,10 @@
     "catalog_categories": [
       "sillas-gerenciales",
       "hogar-y-acabados",
-      "sillas-gamers"
+      "sillas-gamers",
+      "tecnologia",
+      "fitness",
+      "bebes"
     ],
     "sections": {
       "header": {

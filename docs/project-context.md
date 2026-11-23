@@ -1,3 +1,10 @@
+## 23/11/2026 — Identidad visual de la referencia en alta
+
+- Referencia vigente: «WEB DECOKASA EN ALTA.ai» y su JPEG, entregados para aplicar al tema principal. Paleta azul marino `#14253f`, amarillo `#ffcd0d`, blanco y gris `#e0e0e0`; tipografía Raleway. El ancho de contenido en escritorio pasa al 66 % y conserva el 87 % móvil.
+- Seis accesos con miniaturas: Sillas Gerenciales, Hogar y Deco, Sillas Gamers, Tecnología, Deportes y Niños y Juguetes. Enlazan a colecciones existentes, sin cambios en productos ni inventarios.
+- Los bloques grises de la maqueta se interpretan como espacios de imagen: se mantienen las fotografías y la portada operativa. Logotipos y fotografías disponibles se extraen del original.
+- El pie conserva los datos reales y el acceso al Libro de Reclamaciones. Se mantienen la compra asistida, las landings específicas y las mejoras SEO existentes.
+
 ## 23/11/2026 — Fragmento de Google
 
 El aviso de formularios de prueba del pie se identifica en el tema con `data-nosnippet` para excluirlo del resumen que Google construye a partir del contenido visible. La actualización del resultado depende del siguiente rastreo.

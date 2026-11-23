@@ -1,7 +1,7 @@
 <footer class="interface-footer">
   <div class="wrap interface-footer-grid">
     <details data-footer-disclosure open>
-      <summary>Información legal</summary>
+      <summary>Legales</summary>
       <ul>
         <li>{% render 'book-link' %}</li>
         {% if shop.privacy_policy.url != blank %}<li><a href="{{ shop.privacy_policy.url }}">Política de privacidad</a></li>{% endif %}
@@ -10,10 +10,10 @@
       </ul>
     </details>
     <details data-footer-disclosure open>
-      <summary>Ubicación y atención</summary>
+      <summary>Encuéntranos en</summary>
       <ul>
         <li>Av. José Leal n.º 375, Lima</li>
-        {% if section.settings.hours != blank %}<li>{{ section.settings.hours | escape }}</li>{% endif %}
+        {% if section.settings.hours != blank %}<li class="interface-footer-hours"><strong>Horario de atención:</strong>{{ section.settings.hours | escape }}</li>{% endif %}
         <li><a href="{{ routes.root_url }}#como-comprar">Cómo comprar</a></li>
         <li><a href="{{ routes.root_url }}#mayorista">División mayorista</a></li>
       </ul>
@@ -24,8 +24,8 @@
         <li><a href="https://wa.me/51914158674">WhatsApp · 914 158 674</a></li>
         <li><a href="mailto:atencion.decokasa@checkazul.com.pe">atencion.decokasa@checkazul.com.pe</a></li>
       </ul>
+      <a class="interface-footer-logo" href="{{ routes.root_url }}" aria-label="DECOKASA, inicio"><img src="{{ 'decokasa-logo-blanco-2026.webp' | asset_url }}" alt="DECOKASA" width="807" height="117" loading="lazy"></a>
     </details>
-    <a class="interface-footer-logo" href="{{ routes.root_url }}" aria-label="DECOKASA, inicio">{% render 'reference-image', crop: 'logo' %}</a>
     {% if section.settings.instagram_url != blank or section.settings.facebook_url != blank or section.settings.tiktok_url != blank %}
       <nav class="interface-socials" aria-label="Redes sociales">
         {% if section.settings.instagram_url != blank %}<a href="{{ section.settings.instagram_url }}">Instagram</a>{% endif %}
@@ -34,7 +34,7 @@
       </nav>
     {% endif %}
   </div>
-  <div class="interface-footer-strip"><span>© DECOKASA</span><span>Compra con asesoría en Perú</span></div>
+  <div class="interface-footer-strip"><span>CHECK AZUL S.A.C. · R.U.C. N.º 20610129871 | Copyright © DECOKASA</span></div>
 </footer>
 <aside class="consent" aria-label="Preferencias de seguimiento de prueba">
   <div class="wrap"><p data-consent-message></p><button class="accept" data-consent="accepted">Permitir seguimiento</button><button data-consent="rejected">Continuar sin seguimiento</button></div>
@@ -46,7 +46,8 @@
     {
       "type": "text",
       "id": "hours",
-      "label": "Horario de atención"
+      "label": "Horario de atención",
+      "default": "Lunes a Jueves: 9 am - 10 pm · Viernes a Domingo: 10 am - 11 pm"
     },
     {
       "type": "url",

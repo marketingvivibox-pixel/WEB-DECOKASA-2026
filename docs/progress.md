@@ -1,3 +1,12 @@
+## 23/11/2026 — Nueva identidad y diseño de la tienda
+
+- [x] Aplicados los recursos del archivo «WEB DECOKASA EN ALTA.ai»: logotipos, seis miniaturas de navegación, fotografías de hogar/cocina y banner mayorista.
+- [x] Actualizados colores a azul marino, amarillo, blanco y gris; tipografía Raleway, cabecera, marcas, mosaico, tarjetas, pasos de compra y pie. La portada conserva sus imágenes y las landings SPC/PVC mantienen su diseño específico.
+- [x] Rama `codex/diseno-colores-20261123` basada en `a7beafe`; respaldo anterior `respaldo/main-antes-diseno-20261123`. Conservadas las mejoras recientes de SEO y exclusión del aviso de prueba del fragmento de Google.
+- [x] Pasaron 89 pruebas, los 24 casos del Libro por separado, la verificación de sus respaldos y el validador oficial sobre siete archivos modificados. Regeneradas nueve vistas locales y ZIP de 212 archivos.
+- [x] Revisados móvil y escritorio; comprobados favoritos, cambio de variante y agregado al carrito local. Autorizada la aplicación al tema principal existente.
+- [ ] Confirmar la sincronización pública tras integrar en `main`.
+
 ## 23/11/2026 — Aviso de formularios en los resultados de Google
 
 - El tema marca el aviso general de formularios de prueba con `data-nosnippet` para excluir ese texto del fragmento de Google. El aviso se muestra a los visitantes en las páginas correspondientes.

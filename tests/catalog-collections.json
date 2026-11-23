@@ -43,5 +43,15 @@
     "handle": "hogar-y-acabados",
     "title": "Hogar y acabados",
     "url": "/collections/hogar-y-acabados"
+  },
+  "sillas-gerenciales": {
+    "handle": "sillas-gerenciales",
+    "title": "Sillas Gerenciales",
+    "url": "/collections/sillas-gerenciales"
+  },
+  "sillas-gamers": {
+    "handle": "sillas-gamers",
+    "title": "Sillas Gamers",
+    "url": "/collections/sillas-gamers"
   }
 }
