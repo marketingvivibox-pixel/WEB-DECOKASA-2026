@@ -1,4 +1,4 @@
-{% assign default_categories = 'tecnologia|electrodomesticos|bebes|fitness|hogar-y-acabados' | split: '|' %}
+{% assign default_categories = 'sillas-gerenciales|hogar-y-acabados|sillas-gamers|tecnologia|fitness|bebes' | split: '|' %}
 {% assign catalog_types = settings.catalog_categories | default: default_categories %}
 <a class="skip" href="#main">Ir al contenido</a>
 <div class="service-bar interface-promo" data-motion="settle">
@@ -11,7 +11,7 @@
 <header class="store-header" data-motion="settle">
   <div class="wrap store-header-row">
     <a class="store-logo" href="{{ routes.root_url }}" aria-label="DECOKASA, inicio">
-      {% if section.settings.logo != blank %}{{ section.settings.logo | image_url: width: 480 | image_tag: widths: '160, 320, 480', sizes: '180px', loading: 'eager', alt: 'DECOKASA' }}{% else %}{% render 'reference-image', crop: 'logo', loading: 'eager' %}{% endif %}
+      {% if section.settings.logo != blank %}{{ section.settings.logo | image_url: width: 480 | image_tag: widths: '160, 320, 480', sizes: '180px', loading: 'eager', alt: 'DECOKASA' }}{% else %}<img src="{{ 'decokasa-logo-2026.webp' | asset_url }}" alt="DECOKASA" width="798" height="108" loading="eager">{% endif %}
     </a>
     <form class="store-search" action="{{ routes.search_url }}" method="get" role="search">
       <label class="sr-only" for="store-search">Buscar productos</label>
@@ -27,13 +27,23 @@
 </header>
 <div class="navigation-shell" data-motion="settle">
   <nav class="wrap store-nav" aria-label="Navegación principal">
-    <a href="{{ routes.all_products_collection_url }}">Ver todo</a>
     {% for type in catalog_types %}
       {% assign category_collection = type %}
       {% if category_collection.url == blank %}{% assign category_collection = collections[type] %}{% endif %}
-      {% if category_collection.url != blank %}<a href="{{ category_collection.url }}">{{ category_collection.title | escape }}</a>{% endif %}
+      {% if category_collection.url != blank %}
+        {% assign category_label = category_collection.title %}
+        {% assign category_thumbnail = '' %}
+        {% case category_collection.handle %}
+          {% when 'sillas-gerenciales' %}{% assign category_thumbnail = 'office' %}
+          {% when 'hogar-y-acabados' %}{% assign category_thumbnail = 'home' %}{% assign category_label = 'Hogar y Deco' %}
+          {% when 'sillas-gamers' %}{% assign category_thumbnail = 'gamer' %}
+          {% when 'tecnologia' %}{% assign category_thumbnail = 'tech' %}
+          {% when 'fitness' %}{% assign category_thumbnail = 'fitness' %}{% assign category_label = 'Deportes' %}
+          {% when 'bebes' %}{% assign category_thumbnail = 'baby' %}{% assign category_label = 'Niños y Juguetes' %}
+        {% endcase %}
+        <a href="{{ category_collection.url }}">{% if category_thumbnail != blank %}{% assign thumbnail_asset = 'decokasa-nav-' | append: category_thumbnail | append: '.webp' %}<img src="{{ thumbnail_asset | asset_url }}" alt="" width="40" height="40" loading="eager">{% endif %}<span>{{ category_label | escape }}</span></a>
+      {% endif %}
     {% endfor %}
-    <a href="{{ routes.root_url }}#marcas">Nuestras marcas</a>
   </nav>
 </div>
 {% render 'storefront-cart' %}
@@ -50,7 +60,7 @@
       "type": "text",
       "id": "announcement",
       "label": "Texto de la franja superior",
-      "default": "Compra con asesor · Coordina tu envío"
+      "default": "Compra con un asesor y coordina tu envío"
     }
   ],
   "presets": [
