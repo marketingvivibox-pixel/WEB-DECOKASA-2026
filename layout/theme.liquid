@@ -45,7 +45,7 @@
     {% unless custom_landing %}{% section 'header' %}{% endunless %}
     <main id="main">{{ content_for_layout }}</main>
     {% unless custom_landing %}
-      {% unless template.suffix == 'libro-reclamaciones' %}<div class="demo" data-motion>Tienda en preparación · Los formularios son de prueba y todavía no envían solicitudes.</div>{% endunless %}
+      {% unless template.suffix == 'libro-reclamaciones' %}<div class="demo" data-motion data-nosnippet>Tienda en preparación · Los formularios son de prueba y todavía no envían solicitudes.</div>{% endunless %}
       {% section 'footer' %}
     {% endunless %}
     {% if custom_landing %}{% render 'book-link' %}{% endif %}

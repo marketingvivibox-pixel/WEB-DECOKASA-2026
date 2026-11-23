@@ -1,3 +1,7 @@
+## 23/11/2026 — Aviso de formularios en los resultados de Google
+
+- El tema marca el aviso general de formularios de prueba con `data-nosnippet` para excluir ese texto del fragmento de Google. El aviso se muestra a los visitantes en las páginas correspondientes.
+
 ## 23/11/2026 — SEO y ficha de piso SPC
 
 - Ajustados el título y la descripción SEO en el encabezado del tema oficial y normalizada la ficha técnica de SPC con el catálogo de tonos.

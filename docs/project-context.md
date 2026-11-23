@@ -1,3 +1,7 @@
+## 23/11/2026 — Fragmento de Google
+
+El aviso de formularios de prueba del pie se identifica en el tema con `data-nosnippet` para excluirlo del resumen que Google construye a partir del contenido visible. La actualización del resultado depende del siguiente rastreo.
+
 ## 23/11/2026 — SEO y ficha de piso SPC
 
 El tema genera la etiqueta de descripción desde el SEO configurado en Shopify y añade la marca al título cuando el texto aún no la incluye. La ficha SPC usa las medidas por plancha del catálogo, 18 × 122 cm, y distingue espesores de 5 mm y 5,5 mm según el tono. La calculadora conserva su rendimiento referencial de 2,196 m² por caja. La presentación a S/ 95 y el rendimiento por acabado siguen pendientes de confirmación comercial.
