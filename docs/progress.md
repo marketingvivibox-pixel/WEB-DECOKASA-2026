@@ -5,7 +5,7 @@
 - [x] Rama `codex/diseno-colores-20261123` basada en `a7beafe`; respaldo anterior `respaldo/main-antes-diseno-20261123`. Conservadas las mejoras recientes de SEO y exclusión del aviso de prueba del fragmento de Google.
 - [x] Pasaron 89 pruebas, los 24 casos del Libro por separado, la verificación de sus respaldos y el validador oficial sobre siete archivos modificados. Regeneradas nueve vistas locales y ZIP de 212 archivos.
 - [x] Revisados móvil y escritorio; comprobados favoritos, cambio de variante y agregado al carrito local. Autorizada la aplicación al tema principal existente.
-- [ ] Confirmar la sincronización pública tras integrar en `main`.
+- [x] Integrado en `main` con `783f405` y confirmada la sincronización pública en https://decokasa.pe/ sobre el tema oficial `188927803629`. Revisados escritorio (1440 px), móvil (390 px) y acceso al Libro de Reclamaciones: sin imágenes rotas ni desbordamiento horizontal. Capturas guardadas en la carpeta SHOPIFY.
 
 ## 23/11/2026 — Aviso de formularios en los resultados de Google
 
