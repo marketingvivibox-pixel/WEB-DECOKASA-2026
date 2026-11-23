@@ -1,3 +1,7 @@
+## 23/11/2026 — SEO y ficha de piso SPC
+
+El tema genera la etiqueta de descripción desde el SEO configurado en Shopify y añade la marca al título cuando el texto aún no la incluye. La ficha SPC usa las medidas por plancha del catálogo, 18 × 122 cm, y distingue espesores de 5 mm y 5,5 mm según el tono. La calculadora conserva su rendimiento referencial de 2,196 m² por caja. La presentación a S/ 95 y el rendimiento por acabado siguen pendientes de confirmación comercial.
+
 ## 16/11/2026 — Publicación temporal del rediseño
 
 Se autorizó integrar el rediseño en `main` para revisarlo en la tienda pública, en el tema oficial existente `188927803629`. La versión anterior se guardó primero en el commit `9863c09` y la etiqueta `respaldo/main-antes-rediseno-20261116`. Para restablecerla, revertir el commit de fusión del rediseño con `git revert -m 1` y publicar `main` por el canal habitual. Si hubo cambios posteriores, comprobar que el revert los conserve.

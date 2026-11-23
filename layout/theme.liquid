@@ -15,7 +15,17 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>{{ page_title | escape }} · DECOKASA</title>
+    {%- liquid
+      assign seo_title = page_title | strip | default: shop.name
+      assign seo_title_lower = seo_title | downcase
+      assign seo_brand = shop.name | strip | default: 'DECOKASA'
+      assign seo_brand_lower = seo_brand | downcase
+      assign seo_description = page_description | strip_html | strip
+    %}
+    <title>{{ seo_title | escape }}{% unless seo_title_lower contains seo_brand_lower %} · {{ seo_brand | escape }}{% endunless %}</title>
+    {% if seo_description != blank %}
+      <meta name="description" content="{{ seo_description | escape }}">
+    {% endif %}
     <link rel="canonical" href="{{ canonical_url }}">
     <link rel="icon" type="image/png" sizes="128x128" href="{{ 'favicon.png' | asset_url }}">
     {{ content_for_header }}

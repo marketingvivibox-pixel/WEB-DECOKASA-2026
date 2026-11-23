@@ -1,3 +1,8 @@
+## 23/11/2026 — SEO y ficha de piso SPC
+
+- Ajustados el título y la descripción SEO en el encabezado del tema oficial y normalizada la ficha técnica de SPC con el catálogo de tonos.
+- Pasaron 89 pruebas locales ejecutadas por archivo, incluidos 24 casos del Libro de Reclamaciones. Verificados el renderizado Liquid, la vista SPC y el empaquetado local.
+
 ## 16/11/2026 — Integración temporal del rediseño en producción
 
 - [x] Guardada la versión anterior en GitHub (commit `9863c09` y etiqueta `respaldo/main-antes-rediseno-20261116`).
