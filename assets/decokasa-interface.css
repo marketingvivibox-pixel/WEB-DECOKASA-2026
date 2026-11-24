@@ -158,6 +158,9 @@
 .storefront-interface .product-description-block { padding-top: 20px; border-top: 1px solid var(--interface-border); }
 .storefront-interface .product-info-heading { margin: 0 0 12px; font-size: 1.05rem; font-weight: 700; color: var(--interface-ink); letter-spacing: -.01em; }
 .storefront-interface .product-image-stage { background: #f4f4f4; border-color: var(--interface-border); }
+.storefront-interface .product-image-stage .interface-favorite { position: absolute; top: 10px; right: 10px; z-index: 2; }
+.storefront-interface .product-image-panel { display: grid; place-items: center; }
+.storefront-interface .product-main-image { object-position: center; }
 .storefront-interface .product-thumbnails { --thumbnail-gap: 2.4%; gap: var(--thumbnail-gap); padding-inline: 0; }
 .storefront-interface .product-thumbnail { flex: 0 0 calc((100% - 4 * var(--thumbnail-gap)) / 5); min-width: 0; height: auto; aspect-ratio: 1; }
 .storefront-interface .product-availability { background: #e0e0e0; color: var(--interface-ink); }
@@ -262,7 +265,9 @@
   .storefront-interface .catalog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: max(10px, 3vw) 3.3%; }
   .storefront-interface .product-layout { margin-inline: 0; grid-template-columns: minmax(0, 1fr); grid-template-areas: 'gallery' 'summary' 'specs'; row-gap: max(12px, 2.5vw); }
   .storefront-interface .product-page[data-gallery-ratio="responsive"] { --product-ratio: 1; }
-  .storefront-interface .product-page[data-gallery-ratio="responsive"] .product-gallery:has(.product-thumbnails) { --product-ratio: 248 / 360; }
+  .storefront-interface .product-page[data-gallery-ratio="responsive"] .product-gallery:has(.product-thumbnails) { --product-ratio: 1; }
+  .storefront-interface .product-image-stage .interface-favorite { top: 8px; right: 8px; width: 38px; height: 38px; }
+  .storefront-interface .product-image-stage .interface-favorite::after { content: ''; position: absolute; inset: -3px; }
   .storefront-interface .product-gallery { max-width: none; }
   .storefront-interface .store-header-row { grid-template-columns: minmax(0, 1fr) 44px 44px; gap: 5px 2%; padding-block: 8px 10px; }
   .storefront-interface .store-logo { grid-column: 1 / -1; width: 44%; justify-self: center; }
@@ -431,6 +436,23 @@
   .storefront-interface .header-catalog { width: 44px; height: 44px; }
   .storefront-interface .store-nav { min-height: 66px; gap: 3%; padding-block: 6px 16px; }
   .storefront-interface .store-nav a { flex: 0 0 auto; min-width: 155px; padding-inline: 12px; min-height: 44px; font-size: .8rem; }
+  .storefront-interface:has([data-product-page]) .store-header-row { grid-template-columns: minmax(0, 1fr) 40px 40px; gap: 6px 2%; padding-block: 6px 4px; }
+  .storefront-interface:has([data-product-page]) .store-logo { width: 38%; max-width: 148px; padding-bottom: 0; }
+  .storefront-interface:has([data-product-page]) .store-search { padding: 2px 3px 2px 12px; }
+  .storefront-interface:has([data-product-page]) .store-search input[type=search] { min-height: 32px; font-size: .78rem; }
+  .storefront-interface:has([data-product-page]) .store-search button { width: 34px; height: 34px; flex: 0 0 34px; }
+  .storefront-interface:has([data-product-page]) .store-search button .icon { width: 18px; height: 18px; }
+  .storefront-interface:has([data-product-page]) .customer-service--header > summary { position: relative; min-width: 40px; min-height: 40px; }
+  .storefront-interface:has([data-product-page]) .customer-service--header > summary::after { content: ''; position: absolute; inset: -2px; }
+  .storefront-interface:has([data-product-page]) .header-catalog { width: 38px; height: 38px; min-width: 38px; min-height: 38px; }
+  .storefront-interface:has([data-product-page]) .header-catalog::after { content: ''; position: absolute; inset: -3px; }
+  .storefront-interface:has([data-product-page]) .header-catalog .icon { width: 20px; height: 20px; }
+  .storefront-interface:has([data-product-page]) .store-nav { min-height: 40px; padding-block: 2px 6px; gap: 8px; }
+  .storefront-interface:has([data-product-page]) .store-nav a { min-width: max-content; min-height: 34px; padding: 4px 12px; gap: 6px; font-size: .75rem; }
+  .storefront-interface:has([data-product-page]) .store-nav a img { width: 20px; height: 20px; flex-basis: 20px; }
+  .storefront-interface:has([data-product-page]) .product-page { padding-block: 4px 0; }
+  .storefront-interface:has([data-product-page]) .product-page .breadcrumb { margin: 2px 0 6px; font-size: 12px; }
+  .storefront-interface:has([data-product-page]) .product-page .breadcrumb a { min-height: 30px; }
   .interface-slide::after { background: linear-gradient(90deg,#101d30df,#14253f60 72%),linear-gradient(0deg,#101d30bb,transparent 60%); }
   .interface-brand-list { grid-template-columns: 18% 25% 18% 25%; gap: 4%; }
   .interface-brand-logo { max-height: 44px; }
