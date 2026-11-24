@@ -108,21 +108,19 @@ async function main() {
     const content = file === 'DECOKASA-inicio.html' ? home : file === 'catalogo.html' ? catalog : file === 'libro-reclamaciones.html' ? book : landings[file];
     const motionPage = file === routes.root_url || file === routes.all_products_collection_url;
     const footer = sharedFooter.slice(0, sharedFooter.indexOf('</footer>') + '</footer>'.length);
-    const consent = sharedFooter.slice(sharedFooter.indexOf('</footer>') + '</footer>'.length);
     document.querySelectorAll('style').forEach(el => el.remove());
     const isLandingSpc = file === 'landing-piso-spc.html';
     const isLandingPvc = file === 'landing-pisos-pvc.html';
     const isCustomLanding = isLandingSpc || isLandingPvc;
     const pageHeader = isCustomLanding ? '' : header;
     const pageFooter = isCustomLanding ? '' : footer;
-    const pageConsent = isCustomLanding ? '' : consent;
     const extraCss = isCustomLanding ? '' : `<style>${css}</style>`;
     const motionAssets = motionPage ? '<link data-preview-motion rel="stylesheet" href="assets/decokasa-motion.css"><script data-preview-motion src="assets/decokasa-motion.js" defer></script>' : '';
     const curtain = motionPage ? '<div class="motion-curtain" aria-hidden="true"></div>' : '';
     const bodyAttr = isLandingSpc ? ' class="spc-layout"' : isLandingPvc ? ' class="pvc-layout"' :
       motionPage ? ` class="storefront-interface" data-motion-home="${routes.root_url}" data-motion-catalog="${routes.all_products_collection_url}"` : ' class="storefront-interface"';
     if (isLandingPvc) document.querySelector('title').textContent = 'Piso PVC autoadhesivo · DECOKASA';
-    const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">${document.head.innerHTML}${extraCss}${isCustomLanding ? '' : interfaceAssets}${motionAssets}</head><body${bodyAttr}>${curtain}${pageHeader}<main id="main">${content}</main>${pageFooter}${pageConsent}${isCustomLanding ? bookLink : ''}${isCustomLanding ? '' : `<script>${js}</script>`}${landings[file] && !isCustomLanding ? '<script src="product-demo.js" defer></script>' : ''}</body></html>`;
+    const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">${document.head.innerHTML}${extraCss}${isCustomLanding ? '' : interfaceAssets}${motionAssets}</head><body${bodyAttr}>${curtain}${pageHeader}<main id="main">${content}</main>${pageFooter}${isCustomLanding ? bookLink : ''}${isCustomLanding ? '' : `<script>${js}</script>`}${landings[file] && !isCustomLanding ? '<script src="product-demo.js" defer></script>' : ''}</body></html>`;
     fs.writeFileSync(path.join(preview, file), html.replace(/[ \t]+$/gm, ''), 'utf8');
   }
   fs.mkdirSync(path.join(preview, 'assets'), { recursive: true });

@@ -1,5 +1,16 @@
 <footer class="interface-footer">
   <div class="wrap interface-footer-grid">
+    <div class="interface-footer-brand">
+      <a class="interface-footer-logo" href="{{ routes.root_url }}" aria-label="DECOKASA, inicio"><img src="{{ 'decokasa-logo-blanco-2026.webp' | asset_url }}" alt="DECOKASA" width="807" height="117" loading="lazy"></a>
+      <p class="interface-footer-tagline">Todo lo que necesitas para tu hogar y oficina, con atención personalizada en todo el Perú.</p>
+      {% if section.settings.instagram_url != blank or section.settings.facebook_url != blank or section.settings.tiktok_url != blank %}
+        <nav class="interface-socials" aria-label="Redes sociales">
+          {% if section.settings.instagram_url != blank %}<a href="{{ section.settings.instagram_url }}">Instagram</a>{% endif %}
+          {% if section.settings.facebook_url != blank %}<a href="{{ section.settings.facebook_url }}">Facebook</a>{% endif %}
+          {% if section.settings.tiktok_url != blank %}<a href="{{ section.settings.tiktok_url }}">TikTok</a>{% endif %}
+        </nav>
+      {% endif %}
+    </div>
     <details data-footer-disclosure open>
       <summary>Legales</summary>
       <ul>
@@ -12,8 +23,8 @@
     <details data-footer-disclosure open>
       <summary>Encuéntranos en</summary>
       <ul>
-        <li>Av. José Leal n.º 375, Lima</li>
-        {% if section.settings.hours != blank %}<li class="interface-footer-hours"><strong>Horario de atención:</strong>{{ section.settings.hours | escape }}</li>{% endif %}
+        <li>Av. Las Palmeras 343, Torre Azul, San Isidro</li>
+        {% if section.settings.hours != blank %}<li class="interface-footer-hours"><strong>Horario de atención:</strong><span>{{ section.settings.hours | escape }}</span></li>{% endif %}
         <li><a href="{{ routes.root_url }}#como-comprar">Cómo comprar</a></li>
         <li><a href="{{ routes.root_url }}#mayorista">División mayorista</a></li>
       </ul>
@@ -24,21 +35,10 @@
         <li><a href="https://wa.me/51914158674">WhatsApp · 914 158 674</a></li>
         <li><a href="mailto:atencion.decokasa@checkazul.com.pe">atencion.decokasa@checkazul.com.pe</a></li>
       </ul>
-      <a class="interface-footer-logo" href="{{ routes.root_url }}" aria-label="DECOKASA, inicio"><img src="{{ 'decokasa-logo-blanco-2026.webp' | asset_url }}" alt="DECOKASA" width="807" height="117" loading="lazy"></a>
     </details>
-    {% if section.settings.instagram_url != blank or section.settings.facebook_url != blank or section.settings.tiktok_url != blank %}
-      <nav class="interface-socials" aria-label="Redes sociales">
-        {% if section.settings.instagram_url != blank %}<a href="{{ section.settings.instagram_url }}">Instagram</a>{% endif %}
-        {% if section.settings.facebook_url != blank %}<a href="{{ section.settings.facebook_url }}">Facebook</a>{% endif %}
-        {% if section.settings.tiktok_url != blank %}<a href="{{ section.settings.tiktok_url }}">TikTok</a>{% endif %}
-      </nav>
-    {% endif %}
   </div>
   <div class="interface-footer-strip"><span>CHECK AZUL S.A.C. · R.U.C. N.º 20610129871 | Copyright © DECOKASA</span></div>
 </footer>
-<aside class="consent" aria-label="Preferencias de seguimiento de prueba">
-  <div class="wrap"><p data-consent-message></p><button class="accept" data-consent="accepted">Permitir seguimiento</button><button data-consent="rejected">Continuar sin seguimiento</button></div>
-</aside>
 {% schema %}
 {
   "name": "Pie de página",

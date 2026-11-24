@@ -58,8 +58,9 @@ let html=await engine.parseAndRender(sectionSource.replace(/{% schema %}[\s\S]*?
 const doc=parseHTML(html).document;
 const variants=product.variants.map((v,n)=>({...v,coverage:v.metafields?.decokasa?.coverage_m2?.value,imageId:v.featured_image?.id,optionValues:product.options_with_values[0]?.values[n]?.id||''}));
 const script=doc.createElement('script');script.type='application/json';script.setAttribute('data-preview-variants','');script.textContent=JSON.stringify(variants);doc.querySelector('[data-product-page]').append(script);
-const consent=parseHTML(fs.readFileSync(path.join(out,'landing-audifonos.html'),'utf8')).document.querySelector('.consent');
-html=doc.toString()+(consent?.outerHTML||'');
+const landingDoc=parseHTML(fs.readFileSync(path.join(out,'landing-audifonos.html'),'utf8')).document;
+assert.equal(landingDoc.querySelector('.consent'),null);
+html=doc.toString();
 const pvc=load('generic-pvc-test.html','?utm_source=meta&ad_id=123',html);
 const $=s=>pvc.document.querySelector(s),area=$('[name=area]'),quantity=$('[name=quantity]');
 assert.equal($('fieldset').disabled,false);
@@ -75,8 +76,6 @@ pvc.event($('[data-open-request]'),'click');assert.equal($('[data-request-detail
 assert.equal([...pvc.document.querySelectorAll('[data-gallery-panel]')].filter(panel=>!panel.hidden).length,1);
 assert.equal($('[data-gallery-choice][aria-current]').dataset.galleryChoice,'demo-image-4-1');
 const latest=id();area.value='0';pvc.event(area,'input');pvc.event(form,'submit');assert.equal(id(),latest);assert.equal($('[data-calc-result]').classList.contains('error'),true);
-pvc.event($('[data-consent="accepted"]'),'click');assert.equal(JSON.parse(pvc.data.get('decokasa.attribution')).first.ad_id,'123');
-pvc.event($('[data-consent="rejected"]'),'click');assert.equal(pvc.data.has('decokasa.attribution'),false);assert.equal(pvc.data.has('decokasa.visitor'),false);
 assert.equal(pvc.sends(),0);assert.equal([...pvc.data.keys()].some(k=>k.includes('draft')),false);
 });
 const multi=load('landing-audifonos.html');

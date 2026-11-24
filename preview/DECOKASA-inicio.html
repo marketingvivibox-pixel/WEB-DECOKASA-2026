@@ -94,11 +94,11 @@ body{padding-top:var(--service-bar-height,38px)}
   .service-items>.customer-service{font-size:11px}
   .customer-service--bar .customer-service-panel{left:50%;transform:translateX(-50%)}
 }
-</style><link data-preview-interface rel="stylesheet" href="assets/decokasa-interface.css?v=ae83e8bf15fc"><script data-preview-interface src="assets/decokasa-interface.js?v=5a2350828578" defer></script><link data-preview-motion rel="stylesheet" href="assets/decokasa-motion.css"><script data-preview-motion src="assets/decokasa-motion.js" defer></script></head><body class="storefront-interface" data-motion-home="DECOKASA-inicio.html" data-motion-catalog="catalogo.html"><div class="motion-curtain" aria-hidden="true"></div>
+</style><link data-preview-interface rel="stylesheet" href="assets/decokasa-interface.css?v=db2439f7dba6"><script data-preview-interface src="assets/decokasa-interface.js?v=ef0077a5b45a" defer></script><link data-preview-motion rel="stylesheet" href="assets/decokasa-motion.css"><script data-preview-motion src="assets/decokasa-motion.js" defer></script></head><body class="storefront-interface" data-motion-home="DECOKASA-inicio.html" data-motion-catalog="catalogo.html"><div class="motion-curtain" aria-hidden="true"></div>
 
 <a class="skip" href="#main">Ir al contenido</a>
 <div class="service-bar interface-promo" data-motion="settle">
-  <a href="DECOKASA-inicio.html#como-comprar">
+  <a class="interface-promo-track" href="DECOKASA-inicio.html#como-comprar">
 
       <span>Compra con un asesor y coordina tu envío</span>
 
@@ -118,7 +118,10 @@ body{padding-top:var(--service-bar-height,38px)}
 
       <span aria-hidden="true">Compra con un asesor y coordina tu envío</span>
 
+      <span aria-hidden="true">Compra con un asesor y coordina tu envío</span>
+
   </a>
+  <button class="interface-promo-toggle" type="button" data-promo-toggle aria-label="Pausar texto en movimiento">❚❚</button>
 </div>
 <header class="store-header" data-motion="settle">
   <div class="wrap store-header-row">
@@ -828,6 +831,11 @@ body{padding-top:var(--service-bar-height,38px)}
 
 </main><footer class="interface-footer">
   <div class="wrap interface-footer-grid">
+    <div class="interface-footer-brand">
+      <a class="interface-footer-logo" href="DECOKASA-inicio.html" aria-label="DECOKASA, inicio"><img src="assets/decokasa-logo-blanco-2026.webp" alt="DECOKASA" width="807" height="117" loading="lazy"></a>
+      <p class="interface-footer-tagline">Todo lo que necesitas para tu hogar y oficina, con atención personalizada en todo el Perú.</p>
+
+    </div>
     <details data-footer-disclosure open>
       <summary>Legales</summary>
       <ul>
@@ -843,8 +851,8 @@ body{padding-top:var(--service-bar-height,38px)}
     <details data-footer-disclosure open>
       <summary>Encuéntranos en</summary>
       <ul>
-        <li>Av. José Leal n.º 375, Lima</li>
-        <li class="interface-footer-hours"><strong>Horario de atención:</strong>Lunes a Jueves: 9 am - 10 pm · Viernes a Domingo: 10 am - 11 pm</li>
+        <li>Av. Las Palmeras 343, Torre Azul, San Isidro</li>
+        <li class="interface-footer-hours"><strong>Horario de atención:</strong><span>Lunes a Jueves: 9 am - 10 pm · Viernes a Domingo: 10 am - 11 pm</span></li>
         <li><a href="DECOKASA-inicio.html#como-comprar">Cómo comprar</a></li>
         <li><a href="DECOKASA-inicio.html#mayorista">División mayorista</a></li>
       </ul>
@@ -855,17 +863,10 @@ body{padding-top:var(--service-bar-height,38px)}
         <li><a href="https://wa.me/51914158674">WhatsApp · 914 158 674</a></li>
         <li><a href="mailto:atencion.decokasa@checkazul.com.pe">atencion.decokasa@checkazul.com.pe</a></li>
       </ul>
-      <a class="interface-footer-logo" href="DECOKASA-inicio.html" aria-label="DECOKASA, inicio"><img src="assets/decokasa-logo-blanco-2026.webp" alt="DECOKASA" width="807" height="117" loading="lazy"></a>
     </details>
-
   </div>
   <div class="interface-footer-strip"><span>CHECK AZUL S.A.C. · R.U.C. N.º 20610129871 | Copyright © DECOKASA</span></div>
-</footer>
-<aside class="consent" aria-label="Preferencias de seguimiento de prueba">
-  <div class="wrap"><p data-consent-message></p><button class="accept" data-consent="accepted">Permitir seguimiento</button><button data-consent="rejected">Continuar sin seguimiento</button></div>
-</aside>
-
-<script>(function(root){
+</footer><script>(function(root){
   'use strict';
   const fields=['utm_source','utm_medium','utm_campaign','utm_content','utm_term','campaign_id','adset_id','adgroup_id','ad_id','creative_id','account_id','platform','fbclid','gclid','ttclid'];
   function uuid(){ if(root.crypto.randomUUID)return root.crypto.randomUUID(); const b=root.crypto.getRandomValues(new Uint8Array(16));b[6]=(b[6]&15)|64;b[8]=(b[8]&63)|128;return [...b].map((x,i)=>([4,6,8,10].includes(i)?'-':'')+x.toString(16).padStart(2,'0')).join(''); }

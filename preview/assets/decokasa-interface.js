@@ -229,6 +229,16 @@
 
   document.addEventListener('click', event => {
     if (event.defaultPrevented || !event.target.closest) return;
+    const promoToggle = event.target.closest('[data-promo-toggle]');
+    if (promoToggle) {
+      const bar = promoToggle.closest('.interface-promo');
+      if (!bar) return;
+      const paused = bar.dataset.promoPaused === 'true';
+      bar.dataset.promoPaused = paused ? 'false' : 'true';
+      promoToggle.textContent = paused ? '❚❚' : '▶';
+      promoToggle.setAttribute('aria-label', paused ? 'Pausar texto en movimiento' : 'Reanudar texto en movimiento');
+      return;
+    }
     const favorite = event.target.closest('[data-interface-favorite]');
     if (favorite) {
       const handle = favorite.dataset.interfaceFavorite;

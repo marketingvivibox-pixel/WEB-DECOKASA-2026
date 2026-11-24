@@ -2,11 +2,12 @@
 {% assign catalog_types = settings.catalog_categories | default: default_categories %}
 <a class="skip" href="#main">Ir al contenido</a>
 <div class="service-bar interface-promo" data-motion="settle">
-  <a href="{{ routes.root_url }}#como-comprar">
-    {% for i in (1..9) %}
+  <a class="interface-promo-track" href="{{ routes.root_url }}#como-comprar">
+    {% for i in (1..10) %}
       <span{% unless forloop.first %} aria-hidden="true"{% endunless %}>{{ section.settings.announcement | escape }}</span>
     {% endfor %}
   </a>
+  <button class="interface-promo-toggle" type="button" data-promo-toggle aria-label="Pausar texto en movimiento">❚❚</button>
 </div>
 <header class="store-header" data-motion="settle">
   <div class="wrap store-header-row">
