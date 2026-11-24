@@ -100,10 +100,23 @@
         choices.forEach(link=>{const active=link.dataset.brandChoice===brand.value;link.classList.toggle('is-selected',active);if(active)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');});
         if(sort&&grid){const ordered=[...cards];if(sort.value!=='manual')ordered.sort((a,b)=>a.dataset.title.localeCompare(b.dataset.title,'es')*(sort.value==='title-descending'?-1:1));ordered.forEach(card=>grid.appendChild(card));}
       }
-      [brand,category,query].forEach(input=>input.addEventListener('input',filter));
-      sort?.addEventListener('change',filter);
-      choices.forEach(link=>link.addEventListener('click',event=>{event.preventDefault();brand.value=link.dataset.brandChoice;category.value='';query.value='';filter();}));
-      document.querySelectorAll('[data-filter-clear]').forEach(button=>button.addEventListener('click',()=>{brand.value='';category.value='';query.value='';filter();}));
+      function animatedFilter(){
+        if(typeof document.startViewTransition==='function'&&typeof root.matchMedia==='function'&&root.matchMedia('(prefers-reduced-motion: no-preference)').matches){
+          cards.forEach((card,idx)=>{card.style.viewTransitionName=`dk-filter-card-${idx}`;});
+          document.documentElement.dataset.transitionMode='rearrange';
+          const vt=document.startViewTransition(filter);
+          vt.finished.finally(()=>{
+            cards.forEach(card=>{card.style.viewTransitionName='';});
+            delete document.documentElement.dataset.transitionMode;
+          });
+        }else{
+          filter();
+        }
+      }
+      [brand,category,query].forEach(input=>input.addEventListener('input',animatedFilter));
+      sort?.addEventListener('change',animatedFilter);
+      choices.forEach(link=>link.addEventListener('click',event=>{event.preventDefault();brand.value=link.dataset.brandChoice;category.value='';query.value='';animatedFilter();}));
+      document.querySelectorAll('[data-filter-clear]').forEach(button=>button.addEventListener('click',()=>{brand.value='';category.value='';query.value='';animatedFilter();}));
       filter();
     }
     initForms(document);

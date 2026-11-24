@@ -94,9 +94,9 @@ body{padding-top:var(--service-bar-height,38px)}
   .service-items>.customer-service{font-size:11px}
   .customer-service--bar .customer-service-panel{left:50%;transform:translateX(-50%)}
 }
-</style><link data-preview-interface rel="stylesheet" href="assets/decokasa-interface.css?v=a41e4d868cd3"><script data-preview-interface src="assets/decokasa-interface.js?v=ef0077a5b45a" defer></script></head><body class="storefront-interface book-layout"><main id="main"><link rel="stylesheet" href="assets/libro-reclamaciones.css?v=1795544411629">
-<script src="assets/libro-ubigeo.js?v=1795544411629" defer></script>
-<script src="assets/libro-reclamaciones.js?v=1795544411629" defer></script>
+</style><link data-preview-interface rel="stylesheet" href="assets/decokasa-interface.css?v=a41e4d868cd3"><script data-preview-interface src="assets/decokasa-interface.js?v=ef0077a5b45a" defer></script><link data-preview-motion rel="stylesheet" href="assets/decokasa-motion.css?v=1023e4b59582"><link data-preview-motion rel="expect" href="#main" blocking="render"><script data-preview-motion src="assets/decokasa-motion.js?v=97290f15af63" defer blocking="render"></script></head><body class="storefront-interface book-layout" data-motion-home="DECOKASA-inicio.html" data-motion-catalog="catalogo.html"><div class="motion-curtain" aria-hidden="true"></div><main id="main"><link rel="stylesheet" href="assets/libro-reclamaciones.css?v=1795552159828">
+<script src="assets/libro-ubigeo.js?v=1795552159828" defer></script>
+<script src="assets/libro-reclamaciones.js?v=1795552159828" defer></script>
 <section class="book-page" aria-labelledby="book-heading">
   <div class="book-wrap">
     <header class="book-topbar">
@@ -454,10 +454,23 @@ body{padding-top:var(--service-bar-height,38px)}
         choices.forEach(link=>{const active=link.dataset.brandChoice===brand.value;link.classList.toggle('is-selected',active);if(active)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');});
         if(sort&&grid){const ordered=[...cards];if(sort.value!=='manual')ordered.sort((a,b)=>a.dataset.title.localeCompare(b.dataset.title,'es')*(sort.value==='title-descending'?-1:1));ordered.forEach(card=>grid.appendChild(card));}
       }
-      [brand,category,query].forEach(input=>input.addEventListener('input',filter));
-      sort?.addEventListener('change',filter);
-      choices.forEach(link=>link.addEventListener('click',event=>{event.preventDefault();brand.value=link.dataset.brandChoice;category.value='';query.value='';filter();}));
-      document.querySelectorAll('[data-filter-clear]').forEach(button=>button.addEventListener('click',()=>{brand.value='';category.value='';query.value='';filter();}));
+      function animatedFilter(){
+        if(typeof document.startViewTransition==='function'&&typeof root.matchMedia==='function'&&root.matchMedia('(prefers-reduced-motion: no-preference)').matches){
+          cards.forEach((card,idx)=>{card.style.viewTransitionName=`dk-filter-card-${idx}`;});
+          document.documentElement.dataset.transitionMode='rearrange';
+          const vt=document.startViewTransition(filter);
+          vt.finished.finally(()=>{
+            cards.forEach(card=>{card.style.viewTransitionName='';});
+            delete document.documentElement.dataset.transitionMode;
+          });
+        }else{
+          filter();
+        }
+      }
+      [brand,category,query].forEach(input=>input.addEventListener('input',animatedFilter));
+      sort?.addEventListener('change',animatedFilter);
+      choices.forEach(link=>link.addEventListener('click',event=>{event.preventDefault();brand.value=link.dataset.brandChoice;category.value='';query.value='';animatedFilter();}));
+      document.querySelectorAll('[data-filter-clear]').forEach(button=>button.addEventListener('click',()=>{brand.value='';category.value='';query.value='';animatedFilter();}));
       filter();
     }
     initForms(document);

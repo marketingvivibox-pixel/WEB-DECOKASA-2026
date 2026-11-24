@@ -30,7 +30,7 @@
 {% if landing_url == product.url and product.metafields.decokasa.coverage_m2.value == blank %}
   {% if product.has_only_default_variant or product.options_with_values.size == 1 and color_option != nil %}{% assign quick_add = true %}{% endif %}
 {% endif %}
-<article class="card catalog-card" data-interface-title="{{ product.title | escape }}" data-motion{% if demo %} data-card data-brand="{{ product.vendor | escape }}" data-category="{{ product.type | escape }}" data-title="{{ product.title | escape }}"{% endif %}>
+<article class="card catalog-card" data-product-handle="{{ product.handle | escape }}" data-interface-title="{{ product.title | escape }}" data-motion{% if demo %} data-card data-brand="{{ product.vendor | escape }}" data-category="{{ product.type | escape }}" data-title="{{ product.title | escape }}"{% endif %}>
   <a class="catalog-card-media" href="{{ card_url | escape }}" aria-label="Ver {{ product.title | escape }}" data-card-link>
     {% if demo %}
       {% render 'catalog-art', handle: product.handle %}<span class="catalog-sample">Ilustración de muestra</span>

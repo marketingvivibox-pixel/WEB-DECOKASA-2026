@@ -3,6 +3,9 @@
   --motion-stagger: 75ms;
   --motion-distance: 18px;
   --motion-ease: cubic-bezier(.2, .72, .25, 1);
+  --motion-morph-duration: 520ms;
+  --motion-morph-ease: cubic-bezier(.22, 1, .36, 1);
+  --motion-rearrange-duration: 420ms;
   --motion-curtain-half: 560ms;
   --motion-curtain-duration: calc(2 * var(--motion-curtain-half));
   --motion-curtain-ease: cubic-bezier(.65, 0, .35, 1);
@@ -33,6 +36,18 @@
   pointer-events: none;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
 @media screen and (prefers-reduced-motion: no-preference) {
   @view-transition {
     navigation: auto;
@@ -43,30 +58,33 @@
   }
 
   @supports (view-transition-name: decokasa-curtain) {
-    .motion-curtain {
-      view-transition-name: decokasa-curtain;
-    }
-
     ::view-transition {
       pointer-events: none;
     }
 
-    ::view-transition-group(root) {
+    /* =====================================================================
+       1. CURTAIN MODE (Preserved exclusively for Inicio <-> Catálogo)
+       ===================================================================== */
+    html[data-transition-mode="curtain"] .motion-curtain {
+      view-transition-name: decokasa-curtain;
+    }
+
+    html[data-transition-mode="curtain"]::view-transition-group(root) {
       animation-duration: var(--motion-curtain-duration);
     }
 
-    ::view-transition-old(root) {
+    html[data-transition-mode="curtain"]::view-transition-old(root) {
       animation: none;
       mix-blend-mode: normal;
     }
 
-    ::view-transition-new(root) {
+    html[data-transition-mode="curtain"]::view-transition-new(root) {
       animation: motion-swap var(--motion-curtain-duration) step-end both;
       mix-blend-mode: normal;
     }
 
-    ::view-transition-group(decokasa-curtain) {
-      z-index: 1;
+    html[data-transition-mode="curtain"]::view-transition-group(decokasa-curtain) {
+      z-index: 100;
       inset: 0 -12vw;
       width: auto;
       height: auto;
@@ -75,8 +93,144 @@
       animation: motion-curtain-cross var(--motion-curtain-duration) linear both;
     }
 
-    ::view-transition-image-pair(decokasa-curtain) {
+    html[data-transition-mode="curtain"]::view-transition-image-pair(decokasa-curtain) {
       display: none;
+    }
+
+    /* =====================================================================
+       2. INTERFACE RE-ACCOMMODATION / MORPH MODE (All non-curtain routes)
+       ===================================================================== */
+    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"]) .interface-promo {
+      view-transition-name: dk-promo-bar;
+      view-transition-class: dk-chrome;
+    }
+
+    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"]) :is(.store-logo, .book-brand) {
+      view-transition-name: dk-brand-logo;
+      view-transition-class: dk-chrome;
+    }
+
+    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"]) .store-search {
+      view-transition-name: dk-search-bar;
+      view-transition-class: dk-chrome;
+    }
+
+    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"]) .customer-service--header {
+      view-transition-name: dk-header-help;
+      view-transition-class: dk-chrome;
+    }
+
+    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"]) .header-catalog:not([hidden]) {
+      view-transition-name: dk-header-cart;
+      view-transition-class: dk-chrome;
+    }
+
+    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"]) .store-nav [data-vt-nav="1"] { view-transition-name: dk-nav-pill-1; view-transition-class: dk-nav-pill; }
+    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"]) .store-nav [data-vt-nav="2"] { view-transition-name: dk-nav-pill-2; view-transition-class: dk-nav-pill; }
+    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"]) .store-nav [data-vt-nav="3"] { view-transition-name: dk-nav-pill-3; view-transition-class: dk-nav-pill; }
+    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"]) .store-nav [data-vt-nav="4"] { view-transition-name: dk-nav-pill-4; view-transition-class: dk-nav-pill; }
+    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"]) .store-nav [data-vt-nav="5"] { view-transition-name: dk-nav-pill-5; view-transition-class: dk-nav-pill; }
+    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"]) .store-nav [data-vt-nav="6"] { view-transition-name: dk-nav-pill-6; view-transition-class: dk-nav-pill; }
+    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"]) .store-nav [data-vt-nav="7"] { view-transition-name: dk-nav-pill-7; view-transition-class: dk-nav-pill; }
+    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"]) .store-nav [data-vt-nav="8"] { view-transition-name: dk-nav-pill-8; view-transition-class: dk-nav-pill; }
+
+    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"]) :is(.product-page > .breadcrumb, .catalog-page .catalog-breadcrumb) {
+      view-transition-name: dk-breadcrumb;
+      view-transition-class: dk-chrome;
+    }
+
+    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"]) .interface-footer {
+      view-transition-name: dk-footer;
+      view-transition-class: dk-chrome;
+    }
+
+    .catalog-card {
+      view-transition-class: dk-card;
+    }
+
+    /* Root stage cross-settle when morphing between interfaces */
+    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"])::view-transition-group(root) {
+      animation-duration: var(--motion-morph-duration);
+      animation-timing-function: var(--motion-morph-ease);
+    }
+
+    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"])::view-transition-old(root) {
+      animation: dk-stage-out 320ms ease-in both;
+    }
+
+    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"])::view-transition-new(root) {
+      animation: dk-stage-in var(--motion-morph-duration) var(--motion-morph-ease) both;
+    }
+
+    /* Shared Chrome & Nav Pill Morph Physics */
+    ::view-transition-group(.dk-chrome),
+    ::view-transition-group(.dk-nav-pill) {
+      z-index: 30;
+      animation-duration: var(--motion-morph-duration);
+      animation-timing-function: var(--motion-morph-ease);
+    }
+
+    ::view-transition-group(dk-promo-bar) {
+      z-index: 45;
+    }
+
+    ::view-transition-group(dk-brand-logo) {
+      z-index: 42;
+    }
+
+    ::view-transition-new(dk-promo-bar):only-child {
+      animation: dk-bar-drop 380ms var(--motion-morph-ease) both;
+    }
+
+    ::view-transition-old(dk-promo-bar):only-child {
+      animation: dk-bar-lift 280ms ease-in both;
+    }
+
+    ::view-transition-new(.dk-chrome):only-child,
+    ::view-transition-new(.dk-nav-pill):only-child {
+      animation: dk-chrome-enter 400ms var(--motion-morph-ease) both;
+    }
+
+    ::view-transition-old(.dk-chrome):only-child,
+    ::view-transition-old(.dk-nav-pill):only-child {
+      animation: dk-chrome-exit 260ms ease-in both;
+    }
+
+    /* Active Product Card <-> Product Detail Hero Morph Physics */
+    ::view-transition-group(dk-product-media),
+    ::view-transition-group(dk-product-title),
+    ::view-transition-group(dk-product-vendor),
+    ::view-transition-group(dk-product-price),
+    ::view-transition-group(dk-product-cta) {
+      z-index: 36;
+      animation-duration: 540ms;
+      animation-timing-function: var(--motion-morph-ease);
+    }
+
+    ::view-transition-image-pair(dk-product-media) {
+      isolation: isolate;
+      overflow: clip;
+      border-radius: 12px;
+    }
+
+    /* Group Card Rearrangement (Collection <-> Collection & Live Filter/Sort) */
+    ::view-transition-group(.dk-card) {
+      z-index: 20;
+      animation-duration: var(--motion-rearrange-duration);
+      animation-timing-function: var(--motion-morph-ease);
+    }
+
+    ::view-transition-new(.dk-card):only-child {
+      animation: dk-card-enter 380ms var(--motion-morph-ease) both;
+    }
+
+    ::view-transition-old(.dk-card):only-child {
+      animation: dk-card-exit 240ms ease-in both;
+    }
+
+    /* Same-document Rearrange Mode: keep controls interactive by disabling root snapshot */
+    html[data-transition-mode="rearrange"] {
+      view-transition-name: none;
     }
   }
 
@@ -163,4 +317,43 @@
 @keyframes motion-curtain-reveal {
   from { transform: translateX(0); }
   to { transform: translateX(100%); }
+}
+
+@keyframes dk-stage-out {
+  to { opacity: 0; transform: scale(.992); }
+}
+
+@keyframes dk-stage-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes dk-bar-drop {
+  from { opacity: 0; transform: translateY(-100%); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes dk-bar-lift {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-100%); }
+}
+
+@keyframes dk-chrome-enter {
+  from { opacity: 0; transform: translateY(-10px) scale(.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes dk-chrome-exit {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to { opacity: 0; transform: translateY(-10px) scale(.97); }
+}
+
+@keyframes dk-card-enter {
+  from { opacity: 0; transform: translateY(16px) scale(.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes dk-card-exit {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(.94); }
 }

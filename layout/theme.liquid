@@ -1,14 +1,12 @@
 {%- liquid
-  assign storefront_motion = false
-  unless request.design_mode
-    if request.page_type == 'index' or request.page_type == 'collection'
-      assign storefront_motion = true
-    endif
-  endunless
   assign custom_landing = false
   if template.suffix == 'landing-spc' or template.suffix == 'landing-pvc'
     assign custom_landing = true
   endif
+  assign storefront_motion = false
+  unless request.design_mode or custom_landing
+    assign storefront_motion = true
+  endunless
 -%}
 <!doctype html>
 <html lang="{{ request.locale.iso_code }}">
@@ -37,7 +35,8 @@
     {% endunless %}
     {% if storefront_motion %}
       {{ 'decokasa-motion.css' | asset_url | stylesheet_tag }}
-      <script src="{{ 'decokasa-motion.js' | asset_url }}" defer></script>
+      <link rel="expect" href="#main" blocking="render">
+      <script src="{{ 'decokasa-motion.js' | asset_url }}" defer blocking="render"></script>
     {% endif %}
   </head>
   <body{% if template.suffix == 'landing-spc' %} class="spc-layout"{% elsif template.suffix == 'landing-pvc' %} class="pvc-layout"{% elsif template.suffix == 'libro-reclamaciones' %} class="storefront-interface book-layout"{% else %} class="storefront-interface"{% endif %}{% if storefront_motion %} data-motion-home="{{ routes.root_url | escape }}" data-motion-catalog="{{ routes.all_products_collection_url | escape }}"{% endif %}>

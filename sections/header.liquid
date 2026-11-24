@@ -42,7 +42,7 @@
           {% when 'fitness' %}{% assign category_thumbnail = 'fitness' %}{% assign category_label = 'Deportes' %}
           {% when 'bebes' %}{% assign category_thumbnail = 'baby' %}{% assign category_label = 'Niños y Juguetes' %}
         {% endcase %}
-        <a href="{{ category_collection.url }}">{% if category_thumbnail != blank %}{% assign thumbnail_asset = 'decokasa-nav-' | append: category_thumbnail | append: '.webp' %}<img src="{{ thumbnail_asset | asset_url }}" alt="" width="40" height="40" loading="eager">{% endif %}<span>{{ category_label | escape }}</span></a>
+        <a href="{{ category_collection.url }}" data-vt-nav="{{ forloop.index }}">{% if category_thumbnail != blank %}{% assign thumbnail_asset = 'decokasa-nav-' | append: category_thumbnail | append: '.webp' %}<img src="{{ thumbnail_asset | asset_url }}" alt="" width="40" height="40" loading="eager">{% endif %}<span>{{ category_label | escape }}</span></a>
       {% endif %}
     {% endfor %}
   </nav>

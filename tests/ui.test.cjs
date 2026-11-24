@@ -136,3 +136,26 @@ test('Las consultas de PVC, SPC y catálogo usan el número nuevo',()=>{
   const advisor=catalog.document.querySelector('.catalog-help a');
   assert.ok(advisor.getAttribute('href').startsWith('https://wa.me/51914158674?'));
 });
+
+test('Transiciones entre interfaces conectan elementos comunes en todas las vistas generales',()=>{
+  const pages=['DECOKASA-inicio.html','catalogo.html','landing-audifonos.html','landing-kit-fitness.html','landing-licuadora.html','landing-set-bebe.html','libro-reclamaciones.html'];
+  for(const page of pages){
+    const {document}=parseHTML(fs.readFileSync(path.join(out,page),'utf8'));
+    assert.ok(document.querySelector('link[href*="decokasa-motion.css"]'),page);
+    assert.ok(document.querySelector('link[rel="expect"][href="#main"][blocking="render"]'),page);
+    assert.ok(document.querySelector('script[src*="decokasa-motion.js"][blocking="render"]'),page);
+    assert.ok(document.querySelector('.motion-curtain'),page);
+    if(page!=='libro-reclamaciones.html'){
+      const navIds=[...document.querySelectorAll('.store-nav [data-vt-nav]')].map(el=>el.dataset.vtNav);
+      assert.equal(navIds.length,new Set(navIds).size,page);
+      assert.ok(navIds.length>=6,page);
+    }else{
+      assert.ok(document.querySelector('.book-brand'),page);
+    }
+    for(const card of document.querySelectorAll('.catalog-card')){
+      assert.ok(card.dataset.productHandle,page);
+    }
+    const productPage=document.querySelector('[data-product-page]');
+    if(productPage)assert.ok(productPage.dataset.productHandle,page);
+  }
+});
