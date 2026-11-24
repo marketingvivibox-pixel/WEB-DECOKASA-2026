@@ -140,8 +140,8 @@
 .storefront-interface .catalog-colors-label { font-size: .72rem; }
 .storefront-interface .catalog-color-options { gap: 4px; }
 .storefront-interface .catalog-color-choice { min-width: 32px; min-height: 36px; }
-.storefront-interface .interface-card-action { border: 0; border-radius: 8px; background: var(--interface-coral); color: #201713; font-weight: 800; text-align: center; justify-content: center; gap: 6px; }
-.storefront-interface .interface-card-action:hover { background: #ff998b; }
+.storefront-interface .interface-card-action { border: 0; border-radius: 8px; background: var(--interface-ink); color: #fff; font-weight: 700; text-align: center; justify-content: center; gap: 6px; }
+.storefront-interface .interface-card-action:hover { background: #2b4567; color: #fff; }
 .storefront-interface .catalog-card .interface-card-action { align-self: stretch; margin-top: auto; padding: 6px; min-height: 43px; line-height: 1.15; font-size: clamp(.72rem, 1.1vw, .90rem); }
 .storefront-interface .interface-card-action .icon { width: 16px; height: 16px; flex: none; }
 .interface-favorite { display: grid; place-items: center; position: absolute; z-index: 2; top: 9px; right: 9px; width: 44px; height: 44px; padding: 0; border: 1px solid #ece4d7; border-radius: 50%; color: #302820; background: #fffffff2; cursor: pointer; }
@@ -150,20 +150,74 @@
 .interface-favorite[aria-pressed="true"] svg { fill: #fa9a8a; }
 
 .storefront-interface .product-page { max-width: none; padding-block: 20px 0; }
-.storefront-interface .product-layout { margin-inline: 2.8%; grid-template-columns: minmax(0, 55fr) minmax(0, 45fr); gap: 1.5vw 2.1%; grid-template-areas: 'gallery summary' 'specs summary'; }
+.storefront-interface .product-layout { margin-inline: 2.8%; grid-template-columns: minmax(0, 55fr) minmax(0, 45fr); grid-template-rows: auto 1fr; gap: 24px 2.4%; grid-template-areas: 'gallery summary' 'specs summary'; align-items: start; }
 .storefront-interface .product-page[data-gallery-ratio="responsive"] { --product-ratio: 404 / 354; }
 .storefront-interface .product-gallery { grid-area: gallery; min-width: 0; margin: 0; }
-.storefront-interface .product-summary { grid-area: summary; margin: 0; }
-.storefront-interface .product-information-container { grid-area: specs; width: 100%; margin: 0; }
+.storefront-interface .product-summary { grid-area: summary; margin: 0; align-self: start; }
+.storefront-interface .product-information-container { grid-area: specs; width: 100%; margin: 8px 0 0; }
+.storefront-interface .product-description-block { padding-top: 20px; border-top: 1px solid var(--interface-border); }
+.storefront-interface .product-info-heading { margin: 0 0 12px; font-size: 1.05rem; font-weight: 700; color: var(--interface-ink); letter-spacing: -.01em; }
 .storefront-interface .product-image-stage { background: #f4f4f4; border-color: var(--interface-border); }
 .storefront-interface .product-thumbnails { --thumbnail-gap: 2.4%; gap: var(--thumbnail-gap); padding-inline: 0; }
 .storefront-interface .product-thumbnail { flex: 0 0 calc((100% - 4 * var(--thumbnail-gap)) / 5); min-width: 0; height: auto; aspect-ratio: 1; }
-.storefront-interface .product-purchase-panel { max-height: none; }
-.storefront-interface .product-purchase-content { overflow: visible; padding: 2px; }
-.storefront-interface .product-purchase-footer { background: none; padding: 2px; }
 .storefront-interface .product-availability { background: #e0e0e0; color: var(--interface-ink); }
 .storefront-interface .product-summary h1 { font-size: clamp(1.75rem, 4vw, 3.35rem); line-height: 1.05; }
 .storefront-interface .product-price-row { margin-top: 12px; }
+@media (width >= 900px) {
+  .storefront-interface .product-summary { position: sticky; top: calc(var(--service-bar-height, 34px) + 14px); align-self: start; }
+  .storefront-interface .product-purchase-panel { display: flex; flex-direction: column; max-height: none; overflow: visible; }
+  .storefront-interface .product-purchase-content { overflow: visible; padding: 0; }
+  .storefront-interface .product-purchase-footer { flex: none; background: transparent; padding: 0; border-top: 0; }
+  .storefront-interface .product-vendor { margin: 0 0 2px; font-size: 11px; }
+  .storefront-interface .product-summary h1 { font-size: clamp(1.5rem, 2.2vw, 2.15rem); line-height: 1.08; margin: 0 0 8px; }
+  .storefront-interface .product-price-row { margin: 0 0 2px; gap: 10px; }
+  .storefront-interface .product-price { font-size: 22px; }
+  .storefront-interface .product-compare-price { font-size: 14px; }
+  .storefront-interface .product-price-note { font-size: 12px; margin: 0 0 10px; }
+  .storefront-interface .product-option-group { margin: 0 0 10px; }
+  .storefront-interface .product-option-label { font-size: 13px; margin: 0 0 6px; }
+  .storefront-interface .product-option-values { gap: 8px; }
+  .storefront-interface .product-option { min-width: 96px; height: 40px; padding: 4px 12px; gap: 8px; font-size: 13px; }
+  .storefront-interface .product-option[aria-current="true"] { padding: 3px 11px; }
+  .storefront-interface .product-option img { width: 26px; height: 26px; }
+  .storefront-interface .product-availability { padding: 8px 12px; margin: 0 0 10px; border-radius: 8px; gap: 10px; }
+  .storefront-interface .product-availability .icon { width: 20px; height: 20px; }
+  .storefront-interface .product-availability strong { font-size: 13px; }
+  .storefront-interface .product-availability small { font-size: 11.5px; }
+  .storefront-interface .request-builder-help { font-size: 12px; line-height: 1.35; margin: 0 0 8px; }
+  .storefront-interface .product-purchase { margin: 0 0 10px; gap: 10px; }
+  .storefront-interface .product-quantity { height: 42px; width: 118px; }
+  .storefront-interface .product-quantity button { width: 34px; }
+  .storefront-interface .product-quantity input { width: 48px; font-size: 15px; }
+  .storefront-interface .product-cta { height: 42px; min-height: 42px; font-size: 14px; }
+  .storefront-interface .request-builder { padding: 8px 12px; margin: 0 0 10px; }
+  .storefront-interface .request-builder summary { min-height: 22px; font-size: 13.5px; }
+  .storefront-interface .request-builder[open] summary { margin-bottom: 6px; }
+  .storefront-interface .request-builder [data-request-empty] { font-size: 12px; }
+  .storefront-interface .reward-goal-card { padding: 10px 12px; margin: 0 0 10px; border-radius: 10px; }
+  .storefront-interface .reward-goal-badge { margin-bottom: 6px; gap: 6px; }
+  .storefront-interface .reward-badge-left { font-size: 10px; }
+  .storefront-interface .reward-badge-pill { padding: 3px 9px; font-size: 11px; }
+  .storefront-interface .reward-goal-header { gap: 10px; margin-bottom: 6px; }
+  .storefront-interface .reward-goal-icon { width: 34px; height: 34px; font-size: 18px; border-radius: 8px; }
+  .storefront-interface .reward-goal-title { font-size: 12.5px; line-height: 1.3; }
+  .storefront-interface .reward-progress-track { height: 7px; }
+  .storefront-interface .reward-goal-footer { margin-top: 5px; font-size: 11px; }
+  .storefront-interface .product-estimate-card { padding: 8px 12px; margin: 0 0 10px; gap: 8px; }
+  .storefront-interface .product-estimate-card .estimate-title { font-size: 12px; }
+  .storefront-interface .product-estimate-card .estimate-amount { font-size: 15px; }
+  .storefront-interface .product-estimate-card .estimate-breakdown { font-size: 11.5px; padding: 2px 8px; }
+  .storefront-interface .request-continue { min-height: 44px; height: 44px; margin: 0 0 8px; font-size: 14px; }
+  .storefront-interface .interface-delivery { font-size: 12px; gap: 6px; margin: 0; }
+  .storefront-interface .interface-delivery .icon { width: 18px; height: 18px; }
+  .storefront-interface .product-selection-status { font-size: 12px; margin: 6px 0 0; }
+}
+@media (width < 900px) {
+  .storefront-interface .product-summary { position: static; }
+  .storefront-interface .product-purchase-panel { max-height: none; }
+  .storefront-interface .product-purchase-content { overflow: visible; padding: 2px; }
+  .storefront-interface .product-purchase-footer { background: none; padding: 2px; border-top: 0; }
+}
 .interface-product-description { font-size: .94rem; margin-bottom: 14px; }
 .interface-product-description p { margin-block: 6px; }
 .interface-delivery { display: flex; gap: 8px; align-items: center; color: #655846; font-size: .9rem; }

@@ -63,7 +63,6 @@
         <div class="product-purchase-content" data-purchase-content tabindex="0" aria-label="Opciones y detalles de compra">
         {% if section.settings.show_vendor != false and product.vendor != blank %}<p class="eyebrow product-vendor">{{ product.vendor | escape }}</p>{% endif %}
         <h1>{{ product.title | escape }}</h1>
-        {% if section.settings.show_description != false and product.description != blank %}<div class="rte interface-product-description">{{ product.description }}</div>{% endif %}
         <div class="product-price-row">
           {% if section.settings.show_price != false and current_variant != blank %}
             <span class="product-price" data-product-price data-cents="{{ current_variant.price }}">{{ current_variant.price | money_with_currency }}</span>
@@ -205,6 +204,12 @@
         <p class="product-selection-status" data-selection-status role="status" tabindex="-1"></p>
       </div>
       <div class="product-information-container">
+        {% if section.settings.show_description != false and product.description != blank %}
+        <section class="product-information product-description-block" aria-labelledby="ProductDescTitle-{{ section.id }}">
+          <h2 id="ProductDescTitle-{{ section.id }}" class="product-info-heading">Descripción del producto</h2>
+          <div class="rte interface-product-description">{{ product.description }}</div>
+        </section>
+        {% endif %}
         {% assign specs_type = product.type | default: '' %}
         {% assign specs_vendor = '' %}
         {% if section.settings.show_vendor != false %}{% assign specs_vendor = product.vendor | default: '' %}{% endif %}
