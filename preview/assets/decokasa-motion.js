@@ -3,23 +3,28 @@
 
   if (window.Shopify?.designMode) return;
 
-  const curtain = document.querySelector('.motion-curtain');
-  if (!curtain) return;
-
   const motion = window.matchMedia('(prefers-reduced-motion: no-preference)');
   const vtContextKey = 'decokasa.vt.context';
-  const homeDataset = document.body?.dataset?.motionHome || '/';
-  const catalogDataset = document.body?.dataset?.motionCatalog || '/collections/all';
-  const homePath = new URL(homeDataset, location.href).pathname;
-  const catalogPath = new URL(catalogDataset, location.href).pathname;
-  const collectionsPath = catalogPath.endsWith('/all') ? catalogPath.slice(0, -3) : null;
+  const prefetched = new Set();
+
+  function getRoutes() {
+    const homeDataset = document.body?.dataset?.motionHome || '/';
+    const catalogDataset = document.body?.dataset?.motionCatalog || '/collections/all';
+    const homePath = new URL(homeDataset, location.href).pathname;
+    const catalogPath = new URL(catalogDataset, location.href).pathname;
+    const collectionsPath = catalogPath.endsWith('/all') ? catalogPath.slice(0, -3) : null;
+    return { homePath, catalogPath, collectionsPath };
+  }
 
   function viewFor(url) {
     if (!url || url.origin !== location.origin || url.protocol !== location.protocol) return null;
+    const { homePath, catalogPath, collectionsPath } = getRoutes();
     if (url.pathname === homePath) return 'home';
     if (url.pathname === catalogPath || (collectionsPath && url.pathname.startsWith(collectionsPath))) {
       return 'catalog';
     }
+    const p = url.pathname.toLowerCase();
+    if (p.includes('libro-reclamaciones')) return 'book';
     return 'other';
   }
 
@@ -27,6 +32,14 @@
     const fromView = viewFor(from);
     const toView = viewFor(to);
     return (fromView === 'home' && toView === 'catalog') || (fromView === 'catalog' && toView === 'home');
+  }
+
+  function isBookTransition(from, to) {
+    return viewFor(from) === 'book' || viewFor(to) === 'book';
+  }
+
+  function isCatalogToCatalog(from, to) {
+    return viewFor(from) === 'catalog' && viewFor(to) === 'catalog';
   }
 
   function isCustomLandingUrl(url) {
@@ -49,11 +62,11 @@
   }
 
   function isVisibleInViewport(el) {
-    if (!el || el.hidden || el.offsetParent === null) return false;
+    if (!el || el.hidden) return false;
     const rect = el.getBoundingClientRect();
     return rect.width > 0 && rect.height > 0 &&
-      rect.bottom > -80 && rect.top < window.innerHeight + 120 &&
-      rect.right > -40 && rect.left < window.innerWidth + 40;
+      rect.bottom > 0 && rect.top < window.innerHeight &&
+      rect.right > 0 && rect.left < window.innerWidth;
   }
 
   function readContext() {
@@ -70,7 +83,30 @@
     } catch {}
   }
 
-  // Record clicked product card handle before navigation starts so back/related/card morphs always match
+  // Prefetch destination HTML on hover/focus so cross-document transitions start with 0ms network wait
+  function prefetchUrl(href) {
+    if (!href || prefetched.has(href) || prefetched.size > 16) return;
+    let url;
+    try { url = new URL(href, location.href); } catch { return; }
+    if (url.origin !== location.origin || url.href === location.href || url.hash) return;
+    prefetched.add(url.href);
+    const link = document.createElement('link');
+    link.rel = 'prefetch';
+    link.href = url.href;
+    document.head?.appendChild(link);
+  }
+
+  document.addEventListener('pointerover', (event) => {
+    const link = event.target.closest?.('a[href]');
+    if (link) prefetchUrl(link.href);
+  }, { passive: true });
+
+  document.addEventListener('focusin', (event) => {
+    const link = event.target.closest?.('a[href]');
+    if (link) prefetchUrl(link.href);
+  }, { passive: true });
+
+  // Capture exact clicked product card handle before navigation begins
   document.addEventListener('click', (event) => {
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     const link = event.target.closest?.('a[href]');
@@ -88,59 +124,6 @@
     });
   }, true);
 
-  function bindProductPageElements(productPage, cleanupList, usedNames) {
-    if (!productPage) return false;
-    const pairs = [
-      [productPage.querySelector('.product-image-stage'), 'dk-product-media'],
-      [productPage.querySelector('.product-summary h1'), 'dk-product-title'],
-      [productPage.querySelector('.product-vendor'), 'dk-product-vendor'],
-      [productPage.querySelector('[data-product-price]'), 'dk-product-price'],
-      [productPage.querySelector('.product-purchase .product-cta, .request-continue'), 'dk-product-cta']
-    ];
-    let bound = false;
-    for (const [el, name] of pairs) {
-      if (!el || el.hidden || usedNames.has(name)) continue;
-      usedNames.add(name);
-      el.style.viewTransitionName = name;
-      cleanupList.push(el);
-      bound = true;
-    }
-    return bound;
-  }
-
-  function bindProductCardElements(card, cleanupList, usedNames) {
-    if (!card || !isVisibleInViewport(card)) return false;
-    const pairs = [
-      [card.querySelector('.catalog-card-media'), 'dk-product-media'],
-      [card.querySelector('h3'), 'dk-product-title'],
-      [card.querySelector('.tag'), 'dk-product-vendor'],
-      [card.querySelector('[data-card-price]'), 'dk-product-price'],
-      [card.querySelector('.interface-card-action'), 'dk-product-cta']
-    ];
-    let bound = false;
-    for (const [el, name] of pairs) {
-      if (!el || el.hidden || usedNames.has(name)) continue;
-      usedNames.add(name);
-      el.style.viewTransitionName = name;
-      cleanupList.push(el);
-      bound = true;
-    }
-    return bound;
-  }
-
-  function bindRemainingGridCards(excludeHandle, cleanupList, usedNames) {
-    const cards = document.querySelectorAll('.catalog-grid .catalog-card[data-product-handle]');
-    for (const card of cards) {
-      const handle = card.dataset.productHandle;
-      if (!handle || handle === excludeHandle || !isVisibleInViewport(card)) continue;
-      const name = 'dk-card-' + sanitizeIdent(handle);
-      if (usedNames.has(name)) continue;
-      usedNames.add(name);
-      card.style.viewTransitionName = name;
-      cleanupList.push(card);
-    }
-  }
-
   function setupMorphTargets(role, fromUrl, toUrl) {
     const cleanupList = [];
     const usedNames = new Set();
@@ -150,32 +133,43 @@
     const fromHandle = extractProductHandle(fromUrl) || ctx?.fromProductHandle || '';
     const toHandle = extractProductHandle(toUrl) || ctx?.clickedHandle || '';
 
+    const bindOne = (el, name) => {
+      if (!el || el.hidden || usedNames.has(name)) return;
+      usedNames.add(name);
+      el.style.viewTransitionName = name;
+      cleanupList.push(el);
+    };
+
     if (role === 'outgoing') {
       if (toHandle) {
-        // Navigating TO a product page (from Home, Catalog, Search, or Related Products on another Product Page)
         const matchingCard = [...document.querySelectorAll(`.catalog-card[data-product-handle="${CSS.escape(toHandle)}"]`)]
           .find(isVisibleInViewport);
         if (matchingCard) {
-          bindProductCardElements(matchingCard, cleanupList, usedNames);
+          bindOne(matchingCard.querySelector('.catalog-card-media'), 'dk-product-media');
         }
       } else if (currentProductPage && currentPageHandle) {
-        // Leaving a product page back to Catalog / Home / Search
-        bindProductPageElements(currentProductPage, cleanupList, usedNames);
+        bindOne(currentProductPage.querySelector('.product-image-stage'), 'dk-product-media');
       }
-      bindRemainingGridCards(toHandle || currentPageHandle, cleanupList, usedNames);
     } else if (role === 'incoming') {
       if (currentProductPage && currentPageHandle) {
-        // Arriving ON a product page
-        bindProductPageElements(currentProductPage, cleanupList, usedNames);
+        bindOne(currentProductPage.querySelector('.product-image-stage'), 'dk-product-media');
       } else if (fromHandle) {
-        // Returning FROM a product page onto Catalog / Home: morph back into its card if visible!
         const targetCard = [...document.querySelectorAll(`.catalog-card[data-product-handle="${CSS.escape(fromHandle)}"]`)]
           .find(isVisibleInViewport);
         if (targetCard) {
-          bindProductCardElements(targetCard, cleanupList, usedNames);
+          bindOne(targetCard.querySelector('.catalog-card-media'), 'dk-product-media');
         }
       }
-      bindRemainingGridCards(currentPageHandle || fromHandle, cleanupList, usedNames);
+    }
+
+    // Only assign individual grid card names on Collection <-> Collection navigations (avoids extra GPU layers elsewhere)
+    if (isCatalogToCatalog(fromUrl, toUrl)) {
+      const cards = document.querySelectorAll('.catalog-grid .catalog-card[data-product-handle]');
+      for (const card of cards) {
+        const handle = card.dataset.productHandle;
+        if (!handle || !isVisibleInViewport(card)) continue;
+        bindOne(card, 'dk-card-' + sanitizeIdent(handle));
+      }
     }
 
     return () => {
@@ -186,25 +180,52 @@
     };
   }
 
-  function revealContent(transition) {
+  function revealContent(transition, skipInitialViewport = false) {
     if (!motion.matches || !('IntersectionObserver' in window)) return;
 
-    const observer = new IntersectionObserver((entries) => {
-      for (const { target, isIntersecting } of entries) {
-        if (!isIntersecting) continue;
-        observer.unobserve(target);
-        if (target.closest('[data-motion-group]')) {
-          const siblings = [...target.parentElement.children].filter((item) => item.matches('[data-motion]'));
-          const column = Math.min(siblings.indexOf(target), 3);
-          target.style.setProperty('--motion-delay', `calc(var(--motion-stagger) * ${column})`);
-        }
-        target.dataset.motionActive = '';
-      }
-    }, { rootMargin: '0px 0px -12px' });
+    const startObserving = () => {
+      const items = document.querySelectorAll('[data-motion]');
+      if (!items.length) return;
 
-    const observe = () => document.querySelectorAll('[data-motion]').forEach((item) => observer.observe(item));
-    if (transition) transition.finished.then(observe, observe);
-    else observe();
+      if (skipInitialViewport) {
+        // Prevent double-animating elements that already landed via View Transition
+        for (const item of items) {
+          const rect = item.getBoundingClientRect();
+          if (rect.top < window.innerHeight * 0.92 && rect.bottom > 0) {
+            item.dataset.motionSettled = '';
+          }
+        }
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        for (const { target, isIntersecting } of entries) {
+          if (!isIntersecting) continue;
+          observer.unobserve(target);
+          if ('motionSettled' in target.dataset) continue;
+          if (target.closest('[data-motion-group]')) {
+            const siblings = [...target.parentElement.children].filter((item) => item.matches('[data-motion]'));
+            const column = Math.min(siblings.indexOf(target), 3);
+            target.style.setProperty('--motion-delay', `calc(var(--motion-stagger) * ${column})`);
+          }
+          target.dataset.motionActive = '';
+        }
+      }, { rootMargin: '0px 0px -12px' });
+
+      items.forEach((item) => {
+        if (!('motionSettled' in item.dataset)) observer.observe(item);
+      });
+    };
+
+    const runWhenDomReady = () => {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', startObserving, { once: true });
+      } else {
+        startObserving();
+      }
+    };
+
+    if (transition) transition.finished.then(runWhenDomReady, runWhenDomReady);
+    else runWhenDomReady();
   }
 
   const supportsNavigationTransition = window === window.top && location.protocol !== 'file:' && 'onpageswap' in window &&
@@ -230,7 +251,7 @@
           delete document.documentElement.dataset.transitionMode;
         });
       } else {
-        document.documentElement.dataset.transitionMode = 'morph';
+        document.documentElement.dataset.transitionMode = isBookTransition(fromUrl, toUrl) ? 'morph-book' : 'morph';
         const cleanup = setupMorphTargets('outgoing', fromUrl, toUrl);
         viewTransition.finished.finally(cleanup);
       }
@@ -269,13 +290,13 @@
         viewTransition.finished.finally(() => {
           delete document.documentElement.dataset.transitionMode;
         });
+        revealContent(viewTransition, false);
       } else {
-        document.documentElement.dataset.transitionMode = 'morph';
+        document.documentElement.dataset.transitionMode = isBookTransition(fromUrl, toUrl) ? 'morph-book' : 'morph';
         const cleanup = setupMorphTargets('incoming', fromUrl, toUrl);
         viewTransition.finished.finally(cleanup);
+        revealContent(viewTransition, true);
       }
-
-      revealContent(viewTransition);
     }, { once: true });
 
     window.addEventListener('pageshow', () => {
@@ -285,52 +306,62 @@
   }
 
   // Fallback for browsers without Cross-Document View Transitions (e.g. Firefox)
-  const storageKey = 'decokasa.curtain';
-  let navigating = false;
+  const initFallback = () => {
+    const curtain = document.querySelector('.motion-curtain');
+    if (!curtain) return;
+    const storageKey = 'decokasa.curtain';
+    let navigating = false;
 
-  function playCurtain(state) {
-    curtain.dataset.curtainState = state;
-    const animation = curtain.getAnimations?.()[0];
-    return animation ? animation.finished.catch(() => {}) : Promise.resolve();
-  }
+    function playCurtain(state) {
+      curtain.dataset.curtainState = state;
+      const animation = curtain.getAnimations?.()[0];
+      return animation ? animation.finished.catch(() => {}) : Promise.resolve();
+    }
 
-  window.addEventListener('pageshow', ({ persisted }) => {
-    if (!persisted) return;
-    navigating = false;
-    delete curtain.dataset.curtainState;
-  });
-
-  document.addEventListener('click', async (event) => {
-    if (!motion.matches || event.defaultPrevented || event.button !== 0 ||
-      event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    const link = event.target.closest?.('a[href]');
-    if (!link || link.hasAttribute('download') || (link.target && link.target !== '_self')) return;
-
-    const destination = new URL(link.href, location.href);
-    if (!isCurtainTransition(new URL(location.href), destination)) return;
-    event.preventDefault();
-    if (navigating) return;
-
-    navigating = true;
-    await playCurtain('cover');
-    try {
-      sessionStorage.setItem(storageKey, JSON.stringify({ url: destination.href, time: Date.now() }));
-    } catch {}
-    location.assign(destination.href);
-  });
-
-  let arrival;
-  try {
-    arrival = JSON.parse(sessionStorage.getItem(storageKey) || 'null');
-    sessionStorage.removeItem(storageKey);
-  } catch {}
-
-  if (motion.matches && arrival?.url === location.href && Date.now() - arrival.time < 10000) {
-    playCurtain('reveal').then(() => {
+    window.addEventListener('pageshow', ({ persisted }) => {
+      if (!persisted) return;
+      navigating = false;
       delete curtain.dataset.curtainState;
-      revealContent();
     });
+
+    document.addEventListener('click', async (event) => {
+      if (!motion.matches || event.defaultPrevented || event.button !== 0 ||
+        event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const link = event.target.closest?.('a[href]');
+      if (!link || link.hasAttribute('download') || (link.target && link.target !== '_self')) return;
+
+      const destination = new URL(link.href, location.href);
+      if (!isCurtainTransition(new URL(location.href), destination)) return;
+      event.preventDefault();
+      if (navigating) return;
+
+      navigating = true;
+      await playCurtain('cover');
+      try {
+        sessionStorage.setItem(storageKey, JSON.stringify({ url: destination.href, time: Date.now() }));
+      } catch {}
+      location.assign(destination.href);
+    });
+
+    let arrival;
+    try {
+      arrival = JSON.parse(sessionStorage.getItem(storageKey) || 'null');
+      sessionStorage.removeItem(storageKey);
+    } catch {}
+
+    if (motion.matches && arrival?.url === location.href && Date.now() - arrival.time < 10000) {
+      playCurtain('reveal').then(() => {
+        delete curtain.dataset.curtainState;
+        revealContent();
+      });
+    } else {
+      revealContent();
+    }
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFallback, { once: true });
   } else {
-    revealContent();
+    initFallback();
   }
 })();

@@ -1,11 +1,11 @@
 :root {
-  --motion-duration: 880ms;
-  --motion-stagger: 75ms;
-  --motion-distance: 18px;
+  --motion-duration: 720ms;
+  --motion-stagger: 65ms;
+  --motion-distance: 16px;
   --motion-ease: cubic-bezier(.2, .72, .25, 1);
-  --motion-morph-duration: 520ms;
-  --motion-morph-ease: cubic-bezier(.22, 1, .36, 1);
-  --motion-rearrange-duration: 420ms;
+  --motion-morph-duration: 360ms;
+  --motion-morph-ease: cubic-bezier(.2, .9, .3, 1);
+  --motion-rearrange-duration: 300ms;
   --motion-curtain-half: 560ms;
   --motion-curtain-duration: calc(2 * var(--motion-curtain-half));
   --motion-curtain-ease: cubic-bezier(.65, 0, .35, 1);
@@ -25,6 +25,10 @@
       var(--motion-curtain-stripe) calc(14vw + 1px) 19vw,
       var(--motion-curtain-base) 19vw 25vw) bottom / 100% 50% no-repeat,
     var(--motion-curtain-base);
+}
+
+.interface-promo {
+  contain: layout paint;
 }
 
 .motion-curtain {
@@ -98,48 +102,31 @@
     }
 
     /* =====================================================================
-       2. INTERFACE RE-ACCOMMODATION / MORPH MODE (All non-curtain routes)
+       2. ULTRA-LIGHTWEIGHT COMPOSITE MORPH (4-5 GPU layers max, 60/120fps)
        ===================================================================== */
-    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"]) .interface-promo {
-      view-transition-name: dk-promo-bar;
+    /* Store <-> Store: morph header & category bar as 2 clean composite layers */
+    html[data-transition-mode="morph"] .store-header {
+      view-transition-name: dk-store-header;
       view-transition-class: dk-chrome;
     }
 
-    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"]) :is(.store-logo, .book-brand) {
+    html[data-transition-mode="morph"] .navigation-shell {
+      view-transition-name: dk-nav-shell;
+      view-transition-class: dk-chrome;
+    }
+
+    /* Store <-> Libro de Reclamaciones: morph the DECOKASA brand logo directly */
+    html[data-transition-mode="morph-book"] .interface-promo {
+      view-transition-name: dk-promo-bar;
+    }
+
+    html[data-transition-mode="morph-book"] :is(.store-logo, .book-brand) {
       view-transition-name: dk-brand-logo;
       view-transition-class: dk-chrome;
     }
 
-    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"]) .store-search {
-      view-transition-name: dk-search-bar;
-      view-transition-class: dk-chrome;
-    }
-
-    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"]) .customer-service--header {
-      view-transition-name: dk-header-help;
-      view-transition-class: dk-chrome;
-    }
-
-    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"]) .header-catalog:not([hidden]) {
-      view-transition-name: dk-header-cart;
-      view-transition-class: dk-chrome;
-    }
-
-    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"]) .store-nav [data-vt-nav="1"] { view-transition-name: dk-nav-pill-1; view-transition-class: dk-nav-pill; }
-    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"]) .store-nav [data-vt-nav="2"] { view-transition-name: dk-nav-pill-2; view-transition-class: dk-nav-pill; }
-    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"]) .store-nav [data-vt-nav="3"] { view-transition-name: dk-nav-pill-3; view-transition-class: dk-nav-pill; }
-    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"]) .store-nav [data-vt-nav="4"] { view-transition-name: dk-nav-pill-4; view-transition-class: dk-nav-pill; }
-    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"]) .store-nav [data-vt-nav="5"] { view-transition-name: dk-nav-pill-5; view-transition-class: dk-nav-pill; }
-    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"]) .store-nav [data-vt-nav="6"] { view-transition-name: dk-nav-pill-6; view-transition-class: dk-nav-pill; }
-    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"]) .store-nav [data-vt-nav="7"] { view-transition-name: dk-nav-pill-7; view-transition-class: dk-nav-pill; }
-    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"]) .store-nav [data-vt-nav="8"] { view-transition-name: dk-nav-pill-8; view-transition-class: dk-nav-pill; }
-
-    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"]) :is(.product-page > .breadcrumb, .catalog-page .catalog-breadcrumb) {
-      view-transition-name: dk-breadcrumb;
-      view-transition-class: dk-chrome;
-    }
-
-    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"]) .interface-footer {
+    html[data-transition-mode="morph"] .interface-footer,
+    html[data-transition-mode="morph-book"] .interface-footer {
       view-transition-name: dk-footer;
       view-transition-class: dk-chrome;
     }
@@ -148,69 +135,59 @@
       view-transition-class: dk-card;
     }
 
-    /* Root stage cross-settle when morphing between interfaces */
-    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"])::view-transition-group(root) {
+    /* Root stage smooth cross-fade without layout jank */
+    html:is([data-transition-mode="morph"], [data-transition-mode="morph-book"])::view-transition-group(root) {
       animation-duration: var(--motion-morph-duration);
       animation-timing-function: var(--motion-morph-ease);
     }
 
-    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"])::view-transition-old(root) {
-      animation: dk-stage-out 320ms ease-in both;
+    html:is([data-transition-mode="morph"], [data-transition-mode="morph-book"])::view-transition-old(root) {
+      animation: dk-stage-out 220ms ease-out both;
     }
 
-    html:not([data-transition-mode="curtain"]):not([data-transition-mode="rearrange"])::view-transition-new(root) {
+    html:is([data-transition-mode="morph"], [data-transition-mode="morph-book"])::view-transition-new(root) {
       animation: dk-stage-in var(--motion-morph-duration) var(--motion-morph-ease) both;
     }
 
-    /* Shared Chrome & Nav Pill Morph Physics */
-    ::view-transition-group(.dk-chrome),
-    ::view-transition-group(.dk-nav-pill) {
+    /* Composite Chrome Physics */
+    ::view-transition-group(.dk-chrome) {
       z-index: 30;
       animation-duration: var(--motion-morph-duration);
       animation-timing-function: var(--motion-morph-ease);
-    }
-
-    ::view-transition-group(dk-promo-bar) {
-      z-index: 45;
     }
 
     ::view-transition-group(dk-brand-logo) {
       z-index: 42;
     }
 
-    ::view-transition-new(dk-promo-bar):only-child {
-      animation: dk-bar-drop 380ms var(--motion-morph-ease) both;
-    }
-
-    ::view-transition-old(dk-promo-bar):only-child {
-      animation: dk-bar-lift 280ms ease-in both;
-    }
-
-    ::view-transition-new(.dk-chrome):only-child,
-    ::view-transition-new(.dk-nav-pill):only-child {
-      animation: dk-chrome-enter 400ms var(--motion-morph-ease) both;
-    }
-
-    ::view-transition-old(.dk-chrome):only-child,
-    ::view-transition-old(.dk-nav-pill):only-child {
-      animation: dk-chrome-exit 260ms ease-in both;
-    }
-
-    /* Active Product Card <-> Product Detail Hero Morph Physics */
-    ::view-transition-group(dk-product-media),
-    ::view-transition-group(dk-product-title),
-    ::view-transition-group(dk-product-vendor),
-    ::view-transition-group(dk-product-price),
-    ::view-transition-group(dk-product-cta) {
-      z-index: 36;
-      animation-duration: 540ms;
+    ::view-transition-group(dk-promo-bar) {
+      z-index: 45;
+      animation-duration: 280ms;
       animation-timing-function: var(--motion-morph-ease);
     }
 
-    ::view-transition-image-pair(dk-product-media) {
-      isolation: isolate;
+    ::view-transition-new(dk-promo-bar):only-child {
+      animation: dk-bar-drop 280ms var(--motion-morph-ease) both;
+    }
+
+    ::view-transition-old(dk-promo-bar):only-child {
+      animation: dk-bar-lift 220ms ease-in both;
+    }
+
+    /* Active Product Card <-> Product Detail Hero Morph (Zero distortion) */
+    ::view-transition-group(dk-product-media) {
+      z-index: 36;
+      animation-duration: var(--motion-morph-duration);
+      animation-timing-function: var(--motion-morph-ease);
       overflow: clip;
-      border-radius: 12px;
+      border-radius: 10px;
+    }
+
+    ::view-transition-old(dk-product-media),
+    ::view-transition-new(dk-product-media) {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
 
     /* Group Card Rearrangement (Collection <-> Collection & Live Filter/Sort) */
@@ -221,11 +198,11 @@
     }
 
     ::view-transition-new(.dk-card):only-child {
-      animation: dk-card-enter 380ms var(--motion-morph-ease) both;
+      animation: dk-card-enter 280ms var(--motion-morph-ease) both;
     }
 
     ::view-transition-old(.dk-card):only-child {
-      animation: dk-card-exit 240ms ease-in both;
+      animation: dk-card-exit 180ms ease-in both;
     }
 
     /* Same-document Rearrange Mode: keep controls interactive by disabling root snapshot */
@@ -264,13 +241,17 @@
     animation: motion-image var(--motion-duration) var(--motion-ease) backwards;
   }
 
+  [data-motion-settled] {
+    animation: none !important;
+  }
+
   [data-motion-active]:focus-within {
     animation: none;
   }
 
   @media (hover: hover) and (pointer: fine) {
     [data-motion-home] :is(.brand-photo, .catalog-product-photo, .catalog-illustration, .brand-go .icon, .opportunity-go .icon) {
-      transition: scale 550ms var(--motion-ease), translate 550ms var(--motion-ease);
+      transition: scale 450ms var(--motion-ease), translate 450ms var(--motion-ease);
     }
 
     [data-motion-home] :is(.brand-visual:hover .brand-photo, .catalog-card-media:hover :is(.catalog-product-photo, .catalog-illustration)) {
@@ -320,40 +301,30 @@
 }
 
 @keyframes dk-stage-out {
-  to { opacity: 0; transform: scale(.992); }
+  to { opacity: 0; }
 }
 
 @keyframes dk-stage-in {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translate3d(0, 8px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
 @keyframes dk-bar-drop {
-  from { opacity: 0; transform: translateY(-100%); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translate3d(0, -100%, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
 @keyframes dk-bar-lift {
-  from { opacity: 1; transform: translateY(0); }
-  to { opacity: 0; transform: translateY(-100%); }
-}
-
-@keyframes dk-chrome-enter {
-  from { opacity: 0; transform: translateY(-10px) scale(.97); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-@keyframes dk-chrome-exit {
-  from { opacity: 1; transform: translateY(0) scale(1); }
-  to { opacity: 0; transform: translateY(-10px) scale(.97); }
+  from { opacity: 1; transform: translate3d(0, 0, 0); }
+  to { opacity: 0; transform: translate3d(0, -100%, 0); }
 }
 
 @keyframes dk-card-enter {
-  from { opacity: 0; transform: translateY(16px) scale(.96); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from { opacity: 0; transform: translate3d(0, 12px, 0) scale(.97); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
 }
 
 @keyframes dk-card-exit {
   from { opacity: 1; transform: scale(1); }
-  to { opacity: 0; transform: scale(.94); }
+  to { opacity: 0; transform: scale(.95); }
 }

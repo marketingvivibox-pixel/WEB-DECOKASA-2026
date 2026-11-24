@@ -35,7 +35,6 @@
     {% endunless %}
     {% if storefront_motion %}
       {{ 'decokasa-motion.css' | asset_url | stylesheet_tag }}
-      <link rel="expect" href="#main" blocking="render">
       <script src="{{ 'decokasa-motion.js' | asset_url }}" defer blocking="render"></script>
     {% endif %}
   </head>

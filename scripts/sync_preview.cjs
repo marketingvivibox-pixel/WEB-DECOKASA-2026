@@ -117,7 +117,7 @@ async function main() {
     const pageHeader = (isCustomLanding || isLibro) ? '' : header;
     const pageFooter = isCustomLanding ? '' : footer;
     const extraCss = isCustomLanding ? '' : `<style>${css}</style>`;
-    const motionAssets = motionEnabled ? `<link data-preview-motion rel="stylesheet" href="${interfaceAssetUrl('decokasa-motion.css')}"><link data-preview-motion rel="expect" href="#main" blocking="render"><script data-preview-motion src="${interfaceAssetUrl('decokasa-motion.js')}" defer blocking="render"></script>` : '';
+    const motionAssets = motionEnabled ? `<link data-preview-motion rel="stylesheet" href="${interfaceAssetUrl('decokasa-motion.css')}"><script data-preview-motion src="${interfaceAssetUrl('decokasa-motion.js')}" defer blocking="render"></script>` : '';
     const curtain = motionEnabled ? '<div class="motion-curtain" aria-hidden="true"></div>' : '';
     const motionData = motionEnabled ? ` data-motion-home="${routes.root_url}" data-motion-catalog="${routes.all_products_collection_url}"` : '';
     const bodyAttr = isLandingSpc ? ' class="spc-layout"' : isLandingPvc ? ' class="pvc-layout"' :

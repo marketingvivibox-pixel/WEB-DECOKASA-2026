@@ -142,7 +142,6 @@ test('Transiciones entre interfaces conectan elementos comunes en todas las vist
   for(const page of pages){
     const {document}=parseHTML(fs.readFileSync(path.join(out,page),'utf8'));
     assert.ok(document.querySelector('link[href*="decokasa-motion.css"]'),page);
-    assert.ok(document.querySelector('link[rel="expect"][href="#main"][blocking="render"]'),page);
     assert.ok(document.querySelector('script[src*="decokasa-motion.js"][blocking="render"]'),page);
     assert.ok(document.querySelector('.motion-curtain'),page);
     if(page!=='libro-reclamaciones.html'){
