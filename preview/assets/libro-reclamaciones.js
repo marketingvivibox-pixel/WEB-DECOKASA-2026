@@ -79,7 +79,7 @@
   const syncHolder = () => {
     const needsHolder = receiptOwner.value === 'No';
     holderDetails.hidden = !needsHolder;
-    holderFields.forEach(field => { field.disabled = !needsHolder; field.required = needsHolder; });
+    holderFields.forEach(field => { field.disabled = !needsHolder; field.required = false; });
   };
   receiptOwner.addEventListener('change', syncHolder);
   syncHolder();

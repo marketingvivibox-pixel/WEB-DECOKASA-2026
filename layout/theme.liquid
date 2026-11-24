@@ -40,9 +40,9 @@
       <script src="{{ 'decokasa-motion.js' | asset_url }}" defer></script>
     {% endif %}
   </head>
-  <body{% if template.suffix == 'landing-spc' %} class="spc-layout"{% elsif template.suffix == 'landing-pvc' %} class="pvc-layout"{% else %} class="storefront-interface"{% endif %}{% if storefront_motion %} data-motion-home="{{ routes.root_url | escape }}" data-motion-catalog="{{ routes.all_products_collection_url | escape }}"{% endif %}>
+  <body{% if template.suffix == 'landing-spc' %} class="spc-layout"{% elsif template.suffix == 'landing-pvc' %} class="pvc-layout"{% elsif template.suffix == 'libro-reclamaciones' %} class="storefront-interface book-layout"{% else %} class="storefront-interface"{% endif %}{% if storefront_motion %} data-motion-home="{{ routes.root_url | escape }}" data-motion-catalog="{{ routes.all_products_collection_url | escape }}"{% endif %}>
     {% if storefront_motion %}<div class="motion-curtain" aria-hidden="true"></div>{% endif %}
-    {% unless custom_landing %}{% section 'header' %}{% endunless %}
+    {% unless custom_landing or template.suffix == 'libro-reclamaciones' %}{% section 'header' %}{% endunless %}
     <main id="main">{{ content_for_layout }}</main>
     {% unless custom_landing %}
       {% unless template.suffix == 'libro-reclamaciones' %}<div class="demo" data-motion data-nosnippet>Tienda en preparación · Los formularios son de prueba y todavía no envían solicitudes.</div>{% endunless %}

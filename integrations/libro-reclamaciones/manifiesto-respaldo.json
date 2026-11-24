@@ -1,6 +1,6 @@
 {
   "descripcion": "Copia de seguridad del Libro de Reclamaciones: textos normalizados a LF para comprobar su integridad entre sistemas.",
-  "fecha": "2026-11-11",
+  "fecha": "2026-11-24",
   "revisionOrigen": "c74f5b73465b01ebd3feb1061a652b67a136afb3",
   "files": [
     {
@@ -12,19 +12,19 @@
     {
       "original": "sections/libro-reclamaciones.liquid",
       "copia": "integrations/libro-reclamaciones/respaldo-2026-11-11/sections/libro-reclamaciones.liquid",
-      "sha256": "3a8f057c3048c2634042aa22311d0366713d9d5528b949322f7d25ebdfc546bf",
+      "sha256": "2f4bb59cc156eed15e758fb0645ee922e00795fd4e5a5d83831b772ee9c34c24",
       "compararOriginal": true
     },
     {
       "original": "assets/libro-reclamaciones.css",
       "copia": "integrations/libro-reclamaciones/respaldo-2026-11-11/assets/libro-reclamaciones.css",
-      "sha256": "ff25cac173bffd41a40d234709f208febd75c783ed1e855235c89f7bd2d559ad",
+      "sha256": "1eea3f91455507d89f7c97aa28a8853e54c4e89414472a34e5cfc5cc28ee3c9a",
       "compararOriginal": true
     },
     {
       "original": "assets/libro-reclamaciones.js",
       "copia": "integrations/libro-reclamaciones/respaldo-2026-11-11/assets/libro-reclamaciones.js",
-      "sha256": "d9d48b3464549eac42eb29e62c876886164c9496542f83e0665d6d8943167ccf",
+      "sha256": "1b67f0dae0a2b02b5ffdc3285b2d25fa5c885aa5cb933c88c49ff55ad37c8e51",
       "compararOriginal": true
     },
     {
@@ -42,13 +42,13 @@
     {
       "original": "layout/theme.liquid",
       "copia": "integrations/libro-reclamaciones/respaldo-2026-11-11/layout/theme.liquid",
-      "sha256": "f4e6e737bb138e3cc2cbf75146df5ded84f42df5e677567fd7ef2ee57c1f2bca",
+      "sha256": "456cb76627f5591be962c2e532976aeeaa48f81514a6bd99bf639760d4d73296",
       "compararOriginal": false
     },
     {
       "original": "integrations/libro-reclamaciones/Code.gs",
       "copia": "integrations/libro-reclamaciones/respaldo-2026-11-11/integrations/libro-reclamaciones/Code.gs",
-      "sha256": "68b49d438725a3882fbcfab37d405e2b03c4e788032b5ea224ea157a07f9a3b1",
+      "sha256": "9a5589a8be73570d8d03c7fce618568d64b2246bf3e3d10808c52a8d8e72dc65",
       "compararOriginal": true
     }
   ]

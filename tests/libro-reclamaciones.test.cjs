@@ -206,7 +206,7 @@ test('guarda el caso y reintenta la copia cuando falla el correo al cliente', ()
 });
 
 test('rechaza datos incompletos, correo inválido y menores sin apoderado', () => {
-  for (const values of [{ name: '' }, { email: 'invalido' }, { email: '' }, { address: '', response_channel: 'Carta al domicilio' }, { minor: 'Sí', guardian: '' }, { type: 'Otro' }, { q_1: '' }, { q_35: 'Quizás' }]) {
+  for (const values of [{ name: '' }, { email: 'invalido' }, { email: '' }, { address: '', response_channel: 'Carta al domicilio' }, { minor: 'Sí', guardian: '' }, { type: 'Otro' }, { q_35: 'Quizás' }]) {
     const h = harness();
     assert.match(h.doPost(request(values)).content, /No pudimos confirmar el envío/);
     assert.equal(h.rows.length, 1);
@@ -214,21 +214,24 @@ test('rechaza datos incompletos, correo inválido y menores sin apoderado', () =
   }
 });
 
-test('exige fecha real, número de pedido y comprobante en el formulario vigente', () => {
-  for (const values of [{ form_version: '' }, { purchase_date: '' }, { purchase_date: '2026-02-30' }, { purchase_date: '2026-13-01' }, { order_number: '' }, { receipt_number: '' }]) {
+test('admite datos de compra y preguntas adicionales opcionales, pero rechaza fechas inválidas', () => {
+  for (const values of [{ form_version: '' }, { purchase_date: '2026-02-30' }, { purchase_date: '2026-13-01' }]) {
     const h = harness();
     assert.match(h.doPost(request(values)).content, /No pudimos confirmar el envío/);
     assert.equal(h.rows.length, 1);
     assert.equal(h.sent.length, 0);
   }
+  const optionalOnly = harness();
+  const emptyQuestions = Object.fromEntries(Array.from({ length: 35 }, (_, i) => ['q_' + (i + 1), '']));
+  const res = optionalOnly.doPost(currentRequest({ purchase_date: '', order_number: '', receipt_number: '', ...emptyQuestions }));
+  assert.match(res.content, /Tu reclamación fue registrada/);
+  assert.equal(optionalOnly.rows.length, 2);
 });
 
-test('exige y conserva los datos del titular distinto en hoja, constancia y ambas copias', () => {
-  for (const values of [{ q_8: 'No' }, { q_8: 'No', receipt_holder_name: 'Titular Prueba' }, { q_8: 'No', receipt_holder_document: '00123456' }]) {
-    const h = harness();
-    assert.match(h.doPost(request(values)).content, /No pudimos confirmar el envío/);
-    assert.equal(h.rows.length, 1);
-  }
+test('conserva los datos del titular distinto cuando se indican en hoja, constancia y ambas copias', () => {
+  const withoutHolder = harness();
+  assert.match(withoutHolder.doPost(request({ q_8: 'No' })).content, /Tu reclamación fue registrada/);
+  assert.equal(withoutHolder.rows.length, 2);
   const h = harness();
   const result = h.doPost(request({ q_8: 'No', receipt_holder_name: 'Titular Prueba', receipt_holder_document: '00123456', receipt_number: '00000005' }));
   assert.match(result.content, /Titular del comprobante: Titular Prueba/);
@@ -290,13 +293,14 @@ test('acepta el teléfono vacío y conserva las 35 respuestas adicionales en amb
   }
 });
 
-test('la página y el receptor usan las mismas 35 preguntas y el teléfono es opcional', () => {
+test('la página y el receptor usan las mismas 35 preguntas opcionales y el teléfono es opcional', () => {
   const page = fs.readFileSync(path.join(__dirname, '../sections/libro-reclamaciones.liquid'), 'utf8');
   const match = page.match(/assign book_questions = '([^']+)' \| split: '\|'/);
   assert.ok(match);
   assert.deepEqual(match[1].split('|'), Array.from(harness().questions));
   assert.equal(match[1].split('|').length, 35);
-  assert.match(page, /name="q_{{ forloop.index }}" required/);
+  assert.match(page, /name="q_{{ forloop.index }}"/);
+  assert.doesNotMatch(page, /name="q_{{ forloop.index }}" required/);
   assert.match(page, /<input name="phone"[^>]*>/);
   assert.doesNotMatch(page.match(/<input name="phone"[^>]*>/)[0], /required/);
 });
@@ -358,20 +362,23 @@ test('no registra solicitudes si falta configuración o identificador seguro', (
   assert.equal(h.rows.length, 1);
 });
 
-test('el formulario solicita manualmente la compra y pide el titular solo cuando corresponde', () => {
+test('el formulario no muestra cabecera de tienda, solicita opcionalmente la compra y muestra el titular solo cuando corresponde', () => {
   const { parseHTML } = require('linkedom');
   const { window, document } = parseHTML(fs.readFileSync(path.join(__dirname, '../preview/libro-reclamaciones.html'), 'utf8'));
+  assert.equal(document.querySelector('.store-header'), null);
+  assert.equal(document.querySelector('.store-nav'), null);
   const owner = document.querySelector('[name="q_8"]');
   let value = '';
   Object.defineProperty(owner, 'value', { get: () => value, set: selected => { value = selected; } });
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../assets/libro-reclamaciones.js'), 'utf8'), { window, document, Uint8Array });
-  for (const name of ['purchase_date', 'order_number', 'receipt_number']) {
-    assert.ok(document.querySelector('[name="' + name + '"]').hasAttribute('required'), name);
+  for (const name of ['purchase_date', 'order_number', 'receipt_number', 'q_8']) {
+    assert.equal(document.querySelector('[name="' + name + '"]').hasAttribute('required'), false, name);
   }
   const block = document.querySelector('[data-book-holder-details]');
   const purchaseSection = document.querySelector('[name="receipt_number"]').closest('fieldset');
   for (let index = 1; index <= 35; index++) {
     assert.equal(document.querySelectorAll('[name="q_' + index + '"]').length, 1);
+    assert.equal(document.querySelector('[name="q_' + index + '"]').hasAttribute('required'), false, 'q_' + index);
   }
   assert.equal(owner.closest('fieldset'), purchaseSection);
   assert.ok(owner.closest('label').previousElementSibling.querySelector('[name="receipt_number"]'));
@@ -383,7 +390,7 @@ test('el formulario solicita manualmente la compra y pide el titular solo cuando
   owner.value = 'No';
   owner.dispatchEvent(new window.Event('change'));
   assert.equal(block.hidden, false);
-  assert.ok(fields.every(field => !field.disabled && field.required));
+  assert.ok(fields.every(field => !field.disabled && !field.required));
   owner.value = 'Sí';
   owner.dispatchEvent(new window.Event('change'));
   assert.equal(block.hidden, true);

@@ -220,20 +220,27 @@ function validate_(p) {
   if (data.responseChannel === 'Correo electrónico' && !data.email) throw new Error('Por favor indica el correo para recibir la respuesta.');
   if (data.email && (!/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(data.email) || /[\r\n,;]/.test(data.email))) throw new Error('Por favor revisa el campo «correo electrónico».');
   if (data.amount && !/^\d{1,12}(?:[.,]\d{1,2})?$/.test(data.amount)) throw new Error('Por favor revisa el campo «monto reclamado».');
+  function optionalChoice(key, title, allowed) {
+    const value = field(key, title, 100, false);
+    if (value && !allowed.includes(value)) throw new Error('Por favor selecciona una opción válida en «' + title + '».');
+    return value;
+  }
   data.additional = BOOK.additionalQuestions.map((question, index) => ({
     question: question,
-    answer: choice('q_' + (index + 1), question, ['Sí', 'No', 'No sé', 'No aplica'])
+    answer: optionalChoice('q_' + (index + 1), question, ['Sí', 'No', 'No sé', 'No aplica'])
   }));
-  data.purchaseDate = field('purchase_date', 'fecha de compra', 10, true);
-  const parsedDate = new Date(data.purchaseDate + 'T00:00:00Z');
-  if (!/^(?!0000)\d{4}-\d{2}-\d{2}$/.test(data.purchaseDate) || isNaN(parsedDate.getTime()) || parsedDate.toISOString().slice(0, 10) !== data.purchaseDate) {
-    throw new Error('Por favor revisa la fecha de compra.');
+  data.purchaseDate = field('purchase_date', 'fecha de compra', 10, false);
+  if (data.purchaseDate) {
+    const parsedDate = new Date(data.purchaseDate + 'T00:00:00Z');
+    if (!/^(?!0000)\d{4}-\d{2}-\d{2}$/.test(data.purchaseDate) || isNaN(parsedDate.getTime()) || parsedDate.toISOString().slice(0, 10) !== data.purchaseDate) {
+      throw new Error('Por favor revisa la fecha de compra.');
+    }
   }
-  data.orderNumber = field('order_number', 'número de pedido', 100, true);
-  data.receiptNumber = field('receipt_number', 'número de comprobante', 100, true);
+  data.orderNumber = field('order_number', 'número de pedido', 100, false);
+  data.receiptNumber = field('receipt_number', 'número de comprobante', 100, false);
   const differentHolder = data.additional[7].answer === 'No';
-  data.receiptHolderName = differentHolder ? field('receipt_holder_name', 'nombre o razón social del titular del comprobante', 150, true) : '';
-  data.receiptHolderDocument = differentHolder ? field('receipt_holder_document', 'documento del titular del comprobante', 60, true) : '';
+  data.receiptHolderName = differentHolder ? field('receipt_holder_name', 'nombre o razón social del titular del comprobante', 150, false) : '';
+  data.receiptHolderDocument = differentHolder ? field('receipt_holder_document', 'documento del titular del comprobante', 60, false) : '';
   if (current) {
     const location = key => {
       const value = field(key, key, 100, false);
@@ -356,17 +363,16 @@ function receiptText_(id, registeredAt, data) {
     '', 'BIEN O SERVICIO', 'Tipo: ' + data.itemType,
     'Monto reclamado: ' + (data.amount ? 'S/ ' + data.amount : 'No indicado'),
     'Descripción: ' + data.itemDescription,
-    ...(data.purchaseDate ? [
-      'Fecha de compra: ' + data.purchaseDate.split('-').reverse().join('/'),
-      'Número de pedido: ' + data.orderNumber,
-      'Número de comprobante: ' + data.receiptNumber,
-      ...(data.receiptHolderName ? ['Titular del comprobante: ' + data.receiptHolderName, 'Documento del titular: ' + data.receiptHolderDocument] : [])
-    ] : []),
+    ...(data.purchaseDate ? ['Fecha de compra: ' + data.purchaseDate.split('-').reverse().join('/')] : []),
+    ...(data.orderNumber ? ['Número de pedido: ' + data.orderNumber] : []),
+    ...(data.receiptNumber ? ['Número de comprobante: ' + data.receiptNumber] : []),
+    ...(data.receiptHolderName ? ['Titular del comprobante: ' + data.receiptHolderName] : []),
+    ...(data.receiptHolderDocument ? ['Documento del titular: ' + data.receiptHolderDocument] : []),
     '', 'RECLAMACIÓN', 'Tipo: ' + data.type,
     'Detalle: ' + data.details, 'Pedido: ' + data.request,
     'Medio solicitado para la respuesta: ' + data.responseChannel,
     '', 'INFORMACIÓN ADICIONAL',
-    ...(data.additional || []).map(item => item.question + ' ' + item.answer),
+    ...(data.additional || []).map(item => item.question + ' ' + (item.answer || 'No respondida')),
     '', 'DECOKASA responderá por escrito en un plazo máximo de 15 días hábiles, improrrogables.',
     'La presentación de esta reclamación no impide acudir a otras vías de solución ni es requisito previo para denunciar ante Indecopi.'
   ].join('\n');

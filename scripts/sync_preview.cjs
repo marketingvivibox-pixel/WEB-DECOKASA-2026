@@ -111,13 +111,15 @@ async function main() {
     document.querySelectorAll('style').forEach(el => el.remove());
     const isLandingSpc = file === 'landing-piso-spc.html';
     const isLandingPvc = file === 'landing-pisos-pvc.html';
+    const isLibro = file === 'libro-reclamaciones.html';
     const isCustomLanding = isLandingSpc || isLandingPvc;
-    const pageHeader = isCustomLanding ? '' : header;
+    const pageHeader = (isCustomLanding || isLibro) ? '' : header;
     const pageFooter = isCustomLanding ? '' : footer;
     const extraCss = isCustomLanding ? '' : `<style>${css}</style>`;
     const motionAssets = motionPage ? '<link data-preview-motion rel="stylesheet" href="assets/decokasa-motion.css"><script data-preview-motion src="assets/decokasa-motion.js" defer></script>' : '';
     const curtain = motionPage ? '<div class="motion-curtain" aria-hidden="true"></div>' : '';
     const bodyAttr = isLandingSpc ? ' class="spc-layout"' : isLandingPvc ? ' class="pvc-layout"' :
+      isLibro ? ' class="storefront-interface book-layout"' :
       motionPage ? ` class="storefront-interface" data-motion-home="${routes.root_url}" data-motion-catalog="${routes.all_products_collection_url}"` : ' class="storefront-interface"';
     if (isLandingPvc) document.querySelector('title').textContent = 'Piso PVC autoadhesivo · DECOKASA';
     const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">${document.head.innerHTML}${extraCss}${isCustomLanding ? '' : interfaceAssets}${motionAssets}</head><body${bodyAttr}>${curtain}${pageHeader}<main id="main">${content}</main>${pageFooter}${isCustomLanding ? bookLink : ''}${isCustomLanding ? '' : `<script>${js}</script>`}${landings[file] && !isCustomLanding ? '<script src="product-demo.js" defer></script>' : ''}</body></html>`;

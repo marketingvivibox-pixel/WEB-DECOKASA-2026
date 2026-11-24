@@ -1,4 +1,10 @@
 {%- liquid
+  assign storefront_motion = false
+  unless request.design_mode
+    if request.page_type == 'index' or request.page_type == 'collection'
+      assign storefront_motion = true
+    endif
+  endunless
   assign custom_landing = false
   if template.suffix == 'landing-spc' or template.suffix == 'landing-pvc'
     assign custom_landing = true
@@ -9,22 +15,39 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>{{ page_title | escape }} · DECOKASA</title>
+    {%- liquid
+      assign seo_title = page_title | strip | default: shop.name
+      assign seo_title_lower = seo_title | downcase
+      assign seo_brand = shop.name | strip | default: 'DECOKASA'
+      assign seo_brand_lower = seo_brand | downcase
+      assign seo_description = page_description | strip_html | strip
+    %}
+    <title>{{ seo_title | escape }}{% unless seo_title_lower contains seo_brand_lower %} · {{ seo_brand | escape }}{% endunless %}</title>
+    {% if seo_description != blank %}
+      <meta name="description" content="{{ seo_description | escape }}">
+    {% endif %}
     <link rel="canonical" href="{{ canonical_url }}">
     <link rel="icon" type="image/png" sizes="128x128" href="{{ 'favicon.png' | asset_url }}">
     {{ content_for_header }}
     {% unless custom_landing %}
       {{ 'decokasa.css' | asset_url | stylesheet_tag }}
+      {{ 'decokasa-interface.css' | asset_url | stylesheet_tag }}
+      <script src="{{ 'decokasa-interface.js' | asset_url }}" defer></script>
       <script src="{{ 'decokasa.js' | asset_url }}" defer></script>
     {% endunless %}
+    {% if storefront_motion %}
+      {{ 'decokasa-motion.css' | asset_url | stylesheet_tag }}
+      <script src="{{ 'decokasa-motion.js' | asset_url }}" defer></script>
+    {% endif %}
   </head>
-  <body{% if template.suffix == 'landing-spc' %} class="spc-layout"{% elsif template.suffix == 'landing-pvc' %} class="pvc-layout"{% endif %}>
-    {% unless custom_landing %}{% section 'header' %}{% endunless %}
+  <body{% if template.suffix == 'landing-spc' %} class="spc-layout"{% elsif template.suffix == 'landing-pvc' %} class="pvc-layout"{% elsif template.suffix == 'libro-reclamaciones' %} class="storefront-interface book-layout"{% else %} class="storefront-interface"{% endif %}{% if storefront_motion %} data-motion-home="{{ routes.root_url | escape }}" data-motion-catalog="{{ routes.all_products_collection_url | escape }}"{% endif %}>
+    {% if storefront_motion %}<div class="motion-curtain" aria-hidden="true"></div>{% endif %}
+    {% unless custom_landing or template.suffix == 'libro-reclamaciones' %}{% section 'header' %}{% endunless %}
     <main id="main">{{ content_for_layout }}</main>
     {% unless custom_landing %}
-      {% unless template.suffix == 'libro-reclamaciones' %}<div class="demo">Tienda en preparación · Los formularios son de prueba y todavía no envían solicitudes.</div>{% endunless %}
+      {% unless template.suffix == 'libro-reclamaciones' %}<div class="demo" data-motion data-nosnippet>Tienda en preparación · Los formularios son de prueba y todavía no envían solicitudes.</div>{% endunless %}
       {% section 'footer' %}
     {% endunless %}
-    {% render 'book-link' %}
+    {% if custom_landing %}{% render 'book-link' %}{% endif %}
   </body>
 </html>
