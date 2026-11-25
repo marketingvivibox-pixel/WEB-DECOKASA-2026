@@ -28,5 +28,65 @@
         "info": "Las primeras cuatro aparecen en la barra superior. Todas aparecen en el menú de categorías y en el catálogo."
       }
     ]
+  },
+  {
+    "name": "Muestras de color",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Configura los tonos exactos para las muestras circulares de color en las tarjetas de productos y catálogo. Puedes elegir tonos rápidos con el selector de color o añadir cualquier nombre con su código hexadecimal."
+      },
+      {
+        "type": "header",
+        "content": "Tonos rápidos configurables"
+      },
+      {
+        "type": "color",
+        "id": "swatch_gris_claro",
+        "label": "Gris Claro",
+        "default": "#d4d4d8"
+      },
+      {
+        "type": "color",
+        "id": "swatch_gris_oscuro",
+        "label": "Gris oscuro",
+        "default": "#4b5563"
+      },
+      {
+        "type": "color",
+        "id": "swatch_azul_marino",
+        "label": "Azul marino",
+        "default": "#1e3a8a"
+      },
+      {
+        "type": "color",
+        "id": "swatch_verde_militar",
+        "label": "Verde militar / oliva",
+        "default": "#4d5d43"
+      },
+      {
+        "type": "color",
+        "id": "swatch_beige",
+        "label": "Beige / Crema",
+        "default": "#dfcfaf"
+      },
+      {
+        "type": "color",
+        "id": "swatch_marron",
+        "label": "Marrón / Café",
+        "default": "#79513c"
+      },
+      {
+        "type": "header",
+        "content": "Mapeo personalizado de colores"
+      },
+      {
+        "type": "textarea",
+        "id": "custom_color_swatches",
+        "label": "Lista de colores personalizados",
+        "info": "Escribe un color por línea con formato: Nombre = #hex (ej: Roble claro = #c8ad8d o Palo rosa = #d8a2a6).",
+        "default": "Gris Claro = #d4d4d8\nGris oscuro = #4b5563"
+      }
+    ]
   }
 ]

@@ -8,7 +8,7 @@
     <div class="interface-section-heading"><h2 id="RelatedTitle-{{ section.id }}">También te puede interesar</h2><a href="{{ routes.all_products_collection_url }}">Ver catálogo {% render 'icon', name: 'arrow' %}</a></div>
     <div class="interface-track interface-product-track" id="{{ related_track }}" data-carousel-track tabindex="0" aria-label="Productos relacionados">
       {% for recommendation in related.products limit: 9 %}
-        {% unless recommendation.id == product.id %}{% render 'product-card', product: recommendation, demo: is_demo %}{% endunless %}
+        {% unless recommendation.id == product.id %}{% render 'product-card', product: recommendation, demo: is_demo, settings: settings, custom_color_swatches: section.settings.custom_color_swatches %}{% endunless %}
       {% endfor %}
     </div>
     {% render 'storefront-carousel-controls', track_id: related_track %}
@@ -29,7 +29,9 @@
     {"type": "text", "id": "price_note", "label": "Nota bajo el precio", "default": "El asesor confirmará el importe final y la entrega."},
     {"type": "paragraph", "content": "La meta del regalo se calcula automáticamente: precio de la presentación más cara × 1.80 (80% adicional)."},
     {"type": "text", "id": "cta_label", "label": "Texto del botón", "default": "Solicitar compra"},
-    {"type": "checkbox", "id": "show_description", "label": "Mostrar descripción del producto", "default": true}
+    {"type": "checkbox", "id": "show_description", "label": "Mostrar descripción del producto", "default": true},
+    {"type": "header", "content": "Muestras de color"},
+    {"type": "textarea", "id": "custom_color_swatches", "label": "Tonos exactos de color", "info": "Define el tono exacto para nombres de color. Formato: Nombre = #hex (uno por línea). Ej: Gris Claro = #d4d4d8, Gris oscuro = #4b5563.", "default": "Gris Claro = #d4d4d8\nGris oscuro = #4b5563"}
   ],
   "blocks": [{"type": "information", "name": "Información desplegable", "settings": [{"type": "text", "id": "heading", "label": "Título", "default": "Información de entrega"}, {"type": "richtext", "id": "content", "label": "Contenido", "default": "<p>Consulta las condiciones de entrega con tu asesor.</p>"}]}],
   "max_blocks": 6,

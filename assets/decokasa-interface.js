@@ -5,8 +5,10 @@
   const maxUnits = 1000000;
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const footerMobile = matchMedia('(max-width: 699px)');
+  const mobileNavQuery = matchMedia('(max-width: 899px)');
   const initializedCarousels = new WeakSet();
   const initializedFooters = new WeakSet();
+  const initializedMobileNavs = new WeakSet();
 
   function readStore() {
     try {
@@ -145,6 +147,116 @@
     action.setAttribute('aria-label', available ? 'Agregar ' + title + ' al carrito' : 'Ver ' + title);
   }
 
+  function initMobileCategoryNav(shell) {
+    if (!shell || initializedMobileNavs.has(shell)) return;
+    const nav = shell.querySelector('.store-nav');
+    if (!nav) return;
+    initializedMobileNavs.add(shell);
+
+    const prevArrow = shell.querySelector('[data-store-nav-arrow="-1"]');
+    const nextArrow = shell.querySelector('[data-store-nav-arrow="1"]');
+
+    let paused = false;
+    let pauseTimer = null;
+    let direction = 1;
+    let lastTime = 0;
+    const speed = 30;
+    let accum = 0;
+    let endCooldown = 0;
+
+    function tempPause(ms = 2000) {
+      paused = true;
+      if (pauseTimer) clearTimeout(pauseTimer);
+      pauseTimer = setTimeout(() => {
+        paused = false;
+      }, ms);
+    }
+
+    function syncArrows() {
+      if (!prevArrow || !nextArrow) return;
+      const maxScroll = nav.scrollWidth - nav.clientWidth;
+      if (maxScroll <= 4) {
+        prevArrow.style.opacity = '0.25';
+        nextArrow.style.opacity = '0.25';
+        return;
+      }
+      prevArrow.style.opacity = nav.scrollLeft <= 2 ? '0.25' : '1';
+      nextArrow.style.opacity = nav.scrollLeft >= maxScroll - 2 ? '0.25' : '1';
+      if (nav.scrollLeft >= maxScroll - 2) {
+        direction = -1;
+      } else if (nav.scrollLeft <= 2) {
+        direction = 1;
+      }
+    }
+
+    if (prevArrow) {
+      prevArrow.addEventListener('click', (e) => {
+        e.preventDefault();
+        tempPause(2200);
+        direction = -1;
+        nav.scrollBy({ left: -160, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+      });
+    }
+
+    if (nextArrow) {
+      nextArrow.addEventListener('click', (e) => {
+        e.preventDefault();
+        tempPause(2200);
+        direction = 1;
+        nav.scrollBy({ left: 160, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+      });
+    }
+
+    nav.addEventListener('pointerdown', () => {
+      paused = true;
+      if (pauseTimer) clearTimeout(pauseTimer);
+    }, { passive: true });
+
+    window.addEventListener('pointerup', () => {
+      if (paused) tempPause(1800);
+    }, { passive: true });
+
+    window.addEventListener('pointercancel', () => {
+      if (paused) tempPause(1800);
+    }, { passive: true });
+
+    nav.addEventListener('scroll', syncArrows, { passive: true });
+
+    function tick(time) {
+      if (!lastTime) lastTime = time;
+      const delta = Math.min((time - lastTime) / 1000, 0.1);
+      lastTime = time;
+
+      if (!paused && mobileNavQuery.matches && !reducedMotion.matches) {
+        const maxScroll = nav.scrollWidth - nav.clientWidth;
+        if (maxScroll > 6) {
+          if (time >= endCooldown) {
+            accum += speed * delta * direction;
+            if (Math.abs(accum) >= 1) {
+              const step = Math.trunc(accum);
+              accum -= step;
+              nav.scrollLeft += step;
+
+              if (direction === 1 && nav.scrollLeft >= maxScroll - 1) {
+                direction = -1;
+                endCooldown = time + 1400;
+                accum = 0;
+              } else if (direction === -1 && nav.scrollLeft <= 1) {
+                direction = 1;
+                endCooldown = time + 1400;
+                accum = 0;
+              }
+            }
+          }
+        }
+      }
+      syncArrows();
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+    syncArrows();
+  }
+
   function initCarousel(container) {
     if (initializedCarousels.has(container)) return;
     const track = container.querySelector('[data-carousel-track]');
@@ -201,6 +313,7 @@
     document.querySelectorAll('[data-interface-cart], [data-interface-product-add]').forEach(button => { button.hidden = false; });
     document.querySelectorAll('[data-interface-card-add]').forEach(setCardAction);
     document.querySelectorAll('[data-carousel]').forEach(initCarousel);
+    document.querySelectorAll('.navigation-shell').forEach(initMobileCategoryNav);
     document.querySelectorAll('[data-footer-disclosure]').forEach(details => {
       if (!initializedFooters.has(details)) {
         details.open = !footerMobile.matches || Boolean(details.querySelector('.decokasa-book-access'));

@@ -27,6 +27,9 @@
   </div>
 </header>
 <div class="navigation-shell" data-motion="settle">
+  <button class="store-nav-arrow store-nav-arrow--prev" type="button" data-store-nav-arrow="-1" aria-label="Ver categorías anteriores">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m15 18-6-6 6-6"/></svg>
+  </button>
   <nav class="wrap store-nav" aria-label="Navegación principal">
     {% for type in catalog_types %}
       {% assign category_collection = type %}
@@ -46,6 +49,9 @@
       {% endif %}
     {% endfor %}
   </nav>
+  <button class="store-nav-arrow store-nav-arrow--next" type="button" data-store-nav-arrow="1" aria-label="Ver más categorías">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 18 6-6-6-6"/></svg>
+  </button>
 </div>
 {% render 'storefront-cart' %}
 {% schema %}

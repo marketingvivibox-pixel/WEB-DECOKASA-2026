@@ -21,13 +21,15 @@ engine.registerFilter('url_for_type', name => `catalogo.html?categoria=${encodeU
 engine.registerFilter('handleize', name => String(name).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''));
 const collections = Object.fromEntries(Object.entries(require('../tests/catalog-collections.json')).map(([handle, value]) => [handle, {...value, url: value.url.slice(1)}]));
 const routes = { root_url: 'DECOKASA-inicio.html', search_url: 'catalogo.html', all_products_collection_url: 'catalogo.html', collections_url: 'collections' };
+const settingsDataRaw = fs.readFileSync(path.join(root, 'config/settings_data.json'), 'utf8');
+const globalThemeSettings = JSON.parse(settingsDataRaw.replace(/\/\*[\s\S]*?\*\//, '').trim()).current || {};
 async function section(name, overrides = {}, context = {}) {
   const raw = fs.readFileSync(path.join(root, 'sections', `${name}.liquid`), 'utf8');
   const schema = JSON.parse(raw.match(/{% schema %}([\s\S]*?){% endschema %}/)[1]);
   const settings = { ...Object.fromEntries(schema.settings.filter(s => s.id).map(s => [s.id, s.default ?? ''])), ...overrides };
   // The local demo contains five examples; Shopify paginates the real collection.
   const source = raw.replace(/{% schema %}[\s\S]*?{% endschema %}/, '').replace(/{% paginate [\s\S]*?%}/g, '').replace(/{% endpaginate %}/g, '').replace('{% assign is_demo = false %}', `{% assign is_demo = ${context.is_demo === true} %}`);
-  let html = await engine.parseAndRender(source, { settings: {}, collections, routes, search: { terms: '' }, ...context, section: { id: `preview-${name}`, blocks: [], ...context.section, settings: {...settings, ...context.section?.settings} } });
+  let html = await engine.parseAndRender(source, { settings: globalThemeSettings, collections, routes, search: { terms: '' }, ...context, section: { id: `preview-${name}`, blocks: [], ...context.section, settings: {...settings, ...context.section?.settings} } });
   const permanentRoutes = {'sillas-gerenciales': ['categoria', 'Sillas Gerenciales'], 'sillas-gamers': ['categoria', 'Sillas Gamers'], tecnologia: ['categoria', 'Tecnología'], electrodomesticos: ['categoria', 'Electrodomésticos'], bebes: ['categoria', 'Bebés'], fitness: ['categoria', 'Fitness'], 'hogar-y-acabados': ['categoria', 'Acabados'], decokasa: ['marca', 'DECOKASA'], xion: ['marca', 'Xion'], biflex: ['marca', 'Biflex'], 'mundo-baby': ['marca', 'Mundo Baby']};
   for (const [handle, [key, value]] of Object.entries(permanentRoutes)) html = html.replaceAll(`collections/${handle}`, `catalogo.html?${key}=${encodeURIComponent(value)}`);
   return html.replaceAll('collections/types?q=', 'catalogo.html?categoria=').replaceAll('collections/vendors?q=', 'catalogo.html?marca=');

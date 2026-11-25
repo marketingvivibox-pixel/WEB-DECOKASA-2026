@@ -98,3 +98,34 @@ test('Las tarjetas sin colores o con destino personalizado conservan sus enlaces
     assert.ok([...document.querySelectorAll('[data-card-link]')].every(a => a.getAttribute('href') === expected));
   }
 });
+
+test('Permite configurar tonos exactos personalizados desde settings o sección para nombres de colores', async () => {
+  const p = fixture({
+    options_with_values: [
+      {name: 'Color', position: 1, values: [
+        {name: 'Gris Claro', variant: {id: '201', options: ['Gris Claro'], available: true}},
+        {name: 'Gris oscuro', variant: {id: '202', options: ['Gris oscuro'], available: true}},
+        {name: 'Personalizado', variant: {id: '203', options: ['Personalizado'], available: true}}
+      ]}
+    ]
+  });
+
+  // 1. Con tonos automáticos incorporados
+  const {document: docDefault} = parseHTML(await engine.parseAndRender("{% render 'product-card', product: product %}", {product: p}));
+  const dotsDefault = docDefault.querySelectorAll('.catalog-color-dot');
+  assert.equal(dotsDefault.length, 2);
+  assert.equal(dotsDefault[0].getAttribute('style'), 'background-color: #d4d4d8');
+  assert.equal(dotsDefault[1].getAttribute('style'), 'background-color: #4b5563');
+
+  // 2. Con configuración personalizada en settings del tema
+  const customSettings = {
+    custom_color_swatches: "Gris Claro = #e2e8f0\nPersonalizado = #ff0055",
+    swatch_gris_oscuro: "#1f2937"
+  };
+  const {document: docCustom} = parseHTML(await engine.parseAndRender("{% render 'product-card', product: product, settings: settings %}", {product: p, settings: customSettings}));
+  const dotsCustom = docCustom.querySelectorAll('.catalog-color-dot');
+  assert.equal(dotsCustom.length, 3);
+  assert.equal(dotsCustom[0].getAttribute('style'), 'background-color: #e2e8f0');
+  assert.equal(dotsCustom[1].getAttribute('style'), 'background-color: #1f2937');
+  assert.equal(dotsCustom[2].getAttribute('style'), 'background-color: #ff0055');
+});

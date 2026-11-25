@@ -70,14 +70,22 @@
               {% assign color_key = value.name | handleize %}
               {% assign color_hex = '' %}
               {% case color_key %}
+                {% when 'gris-claro' %}
+                  {% assign color_hex = settings.swatch_gris_claro | default: '#d4d4d8' %}
+                {% when 'gris-oscuro' %}
+                  {% assign color_hex = settings.swatch_gris_oscuro | default: '#4b5563' %}
+                {% when 'azul-marino' %}
+                  {% assign color_hex = settings.swatch_azul_marino | default: '#1e3a8a' %}
+                {% when 'verde-militar', 'verde-oliva' %}
+                  {% assign color_hex = settings.swatch_verde_militar | default: '#4d5d43' %}
                 {% when 'negro' %}{% assign color_hex = '#1c1c1c' %}
                 {% when 'blanco' %}{% assign color_hex = '#ffffff' %}
-                {% when 'marron', 'cafe' %}{% assign color_hex = '#79513c' %}
+                {% when 'marron', 'cafe' %}{% assign color_hex = settings.swatch_marron | default: '#79513c' %}
                 {% when 'gris' %}{% assign color_hex = '#909499' %}
                 {% when 'azul' %}{% assign color_hex = '#285fa7' %}
                 {% when 'rojo' %}{% assign color_hex = '#c62e32' %}
                 {% when 'verde' %}{% assign color_hex = '#598541' %}
-                {% when 'beige', 'crema' %}{% assign color_hex = '#dfcfaf' %}
+                {% when 'beige', 'crema' %}{% assign color_hex = settings.swatch_beige | default: '#dfcfaf' %}
                 {% when 'amarillo' %}{% assign color_hex = '#e7c836' %}
                 {% when 'naranja' %}{% assign color_hex = '#e5792e' %}
                 {% when 'rosa', 'rosado' %}{% assign color_hex = '#e1a2b3' %}
@@ -85,6 +93,53 @@
                 {% when 'plata' %}{% assign color_hex = '#bdc1c4' %}
                 {% when 'dorado' %}{% assign color_hex = '#c8a25c' %}
               {% endcase %}
+              {% assign swatch_config = custom_color_swatches | default: section.settings.custom_color_swatches | default: settings.custom_color_swatches %}
+              {% if swatch_config != blank %}
+                {% assign custom_rules = swatch_config | newline_to_br | replace: '<br />', '||' | split: '||' %}
+                {% for rule in custom_rules %}
+                  {% assign rule_clean = rule | strip %}
+                  {% if rule_clean != blank %}
+                    {% assign separator = '' %}
+                    {% if rule_clean contains '=' %}{% assign separator = '=' %}
+                    {% elsif rule_clean contains ':' %}{% assign separator = ':' %}{% endif %}
+                    {% if separator != '' %}
+                      {% assign rule_parts = rule_clean | split: separator %}
+                      {% assign rule_name = rule_parts[0] | strip_newlines | strip | handleize %}
+                      {% if rule_name == color_key %}
+                        {% assign color_hex = rule_parts[1] | strip_newlines | strip %}
+                        {% break %}
+                      {% endif %}
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+              {% if color_hex == blank %}
+                {% if color_key contains 'gris' %}
+                  {% assign color_hex = '#909499' %}
+                {% elsif color_key contains 'azul' %}
+                  {% assign color_hex = '#285fa7' %}
+                {% elsif color_key contains 'verde' %}
+                  {% assign color_hex = '#598541' %}
+                {% elsif color_key contains 'rojo' %}
+                  {% assign color_hex = '#c62e32' %}
+                {% elsif color_key contains 'negro' %}
+                  {% assign color_hex = '#1c1c1c' %}
+                {% elsif color_key contains 'blanco' %}
+                  {% assign color_hex = '#ffffff' %}
+                {% elsif color_key contains 'amarillo' %}
+                  {% assign color_hex = '#e7c836' %}
+                {% elsif color_key contains 'naranja' %}
+                  {% assign color_hex = '#e5792e' %}
+                {% elsif color_key contains 'rosa' or color_key contains 'rosado' %}
+                  {% assign color_hex = '#e1a2b3' %}
+                {% elsif color_key contains 'morado' or color_key contains 'violeta' %}
+                  {% assign color_hex = '#80619b' %}
+                {% elsif color_key contains 'beige' or color_key contains 'crema' %}
+                  {% assign color_hex = '#dfcfaf' %}
+                {% elsif color_key contains 'marron' or color_key contains 'cafe' %}
+                  {% assign color_hex = '#79513c' %}
+                {% endif %}
+              {% endif %}
               {% if value.swatch.color != blank %}{% capture color_hex %}rgb({{ value.swatch.color.rgb }}){% endcapture %}{% endif %}
               {% assign variant_image = color_variant.featured_image %}
               {% assign image_reference = false %}

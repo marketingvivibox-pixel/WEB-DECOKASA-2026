@@ -80,9 +80,69 @@
                   {% for value in option.values %}
                     {% capture option_ids %}{% for other_option in product.options_with_values %}{% if other_option.position == current_option.position %}{{ value.id }}{% else %}{% for selected_value in other_option.values %}{% if selected_value.selected %}{{ selected_value.id }}{% endif %}{% endfor %}{% endif %}{% unless forloop.last %},{% endunless %}{% endfor %}{% endcapture %}
                     {% assign option_url = value.product_url | default: product.url %}
+                    {% assign option_color_hex = '' %}
+                    {% if current_option.name == 'Color' or current_option.name == 'color' %}
+                      {% assign color_key = value.name | handleize %}
+                      {% case color_key %}
+                        {% when 'gris-claro' %}{% assign option_color_hex = settings.swatch_gris_claro | default: '#d4d4d8' %}
+                        {% when 'gris-oscuro' %}{% assign option_color_hex = settings.swatch_gris_oscuro | default: '#4b5563' %}
+                        {% when 'azul-marino' %}{% assign option_color_hex = settings.swatch_azul_marino | default: '#1e3a8a' %}
+                        {% when 'verde-militar', 'verde-oliva' %}{% assign option_color_hex = settings.swatch_verde_militar | default: '#4d5d43' %}
+                        {% when 'negro' %}{% assign option_color_hex = '#1c1c1c' %}
+                        {% when 'blanco' %}{% assign option_color_hex = '#ffffff' %}
+                        {% when 'marron', 'cafe' %}{% assign option_color_hex = settings.swatch_marron | default: '#79513c' %}
+                        {% when 'gris' %}{% assign option_color_hex = '#909499' %}
+                        {% when 'azul' %}{% assign option_color_hex = '#285fa7' %}
+                        {% when 'rojo' %}{% assign option_color_hex = '#c62e32' %}
+                        {% when 'verde' %}{% assign option_color_hex = '#598541' %}
+                        {% when 'beige', 'crema' %}{% assign option_color_hex = settings.swatch_beige | default: '#dfcfaf' %}
+                        {% when 'amarillo' %}{% assign option_color_hex = '#e7c836' %}
+                        {% when 'naranja' %}{% assign option_color_hex = '#e5792e' %}
+                        {% when 'rosa', 'rosado' %}{% assign option_color_hex = '#e1a2b3' %}
+                        {% when 'morado', 'violeta' %}{% assign option_color_hex = '#80619b' %}
+                        {% when 'plata' %}{% assign option_color_hex = '#bdc1c4' %}
+                        {% when 'dorado' %}{% assign option_color_hex = '#c8a25c' %}
+                      {% endcase %}
+                      {% assign swatch_config = section.settings.custom_color_swatches | default: settings.custom_color_swatches %}
+                      {% if swatch_config != blank %}
+                        {% assign custom_rules = swatch_config | newline_to_br | replace: '<br />', '||' | split: '||' %}
+                        {% for rule in custom_rules %}
+                          {% assign rule_clean = rule | strip %}
+                          {% if rule_clean != blank %}
+                            {% assign separator = '' %}
+                            {% if rule_clean contains '=' %}{% assign separator = '=' %}
+                            {% elsif rule_clean contains ':' %}{% assign separator = ':' %}{% endif %}
+                            {% if separator != '' %}
+                              {% assign rule_parts = rule_clean | split: separator %}
+                              {% assign rule_name = rule_parts[0] | strip_newlines | strip | handleize %}
+                              {% if rule_name == color_key %}
+                                {% assign option_color_hex = rule_parts[1] | strip_newlines | strip %}
+                                {% break %}
+                              {% endif %}
+                            {% endif %}
+                          {% endif %}
+                        {% endfor %}
+                      {% endif %}
+                      {% if option_color_hex == blank %}
+                        {% if color_key contains 'gris' %}{% assign option_color_hex = '#909499' %}
+                        {% elsif color_key contains 'azul' %}{% assign option_color_hex = '#285fa7' %}
+                        {% elsif color_key contains 'verde' %}{% assign option_color_hex = '#598541' %}
+                        {% elsif color_key contains 'rojo' %}{% assign option_color_hex = '#c62e32' %}
+                        {% elsif color_key contains 'negro' %}{% assign option_color_hex = '#1c1c1c' %}
+                        {% elsif color_key contains 'blanco' %}{% assign option_color_hex = '#ffffff' %}
+                        {% elsif color_key contains 'amarillo' %}{% assign option_color_hex = '#e7c836' %}
+                        {% elsif color_key contains 'naranja' %}{% assign option_color_hex = '#e5792e' %}
+                        {% elsif color_key contains 'rosa' or color_key contains 'rosado' %}{% assign option_color_hex = '#e1a2b3' %}
+                        {% elsif color_key contains 'morado' or color_key contains 'violeta' %}{% assign option_color_hex = '#80619b' %}
+                        {% elsif color_key contains 'beige' or color_key contains 'crema' %}{% assign option_color_hex = '#dfcfaf' %}
+                        {% elsif color_key contains 'marron' or color_key contains 'cafe' %}{% assign option_color_hex = '#79513c' %}
+                        {% endif %}
+                      {% endif %}
+                    {% endif %}
                     <a class="product-option" href="{{ option_url }}?option_values={{ option_ids | strip }}" data-option-link {% if value.selected %}aria-current="true"{% endif %}>
                       {% if value.swatch.image != blank %}{{ value.swatch.image | image_url: width: 100 | image_tag: widths: '50, 100', sizes: '44px', loading: 'lazy', alt: '' }}
                       {% elsif value.swatch.color != blank %}<span class="product-swatch" style="background-color: {{ value.swatch.color }}" aria-hidden="true"></span>
+                      {% elsif option_color_hex != blank %}<span class="product-swatch" style="background-color: {{ option_color_hex | escape }}" aria-hidden="true"></span>
                       {% elsif value.variant.featured_image != blank %}{{ value.variant.featured_image | image_url: width: 100 | image_tag: widths: '50, 100', sizes: '44px', loading: 'lazy', alt: '' }}{% endif %}
                       <span>{{ value.name | escape }}</span>
                     </a>

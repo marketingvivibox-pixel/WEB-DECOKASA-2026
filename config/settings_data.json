@@ -9,6 +9,13 @@
  */
 {
   "current": {
+    "custom_color_swatches": "Gris Claro = #d4d4d8\nGris oscuro = #4b5563",
+    "swatch_gris_claro": "#d4d4d8",
+    "swatch_gris_oscuro": "#4b5563",
+    "swatch_azul_marino": "#1e3a8a",
+    "swatch_verde_militar": "#4d5d43",
+    "swatch_beige": "#dfcfaf",
+    "swatch_marron": "#79513c",
     "catalog_categories": [
       "sillas-gerenciales",
       "hogar-y-acabados",

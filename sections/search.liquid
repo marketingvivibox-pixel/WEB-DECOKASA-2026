@@ -1,4 +1,4 @@
-<section class="wrap section"><h1>Resultados de búsqueda</h1><p>{{ search.terms | escape }}</p>{% paginate search.results by 24 %}<div class="cards">{% for item in search.results %}{% if item.object_type == 'product' %}{% render 'product-card', product: item %}{% endif %}{% else %}<p>No encontramos resultados. Prueba otra palabra.</p>{% endfor %}</div>{{ paginate | default_pagination }}{% endpaginate %}</section>
+<section class="wrap section"><h1>Resultados de búsqueda</h1><p>{{ search.terms | escape }}</p>{% paginate search.results by 24 %}<div class="cards">{% for item in search.results %}{% if item.object_type == 'product' %}{% render 'product-card', product: item, settings: settings %}{% endif %}{% else %}<p>No encontramos resultados. Prueba otra palabra.</p>{% endfor %}</div>{{ paginate | default_pagination }}{% endpaginate %}</section>
 {% schema %}
 {"name": "Buscar", "settings": [], "presets": [{"name": "Buscar"}]}
 {% endschema %}

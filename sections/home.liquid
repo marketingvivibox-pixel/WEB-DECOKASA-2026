@@ -89,7 +89,7 @@
   <section class="wrap interface-featured" data-carousel aria-labelledby="InterfaceFeaturedTitle">
     <div class="interface-section-heading" data-motion><h2 id="InterfaceFeaturedTitle">Descubre todo lo mejor para tu hogar</h2><a href="{{ routes.all_products_collection_url }}">Ver catálogo {% render 'icon', name: 'arrow' %}</a></div>
     <div class="interface-track interface-product-track" id="{{ featured_track }}" data-carousel-track tabindex="0" aria-label="Productos populares">
-      {% for product in featured.products limit: 10 %}{% render 'product-card', product: product, demo: is_demo %}{% endfor %}
+      {% for product in featured.products limit: 10 %}{% render 'product-card', product: product, demo: is_demo, settings: settings %}{% endfor %}
     </div>
     {% render 'storefront-carousel-controls', track_id: featured_track %}
   </section>

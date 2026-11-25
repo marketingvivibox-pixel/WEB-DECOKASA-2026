@@ -61,7 +61,7 @@
         </div>
         {% unless is_demo %}<div class="catalog-active-filters" data-motion="settle">{% for filter in collection.filters %}{% for value in filter.active_values %}<a href="{{ value.url_to_remove }}" aria-label="Quitar filtro {{ value.label | escape }}">{{ value.label | escape }} <span aria-hidden="true">×</span></a>{% endfor %}{% endfor %}</div>{% endunless %}
         {% paginate collection.products by 24 %}
-          <div class="cards catalog-grid" data-motion-group data-catalog-grid>{% for product in collection.products %}{% render 'product-card', product: product, demo: is_demo %}{% else %}<div class="catalog-empty" data-motion><h3>Estamos preparando los productos de esta sección</h3><p>Pronto podrás explorarlos aquí. Mientras tanto, conoce nuestras marcas y categorías.</p><a class="button" href="{{ routes.all_products_collection_url }}">Ver todo el catálogo</a></div>{% endfor %}</div>
+          <div class="cards catalog-grid" data-motion-group data-catalog-grid>{% for product in collection.products %}{% render 'product-card', product: product, demo: is_demo, settings: settings, custom_color_swatches: section.settings.custom_color_swatches %}{% else %}<div class="catalog-empty" data-motion><h3>Estamos preparando los productos de esta sección</h3><p>Pronto podrás explorarlos aquí. Mientras tanto, conoce nuestras marcas y categorías.</p><a class="button" href="{{ routes.all_products_collection_url }}">Ver todo el catálogo</a></div>{% endfor %}</div>
           {% if paginate.pages > 1 %}<nav class="filter-links catalog-pagination" data-motion aria-label="Páginas del catálogo">{{ paginate | default_pagination }}</nav>{% endif %}
         {% endpaginate %}
         {% if is_demo %}<div class="catalog-empty" data-motion data-empty hidden><h3>No encontramos productos</h3><p>Prueba con otra búsqueda, marca o categoría.</p><button class="button" type="button" data-filter-clear>Ver todos los productos</button></div>{% endif %}
@@ -71,5 +71,37 @@
   </div>
 </section>
 {% schema %}
-{"name":"Catálogo","settings":[{"type":"text","id":"heading","label":"Título","default":"Encuentra algo para ti."},{"type":"textarea","id":"description","label":"Descripción","default":"Ideas para tu hogar, tecnología para tu día a día y mucho más. Explora nuestras marcas y elige tu próximo favorito."}],"presets":[{"name":"Catálogo"}]}
+{
+  "name": "Catálogo",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Encuentra algo para ti."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Descripción",
+      "default": "Ideas para tu hogar, tecnología para tu día a día y mucho más. Explora nuestras marcas y elige tu próximo favorito."
+    },
+    {
+      "type": "header",
+      "content": "Muestras de color"
+    },
+    {
+      "type": "textarea",
+      "id": "custom_color_swatches",
+      "label": "Tonos exactos de color",
+      "info": "Define el tono exacto para nombres de color. Formato: Nombre = #hex (uno por línea). Ej: Gris Claro = #d4d4d8, Gris oscuro = #4b5563.",
+      "default": "Gris Claro = #d4d4d8\nGris oscuro = #4b5563"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Catálogo"
+    }
+  ]
+}
 {% endschema %}
