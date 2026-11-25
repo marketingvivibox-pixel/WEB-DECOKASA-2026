@@ -3,14 +3,14 @@
   --motion-stagger: 65ms;
   --motion-distance: 16px;
   --motion-ease: cubic-bezier(.2, .72, .25, 1);
-  --motion-morph-duration: 432ms;
+  --motion-morph-duration: 480ms;
   --motion-morph-ease: cubic-bezier(.22, 1, .36, 1);
-  --motion-rearrange-duration: 360ms;
-  --motion-stage-out-duration: 264ms;
-  --motion-bar-enter-duration: 336ms;
-  --motion-bar-exit-duration: 264ms;
-  --motion-card-enter-duration: 336ms;
-  --motion-card-exit-duration: 216ms;
+  --motion-rearrange-duration: 400ms;
+  --motion-stage-out-duration: 294ms;
+  --motion-bar-enter-duration: 374ms;
+  --motion-bar-exit-duration: 294ms;
+  --motion-card-enter-duration: 374ms;
+  --motion-card-exit-duration: 240ms;
   --motion-curtain-half: 560ms;
   --motion-curtain-duration: calc(2 * var(--motion-curtain-half));
   --motion-curtain-ease: cubic-bezier(.65, 0, .35, 1);
@@ -34,6 +34,21 @@
 
 .interface-promo {
   contain: layout paint;
+}
+
+/* Fit persistent text boxes tightly to content so View Transitions morph without stretching */
+.storefront-interface .catalog-card .tag,
+.storefront-interface .catalog-card h3,
+.storefront-interface .catalog-card-price > strong,
+.storefront-interface .catalog-card-price > s,
+.storefront-interface .product-vendor,
+.storefront-interface .product-summary h1,
+.storefront-interface .product-price-row > .product-price,
+.storefront-interface .product-price-row > .product-compare-price,
+.storefront-interface .catalog-page .catalog-breadcrumb,
+.storefront-interface .product-page > .breadcrumb {
+  width: fit-content;
+  max-width: 100%;
 }
 
 @supports (animation-timing-function: linear(0, 1)) {
@@ -115,7 +130,12 @@
     /* =====================================================================
        2. ULTRA-LIGHTWEIGHT COMPOSITE MORPH (4-5 GPU layers max, 60/120fps)
        ===================================================================== */
-    /* Store <-> Store: morph header & category bar as 2 clean composite layers */
+    /* Store <-> Store: keep promo bar anchored & morph header, category bar, and breadcrumb */
+    html[data-transition-mode="morph"] .interface-promo,
+    html[data-transition-mode="morph-book"] .interface-promo {
+      view-transition-name: dk-promo-bar;
+    }
+
     html[data-transition-mode="morph"] .store-header {
       view-transition-name: dk-store-header;
       view-transition-class: dk-chrome;
@@ -126,11 +146,11 @@
       view-transition-class: dk-chrome;
     }
 
-    /* Store <-> Libro de Reclamaciones: morph the DECOKASA brand logo directly */
-    html[data-transition-mode="morph-book"] .interface-promo {
-      view-transition-name: dk-promo-bar;
+    html[data-transition-mode="morph"] :is(.product-page > .breadcrumb, .catalog-page .catalog-breadcrumb) {
+      view-transition-name: dk-breadcrumb;
     }
 
+    /* Store <-> Libro de Reclamaciones: morph the DECOKASA brand logo directly */
     html[data-transition-mode="morph-book"] :is(.store-logo, .book-brand) {
       view-transition-name: dk-brand-logo;
       view-transition-class: dk-chrome;
@@ -191,6 +211,32 @@
       animation: dk-bar-lift var(--motion-bar-exit-duration) ease-in both;
     }
 
+    /* Persistent Breadcrumb Re-accommodation */
+    ::view-transition-group(dk-breadcrumb) {
+      z-index: 34;
+      overflow: clip;
+      animation-duration: var(--motion-morph-duration);
+      animation-timing-function: var(--motion-morph-ease);
+    }
+
+    ::view-transition-old(dk-breadcrumb),
+    ::view-transition-new(dk-breadcrumb) {
+      width: auto;
+      height: 100%;
+      left: 0;
+      right: auto;
+      animation-duration: var(--motion-morph-duration);
+      animation-timing-function: var(--motion-morph-ease);
+    }
+
+    ::view-transition-new(dk-breadcrumb):only-child {
+      animation: dk-stage-in var(--motion-morph-duration) var(--motion-morph-ease) both;
+    }
+
+    ::view-transition-old(dk-breadcrumb):only-child {
+      animation: dk-stage-out var(--motion-stage-out-duration) ease-out both;
+    }
+
     /* Active Product Card <-> Product Detail Hero Morph (Zero distortion) */
     ::view-transition-group(dk-product-media) {
       z-index: 36;
@@ -207,6 +253,48 @@
       object-fit: contain;
       animation-duration: var(--motion-morph-duration);
       animation-timing-function: var(--motion-morph-ease);
+    }
+
+    /* Active Product Card <-> Product Detail Persistent Text Morph */
+    ::view-transition-group(dk-product-vendor),
+    ::view-transition-group(dk-product-title),
+    ::view-transition-group(dk-product-price),
+    ::view-transition-group(dk-product-compare) {
+      z-index: 38;
+      animation-duration: var(--motion-morph-duration);
+      animation-timing-function: var(--motion-morph-ease);
+    }
+
+    ::view-transition-old(dk-product-vendor),
+    ::view-transition-new(dk-product-vendor),
+    ::view-transition-old(dk-product-title),
+    ::view-transition-new(dk-product-title),
+    ::view-transition-old(dk-product-price),
+    ::view-transition-new(dk-product-price),
+    ::view-transition-old(dk-product-compare),
+    ::view-transition-new(dk-product-compare) {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: left center;
+      animation-duration: var(--motion-morph-duration);
+      animation-timing-function: var(--motion-morph-ease);
+    }
+
+    ::view-transition-old(dk-product-media):only-child,
+    ::view-transition-old(dk-product-vendor):only-child,
+    ::view-transition-old(dk-product-title):only-child,
+    ::view-transition-old(dk-product-price):only-child,
+    ::view-transition-old(dk-product-compare):only-child {
+      animation: dk-stage-out var(--motion-stage-out-duration) ease-out both;
+    }
+
+    ::view-transition-new(dk-product-media):only-child,
+    ::view-transition-new(dk-product-vendor):only-child,
+    ::view-transition-new(dk-product-title):only-child,
+    ::view-transition-new(dk-product-price):only-child,
+    ::view-transition-new(dk-product-compare):only-child {
+      animation: dk-stage-in var(--motion-morph-duration) var(--motion-morph-ease) both;
     }
 
     /* Group Card Rearrangement (Collection <-> Collection & Live Filter/Sort) */

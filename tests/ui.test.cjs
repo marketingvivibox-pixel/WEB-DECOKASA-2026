@@ -155,6 +155,53 @@ test('Transiciones entre interfaces conectan elementos comunes en todas las vist
       assert.ok(card.dataset.productHandle,page);
     }
     const productPage=document.querySelector('[data-product-page]');
-    if(productPage)assert.ok(productPage.dataset.productHandle,page);
+    if(productPage){
+      assert.ok(productPage.dataset.productHandle,page);
+      assert.ok(productPage.querySelector('.product-vendor'),page);
+      assert.ok(productPage.querySelector('.product-summary h1'),page);
+      assert.ok(productPage.querySelector('[data-product-price], .product-price'),page);
+    }
   }
+  const motionCss=fs.readFileSync(path.resolve(__dirname,'../assets/decokasa-motion.css'),'utf8');
+  assert.match(motionCss,/--motion-morph-duration:\s*480ms;/);
+  assert.match(motionCss,/--motion-rearrange-duration:\s*400ms;/);
+  assert.match(motionCss,/::view-transition-group\(dk-product-title\)/);
+  assert.match(motionCss,/::view-transition-group\(dk-product-vendor\)/);
+  assert.match(motionCss,/::view-transition-group\(dk-product-price\)/);
+  assert.match(motionCss,/::view-transition-group\(dk-breadcrumb\)/);
+  assert.match(motionCss,/width:\s*fit-content;/);
+  const motionJs=fs.readFileSync(path.resolve(__dirname,'../assets/decokasa-motion.js'),'utf8');
+  const runMotion=(file,eventName,eventPayload,storageMap=new Map())=>{
+    const {document}=parseHTML(fs.readFileSync(path.join(out,file),'utf8'));
+    const listeners=new Map();
+    const rect={top:10,left:10,right:200,bottom:60,width:190,height:50};
+    for(const el of document.querySelectorAll('*')){el.getBoundingClientRect=()=>rect;el.isConnected=true;}
+    const loc={href:`http://localhost:8820/${file}`,origin:'http://localhost:8820',protocol:'http:',pathname:`/${file}`};
+    const storage={getItem:k=>storageMap.get(k)??null,setItem:(k,v)=>storageMap.set(k,v),removeItem:k=>storageMap.delete(k)};
+    const win={innerWidth:1280,innerHeight:800,onpageswap:null,onpagereveal:null,location:loc,sessionStorage:storage,matchMedia:()=>({matches:true}),addEventListener:(type,fn)=>{listeners.set(type,[...(listeners.get(type)||[]),fn]);}};
+    win.top=win;
+    const context={window:win,document,location:loc,sessionStorage:storage,URL,CSS:{supports:()=>true,escape:s=>s},Set,Promise};
+    vm.runInNewContext(motionJs,context);
+    let resolveFinished;
+    const finished=new Promise(r=>{resolveFinished=r;});
+    for(const fn of listeners.get(eventName)||[])fn({viewTransition:{finished,skipTransition:()=>{throw Error('Unexpected skip');}},...eventPayload});
+    return {document,finish:()=>resolveFinished(),finished};
+  };
+  const sharedStorage=new Map();
+  const outgoing=runMotion('catalogo.html','pageswap',{activation:{entry:{url:'http://localhost:8820/landing-audifonos.html'}}},sharedStorage);
+  assert.equal(outgoing.document.documentElement.dataset.transitionMode,'morph');
+  const card=outgoing.document.querySelector('.catalog-card[data-product-handle="audifonos"]');
+  assert.equal(card.querySelector('.catalog-card-media').style.viewTransitionName,'dk-product-media');
+  assert.equal(card.querySelector('.tag').style.viewTransitionName,'dk-product-vendor');
+  assert.equal(card.querySelector('h3').style.viewTransitionName,'dk-product-title');
+  assert.equal(card.querySelector('[data-card-price]').style.viewTransitionName,'dk-product-price');
+  outgoing.finish();
+  const incoming=runMotion('landing-audifonos.html','pagereveal',{},new Map([['decokasa.vt.context',JSON.stringify({fromHref:'http://localhost:8820/catalogo.html',clickedHandle:'audifonos',time:Date.now()})]]));
+  assert.equal(incoming.document.documentElement.dataset.transitionMode,'morph');
+  const pageEl=incoming.document.querySelector('[data-product-page]');
+  assert.equal(pageEl.querySelector('.product-image-stage').style.viewTransitionName,'dk-product-media');
+  assert.equal(pageEl.querySelector('.product-vendor').style.viewTransitionName,'dk-product-vendor');
+  assert.equal(pageEl.querySelector('.product-summary h1').style.viewTransitionName,'dk-product-title');
+  assert.equal(pageEl.querySelector('[data-product-price]').style.viewTransitionName,'dk-product-price');
+  incoming.finish();
 });

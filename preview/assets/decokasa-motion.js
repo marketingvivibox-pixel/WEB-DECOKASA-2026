@@ -6,6 +6,7 @@
   const motion = window.matchMedia('(prefers-reduced-motion: no-preference)');
   const vtContextKey = 'decokasa.vt.context';
   const prefetched = new Set();
+  let lastClickedCard = null;
 
   function getRoutes() {
     const homeDataset = document.body?.dataset?.motionHome || '/';
@@ -115,6 +116,7 @@
     try { destination = new URL(link.href, location.href); } catch { return; }
     if (destination.origin !== location.origin) return;
     const clickedCard = link.closest('.catalog-card[data-product-handle]');
+    lastClickedCard = clickedCard || null;
     const currentProduct = document.querySelector('[data-product-page][data-product-handle]');
     writeContext({
       clickedHandle: clickedCard?.dataset.productHandle || extractProductHandle(destination),
@@ -123,6 +125,30 @@
       toHref: destination.href
     });
   }, true);
+
+  function bindProductCardElements(card, bindOne) {
+    if (!card) return;
+    bindOne(card.querySelector('.catalog-card-media'), 'dk-product-media');
+    bindOne(card.querySelector('.tag'), 'dk-product-vendor');
+    bindOne(card.querySelector('h3'), 'dk-product-title');
+    bindOne(card.querySelector('[data-card-price]'), 'dk-product-price');
+    const compare = card.querySelector('[data-card-compare]');
+    if (compare && !compare.hidden && compare.textContent.trim()) {
+      bindOne(compare, 'dk-product-compare');
+    }
+  }
+
+  function bindProductPageElements(productPage, bindOne) {
+    if (!productPage) return;
+    bindOne(productPage.querySelector('.product-image-stage'), 'dk-product-media');
+    bindOne(productPage.querySelector('.product-vendor'), 'dk-product-vendor');
+    bindOne(productPage.querySelector('.product-summary h1'), 'dk-product-title');
+    bindOne(productPage.querySelector('[data-product-price], .product-price'), 'dk-product-price');
+    const compare = productPage.querySelector('.product-compare-price');
+    if (compare && !compare.hidden && compare.textContent.trim()) {
+      bindOne(compare, 'dk-product-compare');
+    }
+  }
 
   function setupMorphTargets(role, fromUrl, toUrl) {
     const cleanupList = [];
@@ -135,29 +161,38 @@
 
     const bindOne = (el, name) => {
       if (!el || el.hidden || usedNames.has(name)) return;
+      const rect = el.getBoundingClientRect();
+      if (rect.width <= 0 || rect.height <= 0) return;
       usedNames.add(name);
       el.style.viewTransitionName = name;
       cleanupList.push(el);
     };
 
+    const findVisibleCard = (handle, preferred = null) => {
+      if (!handle) return null;
+      if (preferred && preferred.isConnected && preferred.dataset.productHandle === handle && isVisibleInViewport(preferred)) {
+        return preferred;
+      }
+      return [...document.querySelectorAll(`.catalog-card[data-product-handle="${CSS.escape(handle)}"]`)]
+        .find(isVisibleInViewport) || null;
+    };
+
     if (role === 'outgoing') {
-      if (toHandle) {
-        const matchingCard = [...document.querySelectorAll(`.catalog-card[data-product-handle="${CSS.escape(toHandle)}"]`)]
-          .find(isVisibleInViewport);
-        if (matchingCard) {
-          bindOne(matchingCard.querySelector('.catalog-card-media'), 'dk-product-media');
-        }
+      const matchingCard = toHandle && toHandle !== currentPageHandle
+        ? findVisibleCard(toHandle, lastClickedCard)
+        : null;
+      if (matchingCard) {
+        bindProductCardElements(matchingCard, bindOne);
       } else if (currentProductPage && currentPageHandle) {
-        bindOne(currentProductPage.querySelector('.product-image-stage'), 'dk-product-media');
+        bindProductPageElements(currentProductPage, bindOne);
       }
     } else if (role === 'incoming') {
       if (currentProductPage && currentPageHandle) {
-        bindOne(currentProductPage.querySelector('.product-image-stage'), 'dk-product-media');
+        bindProductPageElements(currentProductPage, bindOne);
       } else if (fromHandle) {
-        const targetCard = [...document.querySelectorAll(`.catalog-card[data-product-handle="${CSS.escape(fromHandle)}"]`)]
-          .find(isVisibleInViewport);
+        const targetCard = findVisibleCard(fromHandle);
         if (targetCard) {
-          bindOne(targetCard.querySelector('.catalog-card-media'), 'dk-product-media');
+          bindProductCardElements(targetCard, bindOne);
         }
       }
     }

@@ -160,7 +160,7 @@
     let pauseTimer = null;
     let direction = 1;
     let lastTime = 0;
-    const speed = 30;
+    const speed = 18;
     let accum = 0;
     let endCooldown = 0;
 
