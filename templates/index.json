@@ -1,9 +1,29 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "home",
       "settings": {
-        "whatsapp_phone": "51914158674"
+        "heading": "Todo lo que necesitas,",
+        "heading_accent": "en un solo lugar.",
+        "primary_label": "Explorar catálogo",
+        "decokasa_collection": "",
+        "xion_collection": "",
+        "biflex_collection": "",
+        "baby_collection": "",
+        "promo_text": "Descubre todo lo mejor para tu hogar",
+        "whatsapp_phone": "51914158674",
+        "whatsapp_url": "",
+        "whatsapp_message": "Hola, visité la tienda DECOKASA y quisiera ayuda con un producto o una cotización.",
+        "featured_collection": "destacados-del-inicio"
       }
     }
   },
