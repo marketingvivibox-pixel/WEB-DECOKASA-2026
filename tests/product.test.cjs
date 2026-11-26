@@ -16,8 +16,9 @@ const defaults = Object.fromEntries(schema.settings.filter(s => s.id).map(s => [
 function product(selected = 0) {
   return {...productFixture({handle:'ficha', name:'Producto de prueba', brand:'DECOKASA', price:12000, sku:'SKU-001', intro:'Descripción'}, 0, selected), url:'/products/ficha'};
 }
-async function html(p = product(), settings = {}) {
-  return engine.parseAndRender(sectionSource.replace(/{% schema %}[\s\S]*?{% endschema %}/, ''), {product:p, routes:{root_url:'/', all_products_collection_url:'/collections/all'}, section:{id:'product-test', settings:{...defaults, ...settings}, blocks:[]}});
+async function html(p = product(), settings = {}, pvc = false) {
+  const source = pvc ? "{% render 'product-landing', product: product, section: section, routes: routes, pvc: true %}" : sectionSource.replace(/{% schema %}[\s\S]*?{% endschema %}/, '');
+  return engine.parseAndRender(source, {product:p, routes:{root_url:'/', all_products_collection_url:'/collections/all'}, section:{id:'product-test', settings:{...defaults, ...settings}, blocks:[]}});
 }
 test('Ficha Liquid: rutas, galería, variantes y ajustes editoriales sin datos duplicados', async () => {
   const doc = parseHTML(await html()).document;
@@ -46,8 +47,8 @@ test('Opciones múltiples conservan IDs seleccionados y una combinación inexist
   assert.equal(doc.querySelectorAll('[name=variant_id] option').length, 0);
   assert.ok(doc.querySelector('.product-no-image'));
 });
-async function runtime(fetcher, initialProduct = product()) {
-  const {window, document} = parseHTML(await html(initialProduct));
+async function runtime(fetcher, initialProduct = product(), pvc = false) {
+  const {window, document} = parseHTML(await html(initialProduct, {}, pvc));
   delete window.decokasaProductDetail;
   const navigations = [], histories = [], requests = [], loaded = [];
   const location = {href:'https://example.test/products/ficha', origin:'https://example.test', assign:url=>navigations.push(url)};
@@ -61,6 +62,52 @@ async function runtime(fetcher, initialProduct = product()) {
   return {document, window, click, navigations, histories, requests, loaded};
 }
 const settle = async()=>{await new Promise(resolve=>setImmediate(resolve));await new Promise(resolve=>setImmediate(resolve));};
+
+function pvcWithPendingPrice(selected = 0) {
+  const p = productFixture({handle:'ficha', name:'Piso PVC', sku:'DEMO-001', price:12000, coverage:5}, 0, selected);
+  p.url = '/products/ficha';
+  p.variants[1].price = 0;
+  p.price_max = 12000;
+  return p;
+}
+test('PVC sin precio confirmado muestra consulta y no ofrece un total cero ni una meta de regalo', async () => {
+  const p = pvcWithPendingPrice(1);
+  const doc = parseHTML(await html(p, {}, true)).document;
+  assert.equal(doc.querySelector('[data-product-page]').dataset.pricePending, 'true');
+  assert.equal(doc.querySelector('.product-price').textContent, 'Precio a consultar');
+  assert.equal(doc.querySelector('[data-product-price]'), null);
+  assert.equal(doc.querySelector('[data-reward-goal]'), null);
+  assert.equal(doc.querySelector('[data-estimated-amount]').textContent, 'Por confirmar');
+  assert.equal(doc.querySelector('[data-form-total]').textContent, 'Por confirmar');
+  assert.ok(doc.querySelector('[data-pvc]'));
+  const ordinary = parseHTML(await html(p)).document;
+  assert.equal(ordinary.querySelector('[data-product-price]').dataset.cents, '0');
+  assert.equal(ordinary.querySelector('[data-product-page]').dataset.pricePending, undefined);
+});
+test('PVC alterna precios pendientes y confirmados manteniendo cantidad, área y merma', async () => {
+  const pages = [await html(pvcWithPendingPrice(1), {}, true), await html(pvcWithPendingPrice(0), {}, true)];
+  const app = await runtime(() => ({ok:true, text:async()=>pages.shift()}), pvcWithPendingPrice(0), true);
+  app.document.querySelector('[data-pvc] [name="area"]').value = '13.25';
+  app.document.querySelector('[data-pvc] [name="waste"]').value = '7';
+  app.document.querySelector('[data-product-quantity]').value = '3';
+  app.document.querySelector('[data-product-quantity]').dispatchEvent(new app.window.Event('input', {bubbles:true}));
+  app.click('[data-option-link]:not([aria-current])');
+  await settle();
+  assert.equal(app.document.querySelector('[data-estimated-amount]').textContent, 'Por confirmar');
+  assert.equal(app.document.querySelector('[data-estimated-breakdown]').textContent, '3 cajas · Precio a consultar');
+  app.click('[data-quantity-step="1"]');
+  assert.equal(app.document.querySelector('[data-form-qty]').textContent, '4 cajas');
+  assert.equal(app.document.querySelector('[data-form-total]').textContent, 'Por confirmar');
+  app.click('[data-option-link]:not([aria-current])');
+  await settle();
+  assert.equal(app.document.querySelector('[data-pvc] [name="area"]').value, '13.25');
+  assert.equal(app.document.querySelector('[data-pvc] [name="waste"]').value, '7');
+  assert.equal(app.document.querySelector('[data-product-quantity]').value, '4');
+  assert.equal(app.document.querySelector('[data-estimated-amount]').textContent, 'S/. 480.00 PEN');
+  assert.equal(app.document.querySelector('[data-form-total]').textContent, 'S/. 480.00 PEN');
+  assert.ok(app.document.querySelector('[data-reward-goal]'));
+  assert.equal(app.navigations.length, 0);
+});
 
 test('La calculadora conserva área y merma al reemplazar la variante y reinicia su cálculo con la nueva cobertura', async () => {
   const flooring = selected => ({...productFixture({handle:'ficha', name:'Piso de prueba', sku:'DEMO-001', price:12000, coverage:5}, 0, selected), url:'/products/ficha'});

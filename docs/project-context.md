@@ -4,6 +4,8 @@ El usuario pidió dos experiencias del mismo producto: `/products/piso-pvc` mues
 
 Un único producto Shopify (`15506629263597`, sufijo `landing-pvc`) comparte variantes, inventario, precios y rendimiento por caja. El editor Shopify sigue mostrando la landing. La ficha reutiliza la galería, selección de variantes, compra asistida y calculadora existentes; conserva el área y porcentaje de cortes cuando cambia el acabado. No se crean productos ni temas adicionales. El destino sigue siendo `WEB-DECOKASA-2026-ALFIN/main` (`188927803629`), sincronizado desde GitHub/main. Formularios comerciales e integraciones pendientes conservan su estado anterior.
 
+Los diseños PVC sin tarifa confirmada muestran «Precio a consultar» y total «Por confirmar» en la ficha convencional. El cálculo de cajas y superficie sigue disponible, sin cambiar los precios almacenados. Las dos rutas se publicaron desde `640de19` y se verificaron en la tienda el 26/11/2026.
+
 ## 23/11/2026 — Identidad visual de la referencia en alta
 
 - Referencia vigente: «WEB DECOKASA EN ALTA.ai» y su JPEG, entregados para aplicar al tema principal. Paleta azul marino `#14253f`, amarillo `#ffcd0d`, blanco y gris `#e0e0e0`; tipografía Raleway. El ancho de contenido en escritorio pasa al 66 % y conserva el 87 % móvil.

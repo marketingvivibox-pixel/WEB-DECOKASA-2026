@@ -8,7 +8,7 @@ Un único producto Shopify (`15506629263597`, sufijo `landing-pvc`) comparte var
 
 Las vistas de prueba están en `preview/producto-piso-pvc.html` y `preview/landing-pisos-pvc.html`. Los datos comerciales de esas vistas son ficticios; la tienda consulta los del producto real. Ambas rutas conservan la URL canónica del producto para SEO. Los parámetros `variant` y UTM pueden acompañar cualquiera de los enlaces.
 
-Verificación local completada; publicación y verificación pública pendientes en el registro de avances.
+Ambas rutas publicadas desde `640de19` y comprobadas el 26/11/2026 en el tema oficial a 320, 393 y 1440 px. La ficha conserva el cálculo al cambiar acabado. Los diseños cuyo precio está pendiente muestran «Precio a consultar» y total «Por confirmar», manteniendo el cálculo de cajas y superficie. Ver [avances y verificaciones](progress.md).
 
 ## Antecedente — 05/11/2026
 

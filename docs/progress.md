@@ -1,9 +1,10 @@
 ## 26/11/2026 — Dos accesos para Piso PVC
 
 - [x] Implementadas en `feat/pvc-accesos-tienda-publicidad`, desde `c2189c2`, la ficha convencional con calculadora y la landing por sufijo `/landing`.
-- [x] Pruebas: 94/94 del tema, 24/24 del Libro y respaldo íntegro; seis archivos Liquid modificados sin errores ni avisos en el validador oficial. `npm run lint` no pudo ejecutarse por faltar `tsc` en la instalación local; no hay cambios TypeScript.
+- [x] Pruebas: 96/96 del tema, 24/24 del Libro y respaldo íntegro; validación oficial aprobada para los cambios de rutas y el ajuste de precios pendientes. `npm run lint` no pudo ejecutarse por faltar `tsc` en la instalación local; no hay cambios TypeScript.
 - [x] Diez vistas y paquete de 214 archivos regenerados. Vista normal y landing revisadas a 320, 393 y 1440 px, sin desbordamiento ni imágenes rotas. Cálculo de 13,25 m² + 7 % = 3 cajas / 15 m², conservado al cambiar acabado.
-- [ ] Integración, publicación y comprobación de ambas rutas en el tema oficial.
+- [x] Integradas y publicadas ambas rutas en `main` con `640de19`, sobre el tema oficial `188927803629`. Comprobadas públicamente a 320, 393 y 1440 px: ficha con calculadora, landing con UTM, URL canónica compartida, cambio de acabado y acceso al Libro de Reclamaciones. A S/ 99 por caja, el ejemplo de 3 cajas muestra S/ 297.
+- [x] Ajustada la ficha convencional para que los tres acabados con precio pendiente muestren «Precio a consultar» y total «Por confirmar». La calculadora sigue mostrando cajas y superficie; los metros ingresados se conservan al pasar entre acabados con y sin precio. No se modifican tarifas ni existencias en Shopify.
 
 ## 23/11/2026 — Nueva identidad y diseño de la tienda
 

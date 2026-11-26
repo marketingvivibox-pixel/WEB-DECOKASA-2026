@@ -157,18 +157,25 @@
         const qty = lines ? lines.reduce((sum, line) => sum + line.quantity, 0) : Math.max(1, Number(quantity.value) || 1);
         const estimateEl = page.querySelector('[data-estimated-amount]');
         const breakdownEl = page.querySelector('[data-estimated-breakdown]');
+        const isBoxes = !!page.querySelector('[data-pvc]');
+        const unitText = isBoxes ? (qty === 1 ? 'caja' : 'cajas') : (qty === 1 ? 'unidad' : 'unidades');
+        const formQtyEl = page.querySelector('[data-form-qty]');
+        const formTotalEl = page.querySelector('[data-form-total]');
+        if (page.dataset.pricePending === 'true') {
+          if (estimateEl) estimateEl.textContent = 'Por confirmar';
+          if (breakdownEl) breakdownEl.textContent = `${qty} ${unitText} · Precio a consultar`;
+          if (formQtyEl) formQtyEl.textContent = `${qty} ${unitText}`;
+          if (formTotalEl) formTotalEl.textContent = 'Por confirmar';
+          return;
+        }
         if (lines || cents > 0) {
           const totalCents = lines ? lines.reduce((sum, line) => sum + line.quantity * line.price_cents, 0) : qty * cents;
           const formatted = `S/. ${(totalCents / 100).toFixed(2)} PEN`;
           if (estimateEl) estimateEl.textContent = formatted;
-          const isBoxes = !!page.querySelector('[data-pvc]');
-          const unitText = isBoxes ? (qty === 1 ? 'caja' : 'cajas') : (qty === 1 ? 'unidad' : 'unidades');
           if (breakdownEl) {
             breakdownEl.textContent = lines ? `${qty} ${unitText} · ${lines.length} ${lines.length === 1 ? 'presentación' : 'presentaciones'}` : `${qty} ${unitText} × S/. ${(cents / 100).toFixed(2)} PEN`;
           }
           if (lines) page.querySelector('[data-estimated-label]').textContent = 'Total estimado de tu solicitud:';
-          const formQtyEl = page.querySelector('[data-form-qty]');
-          const formTotalEl = page.querySelector('[data-form-total]');
           if (formQtyEl) formQtyEl.textContent = `${qty} ${unitText}`;
           if (formTotalEl) formTotalEl.textContent = formatted;
 

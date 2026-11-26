@@ -11,6 +11,8 @@
 <script src="{{ 'product-detail.js' | asset_url }}" defer="defer"></script>
 {% if product != blank %}
   {% assign current_variant = product.selected_or_first_available_variant %}
+  {% assign price_pending = false %}
+  {% if pvc and current_variant != blank and current_variant.price <= 0 %}{% assign price_pending = true %}{% endif %}
   {% assign main_image = current_variant.featured_image | default: product.featured_image %}
   {% assign gallery_images = current_variant.metafields.decokasa.gallery_images.value | where: 'media_type', 'image' %}
   {% assign main_image_id = main_image.id %}
@@ -21,7 +23,7 @@
   {% endif %}
   {% assign gallery_sizes = '(min-width: 900px) 35vw, 87vw' %}
   {% if gallery_images.size > 1 %}{% assign gallery_sizes = '(min-width: 900px) 35vw, 64vw' %}{% endif %}
-  <div class="wrap product-page" data-product-page data-product-handle="{{ product.handle | escape }}" data-interface-title="{{ product.title | escape }}" data-section-id="{{ section.id }}" data-product-url="{{ product.url }}" data-gallery-ratio="{{ section.settings.gallery_ratio | default: 'responsive' }}" data-image-fit="{{ section.settings.image_fit | default: 'contain' }}">
+  <div class="wrap product-page" data-product-page{% if price_pending %} data-price-pending="true"{% endif %} data-product-handle="{{ product.handle | escape }}" data-interface-title="{{ product.title | escape }}" data-section-id="{{ section.id }}" data-product-url="{{ product.url }}" data-gallery-ratio="{{ section.settings.gallery_ratio | default: 'responsive' }}" data-image-fit="{{ section.settings.image_fit | default: 'contain' }}">
     <nav class="breadcrumb" aria-label="Ruta de navegación"><a href="{{ routes.root_url }}">Inicio</a><span aria-hidden="true">/</span><a href="{{ routes.all_products_collection_url }}">Catálogo</a><span aria-hidden="true">/</span><span>{{ product.title | escape }}</span></nav>
     {% if is_demo %}<p class="product-demo">Vista de muestra · Imágenes ilustrativas y precios ficticios.</p>{% endif %}
     <div class="product-layout">
@@ -65,7 +67,7 @@
         {% if section.settings.show_vendor != false and product.vendor != blank %}<p class="eyebrow product-vendor">{{ product.vendor | escape }}</p>{% endif %}
         <h1>{{ product.title | escape }}</h1>
         <div class="product-price-row">
-          {% if section.settings.show_price != false and current_variant != blank %}
+          {% if section.settings.show_price != false and current_variant != blank and price_pending != true %}
             <span class="product-price" data-product-price data-cents="{{ current_variant.price }}">{{ current_variant.price | money_with_currency }}</span>
             {% if section.settings.show_compare_price != false and current_variant.compare_at_price > current_variant.price %}<s class="product-compare-price">{{ current_variant.compare_at_price | money_with_currency }}</s>{% endif %}
           {% else %}<span class="product-price">Precio a consultar</span>{% endif %}
@@ -178,7 +180,7 @@
         <p class="request-builder-status" data-request-builder-status role="status"></p>
         {% endif %}
         {% assign goal_cents = product.price_max | times: 1.8 | round %}
-        {% if goal_cents > 0 %}
+        {% if goal_cents > 0 and price_pending != true %}
         <div class="reward-goal-card hierarchy-top" data-reward-goal data-threshold="{{ goal_cents }}">
           <div class="reward-goal-badge">
             <div class="reward-badge-left">
@@ -252,16 +254,16 @@
         <div class="product-estimate-card" data-estimated-bar>
           <div class="estimate-line">
             <span class="estimate-title" data-estimated-label>Monto estimado a pagar:</span>
-            <strong class="estimate-amount" data-estimated-amount>{{ current_variant.price | money_with_currency }}</strong>
+            <strong class="estimate-amount" data-estimated-amount>{% if price_pending %}Por confirmar{% else %}{{ current_variant.price | money_with_currency }}{% endif %}</strong>
           </div>
-          <div class="estimate-breakdown" data-estimated-breakdown>1 unidad × {{ current_variant.price | money_with_currency }}</div>
+          <div class="estimate-breakdown" data-estimated-breakdown>{% if price_pending %}1 caja · Precio a consultar{% else %}1 unidad × {{ current_variant.price | money_with_currency }}{% endif %}</div>
         </div>
         {% if multiple_request %}<a class="button yellow request-continue" href="#solicitud" data-open-request aria-disabled="true">{{ section.settings.cta_label | default: 'Solicitar compra' | escape }}</a>{% endif %}
         {% if current_variant == blank %}<p class="error">Esta combinación no existe. Elige otra presentación.</p>{% endif %}
         <p class="interface-delivery">{% render 'icon', name: 'box' %} La entrega se coordina con tu asesor.</p>
         </div>
         </div>
-        <dialog class="request-dialog" data-request-details aria-labelledby="RequestTitle-{{ section.id }}"><button class="request-close" type="button" data-request-close aria-label="Cerrar solicitud">×</button>{% render 'request-form', product: product, section_id: section.id %}</dialog>
+        <dialog class="request-dialog" data-request-details aria-labelledby="RequestTitle-{{ section.id }}"><button class="request-close" type="button" data-request-close aria-label="Cerrar solicitud">×</button>{% render 'request-form', product: product, section_id: section.id, price_pending: price_pending %}</dialog>
         <p class="product-selection-status" data-selection-status role="status" tabindex="-1"></p>
       </div>
       <div class="product-information-container">
