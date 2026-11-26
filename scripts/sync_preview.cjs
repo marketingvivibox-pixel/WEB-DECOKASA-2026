@@ -35,11 +35,13 @@ async function section(name, overrides = {}, context = {}) {
   return html.replaceAll('collections/types?q=', 'catalogo.html?categoria=').replaceAll('collections/vendors?q=', 'catalogo.html?marca=');
 }
 async function main() {
-  const template = JSON.parse(fs.readFileSync(path.join(root, 'templates/index.json'), 'utf8'));
+  const template = JSON.parse(fs.readFileSync(path.join(root, 'templates/index.json'), 'utf8').replace(/^\s*\/\*[\s\S]*?\*\/\s*/, ''));
   const homeSettings = template.sections?.main?.settings ?? {};
   const products = require('../preview/products.json').map((entry, index) => productFixture(entry, index));
   collections.all = {products};
-  const header = await section('header'), home = await section('home', homeSettings, {is_demo: true});
+  // Shopify resolves collection settings to objects; use the fixture locally.
+  const homePreviewSettings = {...homeSettings, featured_collection: collections[homeSettings.featured_collection] || collections.all};
+  const header = await section('header'), home = await section('home', homePreviewSettings, {is_demo: true});
   const sharedFooter = (await section('footer')).replace('/pages/libro-de-reclamaciones', 'libro-reclamaciones.html');
   const bookLink = (await engine.parseAndRender(fs.readFileSync(path.join(root, 'snippets/book-link.liquid'), 'utf8'), {})).replace('/pages/libro-de-reclamaciones', 'libro-reclamaciones.html');
   const book = await section('libro-reclamaciones', {receiver_url: 'https://example.invalid/preview', supplier_address: 'Av. José Leal n.º 375, Lima, Lima, Lima'}, {shop: {privacy_policy: {url: ''}}});
@@ -91,16 +93,27 @@ async function main() {
   }});
   landings['landing-piso-spc.html'] = spcHtml;
 
-  // PVC has its own native product template and independent calculator.
-  const pvcProduct = productFixture({handle: 'piso-pvc', name: 'Piso PVC autoadhesivo', brand: 'DECOKASA', category: 'Acabados', sku: '', price: 0, has_only_default_variant: true}, 6);
+  // The same PVC product renders the storefront or advertising view by path.
+  // Prices and identifiers below are local fixtures, never store data.
+  const pvcProduct = productFixture({handle: 'piso-pvc', name: 'Piso PVC autoadhesivo', brand: 'DECOKASA', category: 'Acabados', sku: 'DEMO-PVC', price: 10000, coverage: 5, intro: 'Piso PVC autoadhesivo. Caja de 36 planchas con rendimiento de 5 m².'}, 6);
   const pvcMain = JSON.parse(fs.readFileSync(path.join(root, 'templates/product.landing-pvc.json'), 'utf8')).sections.main;
   const pvcBlocks = pvcMain.block_order.map(id => ({id, ...pvcMain.blocks[id]}));
   const pvcFinishes = pvcBlocks.filter(block => block.type === 'finish').map(block => block.settings.code);
-  pvcProduct.options_with_values = [{name: 'Acabado', position: 1, values: pvcFinishes}];
-  pvcProduct.variants = pvcFinishes.map((code, index) => ({id: `pvc-draft-${index}`, title: code, options: [code], sku: '', price: 0, available: false}));
-  landings['landing-pisos-pvc.html'] = await section('landing-piso-pvc', pvcMain.settings, {product: pvcProduct, shop: {currency: 'PEN'}, section: {blocks: pvcBlocks}});
+  pvcProduct.images = pvcFinishes.map((code, index) => ({id: `pvc-demo-image-${index}`, src: `assets/pvc-acabado-${code.toLowerCase()}.webp`, alt: `Piso PVC · ${code}`}));
+  pvcProduct.variants = pvcFinishes.map((code, index) => ({id: `pvc-demo-${index}`, title: code, options: [code], sku: `DEMO-${code}`, price: index % 2 ? 12000 : 10000, available: true, featured_image: pvcProduct.images[index], metafields: {decokasa: {coverage_m2: {value: 5}}}}));
+  pvcProduct.options_with_values = [{name: 'Acabado', position: 1, selected_value: pvcFinishes[0], values: pvcProduct.variants.map((variant, index) => ({id: `pvc-demo-option-${index}`, name: variant.title, selected: index === 0, variant}))}];
+  pvcProduct.selected_or_first_available_variant = pvcProduct.variants[0];
+  pvcProduct.featured_image = pvcProduct.images[0];
+  pvcProduct.price_max = 12000;
+  pvcProduct.url = 'producto-piso-pvc.html';
+  const pvcContext = {product: pvcProduct, is_demo: true, template: {suffix: 'landing-pvc'}, shop: {currency: 'PEN'}, section: {blocks: pvcBlocks}};
+  landings['landing-pisos-pvc.html'] = await section('landing-piso-pvc', pvcMain.settings, {...pvcContext, request: {path: '/products/piso-pvc/landing'}});
+  const pvcStorefront = parseHTML(await section('landing-piso-pvc', pvcMain.settings, {...pvcContext, request: {path: '/products/piso-pvc'}})).document;
+  const pvcPreviewVariants = pvcProduct.variants.map((variant, index) => ({...variant, coverage: 5, imageId: variant.featured_image.id, optionValues: pvcProduct.options_with_values[0].values[index].id}));
+  pvcStorefront.querySelector('[data-product-page]').insertAdjacentHTML('beforeend', `<script type="application/json" data-preview-variants>${JSON.stringify(pvcPreviewVariants)}</script>`);
+  landings['producto-piso-pvc.html'] = pvcStorefront.toString();
 
-  const previewFiles = [...new Set([...fs.readdirSync(preview).filter(f => f.endsWith('.html') && !['DECOKASA-movil.html', 'render_pdf.html'].includes(f)), 'landing-piso-spc.html', 'libro-reclamaciones.html'])];
+  const previewFiles = [...new Set([...fs.readdirSync(preview).filter(f => f.endsWith('.html') && !['DECOKASA-movil.html', 'render_pdf.html'].includes(f)), 'landing-piso-spc.html', 'libro-reclamaciones.html', 'producto-piso-pvc.html'])];
   const interfaceAssets = `<link data-preview-interface rel="stylesheet" href="${interfaceAssetUrl('decokasa-interface.css')}"><script data-preview-interface src="${interfaceAssetUrl('decokasa-interface.js')}" defer></script>`;
   for (const file of previewFiles) {
     const rawFile = fs.existsSync(path.join(preview, file)) ? fs.readFileSync(path.join(preview, file), 'utf8') : '';
@@ -125,7 +138,7 @@ async function main() {
     const bodyAttr = isLandingSpc ? ' class="spc-layout"' : isLandingPvc ? ' class="pvc-layout"' :
       isLibro ? ` class="storefront-interface book-layout"${motionData}` :
       ` class="storefront-interface"${motionData}`;
-    if (isLandingPvc) document.querySelector('title').textContent = 'Piso PVC autoadhesivo · DECOKASA';
+    if (isLandingPvc || file === 'producto-piso-pvc.html') document.querySelector('title').textContent = 'Piso PVC autoadhesivo · DECOKASA';
     const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">${document.head.innerHTML}${extraCss}${isCustomLanding ? '' : interfaceAssets}${motionAssets}</head><body${bodyAttr}>${curtain}${pageHeader}<main id="main">${content}</main>${pageFooter}${isCustomLanding ? bookLink : ''}${isCustomLanding ? '' : `<script>${js}</script>`}${landings[file] && !isCustomLanding ? '<script src="product-demo.js" defer></script>' : ''}</body></html>`;
     fs.writeFileSync(path.join(preview, file), html.replace(/[ \t]+$/gm, ''), 'utf8');
   }

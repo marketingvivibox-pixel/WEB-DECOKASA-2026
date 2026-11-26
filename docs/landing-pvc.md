@@ -1,5 +1,17 @@
 # Landing de Piso PVC autoadhesivo
 
+## 26/11/2026 — PVC: ficha de tienda y landing para anuncios
+
+El usuario pidió dos experiencias del mismo producto: `/products/piso-pvc` muestra la ficha convencional con calculadora; `/products/piso-pvc/landing` conserva la landing personalizada para publicidad. La ruta elige la presentación, independientemente del referente o de los parámetros UTM. El catálogo mantiene la URL base y los anuncios deben usar la ruta terminada en `/landing`.
+
+Un único producto Shopify (`15506629263597`, sufijo `landing-pvc`) comparte variantes, inventario, precios y rendimiento por caja. El editor Shopify sigue mostrando la landing. La ficha reutiliza la galería, selección de variantes, compra asistida y calculadora existentes; conserva el área y porcentaje de cortes cuando cambia el acabado. No se crean productos ni temas adicionales. El destino sigue siendo `WEB-DECOKASA-2026-ALFIN/main` (`188927803629`), sincronizado desde GitHub/main. Formularios comerciales e integraciones pendientes conservan su estado anterior.
+
+Las vistas de prueba están en `preview/producto-piso-pvc.html` y `preview/landing-pisos-pvc.html`. Los datos comerciales de esas vistas son ficticios; la tienda consulta los del producto real. Ambas rutas conservan la URL canónica del producto para SEO. Los parámetros `variant` y UTM pueden acompañar cualquiera de los enlaces.
+
+Verificación local completada; publicación y verificación pública pendientes en el registro de avances.
+
+## Antecedente — 05/11/2026
+
 Estado al 05/11/2026: **10 000 cajas disponibles por cada uno de los 20 SKU**, seguimiento activado y **200 000 cajas** totales, configuradas por instrucción del usuario y verificadas en Shopify. No supone auditoría física ni sincronización Odoo.
 
 Los **48 archivos nuevos de PVC y el ajuste de `layout/theme.liquid` (49 cambios del tema)** están publicados en el tema oficial **188927803629 — WEB-DECOKASA-2026-ALFIN/main**. Se enviaron a GitHub mediante `git push origin main`, de `46c3ab6` a `a61758a6bc1f14db6a1a69ccf7b012b64c58af6f`, y Shopify los sincronizó. Rige la regla de un único tema oficial en [AGENTS.md](../AGENTS.md).

@@ -1,0 +1,21 @@
+{%- comment -%}
+  The same PVC product serves the storefront and its advertising landing.
+  Only /products/<handle>/landing selects the landing; campaign parameters
+  and referrers do not change the view. Keep the landing editable in Shopify.
+{%- endcomment -%}
+{%- liquid
+  assign pvc_view = 'product'
+  if template.suffix == 'landing-pvc'
+    assign path_segments = request.path | split: '/'
+    assign handle_index = path_segments.size | minus: 2
+    assign resource_index = path_segments.size | minus: 3
+    assign last_segment = path_segments | last
+    if last_segment == 'landing' and path_segments[handle_index] == product.handle and path_segments[resource_index] == 'products'
+      assign pvc_view = 'landing'
+    endif
+    if request.design_mode
+      assign pvc_view = 'landing'
+    endif
+  endif
+  echo pvc_view
+-%}

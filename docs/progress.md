@@ -1,3 +1,10 @@
+## 26/11/2026 — Dos accesos para Piso PVC
+
+- [x] Implementadas en `feat/pvc-accesos-tienda-publicidad`, desde `c2189c2`, la ficha convencional con calculadora y la landing por sufijo `/landing`.
+- [x] Pruebas: 94/94 del tema, 24/24 del Libro y respaldo íntegro; seis archivos Liquid modificados sin errores ni avisos en el validador oficial. `npm run lint` no pudo ejecutarse por faltar `tsc` en la instalación local; no hay cambios TypeScript.
+- [x] Diez vistas y paquete de 214 archivos regenerados. Vista normal y landing revisadas a 320, 393 y 1440 px, sin desbordamiento ni imágenes rotas. Cálculo de 13,25 m² + 7 % = 3 cajas / 15 m², conservado al cambiar acabado.
+- [ ] Integración, publicación y comprobación de ambas rutas en el tema oficial.
+
 ## 23/11/2026 — Nueva identidad y diseño de la tienda
 
 - [x] Aplicados los recursos del archivo «WEB DECOKASA EN ALTA.ai»: logotipos, seis miniaturas de navegación, fotografías de hogar/cocina y banner mayorista.

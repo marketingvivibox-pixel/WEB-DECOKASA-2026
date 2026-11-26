@@ -1,6 +1,7 @@
 {% doc %}
   Renders the product detail and the selected variant's ordered image gallery.
   @param {product} product - Product whose native data is displayed.
+  @param {section} section - Section settings, blocks and unique identifier.
   @param {boolean} [is_demo] - Show the local sample-data notice.
   @param {boolean} [pvc] - Enable the floor coverage calculator.
 {% enddoc %}
@@ -283,7 +284,8 @@
           </dl>
         </details>
         {% endif %}
-        {% for block in section.blocks %}<details class="product-information" {{ block.shopify_attributes }}><summary>{{ block.settings.heading | escape }}</summary><div class="rte">{{ block.settings.content }}</div></details>{% endfor %}
+        {% assign information_blocks = section.blocks | where: 'type', 'information' %}
+        {% for block in information_blocks %}<details class="product-information" {{ block.shopify_attributes }}><summary>{{ block.settings.heading | escape }}</summary><div class="rte">{{ block.settings.content }}</div></details>{% endfor %}
       </div>
     </div>
   </div>

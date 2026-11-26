@@ -1,3 +1,6 @@
+{%- capture pvc_route_view -%}{%- render 'pvc-route-view', template: template, request: request, product: product -%}{%- endcapture -%}
+{%- assign pvc_route_view = pvc_route_view | strip -%}
+{% if pvc_route_view == 'landing' %}
 {{ 'landing-piso-pvc.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'landing-piso-pvc.js' | asset_url }}" defer></script>
 {% liquid
@@ -185,6 +188,11 @@
   </dialog>
   <script type="application/json" data-pvc-variants>[{% for variant in product.variants %}{"id":{{ variant.id | json }},"title":{{ variant.title | json }},"finish":{% if pvc_finish_index != nil %}{{ variant.options[pvc_finish_index] | json }}{% else %}null{% endif %},"sku":{{ variant.sku | json }},"price":{{ variant.price | json }},"available":{{ variant.available | json }},"coverage":{{ variant.metafields.decokasa.coverage_m2.value | default: pvc_coverage | json }}}{% unless forloop.last %},{% endunless %}{% endfor %}]</script>
 </div>
+{% else %}
+  {% assign is_demo = false %}
+  {% render 'product-landing', product: product, section: section, is_demo: is_demo, routes: routes, pvc: true %}
+  {% render 'product-related', product: product, section: section, is_demo: is_demo, routes: routes, collections: collections, settings: settings %}
+{% endif %}
 {% schema %}
 {
   "name": "Landing Piso PVC",

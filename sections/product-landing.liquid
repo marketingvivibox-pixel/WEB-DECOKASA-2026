@@ -1,19 +1,6 @@
 {% assign is_demo = false %}
 {% render 'product-landing', product: product, section: section, is_demo: is_demo, routes: routes %}
-{% assign related = product.collections.first | default: collections.all %}
-{% if related.products.size < 2 %}{% assign related = collections.all %}{% endif %}
-{% if related.products.size > 1 %}
-  {% capture related_track %}Related-{{ section.id }}{% endcapture %}
-  <section class="wrap interface-related" data-carousel aria-labelledby="RelatedTitle-{{ section.id }}">
-    <div class="interface-section-heading"><h2 id="RelatedTitle-{{ section.id }}">También te puede interesar</h2><a href="{{ routes.all_products_collection_url }}">Ver catálogo {% render 'icon', name: 'arrow' %}</a></div>
-    <div class="interface-track interface-product-track" id="{{ related_track }}" data-carousel-track tabindex="0" aria-label="Productos relacionados">
-      {% for recommendation in related.products limit: 9 %}
-        {% unless recommendation.id == product.id %}{% render 'product-card', product: recommendation, demo: is_demo, settings: settings, custom_color_swatches: section.settings.custom_color_swatches %}{% endunless %}
-      {% endfor %}
-    </div>
-    {% render 'storefront-carousel-controls', track_id: related_track %}
-  </section>
-{% endif %}
+{% render 'product-related', product: product, section: section, is_demo: is_demo, routes: routes, collections: collections, settings: settings %}
 {% schema %}
 {
   "name": "Ficha de producto",

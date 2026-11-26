@@ -5,7 +5,55 @@ const fs = require('node:fs');
 const path = require('node:path');
 const {Liquid} = require('liquidjs');
 const {parseHTML} = require('linkedom');
-const {filters} = require('../scripts/product_fixture.cjs');
+const {filters, productFixture} = require('../scripts/product_fixture.cjs');
+
+test('PVC selects the advertising view only for its explicit landing route or theme editor', async () => {
+  const engine = new Liquid({root:path.resolve(__dirname, '../snippets'), extname:'.liquid'});
+  const source = "{% render 'pvc-route-view', template: template, request: request, product: product %}";
+  for (const [url, expected] of [
+    ['/products/piso-pvc', 'product'],
+    ['/products/piso-pvc?utm_source=facebook', 'product'],
+    ['/products/piso-pvc/landing?utm_source=facebook&variant=123', 'landing'],
+    ['/es/products/piso-pvc/landing', 'landing'],
+    ['/collections/acabados/products/piso-pvc/landing', 'landing'],
+    ['/products/otro-producto/landing', 'product'],
+    ['/products/piso-pvc/landing-extra', 'product'],
+    ['/products/piso-pvc/landing/otra-pagina', 'product']
+  ]) {
+    const context = {template:{suffix:'landing-pvc'}, product:{handle:'piso-pvc'}, request:{path:new URL(url, 'https://example.test').pathname}};
+    assert.equal((await engine.parseAndRender(source, context)).trim(), expected, url);
+  }
+  const editor = {template:{suffix:'landing-pvc'}, product:{handle:'piso-pvc'}, request:{path:'/products/piso-pvc', design_mode:true}};
+  assert.equal((await engine.parseAndRender(source, editor)).trim(), 'landing');
+  assert.equal((await engine.parseAndRender(source, {...editor, template:{suffix:'landing-spc'}})).trim(), 'product');
+});
+
+test('PVC storefront reuses the normal product, native variants and calculator without landing assets or empty accordions', async () => {
+  const root = path.resolve(__dirname, '..');
+  const engine = new Liquid({root:path.join(root, 'snippets'), extname:'.liquid'});
+  filters(engine);
+  engine.registerFilter('asset_url', name => `/assets/${name}`);
+  const main = JSON.parse(fs.readFileSync(path.join(root, 'templates/product.landing-pvc.json'), 'utf8')).sections.main;
+  const product = productFixture({handle:'piso-pvc', name:'Piso PVC', sku:'DEMO-001', price:10000, coverage:5}, 6);
+  product.url = '/products/piso-pvc';
+  const source = fs.readFileSync(path.join(root, 'sections/landing-piso-pvc.liquid'), 'utf8').replace(/{% schema %}[\s\S]*?{% endschema %}/, '');
+  const {document} = parseHTML(await engine.parseAndRender(source, {
+    template:{suffix:'landing-pvc'}, request:{path:'/products/piso-pvc'}, product,
+    routes:{root_url:'/', all_products_collection_url:'/collections/all'},
+    section:{id:'pvc-storefront-test', settings:main.settings, blocks:main.block_order.map(id => ({id, ...main.blocks[id]}))}
+  }));
+  assert.equal(document.querySelectorAll('h1').length, 1);
+  assert.equal(document.querySelector('[data-product-page]').dataset.productUrl, '/products/piso-pvc');
+  assert.equal(document.querySelectorAll('[data-pvc]').length, 1);
+  assert.ok(document.querySelector('[data-pvc] [name="area"]'));
+  assert.equal(document.querySelector('[name="variant_id"] option').dataset.coverage, '5');
+  assert.equal(document.querySelectorAll('[data-option-link]').length, 2);
+  assert.equal(document.querySelector('.breadcrumb a').getAttribute('href'), '/');
+  assert.equal(document.querySelector('[data-pvc-landing]'), null);
+  assert.equal(document.querySelector('[src*="landing-piso-pvc.js"]'), null);
+  assert.equal(document.querySelector('[href*="landing-piso-pvc.css"]'), null);
+  assert.deepEqual(Array.from(document.querySelectorAll('details.product-information > summary'), item => item.textContent.trim()), ['Especificaciones']);
+});
 
 test('PVC area accepts decimal comma and rejects invalid or unreasonable areas', () => {
   assert.equal(parseArea(' 12,5 '), 12.5);
@@ -61,7 +109,7 @@ test('PVC review layout labels mockup samples and preserves the 20-finish catalo
   const source = raw.replace(/{% schema %}[\s\S]*?{% endschema %}/, '');
   const main = JSON.parse(fs.readFileSync(path.join(root, 'templates/product.landing-pvc.json'), 'utf8')).sections.main;
   const blocks = main.block_order.map(id => ({id, ...main.blocks[id]}));
-  const context = {section:{id:'pvc-test', settings:main.settings, blocks}, product:{title:'Piso PVC', variants:[]}};
+  const context = {template:{suffix:'landing-pvc'}, request:{path:'/products/piso-pvc/landing'}, section:{id:'pvc-test', settings:main.settings, blocks}, product:{handle:'piso-pvc', title:'Piso PVC', variants:[]}};
   const render = async section => parseHTML(await engine.parseAndRender(source, {...context, section})).document;
   const doc = await render(context.section);
   assert.equal(doc.querySelectorAll('.pvc-review--sample').length, 5);

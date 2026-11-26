@@ -61,6 +61,21 @@ async function runtime(fetcher, initialProduct = product()) {
   return {document, window, click, navigations, histories, requests, loaded};
 }
 const settle = async()=>{await new Promise(resolve=>setImmediate(resolve));await new Promise(resolve=>setImmediate(resolve));};
+
+test('La calculadora conserva área y merma al reemplazar la variante y reinicia su cálculo con la nueva cobertura', async () => {
+  const flooring = selected => ({...productFixture({handle:'ficha', name:'Piso de prueba', sku:'DEMO-001', price:12000, coverage:5}, 0, selected), url:'/products/ficha'});
+  const nextHTML = await html(flooring(1));
+  const app = await runtime(() => ({ok:true, text:async()=>nextHTML}), flooring(0));
+  app.document.querySelector('[data-pvc] [name="area"]').value = '13.25';
+  app.document.querySelector('[data-pvc] [name="waste"]').value = '7';
+  app.click('[data-option-link]:not([aria-current])');
+  await settle();
+  assert.equal(app.document.querySelector('[data-pvc] [name="area"]').value, '13.25');
+  assert.equal(app.document.querySelector('[data-pvc] [name="waste"]').value, '7');
+  assert.equal(app.document.querySelector('[name="variant_id"] option').dataset.coverage, '2.5');
+  assert.equal(app.loaded.length, 1);
+  assert.equal(app.navigations.length, 0);
+});
 function groupedProduct(selected = 0) {
   const p = product(selected);
   p.variants.forEach((variant, index) => {

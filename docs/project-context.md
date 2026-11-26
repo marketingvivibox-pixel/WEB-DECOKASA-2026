@@ -1,3 +1,9 @@
+## 26/11/2026 — PVC: ficha de tienda y landing para anuncios
+
+El usuario pidió dos experiencias del mismo producto: `/products/piso-pvc` muestra la ficha convencional con calculadora; `/products/piso-pvc/landing` conserva la landing personalizada para publicidad. La ruta elige la presentación, independientemente del referente o de los parámetros UTM. El catálogo mantiene la URL base y los anuncios deben usar la ruta terminada en `/landing`.
+
+Un único producto Shopify (`15506629263597`, sufijo `landing-pvc`) comparte variantes, inventario, precios y rendimiento por caja. El editor Shopify sigue mostrando la landing. La ficha reutiliza la galería, selección de variantes, compra asistida y calculadora existentes; conserva el área y porcentaje de cortes cuando cambia el acabado. No se crean productos ni temas adicionales. El destino sigue siendo `WEB-DECOKASA-2026-ALFIN/main` (`188927803629`), sincronizado desde GitHub/main. Formularios comerciales e integraciones pendientes conservan su estado anterior.
+
 ## 23/11/2026 — Identidad visual de la referencia en alta
 
 - Referencia vigente: «WEB DECOKASA EN ALTA.ai» y su JPEG, entregados para aplicar al tema principal. Paleta azul marino `#14253f`, amarillo `#ffcd0d`, blanco y gris `#e0e0e0`; tipografía Raleway. El ancho de contenido en escritorio pasa al 66 % y conserva el 87 % móvil.
