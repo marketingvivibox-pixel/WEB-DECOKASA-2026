@@ -4,7 +4,7 @@
 - [x] SPC: 11 variantes nativas, S/95 y 1.000 cajas cada una, con escala de nueve precios por cantidad en ambas calculadoras y solicitud. Se conservaron cinco SKU confirmados; seis siguen pendientes.
 - [x] Selector de ambientes en ambas landings, galería por variante en fichas, conservación de área/cortes/UTM, cierre accesible y tamaños móviles comprobados. PVC mantiene sus tres precios pendientes y existencias anteriores.
 - [x] Pruebas locales: 102/102 del tema, 24/24 del Libro y respaldo íntegro; 13 archivos aprobados por el validador oficial. Once vistas y ZIP de 217 archivos regenerados. SPC/PVC verificados a 320, 393 y 1440 px; los 20 acabados PVC comprobados en ambas vistas a 393 px.
-- [ ] Integrar en `main`, comprobar sincronización del tema oficial y repetir la verificación pública.
+- [x] Integrado y publicado en `main` mediante `7677469`, en el único tema oficial `188927803629`. Los 13 archivos verificados coinciden por MD5 con el commit. Ambas rutas públicas de PVC/SPC comprobadas a 320, 393 y 1440 px: ambientes por acabado, miniaturas, conservación de cálculo y UTM, precios pendientes, cierre/foco de selectores y ausencia de desbordamiento o errores de página. PVC: los 20 acabados probados en ambas vistas a 393 px y una muestra de cinco en los otros tamaños. SPC: verificados 6 cajas = S/540 y 12 cajas = S/1.020. Libro de Reclamaciones accesible (HTTP 200), sin enviar formularios.
 - [ ] Completar seis SKU SPC y resolver el espesor de SPC-002-1; confirmar los precios PVC 7172-4, 7172-8 y 7195-8. Fuentes comerciales de solo lectura, sin cambios.
 
 ## 27/11/2026 — Dos accesos para Piso SPC
