@@ -10,6 +10,7 @@
 {{ 'product-detail.css' | asset_url | stylesheet_tag }}
 {{ 'request-form.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'request-form.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'flooring-pricing.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'product-detail.js' | asset_url }}" defer="defer"></script>
 {% if product != blank %}
   {% assign current_variant = product.selected_or_first_available_variant %}
@@ -149,6 +150,7 @@
                     {% endif %}
                     <a class="product-option" href="{{ option_url }}?option_values={{ option_ids | strip }}" data-option-link {% if value.selected %}aria-current="true"{% endif %}>
                       {% if value.swatch.image != blank %}{{ value.swatch.image | image_url: width: 100 | image_tag: widths: '50, 100', sizes: '44px', loading: 'lazy', alt: '' }}
+                      {% elsif value.variant.metafields.decokasa.finish_swatch.value != blank %}{{ value.variant.metafields.decokasa.finish_swatch.value.preview_image | image_url: width: 100 | image_tag: widths: '50, 100', sizes: '44px', loading: 'lazy', alt: '' }}
                       {% elsif value.swatch.color != blank %}<span class="product-swatch" style="background-color: {{ value.swatch.color }}" aria-hidden="true"></span>
                       {% elsif option_color_hex != blank %}<span class="product-swatch" style="background-color: {{ option_color_hex | escape }}" aria-hidden="true"></span>
                       {% elsif value.variant.featured_image != blank %}{{ value.variant.featured_image | image_url: width: 100 | image_tag: widths: '50, 100', sizes: '44px', loading: 'lazy', alt: '' }}{% endif %}
@@ -162,6 +164,7 @@
         {% endunless %}
         <p class="product-availability">{% render 'icon', name: 'headphones' %}<span><strong>{% if current_variant.available %}Disponible para solicitar{% else %}Disponibilidad a confirmar{% endif %}</strong><small>Un asesor te ayuda con tu compra.</small></span></p>
         {% if has_floor_calculator %}{% render 'pvc-calculator' %}{% endif %}
+        {% if has_floor_calculator %}{% render 'floor-quantity-prices', product: product %}{% endif %}
         {% assign multiple_request = false %}
         {% unless product.has_only_default_variant or has_floor_calculator %}{% assign multiple_request = true %}{% endunless %}
         {% if multiple_request %}<p class="request-builder-help">Elige una presentación y su cantidad. Agrégala a tu solicitud y repite con los otros colores que quieras.</p>{% endif %}

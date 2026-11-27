@@ -1,0 +1,8 @@
+.floor-quantity-prices { margin: 12px 0; border: 1px solid #e4dcc4; border-radius: 12px; background: #fffdf5; color: #30312d; font-size: 14px; line-height: 1.5; }
+.floor-quantity-prices summary { padding: 12px 14px; cursor: pointer; font-weight: 600; }
+.floor-quantity-prices summary:focus-visible { outline: 2px solid #76611d; outline-offset: 2px; }
+.floor-quantity-prices table { width: calc(100% - 28px); margin: 0 14px 12px; border-collapse: collapse; font-size: 14px; }
+.floor-quantity-prices th, .floor-quantity-prices td { padding: 5px 8px; border-bottom: 1px solid #eee6d0; text-align: left; }
+.floor-quantity-prices th:last-child, .floor-quantity-prices td:last-child { text-align: right; }
+.floor-quantity-prices p { margin: 0; padding: 0 14px 12px; font-size: 12px; line-height: 1.5; }
+.spc-page .spc-calc-unit-price { margin: 8px 0 0; font-size: 14px; line-height: 1.5; }

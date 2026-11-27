@@ -1,0 +1,19 @@
+{% doc %}
+  Displays box quantity pricing from the product's approved price tiers.
+
+  @param {product} product - Flooring product with decokasa.quantity_prices.
+{% enddoc %}
+{% assign quantity_prices = product.metafields.decokasa.quantity_prices.value %}
+{% if quantity_prices != blank %}
+  {{ 'flooring-pricing.css' | asset_url | stylesheet_tag }}
+  <details class="floor-quantity-prices">
+    <summary>Ahorra por cantidad · Desde 6 cajas</summary>
+    <table><thead><tr><th scope="col">Cantidad</th><th scope="col">Precio por caja</th></tr></thead><tbody>
+      {% for tier in quantity_prices %}
+        {% assign next_tier = quantity_prices[forloop.index] %}
+        <tr><td>{% if forloop.last %}{{ tier.min_boxes }} o más{% else %}{{ tier.min_boxes }}–{{ next_tier.min_boxes | minus: 1 }}{% endif %} cajas</td><td>{{ tier.price_cents | money_with_currency }}</td></tr>
+      {% endfor %}
+    </tbody></table>
+    <p>El precio del tramo se aplica a todas las cajas del acabado seleccionado. El asesor confirma el importe final y el envío.</p>
+  </details>
+{% endif %}

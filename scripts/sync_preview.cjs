@@ -8,6 +8,8 @@ const root = path.resolve(__dirname, '..');
 require('./generate_spc_layout.cjs');
 const engine = new Liquid({ root: [path.join(root, 'snippets'), path.join(root, 'scripts/fixtures')], extname: '.liquid' });
 const {filters, productFixture} = require('./product_fixture.cjs');
+const {spcFixture} = require('./spc_fixture.cjs');
+const {pvcFixture} = require('./pvc_fixture.cjs');
 filters(engine);
 const buildVersion = Date.now();
 engine.registerFilter('asset_url', name => (name.endsWith('.css') || name.endsWith('.js')) ? `assets/${name}?v=${buildVersion}` : `assets/${name}`);
@@ -73,21 +75,7 @@ async function main() {
   }
 
   // Generate the custom "Piso SPC" product landing from sections/landing-piso-spc.liquid
-  const spcEntry = {
-    handle: "piso-spc",
-    name: "Piso SPC",
-    brand: "DECOKASA",
-    category: "Acabados",
-    sku: "SPC-DEC-001",
-    price: 9500,
-    intro: "Piso SPC de alta resistencia con acabado texturizado tipo madera natural, sistema click de encastre y máxima durabilidad.",
-    has_only_default_variant: true
-  };
-  const spcProduct = productFixture(spcEntry, 5);
-  spcProduct.url = 'producto-piso-spc.html';
-  spcProduct.images = [{id:'spc-demo-image', src:'assets/spc-2026-caja-tablones-hero.webp', alt:'Piso SPC · muestra ilustrativa'}];
-  spcProduct.featured_image = spcProduct.images[0];
-  spcProduct.selected_or_first_available_variant.featured_image = spcProduct.images[0];
+  const spcProduct = spcFixture();
   // The normal preview uses the same settings and blocks as the deployed template.
   const spcTemplate = JSON.parse(fs.readFileSync(path.join(root, 'templates/product.landing-spc.json'), 'utf8'));
   const spcMain = spcTemplate.sections.main;
@@ -97,21 +85,19 @@ async function main() {
     settings: {spc_design_preview:process.env.SPC_DESIGN_PREVIEW === '1'}, blocks: spcBlocks
   }});
   landings['landing-piso-spc.html'] = spcHtml;
-  landings['producto-piso-spc.html'] = await section('landing-piso-spc', spcMain.settings, {...spcContext, request:{path:'/products/piso-spc'}, is_demo:true});
+  const spcStorefront = parseHTML(await section('landing-piso-spc', spcMain.settings, {...spcContext, request:{path:'/products/piso-spc'}, is_demo:true})).document;
+  const spcPreviewVariants = spcProduct.variants.map((variant, index) => ({...variant, coverage:2.196, imageId:variant.featured_image.id, optionValues:spcProduct.options_with_values[0].values[index].id}));
+  spcStorefront.querySelector('[data-product-page]').insertAdjacentHTML('beforeend', `<script type="application/json" data-preview-variants>${JSON.stringify(spcPreviewVariants)}</script>`);
+  landings['producto-piso-spc.html'] = spcStorefront.toString();
 
   // The same PVC product renders the storefront or advertising view by path.
   // Prices and identifiers below are local fixtures, never store data.
-  const pvcProduct = productFixture({handle: 'piso-pvc', name: 'Piso PVC autoadhesivo', brand: 'DECOKASA', category: 'Acabados', sku: 'DEMO-PVC', price: 10000, coverage: 5, intro: 'Piso PVC autoadhesivo. Caja de 36 planchas con rendimiento de 5 m².'}, 6);
+  const pvcProduct = pvcFixture();
   const pvcMain = JSON.parse(fs.readFileSync(path.join(root, 'templates/product.landing-pvc.json'), 'utf8')).sections.main;
-  const pvcBlocks = pvcMain.block_order.map(id => ({id, ...pvcMain.blocks[id]}));
-  const pvcFinishes = pvcBlocks.filter(block => block.type === 'finish').map(block => block.settings.code);
-  pvcProduct.images = pvcFinishes.map((code, index) => ({id: `pvc-demo-image-${index}`, src: `assets/pvc-acabado-${code.toLowerCase()}.webp`, alt: `Piso PVC · ${code}`}));
-  pvcProduct.variants = pvcFinishes.map((code, index) => ({id: `pvc-demo-${index}`, title: code, options: [code], sku: `DEMO-${code}`, price: index % 2 ? 12000 : 10000, available: true, featured_image: pvcProduct.images[index], metafields: {decokasa: {coverage_m2: {value: 5}}}}));
-  pvcProduct.options_with_values = [{name: 'Acabado', position: 1, selected_value: pvcFinishes[0], values: pvcProduct.variants.map((variant, index) => ({id: `pvc-demo-option-${index}`, name: variant.title, selected: index === 0, variant}))}];
-  pvcProduct.selected_or_first_available_variant = pvcProduct.variants[0];
-  pvcProduct.featured_image = pvcProduct.images[0];
-  pvcProduct.price_max = 12000;
-  pvcProduct.url = 'producto-piso-pvc.html';
+  const pvcBlocks = pvcMain.block_order.map(id => {
+    const block = {id, ...pvcMain.blocks[id]};
+    return block.type === 'finish' ? {...block, settings:{...block.settings, sku:`DEMO-PVC-${block.settings.code}`}} : block;
+  });
   const pvcContext = {product: pvcProduct, is_demo: true, template: {suffix: 'landing-pvc'}, shop: {currency: 'PEN'}, section: {blocks: pvcBlocks}};
   landings['landing-pisos-pvc.html'] = await section('landing-piso-pvc', pvcMain.settings, {...pvcContext, request: {path: '/products/piso-pvc/landing'}});
   const pvcStorefront = parseHTML(await section('landing-piso-pvc', pvcMain.settings, {...pvcContext, request: {path: '/products/piso-pvc'}})).document;
@@ -150,7 +136,7 @@ async function main() {
     fs.writeFileSync(path.join(preview, file), html.replace(/[ \t]+$/gm, ''), 'utf8');
   }
   fs.mkdirSync(path.join(preview, 'assets'), { recursive: true });
-  for (const asset of fs.readdirSync(path.join(root, 'assets')).filter(name => /^(decokasa-.*\.webp|decokasa-(?:motion|interface)\.(css|js)|favicon\.png|product-detail\.(css|js)|request-form\.(css|js)|libro-reclamaciones\.(css|js)|libro-ubigeo\.js|landing-piso-pvc\.(css|js)|pvc-.*\.webp|landing-piso-spc(?:-layout|-proportions|-desktop|-tones)?\.(css|js)|spc-catalogo-tonos-2026-11\.jpg|spc-.*\.(webp|png|svg|ttf|txt))$/.test(name))) {
+  for (const asset of fs.readdirSync(path.join(root, 'assets')).filter(name => /^(decokasa-.*\.webp|decokasa-(?:motion|interface)\.(css|js)|favicon\.png|flooring-pricing\.(css|js)|product-detail\.(css|js)|request-form\.(css|js)|libro-reclamaciones\.(css|js)|libro-ubigeo\.js|landing-piso-pvc\.(css|js)|pvc-.*\.webp|landing-piso-spc(?:-layout|-proportions|-desktop|-tones)?\.(css|js)|spc-catalogo-tonos-2026-11\.jpg|spc-.*\.(webp|png|svg|ttf|txt))$/.test(name))) {
     fs.copyFileSync(path.join(root, 'assets', asset), path.join(preview, 'assets', asset));
   }
   console.log(`${previewFiles.length} preview pages synchronized with the Shopify sections.`);

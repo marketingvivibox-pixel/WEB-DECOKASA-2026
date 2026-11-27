@@ -1,5 +1,13 @@
 # Landing de Piso PVC autoadhesivo
 
+## 27/11/2026 — Un ambiente diferente por acabado
+
+Las 20 variantes existentes tienen ahora un ambiente ilustrativo diferente, generado usando su textura original de `BASE PVC.psd`. La imagen principal de la variante es el ambiente; `decokasa.finish_swatch` conserva la miniatura real y `decokasa.gallery_images` contiene ambiente y muestra. La ficha convencional cambia la galería al seleccionar acabado; el catálogo de la landing muestra la imagen del acabado seleccionado y permite confirmarlo manteniendo área, cortes y UTM. Las muestras siguen siendo la referencia de color/material.
+
+Se conservan SKU, precio y 10.000 cajas por acabado: 17 FD a S/99 y 7172-4, 7172-8 y 7195-8 con precio pendiente, mostrado como «Por confirmar». Un único producto `15506629263597`, dos rutas y el único tema oficial `188927803629`. No se modificaron las fuentes comerciales de solo lectura.
+
+Comprobados los 20 acabados en ambas vistas a 393 px y el comportamiento a 320/1440 px: imagen correcta, carga con skeleton, selección por URL, calculadora conservada y cierre del diálogo con recuperación del desplazamiento y foco. Pruebas del tema 102/102, Libro 24/24, respaldo íntegro y 13 archivos aprobados por el validador oficial. Evidencia en `SHOPIFY/colores-pisos-20261127/qa/`; estado de publicación en [avances](progress.md).
+
 ## 27/11/2026 — Selector compartido con SPC
 
 El selector de ruta pasa a `snippets/flooring-route-view.liquid` para servir también SPC. PVC conserva sus dos accesos, datos y funcionamiento. Ambas vistas se comprobaron de nuevo localmente a 320, 393 y 1440 px, incluyendo cambio de acabado y conservación del cálculo.
@@ -10,7 +18,7 @@ El usuario pidió dos experiencias del mismo producto: `/products/piso-pvc` mues
 
 Un único producto Shopify (`15506629263597`, sufijo `landing-pvc`) comparte variantes, inventario, precios y rendimiento por caja. El editor Shopify sigue mostrando la landing. La ficha reutiliza la galería, selección de variantes, compra asistida y calculadora existentes; conserva el área y porcentaje de cortes cuando cambia el acabado. No se crean productos ni temas adicionales. El destino sigue siendo `WEB-DECOKASA-2026-ALFIN/main` (`188927803629`), sincronizado desde GitHub/main. Formularios comerciales e integraciones pendientes conservan su estado anterior.
 
-Las vistas de prueba están en `preview/producto-piso-pvc.html` y `preview/landing-pisos-pvc.html`. Los datos comerciales de esas vistas son ficticios; la tienda consulta los del producto real. Ambas rutas conservan la URL canónica del producto para SEO. Los parámetros `variant` y UTM pueden acompañar cualquiera de los enlaces.
+Las vistas de prueba están en `preview/producto-piso-pvc.html` y `preview/landing-pisos-pvc.html`. Desde el 27/11, los fixtures locales reproducen la instantánea verificada de acabados y precios; la tienda consulta los del producto real. Son vistas de prueba y no registran compras. Ambas rutas conservan la URL canónica del producto para SEO. Los parámetros `variant` y UTM pueden acompañar cualquiera de los enlaces.
 
 Ambas rutas publicadas desde `640de19` y comprobadas el 26/11/2026 en el tema oficial a 320, 393 y 1440 px. La ficha conserva el cálculo al cambiar acabado. Los diseños cuyo precio está pendiente muestran «Precio a consultar» y total «Por confirmar», manteniendo el cálculo de cajas y superficie. Ver [avances y verificaciones](progress.md).
 
@@ -67,7 +75,7 @@ El ajuste final limita el nombre del bloque a 25 caracteres («Testimonio autori
 
 ## Fuentes comerciales
 
-El 05/11/2026 se recibieron y verificaron las [fuentes de SKU, miniaturas y precios](catalog-sources.md), protegidas por instrucción de **solo lectura**. Se cruzaron los 20 acabados actuales con sus códigos y SKU únicos, y se aplicó la escala vigente FD. La coincidencia de códigos no sustituye el cotejo visual de miniaturas, aún pendiente. No inferir stock ni elegir una escala anterior o una comisión como precio de venta; tampoco equiparar LQ con HM sin confirmación.
+El 05/11/2026 se recibieron y verificaron las [fuentes de SKU, miniaturas y precios](catalog-sources.md), protegidas por instrucción de **solo lectura**. Se cruzaron los 20 acabados actuales con sus códigos y SKU únicos, y se aplicó la escala vigente FD. El cotejo de miniaturas se completó con `BASE PVC.psd` el 27/11/2026. No inferir stock ni elegir una escala anterior o una comisión como precio de venta; tampoco equiparar LQ con HM sin confirmación.
 
 La descripción Shopify incluye presentación, instalación, asesoría/entrega y la escala FD por caja: **1–2: S/ 99; 3–5: S/ 92; 6–11: S/ 85; 12–19: S/ 78; 20–49: S/ 71; 50 o más: S/ 65**. Es información para cotización del asesor: no se implementaron descuentos automáticos ni tramos en la calculadora. Registro verificado de los datos aplicados: [pvc-product-data.json](pvc-product-data.json). Los originales de Drive permanecen intactos.
 
@@ -104,4 +112,4 @@ Vista local: http://127.0.0.1:8818/landing-pisos-pvc.html?revision=pvc-20-acabad
 - Evidencias: `C:/Users/D. Cordova/Documents/Codex/2026-11-04/pvc-landing/landing-pvc-mobile.png` y `calculadora-mobile.png` en la misma carpeta.
 - 05/11: stock de 10 000 cajas en cada uno de los 20 SKU verificado; producto y landing publicados. Los 49 archivos están sincronizados en el tema oficial desde `a61758a`.
 - Revisión pública en escritorio y móvil: catálogo, selección FD802, cálculo de 20 m², enlace WhatsApp y ocultación del importe pendiente para 7172-4 comprobados.
-- Pendiente comercial: confirmar tarifa de los tres LQ y cotejar visualmente miniaturas. SKU y precios FD completados y releídos en Shopify el 05/11, al igual que la descripción.
+- Pendiente comercial: confirmar tarifa de los tres LQ. SKU y precios FD completados y releídos en Shopify; miniaturas originales cotejadas y asignadas por código el 27/11/2026.

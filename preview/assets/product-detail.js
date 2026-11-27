@@ -158,6 +158,9 @@
         const estimateEl = page.querySelector('[data-estimated-amount]');
         const breakdownEl = page.querySelector('[data-estimated-breakdown]');
         const isBoxes = !!page.querySelector('[data-pvc]');
+        if (isBoxes && !lines && window.DecokasaFloorPricing) {
+          cents = window.DecokasaFloorPricing.unitPrice(qty, cents, window.DecokasaFloorPricing.read(page.querySelector('[data-request-form]')));
+        }
         const unitText = isBoxes ? (qty === 1 ? 'caja' : 'cajas') : (qty === 1 ? 'unidad' : 'unidades');
         const formQtyEl = page.querySelector('[data-form-qty]');
         const formTotalEl = page.querySelector('[data-form-total]');

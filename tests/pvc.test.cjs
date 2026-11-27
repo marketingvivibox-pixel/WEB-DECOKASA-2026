@@ -6,6 +6,46 @@ const path = require('node:path');
 const {Liquid} = require('liquidjs');
 const {parseHTML} = require('linkedom');
 const {filters, productFixture} = require('../scripts/product_fixture.cjs');
+const {pvcFixture, codes: pvcCodes} = require('../scripts/pvc_fixture.cjs');
+
+test('PVC native finishes share twenty distinct rooms, real swatches and pending prices across both routes', async () => {
+  const root = path.resolve(__dirname, '..');
+  const engine = new Liquid({root:path.join(root, 'snippets'), extname:'.liquid'});
+  filters(engine);
+  engine.registerFilter('asset_url', name => `/assets/${name}`);
+  const main = JSON.parse(fs.readFileSync(path.join(root, 'templates/product.landing-pvc.json'), 'utf8')).sections.main;
+  const blocks = main.block_order.map(id => ({id, ...main.blocks[id]}));
+  const source = fs.readFileSync(path.join(root, 'sections/landing-piso-pvc.liquid'), 'utf8').replace(/{% schema %}[\s\S]*?{% endschema %}/, '');
+  const product = pvcFixture(18);
+  product.url = '/products/piso-pvc';
+  for (const landing of [false, true]) {
+    const doc = parseHTML(await engine.parseAndRender(source, {
+      template:{suffix:'landing-pvc'}, request:{path:product.url + (landing ? '/landing' : '')}, product,
+      routes:{root_url:'/', all_products_collection_url:'/collections/all'},
+      section:{id:'pvc-room-test', settings:main.settings, blocks}
+    })).document;
+    if (landing) {
+      const variants = JSON.parse(doc.querySelector('[data-pvc-variants]').textContent);
+      assert.equal(variants.length, 20);
+      assert.equal(new Set(variants.map(variant => variant.image)).size, 20);
+      assert.deepEqual(variants.filter(variant => !variant.price).map(variant => variant.finish), ['7172-4','7172-8','7195-8']);
+      variants.forEach((variant, index) => {
+        assert.equal(variant.finish, pvcCodes[index]);
+        assert.match(variant.image, new RegExp('ambiente-pvc-' + pvcCodes[index].toLowerCase() + '\\.webp'));
+        assert.match(variant.swatch, new RegExp('piso-pvc-' + pvcCodes[index].toLowerCase() + '\\.webp'));
+      });
+      assert.match(doc.querySelector('[data-catalog-room]').src, /ambiente-pvc-7172-8/);
+      assert.equal(doc.querySelector('[data-catalog-room-code]').textContent, '7172-8');
+      assert.ok(doc.querySelector('[data-catalog-confirm]'));
+    } else {
+      const choices = Array.from(doc.querySelectorAll('[data-option-link]'));
+      assert.equal(choices.length, 20);
+      choices.forEach((choice, index) => assert.match(choice.querySelector('img').src, new RegExp('piso-pvc-' + pvcCodes[index].toLowerCase() + '\\.webp')));
+      assert.match(doc.querySelector('[data-gallery-panel]:not([hidden]) img').src, /ambiente-pvc-7172-8/);
+      assert.match(doc.querySelector('[data-estimated-amount]').textContent, /Por confirmar/);
+    }
+  }
+});
 
 test('Flooring selects the advertising view only for its explicit landing route or theme editor', async () => {
   const engine = new Liquid({root:path.resolve(__dirname, '../snippets'), extname:'.liquid'});

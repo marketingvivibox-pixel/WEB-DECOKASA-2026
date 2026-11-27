@@ -1,8 +1,16 @@
+## 27/11/2026 — Ambientes por acabado y variantes SPC
+
+PVC conserva sus 20 variantes y ahora cada acabado tiene un ambiente diferente generado a partir de su textura original. SPC tiene 11 variantes nativas y un ambiente por acabado. La imagen principal de cada variante es el ambiente; `decokasa.finish_swatch` conserva la miniatura original y `decokasa.gallery_images` contiene ambiente y textura. Las imágenes de ambientes son ilustraciones y no sustituyen la muestra del material. Se usan en la ficha convencional y en el selector de la landing; cambiar acabado conserva área, cortes y parámetros de campaña.
+
+El usuario confirmó S/95 y 1.000 cajas por cada acabado SPC. La calculadora aplica la escala del Sheet de solo lectura: desde 1/6/12/50/100/200/300/400/500 cajas, S/95/90/85/83/80/78/75/73/70 por caja. Son estimaciones para confirmación del asesor, no descuentos automáticos de checkout. Rendimiento configurado: 2,196 m²/caja. Quedan seis SKU SPC por confirmar y la discrepancia de espesor de SPC-002-1 (5 mm en fuente comercial frente a 5,5 mm en PSD). No asignar códigos ambiguos.
+
+PVC mantiene 10.000 cajas por acabado, 36 planchas / 5 m², S/99 para los 17 FD y precio por confirmar para 7172-4, 7172-8 y 7195-8. Se mantienen los productos existentes y el único tema oficial `188927803629`; los Sheets no se modifican. Los formularios comerciales siguen simulados y Odoo continúa pendiente.
+
 ## 27/11/2026 — SPC: ficha de tienda y landing para anuncios
 
 Se aplica a SPC el mismo recorrido aprobado para PVC. `/products/piso-spc` muestra la ficha convencional con calculadora; `/products/piso-spc/landing` conserva la landing publicitaria. La ruta determina la vista, independientemente de UTM y referente. El catálogo usa la URL base; los anuncios deben usar `/landing`. No se modifica la configuración de campañas.
 
-Se mantiene un único producto SPC (`15442304925933`, sufijo `landing-spc`) en el tema oficial `188927803629`, sincronizado desde GitHub/main. Mismos precios, stock y variante nativa; los acabados de referencia no se convierten en variantes nuevas. El editor sigue mostrando la landing. La ficha calcula con el rendimiento de variante/producto si existe y, en su defecto, con los 2,196 m²/caja configurados en la sección SPC. Formularios comerciales e integraciones conservan sus pendientes anteriores.
+Se mantiene un único producto SPC (`15442304925933`, sufijo `landing-spc`) en el tema oficial `188927803629`, sincronizado desde GitHub/main. Ambas vistas comparten las 11 variantes, precios y stock. El editor sigue mostrando la landing. La ficha calcula con el rendimiento de variante/producto si existe y, en su defecto, con los 2,196 m²/caja configurados en la sección SPC. Formularios comerciales e integraciones conservan sus pendientes anteriores.
 
 ## 26/11/2026 — PVC: ficha de tienda y landing para anuncios
 

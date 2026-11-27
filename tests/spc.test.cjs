@@ -6,9 +6,11 @@ const { Liquid } = require('liquidjs');
 const { parseHTML } = require('linkedom');
 const { calculate, estimateTotal } = require('../assets/landing-piso-spc.js');
 const { filters, productFixture } = require('../scripts/product_fixture.cjs');
+const { spcFixture, tiers } = require('../scripts/spc_fixture.cjs');
+const floorPricing = require('../assets/flooring-pricing.js');
 const root = path.resolve(__dirname, '..');
 
-test('SPC storefront keeps its single native variant and calculates with variant, product or section coverage in that order', async () => {
+test('SPC supports a single-variant fallback and prioritizes variant, product and section coverage', async () => {
   const engine = new Liquid({root:path.join(root, 'snippets'), extname:'.liquid'});
   filters(engine);
   engine.registerFilter('asset_url', name => `/assets/${name}`);
@@ -464,7 +466,8 @@ test('SPC: la solicitud de escritorio añade el acabado y conserva el comportami
   const build = desktop => {
     const comment = {value:''};
     const quantity = {value:0, dispatchEvent() {}};
-    const form = {querySelector: selector => ({'[name="comment"]':comment, '[name="quantity"]':quantity})[selector]};
+    const variant = {selectedOptions:[{textContent:'SPC-001-2'}]};
+    const form = {querySelector: selector => ({'[name="comment"]':comment, '[name="quantity"]':quantity, '[name="variant_id"]':variant})[selector]};
     const context = {
       window:{matchMedia:() => ({matches:desktop})},
       document:{activeElement:{}, body:{classList:{add() {}}}},
@@ -479,13 +482,13 @@ test('SPC: la solicitud de escritorio añade el acabado y conserva el comportami
   };
   const desktop = build(true);
   assert.equal(desktop.quantity.value, 11);
-  assert.match(desktop.comment.value, /Acabado de referencia: Caoba/);
+  assert.match(desktop.comment.value, /Acabado seleccionado: SPC-001-2/);
   desktop.comment.value = 'Mi comentario personalizado';
   desktop.reopen();
   assert.equal(desktop.comment.value, 'Mi comentario personalizado');
   const mobile = build(false);
   assert.equal(mobile.quantity.value, 11);
-  assert.equal(mobile.comment.value, 'Solicitud de Piso SPC: 11 cajas calculadas para 20.00 m² netos (+10% merma) (cobertura total 24.16 m²).');
+  assert.equal(mobile.comment.value, 'Solicitud de Piso SPC: 11 cajas calculadas para 20.00 m² netos (+10% merma) (cobertura total 24.16 m²). Acabado seleccionado: SPC-001-2.');
   mobile.comment.value = 'Anterior';
   mobile.reopen();
   assert.match(mobile.comment.value, /^Solicitud de Piso SPC: 11 cajas/);
@@ -512,6 +515,83 @@ test('SPC: el estimado usa cajas completas y precio en céntimos, sin inventar i
   assert.equal(estimateTotal(10, '0'), 0);
   for (const price of [undefined, null, '', ' ', 'sin precio', -1, Infinity]) assert.equal(estimateTotal(10, price), null);
   for (const boxes of [0, -1, 1.5, Infinity, NaN]) assert.equal(estimateTotal(boxes, 9990), null);
+});
+
+test('SPC: todos los tramos de cantidad aplican a la caja y se restablecen al reducir el pedido', () => {
+  for (let n = 0; n < tiers.length; n++) {
+    const tier = tiers[n];
+    assert.equal(floorPricing.unitPrice(tier.min_boxes, 9500, tiers), tier.price_cents);
+    assert.equal(estimateTotal(tier.min_boxes, 9500, tiers), tier.min_boxes * tier.price_cents / 100);
+    if (n) assert.equal(floorPricing.unitPrice(tier.min_boxes - 1, 9500, tiers), tiers[n - 1].price_cents);
+  }
+  for (const [quantity, unit] of [[500, 7000], [12, 8500], [6, 9000], [1, 9500]]) {
+    assert.equal(floorPricing.unitPrice(quantity, 9500, tiers), unit);
+  }
+  assert.deepEqual(floorPricing.read({dataset:{quantityPrices:'not json'}}), []);
+  assert.equal(floorPricing.unitPrice(12, 9500, [{min_boxes:0, price_cents:1}, {min_boxes:6, price_cents:-1}]), 9500);
+  assert.equal(floorPricing.unitPrice(12, 9500, []), 9500);
+});
+
+test('SPC: ambas rutas usan 11 acabados, miniaturas, ambientes y precios nativos', async () => {
+  const engine = new Liquid({root:path.join(root, 'snippets'), extname:'.liquid'});
+  filters(engine);
+  engine.registerFilter('asset_url', name => `/assets/${name}`);
+  const raw = fs.readFileSync(path.join(root, 'sections/landing-piso-spc.liquid'), 'utf8');
+  const source = raw.replace(/{% schema %}[\s\S]*?{% endschema %}/, '');
+  const product = spcFixture(2);
+  const context = {product, template:{suffix:'landing-spc'}, section:{id:'spc-variants', settings:{coverage_m2:'2.196'}, blocks:[]}, routes:{root_url:'/'}};
+  const standard = parseHTML(await engine.parseAndRender(source, {...context, request:{path:'/products/piso-spc'}})).document;
+  assert.equal(standard.querySelectorAll('[data-option-link]').length, 11);
+  assert.equal(standard.querySelectorAll('[data-option-link] img[src*="piso-spc-"]').length, 11);
+  assert.equal(standard.querySelectorAll('[data-gallery-panel]').length, 2);
+  assert.match(standard.querySelector('[data-gallery-panel]:not([hidden]) img').src, /ambiente-spc-0020-1/);
+  assert.equal(standard.querySelector('[name="variant_id"] option').value, product.variants[2].id);
+  assert.equal(standard.querySelector('.floor-quantity-prices tbody').children.length, tiers.length);
+  const landing = parseHTML(await engine.parseAndRender(source, {...context, request:{path:'/products/piso-spc/landing'}})).document;
+  assert.equal(landing.querySelectorAll('[data-tone-select]').length, 11);
+  assert.equal(landing.querySelectorAll('[name="variant_id"] option').length, 11);
+  assert.equal(landing.querySelector('[name="variant_id"] option[selected]').value, product.variants[2].id);
+  assert.deepEqual(floorPricing.read(landing.querySelector('[data-request-form]')), tiers);
+  assert.equal(landing.querySelector('.floor-quantity-prices tbody').children.length, tiers.length);
+});
+
+test('SPC: elegir un acabado cambia ambiente, solicitud y URL conservando la selección al reabrir', async () => {
+  const {runInNewContext} = require('node:vm');
+  const engine = new Liquid({root:path.join(root, 'snippets'), extname:'.liquid'});
+  filters(engine);
+  engine.registerFilter('asset_url', name => `/assets/${name}`);
+  const product = spcFixture();
+  const catalog = await engine.renderFile('spc-tone-catalog', {section_id:'test', phone:'51914158674', product});
+  const options = product.variants.map(v => `<option value="${v.id}" data-sku="${v.sku}">${v.title}</option>`).join('');
+  const {document, window:dom} = parseHTML(`<main><button data-tone-open="selected">Cambiar</button><img data-finish-image><strong data-finish-summary></strong><select name="variant_id">${options}</select>${catalog}</main>`);
+  const page = document.querySelector('main'), dialog = page.querySelector('dialog'), select = page.querySelector('select');
+  let value = product.variants[0].id;
+  Object.defineProperty(select, 'value', {get:() => value, set:next => {value = next;}});
+  Object.defineProperty(select, 'selectedOptions', {get:() => [...select.options].filter(option => option.value === value)});
+  dialog.showModal = () => {dialog.open = true;};
+  dialog.close = () => {dialog.open = false; dialog.dispatchEvent(new dom.Event('close'));};
+  const histories = [], controllers = new WeakMap();
+  const source = fs.readFileSync(path.join(root, 'assets/landing-piso-spc.js'), 'utf8');
+  const setup = source.slice(source.indexOf('  function initFinishCatalog('), source.indexOf('  function init(scope)'));
+  runInNewContext(`${setup}\ninitFinishCatalog(page, () => {}, () => {});`, {page, finishControllers:controllers, Event:dom.Event, URL,
+    window:{location:{href:'https://example.test/products/piso-spc/landing?utm_source=campaign'}, history:{replaceState:(_, __, url) => histories.push(url)}}});
+  page.querySelector('[data-tone-open]').click();
+  dialog.querySelector('[data-tone-filter="neutros"]').click();
+  dialog.querySelector('[data-tone-select="DEMO-SPC-6"]').click();
+  assert.equal(select.value, 'DEMO-SPC-6');
+  assert.match(page.querySelector('[data-finish-image]').src, /ambiente-spc-007/);
+  assert.match(dialog.querySelector('[data-tone-room]').src, /ambiente-spc-007/);
+  assert.equal(page.querySelector('[data-finish-summary]').textContent, 'SPC-007');
+  assert.equal(page.dataset.sku, 'DEMO-SPC-007');
+  assert.equal(histories[0].searchParams.get('variant'), 'DEMO-SPC-6');
+  assert.equal(histories[0].searchParams.get('utm_source'), 'campaign');
+  dialog.querySelector('[data-tone-confirm]').click();
+  assert.equal(dialog.open, false);
+  page.querySelector('[data-tone-open]').click();
+  assert.equal(dialog.querySelector('[data-tone-filter="neutros"]').getAttribute('aria-pressed'), 'true');
+  assert.equal(dialog.querySelectorAll('[data-tone-select][aria-pressed="true"]').length, 1);
+  controllers.get(page)();
+  assert.equal(controllers.has(page), false);
 });
 test('SPC: datos nativos y privacidad del contenido de muestra en el tema', async () => {
   const engine = new Liquid({root:path.join(root, 'snippets'), extname:'.liquid'});

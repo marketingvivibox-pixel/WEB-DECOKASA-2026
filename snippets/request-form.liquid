@@ -4,6 +4,7 @@
   @param {string} section_id - Section identifier used to label the dialog.
   @param {boolean} [price_pending] - Show an unconfirmed total for an unpriced floor design.
   @param {number} [coverage_m2] - Fallback coverage per box; native variant and product values take priority.
+  @param {boolean} [all_variants] - Offer every native finish in the advertising landing.
 {% enddoc %}
 <div class="form-box request-form-box" id="solicitud">
   <h2 id="RequestTitle-{{ section_id }}">Solicita tu compra</h2>
@@ -19,7 +20,7 @@
     </ol>
   </div>
 
-  <form data-request-form data-product-id="{{ product.id }}" data-product-title="{{ product.title | escape }}" data-currency="{{ cart.currency.iso_code | default: shop.currency | default: 'PEN' }}" action="#solicitud" method="post" novalidate>
+  <form data-request-form data-product-id="{{ product.id }}" data-product-title="{{ product.title | escape }}" data-quantity-prices="{{ product.metafields.decokasa.quantity_prices.value | json | escape }}" data-currency="{{ cart.currency.iso_code | default: shop.currency | default: 'PEN' }}" action="#solicitud" method="post" novalidate>
     <fieldset disabled class="request-fieldset">
       <div class="request-step" data-request-step>
         <h3 tabindex="-1" data-request-step-heading>Revisa tu pedido</h3>
@@ -29,7 +30,14 @@
           <span class="form-summary-total">Total estimado: <strong data-form-total>{% if price_pending %}Por confirmar{% else %}{{ product.selected_or_first_available_variant.price | money_with_currency }}{% endif %}</strong></span>
         </div>
         <div data-request-items></div>
-        <label data-request-variant>Presentación<select name="variant_id">{% assign variant = product.selected_or_first_available_variant %}{% if variant != blank %}<option value="{{ variant.id }}" data-price="{{ variant.price }}" data-sku="{{ variant.sku | escape }}" data-coverage="{{ variant.metafields.decokasa.coverage_m2.value | default: product.metafields.decokasa.coverage_m2.value | default: coverage_m2 }}" selected>{{ variant.title | escape }}</option>{% endif %}</select></label>
+        <label data-request-variant>Presentación<select name="variant_id">
+          {% assign selected_variant = product.selected_or_first_available_variant %}
+          {% for variant in product.variants %}
+            {% if all_variants or variant.id == selected_variant.id %}
+              <option value="{{ variant.id }}" data-price="{{ variant.price }}" data-sku="{{ variant.sku | escape }}" data-coverage="{{ variant.metafields.decokasa.coverage_m2.value | default: product.metafields.decokasa.coverage_m2.value | default: coverage_m2 }}" {% if variant.id == selected_variant.id %}selected{% endif %}>{{ variant.title | escape }}</option>
+            {% endif %}
+          {% endfor %}
+        </select></label>
         <label data-request-quantity>Cantidad<input name="quantity" type="number" min="1" max="1000000" step="1" value="1" required></label>
       </div>
       <div class="request-step" data-request-step hidden>

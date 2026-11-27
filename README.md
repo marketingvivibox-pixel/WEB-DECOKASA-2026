@@ -36,7 +36,7 @@ El formulario solo simula y no persiste datos personales. Consentimiento de segu
 
 
 ## Verificación
-27/11/2026: 98 pruebas del tema y 24 casos del Libro de Reclamaciones aprobados; respaldo íntegro y seis archivos Liquid validados oficialmente. Once vistas locales y ZIP de 214 archivos actualizados. Ambas experiencias SPC/PVC se comprobaron localmente a 320, 393 y 1440 px. La ficha SPC calcula 13,25 m² + 7 % como 7 cajas de 2,196 m²; PVC conserva cambios de acabado y precios pendientes. Estado de publicación en [avances](docs/progress.md).
+27/11/2026: 102 pruebas del tema y 24 casos del Libro de Reclamaciones aprobados; respaldo íntegro y 13 archivos validados oficialmente. Once vistas locales y ZIP de 217 archivos actualizados. Ambas experiencias SPC/PVC se comprobaron a 320, 393 y 1440 px. PVC tiene 20 ambientes diferentes y SPC 11 variantes con sus ambientes; las miniaturas conservan la textura original. SPC aplica precios por cantidad: 12 m² sin cortes equivalen a 6 cajas y S/540; PVC conserva los tres precios pendientes. Estado de publicación en [avances](docs/progress.md).
 
 Antecedente del 05/11/2026:
 `npm test` aprueba 49 pruebas, entre lógica, navegación Liquid y pruebas DOM (filtros, variantes, galería por color, solicitud combinada, meta automática del regalo, formulario, consentimiento, ficha y landings SPC/PVC). Shopify Theme Check CLI 5.0.1 sin hallazgos; ocho HTML y ZIP de 166 archivos verificados. Ficha y landings SPC/PVC revisadas en escritorio y celular sin desbordamiento. SPC publicado conserva la geometría, imágenes y enlaces móviles; navegación, capas, acabados y calculadora de escritorio comprobados. Reintentos conservan referencia solo en la página actual. Pendiente: datos comerciales del catálogo y recepción idempotente en Odoo. PVC conserva los 20 acabados aprobados: SKU completos y 17 precios FD de S/ 99 por caja verificados el 05/11; tres tarifas LQ pendientes. Stock configurado por instrucción del usuario: 10 000 cajas por SKU, 200 000 en total, con seguimiento activado. [Datos aplicados a Shopify](docs/pvc-product-data.json). Producto activo y publicado: https://decokasaperu.myshopify.com/products/piso-pvc. Los 49 cambios de su landing están sincronizados desde `a61758a` en el tema oficial existente; corrección de instalación `a2b77bc` preservada en la integración SPC. URL pública verificada en móvil y escritorio; catálogo, cálculo y consulta por WhatsApp funcionan.
@@ -60,7 +60,7 @@ La franja superior de servicios permanece fija al desplazarse. La portada incluy
 - [Referencia visual inicial](docs/references/mockup-inicial-decokasa-2026-10-02.jpeg).
 - [Demostración navegable](preview/DECOKASA-inicio.html): descargar el repositorio y abrir este HTML en el navegador; GitHub muestra su código.
 - [Vista móvil de la portada](preview/DECOKASA-movil.html): abrir este HTML en el navegador para verla dentro de un marco de teléfono. Para la tienda conectada, usar la vista móvil del editor de temas Shopify.
-- [Paquete del tema](releases/DECOKASA-tema-0.1.0.zip): contiene los 214 archivos Shopify actuales. GitHub/main está vinculado al tema activo `188927803629`, único destino.
+- [Paquete del tema](releases/DECOKASA-tema-0.1.0.zip): contiene los 217 archivos Shopify actuales. GitHub/main está vinculado al tema activo `188927803629`, único destino.
 
 
 ## Reproducir las verificaciones

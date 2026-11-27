@@ -8,13 +8,17 @@ Los cambios se desarrollan y prueban localmente en una rama secundaria antes de 
 
 `snippets/flooring-route-view.liquid` selecciona la presentación de SPC y PVC mediante la ruta; ni UTM ni referente alteran la vista. El editor de Shopify mantiene la landing editable. La ficha reutiliza `product-landing` y `request-form`, con rendimiento de variante, después de producto y finalmente de la configuración de la sección. SPC conserva el respaldo configurado de 2,196 m²/caja; no se inventa un valor para otras fichas.
 
-El producto SPC tiene actualmente una sola variante nativa. Las familias y muestras de la landing siguen siendo referencias para consulta, no variantes nuevas. No se cambian precios, inventario ni datos comerciales. Las confirmaciones de precio/presentación y rendimiento por acabado conservan sus pendientes anteriores.
+El producto SPC tiene 11 variantes nativas desde el 27/11/2026, con precio común S/95 y 1.000 cajas por acabado confirmados por el usuario. Las familias contienen 3 cálidos, 4 oscuros y 4 neutros. Cada variante tiene un ambiente ilustrativo y la textura original del PSD: `decokasa.finish_swatch` referencia la muestra; `decokasa.gallery_images` agrupa ambiente y muestra. El selector permite ver el ambiente y confirmar el acabado sin perder la superficie, cortes ni UTM. La ficha convencional usa los mismos datos.
 
-Verificación local: 98 pruebas del tema, 24 casos del Libro, respaldo íntegro, seis archivos aprobados por el validador oficial, once vistas y ZIP de 214 archivos. Ambas rutas SPC y PVC comprobadas a 320, 393 y 1440 px, sin desbordamiento, errores de página ni imágenes rotas. Ejemplo SPC: 13,25 m² + 7 % = 7 cajas / 15,37 m² / S/ 665 con el precio configurado de S/ 95.
+`assets/flooring-pricing.js` y `snippets/floor-quantity-prices.liquid` usan la escala confirmada del Sheet: desde 1/6/12/50/100/200/300/400/500 cajas, S/95/90/85/83/80/78/75/73/70 por caja. Se aplica al estimado y la solicitud, sujeto a confirmación del asesor; no configura descuentos de checkout. Rendimiento: 2,196 m² por caja. Se mantienen cinco SKU confirmados y seis vacíos pendientes de correspondencia; SPC-002-1 requiere aclarar 5 mm comercial frente a 5,5 mm del PSD.
+
+Verificación local vigente: 102 pruebas del tema, 24 casos del Libro, respaldo íntegro, 13 archivos aprobados por el validador oficial, once vistas y ZIP de 217 archivos. Ambas rutas SPC y PVC comprobadas a 320, 393 y 1440 px. Ejemplo SPC: 12 m² sin cortes = 6 cajas / S/540; 25 m² = 12 cajas / S/1.020. Ver publicación en [avances](progress.md).
 
 Publicado el 27/11/2026 mediante `6cadfb9` en GitHub/main. Shopify sincronizó los seis archivos Liquid en el tema oficial `188927803629`; las rutas públicas SPC y PVC pasaron nuevamente la revisión a 320, 393 y 1440 px. La ficha y la landing SPC conservan la URL canónica `https://decokasa.pe/products/piso-spc`. Ver detalle en `docs/progress.md`.
 
-## 10/11/2026 — Acabados disponibles por familia
+## Antecedente — 10/11/2026: acabados disponibles por familia
+
+La configuración de muestras sin variantes descrita a continuación fue sustituida el 27/11/2026 por variantes nativas, miniaturas independientes del PSD y ambientes. La distribución por familias se conserva.
 
 Las muestras y botones «Ver más» abren `snippets/spc-tone-catalog.liquid`, con estilos en `assets/landing-piso-spc-tones.css` y lógica en `landing-piso-spc.js`. El catálogo usa un único JPG, `assets/spc-catalogo-tonos-2026-11.jpg` (1080 × 1544), idéntico al proporcionado por el usuario. Cada ventana de textura recorta 456 × 124 píxeles de esa fuente; no se muestran sus textos incrustados ni se reconstruyen sus vetas.
 

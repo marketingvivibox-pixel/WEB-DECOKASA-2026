@@ -1,3 +1,12 @@
+## 27/11/2026 — Ambientes por acabado PVC/SPC
+
+- [x] Generados y revisados 20 ambientes diferentes para PVC y 11 para SPC; subidos a los productos existentes y asociados por código. Cada variante conserva su textura original como miniatura y segunda imagen.
+- [x] SPC: 11 variantes nativas, S/95 y 1.000 cajas cada una, con escala de nueve precios por cantidad en ambas calculadoras y solicitud. Se conservaron cinco SKU confirmados; seis siguen pendientes.
+- [x] Selector de ambientes en ambas landings, galería por variante en fichas, conservación de área/cortes/UTM, cierre accesible y tamaños móviles comprobados. PVC mantiene sus tres precios pendientes y existencias anteriores.
+- [x] Pruebas locales: 102/102 del tema, 24/24 del Libro y respaldo íntegro; 13 archivos aprobados por el validador oficial. Once vistas y ZIP de 217 archivos regenerados. SPC/PVC verificados a 320, 393 y 1440 px; los 20 acabados PVC comprobados en ambas vistas a 393 px.
+- [ ] Integrar en `main`, comprobar sincronización del tema oficial y repetir la verificación pública.
+- [ ] Completar seis SKU SPC y resolver el espesor de SPC-002-1; confirmar los precios PVC 7172-4, 7172-8 y 7195-8. Fuentes comerciales de solo lectura, sin cambios.
+
 ## 27/11/2026 — Dos accesos para Piso SPC
 
 - [x] Implementadas en `feat/spc-product-landing-routes`, desde `70a31f0`, la ficha convencional con calculadora y la landing por sufijo `/landing`.

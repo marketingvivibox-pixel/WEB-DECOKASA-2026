@@ -22,11 +22,13 @@
     };
   }
 
-  function estimateTotal(boxes, rawPrice) {
+  const pricing = typeof module !== 'undefined' && module.exports ? require('./flooring-pricing.js') : window.DecokasaFloorPricing;
+
+  function estimateTotal(boxes, rawPrice, tiers = []) {
     if (rawPrice == null || String(rawPrice).trim() === '') return null;
     const price = Number(rawPrice);
     if (!Number.isInteger(boxes) || boxes < 1 || !Number.isFinite(price) || price < 0) return null;
-    return boxes * price / 100;
+    return boxes * (pricing ? pricing.unitPrice(boxes, price, tiers) : price) / 100;
   }
 
   if (typeof module !== 'undefined' && module.exports) module.exports = { calculate, estimateTotal };
@@ -412,6 +414,8 @@
     if (!dialog) return;
     const filters = [...dialog.querySelectorAll('[data-tone-filter]')];
     const cards = [...dialog.querySelectorAll('[data-tone-family]')];
+    const choices = [...dialog.querySelectorAll('[data-tone-select]')];
+    const variantSelect = page.querySelector('[name="variant_id"]');
     const families = ['calidos', 'oscuros', 'neutros'];
     const labels = ['cálidos', 'oscuros', 'neutros'];
     const listeners = [];
@@ -420,6 +424,19 @@
     const listen = (node, type, handler) => {
       node?.addEventListener(type, handler);
       listeners.push(() => node?.removeEventListener(type, handler));
+    };
+    const syncFinish = () => {
+      const choice = choices.find(button => button.dataset.toneSelect === variantSelect?.value);
+      if (!choice) return;
+      choices.forEach(button => button.setAttribute('aria-pressed', String(button === choice)));
+      page.querySelectorAll('[data-tone-room], [data-finish-image]').forEach(img => {
+        img.src = choice.dataset.toneImage;
+        img.alt = `Ambiente con piso ${choice.dataset.toneName}`;
+      });
+      page.querySelectorAll('[data-tone-room-code], [data-finish-name], [data-finish-summary]').forEach(node => { node.textContent = choice.dataset.toneName; });
+      const index = page.querySelector('[data-finish-index]');
+      if (index) index.textContent = `${String(choices.indexOf(choice) + 1).padStart(2, '0')} / ${choices.length}`;
+      page.dataset.sku = variantSelect.selectedOptions?.[0]?.dataset.sku || '';
     };
     const selectFamily = family => {
       const index = families.indexOf(family);
@@ -438,13 +455,41 @@
     };
     page.querySelectorAll('[data-tone-open]').forEach(button => listen(button, 'click', () => {
       returnFocus = button;
-      selectFamily(button.dataset.toneOpen);
+      const selectedCard = choices.find(choice => choice.dataset.toneSelect === variantSelect?.value)?.closest('[data-tone-family]');
+      selectFamily(button.dataset.toneOpen === 'selected' ? selectedCard?.dataset.toneFamily || families[0] : button.dataset.toneOpen);
       if (!dialog.open) dialog.showModal();
       syncModalState();
       dialog.querySelector('[data-tone-close]')?.focus({preventScroll: true});
     }));
     filters.forEach(button => listen(button, 'click', () => selectFamily(button.dataset.toneFilter)));
-    listen(dialog.querySelector('[data-tone-close]'), 'click', () => dialog.close());
+    choices.forEach(button => listen(button, 'click', () => {
+      if (!variantSelect) return;
+      variantSelect.value = button.dataset.toneSelect;
+      variantSelect.dispatchEvent(new Event('change', {bubbles: true}));
+      const url = new URL(window.location.href);
+      url.searchParams.set('variant', variantSelect.value);
+      window.history.replaceState({}, '', url);
+      dialog.querySelector('[data-tone-content]').scrollTop = 0;
+    }));
+    listen(variantSelect, 'change', syncFinish);
+    const restorePage = () => {
+      if (dialog.open || !returnFocus) return;
+      const opener = returnFocus;
+      returnFocus = null;
+      syncModalState();
+      if (opener.isConnected) opener.focus({preventScroll: true});
+    };
+    const closeCatalog = () => {
+      if (dialog.open) dialog.close();
+      restorePage();
+    };
+    listen(dialog.querySelector('[data-tone-confirm]'), 'click', closeCatalog);
+    syncFinish();
+    listen(dialog.querySelector('[data-tone-close]'), 'click', closeCatalog);
+    listen(dialog, 'cancel', event => {
+      event.preventDefault();
+      closeCatalog();
+    });
     // A drag/scroll beginning inside the panel must never dismiss it.
     const outside = event => {
       const rect = dialog.getBoundingClientRect();
@@ -452,13 +497,10 @@
     };
     listen(dialog, 'pointerdown', event => {backdropPointer = outside(event);});
     listen(dialog, 'click', event => {
-      if (backdropPointer && outside(event)) dialog.close();
+      if (backdropPointer && outside(event)) closeCatalog();
       backdropPointer = false;
     });
-    listen(dialog, 'close', () => {
-      syncModalState();
-      if (returnFocus?.isConnected) returnFocus.focus({preventScroll: true});
-    });
+    listen(dialog, 'close', restorePage);
     finishControllers.set(page, () => {
       listeners.forEach(remove => remove());
       if (dialog.open) dialog.close();
@@ -533,18 +575,6 @@
         selectedColorIdx = (index + swatches.length) % swatches.length;
         swatches.forEach((swatch, i) => swatch.setAttribute('aria-pressed', String(i === selectedColorIdx)));
         if (status) status.textContent = `${swatches[selectedColorIdx].dataset.color} · Color de referencia`;
-        const swatch = swatches[selectedColorIdx];
-        const source = swatch.querySelector('img');
-        const preview = page.querySelector('[data-finish-image]');
-        if (preview && source) {
-          preview.src = source.src;
-          preview.alt = `Muestra de piso SPC en ${swatch.dataset.color.toLowerCase()}`;
-        }
-        page.querySelectorAll('[data-finish-name], [data-finish-summary]').forEach(node => {node.textContent = swatch.dataset.color;});
-        const finishIndex = page.querySelector('[data-finish-index]');
-        if (finishIndex) finishIndex.textContent = `0${selectedColorIdx + 1} / 0${swatches.length}`;
-        const description = page.querySelector('[data-finish-description]');
-        if (description) description.textContent = ['Un tono cálido para espacios acogedores.', 'Un tono profundo que realza la madera.', 'Un tono neutro para combinar con tu estilo.'][selectedColorIdx] || '';
         contactUpdate();
       };
 
@@ -967,14 +997,17 @@
       // Use the same Shopify variant price and currency as the request summary.
       function updateEstimate() {
         if (!estimateEl) return;
-        if (!lastCalculation) { estimateEl.textContent = '—'; return; }
+        const unitEl = form.querySelector('[data-calc-unit-price]');
+        if (!lastCalculation) { estimateEl.textContent = '—'; if (unitEl) unitEl.textContent = ''; return; }
         const request = page.querySelector('#solicitud [data-request-form]');
         const select = request?.querySelector('[name="variant_id"]');
         const option = select?.selectedOptions?.[0] || select?.querySelector('option[selected]');
-        const total = estimateTotal(lastCalculation.boxes, option?.dataset.price);
-        estimateEl.textContent = total === null ? estimateEl.dataset.unconfirmed : new Intl.NumberFormat('es-PE', {
+        const total = estimateTotal(lastCalculation.boxes, option?.dataset.price, pricing?.read(request));
+        const currency = new Intl.NumberFormat('es-PE', {
           style: 'currency', currency: request?.dataset.currency || 'PEN'
-        }).format(total);
+        });
+        estimateEl.textContent = total === null ? estimateEl.dataset.unconfirmed : currency.format(total);
+        if (unitEl) unitEl.textContent = total === null ? '' : `${currency.format(total / lastCalculation.boxes)} por caja · ${lastCalculation.boxes} ${lastCalculation.boxes === 1 ? 'caja' : 'cajas'}`;
       }
 
       // Calculation execution
@@ -1108,8 +1141,8 @@
             ? commentInput && (!commentInput.value.trim() || commentInput.value === generatedRequestComment)
             : commentInput && lastCalculation && lastCalculation.boxes > 0;
           if (canUpdateComment) {
-            const finish = swatches[selectedColorIdx]?.dataset.color;
-            const finishReference = desktopRequest && finish ? ` Acabado de referencia: ${finish} (por confirmar con el asesor).` : '';
+            const finish = reqForm.querySelector('[name="variant_id"]')?.selectedOptions?.[0]?.textContent.trim();
+            const finishReference = finish ? ` Acabado seleccionado: ${finish}.` : '';
             if (lastCalculation && lastCalculation.boxes > 0) {
               const wasteMsg = lastCalculation.includeWaste ? ' (+10% merma)' : '';
               let details = '';
@@ -1207,12 +1240,11 @@
           if (summaryQty) summaryQty.textContent = `${qty} ${qty === 1 ? 'caja' : 'cajas'}`;
           if (summaryTotal) {
             const rawPrice = (select?.selectedOptions?.[0] || select?.querySelector('option[selected]'))?.dataset.price;
-            const price = rawPrice?.trim() ? Number(rawPrice) : NaN;
-            if (!Number.isFinite(price) || price < 0) {
+            const total = estimateTotal(qty, rawPrice, pricing?.read(reqForm));
+            if (total === null) {
               summaryTotal.textContent = 'Importe por confirmar';
               return;
             }
-            const total = (qty * price) / 100;
             summaryTotal.textContent = new Intl.NumberFormat('es-PE', { style: 'currency', currency }).format(total);
           }
         }

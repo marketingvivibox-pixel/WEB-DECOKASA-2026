@@ -259,10 +259,11 @@ body{padding-top:var(--service-bar-height,38px)}
 
 <main id="main">
 
-<link rel="stylesheet" href="assets/product-detail.css?v=1795791227547">
-<link rel="stylesheet" href="assets/request-form.css?v=1795791227547">
-<script src="assets/request-form.js?v=1795791227547" defer="defer"></script>
-<script src="assets/product-detail.js?v=1795791227547" defer="defer"></script>
+<link rel="stylesheet" href="assets/product-detail.css?v=1795804738718">
+<link rel="stylesheet" href="assets/request-form.css?v=1795804738718">
+<script src="assets/request-form.js?v=1795804738718" defer="defer"></script>
+<script src="assets/flooring-pricing.js?v=1795804738718" defer="defer"></script>
+<script src="assets/product-detail.js?v=1795804738718" defer="defer"></script>
 
 
 
@@ -395,6 +396,7 @@ body{padding-top:var(--service-bar-height,38px)}
 
 
 
+
         <p class="request-builder-help">Elige una presentación y su cantidad. Agrégala a tu solicitud y repite con los otros colores que quieras.</p>
         <div class="product-purchase" data-purchase-controls="">
           <div class="product-quantity"><button type="button" data-quantity-step="-1" aria-label="Disminuir cantidad">−</button><label class="sr-only" for="Quantity-preview-product-landing">Cantidad</label><input id="Quantity-preview-product-landing" data-product-quantity="" type="number" min="1" max="1000000" step="1" value="1" inputmode="numeric"><button type="button" data-quantity-step="1" aria-label="Aumentar cantidad">+</button></div>
@@ -517,7 +519,7 @@ body{padding-top:var(--service-bar-height,38px)}
     </ol>
   </div>
 
-  <form data-request-form="" data-product-id="DEMO-P-0" data-product-title="Audífonos inalámbricos" data-currency="PEN" action="#solicitud" method="post" novalidate>
+  <form data-request-form="" data-product-id="DEMO-P-0" data-product-title="Audífonos inalámbricos" data-quantity-prices="" data-currency="PEN" action="#solicitud" method="post" novalidate>
     <fieldset disabled class="request-fieldset">
       <div class="request-step" data-request-step="">
         <h3 tabindex="-1" data-request-step-heading="">Revisa tu pedido</h3>
@@ -527,7 +529,16 @@ body{padding-top:var(--service-bar-height,38px)}
           <span class="form-summary-total">Total estimado: <strong data-form-total="">S/. 129.00 PEN</strong></span>
         </div>
         <div data-request-items=""></div>
-        <label data-request-variant="">Presentación<select name="variant_id"><option value="DEMO-V-0-A" data-price="12900" data-sku="DEMO-XI-001" data-coverage="" selected>Estándar</option></select></label>
+        <label data-request-variant="">Presentación<select name="variant_id">
+
+
+
+              <option value="DEMO-V-0-A" data-price="12900" data-sku="DEMO-XI-001" data-coverage="" selected>Estándar</option>
+
+
+
+
+        </select></label>
         <label data-request-quantity="">Cantidad<input name="quantity" type="number" min="1" max="1000000" step="1" value="1" required></label>
       </div>
       <div class="request-step" data-request-step="" hidden>

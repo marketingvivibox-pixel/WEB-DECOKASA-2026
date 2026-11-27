@@ -8,6 +8,7 @@
 {{ 'landing-piso-spc-tones.css' | asset_url | stylesheet_tag }}
 {{ 'request-form.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'request-form.js' | asset_url }}" defer></script>
+<script src="{{ 'flooring-pricing.js' | asset_url }}" defer></script>
 <script src="{{ 'landing-piso-spc.js' | asset_url }}" defer></script>
 {% liquid
   assign current_variant = product.selected_or_first_available_variant
@@ -63,7 +64,7 @@
 <div class="spc-v2-composition-rim" aria-hidden="true"></div>
 </section>
 <section id="acabados-{{ section.id }}" class="spc-v2-colors-specs spc-v2-white" tabindex="-1">
-<figure class="spc-desktop-only spc-finish-preview" aria-label="Acabado seleccionado"><div class="spc-finish-preview-top"><span>Tu selección</span><span data-finish-index>01 / 03</span></div><img data-finish-image src="{{ 'spc-2026-muestra-calida.webp' | asset_url }}" width="266" height="266" alt="Muestra de piso SPC en madera natural" loading="lazy"><figcaption><strong data-finish-name>Madera natural</strong><span data-finish-description>Un tono cálido para espacios acogedores.</span></figcaption><small>Muestra de referencia · Confirma el tono y la disponibilidad con tu asesor.</small></figure>
+<figure class="spc-desktop-only spc-finish-preview" aria-label="Acabado seleccionado"><div class="spc-finish-preview-top"><span>Tu selección</span><span data-finish-index></span></div><img data-finish-image src="{{ current_variant.featured_image | image_url: width: 900 }}" width="900" height="900" alt="Ambiente con piso {{ current_variant.title | escape }}" loading="lazy"><figcaption><strong data-finish-name>{{ current_variant.title | escape }}</strong><span data-finish-description>Imagina este acabado en tu hogar.</span></figcaption><small>Visualización de ambiente · Consulta la muestra del acabado.</small></figure>
 <div class="spc-v2-colors-heading spc-v2-heading"><h2>Variedad para elegir</h2><p>Colores disponibles</p></div>
 <div id="{{ colors_id }}" class="spc-v2-samples spc-colors" tabindex="-1" aria-label="Colores de referencia">
 <div class="spc-v2-sample"><button type="button" class="spc-v2-swatch" data-color="Madera natural" data-tone-open="calidos" aria-haspopup="dialog" aria-controls="spc-tonos-{{ section.id }}" aria-pressed="true"><img src="{{ 'spc-2026-muestra-calida.webp' | asset_url }}" width="266" height="266" alt="Madera natural" loading="lazy"><span>Tonos <strong>cálidos</strong></span></button><button type="button" class="spc-v2-gold-link" data-tone-open="calidos" aria-haspopup="dialog" aria-controls="spc-tonos-{{ section.id }}" aria-label="Ver tonos cálidos">Ver más</button></div>
@@ -196,7 +197,7 @@
       <div class="spc-calc-col-result">
         <div class="spc-desktop-plan" data-desktop-plan></div>
         <div class="spc-result-card" data-calc-result>
-          <p class="spc-desktop-only spc-calc-finish">Acabado de referencia: <strong data-finish-summary>Madera natural</strong> <a data-spc-desktop-anchor href="#acabados-{{ section.id }}">Cambiar</a></p>
+          <p class="spc-calc-finish">Acabado: <strong data-finish-summary>{{ current_variant.title | escape }}</strong> <button type="button" data-tone-open="selected" aria-haspopup="dialog">Cambiar</button></p>
           <div class="spc-result-summary" role="status" aria-live="polite" aria-atomic="true">
             <div class="spc-result-metrics">
               <div><span class="spc-metric-label">{{ 'spc.calculator.you_need' | t }}</span><strong class="spc-boxes-val" data-boxes>— cajas</strong></div>
@@ -210,6 +211,8 @@
           </div>
           <a class="spc-button spc-button--order spc-calc-order" data-open-request href="#solicitud">{{ 'spc.calculator.request' | t }} <span aria-hidden="true">→</span></a>
           <p class="spc-estimate-note">{{ 'spc.calculator.estimate_note' | t }}</p>
+          <p class="spc-calc-unit-price" data-calc-unit-price></p>
+          {% render 'floor-quantity-prices', product: product %}
           <details class="spc-calc-details">
             <summary>{{ 'spc.calculator.details' | t }}<span aria-hidden="true">+</span></summary>
             <div class="spc-breakdown-details">
@@ -296,8 +299,8 @@
 <p class="spc-v2-copyright">Decokasa Perú {{ 'now' | date: '%Y' }}<br>Todos los derechos reservados</p>
 </footer></div>
 
-{% render 'spc-tone-catalog', section_id: section.id, phone: phone %}
-<dialog class="spc-v2-dialog spc-v2-request-dialog request-dialog" data-spc-modal aria-labelledby="RequestTitle-{{ section.id }}"><button class="request-close" type="button" data-modal-close aria-label="Cerrar solicitud">×</button>{% render 'request-form', product: product, section_id: section.id %}</dialog>
+{% render 'spc-tone-catalog', section_id: section.id, phone: phone, product: product %}
+<dialog class="spc-v2-dialog spc-v2-request-dialog request-dialog" data-spc-modal aria-labelledby="RequestTitle-{{ section.id }}"><button class="request-close" type="button" data-modal-close aria-label="Cerrar solicitud">×</button>{% render 'request-form', product: product, section_id: section.id, all_variants: true, coverage_m2: coverage %}</dialog>
 <a class="spc-mobile-sticky-cta" data-spc-sticky-cta href="#calculadora-{{ section.id }}" inert><strong>Realizar pedido</strong><span>Calcula tus cajas de piso SPC →</span></a>
 </div>
 {% else %}

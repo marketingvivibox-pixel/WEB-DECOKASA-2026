@@ -191,14 +191,60 @@
     }
 
     function unlockDialog() {
-      if (dialogLocked) document.body.style.overflow = previousOverflow;
+      if (catalog.open || !dialogLocked) return;
+      document.body.style.overflow = previousOverflow;
       dialogLocked = false;
       opener?.focus({preventScroll: true});
       scheduleStickyCta();
     }
 
-    function closeCatalog() { if (catalog.open) catalog.close(); }
+    function closeCatalog() {
+      if (catalog.open) catalog.close();
+      unlockDialog();
+    }
+    function showRoom(image, source, code) {
+      if (!image || !source) return;
+      image.alt = `Ambiente ilustrativo con piso PVC ${code}`;
+      if (image.getAttribute('src') === source) return;
+      image.classList.add('pvc-image-loading');
+      image.setAttribute('aria-busy', 'true');
+      image.src = source;
+      if (image.complete) {
+        image.classList.remove('pvc-image-loading');
+        image.removeAttribute('aria-busy');
+      }
+    }
+
+    function selectFinish(next, changeUrl = true, animate = true) {
+      if (!next) return;
+      variant = next;
+      finish = variant.finish;
+      root.querySelector('[data-selected-name]').textContent = finish;
+      root.querySelector('[data-catalog-room-code]').textContent = finish;
+      root.querySelector('[data-catalog-price]').textContent = Number(variant.price) > 0 ? `${money.format(variant.price / 100)} / caja` : 'Precio por confirmar';
+      swatches.forEach(item => item.setAttribute('aria-pressed', String(item.dataset.pickFinish === finish)));
+      showRoom(root.querySelector('[data-catalog-room]'), variant.image, finish);
+      showRoom(root.querySelector('[data-selected-room]'), variant.image, finish);
+      const source = variant.swatch || swatches.find(item => item.dataset.pickFinish === finish)?.querySelector('img')?.src;
+      if (source) miniFloor.style.setProperty('--finish', `url("${source.replace(/["\\\n\r]/g, '')}")`);
+      if (changeUrl) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('variant', variant.id);
+        window.history.replaceState(window.history.state, '', url);
+      }
+      update(animate);
+    }
+
+    function selectFromUrl() {
+      const id = new URL(window.location.href).searchParams.get('variant');
+      selectFinish(variants.find(item => String(item.id) === id) || variants.find(item => item.available) || variants[0], false, false);
+    }
+    on(window, 'popstate', selectFromUrl);
     on(catalog, 'close', unlockDialog);
+    on(catalog, 'cancel', event => {
+      event.preventDefault();
+      closeCatalog();
+    });
     on(catalog, 'click', event => {
       if (event.target !== catalog) return;
       const box = catalog.getBoundingClientRect();
@@ -215,18 +261,10 @@
         dialogLocked = true;
         updateStickyCta();
       }
-      if (event.target.closest('[data-catalog-close]')) closeCatalog();
+      if (event.target.closest('[data-catalog-close], [data-catalog-confirm]')) closeCatalog();
       const pick = event.target.closest('[data-pick-finish]');
       if (!pick) return;
-      finish = pick.dataset.pickFinish;
-      const swatch = swatches.find(item => item.dataset.pickFinish === finish);
-      variant = matchVariant(swatch?.dataset.finishSku, variants, finish);
-      root.querySelector('[data-selected-name]').textContent = finish;
-      root.querySelectorAll('[data-pick-finish]').forEach(item => item.setAttribute('aria-pressed', String(item.dataset.pickFinish === finish)));
-      const source = swatch?.querySelector('img')?.src;
-      if (source) miniFloor.style.setProperty('--finish', `url("${source.replace(/["\\\n\r]/g, '')}")`);
-      update();
-      closeCatalog();
+      selectFinish(matchVariant(pick.dataset.finishSku, variants, pick.dataset.pickFinish));
     });
     on(area, 'input', () => { clearTimeout(debounce); debounce = setTimeout(update, 180); });
     on(waste, 'change', () => update());
@@ -339,7 +377,8 @@
       rail?.querySelectorAll('[data-rail-clone]').forEach(clone => clone.remove());
       instances.delete(root);
     });
-    update();
+    if (variants.length) selectFromUrl();
+    else update();
   }
 
   function mount(scope) {scope.querySelectorAll('[data-pvc-landing]').forEach(initialize);}
