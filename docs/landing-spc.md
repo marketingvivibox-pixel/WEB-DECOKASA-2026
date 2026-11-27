@@ -1,6 +1,16 @@
 # Landing SPC — construcción y configuración
 
-La rama `feature/landing-piso-spc` ya se fusionó en `main` (e594fbf). Por instrucción del usuario, los ajustes continúan en `main`; la corrección móvil del 22/10/2026 se publicó en `95c644f` y su sincronización con el tema activo se verificó en Shopify. Plantilla: `templates/product.landing-spc.json`; sección: `sections/landing-piso-spc.liquid`; estilos y comportamiento: `assets/landing-piso-spc.css`, `landing-piso-spc-proportions.css`, `landing-piso-spc-layout.css` y `landing-piso-spc.js`; iconos y botones: `snippets/spc-icon.liquid` y `spc-actions.liquid`.
+Los cambios se desarrollan y prueban localmente en una rama secundaria antes de integrarse en `main`, conectado al único tema oficial Shopify. Plantilla: `templates/product.landing-spc.json`; sección: `sections/landing-piso-spc.liquid`; estilos y comportamiento: `assets/landing-piso-spc.css`, `landing-piso-spc-proportions.css`, `landing-piso-spc-layout.css` y `landing-piso-spc.js`; iconos y botones: `snippets/spc-icon.liquid` y `spc-actions.liquid`.
+
+## 27/11/2026 — Ficha de tienda y landing para publicidad
+
+`/products/piso-spc` muestra la ficha convencional, con cabecera, pie, galería, calculadora y productos relacionados. `/products/piso-spc/landing` conserva el diseño publicitario y su calculadora. Ambas rutas utilizan el producto `15442304925933`, con sufijo `landing-spc`, y la misma URL canónica base. El catálogo conserva el enlace base; los anuncios deben dirigirse a la ruta terminada en `/landing`. No se modifican anuncios automáticamente.
+
+`snippets/flooring-route-view.liquid` selecciona la presentación de SPC y PVC mediante la ruta; ni UTM ni referente alteran la vista. El editor de Shopify mantiene la landing editable. La ficha reutiliza `product-landing` y `request-form`, con rendimiento de variante, después de producto y finalmente de la configuración de la sección. SPC conserva el respaldo configurado de 2,196 m²/caja; no se inventa un valor para otras fichas.
+
+El producto SPC tiene actualmente una sola variante nativa. Las familias y muestras de la landing siguen siendo referencias para consulta, no variantes nuevas. No se cambian precios, inventario ni datos comerciales. Las confirmaciones de precio/presentación y rendimiento por acabado conservan sus pendientes anteriores.
+
+Verificación local: 98 pruebas del tema, 24 casos del Libro, respaldo íntegro, seis archivos aprobados por el validador oficial, once vistas y ZIP de 214 archivos. Ambas rutas SPC y PVC comprobadas a 320, 393 y 1440 px, sin desbordamiento, errores de página ni imágenes rotas. Ejemplo SPC: 13,25 m² + 7 % = 7 cajas / 15,37 m² / S/ 665 con el precio configurado de S/ 95. Estado de publicación en `docs/progress.md`.
 
 ## 10/11/2026 — Acabados disponibles por familia
 
@@ -24,7 +34,7 @@ El usuario confirmó que FloorScore, ANAB, ILAC, DAkkS, CNAS y EPH corresponden 
 
 Los 21 recursos `spc-*` proceden del PSD. Fotos/productos/logotipos conservan su contenido y transparencias. Textos, controles, beneficios, bordes y degradados son código. El original y manifiesto se conservan en `docs/references/landing-spc-recursos/`. Los recortes antiguos están en `docs/references/landing-spc-recortes-anteriores/`, fuera de las carpetas del tema; no reutilizarlos para construir la página.
 
-La sección conserva la composición vertical del mockup, con un ancho máximo de 1080 px y adaptación para móvil. El diagrama conserva el recorte derecho de su recurso original. Los iconos de beneficios son SVG. La cabecera y el pie generales del tema se omiten solo en la plantilla SPC.
+La sección conserva la composición vertical del mockup, con un ancho máximo de 1080 px y adaptación para móvil. El diagrama conserva el recorte derecho de su recurso original. Los iconos de beneficios son SVG. La cabecera y el pie generales del tema se omiten solo en la ruta publicitaria terminada en `/landing`.
 
 ## Configuración en Shopify
 
@@ -36,7 +46,7 @@ Madera natural, Caoba y Gris claro son nombres visuales de las tres muestras. No
 
 Agregar hasta dos testimonios reales mediante bloques de nombre, retrato y texto autorizados. Los sellos están desactivados por defecto; activarlos únicamente si los seis corresponden al producto. La vista local muestra la composición completa con textos de muestra, sin presentarlos como opiniones reales. El indicador `spc_design_preview` se inyecta solo en el generador local y está ausente del esquema y la plantilla Shopify.
 
-## Revisión y validación
+## Antecedente — Revisión y validación inicial
 
 `npm run sync:preview` regenera ocho vistas. `npm test` ejecuta 22 pruebas. `python scripts/verify_store.py` comprueba vistas/enlaces/IDs/JSON y genera `releases/DECOKASA-tema-0.1.0.zip`. `npx --yes @shopify/cli@4.9.4 theme check --output json` terminó sin hallazgos el 22/10/2026.
 

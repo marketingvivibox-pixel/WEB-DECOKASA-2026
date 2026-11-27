@@ -1,3 +1,9 @@
+## 27/11/2026 — SPC: ficha de tienda y landing para anuncios
+
+Se aplica a SPC el mismo recorrido aprobado para PVC. `/products/piso-spc` muestra la ficha convencional con calculadora; `/products/piso-spc/landing` conserva la landing publicitaria. La ruta determina la vista, independientemente de UTM y referente. El catálogo usa la URL base; los anuncios deben usar `/landing`. No se modifica la configuración de campañas.
+
+Se mantiene un único producto SPC (`15442304925933`, sufijo `landing-spc`) en el tema oficial `188927803629`, sincronizado desde GitHub/main. Mismos precios, stock y variante nativa; los acabados de referencia no se convierten en variantes nuevas. El editor sigue mostrando la landing. La ficha calcula con el rendimiento de variante/producto si existe y, en su defecto, con los 2,196 m²/caja configurados en la sección SPC. Formularios comerciales e integraciones conservan sus pendientes anteriores.
+
 ## 26/11/2026 — PVC: ficha de tienda y landing para anuncios
 
 El usuario pidió dos experiencias del mismo producto: `/products/piso-pvc` muestra la ficha convencional con calculadora; `/products/piso-pvc/landing` conserva la landing personalizada para publicidad. La ruta elige la presentación, independientemente del referente o de los parámetros UTM. El catálogo mantiene la URL base y los anuncios deben usar la ruta terminada en `/landing`.

@@ -14,12 +14,12 @@ class Check(HTMLParser):
         if 'data-pvc' in a:self.calcs+=1
         if tag=='h1':self.h1+=1
 pages=[p for p in out.glob('*.html') if p.name!='DECOKASA-movil.html']
-assert len(pages) == 10, 'Se esperan las diez páginas de demostración generadas'
+assert len(pages) == 11, 'Se esperan las once páginas de demostración generadas'
 for page in pages:
     c=Check();c.feed(page.read_text(encoding='utf-8'))
     assert len(c.ids)==len(set(c.ids)),page
     assert c.h1==1,page
-    assert c.calcs==(1 if page.name in ('landing-pisos-pvc.html', 'producto-piso-pvc.html') else 0),page
+    assert c.calcs==(1 if page.name in ('landing-pisos-pvc.html', 'producto-piso-pvc.html', 'producto-piso-spc.html') else 0),page
     assert all(f['method']=='post' for f in c.forms),page
     for href in c.links:
         url=urlsplit(href)

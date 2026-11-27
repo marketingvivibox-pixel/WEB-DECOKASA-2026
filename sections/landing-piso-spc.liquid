@@ -1,3 +1,6 @@
+{%- capture spc_route_view -%}{%- render 'flooring-route-view', template: template, request: request, product: product -%}{%- endcapture -%}
+{%- assign spc_route_view = spc_route_view | strip -%}
+{% if spc_route_view == 'landing' %}
 {{ 'landing-piso-spc.css' | asset_url | stylesheet_tag }}
 {{ 'landing-piso-spc-proportions.css' | asset_url | stylesheet_tag }}
 {{ 'landing-piso-spc-layout.css' | asset_url | stylesheet_tag }}
@@ -297,6 +300,11 @@
 <dialog class="spc-v2-dialog spc-v2-request-dialog request-dialog" data-spc-modal aria-labelledby="RequestTitle-{{ section.id }}"><button class="request-close" type="button" data-modal-close aria-label="Cerrar solicitud">×</button>{% render 'request-form', product: product, section_id: section.id %}</dialog>
 <a class="spc-mobile-sticky-cta" data-spc-sticky-cta href="#calculadora-{{ section.id }}" inert><strong>Realizar pedido</strong><span>Calcula tus cajas de piso SPC →</span></a>
 </div>
+{% else %}
+  {% assign is_demo = false %}
+  {% render 'product-landing', product: product, section: section, is_demo: is_demo, routes: routes, flooring: true, coverage_m2: section.settings.coverage_m2 %}
+  {% render 'product-related', product: product, section: section, is_demo: is_demo, routes: routes, collections: collections, settings: settings %}
+{% endif %}
 {% schema %}
 {
   "name": "Landing Piso SPC",

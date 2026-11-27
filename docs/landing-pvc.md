@@ -1,5 +1,9 @@
 # Landing de Piso PVC autoadhesivo
 
+## 27/11/2026 — Selector compartido con SPC
+
+El selector de ruta pasa a `snippets/flooring-route-view.liquid` para servir también SPC. PVC conserva sus dos accesos, datos y funcionamiento. Ambas vistas se comprobaron de nuevo localmente a 320, 393 y 1440 px, incluyendo cambio de acabado y conservación del cálculo.
+
 ## 26/11/2026 — PVC: ficha de tienda y landing para anuncios
 
 El usuario pidió dos experiencias del mismo producto: `/products/piso-pvc` muestra la ficha convencional con calculadora; `/products/piso-pvc/landing` conserva la landing personalizada para publicidad. La ruta elige la presentación, independientemente del referente o de los parámetros UTM. El catálogo mantiene la URL base y los anuncios deben usar la ruta terminada en `/landing`.

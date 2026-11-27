@@ -1,4 +1,4 @@
-{%- capture pvc_route_view -%}{%- render 'pvc-route-view', template: template, request: request, product: product -%}{%- endcapture -%}
+{%- capture pvc_route_view -%}{%- render 'flooring-route-view', template: template, request: request, product: product -%}{%- endcapture -%}
 {%- assign pvc_route_view = pvc_route_view | strip -%}
 {% if pvc_route_view == 'landing' %}
 {{ 'landing-piso-pvc.css' | asset_url | stylesheet_tag }}
@@ -190,7 +190,7 @@
 </div>
 {% else %}
   {% assign is_demo = false %}
-  {% render 'product-landing', product: product, section: section, is_demo: is_demo, routes: routes, pvc: true %}
+  {% render 'product-landing', product: product, section: section, is_demo: is_demo, routes: routes, flooring: true, coverage_m2: section.settings.coverage_m2 %}
   {% render 'product-related', product: product, section: section, is_demo: is_demo, routes: routes, collections: collections, settings: settings %}
 {% endif %}
 {% schema %}

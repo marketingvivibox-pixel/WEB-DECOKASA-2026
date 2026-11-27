@@ -84,14 +84,20 @@ async function main() {
     has_only_default_variant: true
   };
   const spcProduct = productFixture(spcEntry, 5);
+  spcProduct.url = 'producto-piso-spc.html';
+  spcProduct.images = [{id:'spc-demo-image', src:'assets/spc-2026-caja-tablones-hero.webp', alt:'Piso SPC · muestra ilustrativa'}];
+  spcProduct.featured_image = spcProduct.images[0];
+  spcProduct.selected_or_first_available_variant.featured_image = spcProduct.images[0];
   // The normal preview uses the same settings and blocks as the deployed template.
   const spcTemplate = JSON.parse(fs.readFileSync(path.join(root, 'templates/product.landing-spc.json'), 'utf8'));
   const spcMain = spcTemplate.sections.main;
   const spcBlocks = (spcMain.block_order || Object.keys(spcMain.blocks || {})).map(id => ({id, ...spcMain.blocks[id]}));
-  let spcHtml = await section('landing-piso-spc', spcMain.settings, {product: spcProduct, is_demo: false, shop: {currency: 'PEN'}, section: {
+  const spcContext = {product:spcProduct, template:{suffix:'landing-spc'}, shop:{currency:'PEN'}, section:{blocks:spcBlocks}};
+  let spcHtml = await section('landing-piso-spc', spcMain.settings, {...spcContext, request:{path:'/products/piso-spc/landing'}, is_demo: false, section: {
     settings: {spc_design_preview:process.env.SPC_DESIGN_PREVIEW === '1'}, blocks: spcBlocks
   }});
   landings['landing-piso-spc.html'] = spcHtml;
+  landings['producto-piso-spc.html'] = await section('landing-piso-spc', spcMain.settings, {...spcContext, request:{path:'/products/piso-spc'}, is_demo:true});
 
   // The same PVC product renders the storefront or advertising view by path.
   // Prices and identifiers below are local fixtures, never store data.
@@ -113,7 +119,7 @@ async function main() {
   pvcStorefront.querySelector('[data-product-page]').insertAdjacentHTML('beforeend', `<script type="application/json" data-preview-variants>${JSON.stringify(pvcPreviewVariants)}</script>`);
   landings['producto-piso-pvc.html'] = pvcStorefront.toString();
 
-  const previewFiles = [...new Set([...fs.readdirSync(preview).filter(f => f.endsWith('.html') && !['DECOKASA-movil.html', 'render_pdf.html'].includes(f)), 'landing-piso-spc.html', 'libro-reclamaciones.html', 'producto-piso-pvc.html'])];
+  const previewFiles = [...new Set([...fs.readdirSync(preview).filter(f => f.endsWith('.html') && !['DECOKASA-movil.html', 'render_pdf.html'].includes(f)), 'landing-piso-spc.html', 'libro-reclamaciones.html', 'producto-piso-pvc.html', 'producto-piso-spc.html'])];
   const interfaceAssets = `<link data-preview-interface rel="stylesheet" href="${interfaceAssetUrl('decokasa-interface.css')}"><script data-preview-interface src="${interfaceAssetUrl('decokasa-interface.js')}" defer></script>`;
   for (const file of previewFiles) {
     const rawFile = fs.existsSync(path.join(preview, file)) ? fs.readFileSync(path.join(preview, file), 'utf8') : '';
@@ -139,6 +145,7 @@ async function main() {
       isLibro ? ` class="storefront-interface book-layout"${motionData}` :
       ` class="storefront-interface"${motionData}`;
     if (isLandingPvc || file === 'producto-piso-pvc.html') document.querySelector('title').textContent = 'Piso PVC autoadhesivo · DECOKASA';
+    if (isLandingSpc || file === 'producto-piso-spc.html') document.querySelector('title').textContent = 'Piso SPC · DECOKASA';
     const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">${document.head.innerHTML}${extraCss}${isCustomLanding ? '' : interfaceAssets}${motionAssets}</head><body${bodyAttr}>${curtain}${pageHeader}<main id="main">${content}</main>${pageFooter}${isCustomLanding ? bookLink : ''}${isCustomLanding ? '' : `<script>${js}</script>`}${landings[file] && !isCustomLanding ? '<script src="product-demo.js" defer></script>' : ''}</body></html>`;
     fs.writeFileSync(path.join(preview, file), html.replace(/[ \t]+$/gm, ''), 'utf8');
   }

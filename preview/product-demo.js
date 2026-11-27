@@ -1,6 +1,8 @@
 // This adapter exists only for the local, clearly labeled demo. Shopify renders real variants.
 document.querySelectorAll('[data-product-page]').forEach(page => {
-  const variants = JSON.parse(page.querySelector('[data-preview-variants]').textContent);
+  const variantData = page.querySelector('[data-preview-variants]');
+  if (!variantData) return;
+  const variants = JSON.parse(variantData.textContent);
   function selectVariant(variant, link) {
     const select = page.querySelector('[name=variant_id]');
     const option = document.createElement('option');

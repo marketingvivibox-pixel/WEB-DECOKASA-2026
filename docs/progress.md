@@ -1,3 +1,12 @@
+## 27/11/2026 — Dos accesos para Piso SPC
+
+- [x] Implementadas en `feat/spc-product-landing-routes`, desde `70a31f0`, la ficha convencional con calculadora y la landing por sufijo `/landing`.
+- [x] Selector de rutas compartido entre SPC/PVC; conserva el editor y excluye UTM/referente de la decisión. Mantiene el producto, precio, stock y variante SPC existentes.
+- [x] Pruebas: 98/98 del tema, 24/24 del Libro y respaldo íntegro; seis archivos Liquid aprobados por el validador oficial.
+- [x] Once vistas y paquete de 214 archivos regenerados. Ambas experiencias SPC/PVC revisadas a 320, 393 y 1440 px, sin desbordamiento, errores de página ni imágenes rotas.
+- [x] SPC: 13,25 m² + 7 % = 7 cajas / 15,37 m² / S/ 665 con la configuración actual. PVC conserva el cálculo al cambiar acabado y el tratamiento de precios pendientes.
+- [ ] Integrar en main, publicar y comprobar las rutas públicas y el Libro en el único tema oficial.
+
 ## 26/11/2026 — Dos accesos para Piso PVC
 
 - [x] Implementadas en `feat/pvc-accesos-tienda-publicidad`, desde `c2189c2`, la ficha convencional con calculadora y la landing por sufijo `/landing`.

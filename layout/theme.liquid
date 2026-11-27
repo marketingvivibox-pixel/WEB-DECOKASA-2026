@@ -1,8 +1,8 @@
-{%- capture pvc_route_view -%}{%- render 'pvc-route-view', template: template, request: request, product: product -%}{%- endcapture -%}
+{%- capture flooring_route_view -%}{%- render 'flooring-route-view', template: template, request: request, product: product -%}{%- endcapture -%}
 {%- liquid
-  assign pvc_route_view = pvc_route_view | strip
+  assign flooring_route_view = flooring_route_view | strip
   assign custom_landing = false
-  if template.suffix == 'landing-spc' or pvc_route_view == 'landing'
+  if flooring_route_view == 'landing'
     assign custom_landing = true
   endif
   assign storefront_motion = false
@@ -40,7 +40,7 @@
       <script src="{{ 'decokasa-motion.js' | asset_url }}" defer blocking="render"></script>
     {% endif %}
   </head>
-  <body{% if template.suffix == 'landing-spc' %} class="spc-layout"{% elsif pvc_route_view == 'landing' %} class="pvc-layout"{% elsif template.suffix == 'libro-reclamaciones' %} class="storefront-interface book-layout"{% else %} class="storefront-interface"{% endif %}{% if storefront_motion %} data-motion-home="{{ routes.root_url | escape }}" data-motion-catalog="{{ routes.all_products_collection_url | escape }}"{% endif %}>
+  <body{% if custom_landing and template.suffix == 'landing-spc' %} class="spc-layout"{% elsif custom_landing and template.suffix == 'landing-pvc' %} class="pvc-layout"{% elsif template.suffix == 'libro-reclamaciones' %} class="storefront-interface book-layout"{% else %} class="storefront-interface"{% endif %}{% if storefront_motion %} data-motion-home="{{ routes.root_url | escape }}" data-motion-catalog="{{ routes.all_products_collection_url | escape }}"{% endif %}>
     {% if storefront_motion %}<div class="motion-curtain" aria-hidden="true"></div>{% endif %}
     {% unless custom_landing or template.suffix == 'libro-reclamaciones' %}{% section 'header' %}{% endunless %}
     <main id="main">{{ content_for_layout }}</main>

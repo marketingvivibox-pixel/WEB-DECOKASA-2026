@@ -7,9 +7,11 @@ const {Liquid} = require('liquidjs');
 const {parseHTML} = require('linkedom');
 const {filters, productFixture} = require('../scripts/product_fixture.cjs');
 
-test('PVC selects the advertising view only for its explicit landing route or theme editor', async () => {
+test('Flooring selects the advertising view only for its explicit landing route or theme editor', async () => {
   const engine = new Liquid({root:path.resolve(__dirname, '../snippets'), extname:'.liquid'});
-  const source = "{% render 'pvc-route-view', template: template, request: request, product: product %}";
+  filters(engine);
+  const source = "{% render 'flooring-route-view', template: template, request: request, product: product %}";
+  for (const material of ['pvc', 'spc']) {
   for (const [url, expected] of [
     ['/products/piso-pvc', 'product'],
     ['/products/piso-pvc?utm_source=facebook', 'product'],
@@ -20,12 +22,37 @@ test('PVC selects the advertising view only for its explicit landing route or th
     ['/products/piso-pvc/landing-extra', 'product'],
     ['/products/piso-pvc/landing/otra-pagina', 'product']
   ]) {
-    const context = {template:{suffix:'landing-pvc'}, product:{handle:'piso-pvc'}, request:{path:new URL(url, 'https://example.test').pathname}};
+    const context = {template:{suffix:`landing-${material}`}, product:{handle:`piso-${material}`}, request:{path:new URL(url.replaceAll('pvc', material), 'https://example.test').pathname}};
     assert.equal((await engine.parseAndRender(source, context)).trim(), expected, url);
   }
-  const editor = {template:{suffix:'landing-pvc'}, product:{handle:'piso-pvc'}, request:{path:'/products/piso-pvc', design_mode:true}};
+  const editor = {template:{suffix:`landing-${material}`}, product:{handle:`piso-${material}`}, request:{path:`/products/piso-${material}`, design_mode:true}};
   assert.equal((await engine.parseAndRender(source, editor)).trim(), 'landing');
-  assert.equal((await engine.parseAndRender(source, {...editor, template:{suffix:'landing-spc'}})).trim(), 'product');
+  assert.equal((await engine.parseAndRender(source, {...editor, template:{suffix:'otro-producto'}})).trim(), 'product');
+  }
+});
+
+test('Flooring layout isolates landing assets and restores the storefront header and footer on normal product routes', async () => {
+  const root = path.resolve(__dirname, '..');
+  const engine = new Liquid({root:path.join(root, 'snippets'), extname:'.liquid'});
+  filters(engine);
+  engine.registerFilter('asset_url', name => `/assets/${name}`);
+  const source = fs.readFileSync(path.join(root, 'layout/theme.liquid'), 'utf8')
+    .replace("{% section 'header' %}", '<header data-storefront-header></header>')
+    .replace("{% section 'footer' %}", '<footer data-storefront-footer></footer>');
+  for (const material of ['pvc', 'spc']) for (const landing of [false, true]) {
+    const canonical = `https://example.test/products/piso-${material}`;
+    const doc = parseHTML(await engine.parseAndRender(source, {
+      template:{suffix:`landing-${material}`}, product:{handle:`piso-${material}`},
+      request:{path:`/products/piso-${material}${landing ? '/landing' : ''}`, locale:{iso_code:'es'}},
+      canonical_url:canonical, content_for_layout:'<h1>Piso</h1>', shop:{name:'Decokasa'}
+    })).document;
+    assert.equal(doc.body.className, landing ? `${material}-layout` : 'storefront-interface');
+    assert.equal(Boolean(doc.querySelector('[data-storefront-header]')), !landing);
+    assert.equal(Boolean(doc.querySelector('[data-storefront-footer]')), !landing);
+    assert.equal(Boolean(doc.querySelector('[src*="decokasa.js"]')), !landing);
+    assert.equal(Boolean(doc.querySelector('[src*="decokasa-motion.js"]')), !landing);
+    assert.equal(doc.querySelector('link[rel="canonical"]').getAttribute('href'), canonical);
+  }
 });
 
 test('PVC storefront reuses the normal product, native variants and calculator without landing assets or empty accordions', async () => {

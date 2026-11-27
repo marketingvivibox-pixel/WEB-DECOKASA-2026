@@ -5,8 +5,43 @@ const path = require('node:path');
 const { Liquid } = require('liquidjs');
 const { parseHTML } = require('linkedom');
 const { calculate, estimateTotal } = require('../assets/landing-piso-spc.js');
-const { filters } = require('../scripts/product_fixture.cjs');
+const { filters, productFixture } = require('../scripts/product_fixture.cjs');
 const root = path.resolve(__dirname, '..');
+
+test('SPC storefront keeps its single native variant and calculates with variant, product or section coverage in that order', async () => {
+  const engine = new Liquid({root:path.join(root, 'snippets'), extname:'.liquid'});
+  filters(engine);
+  engine.registerFilter('asset_url', name => `/assets/${name}`);
+  const raw = fs.readFileSync(path.join(root, 'sections/landing-piso-spc.liquid'), 'utf8');
+  const schema = JSON.parse(raw.match(/{% schema %}([\s\S]*?){% endschema %}/)[1]);
+  const settings = Object.fromEntries(schema.settings.filter(s => s.id).map(s => [s.id, s.default ?? '']));
+  const source = raw.replace(/{% schema %}[\s\S]*?{% endschema %}/, '');
+  const product = productFixture({handle:'piso-spc', name:'Piso SPC', sku:'', price:9500, has_only_default_variant:true}, 5);
+  product.url = '/products/piso-spc';
+  const context = {template:{suffix:'landing-spc'}, request:{path:'/products/piso-spc'}, product,
+    routes:{root_url:'/', all_products_collection_url:'/collections/all'}, section:{id:'spc-storefront-test', settings, blocks:[]}};
+  for (const [variantCoverage, productCoverage, expected] of [[null, null, '2.196'], [null, 2.24, '2.24'], [2.5, 2.24, '2.5']]) {
+    product.metafields.decokasa.coverage_m2.value = productCoverage;
+    product.selected_or_first_available_variant.metafields.decokasa.coverage_m2.value = variantCoverage;
+    const doc = parseHTML(await engine.parseAndRender(source, context)).document;
+    assert.equal(doc.querySelectorAll('h1').length, 1);
+    assert.equal(doc.querySelector('[data-product-page]').dataset.productUrl, '/products/piso-spc');
+    assert.equal(doc.querySelectorAll('[data-pvc]').length, 1);
+    assert.equal(doc.querySelectorAll('[name="variant_id"] option').length, 1);
+    const option = doc.querySelector('[name="variant_id"] option');
+    assert.equal(option.value, product.variants[0].id);
+    assert.equal(option.dataset.price, '9500');
+    assert.equal(option.dataset.coverage, expected);
+    assert.equal(doc.querySelectorAll('[data-option-link]').length, 0);
+    assert.equal(doc.querySelector('[data-spc-page]'), null);
+    assert.equal(doc.querySelector('[src*="landing-piso-spc.js"]'), null);
+    assert.equal(doc.querySelector('[href*="landing-piso-spc.css"]'), null);
+  }
+  const landing = parseHTML(await engine.parseAndRender(source, {...context, request:{path:'/products/piso-spc/landing'}})).document;
+  assert.ok(landing.querySelector('[data-spc-page]'));
+  assert.ok(landing.querySelector('[data-spc-calculator]'));
+  assert.equal(landing.querySelector('[data-product-page]'), null);
+});
 
 function loadingFixture() {
   const { runInNewContext } = require('node:vm');
@@ -486,7 +521,7 @@ test('SPC: datos nativos y privacidad del contenido de muestra en el tema', asyn
   const raw = fs.readFileSync(path.join(root, 'sections/landing-piso-spc.liquid'), 'utf8');
   const schema = JSON.parse(raw.match(/{% schema %}([\s\S]*?){% endschema %}/)[1]);
   const settings = Object.fromEntries(schema.settings.map(s => [s.id, s.default ?? '']));
-  const context = {section:{id:'spc-test', settings, blocks:[]}, product:{title:'SPC Prueba', selected_or_first_available_variant:{sku:'SKU-REAL', metafields:{decokasa:{coverage_m2:{value:2.5}}}}}};
+  const context = {template:{suffix:'landing-spc'}, request:{design_mode:true}, section:{id:'spc-test', settings, blocks:[]}, product:{title:'SPC Prueba', selected_or_first_available_variant:{sku:'SKU-REAL', metafields:{decokasa:{coverage_m2:{value:2.5}}}}}};
   const source = raw.replace(/{% schema %}[\s\S]*?{% endschema %}/, '');
   const doc = parseHTML(await engine.parseAndRender(source, context)).document;
   assert.equal(doc.querySelector('[data-spc-page]').dataset.coverage, '2.5');
@@ -550,6 +585,7 @@ test('SPC: elementos visuales de la calculadora interactiva (pestañas, ambiente
   const raw = fs.readFileSync(path.join(root, 'sections/landing-piso-spc.liquid'), 'utf8');
   const source = raw.replace(/{% schema %}[\s\S]*?{% endschema %}/, '');
   const doc = parseHTML(await engine.parseAndRender(source, {
+    template:{suffix:'landing-spc'}, request:{design_mode:true},
     section:{id:'spc-test', settings:{coverage_m2:'2.196', whatsapp_phone:'51914158674'}, blocks:[]},
     product:{title:'Piso SPC', selected_or_first_available_variant:{sku:'SPC-001'}}
   })).document;
@@ -595,6 +631,7 @@ test('SPC: testimonios reales conservan contenido escapado y controles sin muest
   const schema = JSON.parse(raw.match(/{% schema %}([\s\S]*?){% endschema %}/)[1]);
   assert.ok(schema.blocks[0].settings.some(s => s.id === 'headline'));
   const doc = parseHTML(await engine.parseAndRender(source, {
+    template:{suffix:'landing-spc'}, request:{design_mode:true},
     section:{id:'real-test', settings:{spc_design_preview:true, show_illustrative_testimonials:true}, blocks:[{settings:{city:'Lima', name:'Ana <script>bad()</script>', headline:'Buen <acabado>', quote:'Una opinión & experiencia real.'}}]},
     product:{}
   })).document;

@@ -4,6 +4,8 @@
   @param {section} section - Section settings, blocks and unique identifier.
   @param {boolean} [is_demo] - Show the local sample-data notice.
   @param {boolean} [pvc] - Enable the floor coverage calculator.
+  @param {boolean} [flooring] - Show the shared floor coverage calculator for SPC or PVC.
+  @param {number} [coverage_m2] - Fallback coverage per box when native metafields are empty.
 {% enddoc %}
 {{ 'product-detail.css' | asset_url | stylesheet_tag }}
 {{ 'request-form.css' | asset_url | stylesheet_tag }}
@@ -11,8 +13,11 @@
 <script src="{{ 'product-detail.js' | asset_url }}" defer="defer"></script>
 {% if product != blank %}
   {% assign current_variant = product.selected_or_first_available_variant %}
+  {% if pvc %}{% assign flooring = true %}{% endif %}
+  {% assign has_floor_calculator = flooring %}
+  {% if product.metafields.decokasa.coverage_m2.value != blank or current_variant.metafields.decokasa.coverage_m2.value != blank %}{% assign has_floor_calculator = true %}{% endif %}
   {% assign price_pending = false %}
-  {% if pvc and current_variant != blank and current_variant.price <= 0 %}{% assign price_pending = true %}{% endif %}
+  {% if flooring and current_variant != blank and current_variant.price <= 0 %}{% assign price_pending = true %}{% endif %}
   {% assign main_image = current_variant.featured_image | default: product.featured_image %}
   {% assign gallery_images = current_variant.metafields.decokasa.gallery_images.value | where: 'media_type', 'image' %}
   {% assign main_image_id = main_image.id %}
@@ -156,16 +161,16 @@
           </div>
         {% endunless %}
         <p class="product-availability">{% render 'icon', name: 'headphones' %}<span><strong>{% if current_variant.available %}Disponible para solicitar{% else %}Disponibilidad a confirmar{% endif %}</strong><small>Un asesor te ayuda con tu compra.</small></span></p>
-        {% if pvc or product.metafields.decokasa.coverage_m2.value != blank or current_variant.metafields.decokasa.coverage_m2.value != blank %}{% render 'pvc-calculator' %}{% endif %}
+        {% if has_floor_calculator %}{% render 'pvc-calculator' %}{% endif %}
         {% assign multiple_request = false %}
-        {% unless product.has_only_default_variant or pvc or product.metafields.decokasa.coverage_m2.value != blank or current_variant.metafields.decokasa.coverage_m2.value != blank %}{% assign multiple_request = true %}{% endunless %}
+        {% unless product.has_only_default_variant or has_floor_calculator %}{% assign multiple_request = true %}{% endunless %}
         {% if multiple_request %}<p class="request-builder-help">Elige una presentación y su cantidad. Agrégala a tu solicitud y repite con los otros colores que quieras.</p>{% endif %}
         <div class="product-purchase" data-purchase-controls>
           <div class="product-quantity"><button type="button" data-quantity-step="-1" aria-label="Disminuir cantidad">−</button><label class="sr-only" for="Quantity-{{ section.id }}">Cantidad</label><input id="Quantity-{{ section.id }}" data-product-quantity type="number" min="1" max="1000000" step="1" value="1" inputmode="numeric"><button type="button" data-quantity-step="1" aria-label="Aumentar cantidad">+</button></div>
           {% if multiple_request %}
           <button type="button" class="button interface-card-action product-cta" data-add-request{% if current_variant.available %} data-interface-mirror{% endif %} {% if current_variant == blank %}disabled{% endif %}>{% render 'icon', name: 'bag' %}<span>{% if current_variant.available %}Agregar al carrito{% else %}Agregar a mi solicitud{% endif %}</span></button>
           {% else %}
-          {% unless pvc or product.metafields.decokasa.coverage_m2.value != blank or current_variant.metafields.decokasa.coverage_m2.value != blank %}
+          {% unless has_floor_calculator %}
             {% if current_variant.available %}<button type="button" class="button interface-card-action product-cta" data-interface-product-add hidden>{% render 'icon', name: 'bag' %} Agregar al carrito</button>{% endif %}
           {% endunless %}
           <a class="button yellow product-cta" href="#solicitud" data-open-request {% if current_variant == blank %}aria-disabled="true"{% endif %}>{{ section.settings.cta_label | default: 'Solicitar compra' | escape }}</a>
@@ -263,7 +268,7 @@
         <p class="interface-delivery">{% render 'icon', name: 'box' %} La entrega se coordina con tu asesor.</p>
         </div>
         </div>
-        <dialog class="request-dialog" data-request-details aria-labelledby="RequestTitle-{{ section.id }}"><button class="request-close" type="button" data-request-close aria-label="Cerrar solicitud">×</button>{% render 'request-form', product: product, section_id: section.id, price_pending: price_pending %}</dialog>
+        <dialog class="request-dialog" data-request-details aria-labelledby="RequestTitle-{{ section.id }}"><button class="request-close" type="button" data-request-close aria-label="Cerrar solicitud">×</button>{% render 'request-form', product: product, section_id: section.id, price_pending: price_pending, coverage_m2: coverage_m2 %}</dialog>
         <p class="product-selection-status" data-selection-status role="status" tabindex="-1"></p>
       </div>
       <div class="product-information-container">

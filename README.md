@@ -10,17 +10,17 @@ La [carpeta central del Libro de Reclamaciones](integrations/libro-reclamaciones
 
 
 ## Recorrido
-Inicio → catálogo por marca o tipo → landing con ficha completa → formulario → asesor (integración pendiente). Sin pasarelas ni checkout. No emitir `purchase` desde el navegador.
+Inicio → catálogo por marca o tipo → ficha de producto → formulario → asesor (integración pendiente). Sin pasarelas ni checkout. No emitir `purchase` desde el navegador.
 
-PVC tiene dos accesos al mismo producto (26/11/2026): `/products/piso-pvc` abre la ficha convencional con calculadora, y `/products/piso-pvc/landing` conserva la landing para anuncios. Usar el segundo enlace en publicidad y el primero en el catálogo. La ruta determina la vista; los parámetros de campaña no la cambian. Variantes, precios y existencias son compartidos. [Configuración y verificación](docs/landing-pvc.md).
+SPC y PVC tienen dos accesos por producto (26–27/11/2026): `/products/piso-spc` y `/products/piso-pvc` abren la ficha convencional con calculadora; al añadir `/landing` conservan su landing para anuncios. Usar la ruta terminada en `/landing` en publicidad y la base en el catálogo. La ruta determina la vista; los parámetros de campaña no la cambian. Variantes, precios y existencias son compartidos. [Configuración SPC](docs/landing-spc.md) y [PVC](docs/landing-pvc.md).
 
 
 ## Archivos
-- `templates/product.landing-spc.json`: landing SPC reconstruida con recursos del PSD, elementos HTML/CSS/SVG y calculadora. [Guía de configuración SPC](docs/landing-spc.md). Rama SPC fusionada en `main`; corrección móvil proporcional publicada en `95c644f` y verificada en Shopify el 22/10/2026. Rediseño exclusivo de escritorio (desde 1024 px) publicado en `e8b617e` el 05/11/2026, conservando la versión móvil y PVC; calculadora, capas y acabados comprobados en la tienda.
-- `templates/product.landing-pvc.json`: sirve la ficha convencional con calculadora y la landing publicitaria según `snippets/pvc-route-view.liquid`. Mantiene un producto con 20 acabados, 36 planchas / 5 m² por caja. [Guía y estado PVC](docs/landing-pvc.md).
+- `templates/product.landing-spc.json`: sirve la ficha convencional con calculadora y la landing publicitaria según `snippets/flooring-route-view.liquid`. Conserva la composición del PSD y las calculadoras existentes. [Guía de configuración SPC](docs/landing-spc.md).
+- `templates/product.landing-pvc.json`: sirve la ficha convencional con calculadora y la landing publicitaria según `snippets/flooring-route-view.liquid`. Mantiene un producto con 20 acabados, 36 planchas / 5 m² por caja. [Guía y estado PVC](docs/landing-pvc.md).
 - `templates/index.json`: portada multimarcas editable; imagen principal y colección destacada.
 - `templates/collection.json`: catálogo adaptable con marcas, filtros nativos vendor/type cuando estén configurados, ordenación, tarjetas y paginación.
-- `templates/product.json`: cada URL `/products/<handle>` es una landing que incluye ficha y formulario.
+- `templates/product.json`: ficha convencional de producto con galería y formulario.
 - `templates/page.pvc.json` + `sections/pvc-landing.liquid`: plantilla antigua de página PVC, conservada como alternativa independiente. El nuevo producto `piso-pvc` utiliza `product.landing-pvc`.
 - `assets/decokasa.css` / `.js`: estilos compartidos, calculadora y simulación; no bibliotecas ni servicios externos.
 - `assets/product-detail.css` / `.js`: galería, variantes y cantidad de la ficha; se cargan solo donde se utiliza. [Guía para administrar la ficha](docs/product-detail.md).
@@ -30,13 +30,13 @@ PVC tiene dos accesos al mismo producto (26/11/2026): `/products/piso-pvc` abre 
 
 ## Configuración pendiente
 Moneda de tienda PEN/Perú. Cargar catálogo real y fotos; precios y promociones por definir. Nunca inferir stock de Odoo a partir de disponibilidad Shopify.
-Metacampos propuestos: `decokasa.coverage_m2` (decimal, producto o variante, m² por caja); `decokasa.landing_url` (URL relativa de landing, si usa página interna en lugar del producto). Para PVC, conservar `decokasa.landing_url` vacío: el catálogo debe enlazar `/products/piso-pvc`, mientras que los anuncios utilizan `/products/piso-pvc/landing`.
+Metacampos propuestos: `decokasa.coverage_m2` (decimal, producto o variante, m² por caja); `decokasa.landing_url` (URL relativa de landing, si usa página interna en lugar del producto). Para SPC y PVC, conservar `decokasa.landing_url` vacío: el catálogo debe enlazar la URL base del producto, mientras que los anuncios utilizan su ruta terminada en `/landing`.
 Asignar SKU único por variante, unidad/almacén y mapeo Odoo tras validación. El calculador requiere rendimiento válido; no usa un rendimiento ficticio en el tema. La cobertura PVC debe corresponder a la presentación seleccionada.
 El formulario solo simula y no persiste datos personales. Consentimiento de seguimiento de prueba en sessionStorage; rechazar elimina atribución e identificador de visitante. Referencia de solicitud necesaria separada de analítica. UTMs deben contener nombres de campaña sin datos personales. Primer/último origen se conserva en navegación directa durante la sesión si se autoriza; no hay atribución entre sesiones todavía. GA4 y Meta/TikTok pendientes. No hay enlace al CRM activo.
 
 
 ## Verificación
-26/11/2026: 96 pruebas del tema y 24 casos del Libro de Reclamaciones aprobados; respaldo íntegro y cambios validados oficialmente. Diez vistas locales y ZIP de 214 archivos actualizados. Las dos experiencias PVC se publicaron desde `640de19` y comprobaron a 320, 393 y 1440 px, con cambio de acabado y conservación del cálculo. Los diseños con tarifa pendiente muestran «Precio a consultar». Estado de publicación en [avances](docs/progress.md).
+27/11/2026: 98 pruebas del tema y 24 casos del Libro de Reclamaciones aprobados; respaldo íntegro y seis archivos Liquid validados oficialmente. Once vistas locales y ZIP de 214 archivos actualizados. Ambas experiencias SPC/PVC se comprobaron localmente a 320, 393 y 1440 px. La ficha SPC calcula 13,25 m² + 7 % como 7 cajas de 2,196 m²; PVC conserva cambios de acabado y precios pendientes. Estado de publicación en [avances](docs/progress.md).
 
 Antecedente del 05/11/2026:
 `npm test` aprueba 49 pruebas, entre lógica, navegación Liquid y pruebas DOM (filtros, variantes, galería por color, solicitud combinada, meta automática del regalo, formulario, consentimiento, ficha y landings SPC/PVC). Shopify Theme Check CLI 5.0.1 sin hallazgos; ocho HTML y ZIP de 166 archivos verificados. Ficha y landings SPC/PVC revisadas en escritorio y celular sin desbordamiento. SPC publicado conserva la geometría, imágenes y enlaces móviles; navegación, capas, acabados y calculadora de escritorio comprobados. Reintentos conservan referencia solo en la página actual. Pendiente: datos comerciales del catálogo y recepción idempotente en Odoo. PVC conserva los 20 acabados aprobados: SKU completos y 17 precios FD de S/ 99 por caja verificados el 05/11; tres tarifas LQ pendientes. Stock configurado por instrucción del usuario: 10 000 cajas por SKU, 200 000 en total, con seguimiento activado. [Datos aplicados a Shopify](docs/pvc-product-data.json). Producto activo y publicado: https://decokasaperu.myshopify.com/products/piso-pvc. Los 49 cambios de su landing están sincronizados desde `a61758a` en el tema oficial existente; corrección de instalación `a2b77bc` preservada en la integración SPC. URL pública verificada en móvil y escritorio; catálogo, cálculo y consulta por WhatsApp funcionan.
@@ -67,7 +67,7 @@ La franja superior de servicios permanece fija al desplazarse. La portada incluy
 
 Con Node.js 20 o superior: `npm ci` y `npm test`. Incluye pruebas de lógica, seis pruebas de navegación Liquid y la prueba DOM simulada; esta última no comprueba presentación visual ni validación nativa de formularios.
 
-Con Python 3: `python scripts/verify_store.py` revisa las diez páginas, enlaces, anclas, IDs, JSON y esquemas de secciones y regenera el ZIP del tema a partir del código actual.
+Con Python 3: `python scripts/verify_store.py` revisa las once páginas, enlaces, anclas, IDs, JSON y esquemas de secciones y regenera el ZIP del tema a partir del código actual.
 
 Después de cambiar portada/cabecera/catálogo/estilos: `node scripts/sync_preview.cjs` regenera las vistas locales desde las secciones Liquid y copia los recursos; luego ejecutar el verificador y las pruebas. La demostración conserva su catálogo ficticio.
 
