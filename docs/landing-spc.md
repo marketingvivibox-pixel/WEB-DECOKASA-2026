@@ -10,7 +10,9 @@ Los cambios se desarrollan y prueban localmente en una rama secundaria antes de 
 
 El producto SPC tiene actualmente una sola variante nativa. Las familias y muestras de la landing siguen siendo referencias para consulta, no variantes nuevas. No se cambian precios, inventario ni datos comerciales. Las confirmaciones de precio/presentación y rendimiento por acabado conservan sus pendientes anteriores.
 
-Verificación local: 98 pruebas del tema, 24 casos del Libro, respaldo íntegro, seis archivos aprobados por el validador oficial, once vistas y ZIP de 214 archivos. Ambas rutas SPC y PVC comprobadas a 320, 393 y 1440 px, sin desbordamiento, errores de página ni imágenes rotas. Ejemplo SPC: 13,25 m² + 7 % = 7 cajas / 15,37 m² / S/ 665 con el precio configurado de S/ 95. Estado de publicación en `docs/progress.md`.
+Verificación local: 98 pruebas del tema, 24 casos del Libro, respaldo íntegro, seis archivos aprobados por el validador oficial, once vistas y ZIP de 214 archivos. Ambas rutas SPC y PVC comprobadas a 320, 393 y 1440 px, sin desbordamiento, errores de página ni imágenes rotas. Ejemplo SPC: 13,25 m² + 7 % = 7 cajas / 15,37 m² / S/ 665 con el precio configurado de S/ 95.
+
+Publicado el 27/11/2026 mediante `6cadfb9` en GitHub/main. Shopify sincronizó los seis archivos Liquid en el tema oficial `188927803629`; las rutas públicas SPC y PVC pasaron nuevamente la revisión a 320, 393 y 1440 px. La ficha y la landing SPC conservan la URL canónica `https://decokasa.pe/products/piso-spc`. Ver detalle en `docs/progress.md`.
 
 ## 10/11/2026 — Acabados disponibles por familia
 
