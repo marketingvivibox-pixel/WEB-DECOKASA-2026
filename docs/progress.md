@@ -1,3 +1,10 @@
+## 27/11/2026 — Carga de ambientes WebP
+
+- [x] Optimizados los 31 ambientes (20 PVC y 11 SPC) desde sus PNG originales: WebP de 1254 × 1254, de 7.376.522 a 4.568.304 bytes (38,1 % menos). Reemplazados en Shopify sobre los mismos archivos; los 31 están READY y conservan sus asociaciones con variantes y galerías.
+- [x] Añadidos tamaños adaptables a las imágenes de las landings. La miniatura PVC solicita su tamaño propio; los selectores y la vista SPC de escritorio usan candidatos de 160 a 900 px según espacio y densidad de pantalla. Cambiar acabado actualiza también los candidatos, para evitar imágenes del color anterior.
+- [x] Validación local: 102/102 pruebas del tema, 24/24 del Libro, respaldo íntegro y cuatro archivos Liquid aprobados por el validador oficial. Once vistas y ZIP de 218 archivos regenerados. PVC/SPC comprobados a 320, 393 y 1440 px, incluidas selección, calculadoras y ausencia de desbordamiento o errores de página.
+- [ ] Integrar en main y verificar sincronización, tamaño descargado y Libro de Reclamaciones en el tema oficial.
+
 ## 27/11/2026 — Ambientes por acabado PVC/SPC
 
 - [x] Generados y revisados 20 ambientes diferentes para PVC y 11 para SPC; subidos a los productos existentes y asociados por código. Cada variante conserva su textura original como miniatura y segunda imagen.

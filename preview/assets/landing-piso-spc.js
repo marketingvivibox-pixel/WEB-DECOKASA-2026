@@ -430,6 +430,8 @@
       if (!choice) return;
       choices.forEach(button => button.setAttribute('aria-pressed', String(button === choice)));
       page.querySelectorAll('[data-tone-room], [data-finish-image]').forEach(img => {
+        if (choice.dataset.toneSrcset) img.setAttribute('srcset', choice.dataset.toneSrcset);
+        else img.removeAttribute('srcset');
         img.src = choice.dataset.toneImage;
         img.alt = `Ambiente con piso ${choice.dataset.toneName}`;
       });

@@ -1,3 +1,9 @@
+## 27/11/2026 — Imágenes de ambientes y rendimiento
+
+Los 31 ambientes PVC/SPC se sirven como WebP optimizados de 1254 × 1254, conservando los archivos y asociaciones existentes en Shopify. Los originales PNG permanecen fuera del repositorio, en `Documents/SHOPIFY/colores-pisos-20261127`; la exportación optimizada y su manifiesto están en `webp-optimizados/` de esa carpeta. Peso conjunto: 4.568.304 bytes, 38,1 % menos que la primera exportación WebP.
+
+Las landings usan `floor-room-srcset` con candidatos de 160–900 px y `sizes` según el espacio de cada imagen. Al cambiar acabado se actualizan `src` y `srcset`; la miniatura de la calculadora no debe solicitar siempre la imagen grande del catálogo. Mantener esta lógica junto con las imágenes adaptables que ya usa la ficha convencional.
+
 ## 27/11/2026 — Ambientes por acabado y variantes SPC
 
 PVC conserva sus 20 variantes y ahora cada acabado tiene un ambiente diferente generado a partir de su textura original. SPC tiene 11 variantes nativas y un ambiente por acabado. La imagen principal de cada variante es el ambiente; `decokasa.finish_swatch` conserva la miniatura original y `decokasa.gallery_images` contiene ambiente y textura. Las imágenes de ambientes son ilustraciones y no sustituyen la muestra del material. Se usan en la ficha convencional y en el selector de la landing; cambiar acabado conserva área, cortes y parámetros de campaña.

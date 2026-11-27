@@ -1,0 +1,6 @@
+{%- comment -%}Room previews share candidates; each placement supplies its own sizes.{%- endcomment -%}
+{%- assign room_widths = '160,224,320,440,540,640,900' | split: ',' -%}
+{%- for room_width in room_widths -%}
+  {%- assign room_pixels = room_width | plus: 0 -%}
+  {{- image | image_url: width: room_pixels }} {{ room_width }}w{%- unless forloop.last -%},{%- endunless -%}
+{%- endfor -%}

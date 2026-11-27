@@ -19,7 +19,7 @@
   <div class="spc-tone-content" data-tone-content>
     {% assign selected_finish = product.selected_or_first_available_variant %}
     {% if selected_finish.featured_image %}<figure class="spc-tone-room-preview">
-      <img data-tone-room src="{{ selected_finish.featured_image | image_url: width: 900 }}" width="900" height="900" alt="Ambiente con piso {{ selected_finish.title | escape }}" loading="lazy">
+      <img data-tone-room src="{{ selected_finish.featured_image | image_url: width: 900 }}" srcset="{% render 'floor-room-srcset', image: selected_finish.featured_image %}" sizes="(max-width: 600px) 112px, 220px" width="900" height="900" alt="Ambiente con piso {{ selected_finish.title | escape }}" loading="lazy">
       <figcaption><span>Tu acabado seleccionado</span><strong data-tone-room-code>{{ selected_finish.title | escape }}</strong><small>Visualización de ambiente. Consulta la muestra para apreciar el tono y la veta.</small><button type="button" data-tone-confirm>Continuar con este acabado →</button></figcaption>
     </figure>{% endif %}
     <p class="spc-tone-count" data-tone-count role="status" aria-live="polite">3 acabados cálidos</p>
@@ -45,7 +45,7 @@
             <img class="spc-tone-atlas" src="{{ 'spc-catalogo-tonos-2026-11.jpg' | asset_url }}" width="1080" height="1544" alt="Textura y color del acabado {{ code }}" loading="lazy">
           </div>
           <div class="spc-tone-card-info"><h3>{{ code }}</h3><span class="spc-tone-thickness">{{ thickness }} mm</span><p>18 × 122 cm <span>· Espesor total {{ thickness }} mm</span></p></div>
-          {% if finish_variant.id %}<button type="button" class="spc-tone-select" data-tone-select="{{ finish_variant.id }}" data-tone-image="{{ finish_variant.featured_image | image_url: width: 900 }}" data-tone-name="{{ finish_variant.title | escape }}" aria-pressed="{% if finish_variant.id == selected_finish.id %}true{% else %}false{% endif %}">Elegir este acabado</button>{% else %}<a class="spc-tone-contact" href="https://wa.me/{{ phone }}?text={{ message }}" target="_blank" rel="noopener" aria-label="Consultar el tono {{ code }} por WhatsApp">Consultar este tono <span aria-hidden="true">↗</span></a>{% endif %}
+          {% if finish_variant.id %}<button type="button" class="spc-tone-select" data-tone-select="{{ finish_variant.id }}" data-tone-image="{{ finish_variant.featured_image | image_url: width: 900 }}" data-tone-srcset="{% render 'floor-room-srcset', image: finish_variant.featured_image %}" data-tone-name="{{ finish_variant.title | escape }}" aria-pressed="{% if finish_variant.id == selected_finish.id %}true{% else %}false{% endif %}">Elegir este acabado</button>{% else %}<a class="spc-tone-contact" href="https://wa.me/{{ phone }}?text={{ message }}" target="_blank" rel="noopener" aria-label="Consultar el tono {{ code }} por WhatsApp">Consultar este tono <span aria-hidden="true">↗</span></a>{% endif %}
         </article>
       {% endfor %}
     </div>

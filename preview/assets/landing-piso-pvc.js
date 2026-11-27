@@ -202,12 +202,15 @@
       if (catalog.open) catalog.close();
       unlockDialog();
     }
-    function showRoom(image, source, code) {
+    function showRoom(image, source, code, srcset = '') {
       if (!image || !source) return;
       image.alt = `Ambiente ilustrativo con piso PVC ${code}`;
-      if (image.getAttribute('src') === source) return;
+      if (image.getAttribute('src') === source && image.getAttribute('srcset') === srcset) return;
       image.classList.add('pvc-image-loading');
       image.setAttribute('aria-busy', 'true');
+      // Update candidates first so a color change cannot reuse the previous room.
+      if (srcset) image.setAttribute('srcset', srcset);
+      else image.removeAttribute('srcset');
       image.src = source;
       if (image.complete) {
         image.classList.remove('pvc-image-loading');
@@ -223,8 +226,8 @@
       root.querySelector('[data-catalog-room-code]').textContent = finish;
       root.querySelector('[data-catalog-price]').textContent = Number(variant.price) > 0 ? `${money.format(variant.price / 100)} / caja` : 'Precio por confirmar';
       swatches.forEach(item => item.setAttribute('aria-pressed', String(item.dataset.pickFinish === finish)));
-      showRoom(root.querySelector('[data-catalog-room]'), variant.image, finish);
-      showRoom(root.querySelector('[data-selected-room]'), variant.image, finish);
+      showRoom(root.querySelector('[data-catalog-room]'), variant.image, finish, variant.imageSrcset);
+      showRoom(root.querySelector('[data-selected-room]'), variant.thumbnail || variant.image, finish, variant.imageSrcset);
       const source = variant.swatch || swatches.find(item => item.dataset.pickFinish === finish)?.querySelector('img')?.src;
       if (source) miniFloor.style.setProperty('--finish', `url("${source.replace(/["\\\n\r]/g, '')}")`);
       if (changeUrl) {
